@@ -143,3 +143,34 @@ Started: 2026-01-21
   - Use data-testid attributes consistently for reliable e2e selectors
   - Tests should skip gracefully when feature flags are disabled
 ---
+
+## 2026-01-21 - Post-integ debugging session
+- Found and fixed build error: `react-icons/md` was imported but never installed
+- Fixed by replacing `MdPlayArrow` with `ArrowForwardIcon` from `@chakra-ui/icons` (already installed)
+- Commit: 3efe54a4 - "fix: replace react-icons with chakra-ui icon"
+
+### Root Cause Analysis: Why tests "passed" with broken build
+1. `NEXT_PUBLIC_NL_SEARCH` was NOT set in `.env.local`
+2. Without flag, `NLSearchWithFlag` renders `null`
+3. Playwright tests check `isVisible()` and `test.skip()` when component isn't visible
+4. Tests "passed" by being **skipped**, never actually testing the feature
+
+### New Bug Found: Result count preview broken
+- NL search query generation works (`/api/nl-search` → 200)
+- Result count preview fails (`/api/search` → 404)
+- The `src/pages/api/search/` directory exists but is **EMPTY**
+- API route was never created during integ-004
+- Created beads issue: nls-finetune-scix-h1y
+
+### Process improvement needed (beads: nls-finetune-scix-2ad)
+- Add `pnpm build` before `pnpm test:e2e` in workflow
+- Don't use `test.skip()` for feature-gated tests
+- Require feature flag in CI: `NEXT_PUBLIC_NL_SEARCH=enabled`
+- Add eslint-plugin-import for unresolved imports
+
+**Learnings for future iterations:**
+- Always verify build succeeds before marking tests as passing
+- `test.skip()` hides problems - prefer `expect().toBeVisible()` which fails explicitly
+- Feature flags must be enabled in test environment
+- Check network requests to verify all API calls succeed
+---
