@@ -341,8 +341,8 @@
         "Option to disable expansion"
       ],
       "priority": 24,
-      "passes": false,
-      "notes": "From research-001: Pre-computed table adds 1-5ms. Sentence-BERT deferred until latency requirements met."
+      "passes": true,
+      "notes": "Implemented with 30+ synonym groups covering stellar objects, planetary science, cosmology, gravitational physics, galaxy evolution, and ML. Expansion enabled by default, can be disabled via expand: false in request."
     },
     {
       "id": "integ-012",

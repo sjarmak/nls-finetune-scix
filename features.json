@@ -286,9 +286,9 @@
       "id": "integ-011",
       "name": "Semantic query expansion with synonym table",
       "category": "integration",
-      "status": "failing",
+      "status": "passing",
       "verification": "grep -r 'SYNONYM\\|expandSynonyms' ~/ads-dev/nectar/src/",
-      "notes": "From research-001: Pre-computed table for astronomy terms (planet formation -> protoplanetary disk)"
+      "notes": "Implemented with 30+ synonym groups. Expansion enabled by default, toggle via expand: false in request."
     },
     {
       "id": "integ-012",

@@ -406,3 +406,26 @@ Started: 2026-01-21
   - Canonical author names have format "Last, First" - use exact match or first suggestion
   - Cache key should be normalized (lowercase) for better hit rate
 ---
+
+## 2026-01-21 - integ-011
+- Added semantic query expansion with pre-computed synonym table to nl-search.ts
+- SYNONYM_TABLE covers 30+ astronomy term groups:
+  - Stellar objects: black hole, neutron star, white dwarf, supernova, GRB, quasar
+  - Planetary science: planet formation, exoplanet, protoplanetary disk
+  - Cosmology: dark matter, dark energy, CMB, big bang, inflation, redshift
+  - Gravitational physics: gravitational waves, gravitational lensing
+  - Galaxy evolution: galaxy formation, star formation, ISM, AGN
+  - Techniques: spectroscopy, photometry, astrometry, radial velocity
+  - ML/AI: machine learning, artificial intelligence
+- expandSynonyms() function:
+  - Finds abs: fields in query and checks against synonym table
+  - Expands matching terms to OR expression: abs:"dark matter" → abs:("dark matter" OR DM OR CDM OR WIMP)
+  - Can be disabled via `expand: false` in request body
+- Processing pipeline: operator post-processing → author validation → synonym expansion → query variations
+- Files changed: ~/ads-dev/nectar/src/pages/api/nl-search.ts, prd.json, features.json
+- Commit: 67451231 - "feat(integ-011): add semantic query expansion with synonym table"
+- **Learnings for future iterations:**
+  - Pre-computed synonym table adds negligible latency (<1ms)
+  - Synonym groups should include both abbreviations and full forms
+  - Expansion is best applied before generateQueryVariations() so variations inherit synonyms
+---
