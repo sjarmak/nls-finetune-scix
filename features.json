@@ -119,7 +119,7 @@
       "id": "eval-003",
       "name": "Feature-sliced reporting (author, pubdate, bibstem, object)",
       "category": "eval",
-      "status": "failing",
+      "status": "passing",
       "verification": "python -c \"from finetune.domains.scix.eval import evaluate_by_category; assert evaluate_by_category is not None\""
     },
     {

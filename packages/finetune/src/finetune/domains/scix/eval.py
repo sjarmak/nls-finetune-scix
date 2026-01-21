@@ -192,6 +192,60 @@ def evaluate_pair(
     )
 
 
+def evaluate_by_category(
+    results: list[EvalResult],
+) -> dict[str, dict[str, float]]:
+    """Evaluate queries by category (author, pubdate, bibstem, object) separately.
+
+    Args:
+        results: List of EvalResult objects with category set
+
+    Returns:
+        Dict mapping category name to metrics dict with keys:
+        - total: number of examples in category
+        - valid: number syntactically valid
+        - validity_rate: percentage valid (0.0-1.0)
+        - mean_jaccard: average Jaccard similarity
+        - mean_precision: average precision
+        - mean_recall: average recall
+    """
+    if not results:
+        return {}
+
+    by_category: dict[str, dict[str, float]] = {}
+
+    for r in results:
+        cat = r.category or "unknown"
+        if cat not in by_category:
+            by_category[cat] = {
+                "total": 0.0,
+                "valid": 0.0,
+                "jaccard_sum": 0.0,
+                "precision_sum": 0.0,
+                "recall_sum": 0.0,
+            }
+        by_category[cat]["total"] += 1
+        if r.syntactically_valid:
+            by_category[cat]["valid"] += 1
+            by_category[cat]["jaccard_sum"] += r.jaccard_overlap
+            by_category[cat]["precision_sum"] += r.precision_at_n
+            by_category[cat]["recall_sum"] += r.recall_at_n
+
+    for cat, stats in by_category.items():
+        valid_count = stats["valid"]
+        total_count = stats["total"]
+        by_category[cat] = {
+            "total": total_count,
+            "valid": valid_count,
+            "validity_rate": valid_count / total_count if total_count else 0.0,
+            "mean_jaccard": stats["jaccard_sum"] / valid_count if valid_count else 0.0,
+            "mean_precision": stats["precision_sum"] / valid_count if valid_count else 0.0,
+            "mean_recall": stats["recall_sum"] / valid_count if valid_count else 0.0,
+        }
+
+    return by_category
+
+
 def summarize_results(results: list[EvalResult]) -> EvalSummary:
     """Summarize evaluation results across multiple examples.
 
