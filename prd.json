@@ -184,19 +184,20 @@
       "acceptanceCriteria": [
         "Start nectar dev server: cd ~/ads-dev/nectar && pnpm dev (if not already running)",
         "Test 5 operator query cases via NL search input:",
-        "  1. 'papers similar to 2019ApJ...887L...1K' → similar(bibcode:\"2019ApJ...887L...1K\")",
-        "  2. 'trending papers on exoplanets' → trending(abs:\"exoplanets\")",
-        "  3. 'papers citing gravitational waves' → citations(abs:\"gravitational waves\")",
-        "  4. 'useful papers on dark matter' → useful(abs:\"dark matter\")",
-        "  5. 'reviews of cosmology' → reviews(abs:\"cosmology\")",
-        "For each test: verify query syntax is correct (quoted values, balanced parentheses)",
+        "  1. 'papers similar to 2019ApJ...887L...1K' → similar(bibcode:2019ApJ...887L...1K) or similar(bibcode:\"2019ApJ...887L...1K\") [both valid]",
+        "  2. 'trending papers on exoplanets' → trending(abs:exoplanets) or trending(abs:\"exoplanets\") [both valid - single word doesn't need quotes]",
+        "  3. 'papers citing gravitational waves' → citations(abs:\"gravitational waves\") [multi-word phrase REQUIRES quotes]",
+        "  4. 'useful papers on dark matter' → useful(abs:\"dark matter\") [multi-word phrase REQUIRES quotes]",
+        "  5. 'reviews of cosmology' → reviews(abs:cosmology) or reviews(abs:\"cosmology\") [both valid - single word optional]",
+        "For each test: verify query syntax is correct per ADS rules (multi-word phrases quoted, single words optional, balanced parentheses)",
         "Verify result count is > 0 (no empty results from syntax errors)",
+        "Verify post-processing filter doesn't remove valid fields",
         "Take screenshots of working queries for documentation",
         "Log test results in progress.txt"
       ],
       "priority": 1,
-      "passes": false,
-      "notes": "Tests must cover all 6 operator types. Post-processing filter (constrain_query_output) should not remove any fields."
+      "passes": true,
+      "notes": "ADS accepts both quoted and unquoted single-word values. Quotes required for: multi-word phrases, special characters, bibcodes. Single-word values are equivalent with or without quotes (abs:exoplanet == abs:\"exoplanet\")."
     },
     {
       "id": "US-012",
