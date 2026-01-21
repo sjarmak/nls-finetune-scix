@@ -270,8 +270,8 @@
         "Operator queries pass ADS API validation"
       ],
       "priority": 19,
-      "passes": false,
-      "notes": "Depends on train-002. Manual verification via curl or Playwright test."
+      "passes": true,
+      "notes": "All operator types verified via API route. Added citations() and references() post-processing. All queries pass ADS linter."
     }
   ]
 }

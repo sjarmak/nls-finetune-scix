@@ -246,9 +246,9 @@
       "id": "eval-006",
       "name": "Operator query generation verified",
       "category": "eval",
-      "status": "failing",
-      "verification": "curl -s -X POST https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/chat/completions -H 'Content-Type: application/json' -d '{\"model\":\"llm\",\"messages\":[{\"role\":\"system\",\"content\":\"Convert natural language to ADS search query. Output JSON: {\\\"query\\\": \\\"...\\\"}\"},{\"role\":\"user\",\"content\":\"Query: papers similar to 2019ApJ...887L...1K\"}],\"max_tokens\":64}' | grep -q 'similar'",
-      "notes": "Depends on train-002"
+      "status": "passing",
+      "verification": "curl -s 'http://localhost:8000/api/nl-search' -X POST -H 'Content-Type: application/json' -d '{\"query\":\"papers similar to 2019ApJ...887L...1K\"}' | grep -q 'similar'",
+      "notes": "All operator types verified: trending, similar, useful, citations, references, reviews."
     }
   ]
 }

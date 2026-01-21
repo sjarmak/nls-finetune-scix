@@ -342,3 +342,20 @@ Started: 2026-01-21
   - Same hybrid approach used for author initials (eval-004) and title vs abs (eval-005)
   - Training run: operators-v2, checkpoint: 855/855
 ---
+
+## 2026-01-21 - eval-006
+- Verified all operator query types work through API route with post-processing
+- Test results:
+  - ✓ 'trending papers on exoplanets' → trending(abs:"exoplanets")
+  - ✓ 'papers similar to 2019ApJ...887L...1K' → similar(bibcode:2019ApJ...887L...1K)
+  - ✓ 'useful papers for weak lensing' → useful(abs:"weak lensing" ...)
+  - ✓ 'papers citing dark matter research' → citations(abs:"dark matter")
+  - ✓ All operator queries pass ADS linter
+- Added citations() and references() post-processing
+- Fixed bibcode regex pattern for similar() conversion
+- Files changed: ~/ads-dev/nectar/src/pages/api/nl-search.ts, prd.json, features.json
+- **Learnings for future iterations:**
+  - Bibcode format varies - use flexible regex: \d{4}[A-Za-z.]+\d+[A-Za-z.]+\d+[A-Za-z0-9.]+
+  - Post-processing pipeline handles 6 operator types: trending, similar, useful, reviews, citations, references
+  - validate_query() from scix module provides offline syntax validation
+---
