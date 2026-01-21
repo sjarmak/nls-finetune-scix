@@ -528,5 +528,95 @@
     "nl": "papers by martinez from 2015 to 2020",
     "query": "author:martinez pubdate:[2015 TO 2020]",
     "category": "author"
+  },
+  {
+    "nl": "papers about machine learning",
+    "query": "abs:\"machine learning\"",
+    "category": "content",
+    "notes": "Use abs: for topics, preserve full term"
+  },
+  {
+    "nl": "machine learning papers in astronomy",
+    "query": "abs:\"machine learning\" database:astronomy",
+    "category": "content",
+    "notes": "Full term, not ML abbreviation"
+  },
+  {
+    "nl": "artificial intelligence in astrophysics",
+    "query": "abs:\"artificial intelligence\" database:astronomy",
+    "category": "content",
+    "notes": "Full term, not AI abbreviation"
+  },
+  {
+    "nl": "deep learning for image classification",
+    "query": "abs:\"deep learning\" abs:\"image classification\"",
+    "category": "content",
+    "notes": "Preserve full terms"
+  },
+  {
+    "nl": "papers about code intelligence",
+    "query": "abs:\"code intelligence\"",
+    "category": "content",
+    "notes": "Use abs: not title: for broader coverage"
+  },
+  {
+    "nl": "natural language processing papers",
+    "query": "abs:\"natural language processing\"",
+    "category": "content",
+    "notes": "Full term, not NLP abbreviation"
+  },
+  {
+    "nl": "reinforcement learning for robotics",
+    "query": "abs:\"reinforcement learning\" abs:robotics",
+    "category": "content",
+    "notes": "Preserve full term"
+  },
+  {
+    "nl": "papers on computer vision",
+    "query": "abs:\"computer vision\"",
+    "category": "content",
+    "notes": "Use abs: for topic queries"
+  },
+  {
+    "nl": "convolutional neural networks in astronomy",
+    "query": "abs:\"convolutional neural network\" database:astronomy",
+    "category": "content",
+    "notes": "Full term, not CNN abbreviation"
+  },
+  {
+    "nl": "papers about general relativity",
+    "query": "abs:\"general relativity\"",
+    "category": "content",
+    "notes": "Use abs: for topic"
+  },
+  {
+    "nl": "quantum mechanics in astrophysics",
+    "query": "abs:\"quantum mechanics\" database:astronomy",
+    "category": "content",
+    "notes": "Use abs: for topic"
+  },
+  {
+    "nl": "papers on special relativity",
+    "query": "abs:\"special relativity\"",
+    "category": "content",
+    "notes": "Use abs: not title:"
+  },
+  {
+    "nl": "papers about planet formation",
+    "query": "abs:\"planet formation\"",
+    "category": "content",
+    "notes": "Use abs: for broader coverage"
+  },
+  {
+    "nl": "stellar atmospheres research",
+    "query": "abs:\"stellar atmosphere\"",
+    "category": "content",
+    "notes": "Use abs: for topic"
+  },
+  {
+    "nl": "papers on radio interferometry",
+    "query": "abs:\"radio interferometry\"",
+    "category": "content",
+    "notes": "Use abs: for topic"
   }
 ]
