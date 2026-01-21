@@ -246,3 +246,31 @@ All phases complete. All user stories passing. All beads closed.
 ### Ready for Production
 Endpoint: https://sjarmak--nls-finetune-serve-vllm-serve.modal.run
 UI: ~/ads-dev/nectar with NEXT_PUBLIC_NL_SEARCH=enabled
+
+---
+
+## 2026-01-21 - US-001: Create ADS Field Constraints Module
+
+### Completed
+Created `packages/finetune/src/finetune/domains/scix/field_constraints.py` with:
+
+- **DOCTYPES**: 22 values (abstract, article, book, bookreview, catalog, circular, editorial, eprint, erratum, inbook, inproceedings, mastersthesis, misc, newsletter, obituary, phdthesis, pressrelease, proceedings, proposal, software, talk, techreport)
+- **PROPERTIES**: 21 values (ads_openaccess, author_openaccess, eprint_openaccess, pub_openaccess, openaccess, article, nonarticle, refereed, notrefereed, eprint, inproceedings, software, catalog, associated, data, esource, inspire, library_catalog, presentation, toc, ocr_abstract)
+- **DATABASES**: 3 values (astronomy, physics, general)
+- **BIBGROUPS**: 53 values (HST, JWST, Spitzer, Chandra, ALMA, VLT, Keck, Gemini, etc.)
+- **ESOURCES**: 8 values (PUB_PDF, PUB_HTML, EPRINT_PDF, EPRINT_HTML, AUTHOR_PDF, AUTHOR_HTML, ADS_PDF, ADS_SCAN)
+- **DATA_SOURCES**: 24 values (MAST, IRSA, NED, SIMBAD, VizieR, Herschel, etc.)
+
+### Helper Functions
+- `get_valid_values(field)` - Get valid values for constrained field
+- `is_valid_value(field, value)` - Check if value is valid
+- `suggest_correction(field, invalid_value)` - Suggest fixes for invalid values
+
+### Sources
+- ADS Search Syntax: https://ui.adsabs.harvard.edu/help/search/search-syntax
+- ADS Bibgroups: https://ui.adsabs.harvard.edu/help/data_faq/Bibgroups
+- ADS Solr Schema: https://github.com/adsabs/montysolr
+
+### Verification
+- `mise run verify` - All checks pass
+- Module imports correctly with all enums

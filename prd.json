@@ -18,7 +18,7 @@
         "Run: mise run lint and verify no errors"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "Reference: ADS montysolr schema.xml and GitHub.com/adsabs documentation"
     },
     {
