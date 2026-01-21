@@ -530,6 +530,42 @@
     "category": "author"
   },
   {
+    "nl": "papers by stephanie jarmak",
+    "query": "author:\"jarmak, stephanie\"",
+    "category": "author",
+    "notes": "Full first and last name - use comma format inside quotes"
+  },
+  {
+    "nl": "papers by john smith",
+    "query": "author:\"smith, john\"",
+    "category": "author",
+    "notes": "Full name - lastname, firstname format"
+  },
+  {
+    "nl": "papers by maria garcia on exoplanets",
+    "query": "author:\"garcia, maria\" abs:exoplanet",
+    "category": "author",
+    "notes": "Full name with topic"
+  },
+  {
+    "nl": "first author papers by stephanie jarmak",
+    "query": "^author:\"jarmak, stephanie\"",
+    "category": "author",
+    "notes": "Caret goes BEFORE author field, not inside quotes"
+  },
+  {
+    "nl": "papers where john doe is first author",
+    "query": "^author:\"doe, john\"",
+    "category": "author",
+    "notes": "First author - caret before author:"
+  },
+  {
+    "nl": "first author papers by chen wei",
+    "query": "^author:\"wei, chen\"",
+    "category": "author",
+    "notes": "First author caret syntax"
+  },
+  {
     "nl": "papers about machine learning",
     "query": "abs:\"machine learning\"",
     "category": "content",
