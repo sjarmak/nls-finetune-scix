@@ -389,3 +389,20 @@ Started: 2026-01-21
   - Modal `app stop` before deploy forces container restart to pick up new model
   - Sorting runs by mtime instead of alphabetically ensures latest model is used
 ---
+
+## 2026-01-21 - integ-010
+- Added ADS autocomplete API integration for author validation to nl-search.ts
+- Implementation details:
+  - fetchAuthorAutocomplete(): Calls ADS /v1/autocomplete?term=X&field=author
+  - 200ms timeout using AbortController to prevent latency spikes
+  - In-memory cache with 1-hour TTL (Map-based)
+  - validateAuthors(): Extracts author names, validates via autocomplete, replaces with canonical form
+- Flow: Model output → operator post-processing → author validation → query variations
+- Files changed: ~/ads-dev/nectar/src/pages/api/nl-search.ts, prd.json, features.json
+- Commit: 71635846 - "feat(integ-010): add ADS autocomplete for author validation"
+- **Learnings for future iterations:**
+  - ADS autocomplete returns suggestions array in JSON response
+  - Use AbortController with setTimeout for reliable timeout handling
+  - Canonical author names have format "Last, First" - use exact match or first suggestion
+  - Cache key should be normalized (lowercase) for better hit rate
+---

@@ -278,9 +278,9 @@
       "id": "integ-010",
       "name": "ADS autocomplete for author validation",
       "category": "integration",
-      "status": "failing",
+      "status": "passing",
       "verification": "grep -r 'autocomplete' ~/ads-dev/nectar/src/pages/api/",
-      "notes": "From research-001: Use ADS /v1/autocomplete API with 200ms timeout"
+      "notes": "Implemented with 200ms timeout, 1-hour cache, canonical name replacement"
     },
     {
       "id": "integ-011",

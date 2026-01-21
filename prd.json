@@ -326,8 +326,8 @@
         "Cache autocomplete results for repeated queries"
       ],
       "priority": 23,
-      "passes": false,
-      "notes": "From research-001: ADS provides /v1/autocomplete?term=X&field=author"
+      "passes": true,
+      "notes": "Implemented with 200ms timeout, 1-hour cache, and canonical name replacement."
     },
     {
       "id": "integ-011",
