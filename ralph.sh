@@ -43,23 +43,18 @@ check_prerequisites() {
         exit 1
     fi
 
-    if ! command -v amp &> /dev/null && ! command -v claude &> /dev/null; then
-        echo -e "${RED}Error: Neither amp nor claude command found${NC}"
-        echo "Install one of:"
-        echo "  - Amp: https://ampcode.com"
-        echo "  - Claude Code: npm install -g @anthropic-ai/claude-code"
+    if ! command -v "$TOOL" &> /dev/null; then
+        echo -e "${RED}Error: $TOOL command not found${NC}"
         exit 1
     fi
 
     if [ ! -f "$PRD_FILE" ]; then
         echo -e "${RED}Error: $PRD_FILE not found${NC}"
-        echo "Create it with: amp skill prd"
         exit 1
     fi
 
     if [ ! -f "prompt.md" ]; then
         echo -e "${RED}Error: prompt.md not found${NC}"
-        echo "This file is required for Ralph to work"
         exit 1
     fi
 }
@@ -102,11 +97,10 @@ Each iteration appends findings here so future iterations can benefit.
 ## Session Start
 
 EOF
-        echo "Initialized $PROGRESS_FILE"
     fi
 }
 
-# Run one iteration
+# Run one iteration autonomously
 run_iteration() {
     local iteration=$1
     local story_id=$2
@@ -114,6 +108,8 @@ run_iteration() {
 
     local story_title=$(echo "$story_details" | jq -r '.title')
     local priority=$(echo "$story_details" | jq -r '.priority')
+    local description=$(echo "$story_details" | jq -r '.description')
+    local acceptance_criteria=$(echo "$story_details" | jq -r '.acceptanceCriteria[]' | sed 's/^/- /')
 
     echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo -e "${BLUE}Iteration ${iteration}/${MAX_ITERATIONS}${NC}"
@@ -122,79 +118,133 @@ run_iteration() {
     echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
 
-    # Create context for the AI
-    local ai_context="
-# Current Task
+    # Create temp file for results
+    local result_file="/tmp/ralph-result-${story_id}.txt"
+    rm -f "$result_file"
 
-Story ID: ${story_id}
-Title: ${story_title}
-Priority: ${priority}
+    # Create the task for the AI
+    cat > /tmp/ralph-task.md << TASK_EOF
+# Task: ${story_id}
 
-## Story Details
-$(echo "$story_details" | jq -r '.description')
+## Story
+${story_title}
+
+## Description
+${description}
 
 ## Acceptance Criteria
-$(echo "$story_details" | jq -r '.acceptanceCriteria[]' | sed 's/^/- /')
+${acceptance_criteria}
 
-## Notes
-$(echo "$story_details" | jq -r '.notes')
+## Instructions
 
----
+You are an AI implementing a user story. Your task:
 
-Read prompt.md for full context about this project and quality gates.
-"
+1. **Implement** all acceptance criteria for this story
+2. **Run quality gates**:
+   - \`mise run lint\` (must pass)
+   - \`mise run test\` (must pass)
+   - \`mise run verify\` (must pass)
+3. **Report results** in this exact format at the end:
 
-    # Run the appropriate tool
-    if [[ "$TOOL" == "claude" ]]; then
-        # Claude Code
-        if command -v claude &> /dev/null; then
-            echo -e "${YELLOW}Invoking Claude Code...${NC}"
-            claude code << 'CLAUDE_EOF'
-$ai_context
+RALPH_RESULT_START
+{
+  "story_id": "${story_id}",
+  "passed": true/false,
+  "errors": ["error message 1", "error message 2"],
+  "summary": "Brief summary of what was implemented"
+}
+RALPH_RESULT_END
 
-Please implement this story. Refer to prompt.md for quality gates and requirements.
-When done, let me know by saying: STORY_COMPLETE
-CLAUDE_EOF
-        else
-            echo -e "${RED}Error: claude command not found${NC}"
-            return 1
-        fi
+## Quality Gates
+
+Before reporting success (passed: true):
+- All acceptance criteria are implemented
+- Code passes lint (no style/import errors)
+- Tests pass (all test suites green)
+- Type checking passes (no TypeScript/Python errors)
+- No obvious bugs or incomplete code
+
+If any quality gate fails, report passed: false with error details.
+
+## Context
+
+Refer to prompt.md for full project context and known patterns.
+Read AGENTS.md for codebase conventions and common gotchas.
+
+## Additional Context from Previous Iterations
+
+$(tail -100 progress.txt 2>/dev/null || echo "No previous iterations")
+
+TASK_EOF
+
+    # Invoke the AI tool
+    echo -e "${YELLOW}Invoking ${TOOL}...${NC}"
+    
+    if [ "$TOOL" = "amp" ]; then
+        # Use Amp with task file
+        amp < /tmp/ralph-task.md > /tmp/ralph-output.txt 2>&1 || true
     else
-        # Amp (default)
-        if command -v amp &> /dev/null; then
-            echo -e "${YELLOW}Invoking Amp...${NC}"
-            amp << 'AMP_EOF'
-$ai_context
-
-Please implement this story. Refer to prompt.md for quality gates and requirements.
-When done, confirm all acceptance criteria are met.
-AMP_EOF
-        else
-            echo -e "${RED}Error: amp command not found${NC}"
-            return 1
-        fi
+        # Use Claude Code
+        $TOOL code < /tmp/ralph-task.md > /tmp/ralph-output.txt 2>&1 || true
     fi
 
-    echo ""
-    echo -e "${YELLOW}Did story ${story_id} pass all acceptance criteria? (y/n)${NC}"
-    read -r response
-    
-    if [[ "$response" =~ ^[Yy]$ ]]; then
-        update_story_status "$story_id" "true"
-        git add -A
-        git commit -m "[${story_id}] ${story_title}"
-        
-        # Append to progress
-        echo "" >> "$PROGRESS_FILE"
-        echo "## Iteration ${iteration} - ${story_id}" >> "$PROGRESS_FILE"
-        echo "" >> "$PROGRESS_FILE"
-        echo "**Completed**: ${story_title}" >> "$PROGRESS_FILE"
-        echo "" >> "$PROGRESS_FILE"
-        
-        echo -e "${GREEN}✓ Story ${story_id} marked as complete${NC}"
-        return 0
+    # Parse results from output
+    if grep -q "RALPH_RESULT_START" /tmp/ralph-output.txt; then
+        local json_result=$(sed -n '/RALPH_RESULT_START/,/RALPH_RESULT_END/p' /tmp/ralph-output.txt | sed '1d;$d')
+        local passed=$(echo "$json_result" | jq -r '.passed' 2>/dev/null || echo "false")
+        local summary=$(echo "$json_result" | jq -r '.summary' 2>/dev/null || echo "Implementation completed")
+        local errors=$(echo "$json_result" | jq -r '.errors[]?' 2>/dev/null)
+
+        if [ "$passed" = "true" ]; then
+            echo -e "${GREEN}✓ Story ${story_id} PASSED${NC}"
+            echo "  Summary: $summary"
+            update_story_status "$story_id" "true"
+            git add -A
+            git commit -m "[${story_id}] ${story_title}"
+            
+            # Append to progress
+            echo "" >> "$PROGRESS_FILE"
+            echo "## Iteration ${iteration} - ${story_id}" >> "$PROGRESS_FILE"
+            echo "" >> "$PROGRESS_FILE"
+            echo "**Status**: ✓ PASSED" >> "$PROGRESS_FILE"
+            echo "**Title**: ${story_title}" >> "$PROGRESS_FILE"
+            echo "**Summary**: ${summary}" >> "$PROGRESS_FILE"
+            echo "" >> "$PROGRESS_FILE"
+            
+            return 0
+        else
+            echo -e "${YELLOW}✗ Story ${story_id} FAILED${NC}"
+            echo "  Summary: $summary"
+            if [ ! -z "$errors" ]; then
+                echo "  Errors:"
+                echo "$errors" | while read err; do
+                    echo "    - $err"
+                done
+            fi
+            
+            # Append to progress
+            echo "" >> "$PROGRESS_FILE"
+            echo "## Iteration ${iteration} - ${story_id} (RETRY)" >> "$PROGRESS_FILE"
+            echo "" >> "$PROGRESS_FILE"
+            echo "**Status**: ✗ FAILED" >> "$PROGRESS_FILE"
+            echo "**Title**: ${story_title}" >> "$PROGRESS_FILE"
+            echo "**Summary**: ${summary}" >> "$PROGRESS_FILE"
+            if [ ! -z "$errors" ]; then
+                echo "**Errors**:" >> "$PROGRESS_FILE"
+                echo "$errors" | while read err; do
+                    echo "  - $err" >> "$PROGRESS_FILE"
+                done
+            fi
+            echo "" >> "$PROGRESS_FILE"
+            
+            return 1
+        fi
     else
-        echo -e "${YELLOW}Story ${story_id} not yet complete. Review feedback and try again.${NC}"
+        # Could not parse result - treat as failure
+        echo -e "${RED}✗ Story ${story_id} - Could not parse AI output${NC}"
+        echo "AI output:" >> "$PROGRESS_FILE"
+        tail -20 /tmp/ralph-output.txt >> "$PROGRESS_FILE"
+        echo "" >> "$PROGRESS_FILE"
         return 1
     fi
 }
@@ -223,6 +273,7 @@ main() {
             echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
             echo ""
             echo -e "${GREEN}<promise>COMPLETE</promise>${NC}"
+            echo ""
             break
         fi
 
@@ -241,6 +292,8 @@ main() {
     if [ "$iteration" -gt "$MAX_ITERATIONS" ]; then
         echo -e "${YELLOW}Maximum iterations (${MAX_ITERATIONS}) reached${NC}"
         echo -e "${YELLOW}Some stories may still be incomplete${NC}"
+        echo ""
+        echo "To continue, run: ./ralph.sh --tool $TOOL $((MAX_ITERATIONS + 10))"
     fi
 }
 
