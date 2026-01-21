@@ -71,12 +71,44 @@ python -m finetune.domains.scix.validate validate_query "author:\"doe\""
 
 ## When You're Done With This Story
 
-1. Ensure all acceptance criteria pass
-2. Commit with message: `[US-XXX] Title of story`
-3. Update `prd.json` - set `passes: true` for completed story
-4. Update `progress.txt` - append what you learned
-5. Update `AGENTS.md` - add patterns, gotchas, useful context
-6. Let Ralph pick the next story (you'll be called again automatically)
+**IMPORTANT**: You MUST report results in this exact format, or Ralph cannot parse your output:
+
+```
+RALPH_RESULT_START
+{
+  "story_id": "US-XXX",
+  "passed": true,
+  "errors": [],
+  "summary": "Brief description of what was implemented"
+}
+RALPH_RESULT_END
+```
+
+Use `passed: true` only if ALL acceptance criteria passed AND all quality gates passed.
+Use `passed: false` if any acceptance criterion failed or any quality gate failed.
+
+Example of failure report:
+```
+RALPH_RESULT_START
+{
+  "story_id": "US-001",
+  "passed": false,
+  "errors": [
+    "Type error in field_constraints.py line 15: Expected str, got dict",
+    "Test failure: test_doctype_validation failed with assertion error"
+  ],
+  "summary": "Implementation incomplete - type errors in module definition"
+}
+RALPH_RESULT_END
+```
+
+This format allows Ralph to automatically:
+- Parse your results
+- Update prd.json status
+- Move to the next story
+- Track progress across autonomous iterations
+
+DO NOT skip this step. Ralph cannot proceed without this structured output.
 
 ## When All Stories Are Complete
 
