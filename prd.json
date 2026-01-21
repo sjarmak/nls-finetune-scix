@@ -182,8 +182,8 @@
         "Consistent field selection for similar query types"
       ],
       "priority": 13,
-      "passes": false,
-      "notes": "See beads nls-finetune-scix-6kk"
+      "passes": true,
+      "notes": "Fixed with post-processing (title:→abs: normalization, abbreviation expansion) and 15 new training examples."
     },
     {
       "id": "integ-009",
