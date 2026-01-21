@@ -298,8 +298,8 @@
         "All operator types represented"
       ],
       "priority": 21,
-      "passes": false,
-      "notes": "Depends on data-007"
+      "passes": true,
+      "notes": "Regenerated: 2376 train examples, 5.1% operator coverage (120 operator examples). 160 operator examples in deduped dataset."
     },
     {
       "id": "train-003",

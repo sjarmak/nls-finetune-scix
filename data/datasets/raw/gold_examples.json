@@ -1414,5 +1414,205 @@
     "nl": "metallicity near abundance in text",
     "query": "abs:(metallicity NEAR3 abundance)",
     "category": "operator"
+  },
+  {
+    "nl": "popular papers on stellar evolution",
+    "query": "trending(abs:\"stellar evolution\")",
+    "category": "operator"
+  },
+  {
+    "nl": "hot papers about gamma ray bursts",
+    "query": "trending(abs:\"gamma ray burst\")",
+    "category": "operator"
+  },
+  {
+    "nl": "trending research on quasars",
+    "query": "trending(abs:quasar)",
+    "category": "operator"
+  },
+  {
+    "nl": "what's popular in pulsar timing",
+    "query": "trending(abs:\"pulsar timing\")",
+    "category": "operator"
+  },
+  {
+    "nl": "trending work on AGN jets",
+    "query": "trending(abs:AGN abs:jet)",
+    "category": "operator"
+  },
+  {
+    "nl": "find papers similar to this gravitational wave detection paper 2016PhRvL.116f1102A",
+    "query": "similar(bibcode:2016PhRvL.116f1102A)",
+    "category": "operator"
+  },
+  {
+    "nl": "papers like 2018Natur.555...67B",
+    "query": "similar(bibcode:2018Natur.555...67B)",
+    "category": "operator"
+  },
+  {
+    "nl": "similar papers to the Planck 2018 results",
+    "query": "similar(bibcode:2020A&A...641A...1P)",
+    "category": "operator"
+  },
+  {
+    "nl": "find related papers to 2019ApJ...872L...2M",
+    "query": "similar(bibcode:2019ApJ...872L...2M)",
+    "category": "operator"
+  },
+  {
+    "nl": "papers that cite dark energy research",
+    "query": "citations(abs:\"dark energy\")",
+    "category": "operator"
+  },
+  {
+    "nl": "what cites the LIGO discovery",
+    "query": "citations(bibcode:2016PhRvL.116f1102A)",
+    "category": "operator"
+  },
+  {
+    "nl": "papers citing gravitational wave observations",
+    "query": "citations(abs:\"gravitational wave\")",
+    "category": "operator"
+  },
+  {
+    "nl": "citations to exoplanet transit papers",
+    "query": "citations(abs:exoplanet abs:transit)",
+    "category": "operator"
+  },
+  {
+    "nl": "useful papers for learning about CMB analysis",
+    "query": "useful(abs:\"cosmic microwave background\")",
+    "category": "operator"
+  },
+  {
+    "nl": "methodology papers for spectral analysis",
+    "query": "useful(abs:\"spectral analysis\")",
+    "category": "operator"
+  },
+  {
+    "nl": "useful techniques for photometry",
+    "query": "useful(abs:photometry)",
+    "category": "operator"
+  },
+  {
+    "nl": "useful papers on astrometry methods",
+    "query": "useful(abs:astrometry)",
+    "category": "operator"
+  },
+  {
+    "nl": "review papers on magnetars",
+    "query": "reviews(abs:magnetar)",
+    "category": "operator"
+  },
+  {
+    "nl": "comprehensive reviews about white dwarfs",
+    "query": "reviews(abs:\"white dwarf\")",
+    "category": "operator"
+  },
+  {
+    "nl": "review articles on tidal disruption events",
+    "query": "reviews(abs:\"tidal disruption\")",
+    "category": "operator"
+  },
+  {
+    "nl": "references in supernova papers",
+    "query": "references(abs:supernova)",
+    "category": "operator"
+  },
+  {
+    "nl": "papers referenced by dark matter studies",
+    "query": "references(abs:\"dark matter\")",
+    "category": "operator"
+  },
+  {
+    "nl": "reference list from gravitational lensing work",
+    "query": "references(abs:\"gravitational lensing\")",
+    "category": "operator"
+  },
+  {
+    "nl": "top 50 most cited papers on black holes",
+    "query": "topn(50, abs:\"black hole\", citation_count desc)",
+    "category": "operator"
+  },
+  {
+    "nl": "top 10 recent galaxy papers",
+    "query": "topn(10, abs:galaxy, date desc)",
+    "category": "operator"
+  },
+  {
+    "nl": "what's being read about neutron stars",
+    "query": "trending(abs:\"neutron star\")",
+    "category": "operator"
+  },
+  {
+    "nl": "popular papers on AGN this week",
+    "query": "trending(abs:AGN)",
+    "category": "operator"
+  },
+  {
+    "nl": "trending papers about Type Ia supernovae",
+    "query": "trending(abs:\"Type Ia supernova\")",
+    "category": "operator"
+  },
+  {
+    "nl": "papers similar to the Event Horizon Telescope M87 image paper",
+    "query": "similar(bibcode:2019ApJ...875L...1E)",
+    "category": "operator"
+  },
+  {
+    "nl": "find work related to 2020Natur.581..391G",
+    "query": "similar(bibcode:2020Natur.581..391G)",
+    "category": "operator"
+  },
+  {
+    "nl": "papers that cite Hubble tension research",
+    "query": "citations(abs:\"Hubble tension\")",
+    "category": "operator"
+  },
+  {
+    "nl": "what papers cite neutrino oscillation work",
+    "query": "citations(abs:\"neutrino oscillation\")",
+    "category": "operator"
+  },
+  {
+    "nl": "helpful papers for redshift measurement",
+    "query": "useful(abs:\"redshift measurement\")",
+    "category": "operator"
+  },
+  {
+    "nl": "methodology papers for radial velocity",
+    "query": "useful(abs:\"radial velocity\")",
+    "category": "operator"
+  },
+  {
+    "nl": "review papers on stellar nucleosynthesis",
+    "query": "reviews(abs:nucleosynthesis)",
+    "category": "operator"
+  },
+  {
+    "nl": "comprehensive reviews about globular clusters",
+    "query": "reviews(abs:\"globular cluster\")",
+    "category": "operator"
+  },
+  {
+    "nl": "references from binary star papers",
+    "query": "references(abs:\"binary star\")",
+    "category": "operator"
+  },
+  {
+    "nl": "bibliography of cosmological simulation papers",
+    "query": "references(abs:\"cosmological simulation\")",
+    "category": "operator"
+  },
+  {
+    "nl": "top 20 papers on planet formation by citations",
+    "query": "topn(20, abs:\"planet formation\", citation_count desc)",
+    "category": "operator"
+  },
+  {
+    "nl": "trending high energy astrophysics papers",
+    "query": "trending(abs:\"high energy astrophysics\")",
+    "category": "operator"
   }
 ]
