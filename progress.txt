@@ -373,3 +373,19 @@ Started: 2026-01-21
   - 5-10% category coverage requires ~130-260 examples in a 2600-example dataset
   - Random shuffle splits examples between train/val, reducing train coverage slightly
 ---
+
+## 2026-01-21 - train-003 & eval-006
+- Retrained model with operators-v3 on 2376 training examples (5.1% operator coverage)
+- Training completed: 93.8% token accuracy, 3 epochs, ~9 minutes on H100
+- Fixed serve_vllm.py to use modification time for model selection (was alphabetical)
+- Model now generates operators natively without post-processing:
+  - ✅ trending papers on exoplanets → trending(abs:"exoplanet")
+  - ✅ papers similar to 2019ApJ...887L...1K → similar(bibcode:...)
+  - ✅ useful papers for weak lensing → useful(abs:"weak lensing")
+  - ✅ papers citing dark matter research → citations(abs:"dark matter")
+- Files changed: packages/finetune/src/finetune/modal/serve_vllm.py, prd.json, features.json
+- **Learnings for future iterations:**
+  - 5% operator coverage in training data is sufficient for native pattern learning
+  - Modal `app stop` before deploy forces container restart to pick up new model
+  - Sorting runs by mtime instead of alphabetically ensures latest model is used
+---
