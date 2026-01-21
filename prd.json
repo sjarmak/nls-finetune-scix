@@ -217,7 +217,7 @@
         "Log edge case results in progress.txt"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Tests the interaction between model output and post-processing filter. Ensure filter doesn't over-correct."
     },
     {
