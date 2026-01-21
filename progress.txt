@@ -310,3 +310,35 @@ Started: 2026-01-21
 2. Retrain model with operator-aware data
 3. Update post-processing to handle operator queries
 ---
+
+## 2026-01-21 - data-006
+- Regenerated training JSONL with operator examples using build_dataset.py
+- Total pairs: 2531 (from 2202 previous)
+- Operator examples included: 50 (6 trending, 24+ other operators)
+- Category distribution: 2% operator category now in training data
+- Files changed: data/datasets/processed/train.jsonl, val.jsonl, all_pairs.json
+- **Learnings for future iterations:**
+  - build_dataset.py must be run from repo root (paths are relative)
+  - Script combines gold + synthetic + nl_pairs and validates all
+  - Deduplication by NL and query ensures clean training data
+---
+
+## 2026-01-21 - train-002
+- Completed training run operators-v2 with 2277 examples on H100 GPU
+- Final metrics: 93.1% token accuracy at epoch 3
+- Training took ~8 minutes (855 steps)
+- Merged LoRA adapter and deployed to Modal vLLM endpoint
+- Model generates good base queries but doesn't reliably use operator syntax
+- Root cause: Only 25 operator examples vs 2277 total (~1%) - insufficient for strong pattern learning
+- Solution: Added applyOperatorPostProcessing() to API route
+  - Converts read_count patterns to trending() when user asks for trending/popular
+  - Converts identifier/bibcode patterns to similar() for similar-to queries
+  - Wraps queries in useful() or reviews() when appropriate keywords detected
+- Warm latency: ~1.3s (well under 2s target)
+- Files changed: ~/ads-dev/nectar/src/pages/api/nl-search.ts, prd.json, features.json
+- **Learnings for future iterations:**
+  - Operator examples need ~5-10% of training data to be learned reliably
+  - Post-processing is effective for pattern conversion when model provides good base queries
+  - Same hybrid approach used for author initials (eval-004) and title vs abs (eval-005)
+  - Training run: operators-v2, checkpoint: 855/855
+---

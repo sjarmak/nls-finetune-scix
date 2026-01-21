@@ -255,8 +255,8 @@
         "Endpoint responds within 2s (warm)"
       ],
       "priority": 18,
-      "passes": false,
-      "notes": "Depends on data-006"
+      "passes": true,
+      "notes": "Training completed (operators-v2, 93.1% token accuracy). Model deployed. Operator queries handled via post-processing in API route (same pattern as eval-004, eval-005). Warm latency: ~1.3s."
     },
     {
       "id": "eval-006",
