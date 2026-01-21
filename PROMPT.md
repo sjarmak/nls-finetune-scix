@@ -9,11 +9,24 @@ This project fine-tunes language models (Qwen3-1.7B) to convert natural language
 - Output invalid field combinations (e.g., `bibstem:phdthesis` when there's no doctype:phdthesis)
 - Hallucinate field values not in the ADS schema
 
+## Workflow: Data → Train → Deploy → Test → Iterate
+
+This Ralph cycle implements an **end-to-end workflow**:
+
+1. **US-001 to US-007** ✅ COMPLETE - Foundation (constraints, validation, post-processing)
+2. **US-008** - Fix training data (operator syntax, bare fields)
+3. **US-009** - Retrain model with fixed data
+4. **US-010** - Deploy to Modal inference endpoint
+5. **US-011 to US-013** - Test UI to verify fixes work
+6. **US-014** - Performance verification
+7. **US-015** - Iteration: if tests fail, fix data and loop back
+
 ## Current Task Selection
 
 1. **Read `prd.json`** - Find the highest-priority story where `passes: false`
 2. **One story per iteration** - Focus only on that story's acceptance criteria
 3. **Quality gates** - Story must pass all acceptance criteria before marking `passes: true`
+4. **Iteration gate (US-015)** - If US-011-014 tests fail, fix root cause and restart from US-008
 
 ## Key Files
 

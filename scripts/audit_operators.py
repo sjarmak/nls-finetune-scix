@@ -1,68 +1,125 @@
 #!/usr/bin/env python3
-"""Audit training data for malformed operator syntax."""
+"""Audit operator syntax in training data.
+
+This script checks for malformed operator patterns like:
+- citations(abs:cosmology) instead of citations(abs:"cosmology")
+- trending(abs:(topic)) instead of trending(abs:"topic")  
+- reviews(abs:magnetar) instead of reviews(abs:"magnetar")
+
+Usage:
+    python scripts/audit_operators.py [--verbose]
+"""
 
 import json
 import re
 import sys
 from pathlib import Path
 
-def find_bad_operators(query: str) -> list[tuple[str, str]]:
-    """Find malformed operator patterns.
-    
-    Returns list of (operator, issue) tuples.
-    """
-    operators = ["citations", "trending", "useful", "reviews", "similar", "references"]
+# Operators that take query arguments
+OPERATORS = ["citations", "trending", "useful", "reviews", "similar", "references"]
+
+# Pattern to find operators with unquoted abs: values
+# Matches: operator(abs:word) but not operator(abs:"quoted")
+UNQUOTED_ABS_PATTERN = re.compile(
+    r'(' + '|'.join(OPERATORS) + r')\([^)]*abs:(?!["\'])([a-zA-Z0-9_]+)'
+)
+
+# Pattern to find operator at the start of query (indicates we're inside an operator context)
+OPERATOR_START = re.compile(r'^(' + '|'.join(OPERATORS) + r')\(')
+
+# Pattern to find malformed parentheses: abs:(topic)
+MALFORMED_PARENS_PATTERN = re.compile(r'abs:\(([^)]+)\)')
+
+# Pattern to find operators with unquoted title: values inside
+UNQUOTED_TITLE_PATTERN = re.compile(
+    r'(' + '|'.join(OPERATORS) + r')\([^)]*title:(?!["\'])([a-zA-Z0-9_]+)'
+)
+
+
+def find_operator_issues(query: str) -> list[dict]:
+    """Find all operator syntax issues in a query."""
     issues = []
     
-    for op in operators:
-        # Pattern: operator(field:value without quotes)
-        # Bad: citations(abs:topic) ✗
-        # Good: citations(abs:"topic") ✓
-        if re.search(rf'{op}\([a-z_]+:(?!["\(])[a-zA-Z]', query):
-            issues.append((op, "missing quotes around field value"))
-        
-        # Pattern: operator(field:(value)) with extra parens
-        # Bad: trending(abs:(exoplanets)) ✗
-        # Good: trending(abs:"exoplanets") ✓
-        if re.search(rf'{op}\([a-z_]+:\([^)]+\)\)', query):
-            issues.append((op, "extra/malformed parentheses"))
-        
-        # Pattern: field:value without quotes inside operator
-        # Already caught above but be explicit
+    # Check for unquoted abs: values inside operators
+    for match in UNQUOTED_ABS_PATTERN.finditer(query):
+        issues.append({
+            "type": "unquoted_abs",
+            "operator": match.group(1),
+            "value": match.group(2),
+            "match": match.group(0)
+        })
+    
+    # Check for malformed parentheses inside operators (query starts with operator)
+    if OPERATOR_START.match(query):
+        for match in MALFORMED_PARENS_PATTERN.finditer(query):
+            issues.append({
+                "type": "malformed_parens",
+                "value": match.group(1),
+                "match": match.group(0)
+            })
     
     return issues
 
-def audit_file(filepath: Path) -> dict:
-    """Audit a JSON file for bad operator patterns."""
+
+def audit_file(filepath: Path, verbose: bool = False) -> dict:
+    """Audit a JSON file for operator issues."""
     with open(filepath) as f:
         data = json.load(f)
     
-    bad_examples = []
     total = len(data)
+    issues_by_type = {
+        "unquoted_abs": [],
+        "malformed_parens": [],
+    }
     
     for i, pair in enumerate(data):
-        query = pair.get("ads_query", "")
-        nl = pair.get("natural_language", "")
+        query = pair.get("ads_query", pair.get("query", ""))
+        nl = pair.get("natural_language", pair.get("nl", ""))
+        issues = find_operator_issues(query)
         
-        issues = find_bad_operators(query)
-        if issues:
-            bad_examples.append({
-                "index": i,
-                "nl": nl,
-                "query": query,
-                "issues": [f"{op} - {issue}" for op, issue in issues],
-            })
+        for issue in issues:
+            issue["index"] = i
+            issue["query"] = query
+            issue["natural_language"] = nl[:80] + "..." if len(nl) > 80 else nl
+            issues_by_type[issue["type"]].append(issue)
     
     return {
         "filepath": str(filepath),
         "total": total,
-        "bad_count": len(bad_examples),
-        "percentage": f"{100 * len(bad_examples) / total:.1f}%" if total else "N/A",
-        "examples": bad_examples,
+        "issues": issues_by_type,
     }
 
+
+def print_issues(result: dict, verbose: bool = False):
+    """Print audit results."""
+    filepath = Path(result["filepath"]).name
+    total_issues = sum(len(v) for v in result["issues"].values())
+    
+    print(f"\n📄 {filepath} ({result['total']} examples)")
+    print("-" * 60)
+    
+    if total_issues == 0:
+        print("  ✅ No operator issues found")
+        return
+    
+    for issue_type, issues in result["issues"].items():
+        if not issues:
+            continue
+        
+        label = {
+            "unquoted_abs": "Unquoted abs: inside operator",
+            "malformed_parens": "Malformed parentheses abs:()",
+        }.get(issue_type, issue_type)
+        
+        print(f"\n  ❌ {label}: {len(issues)}")
+        
+        if verbose:
+            for issue in issues[:10]:  # Show first 10
+                print(f"      Line {issue['index']}: {issue['query'][:70]}...")
+
+
 def main():
-    """Audit training data files."""
+    """Audit operator syntax in training data."""
     project_root = Path(__file__).parent.parent
     
     files = [
@@ -70,61 +127,40 @@ def main():
         project_root / "data/datasets/raw/gold_examples.json",
     ]
     
-    print("=" * 80)
-    print("OPERATOR SYNTAX AUDIT")
-    print("=" * 80)
+    verbose = "--verbose" in sys.argv or "-v" in sys.argv
     
-    all_results = {}
-    total_bad = 0
+    print("=" * 70)
+    print("OPERATOR SYNTAX AUDIT")
+    print("=" * 70)
+    print("Checking for:")
+    print("  - Unquoted values inside operators: citations(abs:word)")
+    print("  - Malformed parentheses: abs:(topic)")
+    
+    total_issues = 0
+    all_results = []
     
     for filepath in files:
         if not filepath.exists():
             print(f"\n⚠️  File not found: {filepath}")
             continue
         
-        print(f"\n📄 Auditing {filepath.name}...")
-        result = audit_file(filepath)
-        all_results[str(filepath)] = result
-        
-        print(f"  Total pairs: {result['total']}")
-        print(f"  Bad operators: {result['bad_count']} ({result['percentage']})")
-        total_bad += result['bad_count']
+        result = audit_file(filepath, verbose)
+        all_results.append(result)
+        print_issues(result, verbose)
+        total_issues += sum(len(v) for v in result["issues"].values())
     
-    # Show samples
-    print("\n" + "=" * 80)
-    print("SAMPLE BAD OPERATORS")
-    print("=" * 80)
-    
-    shown = 0
-    max_samples = 10
-    
-    for filepath, result in all_results.items():
-        for ex in result["examples"]:
-            if shown >= max_samples:
-                break
-            
-            print(f"\n[{ex['index']}] {ex['nl']}")
-            print(f"     Query: {ex['query']}")
-            for issue in ex['issues']:
-                print(f"     ✗ {issue}")
-            
-            shown += 1
-    
-    # Summary
-    print("\n" + "=" * 80)
+    print("\n" + "=" * 70)
     print("SUMMARY")
-    print("=" * 80)
-    print(f"Total bad operator examples: {total_bad}")
+    print("=" * 70)
     
-    if total_bad == 0:
-        print("\n✓ No malformed operators found - data looks good!")
+    if total_issues == 0:
+        print("✅ No operator syntax issues found!")
         return 0
     else:
-        print(f"\n⚠️  {total_bad} operator examples need fixing")
-        print("\nTo fix, ensure operators follow this pattern:")
-        print("  operator(field:\"value\") - not operator(field:value)")
-        print("  operator(field:\"value\") - not operator(field:(value))")
+        print(f"❌ Found {total_issues} operator syntax issues")
+        print("\nRun: python scripts/fix_operators.py to fix these issues")
         return 1
+
 
 if __name__ == "__main__":
     sys.exit(main())

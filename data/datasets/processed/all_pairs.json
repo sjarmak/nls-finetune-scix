@@ -536,7 +536,7 @@
   },
   {
     "natural_language": "what do magnetar papers cite",
-    "ads_query": "references(abs:magnetar)",
+    "ads_query": "references(abs:\"magnetar\")",
     "category": "operator"
   },
   {
@@ -1521,7 +1521,7 @@
   },
   {
     "natural_language": "trending exoplanets",
-    "ads_query": "trending(abs:(exoplanets))",
+    "ads_query": "trending(abs:\"exoplanets\")",
     "category": "second_order"
   },
   {
@@ -1596,7 +1596,7 @@
   },
   {
     "natural_language": "papers citing cosmology research",
-    "ads_query": "citations(abs:cosmology)",
+    "ads_query": "citations(abs:\"cosmology\")",
     "category": "operator"
   },
   {
@@ -1771,7 +1771,7 @@
   },
   {
     "natural_language": "references in supernova papers",
-    "ads_query": "references(abs:supernova)",
+    "ads_query": "references(abs:\"supernova\")",
     "category": "operator"
   },
   {
@@ -1796,7 +1796,7 @@
   },
   {
     "natural_language": "key methodology papers for photometry",
-    "ads_query": "useful(abs:photometry)",
+    "ads_query": "useful(abs:\"photometry\")",
     "category": "operator"
   },
   {
@@ -2846,7 +2846,7 @@
   },
   {
     "natural_language": "review papers on magnetars",
-    "ads_query": "reviews(abs:magnetar)",
+    "ads_query": "reviews(abs:\"magnetar\")",
     "category": "operator"
   },
   {
@@ -2966,7 +2966,7 @@
   },
   {
     "natural_language": "papers like Kepler exoplanet discoveries",
-    "ads_query": "similar(abs:\"Kepler\" abs:exoplanet)",
+    "ads_query": "similar(abs:\"Kepler\" abs:\"exoplanet\")",
     "category": "operator"
   },
   {
@@ -4136,7 +4136,7 @@
   },
   {
     "natural_language": "what's hot in cosmology",
-    "ads_query": "trending(abs:cosmology)",
+    "ads_query": "trending(abs:\"cosmology\")",
     "category": "operator"
   },
   {
@@ -4216,7 +4216,7 @@
   },
   {
     "natural_language": "common references in spectroscopy research",
-    "ads_query": "useful(abs:spectroscopy)",
+    "ads_query": "useful(abs:\"spectroscopy\")",
     "category": "operator"
   },
   {
@@ -4516,7 +4516,7 @@
   },
   {
     "natural_language": "papers citing supernova studies",
-    "ads_query": "citations(abs:supernova)",
+    "ads_query": "citations(abs:\"supernova\")",
     "category": "operator"
   },
   {
@@ -4951,7 +4951,7 @@
   },
   {
     "natural_language": "foundational papers for astrometry research",
-    "ads_query": "useful(abs:astrometry)",
+    "ads_query": "useful(abs:\"astrometry\")",
     "category": "operator"
   },
   {
@@ -5701,7 +5701,7 @@
   },
   {
     "natural_language": "trending research on JWST observations",
-    "ads_query": "trending(abs:JWST)",
+    "ads_query": "trending(abs:\"JWST\")",
     "category": "operator"
   },
   {
@@ -5921,7 +5921,7 @@
   },
   {
     "natural_language": "papers from this year citing exoplanet work",
-    "ads_query": "citations(abs:exoplanet) pubdate:2026",
+    "ads_query": "citations(abs:\"exoplanet\") pubdate:2026",
     "category": "operator"
   },
   {
@@ -6061,7 +6061,7 @@
   },
   {
     "natural_language": "what do cosmology papers cite",
-    "ads_query": "references(abs:cosmology)",
+    "ads_query": "references(abs:\"cosmology\")",
     "category": "operator"
   },
   {
@@ -6596,7 +6596,7 @@
   },
   {
     "natural_language": "who cites JWST papers",
-    "ads_query": "citations(abs:JWST)",
+    "ads_query": "citations(abs:\"JWST\")",
     "category": "operator"
   },
   {
@@ -6686,7 +6686,7 @@
   },
   {
     "natural_language": "bibliography of pulsar research",
-    "ads_query": "references(abs:pulsar)",
+    "ads_query": "references(abs:\"pulsar\")",
     "category": "operator"
   },
   {
@@ -7246,7 +7246,7 @@
   },
   {
     "natural_language": "useful papers for studying quasars",
-    "ads_query": "useful(abs:quasar)",
+    "ads_query": "useful(abs:\"quasar\")",
     "category": "operator"
   },
   {
@@ -7601,7 +7601,7 @@
   },
   {
     "natural_language": "papers similar to Gaia stellar surveys",
-    "ads_query": "similar(abs:\"Gaia\" abs:stellar)",
+    "ads_query": "similar(abs:\"Gaia\" abs:\"stellar\")",
     "category": "operator"
   },
   {
@@ -7741,7 +7741,7 @@
   },
   {
     "natural_language": "review papers on stellar nucleosynthesis",
-    "ads_query": "reviews(abs:nucleosynthesis)",
+    "ads_query": "reviews(abs:\"nucleosynthesis\")",
     "category": "operator"
   },
   {
@@ -8151,7 +8151,7 @@
   },
   {
     "natural_language": "useful papers for m31",
-    "ads_query": "useful(abs:(M31))",
+    "ads_query": "useful(abs:\"M31\")",
     "category": "second_order"
   },
   {
@@ -8631,7 +8631,7 @@
   },
   {
     "natural_language": "trending work on AGN jets",
-    "ads_query": "trending(abs:\"AGN\" abs:jet)",
+    "ads_query": "trending(abs:\"AGN\" abs:\"jet\")",
     "category": "operator"
   },
   {
@@ -11026,7 +11026,7 @@
   },
   {
     "natural_language": "citations to exoplanet transit papers",
-    "ads_query": "citations(abs:\"exoplanet\" abs:transit)",
+    "ads_query": "citations(abs:\"exoplanet\" abs:\"transit\")",
     "category": "operator"
   },
   {
@@ -11346,7 +11346,7 @@
   },
   {
     "natural_language": "papers referenced by quasar research",
-    "ads_query": "references(abs:quasar)",
+    "ads_query": "references(abs:\"quasar\")",
     "category": "operator"
   },
   {
@@ -11381,7 +11381,7 @@
   },
   {
     "natural_language": "papers related to ALMA observations",
-    "ads_query": "similar(abs:ALMA)",
+    "ads_query": "similar(abs:\"ALMA\")",
     "category": "operator"
   },
   {
@@ -11786,7 +11786,7 @@
   },
   {
     "natural_language": "trending papers similar to JWST research",
-    "ads_query": "trending(similar(abs:JWST))",
+    "ads_query": "trending(similar(abs:\"JWST\"))",
     "category": "operator"
   },
   {
@@ -12001,7 +12001,7 @@
   },
   {
     "natural_language": "popular papers on AGN this week",
-    "ads_query": "trending(abs:AGN)",
+    "ads_query": "trending(abs:\"AGN\")",
     "category": "operator"
   },
   {
@@ -13251,7 +13251,7 @@
   },
   {
     "natural_language": "review articles on cosmology",
-    "ads_query": "reviews(abs:cosmology)",
+    "ads_query": "reviews(abs:\"cosmology\")",
     "category": "operator"
   },
   {
@@ -13771,7 +13771,7 @@
   },
   {
     "natural_language": "trending papers on exoplanets",
-    "ads_query": "trending(abs:exoplanet)",
+    "ads_query": "trending(abs:\"exoplanet\")",
     "category": "operator"
   },
   {
@@ -13841,7 +13841,7 @@
   },
   {
     "natural_language": "review papers for m31",
-    "ads_query": "reviews(abs:(M31))",
+    "ads_query": "reviews(abs:\"M31\")",
     "category": "second_order"
   },
   {
@@ -13971,7 +13971,7 @@
   },
   {
     "natural_language": "useful references for papers citing cosmology",
-    "ads_query": "useful(citations(abs:cosmology))",
+    "ads_query": "useful(citations(abs:\"cosmology\"))",
     "category": "operator"
   },
   {
@@ -14881,7 +14881,7 @@
   },
   {
     "natural_language": "trending research on quasars",
-    "ads_query": "trending(abs:quasar)",
+    "ads_query": "trending(abs:\"quasar\")",
     "category": "operator"
   },
   {

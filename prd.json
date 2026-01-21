@@ -138,8 +138,151 @@
         "Document operator syntax rules in AGENTS.md"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "37 bad operator examples identified in training data. Critical for model to learn correct syntax for citations(author:\"jarmak\") pattern."
+    },
+    {
+      "id": "US-009",
+      "title": "Retrain model with fixed operator data",
+      "description": "As a system, I need to retrain the model with the corrected training data from US-008 so the model learns correct operator syntax patterns.",
+      "acceptanceCriteria": [
+        "Run fine-tuning: scix-finetune train --run-name v3-operators",
+        "Wait for training to complete (estimated 40 minutes on H100)",
+        "Verify training output: model checkpoint created in /runs/v3-operators/",
+        "Check final training loss decreased from previous version",
+        "Merge LoRA weights: scix-finetune merge --checkpoint /runs/v3-operators/checkpoint-700",
+        "Verify merged model exists at /runs/v3-operators/merged",
+        "Test model locally with 3 operator queries to confirm it generates valid syntax",
+        "Log training metrics in progress.txt"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "Retraining must complete before deployment. Uses same infrastructure as previous runs. Checkpoint selection based on final loss metrics."
+    },
+    {
+      "id": "US-010",
+      "title": "Deploy retrained model to Modal",
+      "description": "As an API, I need to deploy the retrained model so the inference endpoint uses the corrected operators.",
+      "acceptanceCriteria": [
+        "Run: modal deploy serve_vllm.py",
+        "Wait for deployment to complete (estimated 5-10 minutes)",
+        "Verify endpoint is live: curl https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/models",
+        "Endpoint returns model 'llm' in response",
+        "Test with 3 warm requests, measure latency (should be ~0.4-0.5s)",
+        "Verify Modal logs show model loading from /runs/v3-operators/merged",
+        "Test with one operator query: 'trending papers on black holes' → should return trending(abs:\"black holes\")",
+        "Log deployment timestamp and endpoint status in progress.txt"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "Deployment picks latest merged model by mtime. Typically <1 minute after training completes. Verify warm container is running."
+    },
+    {
+      "id": "US-011",
+      "title": "Test UI with operator queries via nectar",
+      "description": "As a user, I need to test the NL search feature in the SciX UI to verify that operator syntax is now correct.",
+      "acceptanceCriteria": [
+        "Start nectar dev server: cd ~/ads-dev/nectar && pnpm dev (if not already running)",
+        "Test 5 operator query cases via NL search input:",
+        "  1. 'papers similar to 2019ApJ...887L...1K' → similar(bibcode:\"2019ApJ...887L...1K\")",
+        "  2. 'trending papers on exoplanets' → trending(abs:\"exoplanets\")",
+        "  3. 'papers citing gravitational waves' → citations(abs:\"gravitational waves\")",
+        "  4. 'useful papers on dark matter' → useful(abs:\"dark matter\")",
+        "  5. 'reviews of cosmology' → reviews(abs:\"cosmology\")",
+        "For each test: verify query syntax is correct (quoted values, balanced parentheses)",
+        "Verify result count is > 0 (no empty results from syntax errors)",
+        "Take screenshots of working queries for documentation",
+        "Log test results in progress.txt"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "Tests must cover all 6 operator types. Post-processing filter (constrain_query_output) should not remove any fields."
+    },
+    {
+      "id": "US-012",
+      "title": "Test edge cases and verify constraint validation",
+      "description": "As a system, I need to verify that invalid field constraints are caught and corrected before reaching ADS.",
+      "acceptanceCriteria": [
+        "Test 5 constraint edge cases via NL search:",
+        "  1. 'ADS papers' → model may output invalid database → post-processing removes it",
+        "  2. 'refereed articles' → property:refereed (valid, should be kept)",
+        "  3. 'papers by Hubble' → may output bibgroup:Hubble → corrected to HST",
+        "  4. 'PhD theses' → doctype:phdthesis (valid, should be kept)",
+        "  5. 'data papers with open access' → property:openaccess AND property:data (valid)",
+        "Verify constraint violations are logged in browser console (debug logs)",
+        "For any invalid fields removed, verify they don't appear in final ADS query",
+        "Verify results still valid (not empty due to over-aggressive filtering)",
+        "Compare with v2-4k-pairs baseline to ensure no regressions",
+        "Log edge case results in progress.txt"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "Tests the interaction between model output and post-processing filter. Ensure filter doesn't over-correct."
+    },
+    {
+      "id": "US-013",
+      "title": "Regression test: verify original issues are fixed",
+      "description": "As a developer, I need to confirm that the original training data issues (bare fields, malformed operators) no longer cause problems.",
+      "acceptanceCriteria": [
+        "Test original bug cases that were fixed in US-004 and US-008:",
+        "  1. 'papers by jarmak' → author:\"jarmak\" (no bare fields)",
+        "  2. 'papers by kelbert' → author:\"kelbert\" (no hallucinated initials from US-004)",
+        "  3. 'citations from gravitational wave papers' → citations(abs:\"gravitational waves\") (correct operator syntax)",
+        "  4. 'trending papers on cosmology' → trending(abs:\"cosmology\") (proper quoted values inside operator)",
+        "  5. 'papers similar to famous paper' → similar(bibcode:\"...\") (balanced parentheses)",
+        "Verify all 5 queries generate valid ADS syntax",
+        "Verify all 5 queries return results (not empty)",
+        "Compare model output before/after improvements (using v2-4k-pairs baseline)",
+        "Document that all fixes are working correctly",
+        "Log regression test results in progress.txt"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "Critical for confirming that training data fixes actually solved the problems. Compare outputs to show improvement."
+    },
+    {
+      "id": "US-014",
+      "title": "Performance verification and final sign-off",
+      "description": "As a system owner, I need to verify that the improved model meets performance targets before marking complete.",
+      "acceptanceCriteria": [
+        "Measure model latency: warm request time (should be < 0.5s)",
+        "Verify cold start time (should be < 1.5s with min_containers=1)",
+        "Run evaluation against 20+ gold examples to measure syntax validity",
+        "  Expected: > 95% of generated queries have valid ADS syntax",
+        "Check that post-processing doesn't remove too much (< 5% correction rate)",
+        "Verify error rates: < 5% queries result in empty ADS result set",
+        "Compare metrics before/after (v2-4k-pairs vs v3-operators):",
+        "  - Syntax validity improvement",
+        "  - Operator accuracy",
+        "  - False correction rate",
+        "Document all metrics in data/datasets/OPERATOR_METRICS.md",
+        "Confirm all 5 previous user stories (US-008-012) are passing",
+        "Generate final report with recommendations"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "This is the final gate before marking complete. All metrics must be acceptable or workflow returns to iteration."
+    },
+    {
+      "id": "US-015",
+      "title": "Iteration control: if tests fail, return to data fixes",
+      "description": "As a QA process, if any tests in US-011-014 fail, I need to identify issues and iterate back to fix training data.",
+      "acceptanceCriteria": [
+        "IF any test in US-011-014 fails:",
+        "  1. Analyze failure: is it a data issue (training) or model issue (hyperparameters)?",
+        "  2. IF data issue: add more examples to fix gap, goto US-008",
+        "  3. IF model issue: adjust hyperparameters in train.py, goto US-009",
+        "  4. Re-run failed test to verify fix works",
+        "IF all tests pass:",
+        "  1. Mark US-008 through US-014 as complete",
+        "  2. Merge improve-training-data branch to main",
+        "  3. Create summary in progress.txt with before/after metrics",
+        "Create decision tree in AGENTS.md documenting iteration logic",
+        "Update Ralph loop documentation with lessons learned"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "Iteration loop: identify failure → fix root cause → retrain → redeploy → retest. Repeat until all pass."
     }
   ]
 }

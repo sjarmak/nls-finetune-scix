@@ -42,22 +42,85 @@ Ralph is an autonomous AI agent loop that will:
    which mise  # Should return path
    ```
 
+## Complete Workflow: Data Fix → Retrain → Deploy → Test
+
+The Ralph loop now implements a **full end-to-end workflow**:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│ Phase 1: Data Fixes (US-008)                             │
+│ - Fix bare fields and operator syntax in training data   │
+│ - Verify with scripts/audit_*.py                        │
+└─────────┬───────────────────────────────────────────────┘
+          ↓
+┌─────────────────────────────────────────────────────────┐
+│ Phase 2: Retrain (US-009)                               │
+│ - Run: scix-finetune train --run-name v3-operators      │
+│ - Wait ~40 min for training on H100                     │
+│ - Merge LoRA: scix-finetune merge                       │
+│ - Result: /runs/v3-operators/merged                     │
+└─────────┬───────────────────────────────────────────────┘
+          ↓
+┌─────────────────────────────────────────────────────────┐
+│ Phase 3: Deploy (US-010)                                │
+│ - Run: modal deploy serve_vllm.py                       │
+│ - Wait ~5 min for deployment                            │
+│ - Verify: endpoint live & serving v3-operators          │
+└─────────┬───────────────────────────────────────────────┘
+          ↓
+┌─────────────────────────────────────────────────────────┐
+│ Phase 4: Test UI (US-011 to US-013)                     │
+│ - Test 5 operator queries in nectar                     │
+│ - Test 5 constraint edge cases                          │
+│ - Test 5 regression cases (original bugs)               │
+│ - All tests must pass with valid syntax & results       │
+└─────────┬───────────────────────────────────────────────┘
+          ↓
+┌─────────────────────────────────────────────────────────┐
+│ Phase 5: Verify & Sign-off (US-014)                     │
+│ - Measure latency & accuracy metrics                    │
+│ - Compare before/after improvements                     │
+│ - Confirm > 95% syntax validity                         │
+│ - Confirm < 5% correction rate                          │
+└─────────┬───────────────────────────────────────────────┘
+          ↓
+┌─────────────────────────────────────────────────────────┐
+│ Phase 6: Iterate if Needed (US-015)                     │
+│ - If tests fail: identify root cause                    │
+│ - Fix training data or hyperparameters                  │
+│ - Loop back to US-008 or US-009                         │
+│ - Repeat until all tests pass                           │
+└─────────────────────────────────────────────────────────┘
+```
+
 ## How to Run Ralph
 
-### Option 1: Run with Amp (Default)
+### Option 1: Run Complete Workflow with Amp (Default)
 
 ```bash
 cd /Users/sjarmak/nls-finetune-scix
-./ralph.sh --tool amp
+./ralph.sh --tool amp 15
 ```
 
 Ralph will:
 - Create/checkout the `improve-training-data` branch
-- Pick the highest-priority story where `passes: false`
+- Pick the next story where `passes: false`
 - Invoke Amp to implement it
-- Ask you to verify it passes all acceptance criteria
-- Mark it as complete and move to next story
-- Repeat until all stories pass
+- For manual steps (US-009, US-010, US-011-014):
+  - Provide instructions
+  - Wait for you to complete and report results
+- Mark stories as complete and advance
+- Repeat until all stories pass or hit max iterations
+
+### Expected Timeline
+
+- **US-008** (data fixes): ~30 min
+- **US-009** (retraining): ~45 min (manual, don't wait in Ralph)
+- **US-010** (deployment): ~10 min (manual)
+- **US-011 to US-014** (testing): ~60 min (manual)
+- **US-015** (iteration): 0-60 min depending on test results
+
+**Total**: ~3-4 hours for full workflow
 
 ### Option 2: Run with Claude Code
 

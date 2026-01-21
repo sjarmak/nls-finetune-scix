@@ -77,6 +77,50 @@ Key fields the model must learn:
 
 Full syntax: https://ui.adsabs.harvard.edu/help/search/search-syntax
 
+## ADS Operator Syntax
+
+ADS supports function-like operators that take query expressions as arguments:
+
+| Operator | Purpose | Example |
+|----------|---------|---------|
+| `citations()` | Find papers that cite the given search results | `citations(abs:"gravitational wave")` |
+| `references()` | Find papers referenced by the given search results | `references(abs:"supernova")` |
+| `trending()` | Find currently popular papers matching the query | `trending(abs:"exoplanet")` |
+| `useful()` | Find high-utility papers matching the query | `useful(abs:"cosmology")` |
+| `similar()` | Find textually similar papers | `similar(abs:"black hole merger")` |
+| `reviews()` | Find review articles matching the query | `reviews(abs:"magnetar")` |
+
+### Operator Syntax Rules
+
+**CRITICAL:** All field values inside operators MUST be quoted:
+
+| ❌ Bad | ✅ Good |
+|--------|---------|
+| `citations(abs:cosmology)` | `citations(abs:"cosmology")` |
+| `trending(abs:exoplanet)` | `trending(abs:"exoplanet")` |
+| `references(abs:magnetar)` | `references(abs:"magnetar")` |
+| `similar(abs:JWST)` | `similar(abs:"JWST")` |
+| `useful(abs:photometry)` | `useful(abs:"photometry")` |
+
+**Avoid malformed parentheses:**
+
+| ❌ Bad | ✅ Good |
+|--------|---------|
+| `trending(abs:(exoplanets))` | `trending(abs:"exoplanets")` |
+| `useful(abs:(M31))` | `useful(abs:"M31")` |
+
+**Nested operators require quoting at all levels:**
+
+| ❌ Bad | ✅ Good |
+|--------|---------|
+| `useful(citations(abs:cosmology))` | `useful(citations(abs:"cosmology"))` |
+
+### Audit Script
+
+Run `python scripts/audit_operators.py` to find malformed operator patterns in training data.
+
+Run `python scripts/fix_operators.py` to fix them.
+
 ## ADS Field Constraints
 
 ### Overview
