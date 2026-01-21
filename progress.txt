@@ -307,3 +307,10 @@ Created `packages/finetune/src/finetune/domains/scix/field_constraints.py` with:
 **Title**: Create training data quality report
 **Summary**: Created training data quality report at data/datasets/QUALITY_REPORT.md with: total pairs (3,025), category breakdown (22 categories), 100% lint pass rate, invalid field values report (19 issues: 1 database, 18 bibgroup), bare field summary (61 unquoted values), 5 good/bad examples section, 3 recommendations (fix invalid values, quote bare fields, balance categories), and before/after metrics showing bibstem fixes from US-004. Added generate_quality_report.py script.
 
+
+## Iteration 5 - US-006
+
+**Status**: ✓ PASSED
+**Title**: Integrate field constraints into API validation layer
+**Summary**: Integrated field constraints into API validation layer: 1) Created TypeScript port of field_constraints module at ~/ads-dev/nectar/src/lib/field-constraints.ts with DOCTYPES, PROPERTIES, DATABASES, BIBGROUPS, ESOURCES, DATA_SOURCES enums and constrainQueryOutput/validateFieldConstraints functions. 2) Updated nl-search.ts API to call constraint validation after model inference, before ADS API call (lines 680-689). 3) Added debug logging for all corrections (lines 691-698). 4) Extended NLSearchResponse interface with constraintViolations, corrections, and rawQuery fields returned to frontend when violations detected. 5) Created comprehensive test suite with 13 real query examples covering invalid doctype (journal, paper, publication, thesis), invalid property (peerreviewed, open_access, peer-reviewed), invalid database (astrophysics, astro), and invalid bibgroup (Hubble) issues. All 856 nectar tests pass, all 65 finetune tests pass, lint passes, verify passes.
+

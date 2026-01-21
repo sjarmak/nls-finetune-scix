@@ -120,7 +120,7 @@
         "Add note about CanonicalAffiliations for future affiliation-based training"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "Knowledge base for future iterations"
     }
   ]
