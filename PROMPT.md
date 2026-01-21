@@ -107,14 +107,53 @@ All work on `sj/fine-tune` branch (checked out across all repos in `~/ads-dev`)
 
 ## Integration Features to Implement
 
-| Feature | Description | Verification |
-|---------|-------------|--------------|
-| `integ-001` | NL search component in nectar | Component file exists |
-| `integ-002` | Modal endpoint proxy route | API route proxies to Modal |
-| `integ-003` | Copy/apply buttons | User can copy or apply query |
-| `integ-004` | Result count preview | Shows numFound from ADS |
-| `integ-005` | Feature flag | `NEXT_PUBLIC_NL_SEARCH` env var |
-| `integ-006` | Playwright e2e test | `pnpm test:e2e` passes |
+| Feature | Description | Status | Verification |
+|---------|-------------|--------|--------------|
+| `integ-001` | NL search component in nectar | ✅ | Component file exists |
+| `integ-002` | Modal endpoint proxy route | ✅ | API route proxies to Modal |
+| `integ-003` | Copy/apply buttons | ✅ | User can copy or apply query |
+| `integ-004` | Result count preview | ✅ | Shows numFound from ADS |
+| `integ-005` | Feature flag | ✅ | `NEXT_PUBLIC_NL_SEARCH` env var |
+| `integ-006` | Playwright e2e test | ✅ | `pnpm test:e2e` passes |
+| `integ-007` | Search API proxy | ❌ | `/api/search` returns 404 - needs creation |
+| `integ-008` | Model latency optimization | ❌ | Model responds too slowly |
+
+## Known Issues (Beads)
+
+Check `bd ready` for current work items. Key issues:
+
+| Beads ID | Priority | Description |
+|----------|----------|-------------|
+| `nls-finetune-scix-h1y` | P1 | `/api/search` returns 404, result count preview broken |
+| `nls-finetune-scix-556` | P1 | Model inference too slow for 1.7B model |
+| `nls-finetune-scix-2ad` | P2 | Process fix for false-positive Playwright tests |
+
+## How NL Search Works
+
+```
+User Input → NLSearch Component → /api/nl-search (proxy) → Modal vLLM → Response
+     │              │                    │                      │
+     │         500ms debounce       POST request            Qwen3-1.7B
+     │              │                    │                  + LoRA
+     │              ▼                    ▼                      │
+     │         useNLSearch.ts     System: "Convert to ADS..."  │
+     │              │             User: "Query: {nl}\nDate: {date}"
+     │              │                    │                      │
+     │              ◀────────────────────┴──────────────────────┘
+     │                            JSON: {"query": "author:..."}
+     │
+     └──▶ Display suggestion with Copy/Apply buttons
+              │
+              └──▶ /api/search?q=...&rows=0 (404 - BROKEN)
+                        │
+                        └──▶ Would show "~1.2K results"
+```
+
+### Key Files
+- `~/ads-dev/nectar/src/components/NLSearch/index.tsx` - UI component
+- `~/ads-dev/nectar/src/components/NLSearch/useNLSearch.ts` - React hook
+- `~/ads-dev/nectar/src/pages/api/nl-search.ts` - Modal proxy
+- `~/ads-dev/nectar/src/pages/api/search/index.ts` - **MISSING** (needs creation)
 
 ## Inference Endpoint Usage
 
