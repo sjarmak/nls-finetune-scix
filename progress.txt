@@ -252,3 +252,19 @@ Started: 2026-01-21
   - Result count updates when user selects different query option
   - Pre-existing build error in authoraffiliations page is unrelated to this feature
 ---
+
+## 2026-01-21 - research-001
+- Created research document at docs/research/query-expansion.md
+- Analyzed two approaches: semantic embeddings and database constraints
+- Key findings:
+  - Pre-computed synonym table: +1-5ms latency (acceptable)
+  - ADS autocomplete API: +50-100ms latency for author validation
+  - Sentence-BERT: +50ms latency for dynamic expansion
+- Recommendation: Use ADS autocomplete for author validation with 200ms timeout
+- Deferred: Embedding-based expansion until core issues resolved
+- Files changed: docs/research/query-expansion.md, prd.json, features.json
+- **Learnings for future iterations:**
+  - ADS provides autocomplete endpoint at /v1/autocomplete?term=X&field=author
+  - Cache autocomplete results (author names don't change often)
+  - Set hard timeouts for validation to prevent latency spikes
+---
