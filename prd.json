@@ -153,8 +153,8 @@
         "Query translation returns in <2 seconds for warm requests"
       ],
       "priority": 11,
-      "passes": false,
-      "notes": "See beads issue nls-finetune-scix-556. Check packages/finetune/src/finetune/modal/serve.py"
+      "passes": true,
+      "notes": "Fixed by adding min_containers=1 to keep one warm container. Warm requests: ~0.4s"
     },
     {
       "id": "eval-004",

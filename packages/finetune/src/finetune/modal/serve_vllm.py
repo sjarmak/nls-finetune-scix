@@ -39,6 +39,7 @@ MAX_MODEL_LEN = 512  # Sourcegraph queries are short
     },
     secrets=[modal.Secret.from_name("huggingface-secret")],
     scaledown_window=300,  # 5 minutes
+    min_containers=1,  # Keep one container always warm to avoid cold starts
     timeout=600,
 )
 @modal.web_server(port=VLLM_PORT, startup_timeout=300)

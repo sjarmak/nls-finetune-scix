@@ -182,9 +182,9 @@
       "id": "integ-008",
       "name": "Model inference latency optimization",
       "category": "integration",
-      "status": "failing",
+      "status": "passing",
       "verification": "time curl -s -X POST https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/chat/completions -H 'Content-Type: application/json' -d '{\"model\":\"llm\",\"messages\":[{\"role\":\"user\",\"content\":\"Query: papers by Einstein\"}],\"max_tokens\":64}' 2>&1 | grep -E 'real.*0m[01]'",
-      "notes": "Model should respond in <2s. See beads: nls-finetune-scix-556"
+      "notes": "Fixed with min_containers=1. Warm requests ~0.4s. See: nls-finetune-scix-556"
     },
     {
       "id": "eval-004",
