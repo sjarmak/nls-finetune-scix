@@ -268,3 +268,45 @@ Started: 2026-01-21
   - Cache autocomplete results (author names don't change often)
   - Set hard timeouts for validation to prevent latency spikes
 ---
+
+## Next Task: data-005 - Add second-order operator training examples
+
+**Goal:** Train model to understand and generate complex ADS query operators
+
+**Added 56 new training examples covering:**
+1. **Second-order operators:**
+   - `trending(query)` - currently popular papers among readers
+   - `similar(query)` - textually similar papers
+   - `useful(query)` - frequently cited methodology papers
+   - `reviews(query)` - papers with extensive topic coverage
+   - `citations(query)` - papers citing the query results
+   - `references(query)` - papers cited by query results
+   - `topn(N, query, sort)` - top N results by sort order
+
+2. **Nested operators:**
+   - `trending(similar(query))` - trending papers similar to topic
+   - `reviews(citations(query))` - reviews citing topic papers
+   - Operators combined with date filters
+
+3. **Proximity operators:**
+   - `NEAR3`, `NEAR5` - words within N tokens of each other
+   - Applied to abs:, title:, full: fields
+
+4. **Boolean operators:**
+   - `NOT` and `-` exclusion
+   - `OR` for alternatives
+   - Grouped expressions with parentheses
+
+5. **Property and data filters:**
+   - `property:openaccess`, `property:refereed`, `property:data`
+   - `data:Chandra`, `data:HST`, `data:Spitzer`
+
+**Reference:** https://ui.adsabs.harvard.edu/help/search/
+
+**Files changed:** data/datasets/raw/gold_examples.json (56 new examples)
+
+**Next steps:**
+1. Regenerate training JSONL with new examples
+2. Retrain model with operator-aware data
+3. Update post-processing to handle operator queries
+---

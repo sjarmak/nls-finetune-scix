@@ -618,5 +618,341 @@
     "query": "abs:\"radio interferometry\"",
     "category": "content",
     "notes": "Use abs: for topic"
+  },
+  {
+    "nl": "trending papers on exoplanets",
+    "query": "trending(abs:exoplanet)",
+    "category": "operator",
+    "notes": "trending() returns papers currently popular among readers interested in the topic"
+  },
+  {
+    "nl": "what's hot in gravitational wave research",
+    "query": "trending(abs:\"gravitational wave\")",
+    "category": "operator",
+    "notes": "trending() for currently popular papers"
+  },
+  {
+    "nl": "trending dark matter papers",
+    "query": "trending(abs:\"dark matter\")",
+    "category": "operator",
+    "notes": "trending() operator"
+  },
+  {
+    "nl": "popular papers on machine learning in astronomy right now",
+    "query": "trending(abs:\"machine learning\" database:astronomy)",
+    "category": "operator",
+    "notes": "trending() with compound query"
+  },
+  {
+    "nl": "papers similar to 2019ApJ...887L...1K",
+    "query": "similar(bibcode:2019ApJ...887L...1K)",
+    "category": "operator",
+    "notes": "similar() finds textually similar papers"
+  },
+  {
+    "nl": "find papers like the original LIGO detection paper",
+    "query": "similar(bibcode:2016PhRvL.116f1102A)",
+    "category": "operator",
+    "notes": "similar() for finding related work"
+  },
+  {
+    "nl": "papers similar to Hawking's work on black hole radiation",
+    "query": "similar(author:\"Hawking, S\" abs:\"black hole radiation\")",
+    "category": "operator",
+    "notes": "similar() with compound first-order query"
+  },
+  {
+    "nl": "find papers related to recent JWST observations",
+    "query": "similar(abs:JWST pubdate:[2022 TO 2025])",
+    "category": "operator",
+    "notes": "similar() with date-restricted query"
+  },
+  {
+    "nl": "useful papers for studying weak lensing",
+    "query": "useful(abs:\"weak lensing\")",
+    "category": "operator",
+    "notes": "useful() returns frequently cited methodology papers"
+  },
+  {
+    "nl": "methodology papers for galaxy survey analysis",
+    "query": "useful(abs:\"galaxy survey\")",
+    "category": "operator",
+    "notes": "useful() for finding techniques and methods"
+  },
+  {
+    "nl": "useful references for CMB analysis",
+    "query": "useful(abs:\"cosmic microwave background\")",
+    "category": "operator",
+    "notes": "useful() operator"
+  },
+  {
+    "nl": "key papers for exoplanet atmosphere research",
+    "query": "useful(abs:\"exoplanet atmosphere\")",
+    "category": "operator",
+    "notes": "useful() finds foundational papers"
+  },
+  {
+    "nl": "review papers on dark energy",
+    "query": "reviews(abs:\"dark energy\")",
+    "category": "operator",
+    "notes": "reviews() returns papers with extensive topic coverage"
+  },
+  {
+    "nl": "comprehensive reviews of black hole physics",
+    "query": "reviews(abs:\"black hole\")",
+    "category": "operator",
+    "notes": "reviews() for finding review articles"
+  },
+  {
+    "nl": "review articles on cosmology",
+    "query": "reviews(abs:cosmology)",
+    "category": "operator",
+    "notes": "reviews() operator"
+  },
+  {
+    "nl": "papers that review gravitational wave detection",
+    "query": "reviews(abs:\"gravitational wave detection\")",
+    "category": "operator",
+    "notes": "reviews() for comprehensive coverage"
+  },
+  {
+    "nl": "papers that cite Einstein's general relativity work",
+    "query": "citations(author:\"Einstein, A\" abs:\"general relativity\")",
+    "category": "operator",
+    "notes": "citations() returns papers citing the query results"
+  },
+  {
+    "nl": "papers citing the original Hubble constant paper",
+    "query": "citations(bibcode:1929PNAS...15..168H)",
+    "category": "operator",
+    "notes": "citations() with specific bibcode"
+  },
+  {
+    "nl": "who cites JWST papers",
+    "query": "citations(abs:JWST)",
+    "category": "operator",
+    "notes": "citations() operator"
+  },
+  {
+    "nl": "papers citing dark matter research",
+    "query": "citations(abs:\"dark matter\")",
+    "category": "operator",
+    "notes": "citations() for citation network"
+  },
+  {
+    "nl": "references in Hawking's black hole papers",
+    "query": "references(author:\"Hawking, S\" abs:\"black hole\")",
+    "category": "operator",
+    "notes": "references() returns papers cited by query results"
+  },
+  {
+    "nl": "what papers does 2019ApJ...887L...1K cite",
+    "query": "references(bibcode:2019ApJ...887L...1K)",
+    "category": "operator",
+    "notes": "references() with specific bibcode"
+  },
+  {
+    "nl": "papers referenced by LIGO gravitational wave papers",
+    "query": "references(abs:LIGO abs:\"gravitational wave\")",
+    "category": "operator",
+    "notes": "references() with compound query"
+  },
+  {
+    "nl": "bibliography of cosmology papers from 2023",
+    "query": "references(abs:cosmology pubdate:2023)",
+    "category": "operator",
+    "notes": "references() for finding foundational work"
+  },
+  {
+    "nl": "top 100 most cited astronomy papers",
+    "query": "topn(100, database:astronomy, citation_count desc)",
+    "category": "operator",
+    "notes": "topn(N, query, sort) returns top N results"
+  },
+  {
+    "nl": "top 50 most cited exoplanet papers",
+    "query": "topn(50, abs:exoplanet, citation_count desc)",
+    "category": "operator",
+    "notes": "topn() with custom sort"
+  },
+  {
+    "nl": "top 20 papers on black holes by citation count",
+    "query": "topn(20, abs:\"black hole\", citation_count desc)",
+    "category": "operator",
+    "notes": "topn() operator"
+  },
+  {
+    "nl": "most read papers on galaxies",
+    "query": "topn(100, abs:galaxy, read_count desc)",
+    "category": "operator",
+    "notes": "topn() with read_count sort"
+  },
+  {
+    "nl": "trending papers similar to JWST research",
+    "query": "trending(similar(abs:JWST))",
+    "category": "operator",
+    "notes": "Nested operators: trending of similar papers"
+  },
+  {
+    "nl": "reviews citing dark energy papers",
+    "query": "reviews(citations(abs:\"dark energy\"))",
+    "category": "operator",
+    "notes": "Nested operators"
+  },
+  {
+    "nl": "useful papers for those citing gravitational wave research",
+    "query": "useful(citations(abs:\"gravitational wave\"))",
+    "category": "operator",
+    "notes": "Nested operators: methodology for citation network"
+  },
+  {
+    "nl": "papers citing Hawking from the last 5 years",
+    "query": "citations(author:\"Hawking, S\") pubdate:[2020 TO 2025]",
+    "category": "operator",
+    "notes": "Operator with additional filter"
+  },
+  {
+    "nl": "recent papers similar to old weak lensing work",
+    "query": "similar(abs:\"weak lensing\" pubdate:[1990 TO 2010]) pubdate:[2020 TO 2025]",
+    "category": "operator",
+    "notes": "similar() with disjoint date ranges"
+  },
+  {
+    "nl": "trending papers in ApJ",
+    "query": "trending(bibstem:ApJ)",
+    "category": "operator",
+    "notes": "trending() with journal filter"
+  },
+  {
+    "nl": "what's popular at Harvard right now",
+    "query": "trending(aff:Harvard)",
+    "category": "operator",
+    "notes": "trending() with affiliation"
+  },
+  {
+    "nl": "papers with dark matter near cosmology in the abstract",
+    "query": "abs:(\"dark matter\" NEAR5 cosmology)",
+    "category": "operator",
+    "notes": "NEAR proximity operator"
+  },
+  {
+    "nl": "papers where black hole appears near merger",
+    "query": "abs:(\"black hole\" NEAR3 merger)",
+    "category": "operator",
+    "notes": "NEAR proximity search"
+  },
+  {
+    "nl": "exoplanet near atmosphere in title",
+    "query": "title:(exoplanet NEAR3 atmosphere)",
+    "category": "operator",
+    "notes": "NEAR in title search"
+  },
+  {
+    "nl": "papers with gravitational wave within 5 words of detection",
+    "query": "abs:(\"gravitational wave\" NEAR5 detection)",
+    "category": "operator",
+    "notes": "NEAR proximity operator"
+  },
+  {
+    "nl": "papers about black holes but not mergers",
+    "query": "abs:\"black hole\" NOT abs:merger",
+    "category": "operator",
+    "notes": "NOT exclusion operator"
+  },
+  {
+    "nl": "exoplanet papers excluding hot Jupiters",
+    "query": "abs:exoplanet NOT abs:\"hot Jupiter\"",
+    "category": "operator",
+    "notes": "NOT exclusion"
+  },
+  {
+    "nl": "cosmology papers without dark energy",
+    "query": "abs:cosmology -abs:\"dark energy\"",
+    "category": "operator",
+    "notes": "Minus sign for exclusion"
+  },
+  {
+    "nl": "gravitational wave papers not from LIGO",
+    "query": "abs:\"gravitational wave\" NOT aff:LIGO",
+    "category": "operator",
+    "notes": "NOT with affiliation"
+  },
+  {
+    "nl": "papers about Crab nebula or Crab pulsar",
+    "query": "abs:\"Crab nebula\" OR abs:\"Crab pulsar\"",
+    "category": "operator",
+    "notes": "OR for alternatives"
+  },
+  {
+    "nl": "dark matter or dark energy papers",
+    "query": "abs:\"dark matter\" OR abs:\"dark energy\"",
+    "category": "operator",
+    "notes": "OR operator"
+  },
+  {
+    "nl": "ALMA or VLA radio observations",
+    "query": "abs:ALMA OR abs:VLA",
+    "category": "operator",
+    "notes": "OR for telescope options"
+  },
+  {
+    "nl": "neutron star or pulsar timing",
+    "query": "(abs:\"neutron star\" OR abs:pulsar) abs:timing",
+    "category": "operator",
+    "notes": "Grouped OR with AND"
+  },
+  {
+    "nl": "papers with author name starting with Haw",
+    "query": "author:\"Haw*\"",
+    "category": "operator",
+    "notes": "Wildcard search"
+  },
+  {
+    "nl": "papers by any Einstein",
+    "query": "author:\"Einstein, *\"",
+    "category": "operator",
+    "notes": "Wildcard for first name"
+  },
+  {
+    "nl": "papers in journals starting with Astro",
+    "query": "bibstem:Astro*",
+    "category": "operator",
+    "notes": "Wildcard in bibstem"
+  },
+  {
+    "nl": "open access papers on exoplanets",
+    "query": "abs:exoplanet property:openaccess",
+    "category": "property",
+    "notes": "property:openaccess filter"
+  },
+  {
+    "nl": "peer reviewed dark matter papers",
+    "query": "abs:\"dark matter\" property:refereed",
+    "category": "property",
+    "notes": "property:refereed filter"
+  },
+  {
+    "nl": "papers with associated data",
+    "query": "abs:exoplanet property:data",
+    "category": "property",
+    "notes": "property:data for papers with datasets"
+  },
+  {
+    "nl": "papers using Chandra data",
+    "query": "data:Chandra",
+    "category": "data",
+    "notes": "data: field for data source"
+  },
+  {
+    "nl": "papers with Hubble observations",
+    "query": "data:HST",
+    "category": "data",
+    "notes": "data: for telescope data"
+  },
+  {
+    "nl": "papers using Spitzer data on exoplanets",
+    "query": "data:Spitzer abs:exoplanet",
+    "category": "data",
+    "notes": "data: combined with topic"
   }
 ]
