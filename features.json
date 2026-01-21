@@ -294,9 +294,9 @@
       "id": "integ-012",
       "name": "Object name resolution via SIMBAD/NED",
       "category": "integration",
-      "status": "failing",
+      "status": "passing",
       "verification": "grep -r 'SIMBAD\\|resolveObject' ~/ads-dev/nectar/src/",
-      "notes": "Stretch goal: Resolve M31 -> Andromeda, NGC 224"
+      "notes": "Implemented using SIMBAD TAP API with 100ms timeout and 1-hour cache. Detects M, NGC, IC, UGC, PGC, 3C, Abell, HD, HIP, 2MASS, SDSS patterns."
     }
   ]
 }

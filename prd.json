@@ -355,8 +355,8 @@
         "Latency under 100ms with timeout fallback"
       ],
       "priority": 25,
-      "passes": false,
-      "notes": "Stretch goal from research-001. Object name standardization improves recall."
+      "passes": true,
+      "notes": "Implemented using SIMBAD TAP API. 100ms timeout, 1-hour cache. Detects 13+ object name patterns. Can be disabled via resolveObjects: false."
     }
   ]
 }
