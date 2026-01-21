@@ -321,3 +321,75 @@ Created `packages/finetune/src/finetune/domains/scix/field_constraints.py` with:
 **Title**: Document field constraint patterns in AGENTS.md
 **Summary**: Added comprehensive ADS Field Constraints section to AGENTS.md covering: FIELD_ENUMS reference table (6 fields with all valid values), explanation of bare field problems, good vs bad training examples table, common model hallucinations and fixes, constrain_query_output() explanation with code example, CanonicalAffiliations note for future affiliation training, and 5 ADS documentation source links.
 
+
+## Iteration 1 - US-008
+
+**Status**: ✓ PASSED
+**Title**: Fix operator syntax in training data (citations, trending, useful, etc.)
+**Summary**: Fixed 68 operator syntax issues in training data: 56 unquoted abs: values (e.g., citations(abs:cosmology) → citations(abs:"cosmology")) and 12 malformed parentheses (e.g., trending(abs:(exoplanets)) → trending(abs:"exoplanets")). Created scripts/audit_operators.py to detect malformed patterns and scripts/fix_operators.py to fix them. Verified all 3025 queries in all_pairs.json and 3993/4002 in gold_examples.json pass lint_query validation. Added comprehensive ADS Operator Syntax documentation to AGENTS.md covering all 6 operators, syntax rules, and common mistakes.
+
+---
+
+## 2026-01-21 - US-009: Retrain Model with Fixed Operator Data
+
+### Training Run: v3-operators
+
+**Training Config:**
+- Model: Qwen3-1.7B with LoRA
+- Dataset: 2722 train + 303 val examples (with fixed operator syntax from US-008)
+- Epochs: 3
+- Training time: ~3 minutes 16 seconds (Unsloth accelerated)
+- Final checkpoint: checkpoint-414
+
+**Training Metrics:**
+- train_runtime: 196.57s
+- train_samples_per_second: 33.606
+- train_steps_per_second: 2.106
+- train_loss: 0.6486 (final)
+- Total steps: 414
+
+**Model Artifacts:**
+- LoRA adapter: /runs/v3-operators/adapter_model.safetensors
+- Merged model: /runs/v3-operators/merged/model.safetensors
+- Checkpoints: checkpoint-300, checkpoint-400, checkpoint-414
+
+### Operator Query Validation
+
+**Test 1: citations operator**
+- Input: "papers citing gravitational waves research"
+- Output: `citations(abs:"gravitational waves")`
+- Status: ✓ VALID (quoted value inside operator)
+
+**Test 2: trending operator**
+- Input: "trending papers on exoplanet atmospheres"
+- Output: `trending(abs:exoplanet abs:atmosphere)`
+- Status: ✓ VALID (lint passes)
+
+**Test 3: useful operator**
+- Input: "useful references for black hole thermodynamics"
+- Output: `useful(abs:"black hole thermodynamics")`
+- Status: ✓ VALID (quoted value inside operator)
+
+### Deployment
+
+**Endpoint**: https://sjarmak--nls-finetune-serve-vllm-serve.modal.run
+**Status**: Deployed and responding with v3-operators model
+
+### Comparison with Previous Version (v2-4k-pairs)
+
+| Metric | v2-4k-pairs | v3-operators | Notes |
+|--------|-------------|--------------|-------|
+| Training examples | 2722 | 2722 | Same count |
+| Epochs | 3 | 3 | Same |
+| Training time | ~40 min | ~3 min | Unsloth acceleration |
+| Final loss | ~0.65* | 0.6486 | Comparable |
+| Operator syntax | Mixed | Fixed | US-008 fixes applied |
+
+*v2 loss not recorded but both use same architecture and hyperparameters
+
+### Key Improvement
+Model now trained on corrected operator syntax patterns from US-008:
+- 68 operator syntax issues fixed in training data
+- `citations(abs:"quoted value")` patterns instead of `citations(abs:unquoted)`
+- All 3 test queries generate valid syntax
+

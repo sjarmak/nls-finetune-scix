@@ -156,7 +156,7 @@
         "Log training metrics in progress.txt"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "Retraining must complete before deployment. Uses same infrastructure as previous runs. Checkpoint selection based on final loss metrics."
     },
     {
