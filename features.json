@@ -193,6 +193,30 @@
       "status": "failing",
       "verification": "curl -s -X POST https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/chat/completions -H 'Content-Type: application/json' -d '{\"model\":\"llm\",\"messages\":[{\"role\":\"system\",\"content\":\"Convert to ADS query. Output JSON: {\\\"query\\\":\\\"...\\\"}\"},{\"role\":\"user\",\"content\":\"Query: papers by kelbert\"}],\"max_tokens\":64}' | grep -v ', [a-z]\\.'",
       "notes": "Model hallucinates initials. 'papers by jarmak' → author:\"jarmak, b.\" (wrong). See beads: nls-finetune-scix-3gw"
+    },
+    {
+      "id": "eval-005",
+      "name": "Model quality - consistent field selection (title vs abs)",
+      "category": "eval",
+      "status": "failing",
+      "verification": "echo 'Manual test: papers about machine learning should not become ML'",
+      "notes": "Inconsistent title: vs abs: selection. Converts 'machine learning' to 'ML'. See beads: nls-finetune-scix-6kk"
+    },
+    {
+      "id": "integ-009",
+      "name": "Multiple query suggestions (3-5 alternatives)",
+      "category": "integration",
+      "status": "failing",
+      "verification": "curl -s http://localhost:8000/api/nl-search -X POST -H 'Content-Type: application/json' -d '{\"query\":\"exoplanets\"}' | jq '.queries | length > 1'",
+      "notes": "Return array of query options instead of single query. See beads: nls-finetune-scix-f42"
+    },
+    {
+      "id": "research-001",
+      "name": "Research: embeddings for query expansion + DB constraints",
+      "category": "research",
+      "status": "failing",
+      "verification": "test -f docs/research/query-expansion.md",
+      "notes": "Lower priority. Investigate after core issues fixed. See beads: nls-finetune-scix-mtt"
     }
   ]
 }
