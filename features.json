@@ -281,6 +281,22 @@
       "status": "failing",
       "verification": "grep -r 'autocomplete' ~/ads-dev/nectar/src/pages/api/",
       "notes": "From research-001: Use ADS /v1/autocomplete API with 200ms timeout"
+    },
+    {
+      "id": "integ-011",
+      "name": "Semantic query expansion with synonym table",
+      "category": "integration",
+      "status": "failing",
+      "verification": "grep -r 'SYNONYM\\|expandSynonyms' ~/ads-dev/nectar/src/",
+      "notes": "From research-001: Pre-computed table for astronomy terms (planet formation -> protoplanetary disk)"
+    },
+    {
+      "id": "integ-012",
+      "name": "Object name resolution via SIMBAD/NED",
+      "category": "integration",
+      "status": "failing",
+      "verification": "grep -r 'SIMBAD\\|resolveObject' ~/ads-dev/nectar/src/",
+      "notes": "Stretch goal: Resolve M31 -> Andromeda, NGC 224"
     }
   ]
 }

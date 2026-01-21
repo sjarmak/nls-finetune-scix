@@ -328,6 +328,35 @@
       "priority": 23,
       "passes": false,
       "notes": "From research-001: ADS provides /v1/autocomplete?term=X&field=author"
+    },
+    {
+      "id": "integ-011",
+      "title": "Semantic query expansion with synonym table",
+      "description": "Expand queries with domain-specific synonyms for better recall. Start with pre-computed synonym table for common astronomy terms.",
+      "acceptanceCriteria": [
+        "Create synonym table mapping astronomy terms (e.g., planet formation -> protoplanetary disk, accretion)",
+        "API route expands abs: queries with OR synonyms when appropriate",
+        "Latency impact under 5ms",
+        "User can see expanded query in UI",
+        "Option to disable expansion"
+      ],
+      "priority": 24,
+      "passes": false,
+      "notes": "From research-001: Pre-computed table adds 1-5ms. Sentence-BERT deferred until latency requirements met."
+    },
+    {
+      "id": "integ-012",
+      "title": "Object name resolution via SIMBAD/NED",
+      "description": "Resolve astronomical object names to canonical identifiers for better search.",
+      "acceptanceCriteria": [
+        "Detect object names in queries (M31, NGC 1234, etc.)",
+        "Optionally expand to aliases (M31 -> Andromeda, NGC 224)",
+        "Use SIMBAD or NED API with caching",
+        "Latency under 100ms with timeout fallback"
+      ],
+      "priority": 25,
+      "passes": false,
+      "notes": "Stretch goal from research-001. Object name standardization improves recall."
     }
   ]
 }
