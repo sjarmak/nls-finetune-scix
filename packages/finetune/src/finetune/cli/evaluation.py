@@ -34,8 +34,8 @@ def baseline(
 
     import httpx
 
-    from finetune.eval.runner import EvalRunner
     from finetune.eval.eval import evaluate_query
+    from finetune.eval.runner import EvalRunner
 
     console.print(f"[bold]Generating baseline with {model}[/bold]")
 

@@ -53,7 +53,7 @@
         "Run: mise run test and verify all tests pass"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "This is the safety net to prevent model from outputting nonsense like 'bibstem:phdthesis'"
     },
     {

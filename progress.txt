@@ -279,3 +279,10 @@ Created `packages/finetune/src/finetune/domains/scix/field_constraints.py` with:
 
 **Completed**: Create ADS field constraints module
 
+
+## Iteration 1 - US-002
+
+**Status**: ✓ PASSED
+**Title**: Add query constraint validation function
+**Summary**: Implemented validate_field_constraints() in validate.py with ConstraintValidationResult and FieldConstraintError dataclasses. Function validates doctype, database, property, and bibgroup fields against FIELD_ENUMS from field_constraints.py. Supports quoted values, OR lists, case-insensitive matching, and provides suggestions for invalid values. Added 24 unit tests in packages/finetune/tests/test_validate.py covering valid/invalid queries, edge cases, and error formatting. All quality gates pass: lint, test, verify.
+
