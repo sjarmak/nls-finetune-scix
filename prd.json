@@ -103,7 +103,7 @@
         "Run: npm run build and npm run test in ads-dev/nectar"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "Cross-repo change - coordinate with ads-dev project structure"
     },
     {

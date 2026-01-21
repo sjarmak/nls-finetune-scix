@@ -300,3 +300,10 @@ Created `packages/finetune/src/finetune/domains/scix/field_constraints.py` with:
 **Title**: Audit and fix remaining bare fields in training data
 **Summary**: Fixed 536 bare bibstem fields across training data. Created scripts/fix_bare_fields.py to quote unquoted bibstem: values (e.g., bibstem:ApJ → bibstem:"ApJ"). Fixed 133 in all_pairs.json and 403 in gold_examples.json. Verified all queries pass lint_query validation. All quality gates pass: lint ✓, test (65 passed) ✓, verify ✓.
 
+
+## Iteration 4 - US-005
+
+**Status**: ✓ PASSED
+**Title**: Create training data quality report
+**Summary**: Created training data quality report at data/datasets/QUALITY_REPORT.md with: total pairs (3,025), category breakdown (22 categories), 100% lint pass rate, invalid field values report (19 issues: 1 database, 18 bibgroup), bare field summary (61 unquoted values), 5 good/bad examples section, 3 recommendations (fix invalid values, quote bare fields, balance categories), and before/after metrics showing bibstem fixes from US-004. Added generate_quality_report.py script.
+
