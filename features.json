@@ -206,9 +206,9 @@
       "id": "integ-009",
       "name": "Multiple query suggestions (3-5 alternatives)",
       "category": "integration",
-      "status": "failing",
+      "status": "passing",
       "verification": "curl -s http://localhost:8000/api/nl-search -X POST -H 'Content-Type: application/json' -d '{\"query\":\"exoplanets\"}' | jq '.queries | length > 1'",
-      "notes": "Return array of query options instead of single query. See beads: nls-finetune-scix-f42"
+      "notes": "Returns 3-5 query variations via post-processing. UI displays radio buttons for selection."
     },
     {
       "id": "research-001",

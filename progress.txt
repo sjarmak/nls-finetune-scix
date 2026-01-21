@@ -217,3 +217,38 @@ Started: 2026-01-21
   - Training data should include more "lastname only" examples to reduce future hallucination
   - Modal billing limits can interrupt verification - consider monitoring usage
 ---
+
+## 2026-01-21 - eval-005
+- Fixed model inconsistently selecting title: vs abs: for topic queries
+- Added post-processing functions to ~/ads-dev/nectar/src/pages/api/nl-search.ts:
+  - `normalizeTitleToAbs()`: Converts all `title:` fields to `abs:` for broader coverage
+  - `expandAbbreviations()`: Expands ML→machine learning, AI→artificial intelligence, etc. when user provided full term
+- Added 15 new training examples to gold_examples.json with consistent `abs:` field usage
+- Post-processing pipeline now: normalizeTitleToAbs → expandAbbreviations → stripHallucinatedInitials
+- Files changed: ~/ads-dev/nectar/src/pages/api/nl-search.ts, data/datasets/raw/gold_examples.json, prd.json, features.json
+- **Learnings for future iterations:**
+  - Post-processing is faster than retraining for immediate behavioral fixes
+  - `abs:` field searches title, abstract, AND keywords - better recall than `title:`
+  - Common abbreviation list: ML, AI, NLP, CNN, RNN, DL, RL, CV, GR, QM
+  - Abbreviation expansion only applies when user input contained full term
+---
+
+## 2026-01-21 - integ-009
+- Implemented multiple query suggestions feature (3-5 alternatives)
+- Used post-processing approach: model returns single query, backend generates variations
+- Variation types: Best match, AND terms, OR terms, First author, Highly cited
+- Updated API at ~/ads-dev/nectar/src/pages/api/nl-search.ts with generateQueryVariations()
+- Updated useNLSearch hook to handle queries array and selectedIndex state
+- Updated NLSearch component with RadioGroup for option selection
+- Added Playwright test for multiple options display and selection
+- Files changed: 
+  - ~/ads-dev/nectar/src/pages/api/nl-search.ts
+  - ~/ads-dev/nectar/src/components/NLSearch/index.tsx
+  - ~/ads-dev/nectar/src/components/NLSearch/useNLSearch.ts
+  - ~/ads-dev/nectar/e2e/tests/nl-search.spec.ts
+- **Learnings for future iterations:**
+  - Post-processing is faster and more deterministic than model-based multi-output
+  - RadioGroup with Stack from Chakra UI works well for option selection
+  - Result count updates when user selects different query option
+  - Pre-existing build error in authoraffiliations page is unrelated to this feature
+---

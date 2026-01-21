@@ -196,8 +196,8 @@
         "User can click to apply any suggestion"
       ],
       "priority": 14,
-      "passes": false,
-      "notes": "See beads nls-finetune-scix-f42. Consider: model generates vs post-process single query"
+      "passes": true,
+      "notes": "Fixed with post-process approach: API generates variations from single model output. UI shows radio button selection."
     },
     {
       "id": "research-001",
