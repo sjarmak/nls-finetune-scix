@@ -230,9 +230,9 @@
       "id": "data-006",
       "name": "Training JSONL regenerated with operator examples",
       "category": "data",
-      "status": "failing",
+      "status": "passing",
       "verification": "python -c \"import json; lines=open('data/datasets/processed/train.jsonl').readlines(); assert any('trending(' in l for l in lines), 'No trending() in training data'\"",
-      "notes": "Need to run dataset generation scripts"
+      "notes": "Regenerated: 2531 pairs total, 50 operator examples"
     },
     {
       "id": "train-002",

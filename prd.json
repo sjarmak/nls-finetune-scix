@@ -241,8 +241,8 @@
         "Total training examples > 2500"
       ],
       "priority": 17,
-      "passes": false,
-      "notes": "Depends on data-005"
+      "passes": true,
+      "notes": "Regenerated with build_dataset.py. 2531 pairs total, 50 operator examples (6 trending, 24+ others)."
     },
     {
       "id": "train-002",
