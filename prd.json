@@ -54,7 +54,7 @@
         "pnpm lint passes in nectar directory"
       ],
       "priority": 4,
-      "passes": false,
+      "passes": true,
       "notes": "Work in ~/ads-dev/nectar on branch sj/fine-tune"
     },
     {

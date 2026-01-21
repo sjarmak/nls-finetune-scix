@@ -52,3 +52,27 @@ Started: 2026-01-21
   - `lint_query` does fast offline validation, `validate_query` calls ADS API
   - Branch sj/fine-tune doesn't exist in this repo, work continues on main
 ---
+
+## 2026-01-21 - eval-003
+- Added `evaluate_by_category` function to eval.py
+- Returns dict mapping category name to metrics (total, valid, validity_rate, mean_jaccard, mean_precision, mean_recall)
+- Groups EvalResult objects by their `category` field (author, pubdate, bibstem, object, etc.)
+- Files changed: packages/finetune/src/finetune/domains/scix/eval.py, prd.json, features.json
+- **Learnings for future iterations:**
+  - EvalResult already has a `category` field for sliced analysis
+  - summarize_results() already did category grouping in by_category dict - new function extracts this pattern
+---
+
+## 2026-01-21 - integ-001
+- Created NLSearch component in ~/ads-dev/nectar/src/components/NLSearch/
+- Component includes text input with debounced natural language query
+- Shows loading spinner while fetching from /api/nl-search endpoint
+- Displays suggested query in styled box with data-testid for testing
+- Created useNLSearch hook for API call handling with AbortController
+- Files changed: src/components/NLSearch/index.tsx, src/components/NLSearch/useNLSearch.ts
+- **Learnings for future iterations:**
+  - nectar uses Chakra UI for components
+  - use-debounce library available for debouncing
+  - Component patterns: forwardRef, displayName convention
+  - API routes expected at /api/* path
+---

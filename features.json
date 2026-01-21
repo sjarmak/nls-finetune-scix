@@ -126,7 +126,7 @@
       "id": "integ-001",
       "name": "NL search component added to nectar UI",
       "category": "integration",
-      "status": "failing",
+      "status": "passing",
       "verification": "test -f ~/ads-dev/nectar/src/components/NLSearch/index.tsx",
       "notes": "Branch: sj/fine-tune in ~/ads-dev/nectar"
     },
