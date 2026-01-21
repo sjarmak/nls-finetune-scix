@@ -150,7 +150,7 @@
       "id": "integ-004",
       "name": "Preview result count via ADS API",
       "category": "integration",
-      "status": "failing",
+      "status": "passing",
       "verification": "grep -r 'numFound\\|resultCount' ~/ads-dev/nectar/src/components/NLSearch/",
       "notes": "Show approximate result count for generated query"
     },

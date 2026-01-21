@@ -103,3 +103,16 @@ Started: 2026-01-21
   - react-icons/md provides MdPlayArrow for the apply button
   - Chakra UI useToast for success notifications
 ---
+
+## 2026-01-21 - integ-004
+- Added result count preview to NLSearch component
+- Updated useNLSearch hook to fetch numFound from ADS API with rows=0
+- Displays approximate result count (~1.2K results) next to query suggestion
+- Loading spinner shown while fetching count, silently fails on error
+- Added data-testid="nl-search-result-count" for e2e testing
+- Files changed: ~/ads-dev/nectar/src/components/NLSearch/index.tsx, useNLSearch.ts
+- **Learnings for future iterations:**
+  - nectar has existing NumFound component but simpler inline approach works
+  - Use rows=0 for count-only queries to minimize response size
+  - Search API available at /api/search endpoint
+---
