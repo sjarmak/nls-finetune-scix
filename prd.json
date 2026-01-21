@@ -174,7 +174,7 @@
         "Log deployment timestamp and endpoint status in progress.txt"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "Deployment picks latest merged model by mtime. Typically <1 minute after training completes. Verify warm container is running."
     },
     {

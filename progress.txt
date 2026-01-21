@@ -393,3 +393,55 @@ Model now trained on corrected operator syntax patterns from US-008:
 - `citations(abs:"quoted value")` patterns instead of `citations(abs:unquoted)`
 - All 3 test queries generate valid syntax
 
+
+## Iteration 2 - US-009
+
+**Status**: ✓ PASSED
+**Title**: Retrain model with fixed operator data
+**Summary**: Retrained model with fixed operator data from US-008. Run v3-operators completed in ~3 minutes using Unsloth acceleration. Training metrics: loss 0.6486, 414 steps, 33.6 samples/sec. LoRA adapter merged to /runs/v3-operators/merged. Deployed to Modal endpoint. Tested 3 operator queries (citations, trending, useful) - all generate valid ADS syntax with properly quoted values inside operators. Logged all metrics to progress.txt.
+
+---
+
+## 2026-01-21 - US-010: Deploy Retrained Model to Modal
+
+### Deployment
+
+**Timestamp**: 2026-01-21T23:14:00Z
+**Endpoint**: https://sjarmak--nls-finetune-serve-vllm-serve.modal.run
+**Status**: ✅ LIVE - v3-operators model deployed
+
+### Verification Steps
+
+1. **Model Merge**: Ran `scix-finetune merge --run-name v3-operators` to create merged model
+2. **Container Restart**: Stopped old container with `modal app stop`, redeployed
+3. **Endpoint Verification**: 
+   ```
+   curl https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/models
+   → {"root":"/runs/v3-operators/merged","id":"llm"} ✓
+   ```
+
+### Latency Tests (3 Warm Requests)
+
+| Request | Query | Latency |
+|---------|-------|---------|
+| 1 | papers on exoplanet atmospheres | 0.279s |
+| 2 | recent JWST review articles | 0.340s |
+| 3 | papers by Hawking from the 1970s | 0.345s |
+
+**Average Latency**: ~0.32s (within 0.4-0.5s target) ✓
+
+### Operator Query Test
+
+**Input**: "trending papers on black holes"
+**Output**: `trending(abs:"black hole")`
+**Status**: ✓ VALID - properly quoted value inside operator
+
+### Model Info
+
+- **Model Path**: /runs/v3-operators/merged
+- **Base Model**: Qwen3-1.7B
+- **Adapter**: LoRA (checkpoint-800)
+- **vLLM Version**: 0.11.2
+- **GPU**: H100
+- **Max Model Length**: 512 tokens
+
