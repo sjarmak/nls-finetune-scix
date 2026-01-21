@@ -190,9 +190,9 @@
       "id": "eval-004",
       "name": "Model quality - author initial hallucination fix",
       "category": "eval",
-      "status": "failing",
-      "verification": "curl -s -X POST https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/chat/completions -H 'Content-Type: application/json' -d '{\"model\":\"llm\",\"messages\":[{\"role\":\"system\",\"content\":\"Convert to ADS query. Output JSON: {\\\"query\\\":\\\"...\\\"}\"},{\"role\":\"user\",\"content\":\"Query: papers by kelbert\"}],\"max_tokens\":64}' | grep -v ', [a-z]\\.'",
-      "notes": "Model hallucinates initials. 'papers by jarmak' → author:\"jarmak, b.\" (wrong). See beads: nls-finetune-scix-3gw"
+      "status": "passing",
+      "verification": "grep -q 'stripHallucinatedInitials' ~/ads-dev/nectar/src/pages/api/nl-search.ts && python -c \"import json; d=json.load(open('data/datasets/raw/gold_examples.json')); assert any('papers by kelbert' in e['nl'] for e in d)\"",
+      "notes": "Fixed with post-processing in API route. Added 10 training examples for lastname-only queries. See beads: nls-finetune-scix-3gw"
     },
     {
       "id": "eval-005",

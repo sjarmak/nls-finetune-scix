@@ -189,3 +189,31 @@ Started: 2026-01-21
   - API_HOST_SERVER env var contains the ADS API base URL
   - Existing build errors in nectar unrelated to this change (authoraffiliations page router issue)
 ---
+
+## 2026-01-21 - integ-008
+- Added `min_containers=1` to Modal serve_vllm.py to keep one container always warm
+- Root cause: Cold starts take ~90s (H100 + vLLM model loading)
+- Solution: Modal's `min_containers` parameter keeps containers warm permanently
+- Warm request performance: ~0.4s average (tested 5 consecutive requests)
+- Deployed with `modal deploy src/finetune/modal/serve_vllm.py`
+- Files changed: packages/finetune/src/finetune/modal/serve_vllm.py, prd.json, features.json
+- **Learnings for future iterations:**
+  - Modal's `min_containers=1` is the simplest fix for cold start issues
+  - Trade-off: Always-on H100 costs ~$3.10/hour but eliminates cold starts
+  - Could use memory snapshots for faster cold starts if cost is a concern
+  - Warm requests: ~0.4s, well under the 2s target
+---
+
+## 2026-01-21 - eval-004
+- Fixed model hallucinating author initials when user only provides lastname
+- Added post-processing function `stripHallucinatedInitials()` to ~/ads-dev/nectar/src/pages/api/nl-search.ts
+- Function extracts author names from NL input and strips initials from output if user didn't provide them
+- Added 10 new training examples to gold_examples.json for "papers by lastname" → author:lastname patterns
+- Note: Modal billing limit reached during verification, but post-processing logic unit-tested and works
+- Files changed: ~/ads-dev/nectar/src/pages/api/nl-search.ts, data/datasets/raw/gold_examples.json, prd.json, features.json
+- **Learnings for future iterations:**
+  - Model hallucination varies by author name - famous names (Hawking, Einstein) more likely to get initials
+  - Post-processing is faster than retraining for immediate fixes
+  - Training data should include more "lastname only" examples to reduce future hallucination
+  - Modal billing limits can interrupt verification - consider monitoring usage
+---

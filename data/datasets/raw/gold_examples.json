@@ -478,5 +478,55 @@
     "nl": "asteroid spectroscopy and composition",
     "query": "abs:asteroid abs:spectroscopy",
     "category": "compound"
+  },
+  {
+    "nl": "papers by kelbert",
+    "query": "author:kelbert",
+    "category": "author"
+  },
+  {
+    "nl": "papers by jarmak",
+    "query": "author:jarmak",
+    "category": "author"
+  },
+  {
+    "nl": "papers by williams",
+    "query": "author:williams",
+    "category": "author"
+  },
+  {
+    "nl": "papers by zhang",
+    "query": "author:zhang",
+    "category": "author"
+  },
+  {
+    "nl": "papers by jones",
+    "query": "author:jones",
+    "category": "author"
+  },
+  {
+    "nl": "papers by smith on exoplanets",
+    "query": "author:smith abs:exoplanet",
+    "category": "author"
+  },
+  {
+    "nl": "papers by chen from 2020",
+    "query": "author:chen pubdate:2020",
+    "category": "author"
+  },
+  {
+    "nl": "papers by brown in ApJ",
+    "query": "author:brown bibstem:ApJ",
+    "category": "author"
+  },
+  {
+    "nl": "papers by garcia on dark matter",
+    "query": "author:garcia abs:\"dark matter\"",
+    "category": "author"
+  },
+  {
+    "nl": "papers by martinez from 2015 to 2020",
+    "query": "author:martinez pubdate:[2015 TO 2020]",
+    "category": "author"
   }
 ]

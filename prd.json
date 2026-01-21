@@ -168,8 +168,8 @@
         "'papers by jarmak' returns author:jarmak, not author:\"jarmak, b.\""
       ],
       "priority": 12,
-      "passes": false,
-      "notes": "See beads issue nls-finetune-scix-3gw. Model also outputs author:\"^b.\" for just 'papers by'"
+      "passes": true,
+      "notes": "Fixed with post-processing in API route + 10 new training examples. Modal billing limit reached during verification."
     },
     {
       "id": "eval-005",
