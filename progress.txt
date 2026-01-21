@@ -429,3 +429,25 @@ Started: 2026-01-21
   - Synonym groups should include both abbreviations and full forms
   - Expansion is best applied before generateQueryVariations() so variations inherit synonyms
 ---
+
+## 2026-01-21 - integ-012
+- Implemented object name resolution via SIMBAD TAP API to nl-search.ts
+- Key features:
+  - fetchObjectAliases(): Queries SIMBAD TAP to get all identifiers for an object
+  - detectObjectNames(): Matches 13+ patterns (M, NGC, IC, UGC, PGC, 3C, Abell, HD, HIP, 2MASS, SDSS, Messier, Cl)
+  - resolveObjectNames(): Expands object:M31 to object:(M31 OR "NGC 224" OR Andromeda)
+  - 100ms timeout using AbortController to prevent latency spikes
+  - In-memory cache with 1-hour TTL
+  - Filters out obscure catalog IDs (2MASX, IRAS, RAFGL, etc.) keeping only common names
+  - Priority sorting puts M, NGC, IC, NAME forms first
+- Processing pipeline: operator → author → object → synonym → variations
+- Can be disabled via `resolveObjects: false` in request body
+- Files changed: ~/ads-dev/nectar/src/pages/api/nl-search.ts, prd.json, features.json
+- Commit: 9522caba - "feat(integ-012): add SIMBAD object name resolution"
+- **Learnings for future iterations:**
+  - SIMBAD TAP API uses ADQL (SQL-like) queries and returns JSON
+  - Use URLSearchParams for form data, not JSON body
+  - Object names in SIMBAD include "NAME " prefix for common names (NAME Andromeda)
+  - Priority filtering and skip patterns needed to avoid overwhelming users with catalog IDs
+  - Processing order matters: object resolution before synonym expansion
+---
