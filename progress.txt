@@ -293,3 +293,10 @@ Created `packages/finetune/src/finetune/domains/scix/field_constraints.py` with:
 **Title**: Implement post-processing filter for model output
 **Summary**: Implemented constrain_query_output(query: str) -> str in packages/finetune/src/finetune/domains/scix/constrain.py. The function removes invalid doctype/database/property/bibgroup/esources/data values not in FIELD_ENUMS, logs warnings for each removed field, preserves valid field combinations, and handles edge cases including empty fields, trailing operators, OR lists, quoted values, and malformed parentheses. Added 42 test cases in test_constrain.py covering valid queries, invalid values, OR list handling, operator cleanup, common model hallucinations (journal, paper, peerreviewed, open_access, etc.), case sensitivity, and logging verification.
 
+
+## Iteration 3 - US-004
+
+**Status**: ✓ PASSED
+**Title**: Audit and fix remaining bare fields in training data
+**Summary**: Fixed 536 bare bibstem fields across training data. Created scripts/fix_bare_fields.py to quote unquoted bibstem: values (e.g., bibstem:ApJ → bibstem:"ApJ"). Fixed 133 in all_pairs.json and 403 in gold_examples.json. Verified all queries pass lint_query validation. All quality gates pass: lint ✓, test (65 passed) ✓, verify ✓.
+

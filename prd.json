@@ -87,7 +87,7 @@
         "Include before/after metrics from this task"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "Use for presentation and tracking progress"
     },
     {
