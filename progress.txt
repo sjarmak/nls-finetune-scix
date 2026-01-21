@@ -359,3 +359,17 @@ Started: 2026-01-21
   - Post-processing pipeline handles 6 operator types: trending, similar, useful, reviews, citations, references
   - validate_query() from scix module provides offline syntax validation
 ---
+
+## 2026-01-21 - data-008
+- Regenerated training JSONL with expanded operator examples
+- Added 41 new operator examples to gold_examples.json (total: 307 gold examples)
+- Built new training dataset: 2376 train / 265 val examples
+- Operator coverage now at 5.1% (120/2376 training examples)
+- Category distribution: 160 operator examples in full deduped dataset (6.1%)
+- Fixed verification script to check all 7 operator types, not just 3
+- Files changed: data/datasets/raw/gold_examples.json, data/datasets/processed/train.jsonl, val.jsonl, all_pairs.json, features.json, prd.json
+- **Learnings for future iterations:**
+  - Verification scripts should be inclusive of all relevant patterns
+  - 5-10% category coverage requires ~130-260 examples in a 2600-example dataset
+  - Random shuffle splits examples between train/val, reducing train coverage slightly
+---
