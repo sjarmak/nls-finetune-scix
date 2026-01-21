@@ -210,8 +210,8 @@
         "Recommend approach based on findings"
       ],
       "priority": 15,
-      "passes": false,
-      "notes": "See beads nls-finetune-scix-mtt. Lower priority - fix core issues first"
+      "passes": true,
+      "notes": "Research complete. Recommend ADS autocomplete for author validation. See docs/research/query-expansion.md"
     }
   ]
 }

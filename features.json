@@ -214,9 +214,9 @@
       "id": "research-001",
       "name": "Research: embeddings for query expansion + DB constraints",
       "category": "research",
-      "status": "failing",
+      "status": "passing",
       "verification": "test -f docs/research/query-expansion.md",
-      "notes": "Lower priority. Investigate after core issues fixed. See beads: nls-finetune-scix-mtt"
+      "notes": "Research complete. Recommend ADS autocomplete for author validation with 200ms timeout."
     }
   ]
 }
