@@ -76,3 +76,30 @@ Started: 2026-01-21
   - Component patterns: forwardRef, displayName convention
   - API routes expected at /api/* path
 ---
+
+## 2026-01-21 - integ-002
+- Created Modal endpoint proxy API route at ~/ads-dev/nectar/src/pages/api/nl-search.ts
+- Proxies POST requests to https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/chat/completions
+- Uses system prompt: 'Convert natural language to ADS search query. Output JSON: {"query": "..."}'
+- Parses JSON response from model with regex fallback for robustness
+- Handles errors with proper HTTP status codes (400, 405, 500, 502)
+- Files changed: src/pages/api/nl-search.ts
+- **Learnings for future iterations:**
+  - nectar uses Pages Router (src/pages/api/) not App Router (src/app/api/)
+  - API routes follow NextApiRequest/NextApiResponse pattern
+  - lint-staged runs on commit, fixing formatting automatically
+---
+
+## 2026-01-21 - integ-003
+- Added copy/apply buttons to NLSearch component in nectar
+- Copy button: Uses navigator.clipboard.writeText(), shows toast notification, changes icon to CheckIcon when copied
+- Apply button: Navigates to /search with generated query via router.push using makeSearchParams
+- Added data-testid attributes for e2e testing (nl-search-copy-btn, nl-search-apply-btn)
+- Added onApplyQuery prop for custom apply behavior
+- Files changed: ~/ads-dev/nectar/src/components/NLSearch/index.tsx
+- **Learnings for future iterations:**
+  - Use existing CopyButton patterns from @/components/CopyButton but simplified inline
+  - makeSearchParams from @/utils/common/search formats query params correctly
+  - react-icons/md provides MdPlayArrow for the apply button
+  - Chakra UI useToast for success notifications
+---

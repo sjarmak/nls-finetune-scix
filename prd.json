@@ -68,7 +68,7 @@
         "pnpm lint passes"
       ],
       "priority": 5,
-      "passes": false,
+      "passes": true,
       "notes": "Model name is 'llm', use OpenAI chat completions format"
     },
     {
@@ -82,7 +82,7 @@
         "pnpm lint passes"
       ],
       "priority": 6,
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {

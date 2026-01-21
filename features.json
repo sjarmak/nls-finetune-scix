@@ -134,7 +134,7 @@
       "id": "integ-002",
       "name": "Modal endpoint proxy in nectar API routes",
       "category": "integration",
-      "status": "failing",
+      "status": "passing",
       "verification": "grep -r 'nls-finetune-serve-vllm' ~/ads-dev/nectar/src/",
       "notes": "Proxy Modal endpoint through Next.js API route"
     },
@@ -142,7 +142,7 @@
       "id": "integ-003",
       "name": "Query suggestion display with copy/apply buttons",
       "category": "integration",
-      "status": "failing",
+      "status": "passing",
       "verification": "grep -r 'copyToClipboard\\|applyQuery' ~/ads-dev/nectar/src/components/NLSearch/",
       "notes": "User can copy suggested query or apply directly to search"
     },
