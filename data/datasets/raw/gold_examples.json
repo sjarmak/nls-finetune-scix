@@ -31,7 +31,7 @@
   },
   {
     "natural_language": "supermassive black hole formation theories",
-    "ads_query": "abs:\"supermassive black hole\" abs:formation",
+    "ads_query": "abs:\"supermassive black hole\" abs:\"formation\"",
     "category": "compound"
   },
   {
@@ -171,7 +171,7 @@
   },
   {
     "natural_language": "papers by taylor",
-    "ads_query": "author:taylor",
+    "ads_query": "author:\"taylor\"",
     "category": "author"
   },
   {
@@ -186,7 +186,7 @@
   },
   {
     "natural_language": "papers by williams on exoplanets",
-    "ads_query": "author:williams abs:exoplanet",
+    "ads_query": "author:\"williams\" abs:\"exoplanet\"",
     "category": "author"
   },
   {
@@ -211,7 +211,7 @@
   },
   {
     "natural_language": "supernova papers or nova papers",
-    "ads_query": "abs:supernova OR abs:nova",
+    "ads_query": "abs:\"supernova\" OR abs:\"nova\"",
     "category": "operator"
   },
   {
@@ -596,7 +596,7 @@
   },
   {
     "natural_language": "brown dwarf atmospheric modeling",
-    "ads_query": "abs:\"brown dwarf\" abs:atmosphere",
+    "ads_query": "abs:\"brown dwarf\" abs:\"atmosphere\"",
     "category": "compound"
   },
   {
@@ -631,7 +631,7 @@
   },
   {
     "natural_language": "work similar to Fermi gamma ray research",
-    "ads_query": "similar(abs:Fermi abs:\"gamma ray\")",
+    "ads_query": "similar(abs:\"Fermi\" abs:\"gamma ray\")",
     "category": "operator"
   },
   {
@@ -726,7 +726,7 @@
   },
   {
     "natural_language": "Orion Nebula photometry",
-    "ads_query": "object:\"Orion Nebula\" abs:photometry",
+    "ads_query": "object:\"Orion Nebula\" abs:\"photometry\"",
     "category": "astronomy"
   },
   {
@@ -796,7 +796,7 @@
   },
   {
     "natural_language": "papers by walker",
-    "ads_query": "author:walker",
+    "ads_query": "author:\"walker\"",
     "category": "author"
   },
   {
@@ -826,7 +826,7 @@
   },
   {
     "natural_language": "reinforcement learning for robotics",
-    "ads_query": "abs:\"reinforcement learning\" abs:robotics",
+    "ads_query": "abs:\"reinforcement learning\" abs:\"robotics\"",
     "category": "content"
   },
   {
@@ -961,7 +961,7 @@
   },
   {
     "natural_language": "Small Magellanic Cloud variability",
-    "ads_query": "object:\"SMC\" abs:variability",
+    "ads_query": "object:\"SMC\" abs:\"variability\"",
     "category": "astronomy"
   },
   {
@@ -1051,7 +1051,7 @@
   },
   {
     "natural_language": "cosmology papers not about inflation",
-    "ads_query": "abs:cosmology NOT abs:inflation",
+    "ads_query": "abs:\"cosmology\" NOT abs:\"inflation\"",
     "category": "operator"
   },
   {
@@ -1156,7 +1156,7 @@
   },
   {
     "natural_language": "Betelgeuse dimming observations",
-    "ads_query": "object:Betelgeuse abs:dimming",
+    "ads_query": "object:Betelgeuse abs:\"dimming\"",
     "category": "astronomy"
   },
   {
@@ -1396,7 +1396,7 @@
   },
   {
     "natural_language": "papers by williams",
-    "ads_query": "author:williams",
+    "ads_query": "author:\"williams\"",
     "category": "author"
   },
   {
@@ -1441,7 +1441,7 @@
   },
   {
     "natural_language": "papers by black on supernovae",
-    "ads_query": "author:black abs:supernova",
+    "ads_query": "author:\"black\" abs:\"supernova\"",
     "category": "author"
   },
   {
@@ -1511,7 +1511,7 @@
   },
   {
     "natural_language": "find papers related to LIGO discoveries",
-    "ads_query": "similar(abs:LIGO abs:\"gravitational wave\")",
+    "ads_query": "similar(abs:\"LIGO\" abs:\"gravitational wave\")",
     "category": "operator"
   },
   {
@@ -1871,7 +1871,7 @@
   },
   {
     "natural_language": "conference proceedings on instrumentation",
-    "ads_query": "doctype:inproceedings abs:instrumentation",
+    "ads_query": "doctype:inproceedings abs:\"instrumentation\"",
     "category": "properties"
   },
   {
@@ -1891,7 +1891,7 @@
   },
   {
     "natural_language": "papers by phillips",
-    "ads_query": "author:phillips",
+    "ads_query": "author:\"phillips\"",
     "category": "author"
   },
   {
@@ -1941,7 +1941,7 @@
   },
   {
     "natural_language": "papers by zhang",
-    "ads_query": "author:zhang",
+    "ads_query": "author:\"zhang\"",
     "category": "author"
   },
   {
@@ -2111,7 +2111,7 @@
   },
   {
     "natural_language": "papers with JWST in the title",
-    "ads_query": "title:JWST",
+    "ads_query": "title:\"JWST\"",
     "category": "content"
   },
   {
@@ -2156,7 +2156,7 @@
   },
   {
     "natural_language": "papers by jarmak",
-    "ads_query": "author:jarmak",
+    "ads_query": "author:\"jarmak\"",
     "category": "author"
   },
   {
@@ -2231,7 +2231,7 @@
   },
   {
     "natural_language": "papers excluding solar system studies",
-    "ads_query": "abs:exoplanet NOT abs:\"solar system\"",
+    "ads_query": "abs:\"exoplanet\" NOT abs:\"solar system\"",
     "category": "compound"
   },
   {
@@ -2351,7 +2351,7 @@
   },
   {
     "natural_language": "papers by garcia on dark matter",
-    "ads_query": "author:garcia abs:\"dark matter\"",
+    "ads_query": "author:\"garcia\" abs:\"dark matter\"",
     "category": "author"
   },
   {
@@ -2451,7 +2451,7 @@
   },
   {
     "natural_language": "papers referenced by LIGO gravitational wave papers",
-    "ads_query": "references(abs:LIGO abs:\"gravitational wave\")",
+    "ads_query": "references(abs:\"LIGO\" abs:\"gravitational wave\")",
     "category": "operator"
   },
   {
@@ -2541,7 +2541,7 @@
   },
   {
     "natural_language": "NASA Goddard research on exoplanets",
-    "ads_query": "aff:\"Goddard\" abs:exoplanet",
+    "ads_query": "aff:\"Goddard\" abs:\"exoplanet\"",
     "category": "affiliation"
   },
   {
@@ -2576,7 +2576,7 @@
   },
   {
     "natural_language": "neutron star or pulsar timing",
-    "ads_query": "(abs:\"neutron star\" OR abs:pulsar) abs:timing",
+    "ads_query": "(abs:\"neutron star\" OR abs:pulsar) abs:\"timing\"",
     "category": "operator"
   },
   {
@@ -2671,7 +2671,7 @@
   },
   {
     "natural_language": "HD 209458 b atmospheric studies",
-    "ads_query": "object:\"HD 209458\" abs:atmosphere",
+    "ads_query": "object:\"HD 209458\" abs:\"atmosphere\"",
     "category": "astronomy"
   },
   {
@@ -2846,7 +2846,7 @@
   },
   {
     "natural_language": "papers with associated data",
-    "ads_query": "abs:exoplanet property:data",
+    "ads_query": "abs:\"exoplanet\" property:data",
     "category": "property"
   },
   {
@@ -2856,7 +2856,7 @@
   },
   {
     "natural_language": "papers by green on gravitational waves",
-    "ads_query": "author:green abs:\"gravitational wave\"",
+    "ads_query": "author:\"green\" abs:\"gravitational wave\"",
     "category": "author"
   },
   {
@@ -3536,7 +3536,7 @@
   },
   {
     "natural_language": "STScI publications on Hubble",
-    "ads_query": "aff:\"STScI\" abs:Hubble",
+    "ads_query": "aff:\"STScI\" abs:\"Hubble\"",
     "category": "affiliation"
   },
   {
@@ -3661,7 +3661,7 @@
   },
   {
     "natural_language": "first author papers by Penrose on singularities",
-    "ads_query": "author:\"^Penrose, R\"abs:singularity",
+    "ads_query": "author:\"^Penrose, R\"abs:\"singularity\"",
     "category": "compound"
   },
   {
@@ -3726,7 +3726,7 @@
   },
   {
     "natural_language": "Large Magellanic Cloud spectroscopy",
-    "ads_query": "object:\"LMC\" abs:spectroscopy",
+    "ads_query": "object:\"LMC\" abs:\"spectroscopy\"",
     "category": "astronomy"
   },
   {
@@ -3961,7 +3961,7 @@
   },
   {
     "natural_language": "bibliography of cosmology papers from 2023",
-    "ads_query": "references(abs:cosmology pubdate:2023)",
+    "ads_query": "references(abs:\"cosmology\" pubdate:2023)",
     "category": "operator"
   },
   {
@@ -4036,7 +4036,7 @@
   },
   {
     "natural_language": "Proxima Centauri planet discoveries",
-    "ads_query": "object:\"Proxima Centauri\" abs:planet",
+    "ads_query": "object:\"Proxima Centauri\" abs:\"planet\"",
     "category": "astronomy"
   },
   {
@@ -4046,7 +4046,7 @@
   },
   {
     "natural_language": "papers from the 1990s on quasars",
-    "ads_query": "year:1990-1999 abs:quasar",
+    "ads_query": "year:1990-1999 abs:\"quasar\"",
     "category": "publication"
   },
   {
@@ -4106,7 +4106,7 @@
   },
   {
     "natural_language": "active galactic nuclei variability studies",
-    "ads_query": "abs:\"active galactic nuclei\" abs:variability",
+    "ads_query": "abs:\"active galactic nuclei\" abs:\"variability\"",
     "category": "compound"
   },
   {
@@ -4596,7 +4596,7 @@
   },
   {
     "natural_language": "asteroid spectroscopy and composition",
-    "ads_query": "abs:asteroid abs:spectroscopy",
+    "ads_query": "abs:\"asteroid\" abs:\"spectroscopy\"",
     "category": "compound"
   },
   {
@@ -4941,12 +4941,12 @@
   },
   {
     "natural_language": "papers from Harvard on cosmology",
-    "ads_query": "aff:\"Harvard\" abs:cosmology",
+    "ads_query": "aff:\"Harvard\" abs:\"cosmology\"",
     "category": "affiliation"
   },
   {
     "natural_language": "open access papers on exoplanets",
-    "ads_query": "abs:exoplanet property:openaccess",
+    "ads_query": "abs:\"exoplanet\" property:openaccess",
     "category": "property"
   },
   {
@@ -5201,7 +5201,7 @@
   },
   {
     "natural_language": "papers by clark from 2019",
-    "ads_query": "author:clark pubdate:2019",
+    "ads_query": "author:\"clark\" pubdate:2019",
     "category": "author"
   },
   {
@@ -5256,12 +5256,12 @@
   },
   {
     "natural_language": "GW150914 variability",
-    "ads_query": "object:\"GW150914\" abs:variability",
+    "ads_query": "object:\"GW150914\" abs:\"variability\"",
     "category": "astronomy"
   },
   {
     "natural_language": "papers by johnson",
-    "ads_query": "author:johnson",
+    "ads_query": "author:\"johnson\"",
     "category": "author"
   },
   {
@@ -5501,7 +5501,7 @@
   },
   {
     "natural_language": "trending work on AGN jets",
-    "ads_query": "trending(abs:AGN abs:jet)",
+    "ads_query": "trending(abs:\"AGN\" abs:jet)",
     "category": "operator"
   },
   {
@@ -5691,7 +5691,7 @@
   },
   {
     "natural_language": "papers by turner",
-    "ads_query": "author:turner",
+    "ads_query": "author:\"turner\"",
     "category": "author"
   },
   {
@@ -5876,7 +5876,7 @@
   },
   {
     "natural_language": "TRAPPIST-1 variability",
-    "ads_query": "object:\"TRAPPIST-1\" abs:variability",
+    "ads_query": "object:\"TRAPPIST-1\" abs:\"variability\"",
     "category": "astronomy"
   },
   {
@@ -5916,7 +5916,7 @@
   },
   {
     "natural_language": "papers similar to Gaia stellar surveys",
-    "ads_query": "similar(abs:Gaia abs:stellar)",
+    "ads_query": "similar(abs:\"Gaia\" abs:stellar)",
     "category": "operator"
   },
   {
@@ -6031,7 +6031,7 @@
   },
   {
     "natural_language": "papers by martin on X-ray astronomy",
-    "ads_query": "author:martin abs:\"X-ray\"",
+    "ads_query": "author:\"martin\" abs:\"X-ray\"",
     "category": "author"
   },
   {
@@ -6191,7 +6191,7 @@
   },
   {
     "natural_language": "papers by kim from 2021",
-    "ads_query": "author:kim pubdate:2021",
+    "ads_query": "author:\"kim\" pubdate:2021",
     "category": "author"
   },
   {
@@ -6201,7 +6201,7 @@
   },
   {
     "natural_language": "papers about black holes but not mergers",
-    "ads_query": "abs:\"black hole\" NOT abs:merger",
+    "ads_query": "abs:\"black hole\" NOT abs:\"merger\"",
     "category": "operator"
   },
   {
@@ -6441,7 +6441,7 @@
   },
   {
     "natural_language": "papers by rodriguez on black holes",
-    "ads_query": "author:rodriguez abs:\"black hole\"",
+    "ads_query": "author:\"rodriguez\" abs:\"black hole\"",
     "category": "author"
   },
   {
@@ -6506,7 +6506,7 @@
   },
   {
     "natural_language": "papers by brown in ApJ",
-    "ads_query": "author:brown bibstem:ApJ",
+    "ads_query": "author:\"brown\" bibstem:ApJ",
     "category": "author"
   },
   {
@@ -6536,7 +6536,7 @@
   },
   {
     "natural_language": "star formation without feedback",
-    "ads_query": "abs:\"star formation\" -abs:feedback",
+    "ads_query": "abs:\"star formation\" -abs:\"feedback\"",
     "category": "operator"
   },
   {
@@ -6851,7 +6851,7 @@
   },
   {
     "natural_language": "black hole or neutron star binaries",
-    "ads_query": "(abs:\"black hole\" OR abs:\"neutron star\") abs:binary",
+    "ads_query": "(abs:\"black hole\" OR abs:\"neutron star\") abs:\"binary\"",
     "category": "operator"
   },
   {
@@ -6976,7 +6976,7 @@
   },
   {
     "natural_language": "citations to exoplanet transit papers",
-    "ads_query": "citations(abs:exoplanet abs:transit)",
+    "ads_query": "citations(abs:\"exoplanet\" abs:transit)",
     "category": "operator"
   },
   {
@@ -7026,7 +7026,7 @@
   },
   {
     "natural_language": "recent JWST spectroscopy papers in Nature",
-    "ads_query": "abs:JWST abs:spectroscopy bibstem:Nature year:2022-2025",
+    "ads_query": "abs:\"JWST\" abs:\"spectroscopy\" bibstem:Nature year:2022-2025",
     "category": "compound"
   },
   {
@@ -7156,7 +7156,7 @@
   },
   {
     "natural_language": "cosmic microwave background anisotropies",
-    "ads_query": "abs:\"cosmic microwave background\" abs:anisotropy",
+    "ads_query": "abs:\"cosmic microwave background\" abs:\"anisotropy\"",
     "category": "content"
   },
   {
@@ -7361,7 +7361,7 @@
   },
   {
     "natural_language": "papers by anderson",
-    "ads_query": "author:anderson",
+    "ads_query": "author:\"anderson\"",
     "category": "author"
   },
   {
@@ -7466,7 +7466,7 @@
   },
   {
     "natural_language": "Crab Nebula spectroscopy",
-    "ads_query": "object:\"Crab Nebula\" abs:spectroscopy",
+    "ads_query": "object:\"Crab Nebula\" abs:\"spectroscopy\"",
     "category": "astronomy"
   },
   {
@@ -7481,7 +7481,7 @@
   },
   {
     "natural_language": "white dwarf cooling sequences",
-    "ads_query": "abs:\"white dwarf\" abs:cooling",
+    "ads_query": "abs:\"white dwarf\" abs:\"cooling\"",
     "category": "compound"
   },
   {
@@ -7526,7 +7526,7 @@
   },
   {
     "natural_language": "common references for Bayesian analysis in astronomy",
-    "ads_query": "useful(abs:Bayesian database:astronomy)",
+    "ads_query": "useful(abs:\"Bayesian\" database:astronomy)",
     "category": "operator"
   },
   {
@@ -7671,7 +7671,7 @@
   },
   {
     "natural_language": "papers by allen",
-    "ads_query": "author:allen",
+    "ads_query": "author:\"allen\"",
     "category": "author"
   },
   {
@@ -7686,7 +7686,7 @@
   },
   {
     "natural_language": "papers by miller",
-    "ads_query": "author:miller",
+    "ads_query": "author:\"miller\"",
     "category": "author"
   },
   {
@@ -7756,7 +7756,7 @@
   },
   {
     "natural_language": "papers by scott on stellar evolution",
-    "ads_query": "author:scott abs:\"stellar evolution\"",
+    "ads_query": "author:\"scott\" abs:\"stellar evolution\"",
     "category": "author"
   },
   {
@@ -7801,7 +7801,7 @@
   },
   {
     "natural_language": "magnetar X-ray observations",
-    "ads_query": "abs:magnetar abs:\"X-ray\"",
+    "ads_query": "abs:\"magnetar\" abs:\"X-ray\"",
     "category": "compound"
   },
   {
@@ -7896,7 +7896,7 @@
   },
   {
     "natural_language": "papers by lee in Nature",
-    "ads_query": "author:lee bibstem:Nature",
+    "ads_query": "author:\"lee\" bibstem:Nature",
     "category": "author"
   },
   {
@@ -8006,7 +8006,7 @@
   },
   {
     "natural_language": "papers by parker",
-    "ads_query": "author:parker",
+    "ads_query": "author:\"parker\"",
     "category": "author"
   },
   {
@@ -8071,7 +8071,7 @@
   },
   {
     "natural_language": "papers by hall",
-    "ads_query": "author:hall",
+    "ads_query": "author:\"hall\"",
     "category": "author"
   },
   {
@@ -8331,7 +8331,7 @@
   },
   {
     "natural_language": "exomoon or exoring detection papers",
-    "ads_query": "abs:exomoon OR abs:exoring",
+    "ads_query": "abs:\"exomoon\" OR abs:\"exoring\"",
     "category": "compound"
   },
   {
@@ -8381,7 +8381,7 @@
   },
   {
     "natural_language": "Andromeda spectroscopy",
-    "ads_query": "object:\"M31\" abs:spectroscopy",
+    "ads_query": "object:\"M31\" abs:\"spectroscopy\"",
     "category": "astronomy"
   },
   {
@@ -8391,7 +8391,7 @@
   },
   {
     "natural_language": "papers like Kepler exoplanet discoveries",
-    "ads_query": "similar(abs:Kepler abs:exoplanet)",
+    "ads_query": "similar(abs:\"Kepler\" abs:exoplanet)",
     "category": "operator"
   },
   {
@@ -8501,7 +8501,7 @@
   },
   {
     "natural_language": "papers about quasars at high redshift",
-    "ads_query": "abs:quasar abs:\"high redshift\"",
+    "ads_query": "abs:\"quasar\" abs:\"high redshift\"",
     "category": "compound"
   },
   {
@@ -8656,7 +8656,7 @@
   },
   {
     "natural_language": "ALMA or NOEMA observations",
-    "ads_query": "abs:ALMA OR abs:NOEMA",
+    "ads_query": "abs:\"ALMA\" OR abs:\"NOEMA\"",
     "category": "operator"
   },
   {
@@ -8666,7 +8666,7 @@
   },
   {
     "natural_language": "Proxima Centauri variability",
-    "ads_query": "object:\"Proxima Centauri\" abs:variability",
+    "ads_query": "object:\"Proxima Centauri\" abs:\"variability\"",
     "category": "astronomy"
   },
   {
@@ -8741,7 +8741,7 @@
   },
   {
     "natural_language": "Andromeda photometry",
-    "ads_query": "object:\"M31\" abs:photometry",
+    "ads_query": "object:\"M31\" abs:\"photometry\"",
     "category": "astronomy"
   },
   {
@@ -8841,7 +8841,7 @@
   },
   {
     "natural_language": "M87 dynamics",
-    "ads_query": "object:\"M87\" abs:dynamics",
+    "ads_query": "object:\"M87\" abs:\"dynamics\"",
     "category": "astronomy"
   },
   {
@@ -8891,7 +8891,7 @@
   },
   {
     "natural_language": "papers by campbell",
-    "ads_query": "author:campbell",
+    "ads_query": "author:\"campbell\"",
     "category": "author"
   },
   {
@@ -8921,7 +8921,7 @@
   },
   {
     "natural_language": "exoplanet papers excluding hot Jupiters",
-    "ads_query": "abs:exoplanet NOT abs:\"hot Jupiter\"",
+    "ads_query": "abs:\"exoplanet\" NOT abs:\"hot Jupiter\"",
     "category": "operator"
   },
   {
@@ -9101,12 +9101,12 @@
   },
   {
     "natural_language": "papers by white on dark matter",
-    "ads_query": "author:white abs:\"dark matter\"",
+    "ads_query": "author:\"white\" abs:\"dark matter\"",
     "category": "author"
   },
   {
     "natural_language": "papers by moore on cosmology",
-    "ads_query": "author:moore abs:cosmology",
+    "ads_query": "author:\"moore\" abs:\"cosmology\"",
     "category": "author"
   },
   {
@@ -9146,7 +9146,7 @@
   },
   {
     "natural_language": "find papers related to recent JWST observations",
-    "ads_query": "similar(abs:JWST year:2022-2025)",
+    "ads_query": "similar(abs:\"JWST\" year:2022-2025)",
     "category": "operator"
   },
   {
@@ -9206,7 +9206,7 @@
   },
   {
     "natural_language": "Vega variability",
-    "ads_query": "object:\"Vega\" abs:variability",
+    "ads_query": "object:\"Vega\" abs:\"variability\"",
     "category": "astronomy"
   },
   {
@@ -9226,7 +9226,7 @@
   },
   {
     "natural_language": "papers like the Planck CMB results",
-    "ads_query": "similar(abs:Planck abs:\"cosmic microwave background\")",
+    "ads_query": "similar(abs:\"Planck\" abs:\"cosmic microwave background\")",
     "category": "operator"
   },
   {
@@ -9276,7 +9276,7 @@
   },
   {
     "natural_language": "gamma ray burst afterglow observations",
-    "ads_query": "abs:\"gamma ray burst\" abs:afterglow",
+    "ads_query": "abs:\"gamma ray burst\" abs:\"afterglow\"",
     "category": "compound"
   },
   {
@@ -9311,7 +9311,7 @@
   },
   {
     "natural_language": "GW150914 observations",
-    "ads_query": "object:\"GW150914\" abs:observations",
+    "ads_query": "object:\"GW150914\" abs:\"observations\"",
     "category": "astronomy"
   },
   {
@@ -9391,7 +9391,7 @@
   },
   {
     "natural_language": "Crab Nebula structure",
-    "ads_query": "object:\"Crab Nebula\" abs:structure",
+    "ads_query": "object:\"Crab Nebula\" abs:\"structure\"",
     "category": "astronomy"
   },
   {
@@ -9706,7 +9706,7 @@
   },
   {
     "natural_language": "Vega dynamics",
-    "ads_query": "object:\"Vega\" abs:dynamics",
+    "ads_query": "object:\"Vega\" abs:\"dynamics\"",
     "category": "astronomy"
   },
   {
@@ -9941,7 +9941,7 @@
   },
   {
     "natural_language": "papers by lewis on neutron stars",
-    "ads_query": "author:lewis abs:\"neutron star\"",
+    "ads_query": "author:\"lewis\" abs:\"neutron star\"",
     "category": "author"
   },
   {
@@ -10061,7 +10061,7 @@
   },
   {
     "natural_language": "radio astronomy papers from the VLA",
-    "ads_query": "abs:VLA database:astronomy",
+    "ads_query": "abs:\"VLA\" database:astronomy",
     "category": "compound"
   },
   {
@@ -10216,7 +10216,7 @@
   },
   {
     "natural_language": "papers by martinez from 2015 to 2020",
-    "ads_query": "author:martinez year:2015-2020",
+    "ads_query": "author:\"martinez\" year:2015-2020",
     "category": "author"
   },
   {
@@ -10331,7 +10331,7 @@
   },
   {
     "natural_language": "work related to Hubble deep field",
-    "ads_query": "similar(abs:Hubble abs:\"deep field\")",
+    "ads_query": "similar(abs:\"Hubble\" abs:\"deep field\")",
     "category": "operator"
   },
   {
@@ -10571,7 +10571,7 @@
   },
   {
     "natural_language": "Chandra or XMM Newton X-ray data",
-    "ads_query": "(abs:Chandra OR abs:\"XMM Newton\") abs:\"X-ray\"",
+    "ads_query": "(abs:\"Chandra\" OR abs:\"XMM Newton\") abs:\"X-ray\"",
     "category": "operator"
   },
   {
@@ -10666,7 +10666,7 @@
   },
   {
     "natural_language": "papers by young",
-    "ads_query": "author:young",
+    "ads_query": "author:\"young\"",
     "category": "author"
   },
   {
@@ -10721,7 +10721,7 @@
   },
   {
     "natural_language": "Andromeda variability",
-    "ads_query": "object:\"M31\" abs:variability",
+    "ads_query": "object:\"M31\" abs:\"variability\"",
     "category": "astronomy"
   },
   {
@@ -10856,7 +10856,7 @@
   },
   {
     "natural_language": "papers by murphy",
-    "ads_query": "author:murphy",
+    "ads_query": "author:\"murphy\"",
     "category": "author"
   },
   {
@@ -10876,12 +10876,12 @@
   },
   {
     "natural_language": "papers by jones",
-    "ads_query": "author:jones",
+    "ads_query": "author:\"jones\"",
     "category": "author"
   },
   {
     "natural_language": "Betelgeuse spectroscopy",
-    "ads_query": "object:\"Betelgeuse\" abs:spectroscopy",
+    "ads_query": "object:\"Betelgeuse\" abs:\"spectroscopy\"",
     "category": "astronomy"
   },
   {
@@ -11111,7 +11111,7 @@
   },
   {
     "natural_language": "single-author papers on cosmology",
-    "ads_query": "author_count:1 abs:cosmology",
+    "ads_query": "author_count:1 abs:\"cosmology\"",
     "category": "author"
   },
   {
@@ -11121,7 +11121,7 @@
   },
   {
     "natural_language": "papers using Spitzer data on exoplanets",
-    "ads_query": "data:Spitzer abs:exoplanet",
+    "ads_query": "data:Spitzer abs:\"exoplanet\"",
     "category": "data"
   },
   {
@@ -11261,7 +11261,7 @@
   },
   {
     "natural_language": "papers by kelbert",
-    "ads_query": "author:kelbert",
+    "ads_query": "author:\"kelbert\"",
     "category": "author"
   },
   {
@@ -11316,7 +11316,7 @@
   },
   {
     "natural_language": "Small Magellanic Cloud structure",
-    "ads_query": "object:\"SMC\" abs:structure",
+    "ads_query": "object:\"SMC\" abs:\"structure\"",
     "category": "astronomy"
   },
   {
@@ -11351,7 +11351,7 @@
   },
   {
     "natural_language": "papers by smith on exoplanets",
-    "ads_query": "author:smith abs:exoplanet",
+    "ads_query": "author:\"smith\" abs:\"exoplanet\"",
     "category": "author"
   },
   {
@@ -11426,7 +11426,7 @@
   },
   {
     "natural_language": "ALMA or VLA radio observations",
-    "ads_query": "abs:ALMA OR abs:VLA",
+    "ads_query": "abs:\"ALMA\" OR abs:\"VLA\"",
     "category": "operator"
   },
   {
@@ -11526,7 +11526,7 @@
   },
   {
     "natural_language": "supernova cosmology studies",
-    "ads_query": "abs:supernova abs:cosmology",
+    "ads_query": "abs:\"supernova\" abs:\"cosmology\"",
     "category": "content"
   },
   {
@@ -11726,7 +11726,7 @@
   },
   {
     "natural_language": "papers by thomas",
-    "ads_query": "author:thomas",
+    "ads_query": "author:\"thomas\"",
     "category": "author"
   },
   {
@@ -11751,7 +11751,7 @@
   },
   {
     "natural_language": "papers by davies",
-    "ads_query": "author:davies",
+    "ads_query": "author:\"davies\"",
     "category": "author"
   },
   {
@@ -11926,7 +11926,7 @@
   },
   {
     "natural_language": "galaxy papers excluding mergers",
-    "ads_query": "abs:galaxy NOT abs:merger",
+    "ads_query": "abs:\"galaxy\" NOT abs:\"merger\"",
     "category": "operator"
   },
   {
@@ -12076,7 +12076,7 @@
   },
   {
     "natural_language": "Crab Nebula photometry",
-    "ads_query": "object:\"Crab Nebula\" abs:photometry",
+    "ads_query": "object:\"Crab Nebula\" abs:\"photometry\"",
     "category": "astronomy"
   },
   {
@@ -12091,7 +12091,7 @@
   },
   {
     "natural_language": "papers by harris on galaxy clusters",
-    "ads_query": "author:harris abs:\"galaxy cluster\"",
+    "ads_query": "author:\"harris\" abs:\"galaxy cluster\"",
     "category": "author"
   },
   {
@@ -12351,7 +12351,7 @@
   },
   {
     "natural_language": "Gaia satellite stellar parallax measurements",
-    "ads_query": "abs:Gaia abs:parallax",
+    "ads_query": "abs:\"Gaia\" abs:\"parallax\"",
     "category": "compound"
   },
   {
@@ -12531,7 +12531,7 @@
   },
   {
     "natural_language": "ALMA observations of protoplanetary disks",
-    "ads_query": "abs:ALMA abs:\"protoplanetary disk\"",
+    "ads_query": "abs:\"ALMA\" abs:\"protoplanetary disk\"",
     "category": "compound"
   },
   {
@@ -12736,7 +12736,7 @@
   },
   {
     "natural_language": "GW150914 structure",
-    "ads_query": "object:\"GW150914\" abs:structure",
+    "ads_query": "object:\"GW150914\" abs:\"structure\"",
     "category": "astronomy"
   },
   {
@@ -12936,7 +12936,7 @@
   },
   {
     "natural_language": "Vega spectroscopy",
-    "ads_query": "object:\"Vega\" abs:spectroscopy",
+    "ads_query": "object:\"Vega\" abs:\"spectroscopy\"",
     "category": "astronomy"
   },
   {
@@ -12961,7 +12961,7 @@
   },
   {
     "natural_language": "papers by colwell",
-    "ads_query": "author:colwell",
+    "ads_query": "author:\"colwell\"",
     "category": "author"
   },
   {
@@ -13231,7 +13231,7 @@
   },
   {
     "natural_language": "papers by maria garcia on exoplanets",
-    "ads_query": "author:\"garcia, maria\" abs:exoplanet",
+    "ads_query": "author:\"garcia, maria\" abs:\"exoplanet\"",
     "category": "author"
   },
   {
@@ -13316,7 +13316,7 @@
   },
   {
     "natural_language": "papers by chen from 2020",
-    "ads_query": "author:chen pubdate:2020",
+    "ads_query": "author:\"chen\" pubdate:2020",
     "category": "author"
   },
   {
@@ -13551,32 +13551,32 @@
   },
   {
     "natural_language": "title contains exactly etoile",
-    "ads_query": "=title:etoile",
+    "ads_query": "=title:\"etoile\"",
     "category": "syntax"
   },
   {
     "natural_language": "exact token etoile in title",
-    "ads_query": "=title:etoile",
+    "ads_query": "=title:\"etoile\"",
     "category": "syntax"
   },
   {
     "natural_language": "no synonyms title etoile",
-    "ads_query": "=title:etoile",
+    "ads_query": "=title:\"etoile\"",
     "category": "syntax"
   },
   {
     "natural_language": "title exact star (no synonyms)",
-    "ads_query": "=title:star",
+    "ads_query": "=title:\"star\"",
     "category": "syntax"
   },
   {
     "natural_language": "disable synonyms for star in title",
-    "ads_query": "=title:star",
+    "ads_query": "=title:\"star\"",
     "category": "syntax"
   },
   {
     "natural_language": "title =star",
-    "ads_query": "=title:star",
+    "ads_query": "=title:\"star\"",
     "category": "syntax"
   },
   {

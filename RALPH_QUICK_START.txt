@@ -1,0 +1,59 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    RALPH QUICK START - ONE MINUTE GUIDE                     ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+WHAT IS THIS?
+  Ralph is an autonomous AI agent that will fix your training data and add
+  post-processing validation to catch model hallucinations.
+
+DO YOU HAVE AMP INSTALLED?
+  $ which amp
+  
+  If not: Sign up at https://ampcode.com and install the CLI
+
+RUN IT:
+  $ ./ralph.sh
+
+WHAT WILL HAPPEN?
+  Ralph will automatically:
+  1. Create ADS field constraints module
+  2. Add validation functions  
+  3. Build post-processing filter
+  4. Fix 45 bare fields in training data
+  5. Generate quality report
+  6. Integrate validation into your API
+  7. Document patterns
+
+WHEN RALPH ASKS "Did story pass?"
+  Read what the AI implemented. If all acceptance criteria are met, type: y
+  Otherwise type: n and Ralph will try again
+
+TIME REQUIRED:
+  3-4 hours (Ralph runs autonomously)
+
+MONITOR PROGRESS:
+  $ jq '.userStories[] | {id, title, passes}' prd.json
+  $ tail -20 progress.txt
+  $ git log --oneline -10
+
+TROUBLESHOOTING:
+  Got stuck? Read: RALPH_SETUP.md
+  Want to understand the changes? Read: RALPH_INTEGRATION_GUIDE.md
+  Need story details? Read: prd.json
+
+FULL DOCUMENTATION:
+  RALPH_SETUP.md              ← Complete guide
+  RALPH_INTEGRATION_GUIDE.md  ← Technical architecture
+  prompt.md                   ← What Ralph knows
+  prd.json                    ← All user stories
+
+═════════════════════════════════════════════════════════════════════════════
+
+TL;DR:
+  $ ./ralph.sh
+  Answer "y" or "n" when asked if story passed
+  Wait 3-4 hours
+  Check: jq '.userStories[] | {id, passes}' prd.json
+  When all pass: merge & retrain model
+
+═════════════════════════════════════════════════════════════════════════════

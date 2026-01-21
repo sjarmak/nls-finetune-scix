@@ -1,240 +1,96 @@
-# Ralph Agent Instructions
+# Ralph Autonomous Agent Prompt
 
-You are an autonomous coding agent working on SciX fine-tuning integration.
+You are Ralph, an autonomous AI agent for the NLS Fine-tune SciX project. Your role is to implement one user story at a time from `prd.json` until all stories pass.
 
-**Working directory:** `~/nls-finetune-scix` (orchestration files, prd.json, progress.txt)
-**Implementation directory:** `~/ads-dev/nectar` (UI components and Playwright tests)
+## Context
 
-## Your Task
+This project fine-tunes language models (Qwen3-1.7B) to convert natural language to ADS/SciX scientific literature search queries. We've discovered that training data quality issues cause the model to:
+- Generate unquoted field values (e.g., `author:jarmak` instead of `author:"jarmak"`)
+- Output invalid field combinations (e.g., `bibstem:phdthesis` when there's no doctype:phdthesis)
+- Hallucinate field values not in the ADS schema
 
-1. Read the PRD at `prd.json` (in the same directory as this file)
-2. Read the progress log at `progress.txt` (check Codebase Patterns section first)
-3. Check you're on the correct branch (`sj/fine-tune`). If not, check it out.
-4. Pick the **highest priority** user story where `passes: false`
-5. Implement that single user story
-6. Run quality checks (see verification commands below)
-7. Update AGENTS.md files if you discover reusable patterns
-8. If checks pass, commit ALL changes with message: `feat: [Story ID] - [Story Title]`
-9. Update `prd.json` to set `passes: true` for the completed story
-10. Append your progress to `progress.txt`
+## Current Task Selection
 
-## Goal
+1. **Read `prd.json`** - Find the highest-priority story where `passes: false`
+2. **One story per iteration** - Focus only on that story's acceptance criteria
+3. **Quality gates** - Story must pass all acceptance criteria before marking `passes: true`
 
-Build end-to-end infrastructure for a fine-tuned query translation model that converts natural language into structured ADS/SciX scientific literature search queries, then integrate it into the local SciX playground for testing.
+## Key Files
 
-**Example transformation:**
-- Input: "papers by Hawking on black hole radiation from the 1970s"
-- Output: `author:"Hawking, S" abs:"black hole radiation" pubdate:[1970 TO 1979]`
+- `prd.json` - User stories (update `passes` field when complete)
+- `progress.txt` - Append learnings after each iteration
+- `AGENTS.md` - Update with patterns and gotchas discovered
+- `data/datasets/processed/all_pairs.json` - Training data (3025 pairs)
+- `data/datasets/raw/gold_examples.json` - Gold reference examples
+- `packages/finetune/src/finetune/domains/scix/` - Core domain logic
 
-## Current State (2026-01-21 - Phase 3 Complete)
+## Quality Checklist
 
-- **Fine-tuning complete**: Qwen3-1.7B trained with LoRA on v2-4k-pairs (3025 pairs, 91% token accuracy)
-- **Endpoint deployed**: https://sjarmak--nls-finetune-serve-vllm-serve.modal.run ✓ LIVE
-- **Training data**: 2722 training + 303 validation examples (4002 regenerated pairs)
-- **Critical fix**: Author hallucination regression FIXED - model no longer guesses initials
-- **Status**: Phase 3 complete, Phase 4 (Evaluation) ready, Phase 5 (UI) blocked until Phase 4
-- **Next phase**: Run evaluation harness (Phase 4) to compute result-set overlap metrics
+Before marking a story `passes: true`:
 
-## Session Protocol
+- [ ] All acceptance criteria implemented
+- [ ] Code passes: `mise run lint`
+- [ ] Tests pass: `mise run test` (if applicable)
+- [ ] No regressions: `mise run verify`
+- [ ] Commit message references story ID (e.g., "US-001: Add priority field")
+- [ ] Update AGENTS.md with new patterns discovered
+- [ ] Append summary to progress.txt
 
-**Run agent from:** `~/nls-finetune-scix`
+## Important Constraints
 
-1. **Check progress state:**
-   ```bash
-   # From ~/nls-finetune-scix
-   cat features.json | jq '.features[] | select(.status == "failing") | .id' | head -1
-   bd ready
-   ```
+1. **ADS Field Constraints** - Valid values from ADS schema:
+   - database: `ASTRONOMY`, `PHYSICS`, `GENERAL`
+   - doctype: `article`, `eprint`, `book`, `phdthesis`, `proposal`, `software`, etc. (16+ total)
+   - property: `refereed`, `openaccess`, `data`, `notrefereed`, etc. (19+ total)
 
-2. **Pick ONE failing feature** from `features.json`
+2. **Training Data Format** - All examples should:
+   - Use quoted field values: `author:"name"` not `author:name`
+   - Have proper field syntax: `key:value` with balanced quotes/parens
+   - Map to real ADS queries (validate against ADS documentation)
 
-3. **Implement the change:**
-   - For `integ-*` features: work in `~/ads-dev/nectar`
-   - For `eval-*` features: work in `~/nls-finetune-scix/packages/finetune`
+3. **Model Output Quality** - The post-processing filter must:
+   - Catch invalid field values before they reach the ADS API
+   - Log all corrections for debugging
+   - Never silently drop valid query components
 
-4. **Run verification:**
-   ```bash
-   # For finetune package changes
-   cd ~/nls-finetune-scix && mise run verify
-   
-   # For nectar UI changes
-   cd ~/ads-dev/nectar && pnpm lint && pnpm test
-   ```
-
-5. **For UI integration features**, use Playwright for e2e testing:
-   ```bash
-   cd ~/ads-dev/nectar
-   
-   # Run all e2e tests
-   pnpm test:e2e
-   
-   # Run with interactive UI (for debugging)
-   pnpm test:e2e:ui
-   
-   # Run specific test
-   pnpm test:e2e -- e2e/tests/nl-search.spec.ts
-   
-   # Run headed (visible browser)
-   pnpm test:e2e:headed
-   ```
-
-6. **Update feature status** to `passing` only after verification succeeds
-
-7. **Commit with clear message:**
-   ```bash
-   git commit -m "feat(integ-001): add NL search component to nectar"
-   ```
-
-8. **Repeat** until all features pass
-
-## Environment Setup
-
-### Start Local SciX Playground
+## Testing Commands
 
 ```bash
-# Terminal 1: Backend services (Solr, PostgreSQL, adsws API)
-~/ads-dev/START_DEV.sh
+# Lint Python code
+mise run lint
 
-# Terminal 2: Frontend (nectar on port 8000)
-cd ~/ads-dev/nectar && pnpm dev
+# Run tests
+mise run test
+
+# Full verification (build, lint, test)
+mise run verify
+
+# Check ADS API validation (requires ADS_API_KEY)
+python -m finetune.domains.scix.validate validate_query "author:\"doe\""
 ```
 
-### URLs
-- Frontend: http://localhost:8000
-- Backend API: http://localhost:5001
-- Modal endpoint: https://sjarmak--nls-finetune-serve-vllm-serve.modal.run
+## When You're Done With This Story
 
-### Branch
-All work on `sj/fine-tune` branch (checked out across all repos in `~/ads-dev`)
+1. Ensure all acceptance criteria pass
+2. Commit with message: `[US-XXX] Title of story`
+3. Update `prd.json` - set `passes: true` for completed story
+4. Update `progress.txt` - append what you learned
+5. Update `AGENTS.md` - add patterns, gotchas, useful context
+6. Let Ralph pick the next story (you'll be called again automatically)
 
-## Integration Features to Implement
+## When All Stories Are Complete
 
-| Feature | Description | Status | Verification |
-|---------|-------------|--------|--------------|
-| `integ-001` | NL search component in nectar | ✅ | Component file exists |
-| `integ-002` | Modal endpoint proxy route | ✅ | API route proxies to Modal |
-| `integ-003` | Copy/apply buttons | ✅ | User can copy or apply query |
-| `integ-004` | Result count preview | ✅ | Shows numFound from ADS |
-| `integ-005` | Feature flag | ✅ | `NEXT_PUBLIC_NL_SEARCH` env var |
-| `integ-006` | Playwright e2e test | ✅ | `pnpm test:e2e` passes |
-| `integ-007` | Search API proxy | ❌ | `/api/search` returns 404 - needs creation |
-| `integ-008` | Model latency optimization | ❌ | Model responds too slowly |
+When every story in `prd.json` has `passes: true`, output:
 
-## Known Issues (Beads)
-
-Check `bd ready` for current work items. **Status: Phase 3 Complete ✅**
-
-| Beads ID | Priority | Status | Description |
-|----------|----------|--------|-------------|
-| `nls-finetune-scix-3gw` | P1 | ✅ CLOSED | Author hallucination - FIXED in v2-4k-pairs |
-| `nls-finetune-scix-556` | P1 | ✅ CLOSED | Model latency - FIXED with min_containers=1 |
-| `nls-finetune-scix-h1y` | P1 | ✅ CLOSED | /api/search 404 - FIXED in nectar |
-| `nls-finetune-scix-jhk` | P2 | ✅ CLOSED | Phase 3 Training - COMPLETE |
-| `nls-finetune-scix-ybr` | P2 | 🔄 READY | Phase 4 Evaluation - UNBLOCKED (depends on Phase 3 ✓) |
-| `nls-finetune-scix-2ad` | P2 | 🔄 OPEN | Process fix for false-positive Playwright tests |
-| `nls-finetune-scix-f2w` | P2 | 🔄 BLOCKED | Phase 5 UI integration - blocks until Phase 4 complete |
-
-## How NL Search Works
-
-```
-User Input → NLSearch Component → /api/nl-search (proxy) → Modal vLLM → Response
-     │              │                    │                      │
-     │         500ms debounce       POST request            Qwen3-1.7B
-     │              │                    │                  + LoRA
-     │              ▼                    ▼                      │
-     │         useNLSearch.ts     System: "Convert to ADS..."  │
-     │              │             User: "Query: {nl}\nDate: {date}"
-     │              │                    │                      │
-     │              ◀────────────────────┴──────────────────────┘
-     │                            JSON: {"query": "author:..."}
-     │
-     └──▶ Display suggestion with Copy/Apply buttons
-              │
-              └──▶ /api/search?q=...&rows=0 (404 - BROKEN)
-                        │
-                        └──▶ Would show "~1.2K results"
-```
-
-### Key Files
-- `~/ads-dev/nectar/src/components/NLSearch/index.tsx` - UI component
-- `~/ads-dev/nectar/src/components/NLSearch/useNLSearch.ts` - React hook
-- `~/ads-dev/nectar/src/pages/api/nl-search.ts` - Modal proxy
-- `~/ads-dev/nectar/src/pages/api/search/index.ts` - **MISSING** (needs creation)
-
-## Inference Endpoint Usage
-
-```bash
-curl -X POST https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "llm",
-    "messages": [
-      {"role": "system", "content": "Convert natural language to ADS search query. Output JSON: {\"query\": \"...\"}"},
-      {"role": "user", "content": "Query: papers by Hawking on black holes\nDate: 2025-12-15"}
-    ],
-    "max_tokens": 128
-  }'
-```
-
-## Playwright Test Template
-
-Create `~/ads-dev/nectar/e2e/tests/nl-search.spec.ts`:
-
-```typescript
-import { test, expect } from '@playwright/test';
-
-test.describe('NL Search', () => {
-  test('converts natural language to ADS query', async ({ page }) => {
-    await page.goto('/');
-    
-    // Find and interact with NL search input
-    const nlInput = page.getByPlaceholder(/natural language|describe/i);
-    await nlInput.fill('papers by Hawking on black holes');
-    
-    // Wait for suggestion to appear
-    const suggestion = page.getByTestId('nl-query-suggestion');
-    await expect(suggestion).toBeVisible({ timeout: 5000 });
-    
-    // Verify query contains expected fields
-    await expect(suggestion).toContainText('author:');
-    
-    // Test apply button
-    const applyButton = page.getByRole('button', { name: /apply/i });
-    await applyButton.click();
-    
-    // Verify search was performed
-    await expect(page).toHaveURL(/q=/);
-  });
-});
-```
-
-## Progress Report Format
-
-APPEND to progress.txt (never replace, always append):
-```
-## [Date/Time] - [Story ID]
-- What was implemented
-- Files changed
-- **Learnings for future iterations:**
-  - Patterns discovered
-  - Gotchas encountered
----
-```
-
-## Stop Condition
-
-After completing a user story, check if ALL stories in `prd.json` have `passes: true`.
-
-If ALL stories are complete and passing, reply with:
 ```
 <promise>COMPLETE</promise>
 ```
 
-If there are still stories with `passes: false`, end your response normally (another iteration will pick up the next story).
+This signals Ralph to exit and the user that the task is fully complete.
 
-## Important
+## Notes
 
-- Work on ONE story per iteration
-- Commit frequently
-- Keep verification passing
-- Read the Codebase Patterns section in progress.txt before starting
+- Each iteration is fresh context - progress.txt and git history are your memory
+- If you hit context limits, make a clean commit and let Ralph restart with fresh context
+- Prioritize getting stories to pass over perfect code - iterate toward quality
+- Update AGENTS.md liberally - this is how the system learns
