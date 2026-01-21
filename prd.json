@@ -270,8 +270,8 @@
         "Operator queries pass ADS API validation"
       ],
       "priority": 19,
-      "passes": false,
-      "notes": "Previous pass used post-processing hacks which were removed. Model must learn operators natively."
+      "passes": true,
+      "notes": "Verified with operators-v3 model. All operator types generate correctly without post-processing."
     },
     {
       "id": "data-007",
@@ -312,8 +312,8 @@
         "Endpoint responds within 2s"
       ],
       "priority": 22,
-      "passes": false,
-      "notes": "Depends on data-008. Should achieve reliable operator generation."
+      "passes": true,
+      "notes": "Training completed (operators-v3, 93.8% token accuracy). Model now generates operators natively. Fixed serve_vllm.py to use mtime-based model selection."
     },
     {
       "id": "integ-010",

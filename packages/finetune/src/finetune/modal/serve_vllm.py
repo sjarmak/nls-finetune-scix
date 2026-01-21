@@ -47,16 +47,20 @@ def serve():
     import subprocess
     from pathlib import Path
 
-    # Find latest merged model
+    # Find latest merged model (by modification time, not alphabetical)
     runs_dir = Path("/runs")
-    merged_runs = sorted([
-        d.name for d in runs_dir.iterdir()
+    merged_runs = [
+        (d, d.stat().st_mtime) for d in runs_dir.iterdir()
         if d.is_dir() and (d / "merged").exists()
-    ])
+    ]
     if not merged_runs:
         raise FileNotFoundError("No merged models found")
 
-    model_path = f"/runs/{merged_runs[-1]}/merged"
+    # Sort by modification time (newest last)
+    merged_runs.sort(key=lambda x: x[1])
+    latest_run = merged_runs[-1][0].name
+    model_path = f"/runs/{latest_run}/merged"
+    print(f"Using model: {model_path}")
 
     cmd = [
         "vllm", "serve",
