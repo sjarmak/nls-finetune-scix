@@ -124,7 +124,7 @@
         "pnpm test:e2e passes (or test runs successfully in isolation)"
       ],
       "priority": 9,
-      "passes": false,
+      "passes": true,
       "notes": "Run with: cd ~/ads-dev/nectar && pnpm test:e2e -- e2e/tests/nl-search.spec.ts"
     }
   ]

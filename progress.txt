@@ -129,3 +129,17 @@ Started: 2026-01-21
   - Use 'enabled' string value for boolean-like env vars (consistent with NEXT_PUBLIC_API_MOCKING)
   - lint-staged auto-fixes formatting on commit
 ---
+
+## 2026-01-21 - integ-006
+- Created Playwright e2e test at ~/ads-dev/nectar/e2e/tests/nl-search.spec.ts
+- Test covers 3 scenarios: query conversion & apply, result count preview, copy to clipboard
+- Uses route interception to mock API responses (NL search endpoint and search API)
+- Tests skip gracefully when NEXT_PUBLIC_NL_SEARCH feature flag is not enabled
+- Integrated NLSearchWithFlag into home page (src/pages/index.tsx) for visibility
+- Files changed: ~/ads-dev/nectar/e2e/tests/nl-search.spec.ts, ~/ads-dev/nectar/src/pages/index.tsx, prd.json, features.json
+- **Learnings for future iterations:**
+  - NEXT_PUBLIC_ env vars are compiled at build time in Next.js, not runtime
+  - Playwright tests should use route interception to mock external APIs
+  - Use data-testid attributes consistently for reliable e2e selectors
+  - Tests should skip gracefully when feature flags are disabled
+---

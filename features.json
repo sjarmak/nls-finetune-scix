@@ -166,7 +166,7 @@
       "id": "integ-006",
       "name": "Playwright e2e test for NL search flow",
       "category": "integration",
-      "status": "failing",
+      "status": "passing",
       "verification": "test -f ~/ads-dev/nectar/e2e/tests/nl-search.spec.ts && cd ~/ads-dev/nectar && pnpm test:e2e --grep 'NL search'",
       "notes": "E2E test covering NL input → query suggestion → apply flow"
     }
