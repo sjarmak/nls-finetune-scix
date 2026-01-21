@@ -122,6 +122,24 @@
       "priority": 3,
       "passes": true,
       "notes": "Knowledge base for future iterations"
+    },
+    {
+      "id": "US-008",
+      "title": "Fix operator syntax in training data (citations, trending, useful, etc.)",
+      "description": "As a developer, I need to fix malformed operator syntax in training data so the model learns correct function call patterns.",
+      "acceptanceCriteria": [
+        "Audit all operator examples: citations(), trending(), useful(), reviews(), similar(), references()",
+        "Fix 37 bad operator examples found in all_pairs.json and gold_examples.json",
+        "Ensure all field values inside operators are quoted: citations(abs:\"topic\") not citations(abs:topic)",
+        "Remove extra/malformed parentheses: trending(abs:\"topic\") not trending(abs:(topic))",
+        "Verify all corrected queries pass lint_query validation",
+        "Run: python scripts/audit_operators.py (new script) to verify no remaining bad patterns",
+        "Run: mise run verify to ensure no regressions",
+        "Document operator syntax rules in AGENTS.md"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "37 bad operator examples identified in training data. Critical for model to learn correct syntax for citations(author:\"jarmak\") pattern."
     }
   ]
 }
