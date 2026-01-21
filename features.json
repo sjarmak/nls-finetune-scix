@@ -185,6 +185,14 @@
       "status": "failing",
       "verification": "time curl -s -X POST https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/chat/completions -H 'Content-Type: application/json' -d '{\"model\":\"llm\",\"messages\":[{\"role\":\"user\",\"content\":\"Query: papers by Einstein\"}],\"max_tokens\":64}' 2>&1 | grep -E 'real.*0m[01]'",
       "notes": "Model should respond in <2s. See beads: nls-finetune-scix-556"
+    },
+    {
+      "id": "eval-004",
+      "name": "Model quality - author initial hallucination fix",
+      "category": "eval",
+      "status": "failing",
+      "verification": "curl -s -X POST https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/chat/completions -H 'Content-Type: application/json' -d '{\"model\":\"llm\",\"messages\":[{\"role\":\"system\",\"content\":\"Convert to ADS query. Output JSON: {\\\"query\\\":\\\"...\\\"}\"},{\"role\":\"user\",\"content\":\"Query: papers by kelbert\"}],\"max_tokens\":64}' | grep -v ', [a-z]\\.'",
+      "notes": "Model hallucinates initials. 'papers by jarmak' → author:\"jarmak, b.\" (wrong). See beads: nls-finetune-scix-3gw"
     }
   ]
 }
