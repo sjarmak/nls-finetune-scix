@@ -286,3 +286,10 @@ Created `packages/finetune/src/finetune/domains/scix/field_constraints.py` with:
 **Title**: Add query constraint validation function
 **Summary**: Implemented validate_field_constraints() in validate.py with ConstraintValidationResult and FieldConstraintError dataclasses. Function validates doctype, database, property, and bibgroup fields against FIELD_ENUMS from field_constraints.py. Supports quoted values, OR lists, case-insensitive matching, and provides suggestions for invalid values. Added 24 unit tests in packages/finetune/tests/test_validate.py covering valid/invalid queries, edge cases, and error formatting. All quality gates pass: lint, test, verify.
 
+
+## Iteration 2 - US-003
+
+**Status**: ✓ PASSED
+**Title**: Implement post-processing filter for model output
+**Summary**: Implemented constrain_query_output(query: str) -> str in packages/finetune/src/finetune/domains/scix/constrain.py. The function removes invalid doctype/database/property/bibgroup/esources/data values not in FIELD_ENUMS, logs warnings for each removed field, preserves valid field combinations, and handles edge cases including empty fields, trailing operators, OR lists, quoted values, and malformed parentheses. Added 42 test cases in test_constrain.py covering valid queries, invalid values, OR list handling, operator cleanup, common model hallucinations (journal, paper, peerreviewed, open_access, etc.), case sensitivity, and logging verification.
+

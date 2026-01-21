@@ -69,7 +69,7 @@
         "Run: mise run verify to confirm no regressions"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "45 bare fields remain from previous fix (mostly in complex expressions like author:(...))"
     },
     {

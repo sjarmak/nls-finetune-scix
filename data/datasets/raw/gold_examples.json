@@ -201,7 +201,7 @@
   },
   {
     "natural_language": "\"The Latins in the Levant\" Frankish Greece 1204-1566",
-    "ads_query": "title:\"The Latins in the Levant, a History of Frankish Greece (1204\u20131566)\"",
+    "ads_query": "title:\"The Latins in the Levant, a History of Frankish Greece (1204–1566)\"",
     "category": "content"
   },
   {
@@ -311,7 +311,7 @@
   },
   {
     "natural_language": "papers in nature 1981 volume 294 page 92",
-    "ads_query": "identifier:\"1981Natur.294\u00e2\u20ac\u00a692C\"",
+    "ads_query": "identifier:\"1981Natur.294â€¦92C\"",
     "category": "compound"
   },
   {
@@ -496,7 +496,7 @@
   },
   {
     "natural_language": "Hawaiian legislature rosters 1841-1918",
-    "ads_query": "title:\"Roster Legislatures of Hawaii, 1841\u20131918\"",
+    "ads_query": "title:\"Roster Legislatures of Hawaii, 1841–1918\"",
     "category": "content"
   },
   {
@@ -675,8 +675,8 @@
     "category": "unfielded"
   },
   {
-    "natural_language": "\u0411\u0430\u0431\u043a\u0438\u043d\u0430 grandmother sixty news Crimea sobytiya.com.ua",
-    "ads_query": "title:\"\u0411\u0430\u0431\u043a\u0438\u043d\u0430 \u0432 \u0448\u0435\u0441\u0442\u044c\u0434\u0435\u0441\u044f\u0442 \u0441\u0442\u0430\u043d\u0435\u0442 \u0431\u0430\u0431\u0443\u0448\u043a\u043e\u0439 \u2013 \u041d\u043e\u0432\u043e\u0441\u0442\u0438 \u2013 \u0415\u0436\u0435\u043d\u0435\u0434\u0435\u043b\u044c\u043d\u0438\u043a \u0421\u043e\u0431\u044b\u0442\u0438\u044f, \u041f\u043e\u0441\u043b\u0435\u0434\u043d\u0438\u0435 \u043d\u043e\u0432\u043e\u0441\u0442\u0438 \u043a\u0440\u044b\u043c\u0430 \u00bb sobytiya.com.ua\"",
+    "natural_language": "Бабкина grandmother sixty news Crimea sobytiya.com.ua",
+    "ads_query": "title:\"Бабкина в шестьдесят станет бабушкой – Новости – Еженедельник События, Последние новости крыма » sobytiya.com.ua\"",
     "category": "content"
   },
   {
@@ -786,7 +786,7 @@
   },
   {
     "natural_language": "deep learning in Astronomical Journal",
-    "ads_query": "abs:\"deep learning\" bibstem:AJ",
+    "ads_query": "abs:\"deep learning\" bibstem:\"AJ\"",
     "category": "publication"
   },
   {
@@ -1001,7 +1001,7 @@
   },
   {
     "natural_language": "PRL papers on white dwarfs",
-    "ads_query": "abs:\"white dwarfs\" bibstem:PhRvL",
+    "ads_query": "abs:\"white dwarfs\" bibstem:\"PhRvL\"",
     "category": "publication"
   },
   {
@@ -1375,8 +1375,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "\"Cours d'analyse de l'\u00e9cole polytechnique\" historical mathematics textbook",
-    "ads_query": "title:\"Cours d'analyse de l'\u00e9cole polytechnique\"",
+    "natural_language": "\"Cours d'analyse de l'école polytechnique\" historical mathematics textbook",
+    "ads_query": "title:\"Cours d'analyse de l'école polytechnique\"",
     "category": "content"
   },
   {
@@ -1390,8 +1390,8 @@
     "category": "author"
   },
   {
-    "natural_language": "papers by K\u00fcstner from 1900 to 1904",
-    "ads_query": "pubdate:[1900-01 TO 1904-12] author:(\"K\u00fcstner\")",
+    "natural_language": "papers by Küstner from 1900 to 1904",
+    "ads_query": "pubdate:[1900-01 TO 1904-12] author:(\"Küstner\")",
     "category": "author"
   },
   {
@@ -1406,7 +1406,7 @@
   },
   {
     "natural_language": "PDS 8000 Development System integrated approach systems design",
-    "ads_query": "title:\"PDS 8000 Development System \u2013 The integrated approach to systems design\"",
+    "ads_query": "title:\"PDS 8000 Development System – The integrated approach to systems design\"",
     "category": "content"
   },
   {
@@ -1476,7 +1476,7 @@
   },
   {
     "natural_language": "International Tchaikovsky Competition 2011 Piano",
-    "ads_query": "title:\"International Tchaikovsky Competition 2011 \u2013 Piano\"",
+    "ads_query": "title:\"International Tchaikovsky Competition 2011 – Piano\"",
     "category": "content"
   },
   {
@@ -1531,7 +1531,7 @@
   },
   {
     "natural_language": "papers in Astronomical Journal",
-    "ads_query": "bibstem:AJ",
+    "ads_query": "bibstem:\"AJ\"",
     "category": "publication"
   },
   {
@@ -1556,7 +1556,7 @@
   },
   {
     "natural_language": "American clipper ships 1833-1858 maritime history",
-    "ads_query": "title:\"American Clipper Ships 1833\u20131858\"",
+    "ads_query": "title:\"American Clipper Ships 1833–1858\"",
     "category": "content"
   },
   {
@@ -1856,7 +1856,7 @@
   },
   {
     "natural_language": "Robertson George Morison family genealogy 1851-1973",
-    "ads_query": "title:\"The Family of George Morison Robertson and Sarah Symonds Humphreys Robertson After 122 Years, 1851\u20131973\"",
+    "ads_query": "title:\"The Family of George Morison Robertson and Sarah Symonds Humphreys Robertson After 122 Years, 1851–1973\"",
     "category": "content"
   },
   {
@@ -1925,12 +1925,12 @@
     "category": "unfielded"
   },
   {
-    "natural_language": "papers by Trevi\u00f1o-Morales from 2014",
-    "ads_query": "pubdate:[2014-01 TO 2014-12] author:(\"^Trevi\u00f1o-Morales\")",
+    "natural_language": "papers by Treviño-Morales from 2014",
+    "ads_query": "pubdate:[2014-01 TO 2014-12] author:(\"^Treviño-Morales\")",
     "category": "first_author"
   },
   {
-    "natural_language": "papers from Instituto de Astrof\u00edsica de La Plata on stellar evolution",
+    "natural_language": "papers from Instituto de Astrofísica de La Plata on stellar evolution",
     "ads_query": "inst:\"Inst Ast La Plata\" OR aff:\"Instituto de astrofisica de la plata\" OR aff:\"Institute for astrophysics La Plata\" OR aff:\"IALP\"",
     "category": "affiliation"
   },
@@ -1966,7 +1966,7 @@
   },
   {
     "natural_language": "Physical Review Letters papers on dark energy",
-    "ads_query": "bibstem:PhRvL abs:\"dark energy\"",
+    "ads_query": "bibstem:\"PhRvL\" abs:\"dark energy\"",
     "category": "publication"
   },
   {
@@ -1976,7 +1976,7 @@
   },
   {
     "natural_language": "Hamilton College annual catalogue officers students 1874-75",
-    "ads_query": "title:\"63rd Annual Catalogue of the Officers and Students of Hamilton College, 1874\u201375\"",
+    "ads_query": "title:\"63rd Annual Catalogue of the Officers and Students of Hamilton College, 1874–75\"",
     "category": "content"
   },
   {
@@ -2171,7 +2171,7 @@
   },
   {
     "natural_language": "Science papers on Swift bursts",
-    "ads_query": "abs:\"Swift bursts\" bibstem:Science",
+    "ads_query": "abs:\"Swift bursts\" bibstem:\"Science\"",
     "category": "publication"
   },
   {
@@ -2251,7 +2251,7 @@
   },
   {
     "natural_language": "Where to educate 1898 1899 guide best private schools higher institutions learning United States",
-    "ads_query": "title:\"Where to educate, 1898\u20131899. A guide to the best private schools, higher institutions of learning, etc., in the United States\"",
+    "ads_query": "title:\"Where to educate, 1898–1899. A guide to the best private schools, higher institutions of learning, etc., in the United States\"",
     "category": "content"
   },
   {
@@ -2305,8 +2305,8 @@
     "category": "affiliation"
   },
   {
-    "natural_language": "papers by Kre\u0142owski between 1981 and 1987",
-    "ads_query": "pubdate:[1981-01 TO 1987-12] author:(\"Kre\u0142owski, J.\")",
+    "natural_language": "papers by Krełowski between 1981 and 1987",
+    "ads_query": "pubdate:[1981-01 TO 1987-12] author:(\"Krełowski, J.\")",
     "category": "author"
   },
   {
@@ -2360,8 +2360,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "\u0423\u043a\u0430\u0437 \u041f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442\u0430 \u0420\u0421\u0424\u0421\u0420 \u043e\u0442 03.01.1992 \u0433. \u2116 242-\u043d",
-    "ads_query": "title:\"\u0423\u043a\u0430\u0437 \u041f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442\u0430 \u0420\u0421\u0424\u0421\u0420 \u043e\u0442 03.01.1992 \u0433. \u2116 242-\u043d\"",
+    "natural_language": "Указ Президента РСФСР от 03.01.1992 г. № 242-н",
+    "ads_query": "title:\"Указ Президента РСФСР от 03.01.1992 г. № 242-н\"",
     "category": "content"
   },
   {
@@ -2391,7 +2391,7 @@
   },
   {
     "natural_language": "2018A&A...620A.161K",
-    "ads_query": "identifier:\"2018A&A\u2026620A.161K\"",
+    "ads_query": "identifier:\"2018A&A…620A.161K\"",
     "category": "compound"
   },
   {
@@ -2421,7 +2421,7 @@
   },
   {
     "natural_language": "AJ papers on LISA mission",
-    "ads_query": "abs:\"LISA mission\" bibstem:AJ",
+    "ads_query": "abs:\"LISA mission\" bibstem:\"AJ\"",
     "category": "publication"
   },
   {
@@ -2435,13 +2435,13 @@
     "category": "author"
   },
   {
-    "natural_language": "Das Problem der audition color\u00e9e historisch-kritische Untersuchung",
-    "ads_query": "title:\"Das Problem der 'audition color\u00e9e': Eine historisch-kritische Untersuchung\"",
+    "natural_language": "Das Problem der audition colorée historisch-kritische Untersuchung",
+    "ads_query": "title:\"Das Problem der 'audition colorée': Eine historisch-kritische Untersuchung\"",
     "category": "content"
   },
   {
-    "natural_language": "\u0420\u0410\u0421\u041f\u041e\u0420\u042f\u0416\u0415\u041d\u0418\u0415 \u043e\u0442 28 \u044f\u043d\u0432\u0430\u0440\u044f 2019 \u0433. \u2116 96-\u0440 \u041c\u041e\u0421\u041a\u0412\u0410",
-    "ads_query": "title:\"\u0420\u0410\u0421\u041f\u041e\u0420\u042f\u0416\u0415\u041d\u0418\u0415 \u043e\u0442 28 \u044f\u043d\u0432\u0430\u0440\u044f 2019 \u0433. \u2116 96-\u0440 \u041c\u041e\u0421\u041a\u0412\u0410\"",
+    "natural_language": "РАСПОРЯЖЕНИЕ от 28 января 2019 г. № 96-р МОСКВА",
+    "ads_query": "title:\"РАСПОРЯЖЕНИЕ от 28 января 2019 г. № 96-р МОСКВА\"",
     "category": "content"
   },
   {
@@ -2476,7 +2476,7 @@
   },
   {
     "natural_language": "papers on Mycenae excavations 1870-1878 Schliemann",
-    "ads_query": "title:\"\u03a4\u03bf \u03c7\u03c1\u03bf\u03bd\u03b9\u03ba\u03cc \u03c4\u03b7\u03c2 \u03b1\u03bd\u03b1\u03c3\u03ba\u03b1\u03c6\u03ae\u03c2 \u03c4\u03c9\u03bd \u039c\u03c5\u03ba\u03b7\u03bd\u03ce\u03bd, 1870\u20131878\"",
+    "ads_query": "title:\"Το χρονικό της ανασκαφής των Μυκηνών, 1870–1878\"",
     "category": "content"
   },
   {
@@ -2551,7 +2551,7 @@
   },
   {
     "natural_language": "HP 48G calculator user manual documentation",
-    "ads_query": "title:\"HP&nbsp;48G Series \u2013 User's Guide (UG)\"",
+    "ads_query": "title:\"HP&nbsp;48G Series – User's Guide (UG)\"",
     "category": "content"
   },
   {
@@ -2636,7 +2636,7 @@
   },
   {
     "natural_language": "nautical charts South Australia coast Cape Du Couedic Whidbey Isles",
-    "ads_query": "title:\"Chart Aus343: Australia South Coast \u2013 South Australia \u2013 Whidbey Isles to Cape Du Couedic\"",
+    "ads_query": "title:\"Chart Aus343: Australia South Coast – South Australia – Whidbey Isles to Cape Du Couedic\"",
     "category": "content"
   },
   {
@@ -2660,8 +2660,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "papers by B\u0105kowska",
-    "ads_query": "abs:(B\u0105kowska, K.)",
+    "natural_language": "papers by Bąkowska",
+    "ads_query": "abs:(Bąkowska, K.)",
     "category": "unfielded"
   },
   {
@@ -2716,7 +2716,7 @@
   },
   {
     "natural_language": "Swift bursts in Astronomical Journal",
-    "ads_query": "abs:\"Swift bursts\" bibstem:AJ",
+    "ads_query": "abs:\"Swift bursts\" bibstem:\"AJ\"",
     "category": "publication"
   },
   {
@@ -2775,8 +2775,8 @@
     "category": "compound"
   },
   {
-    "natural_language": "Collected Tales, Sketches, Speeches, and Essays 1852\u20131890",
-    "ads_query": "title:\"Collected Tales, Sketches, Speeches, and Essays 1852\u20131890\"",
+    "natural_language": "Collected Tales, Sketches, Speeches, and Essays 1852–1890",
+    "ads_query": "title:\"Collected Tales, Sketches, Speeches, and Essays 1852–1890\"",
     "category": "content"
   },
   {
@@ -2946,7 +2946,7 @@
   },
   {
     "natural_language": "papers about Tombstone 1881 sampling of rogues glorification of thugs",
-    "ads_query": "title:\"Tombstone 1881: A Sampling of Rogues \u2013 A Glorification of Thugs\"",
+    "ads_query": "title:\"Tombstone 1881: A Sampling of Rogues – A Glorification of Thugs\"",
     "category": "content"
   },
   {
@@ -3000,8 +3000,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "papers about \u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0413\u043e\u0440 actor biography filmography",
-    "ads_query": "title:\"\u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0413\u043e\u0440 (\u0413\u043e\u0440\u0448\u0435\u0447\u043a\u043e\u0432): \u0444\u043e\u0442\u043e, \u0431\u0438\u043e\u0433\u0440\u0430\u0444\u0438\u044f, \u0444\u0438\u043b\u044c\u043c\u043e\u0433\u0440\u0430\u0444\u0438\u044f, \u043d\u043e\u0432\u043e\u0441\u0442\u0438 \u2013 \u0412\u043e\u043a\u0440\u0443\u0433 \u0422\u0412.\"",
+    "natural_language": "papers about Евгений Гор actor biography filmography",
+    "ads_query": "title:\"Евгений Гор (Горшечков): фото, биография, фильмография, новости – Вокруг ТВ.\"",
     "category": "content"
   },
   {
@@ -3176,7 +3176,7 @@
   },
   {
     "natural_language": "galactic distribution 511 keV positron electron annihilation radiation",
-    "ads_query": "abs:(The Galactic distribution of the 511 keV e+/e\u2212 annihilation radiation)",
+    "ads_query": "abs:(The Galactic distribution of the 511 keV e+/e− annihilation radiation)",
     "category": "unfielded"
   },
   {
@@ -3196,7 +3196,7 @@
   },
   {
     "natural_language": "Clipper Ships of America and Great Britain 1833-1869",
-    "ads_query": "title:\"Clipper Ships of America and Great Britain, 1833\u20131869\"",
+    "ads_query": "title:\"Clipper Ships of America and Great Britain, 1833–1869\"",
     "category": "content"
   },
   {
@@ -3231,7 +3231,7 @@
   },
   {
     "natural_language": "Presidential Decree of the Russian Federation March 17 2010 No. 324",
-    "ads_query": "title:\"\u0423\u043a\u0430\u0437 \u041f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442\u0430 \u0420\u043e\u0441\u0441\u0438\u0439\u0441\u043a\u043e\u0439 \u0424\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u0438 \u043e\u0442 17.03.2010 \u0433. \u2116 324\"",
+    "ads_query": "title:\"Указ Президента Российской Федерации от 17.03.2010 г. № 324\"",
     "category": "content"
   },
   {
@@ -3301,7 +3301,7 @@
   },
   {
     "natural_language": "planetary atmospheres in Astrophysical Journal",
-    "ads_query": "abs:\"planetary atmospheres\" bibstem:ApJ",
+    "ads_query": "abs:\"planetary atmospheres\" bibstem:\"ApJ\"",
     "category": "publication"
   },
   {
@@ -3325,7 +3325,7 @@
     "category": "first_author"
   },
   {
-    "natural_language": "papers by Faucher-Gigu\u00e8re on galaxy formation feedback",
+    "natural_language": "papers by Faucher-Giguère on galaxy formation feedback",
     "ads_query": "abs:(2013ApJ...778..167F)",
     "category": "unfielded"
   },
@@ -3395,8 +3395,8 @@
     "category": "operator"
   },
   {
-    "natural_language": "\u0423\u041a\u0410\u0417 \u041f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442\u0430 \u0420\u0424 \u043e\u0442 29.06.2005 N 755 \u041e \u041d\u0410\u0413\u0420\u0410\u0416\u0414\u0415\u041d\u0418\u0418 \u0413\u041e\u0421\u0423\u0414\u0410\u0420\u0421\u0422\u0412\u0415\u041d\u041d\u042b\u041c",
-    "ads_query": "title:\"\u0423\u041a\u0410\u0417 \u041f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442\u0430 \u0420\u0424 \u043e\u0442 29.06.2005 N 755 '\u041e \u041d\u0410\u0413\u0420\u0410\u0416\u0414\u0415\u041d\u0418\u0418 \u0413\u041e\u0421\u0423\u0414\u0410\u0420\u0421\u0422\u0412\u0415\u041d\u041d\u042b\u041c\u2026'\"",
+    "natural_language": "УКАЗ Президента РФ от 29.06.2005 N 755 О НАГРАЖДЕНИИ ГОСУДАРСТВЕННЫМ",
+    "ads_query": "title:\"УКАЗ Президента РФ от 29.06.2005 N 755 'О НАГРАЖДЕНИИ ГОСУДАРСТВЕННЫМ…'\"",
     "category": "content"
   },
   {
@@ -3496,7 +3496,7 @@
   },
   {
     "natural_language": "papers by Ramos-Martinez as first author",
-    "ads_query": "author:\"^Ramos-Mart\u00b4\u0131nez\"",
+    "ads_query": "author:\"^Ramos-Mart´ınez\"",
     "category": "first_author"
   },
   {
@@ -3586,7 +3586,7 @@
   },
   {
     "natural_language": "PRD articles",
-    "ads_query": "bibstem:PhRvD",
+    "ads_query": "bibstem:\"PhRvD\"",
     "category": "publication"
   },
   {
@@ -3605,8 +3605,8 @@
     "category": "unfielded"
   },
   {
-    "natural_language": "\"Syn\u00e4sthesien. Roter Faden durchs Leben?\" synesthesia red thread life",
-    "ads_query": "title:\"Syn\u00e4sthesien. Roter Faden durchs Leben?\"",
+    "natural_language": "\"Synästhesien. Roter Faden durchs Leben?\" synesthesia red thread life",
+    "ads_query": "title:\"Synästhesien. Roter Faden durchs Leben?\"",
     "category": "content"
   },
   {
@@ -3621,7 +3621,7 @@
   },
   {
     "natural_language": "Hubble Space Telescope in Astronomy & Astrophysics",
-    "ads_query": "abs:\"Hubble Space Telescope\" bibstem:A&A",
+    "ads_query": "abs:\"Hubble Space Telescope\" bibstem:\"A&A\"",
     "category": "publication"
   },
   {
@@ -3720,8 +3720,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "papers with title \"\u042f\u0440\u043a\u0438\u0439 \u0442\u0430\u043b\u0430\u043d\u0442\" or \"Bright talent\"",
-    "ads_query": "title:\"\u042f\u0440\u043a\u0438\u0439 \u0442\u0430\u043b\u0430\u043d\u0442 [Bright talent]\"",
+    "natural_language": "papers with title \"Яркий талант\" or \"Bright talent\"",
+    "ads_query": "title:\"Яркий талант [Bright talent]\"",
     "category": "content"
   },
   {
@@ -3906,7 +3906,7 @@
   },
   {
     "natural_language": "MNRAS papers on galaxy evolution",
-    "ads_query": "abs:\"galaxy evolution\" bibstem:MNRAS",
+    "ads_query": "abs:\"galaxy evolution\" bibstem:\"MNRAS\"",
     "category": "publication"
   },
   {
@@ -4071,7 +4071,7 @@
   },
   {
     "natural_language": "papers on \"Planning a Computer System Project Stretch\"",
-    "ads_query": "title:\"Planning a Computer System \u2013 Project Stretch\"",
+    "ads_query": "title:\"Planning a Computer System – Project Stretch\"",
     "category": "content"
   },
   {
@@ -4165,8 +4165,8 @@
     "category": "operator"
   },
   {
-    "natural_language": "\"Trait\u00e9 d'analyse\" mathematical treatise",
-    "ads_query": "title:\"Trait\u00e9 d'analyse\"",
+    "natural_language": "\"Traité d'analyse\" mathematical treatise",
+    "ads_query": "title:\"Traité d'analyse\"",
     "category": "content"
   },
   {
@@ -4201,7 +4201,7 @@
   },
   {
     "natural_language": "Science papers on image processing",
-    "ads_query": "abs:\"image processing\" bibstem:Science",
+    "ads_query": "abs:\"image processing\" bibstem:\"Science\"",
     "category": "publication"
   },
   {
@@ -4245,8 +4245,8 @@
     "category": "unfielded"
   },
   {
-    "natural_language": "\u041a\u0435\u043c\u0435\u0440\u043e\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c \u043f\u043e\u0447\u0435\u0442\u043d\u044b\u0439 \u0433\u0440\u0430\u0436\u0434\u0430\u043d\u0438\u043d \u043f\u043e\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0435 2015",
-    "ads_query": "title:\"\u041e \u041f\u0420\u0418\u0421\u0412\u041e\u0415\u041d\u0418\u0418 \u041f\u041e\u0427\u0415\u0422\u041d\u041e\u0413\u041e \u0417\u0412\u0410\u041d\u0418\u042f \u041f\u041e\u0427\u0415\u0422\u041d\u042b\u0419 \u0413\u0420\u0410\u0416\u0414\u0410\u041d\u0418\u041d \u041a\u0415\u041c\u0415\u0420\u041e\u0412\u0421\u041a\u041e\u0419 \u041e\u0411\u041b\u0410\u0421\u0422\u0418 , \u041f\u043e\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0435 \u0421\u043e\u0432\u0435\u0442\u0430 \u043d\u0430\u0440\u043e\u0434\u043d\u044b\u0445 \u0434\u0435\u043f\u0443\u0442\u0430\u0442\u043e\u0432 \u041a\u0435\u043c\u0435\u0440\u043e\u0432\u0441\u043a\u043e\u0439 \u043e\u0431\u043b\u0430\u0441\u0442\u0438 \u043e\u0442 28 \u044f\u043d\u0432\u0430\u0440\u044f 2015 \u0433\u043e\u0434\u0430 \u2116662\"",
+    "natural_language": "Кемеровская область почетный гражданин постановление 2015",
+    "ads_query": "title:\"О ПРИСВОЕНИИ ПОЧЕТНОГО ЗВАНИЯ ПОЧЕТНЫЙ ГРАЖДАНИН КЕМЕРОВСКОЙ ОБЛАСТИ , Постановление Совета народных депутатов Кемеровской области от 28 января 2015 года №662\"",
     "category": "content"
   },
   {
@@ -4406,7 +4406,7 @@
   },
   {
     "natural_language": "\"Farbe Licht Musik Synaesthesie Farblichtmusik\" color light music synesthesia papers",
-    "ads_query": "title:\"Farbe \u2013 Licht \u2013 Musik. Synaesthesie und Farblichtmusik.\"",
+    "ads_query": "title:\"Farbe – Licht – Musik. Synaesthesie und Farblichtmusik.\"",
     "category": "content"
   },
   {
@@ -4466,7 +4466,7 @@
   },
   {
     "natural_language": "The Maritime History of Massachusetts 1783 1860",
-    "ads_query": "title:\"The Maritime History of Massachusetts, 1783\u20131860\"",
+    "ads_query": "title:\"The Maritime History of Massachusetts, 1783–1860\"",
     "category": "content"
   },
   {
@@ -4566,7 +4566,7 @@
   },
   {
     "natural_language": "papers in the Astrophysical Journal",
-    "ads_query": "bibstem:ApJ",
+    "ads_query": "bibstem:\"ApJ\"",
     "category": "publication"
   },
   {
@@ -4631,7 +4631,7 @@
   },
   {
     "natural_language": "2015ApJ...799...71G",
-    "ads_query": "identifier:\"2015ApJ...799\u202671G\"",
+    "ads_query": "identifier:\"2015ApJ...799…71G\"",
     "category": "compound"
   },
   {
@@ -4720,8 +4720,8 @@
     "category": "content"
   },
   {
-    "natural_language": "papers by \u00dcbler published in 2019",
-    "ads_query": "author:\"^\u00dcbler\" year:2019",
+    "natural_language": "papers by Übler published in 2019",
+    "ads_query": "author:\"^Übler\" year:2019",
     "category": "first_author"
   },
   {
@@ -4841,7 +4841,7 @@
   },
   {
     "natural_language": "DOE handbook spontaneous heating pyrophoricity primer",
-    "ads_query": "title:\"DOE Handbook \u2013 Primer on Spontaneous Heating and Pyrophoricity\"",
+    "ads_query": "title:\"DOE Handbook – Primer on Spontaneous Heating and Pyrophoricity\"",
     "category": "content"
   },
   {
@@ -5396,7 +5396,7 @@
   },
   {
     "natural_language": "papers about Isadora Duncan dancer biography 1878-1927",
-    "ads_query": "title:\"Isadora Duncan (1878\u20131927)\"",
+    "ads_query": "title:\"Isadora Duncan (1878–1927)\"",
     "category": "content"
   },
   {
@@ -5431,7 +5431,7 @@
   },
   {
     "natural_language": "papers about Lola Montez 1821-1861",
-    "ads_query": "title:\"Montez, Lola (1821\u20131861)\"",
+    "ads_query": "title:\"Montez, Lola (1821–1861)\"",
     "category": "content"
   },
   {
@@ -5441,7 +5441,7 @@
   },
   {
     "natural_language": "trending papers in ApJ",
-    "ads_query": "trending(bibstem:ApJ)",
+    "ads_query": "trending(bibstem:\"ApJ\")",
     "category": "operator"
   },
   {
@@ -5515,8 +5515,8 @@
     "category": "publication"
   },
   {
-    "natural_language": "Instruction abr\u00e9g\u00e9e sur les mesures d\u00e9duites de la grandeur de la Terre uniformes pour toute la R\u00e9publique",
-    "ads_query": "title:\"Instruction abr\u00e9g\u00e9e sur les mesures d\u00e9duites de la grandeur de la Terre; uniformes pour toute la R\u00eapublique, et sur les Calculs relatifs \u00e0 leur division d\u00e9cimale\"",
+    "natural_language": "Instruction abrégée sur les mesures déduites de la grandeur de la Terre uniformes pour toute la République",
+    "ads_query": "title:\"Instruction abrégée sur les mesures déduites de la grandeur de la Terre; uniformes pour toute la Rêpublique, et sur les Calculs relatifs à leur division décimale\"",
     "category": "content"
   },
   {
@@ -5616,7 +5616,7 @@
   },
   {
     "natural_language": "Genealogy Volume 1-2 weekly journal American ancestry",
-    "ads_query": "title:\"Genealogy Volume 1\u20132; a weekly journal of American ancestry\"",
+    "ads_query": "title:\"Genealogy Volume 1–2; a weekly journal of American ancestry\"",
     "category": "content"
   },
   {
@@ -5686,7 +5686,7 @@
   },
   {
     "natural_language": "1st Interservice Industry Training Equipment Conference proceedings 1979",
-    "ads_query": "title:\"Proceedings 27\u201329 November 1979 \u2013 1st Interservice/Industry Training Equipment Conference\"",
+    "ads_query": "title:\"Proceedings 27–29 November 1979 – 1st Interservice/Industry Training Equipment Conference\"",
     "category": "content"
   },
   {
@@ -5720,8 +5720,8 @@
     "category": "unfielded"
   },
   {
-    "natural_language": "papers from Instituto de Astronom\u00eda UNAM 2023",
-    "ads_query": "aff:Instituto de Astronom\u00eda, Universidad Nacional Aut\u00f3noma de M\u00e9xico +year:2023",
+    "natural_language": "papers from Instituto de Astronomía UNAM 2023",
+    "ads_query": "aff:Instituto de Astronomía, Universidad Nacional Autónoma de México +year:2023",
     "category": "affiliation"
   },
   {
@@ -5770,8 +5770,8 @@
     "category": "compound"
   },
   {
-    "natural_language": "\"\u0423\u043a\u0430\u0437 \u041f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442\u0430\" Russian Federation legal acts 2016",
-    "ads_query": "title:\"\u0423\u043a\u0430\u0437 \u041f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442\u0430 \u0420\u043e\u0441\u0441\u0438\u0439\u0441\u043a\u043e\u0439 \u0424\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u0438 \u043e\u0442 17.11.2016 \u2116 608 \u2219 \u041e\u0444\u0438\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0435 \u043e\u043f\u0443\u0431\u043b\u0438\u043a\u043e\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u0430\u0432\u043e\u0432\u044b\u0445 \u0430\u043a\u0442\u043e\u0432 \u2219 \u041e\u0444\u0438\u0446\u0438\u0430\u043b\u044c\u043d\u044b\u0439 \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442-\u043f\u043e\u0440\u0442\u0430\u043b \u043f\u0440\u0430\u0432\u043e\u0432\u043e\u0439 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u0438\"",
+    "natural_language": "\"Указ Президента\" Russian Federation legal acts 2016",
+    "ads_query": "title:\"Указ Президента Российской Федерации от 17.11.2016 № 608 ∙ Официальное опубликование правовых актов ∙ Официальный интернет-портал правовой информации\"",
     "category": "content"
   },
   {
@@ -5846,7 +5846,7 @@
   },
   {
     "natural_language": "papers by Gaensler on arXiv",
-    "ads_query": "author:\"Gaensler, B.\" and bibstem:arXiv",
+    "ads_query": "author:\"Gaensler, B.\" and bibstem:\"arXiv\"",
     "category": "author"
   },
   {
@@ -5865,8 +5865,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "papers by Cabez\u00f3n G\u00f3mez on stellar evolution",
-    "ads_query": "author:(\"Cabez\u00f3n G\u00f3mez, Rub\u00e9n Mart\u00edn\" OR \"Cabezon, Rub\u00e9n M.\" OR \"Cabez\u00f3n, Rub\u00e9n\")",
+    "natural_language": "papers by Cabezón Gómez on stellar evolution",
+    "ads_query": "author:(\"Cabezón Gómez, Rubén Martín\" OR \"Cabezon, Rubén M.\" OR \"Cabezón, Rubén\")",
     "category": "author"
   },
   {
@@ -6000,8 +6000,8 @@
     "category": "operator"
   },
   {
-    "natural_language": "\u0417\u0430\u0441\u0435\u0434\u0430\u0442\u0435\u043b\u0435\u0432 customs law dissertation financial legal status Russian Federation",
-    "ads_query": "title:\"\u0417\u0430\u0441\u0435\u0434\u0430\u0442\u0435\u043b\u0435\u0432, \u0414\u0430\u043d\u0438\u043b\u0430 \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440\u043e\u0432\u0438\u0447 \u2013 \u0424\u0438\u043d\u0430\u043d\u0441\u043e\u0432\u043e-\u043f\u0440\u0430\u0432\u043e\u0432\u043e\u0439 \u0441\u0442\u0430\u0442\u0443\u0441 \u0442\u0430\u043c\u043e\u0436\u0435\u043d\u043d\u044b\u0445 \u043e\u0440\u0433\u0430\u043d\u043e\u0432 \u0420\u043e\u0441\u0441\u0438\u0439\u0441\u043a\u043e\u0439 \u0424\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u0438 : \u0434\u0438\u0441\u0441\u0435\u0440\u0442\u0430\u0446\u0438\u044f ... \u043a\u0430\u043d\u0434\u0438\u0434\u0430\u0442\u0430 \u044e\u0440\u0438\u0434\u0438\u0447\u0435\u0441\u043a\u0438\u0445 \u043d\u0430\u0443\u043a : 12.00.14 \u2013 Search RSL\"",
+    "natural_language": "Заседателев customs law dissertation financial legal status Russian Federation",
+    "ads_query": "title:\"Заседателев, Данила Владимирович – Финансово-правовой статус таможенных органов Российской Федерации : диссертация ... кандидата юридических наук : 12.00.14 – Search RSL\"",
     "category": "content"
   },
   {
@@ -6086,7 +6086,7 @@
   },
   {
     "natural_language": "Babkina entertainment industry family careers Russian performers",
-    "ads_query": "title:\"\u0412\u0418\u0414\u0415\u041e: \u041d\u0430\u0434\u0435\u0436\u0434\u0430 \u0411\u0430\u0431\u043a\u0438\u043d\u0430 \u043f\u0440\u0438\u0437\u043d\u0430\u043b\u0430\u0441\u044c, \u0447\u0442\u043e \u043d\u0435 \u0445\u043e\u0447\u0435\u0442, \u0447\u0442\u043e\u0431\u044b \u0435\u0435 \u0432\u043d\u0443\u043a \u0441\u0442\u0430\u043d\u043e\u0432\u0438\u043b\u0441\u044f \u0430\u0440\u0442\u0438\u0441\u0442\u043e\u043c \u2013 7\u0414\u043d\u0435\u0439.\u0440\u0443\"",
+    "ads_query": "title:\"ВИДЕО: Надежда Бабкина призналась, что не хочет, чтобы ее внук становился артистом – 7Дней.ру\"",
     "category": "content"
   },
   {
@@ -6151,7 +6151,7 @@
   },
   {
     "natural_language": "Russian Ministry of Culture official website cultural figures",
-    "ads_query": "title:\"\u041e\u0444\u0438\u0446\u0438\u0430\u043b\u044c\u043d\u044b\u0439 \u0441\u0430\u0439\u0442 \u041c\u0438\u043d\u0438\u0441\u0442\u0435\u0440\u0441\u0442\u0432\u0430 \u043a\u0443\u043b\u044c\u0442\u0443\u0440\u044b \u0420\u043e\u0441\u0441\u0438\u0439\u0441\u043a\u043e\u0439 \u0424\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u0438 \u2013 \u0414\u0435\u044f\u0442\u0435\u043b\u0438...\"",
+    "ads_query": "title:\"Официальный сайт Министерства культуры Российской Федерации – Деятели...\"",
     "category": "content"
   },
   {
@@ -6331,7 +6331,7 @@
   },
   {
     "natural_language": "papers by Khachaturian on Armenian symphonism centennial",
-    "ads_query": "title:\"\u0418\u0434\u0435\u044f \u0444\u043e\u0440\u043c\u044b \u0438\u043b\u0438 \u043c\u0438\u0444 \u0430\u0440\u043c\u044f\u043d\u0441\u043a\u043e\u0433\u043e \u0441\u0438\u043c\u0444\u043e\u043d\u0438\u0437\u043c\u0430 (\u043a 100-\u043b\u0435\u0442\u0438\u044e \u0441\u043e \u0434\u043d\u044f \u0440\u043e\u0436\u0434\u0435\u043d\u0438\u044f \u0410\u0440\u0430\u043c\u0430 \u0418\u043b\u044c\u0438\u0447\u0430 \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d\u0430) [The idea of form or the myth of Armenian symphonism (to Aram Khachatrian's 100th birth anniversary)]\"",
+    "ads_query": "title:\"Идея формы или миф армянского симфонизма (к 100-летию со дня рождения Арама Ильича Хачатуряна) [The idea of form or the myth of Armenian symphonism (to Aram Khachatrian's 100th birth anniversary)]\"",
     "category": "content"
   },
   {
@@ -6401,7 +6401,7 @@
   },
   {
     "natural_language": "PRL articles",
-    "ads_query": "bibstem:PhRvL",
+    "ads_query": "bibstem:\"PhRvL\"",
     "category": "publication"
   },
   {
@@ -6430,8 +6430,8 @@
     "category": "conversational"
   },
   {
-    "natural_language": "papers by Grudich or Grudic or Grudi\u0107",
-    "ads_query": "-docs(56c4b65ab1a1a3f16a18c35f08f32a2c) -docs(f1eaa9e10da61265795efb741437a00c) author:\"Grudich\" OR author:\"Grudic\" OR author:\"Grudi\u0107\"",
+    "natural_language": "papers by Grudich or Grudic or Grudić",
+    "ads_query": "-docs(56c4b65ab1a1a3f16a18c35f08f32a2c) -docs(f1eaa9e10da61265795efb741437a00c) author:\"Grudich\" OR author:\"Grudic\" OR author:\"Grudić\"",
     "category": "author"
   },
   {
@@ -6506,7 +6506,7 @@
   },
   {
     "natural_language": "papers by brown in ApJ",
-    "ads_query": "author:\"brown\" bibstem:ApJ",
+    "ads_query": "author:\"brown\" bibstem:\"ApJ\"",
     "category": "author"
   },
   {
@@ -6876,7 +6876,7 @@
   },
   {
     "natural_language": "russian election voting day 2014 mail.ru news analysis",
-    "ads_query": "title:\"\u0415\u0434\u0438\u043d\u044b\u0439 \u0434\u0435\u043d\u044c \u0433\u043e\u043b\u043e\u0441\u043e\u0432\u0430\u043d\u0438\u044f \u2013 2014 \u2013 \u0422\u0435\u043c\u044b \u2013 \u041d\u043e\u0432\u043e\u0441\u0442\u0438 Mail.Ru\"",
+    "ads_query": "title:\"Единый день голосования – 2014 – Темы – Новости Mail.Ru\"",
     "category": "content"
   },
   {
@@ -6946,7 +6946,7 @@
   },
   {
     "natural_language": "papers in Astronomy & Astrophysics",
-    "ads_query": "bibstem:A&A",
+    "ads_query": "bibstem:\"A&A\"",
     "category": "publication"
   },
   {
@@ -7026,12 +7026,12 @@
   },
   {
     "natural_language": "recent JWST spectroscopy papers in Nature",
-    "ads_query": "abs:\"JWST\" abs:\"spectroscopy\" bibstem:Nature year:2022-2025",
+    "ads_query": "abs:\"JWST\" abs:\"spectroscopy\" bibstem:\"Nature\" year:2022-2025",
     "category": "compound"
   },
   {
     "natural_language": "papers by gorrini on stellar astronomy",
-    "ads_query": "abs:(\u011dorrini)",
+    "ads_query": "abs:(ĝorrini)",
     "category": "unfielded"
   },
   {
@@ -7040,8 +7040,8 @@
     "category": "metrics"
   },
   {
-    "natural_language": "\"\u041f\u0430\u0440\u0430\u0434 \u0430\u043d\u0441\u0430\u043c\u0431\u043b\u0435\u0439\" \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 \u0417\u0430\u0441\u0435\u0434\u0430\u0442\u0435\u043b\u0435\u0432 \u0412\u0418\u0410 \u041b\u0435\u0439\u0441\u044f musical ensemble",
-    "ads_query": "title:\"\u041f\u0430\u0440\u0430\u0434 \u0430\u043d\u0441\u0430\u043c\u0431\u043b\u0435\u0439 \u2013 \u043c\u0443\u0437\u044b\u043a\u0430\u043d\u0442: \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 \u0417\u0430\u0441\u0435\u0434\u0430\u0442\u0435\u043b\u0435\u0432 (\u0412\u0418\u0410 \u041b\u0435\u0439\u0441\u044f, \u043f\u0435\u0441\u043d\u044f )\"",
+    "natural_language": "\"Парад ансамблей\" Владимир Заседателев ВИА Лейся musical ensemble",
+    "ads_query": "title:\"Парад ансамблей – музыкант: Владимир Заседателев (ВИА Лейся, песня )\"",
     "category": "content"
   },
   {
@@ -7061,7 +7061,7 @@
   },
   {
     "natural_language": "Aram Khachaturian piano works music composition",
-    "ads_query": "title:\"\u0424\u043e\u0440\u0442\u0435\u043f\u0438\u0430\u043d\u043d\u043e\u0435 \u0442\u0432\u043e\u0440\u0447\u0435\u0441\u0442\u0432\u043e \u0410\u0440\u0430\u043c\u0430 \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d\u0430 [Aram Khachaturian's piano music]\"",
+    "ads_query": "title:\"Фортепианное творчество Арама Хачатуряна [Aram Khachaturian's piano music]\"",
     "category": "content"
   },
   {
@@ -7096,7 +7096,7 @@
   },
   {
     "natural_language": "MNRAS papers on string theory",
-    "ads_query": "abs:\"string theory\" bibstem:MNRAS",
+    "ads_query": "abs:\"string theory\" bibstem:\"MNRAS\"",
     "category": "publication"
   },
   {
@@ -7145,8 +7145,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "\u041c\u0443\u0437\u044b\u043a\u0430\u043b\u044c\u043d\u0430\u044f \u044d\u043d\u0446\u0438\u043a\u043b\u043e\u043f\u0435\u0434\u0438\u044f \u0442\u043e\u043c 1 \u0410 \u0413\u043e\u043d\u0433",
-    "ads_query": "title:\"\u041c\u0443\u0437\u044b\u043a\u0430\u043b\u044c\u043d\u0430\u044f \u044d\u043d\u0446\u0438\u043a\u043b\u043e\u043f\u0435\u0434\u0438\u044f. \u0422\u043e\u043c 1. \u0410 \u0410 \u2013 \u0413\u043e\u043d\u0433\"",
+    "natural_language": "Музыкальная энциклопедия том 1 А Гонг",
+    "ads_query": "title:\"Музыкальная энциклопедия. Том 1. А А – Гонг\"",
     "category": "content"
   },
   {
@@ -7225,8 +7225,8 @@
     "category": "operator"
   },
   {
-    "natural_language": "papers by ca\u00f1as from 2022",
-    "ads_query": "author:\"^ca\u00f1as\" year:2022",
+    "natural_language": "papers by cañas from 2022",
+    "ads_query": "author:\"^cañas\" year:2022",
     "category": "first_author"
   },
   {
@@ -7271,7 +7271,7 @@
   },
   {
     "natural_language": "quantum gravity in Astrophysical Journal",
-    "ads_query": "abs:\"quantum gravity\" bibstem:ApJ",
+    "ads_query": "abs:\"quantum gravity\" bibstem:\"ApJ\"",
     "category": "publication"
   },
   {
@@ -7321,7 +7321,7 @@
   },
   {
     "natural_language": "MNRAS articles from 2023",
-    "ads_query": "bibstem:MNRAS pubdate:2023",
+    "ads_query": "bibstem:\"MNRAS\" pubdate:2023",
     "category": "publication"
   },
   {
@@ -7641,7 +7641,7 @@
   },
   {
     "natural_language": "American Clipper Ships 1833-1858 Volume 2 Malay Young Mechanic",
-    "ads_query": "title:\"American Clipper Ships 1833\u20131858. Volume 2, Malay-Young Mechanic\"",
+    "ads_query": "title:\"American Clipper Ships 1833–1858. Volume 2, Malay-Young Mechanic\"",
     "category": "content"
   },
   {
@@ -7745,8 +7745,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "\u041f\u043e\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0435 \u0413\u0443\u0431\u0435\u0440\u043d\u0430\u0442\u043e\u0440\u0430 \u0410\u0441\u0442\u0440\u0430\u0445\u0430\u043d\u0441\u043a\u043e\u0439 \u043e\u0431\u043b\u0430\u0441\u0442\u0438 17.03.2010 N 89",
-    "ads_query": "title:\"\u041f\u043e\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0435 \u0413\u0443\u0431\u0435\u0440\u043d\u0430\u0442\u043e\u0440\u0430 \u0410\u0441\u0442\u0440\u0430\u0445\u0430\u043d\u0441\u043a\u043e\u0439 \u043e\u0431\u043b\u0430\u0441\u0442\u0438 \u043e\u0442 17.03.2010 N 89 \u041e \u2026\"",
+    "natural_language": "Постановление Губернатора Астраханской области 17.03.2010 N 89",
+    "ads_query": "title:\"Постановление Губернатора Астраханской области от 17.03.2010 N 89 О …\"",
     "category": "content"
   },
   {
@@ -7846,7 +7846,7 @@
   },
   {
     "natural_language": "research purpose operating systems survey",
-    "ads_query": "title:\"Research Purpose Operating Systems \u2014 A Wide Survey\"",
+    "ads_query": "title:\"Research Purpose Operating Systems — A Wide Survey\"",
     "category": "content"
   },
   {
@@ -7855,8 +7855,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "\"\u041a\u043e\u0442 \u0432 \u0441\u0430\u043f\u043e\u0433\u0430\u0445\" \"Puss in Boots\" folklore analysis",
-    "ads_query": "title:\"\u041a\u043e\u0442 \u0432 \u0441\u0430\u043f\u043e\u0433\u0430\u0445 (Puss in Boots)\"",
+    "natural_language": "\"Кот в сапогах\" \"Puss in Boots\" folklore analysis",
+    "ads_query": "title:\"Кот в сапогах (Puss in Boots)\"",
     "category": "content"
   },
   {
@@ -7896,7 +7896,7 @@
   },
   {
     "natural_language": "papers by lee in Nature",
-    "ads_query": "author:\"lee\" bibstem:Nature",
+    "ads_query": "author:\"lee\" bibstem:\"Nature\"",
     "category": "author"
   },
   {
@@ -7941,7 +7941,7 @@
   },
   {
     "natural_language": "Science papers on VLA radio",
-    "ads_query": "abs:\"VLA radio\" bibstem:Science",
+    "ads_query": "abs:\"VLA radio\" bibstem:\"Science\"",
     "category": "publication"
   },
   {
@@ -8025,8 +8025,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "papers by f\u00fcrnkranz v as first author",
-    "ads_query": "author:\"^f\u00fcrnkranz, v.\"",
+    "natural_language": "papers by fürnkranz v as first author",
+    "ads_query": "author:\"^fürnkranz, v.\"",
     "category": "first_author"
   },
   {
@@ -8146,7 +8146,7 @@
   },
   {
     "natural_language": "Mark Twain Toronto Ontario 1884 1885",
-    "ads_query": "title:\"Mark Twain in Toronto, Ontario, 1884\u20131885\"",
+    "ads_query": "title:\"Mark Twain in Toronto, Ontario, 1884–1885\"",
     "category": "content"
   },
   {
@@ -8295,8 +8295,8 @@
     "category": "author"
   },
   {
-    "natural_language": "papers about \"Haa L\u00e9elk'w H\u00e1s Aan\u00ed Saax'\u00fa\"",
-    "ads_query": "title:\"Haa L\u00e9elk'w H\u00e1s Aan\u00ed Saax'\u00fa\"",
+    "natural_language": "papers about \"Haa Léelk'w Hás Aaní Saax'ú\"",
+    "ads_query": "title:\"Haa Léelk'w Hás Aaní Saax'ú\"",
     "category": "content"
   },
   {
@@ -8486,7 +8486,7 @@
   },
   {
     "natural_language": "MNRAS papers on WIMPs",
-    "ads_query": "abs:\"WIMPs\" bibstem:MNRAS",
+    "ads_query": "abs:\"WIMPs\" bibstem:\"MNRAS\"",
     "category": "publication"
   },
   {
@@ -8556,7 +8556,7 @@
   },
   {
     "natural_language": "astronomical journal survey papers 1850-2024",
-    "ads_query": "bibstem:AJ year:1850-2024 abs:\"survey\"",
+    "ads_query": "bibstem:\"AJ\" year:1850-2024 abs:\"survey\"",
     "category": "publication"
   },
   {
@@ -8591,7 +8591,7 @@
   },
   {
     "natural_language": "tidal disruption events in ApJ",
-    "ads_query": "abs:\"tidal disruption event\" bibstem:ApJ",
+    "ads_query": "abs:\"tidal disruption event\" bibstem:\"ApJ\"",
     "category": "compound"
   },
   {
@@ -8631,7 +8631,7 @@
   },
   {
     "natural_language": "The Pekin Centenary 1849-1949",
-    "ads_query": "title:\"The Pekin Centenary, 1849\u20131949\"",
+    "ads_query": "title:\"The Pekin Centenary, 1849–1949\"",
     "category": "content"
   },
   {
@@ -8661,7 +8661,7 @@
   },
   {
     "natural_language": "television series psychological horror atmospheric effects 2017",
-    "ads_query": "title:\"The Mist (TV Series 2017\u2013 )\"",
+    "ads_query": "title:\"The Mist (TV Series 2017– )\"",
     "category": "content"
   },
   {
@@ -8736,7 +8736,7 @@
   },
   {
     "natural_language": "papers on integration of functions mathematical notes",
-    "ads_query": "title:\"19. Note sur l'int\u00e9gration de la fonction\"",
+    "ads_query": "title:\"19. Note sur l'intégration de la fonction\"",
     "category": "content"
   },
   {
@@ -8880,8 +8880,8 @@
     "category": "unfielded"
   },
   {
-    "natural_language": "\u0410\u0440\u0430\u043c \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d \u044d\u0441\u043a\u0438\u0437 \u0445\u0430\u0440\u0430\u043a\u0442\u0435\u0440\u0438\u0441\u0442\u0438\u043a\u0438\" OR \"Aram Khachaturian sketches characteristics",
-    "ads_query": "title:\"\u0410\u0440\u0430\u043c \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d. \u042d\u0441\u043a\u0438\u0437 \u0445\u0430\u0440\u0430\u043a\u0442\u0435\u0440\u0438\u0441\u0442\u0438\u043a\u0438 [Aram Khachaturian. Sketches of characteristics]\"",
+    "natural_language": "Арам Хачатурян эскиз характеристики\" OR \"Aram Khachaturian sketches characteristics",
+    "ads_query": "title:\"Арам Хачатурян. Эскиз характеристики [Aram Khachaturian. Sketches of characteristics]\"",
     "category": "content"
   },
   {
@@ -8960,8 +8960,8 @@
     "category": "operator"
   },
   {
-    "natural_language": "papers by S\u00e1nchez-S\u00e1ez and Shen on transient astronomy",
-    "ads_query": "author:\"S\u00e1nchez-S\u00e1ez, P\" AND (author:\"Shen, Y\")",
+    "natural_language": "papers by Sánchez-Sáez and Shen on transient astronomy",
+    "ads_query": "author:\"Sánchez-Sáez, P\" AND (author:\"Shen, Y\")",
     "category": "author"
   },
   {
@@ -9261,7 +9261,7 @@
   },
   {
     "natural_language": "PRD papers on white dwarfs",
-    "ads_query": "abs:\"white dwarfs\" bibstem:PhRvD",
+    "ads_query": "abs:\"white dwarfs\" bibstem:\"PhRvD\"",
     "category": "publication"
   },
   {
@@ -9306,7 +9306,7 @@
   },
   {
     "natural_language": "papers in Monthly Notices",
-    "ads_query": "bibstem:MNRAS",
+    "ads_query": "bibstem:\"MNRAS\"",
     "category": "publication"
   },
   {
@@ -9360,8 +9360,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "papers by Sipil\u00e4 as first author",
-    "ads_query": "author:\"^Sipil\u00e4\"",
+    "natural_language": "papers by Sipilä as first author",
+    "ads_query": "author:\"^Sipilä\"",
     "category": "first_author"
   },
   {
@@ -9380,8 +9380,8 @@
     "category": "author"
   },
   {
-    "natural_language": "papers by ca\u00f1as from 2023",
-    "ads_query": "author:\"^ca\u00f1as\" year:2023",
+    "natural_language": "papers by cañas from 2023",
+    "ads_query": "author:\"^cañas\" year:2023",
     "category": "first_author"
   },
   {
@@ -9551,7 +9551,7 @@
   },
   {
     "natural_language": "American clipper ships 1833 1858",
-    "ads_query": "title:\"American Clipper Ships, 1833\u20131858\"",
+    "ads_query": "title:\"American Clipper Ships, 1833–1858\"",
     "category": "content"
   },
   {
@@ -9651,7 +9651,7 @@
   },
   {
     "natural_language": "papers in journals starting with Astro",
-    "ads_query": "bibstem:Astro*",
+    "ads_query": "bibstem:\"Astro\"*",
     "category": "operator"
   },
   {
@@ -9666,7 +9666,7 @@
   },
   {
     "natural_language": "Nature papers on astronomy",
-    "ads_query": "bibstem:Nature database:astronomy",
+    "ads_query": "bibstem:\"Nature\" database:astronomy",
     "category": "publication"
   },
   {
@@ -9715,8 +9715,8 @@
     "category": "publication"
   },
   {
-    "natural_language": "papers by Gim\u00e9nez-Arteaga 2023",
-    "ads_query": "author:\"^Gim\u00e9nez-Arteaga\", year:2023",
+    "natural_language": "papers by Giménez-Arteaga 2023",
+    "ads_query": "author:\"^Giménez-Arteaga\", year:2023",
     "category": "first_author"
   },
   {
@@ -9850,8 +9850,8 @@
     "category": "unfielded"
   },
   {
-    "natural_language": "papers by Vu\u010dkovi\u0107 and Baran",
-    "ads_query": "author:\"Vu\u010dkovi\u0107, M.\" author:\"baran\"",
+    "natural_language": "papers by Vučković and Baran",
+    "ads_query": "author:\"Vučković, M.\" author:\"baran\"",
     "category": "author"
   },
   {
@@ -9871,7 +9871,7 @@
   },
   {
     "natural_language": "phd thesis by joshi reetika",
-    "ads_query": "author:\"^joshi,reetika\" bibstem:phdt",
+    "ads_query": "author:\"^joshi,reetika\" bibstem:\"phdt\"",
     "category": "first_author"
   },
   {
@@ -10011,7 +10011,7 @@
   },
   {
     "natural_language": "AJ papers in volume 165",
-    "ads_query": "bibstem:AJ volume:165",
+    "ads_query": "bibstem:\"AJ\" volume:165",
     "category": "publication"
   },
   {
@@ -10161,7 +10161,7 @@
   },
   {
     "natural_language": "AJ papers on galaxy formation",
-    "ads_query": "abs:\"galaxy formation\" bibstem:AJ",
+    "ads_query": "abs:\"galaxy formation\" bibstem:\"AJ\"",
     "category": "publication"
   },
   {
@@ -10176,7 +10176,7 @@
   },
   {
     "natural_language": "Hubble constant measurement SH0ES team HST local value 1 km/s/Mpc uncertainty",
-    "ads_query": "title:(A Comprehensive Measurement of the Local Value of the Hubble Constant with 1 km s\u22121 Mpc\u22121 Uncertainty from the Hubble Space Telescope and the SH0ES Team)",
+    "ads_query": "title:(A Comprehensive Measurement of the Local Value of the Hubble Constant with 1 km s−1 Mpc−1 Uncertainty from the Hubble Space Telescope and the SH0ES Team)",
     "category": "content"
   },
   {
@@ -10281,7 +10281,7 @@
   },
   {
     "natural_language": "papers on Khachaturian symphonic works",
-    "ads_query": "title:\"\u0421\u0438\u043c\u0444\u043e\u043d\u0438\u0447\u0435\u0441\u043a\u043e\u0435 \u0442\u0432\u043e\u0440\u0447\u0435\u0441\u0442\u0432\u043e \u0410. \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d\u0430 [Symphonic Oeuvre of A. Khachaturian]\"",
+    "ads_query": "title:\"Симфоническое творчество А. Хачатуряна [Symphonic Oeuvre of A. Khachaturian]\"",
     "category": "content"
   },
   {
@@ -10475,8 +10475,8 @@
     "category": "compound"
   },
   {
-    "natural_language": "refereed papers by Mu\u00f1oz-Darias",
-    "ads_query": "Mu\u00f1oz-Darias property:refereed",
+    "natural_language": "refereed papers by Muñoz-Darias",
+    "ads_query": "Muñoz-Darias property:refereed",
     "category": "properties"
   },
   {
@@ -10661,7 +10661,7 @@
   },
   {
     "natural_language": "Granville Stuart DHS Ranch 1879-1887",
-    "ads_query": "title:\"Granville Stuart of the DHS Ranch, 1879\u20131887\"",
+    "ads_query": "title:\"Granville Stuart of the DHS Ranch, 1879–1887\"",
     "category": "content"
   },
   {
@@ -10701,7 +10701,7 @@
   },
   {
     "natural_language": "Thorne-Zytkow objects 2013 to 2023",
-    "ads_query": "pubdate:[2013-01 TO 2023-11] title:(Thorne\u2013\u017bytkow object)",
+    "ads_query": "pubdate:[2013-01 TO 2023-11] title:(Thorne–Żytkow object)",
     "category": "compound"
   },
   {
@@ -10785,13 +10785,13 @@
     "category": "author"
   },
   {
-    "natural_language": "\u041f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442 \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0438 \u0411\u0435\u043b\u0430\u0440\u0443\u0441\u044c \u0443\u0437\u043d\u0430\u0433\u0430\u0440\u043e\u0434\u0436\u0430\u043d\u043d\u0435 \u0411\u0430\u0431\u043ai\u043d\u0430\u0439",
-    "ads_query": "title:\"\u041f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442 \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0438 \u0411\u0435\u043b\u0430\u0440\u0443\u0441\u044c \u2013 \u0410\u0431 \u0443\u0437\u043d\u0430\u0433\u0430\u0440\u043e\u0434\u0436\u0430\u043d\u043di \u041d.\u0413.\u0411\u0430\u0431\u043ai\u043d\u0430\u0439 i \u041c.\u0412.\u2026\"",
+    "natural_language": "Президент Республики Беларусь узнагароджанне Бабкiнай",
+    "ads_query": "title:\"Президент Республики Беларусь – Аб узнагароджаннi Н.Г.Бабкiнай i М.В.…\"",
     "category": "content"
   },
   {
     "natural_language": "MOND in Nature",
-    "ads_query": "abs:\"MOND\" bibstem:Nature",
+    "ads_query": "abs:\"MOND\" bibstem:\"Nature\"",
     "category": "publication"
   },
   {
@@ -10811,7 +10811,7 @@
   },
   {
     "natural_language": "Astronomy & Astrophysics review articles",
-    "ads_query": "bibstem:A&A doctype:article property:refereed",
+    "ads_query": "bibstem:\"A&A\" doctype:article property:refereed",
     "category": "publication"
   },
   {
@@ -10841,7 +10841,7 @@
   },
   {
     "natural_language": "Missouri radical rule reconstruction 1865-1870",
-    "ads_query": "title:\"Missouri Under Radical Rule, 1865\u20131870\"",
+    "ads_query": "title:\"Missouri Under Radical Rule, 1865–1870\"",
     "category": "content"
   },
   {
@@ -11035,8 +11035,8 @@
     "category": "unfielded"
   },
   {
-    "natural_language": "papers by ag\u00eds b",
-    "ads_query": "abs:(ag\u00eds, b.)",
+    "natural_language": "papers by agís b",
+    "ads_query": "abs:(agís, b.)",
     "category": "unfielded"
   },
   {
@@ -11061,7 +11061,7 @@
   },
   {
     "natural_language": "1995QuSOp...7..259C",
-    "ads_query": "identifier:\"1995QuSOp\u20267..259C\"",
+    "ads_query": "identifier:\"1995QuSOp…7..259C\"",
     "category": "compound"
   },
   {
@@ -11241,7 +11241,7 @@
   },
   {
     "natural_language": "papers on SCP 86-DOS single-user disk operating system 8086",
-    "ads_query": "title:\"SCP 86-DOS \u2013 Single-User Disk Operating System for the 8086\"",
+    "ads_query": "title:\"SCP 86-DOS – Single-User Disk Operating System for the 8086\"",
     "category": "content"
   },
   {
@@ -11275,8 +11275,8 @@
     "category": "content"
   },
   {
-    "natural_language": "papers by \u00dcbler from 2010s",
-    "ads_query": "author:\"^\u00dcbler\" year:201",
+    "natural_language": "papers by Übler from 2010s",
+    "ads_query": "author:\"^Übler\" year:201",
     "category": "first_author"
   },
   {
@@ -11400,8 +11400,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "papers by Mili\u0107 Ivan on magnetic fields",
-    "ads_query": "author:\"Mili\u0107, Ivan\" magnetic fields",
+    "natural_language": "papers by Milić Ivan on magnetic fields",
+    "ads_query": "author:\"Milić, Ivan\" magnetic fields",
     "category": "author"
   },
   {
@@ -11596,7 +11596,7 @@
   },
   {
     "natural_language": "Mineo Gilfanov X-ray binaries star forming galaxies",
-    "ads_query": "abs:(Mineo, S., Gilfanov, M. & Sunyaev, R. X-ray emission from star-forming galaxies - I. High-mass X-ray binaries. Mon. Not. R. Astron. Soc. 419, 2095\u2013 2115 (2012). 1105.4610.)",
+    "ads_query": "abs:(Mineo, S., Gilfanov, M. & Sunyaev, R. X-ray emission from star-forming galaxies - I. High-mass X-ray binaries. Mon. Not. R. Astron. Soc. 419, 2095– 2115 (2012). 1105.4610.)",
     "category": "unfielded"
   },
   {
@@ -11636,7 +11636,7 @@
   },
   {
     "natural_language": "WISE 0855-0714 brown dwarf observations",
-    "ads_query": "abs:(WISE 0855\u22120714)",
+    "ads_query": "abs:(WISE 0855−0714)",
     "category": "unfielded"
   },
   {
@@ -11741,7 +11741,7 @@
   },
   {
     "natural_language": "customs services western Canada 1867 1925",
-    "ads_query": "title:\"Customs Services in Western Canada, 1867\u20131925\"",
+    "ads_query": "title:\"Customs Services in Western Canada, 1867–1925\"",
     "category": "content"
   },
   {
@@ -11986,7 +11986,7 @@
   },
   {
     "natural_language": "synesthesia music visualization auditory visual cross-modal perception",
-    "ads_query": "title:\"Waterparks' Awsten Can 'See' Music, So We Had Him Paint His Songs \ud83c\udfa8 Seeing Sounds MTV\"",
+    "ads_query": "title:\"Waterparks' Awsten Can 'See' Music, So We Had Him Paint His Songs 🎨 Seeing Sounds MTV\"",
     "category": "content"
   },
   {
@@ -12081,7 +12081,7 @@
   },
   {
     "natural_language": "papers about Otherworld application survival during kernel crashes",
-    "ads_query": "title:\"Otherworld \u2014 Giving Applications a Chance to Survive OS Kernel Crashes\"",
+    "ads_query": "title:\"Otherworld — Giving Applications a Chance to Survive OS Kernel Crashes\"",
     "category": "content"
   },
   {
@@ -12190,8 +12190,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "papers by Kre\u0142owski from 1982 to 1987",
-    "ads_query": "pubdate:[1982-01 TO 1987-12] author:(\"Kre\u0142owski, J.\")",
+    "natural_language": "papers by Krełowski from 1982 to 1987",
+    "ads_query": "pubdate:[1982-01 TO 1987-12] author:(\"Krełowski, J.\")",
     "category": "author"
   },
   {
@@ -12230,8 +12230,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "papers by ca\u00f1as 2021",
-    "ads_query": "author:\"^ca\u00f1as\" year:2021",
+    "natural_language": "papers by cañas 2021",
+    "ads_query": "author:\"^cañas\" year:2021",
     "category": "first_author"
   },
   {
@@ -12241,7 +12241,7 @@
   },
   {
     "natural_language": "papers about Aram Khachaturian composer",
-    "ads_query": "title:\"\u0410\u0440\u0430\u043c \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d [Aram Khachaturian]\"",
+    "ads_query": "title:\"Арам Хачатурян [Aram Khachaturian]\"",
     "category": "content"
   },
   {
@@ -12271,7 +12271,7 @@
   },
   {
     "natural_language": "86-DOS Disk Operating System 8086 User's manual",
-    "ads_query": "title:\"86-DOS \u2013 Disk Operating System for the 8086. User's manual\"",
+    "ads_query": "title:\"86-DOS – Disk Operating System for the 8086. User's manual\"",
     "category": "content"
   },
   {
@@ -12311,7 +12311,7 @@
   },
   {
     "natural_language": "trending papers in Physical Review Letters",
-    "ads_query": "trending(bibstem:PhRvL)",
+    "ads_query": "trending(bibstem:\"PhRvL\")",
     "category": "operator"
   },
   {
@@ -12330,8 +12330,8 @@
     "category": "first_author"
   },
   {
-    "natural_language": "First Records\u2014No. 6. The Name 'Rhodesia'",
-    "ads_query": "title:\"First Records\u2014No. 6. The Name 'Rhodesia'\"",
+    "natural_language": "First Records—No. 6. The Name 'Rhodesia'",
+    "ads_query": "title:\"First Records—No. 6. The Name 'Rhodesia'\"",
     "category": "content"
   },
   {
@@ -12386,12 +12386,12 @@
   },
   {
     "natural_language": "Russian Federation state awards decree November 1999 presidential order 1557",
-    "ads_query": "title:\"\u041e \u043d\u0430\u0433\u0440\u0430\u0436\u0434\u0435\u043d\u0438\u0438 \u0433\u043e\u0441\u0443\u0434\u0430\u0440\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u043c\u0438 \u043d\u0430\u0433\u0440\u0430\u0434\u0430\u043c\u0438 \u0420\u043e\u0441\u0441\u0438\u0439\u0441\u043a\u043e\u0439 \u0424\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u0438, \u0423\u043a\u0430\u0437 \u041f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442\u0430 \u0420\u0424 \u043e\u0442 22 \u043d\u043e\u044f\u0431\u0440\u044f 1999 \u0433\u043e\u0434\u0430 \u21161557\"",
+    "ads_query": "title:\"О награждении государственными наградами Российской Федерации, Указ Президента РФ от 22 ноября 1999 года №1557\"",
     "category": "content"
   },
   {
     "natural_language": "Povic Marquez Masegosa galaxy classification MNRAS 2015",
-    "ads_query": "abs:(Povic, M., M\u00e1rquez, I., Masegosa, J., et al. 2015, \u00b4 MNRAS, 453, 1644)",
+    "ads_query": "abs:(Povic, M., Márquez, I., Masegosa, J., et al. 2015, ´ MNRAS, 453, 1644)",
     "category": "unfielded"
   },
   {
@@ -12461,7 +12461,7 @@
   },
   {
     "natural_language": "image processing in Monthly Notices",
-    "ads_query": "abs:\"image processing\" bibstem:MNRAS",
+    "ads_query": "abs:\"image processing\" bibstem:\"MNRAS\"",
     "category": "publication"
   },
   {
@@ -12526,7 +12526,7 @@
   },
   {
     "natural_language": "JWST observations in ApJ Letters",
-    "ads_query": "abs:\"JWST observations\" bibstem:ApJL",
+    "ads_query": "abs:\"JWST observations\" bibstem:\"ApJL\"",
     "category": "publication"
   },
   {
@@ -12535,8 +12535,8 @@
     "category": "compound"
   },
   {
-    "natural_language": "papers by Alfv\u00e9n from 1947",
-    "ads_query": "pubdate:[1947-01 TO 1947-12] author:(\"^Alfv\u00e9n\")",
+    "natural_language": "papers by Alfvén from 1947",
+    "ads_query": "pubdate:[1947-01 TO 1947-12] author:(\"^Alfvén\")",
     "category": "first_author"
   },
   {
@@ -12671,7 +12671,7 @@
   },
   {
     "natural_language": "papers in ApJ Letters",
-    "ads_query": "bibstem:ApJL",
+    "ads_query": "bibstem:\"ApJL\"",
     "category": "publication"
   },
   {
@@ -12741,7 +12741,7 @@
   },
   {
     "natural_language": "Chandra X-ray in Science",
-    "ads_query": "abs:\"Chandra X-ray\" bibstem:Science",
+    "ads_query": "abs:\"Chandra X-ray\" bibstem:\"Science\"",
     "category": "publication"
   },
   {
@@ -12831,7 +12831,7 @@
   },
   {
     "natural_language": "ApJL papers on planetary nebulae",
-    "ads_query": "abs:\"planetary nebulae\" bibstem:ApJL",
+    "ads_query": "abs:\"planetary nebulae\" bibstem:\"ApJL\"",
     "category": "publication"
   },
   {
@@ -12851,7 +12851,7 @@
   },
   {
     "natural_language": "Carnegie Institution Washington Year Book 47 1947 1948",
-    "ads_query": "title:\"Carnegie Institution of Washington. Year Book No. 47, July 1, 1947 \u2013 June 30, 1948\"",
+    "ads_query": "title:\"Carnegie Institution of Washington. Year Book No. 47, July 1, 1947 – June 30, 1948\"",
     "category": "content"
   },
   {
@@ -12986,7 +12986,7 @@
   },
   {
     "natural_language": "Science papers on Fermi gamma ray",
-    "ads_query": "abs:\"Fermi gamma ray\" bibstem:Science",
+    "ads_query": "abs:\"Fermi gamma ray\" bibstem:\"Science\"",
     "category": "publication"
   },
   {
@@ -13051,7 +13051,7 @@
   },
   {
     "natural_language": "papers by Aram Khachaturian on musical composition",
-    "ads_query": "title:\"\u0410\u0440\u0430\u043c \u0418\u043b\u044c\u0438\u0447 \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d [Aram Il\u02b9ich Khachaturi\ufe20a\ufe21n]\"",
+    "ads_query": "title:\"Арам Ильич Хачатурян [Aram Ilʹich Khachaturi︠a︡n]\"",
     "category": "content"
   },
   {
@@ -13156,7 +13156,7 @@
   },
   {
     "natural_language": "papers about Lola Montez 1818-1861",
-    "ads_query": "title:\"Montez, Lola (1818\u20131861)\"",
+    "ads_query": "title:\"Montez, Lola (1818–1861)\"",
     "category": "content"
   },
   {
@@ -13191,7 +13191,7 @@
   },
   {
     "natural_language": "XLT86 8080 to 8086 Assembly Language Translator User's Guide",
-    "ads_query": "title:\"XLT86 \u2013 8080 to 8086 Assembly Language Translator \u2013 User's Guide\"",
+    "ads_query": "title:\"XLT86 – 8080 to 8086 Assembly Language Translator – User's Guide\"",
     "category": "content"
   },
   {
@@ -13276,7 +13276,7 @@
   },
   {
     "natural_language": "\"Major Burnham The Scout\" papers",
-    "ads_query": "title:\"Major Burnham&nbsp;\u2014 The Scout\"",
+    "ads_query": "title:\"Major Burnham&nbsp;— The Scout\"",
     "category": "content"
   },
   {
@@ -17266,1802 +17266,1802 @@
   },
   {
     "natural_language": "ApJ gravitational waves refereed",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in ApJ with refereed",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed ApJ papers on gravitational waves",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves ApJ refereed only",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ dark energy refereed",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in ApJ with refereed",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed ApJ papers on dark energy",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy ApJ refereed only",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ weak lensing refereed",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in ApJ with refereed",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed ApJ papers on weak lensing",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing ApJ refereed only",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ solar wind refereed",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in ApJ with refereed",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed ApJ papers on solar wind",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind ApJ refereed only",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ coronal mass ejections refereed",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in ApJ with refereed",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed ApJ papers on coronal mass ejections",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections ApJ refereed only",
-    "ads_query": "bibstem:ApJ property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ gravitational waves openaccess",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in ApJ with openaccess",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess ApJ papers on gravitational waves",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves ApJ openaccess only",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ dark energy openaccess",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in ApJ with openaccess",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess ApJ papers on dark energy",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy ApJ openaccess only",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ weak lensing openaccess",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in ApJ with openaccess",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess ApJ papers on weak lensing",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing ApJ openaccess only",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ solar wind openaccess",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in ApJ with openaccess",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess ApJ papers on solar wind",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind ApJ openaccess only",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ coronal mass ejections openaccess",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in ApJ with openaccess",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess ApJ papers on coronal mass ejections",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections ApJ openaccess only",
-    "ads_query": "bibstem:ApJ property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ gravitational waves data",
-    "ads_query": "bibstem:ApJ property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in ApJ with data",
-    "ads_query": "bibstem:ApJ property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "data ApJ papers on gravitational waves",
-    "ads_query": "bibstem:ApJ property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves ApJ data only",
-    "ads_query": "bibstem:ApJ property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ dark energy data",
-    "ads_query": "bibstem:ApJ property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in ApJ with data",
-    "ads_query": "bibstem:ApJ property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "data ApJ papers on dark energy",
-    "ads_query": "bibstem:ApJ property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy ApJ data only",
-    "ads_query": "bibstem:ApJ property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ weak lensing data",
-    "ads_query": "bibstem:ApJ property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in ApJ with data",
-    "ads_query": "bibstem:ApJ property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "data ApJ papers on weak lensing",
-    "ads_query": "bibstem:ApJ property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing ApJ data only",
-    "ads_query": "bibstem:ApJ property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ solar wind data",
-    "ads_query": "bibstem:ApJ property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in ApJ with data",
-    "ads_query": "bibstem:ApJ property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "data ApJ papers on solar wind",
-    "ads_query": "bibstem:ApJ property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind ApJ data only",
-    "ads_query": "bibstem:ApJ property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "ApJ coronal mass ejections data",
-    "ads_query": "bibstem:ApJ property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in ApJ with data",
-    "ads_query": "bibstem:ApJ property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "data ApJ papers on coronal mass ejections",
-    "ads_query": "bibstem:ApJ property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections ApJ data only",
-    "ads_query": "bibstem:ApJ property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ gravitational waves refereed",
-    "ads_query": "bibstem:AJ property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in AJ with refereed",
-    "ads_query": "bibstem:AJ property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed AJ papers on gravitational waves",
-    "ads_query": "bibstem:AJ property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves AJ refereed only",
-    "ads_query": "bibstem:AJ property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ dark energy refereed",
-    "ads_query": "bibstem:AJ property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in AJ with refereed",
-    "ads_query": "bibstem:AJ property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed AJ papers on dark energy",
-    "ads_query": "bibstem:AJ property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy AJ refereed only",
-    "ads_query": "bibstem:AJ property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ weak lensing refereed",
-    "ads_query": "bibstem:AJ property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in AJ with refereed",
-    "ads_query": "bibstem:AJ property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed AJ papers on weak lensing",
-    "ads_query": "bibstem:AJ property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing AJ refereed only",
-    "ads_query": "bibstem:AJ property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ solar wind refereed",
-    "ads_query": "bibstem:AJ property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in AJ with refereed",
-    "ads_query": "bibstem:AJ property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed AJ papers on solar wind",
-    "ads_query": "bibstem:AJ property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind AJ refereed only",
-    "ads_query": "bibstem:AJ property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ coronal mass ejections refereed",
-    "ads_query": "bibstem:AJ property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in AJ with refereed",
-    "ads_query": "bibstem:AJ property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed AJ papers on coronal mass ejections",
-    "ads_query": "bibstem:AJ property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections AJ refereed only",
-    "ads_query": "bibstem:AJ property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ gravitational waves openaccess",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in AJ with openaccess",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess AJ papers on gravitational waves",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves AJ openaccess only",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ dark energy openaccess",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in AJ with openaccess",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess AJ papers on dark energy",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy AJ openaccess only",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ weak lensing openaccess",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in AJ with openaccess",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess AJ papers on weak lensing",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing AJ openaccess only",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ solar wind openaccess",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in AJ with openaccess",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess AJ papers on solar wind",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind AJ openaccess only",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ coronal mass ejections openaccess",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in AJ with openaccess",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess AJ papers on coronal mass ejections",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections AJ openaccess only",
-    "ads_query": "bibstem:AJ property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ gravitational waves data",
-    "ads_query": "bibstem:AJ property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in AJ with data",
-    "ads_query": "bibstem:AJ property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "data AJ papers on gravitational waves",
-    "ads_query": "bibstem:AJ property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves AJ data only",
-    "ads_query": "bibstem:AJ property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ dark energy data",
-    "ads_query": "bibstem:AJ property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in AJ with data",
-    "ads_query": "bibstem:AJ property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "data AJ papers on dark energy",
-    "ads_query": "bibstem:AJ property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy AJ data only",
-    "ads_query": "bibstem:AJ property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ weak lensing data",
-    "ads_query": "bibstem:AJ property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in AJ with data",
-    "ads_query": "bibstem:AJ property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "data AJ papers on weak lensing",
-    "ads_query": "bibstem:AJ property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing AJ data only",
-    "ads_query": "bibstem:AJ property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ solar wind data",
-    "ads_query": "bibstem:AJ property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in AJ with data",
-    "ads_query": "bibstem:AJ property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "data AJ papers on solar wind",
-    "ads_query": "bibstem:AJ property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind AJ data only",
-    "ads_query": "bibstem:AJ property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "AJ coronal mass ejections data",
-    "ads_query": "bibstem:AJ property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in AJ with data",
-    "ads_query": "bibstem:AJ property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "data AJ papers on coronal mass ejections",
-    "ads_query": "bibstem:AJ property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections AJ data only",
-    "ads_query": "bibstem:AJ property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"AJ\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A gravitational waves refereed",
-    "ads_query": "bibstem:A&A property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in A&A with refereed",
-    "ads_query": "bibstem:A&A property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed A&A papers on gravitational waves",
-    "ads_query": "bibstem:A&A property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves A&A refereed only",
-    "ads_query": "bibstem:A&A property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A dark energy refereed",
-    "ads_query": "bibstem:A&A property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in A&A with refereed",
-    "ads_query": "bibstem:A&A property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed A&A papers on dark energy",
-    "ads_query": "bibstem:A&A property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy A&A refereed only",
-    "ads_query": "bibstem:A&A property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A weak lensing refereed",
-    "ads_query": "bibstem:A&A property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in A&A with refereed",
-    "ads_query": "bibstem:A&A property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed A&A papers on weak lensing",
-    "ads_query": "bibstem:A&A property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing A&A refereed only",
-    "ads_query": "bibstem:A&A property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A solar wind refereed",
-    "ads_query": "bibstem:A&A property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in A&A with refereed",
-    "ads_query": "bibstem:A&A property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed A&A papers on solar wind",
-    "ads_query": "bibstem:A&A property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind A&A refereed only",
-    "ads_query": "bibstem:A&A property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A coronal mass ejections refereed",
-    "ads_query": "bibstem:A&A property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in A&A with refereed",
-    "ads_query": "bibstem:A&A property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed A&A papers on coronal mass ejections",
-    "ads_query": "bibstem:A&A property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections A&A refereed only",
-    "ads_query": "bibstem:A&A property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A gravitational waves openaccess",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in A&A with openaccess",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess A&A papers on gravitational waves",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves A&A openaccess only",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A dark energy openaccess",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in A&A with openaccess",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess A&A papers on dark energy",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy A&A openaccess only",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A weak lensing openaccess",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in A&A with openaccess",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess A&A papers on weak lensing",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing A&A openaccess only",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A solar wind openaccess",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in A&A with openaccess",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess A&A papers on solar wind",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind A&A openaccess only",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A coronal mass ejections openaccess",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in A&A with openaccess",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess A&A papers on coronal mass ejections",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections A&A openaccess only",
-    "ads_query": "bibstem:A&A property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A gravitational waves data",
-    "ads_query": "bibstem:A&A property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in A&A with data",
-    "ads_query": "bibstem:A&A property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "data A&A papers on gravitational waves",
-    "ads_query": "bibstem:A&A property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves A&A data only",
-    "ads_query": "bibstem:A&A property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A dark energy data",
-    "ads_query": "bibstem:A&A property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in A&A with data",
-    "ads_query": "bibstem:A&A property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "data A&A papers on dark energy",
-    "ads_query": "bibstem:A&A property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy A&A data only",
-    "ads_query": "bibstem:A&A property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A weak lensing data",
-    "ads_query": "bibstem:A&A property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in A&A with data",
-    "ads_query": "bibstem:A&A property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "data A&A papers on weak lensing",
-    "ads_query": "bibstem:A&A property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing A&A data only",
-    "ads_query": "bibstem:A&A property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A solar wind data",
-    "ads_query": "bibstem:A&A property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in A&A with data",
-    "ads_query": "bibstem:A&A property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "data A&A papers on solar wind",
-    "ads_query": "bibstem:A&A property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind A&A data only",
-    "ads_query": "bibstem:A&A property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "A&A coronal mass ejections data",
-    "ads_query": "bibstem:A&A property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in A&A with data",
-    "ads_query": "bibstem:A&A property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "data A&A papers on coronal mass ejections",
-    "ads_query": "bibstem:A&A property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections A&A data only",
-    "ads_query": "bibstem:A&A property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"A&A\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus gravitational waves refereed",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in Icarus with refereed",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Icarus papers on gravitational waves",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves Icarus refereed only",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus dark energy refereed",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in Icarus with refereed",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Icarus papers on dark energy",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy Icarus refereed only",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus weak lensing refereed",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in Icarus with refereed",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Icarus papers on weak lensing",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing Icarus refereed only",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus solar wind refereed",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in Icarus with refereed",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Icarus papers on solar wind",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind Icarus refereed only",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus coronal mass ejections refereed",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Icarus with refereed",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Icarus papers on coronal mass ejections",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Icarus refereed only",
-    "ads_query": "bibstem:Icarus property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus gravitational waves openaccess",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in Icarus with openaccess",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Icarus papers on gravitational waves",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves Icarus openaccess only",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus dark energy openaccess",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in Icarus with openaccess",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Icarus papers on dark energy",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy Icarus openaccess only",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus weak lensing openaccess",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in Icarus with openaccess",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Icarus papers on weak lensing",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing Icarus openaccess only",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus solar wind openaccess",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in Icarus with openaccess",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Icarus papers on solar wind",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind Icarus openaccess only",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus coronal mass ejections openaccess",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Icarus with openaccess",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Icarus papers on coronal mass ejections",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Icarus openaccess only",
-    "ads_query": "bibstem:Icarus property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus gravitational waves data",
-    "ads_query": "bibstem:Icarus property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in Icarus with data",
-    "ads_query": "bibstem:Icarus property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "data Icarus papers on gravitational waves",
-    "ads_query": "bibstem:Icarus property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves Icarus data only",
-    "ads_query": "bibstem:Icarus property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus dark energy data",
-    "ads_query": "bibstem:Icarus property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in Icarus with data",
-    "ads_query": "bibstem:Icarus property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "data Icarus papers on dark energy",
-    "ads_query": "bibstem:Icarus property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy Icarus data only",
-    "ads_query": "bibstem:Icarus property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus weak lensing data",
-    "ads_query": "bibstem:Icarus property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in Icarus with data",
-    "ads_query": "bibstem:Icarus property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "data Icarus papers on weak lensing",
-    "ads_query": "bibstem:Icarus property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing Icarus data only",
-    "ads_query": "bibstem:Icarus property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus solar wind data",
-    "ads_query": "bibstem:Icarus property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in Icarus with data",
-    "ads_query": "bibstem:Icarus property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "data Icarus papers on solar wind",
-    "ads_query": "bibstem:Icarus property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind Icarus data only",
-    "ads_query": "bibstem:Icarus property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "Icarus coronal mass ejections data",
-    "ads_query": "bibstem:Icarus property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Icarus with data",
-    "ads_query": "bibstem:Icarus property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "data Icarus papers on coronal mass ejections",
-    "ads_query": "bibstem:Icarus property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Icarus data only",
-    "ads_query": "bibstem:Icarus property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature gravitational waves refereed",
-    "ads_query": "bibstem:Nature property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in Nature with refereed",
-    "ads_query": "bibstem:Nature property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Nature papers on gravitational waves",
-    "ads_query": "bibstem:Nature property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves Nature refereed only",
-    "ads_query": "bibstem:Nature property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature dark energy refereed",
-    "ads_query": "bibstem:Nature property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in Nature with refereed",
-    "ads_query": "bibstem:Nature property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Nature papers on dark energy",
-    "ads_query": "bibstem:Nature property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy Nature refereed only",
-    "ads_query": "bibstem:Nature property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature weak lensing refereed",
-    "ads_query": "bibstem:Nature property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in Nature with refereed",
-    "ads_query": "bibstem:Nature property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Nature papers on weak lensing",
-    "ads_query": "bibstem:Nature property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing Nature refereed only",
-    "ads_query": "bibstem:Nature property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature solar wind refereed",
-    "ads_query": "bibstem:Nature property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in Nature with refereed",
-    "ads_query": "bibstem:Nature property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Nature papers on solar wind",
-    "ads_query": "bibstem:Nature property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind Nature refereed only",
-    "ads_query": "bibstem:Nature property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature coronal mass ejections refereed",
-    "ads_query": "bibstem:Nature property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Nature with refereed",
-    "ads_query": "bibstem:Nature property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Nature papers on coronal mass ejections",
-    "ads_query": "bibstem:Nature property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Nature refereed only",
-    "ads_query": "bibstem:Nature property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature gravitational waves openaccess",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in Nature with openaccess",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Nature papers on gravitational waves",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves Nature openaccess only",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature dark energy openaccess",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in Nature with openaccess",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Nature papers on dark energy",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy Nature openaccess only",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature weak lensing openaccess",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in Nature with openaccess",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Nature papers on weak lensing",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing Nature openaccess only",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature solar wind openaccess",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in Nature with openaccess",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Nature papers on solar wind",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind Nature openaccess only",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature coronal mass ejections openaccess",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Nature with openaccess",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Nature papers on coronal mass ejections",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Nature openaccess only",
-    "ads_query": "bibstem:Nature property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature gravitational waves data",
-    "ads_query": "bibstem:Nature property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in Nature with data",
-    "ads_query": "bibstem:Nature property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "data Nature papers on gravitational waves",
-    "ads_query": "bibstem:Nature property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves Nature data only",
-    "ads_query": "bibstem:Nature property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature dark energy data",
-    "ads_query": "bibstem:Nature property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in Nature with data",
-    "ads_query": "bibstem:Nature property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "data Nature papers on dark energy",
-    "ads_query": "bibstem:Nature property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy Nature data only",
-    "ads_query": "bibstem:Nature property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature weak lensing data",
-    "ads_query": "bibstem:Nature property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in Nature with data",
-    "ads_query": "bibstem:Nature property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "data Nature papers on weak lensing",
-    "ads_query": "bibstem:Nature property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing Nature data only",
-    "ads_query": "bibstem:Nature property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature solar wind data",
-    "ads_query": "bibstem:Nature property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in Nature with data",
-    "ads_query": "bibstem:Nature property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "data Nature papers on solar wind",
-    "ads_query": "bibstem:Nature property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind Nature data only",
-    "ads_query": "bibstem:Nature property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "Nature coronal mass ejections data",
-    "ads_query": "bibstem:Nature property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Nature with data",
-    "ads_query": "bibstem:Nature property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "data Nature papers on coronal mass ejections",
-    "ads_query": "bibstem:Nature property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Nature data only",
-    "ads_query": "bibstem:Nature property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Nature\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "Science gravitational waves refereed",
-    "ads_query": "bibstem:Science property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in Science with refereed",
-    "ads_query": "bibstem:Science property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Science papers on gravitational waves",
-    "ads_query": "bibstem:Science property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves Science refereed only",
-    "ads_query": "bibstem:Science property:refereed abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "Science dark energy refereed",
-    "ads_query": "bibstem:Science property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in Science with refereed",
-    "ads_query": "bibstem:Science property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Science papers on dark energy",
-    "ads_query": "bibstem:Science property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy Science refereed only",
-    "ads_query": "bibstem:Science property:refereed abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "Science weak lensing refereed",
-    "ads_query": "bibstem:Science property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in Science with refereed",
-    "ads_query": "bibstem:Science property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Science papers on weak lensing",
-    "ads_query": "bibstem:Science property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing Science refereed only",
-    "ads_query": "bibstem:Science property:refereed abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "Science solar wind refereed",
-    "ads_query": "bibstem:Science property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in Science with refereed",
-    "ads_query": "bibstem:Science property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Science papers on solar wind",
-    "ads_query": "bibstem:Science property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind Science refereed only",
-    "ads_query": "bibstem:Science property:refereed abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "Science coronal mass ejections refereed",
-    "ads_query": "bibstem:Science property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Science with refereed",
-    "ads_query": "bibstem:Science property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "refereed Science papers on coronal mass ejections",
-    "ads_query": "bibstem:Science property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Science refereed only",
-    "ads_query": "bibstem:Science property:refereed abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "Science gravitational waves openaccess",
-    "ads_query": "bibstem:Science property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in Science with openaccess",
-    "ads_query": "bibstem:Science property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Science papers on gravitational waves",
-    "ads_query": "bibstem:Science property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves Science openaccess only",
-    "ads_query": "bibstem:Science property:openaccess abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "Science dark energy openaccess",
-    "ads_query": "bibstem:Science property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in Science with openaccess",
-    "ads_query": "bibstem:Science property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Science papers on dark energy",
-    "ads_query": "bibstem:Science property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy Science openaccess only",
-    "ads_query": "bibstem:Science property:openaccess abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "Science weak lensing openaccess",
-    "ads_query": "bibstem:Science property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in Science with openaccess",
-    "ads_query": "bibstem:Science property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Science papers on weak lensing",
-    "ads_query": "bibstem:Science property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing Science openaccess only",
-    "ads_query": "bibstem:Science property:openaccess abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "Science solar wind openaccess",
-    "ads_query": "bibstem:Science property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in Science with openaccess",
-    "ads_query": "bibstem:Science property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Science papers on solar wind",
-    "ads_query": "bibstem:Science property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind Science openaccess only",
-    "ads_query": "bibstem:Science property:openaccess abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "Science coronal mass ejections openaccess",
-    "ads_query": "bibstem:Science property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Science with openaccess",
-    "ads_query": "bibstem:Science property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Science papers on coronal mass ejections",
-    "ads_query": "bibstem:Science property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Science openaccess only",
-    "ads_query": "bibstem:Science property:openaccess abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "Science gravitational waves data",
-    "ads_query": "bibstem:Science property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves in Science with data",
-    "ads_query": "bibstem:Science property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "data Science papers on gravitational waves",
-    "ads_query": "bibstem:Science property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "gravitational waves Science data only",
-    "ads_query": "bibstem:Science property:data abs:\"gravitational waves\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"gravitational waves\"",
     "category": "filters"
   },
   {
     "natural_language": "Science dark energy data",
-    "ads_query": "bibstem:Science property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy in Science with data",
-    "ads_query": "bibstem:Science property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "data Science papers on dark energy",
-    "ads_query": "bibstem:Science property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "dark energy Science data only",
-    "ads_query": "bibstem:Science property:data abs:\"dark energy\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"dark energy\"",
     "category": "filters"
   },
   {
     "natural_language": "Science weak lensing data",
-    "ads_query": "bibstem:Science property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing in Science with data",
-    "ads_query": "bibstem:Science property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "data Science papers on weak lensing",
-    "ads_query": "bibstem:Science property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "weak lensing Science data only",
-    "ads_query": "bibstem:Science property:data abs:\"weak lensing\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"weak lensing\"",
     "category": "filters"
   },
   {
     "natural_language": "Science solar wind data",
-    "ads_query": "bibstem:Science property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind in Science with data",
-    "ads_query": "bibstem:Science property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "data Science papers on solar wind",
-    "ads_query": "bibstem:Science property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "solar wind Science data only",
-    "ads_query": "bibstem:Science property:data abs:\"solar wind\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"solar wind\"",
     "category": "filters"
   },
   {
     "natural_language": "Science coronal mass ejections data",
-    "ads_query": "bibstem:Science property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Science with data",
-    "ads_query": "bibstem:Science property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "data Science papers on coronal mass ejections",
-    "ads_query": "bibstem:Science property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Science data only",
-    "ads_query": "bibstem:Science property:data abs:\"coronal mass ejections\"",
+    "ads_query": "bibstem:\"Science\" property:data abs:\"coronal mass ejections\"",
     "category": "filters"
   },
   {
