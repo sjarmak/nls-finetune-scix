@@ -240,15 +240,47 @@
       "category": "modal",
       "status": "passing",
       "verification": "curl -s 'http://localhost:8000/api/nl-search' -X POST -H 'Content-Type: application/json' -d '{\"query\":\"trending papers on exoplanets\"}' | grep -q 'trending'",
-      "notes": "Training completed (operators-v2). Operators handled via post-processing in API route."
+      "notes": "Training completed (operators-v2). Post-processing removed - model must learn natively via train-003."
     },
     {
       "id": "eval-006",
       "name": "Operator query generation verified",
       "category": "eval",
+      "status": "failing",
+      "verification": "curl -s -X POST https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/chat/completions -H 'Content-Type: application/json' -d '{\"model\":\"llm\",\"messages\":[{\"role\":\"system\",\"content\":\"Convert natural language to ADS search query. Output JSON: {\\\"query\\\": \\\"...\\\"}\"},{\"role\":\"user\",\"content\":\"Query: papers similar to 2019ApJ...887L...1K\"}],\"max_tokens\":64}' | grep -q 'similar'",
+      "notes": "Post-processing removed. Model must learn operators natively."
+    },
+    {
+      "id": "data-007",
+      "name": "Operator examples expanded to 10%+ coverage",
+      "category": "data",
       "status": "passing",
-      "verification": "curl -s 'http://localhost:8000/api/nl-search' -X POST -H 'Content-Type: application/json' -d '{\"query\":\"papers similar to 2019ApJ...887L...1K\"}' | grep -q 'similar'",
-      "notes": "All operator types verified: trending, similar, useful, citations, references, reviews."
+      "verification": "python -c \"import json; d=json.load(open('data/datasets/raw/gold_examples.json')); ops=[e for e in d if e.get('category')=='operator']; assert len(ops)>=100, f'Only {len(ops)} operator examples'\"",
+      "notes": "Added 84 new examples. Total: 134 operator examples covering citations, reviews, useful, similar, trending, references, topn, NOT, OR, NEAR"
+    },
+    {
+      "id": "data-008",
+      "name": "Training data regenerated with expanded operators",
+      "category": "data",
+      "status": "failing",
+      "verification": "python -c \"lines=open('data/datasets/processed/train.jsonl').readlines(); ops=sum(1 for l in lines if 'trending(' in l or 'citations(' in l or 'similar(' in l); pct=ops/len(lines)*100; assert pct>=5, f'Only {pct:.1f}% operators'\"",
+      "notes": "Depends on data-007"
+    },
+    {
+      "id": "train-003",
+      "name": "Model retrained with expanded operator data",
+      "category": "modal",
+      "status": "failing",
+      "verification": "curl -s -X POST https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/chat/completions -H 'Content-Type: application/json' -d '{\"model\":\"llm\",\"messages\":[{\"role\":\"system\",\"content\":\"Convert natural language to ADS search query. Output JSON: {\\\"query\\\": \\\"...\\\"}\"},{\"role\":\"user\",\"content\":\"Query: trending papers on cosmology\"}],\"max_tokens\":64}' | grep -q 'trending('",
+      "notes": "Depends on data-008. Model should generate operators natively."
+    },
+    {
+      "id": "integ-010",
+      "name": "ADS autocomplete for author validation",
+      "category": "integration",
+      "status": "failing",
+      "verification": "grep -r 'autocomplete' ~/ads-dev/nectar/src/pages/api/",
+      "notes": "From research-001: Use ADS /v1/autocomplete API with 200ms timeout"
     }
   ]
 }

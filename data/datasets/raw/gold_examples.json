@@ -990,5 +990,429 @@
     "query": "data:Spitzer abs:exoplanet",
     "category": "data",
     "notes": "data: combined with topic"
+  },
+  {
+    "nl": "papers citing research about dark matter",
+    "query": "citations(abs:\"dark matter\")",
+    "category": "operator",
+    "notes": "citations() for citation network"
+  },
+  {
+    "nl": "papers citing work on gravitational waves",
+    "query": "citations(abs:\"gravitational wave\")",
+    "category": "operator"
+  },
+  {
+    "nl": "papers citing cosmology research",
+    "query": "citations(abs:cosmology)",
+    "category": "operator"
+  },
+  {
+    "nl": "papers citing black hole studies",
+    "query": "citations(abs:\"black hole\")",
+    "category": "operator"
+  },
+  {
+    "nl": "papers citing galaxy formation work",
+    "query": "citations(abs:\"galaxy formation\")",
+    "category": "operator"
+  },
+  {
+    "nl": "papers citing stellar evolution research",
+    "query": "citations(abs:\"stellar evolution\")",
+    "category": "operator"
+  },
+  {
+    "nl": "papers citing supernova studies",
+    "query": "citations(abs:supernova)",
+    "category": "operator"
+  },
+  {
+    "nl": "papers citing neutron star research",
+    "query": "citations(abs:\"neutron star\")",
+    "category": "operator"
+  },
+  {
+    "nl": "review articles covering dark energy broadly",
+    "query": "reviews(abs:\"dark energy\")",
+    "category": "operator",
+    "notes": "reviews() for comprehensive coverage"
+  },
+  {
+    "nl": "comprehensive reviews of galaxy clusters",
+    "query": "reviews(abs:\"galaxy cluster\")",
+    "category": "operator"
+  },
+  {
+    "nl": "review papers covering AGN",
+    "query": "reviews(abs:\"active galactic nuclei\")",
+    "category": "operator"
+  },
+  {
+    "nl": "broad reviews of stellar atmospheres",
+    "query": "reviews(abs:\"stellar atmosphere\")",
+    "category": "operator"
+  },
+  {
+    "nl": "reviews covering interstellar medium",
+    "query": "reviews(abs:\"interstellar medium\")",
+    "category": "operator"
+  },
+  {
+    "nl": "comprehensive review of pulsar timing",
+    "query": "reviews(abs:\"pulsar timing\")",
+    "category": "operator"
+  },
+  {
+    "nl": "review articles on planetary nebulae",
+    "query": "reviews(abs:\"planetary nebula\")",
+    "category": "operator"
+  },
+  {
+    "nl": "reviews of radio astronomy techniques",
+    "query": "reviews(abs:\"radio astronomy\")",
+    "category": "operator"
+  },
+  {
+    "nl": "useful papers for studying quasars",
+    "query": "useful(abs:quasar)",
+    "category": "operator",
+    "notes": "useful() for methodology papers"
+  },
+  {
+    "nl": "foundational methodology for CMB analysis",
+    "query": "useful(abs:\"cosmic microwave background\")",
+    "category": "operator"
+  },
+  {
+    "nl": "common references in spectroscopy research",
+    "query": "useful(abs:spectroscopy)",
+    "category": "operator"
+  },
+  {
+    "nl": "key methodology papers for photometry",
+    "query": "useful(abs:photometry)",
+    "category": "operator"
+  },
+  {
+    "nl": "foundational papers for astrometry research",
+    "query": "useful(abs:astrometry)",
+    "category": "operator"
+  },
+  {
+    "nl": "methodology for N-body simulations",
+    "query": "useful(abs:\"N-body simulation\")",
+    "category": "operator"
+  },
+  {
+    "nl": "common references for Bayesian analysis in astronomy",
+    "query": "useful(abs:Bayesian database:astronomy)",
+    "category": "operator"
+  },
+  {
+    "nl": "foundational papers for radial velocity measurements",
+    "query": "useful(abs:\"radial velocity\")",
+    "category": "operator"
+  },
+  {
+    "nl": "trending research on JWST observations",
+    "query": "trending(abs:JWST)",
+    "category": "operator"
+  },
+  {
+    "nl": "popular papers on black hole mergers right now",
+    "query": "trending(abs:\"black hole merger\")",
+    "category": "operator"
+  },
+  {
+    "nl": "what's hot in cosmology",
+    "query": "trending(abs:cosmology)",
+    "category": "operator"
+  },
+  {
+    "nl": "currently popular dark matter research",
+    "query": "trending(abs:\"dark matter\")",
+    "category": "operator"
+  },
+  {
+    "nl": "trending papers on fast radio bursts",
+    "query": "trending(abs:\"fast radio burst\")",
+    "category": "operator"
+  },
+  {
+    "nl": "hot papers on gravitational lensing",
+    "query": "trending(abs:\"gravitational lensing\")",
+    "category": "operator"
+  },
+  {
+    "nl": "what's popular in galaxy evolution research",
+    "query": "trending(abs:\"galaxy evolution\")",
+    "category": "operator"
+  },
+  {
+    "nl": "trending research on supermassive black holes",
+    "query": "trending(abs:\"supermassive black hole\")",
+    "category": "operator"
+  },
+  {
+    "nl": "papers like the Planck CMB results",
+    "query": "similar(abs:Planck abs:\"cosmic microwave background\")",
+    "category": "operator"
+  },
+  {
+    "nl": "find papers related to LIGO discoveries",
+    "query": "similar(abs:LIGO abs:\"gravitational wave\")",
+    "category": "operator"
+  },
+  {
+    "nl": "papers similar to Gaia stellar surveys",
+    "query": "similar(abs:Gaia abs:stellar)",
+    "category": "operator"
+  },
+  {
+    "nl": "work related to Hubble deep field",
+    "query": "similar(abs:Hubble abs:\"deep field\")",
+    "category": "operator"
+  },
+  {
+    "nl": "papers like Kepler exoplanet discoveries",
+    "query": "similar(abs:Kepler abs:exoplanet)",
+    "category": "operator"
+  },
+  {
+    "nl": "find similar work to Event Horizon Telescope",
+    "query": "similar(abs:\"Event Horizon Telescope\")",
+    "category": "operator"
+  },
+  {
+    "nl": "papers related to ALMA observations",
+    "query": "similar(abs:ALMA)",
+    "category": "operator"
+  },
+  {
+    "nl": "work similar to Fermi gamma ray research",
+    "query": "similar(abs:Fermi abs:\"gamma ray\")",
+    "category": "operator"
+  },
+  {
+    "nl": "references from dark matter papers",
+    "query": "references(abs:\"dark matter\")",
+    "category": "operator"
+  },
+  {
+    "nl": "what do cosmology papers cite",
+    "query": "references(abs:cosmology)",
+    "category": "operator"
+  },
+  {
+    "nl": "references used in gravitational wave research",
+    "query": "references(abs:\"gravitational wave\")",
+    "category": "operator"
+  },
+  {
+    "nl": "bibliography from stellar evolution papers",
+    "query": "references(abs:\"stellar evolution\")",
+    "category": "operator"
+  },
+  {
+    "nl": "papers referenced by quasar research",
+    "query": "references(abs:quasar)",
+    "category": "operator"
+  },
+  {
+    "nl": "references from exoplanet atmosphere studies",
+    "query": "references(abs:\"exoplanet atmosphere\")",
+    "category": "operator"
+  },
+  {
+    "nl": "what do magnetar papers cite",
+    "query": "references(abs:magnetar)",
+    "category": "operator"
+  },
+  {
+    "nl": "bibliography of pulsar research",
+    "query": "references(abs:pulsar)",
+    "category": "operator"
+  },
+  {
+    "nl": "top 50 most cited papers on black holes",
+    "query": "topn(50, abs:\"black hole\", citation_count desc)",
+    "category": "operator"
+  },
+  {
+    "nl": "best 100 papers on cosmology by citations",
+    "query": "topn(100, abs:cosmology, citation_count desc)",
+    "category": "operator"
+  },
+  {
+    "nl": "top 20 most read dark matter papers",
+    "query": "topn(20, abs:\"dark matter\", read_count desc)",
+    "category": "operator"
+  },
+  {
+    "nl": "most cited 50 papers on gravitational waves",
+    "query": "topn(50, abs:\"gravitational wave\", citation_count desc)",
+    "category": "operator"
+  },
+  {
+    "nl": "best 25 papers on galaxy formation",
+    "query": "topn(25, abs:\"galaxy formation\", citation_count desc)",
+    "category": "operator"
+  },
+  {
+    "nl": "top papers on stellar nucleosynthesis",
+    "query": "topn(50, abs:\"stellar nucleosynthesis\", citation_count desc)",
+    "category": "operator"
+  },
+  {
+    "nl": "most popular 30 supernova papers",
+    "query": "topn(30, abs:supernova, read_count desc)",
+    "category": "operator"
+  },
+  {
+    "nl": "best cited neutron star papers",
+    "query": "topn(50, abs:\"neutron star\", citation_count desc)",
+    "category": "operator"
+  },
+  {
+    "nl": "trending papers that cite dark energy research",
+    "query": "trending(citations(abs:\"dark energy\"))",
+    "category": "operator",
+    "notes": "nested operators"
+  },
+  {
+    "nl": "popular papers similar to JWST work",
+    "query": "trending(similar(abs:JWST))",
+    "category": "operator"
+  },
+  {
+    "nl": "reviews that cite gravitational wave papers",
+    "query": "reviews(citations(abs:\"gravitational wave\"))",
+    "category": "operator"
+  },
+  {
+    "nl": "useful references for papers citing cosmology",
+    "query": "useful(citations(abs:cosmology))",
+    "category": "operator"
+  },
+  {
+    "nl": "papers citing Hawking's work from 2020 onwards",
+    "query": "citations(author:\"Hawking, S\") pubdate:[2020 TO *]",
+    "category": "operator"
+  },
+  {
+    "nl": "recent papers citing Einstein",
+    "query": "citations(author:\"Einstein, A\") pubdate:[2015 TO *]",
+    "category": "operator"
+  },
+  {
+    "nl": "2023 papers citing dark matter research",
+    "query": "citations(abs:\"dark matter\") pubdate:2023",
+    "category": "operator"
+  },
+  {
+    "nl": "papers from this year citing exoplanet work",
+    "query": "citations(abs:exoplanet) pubdate:2026",
+    "category": "operator"
+  },
+  {
+    "nl": "trending papers in Physical Review Letters",
+    "query": "trending(bibstem:PhRvL)",
+    "category": "operator"
+  },
+  {
+    "nl": "popular ApJ papers right now",
+    "query": "trending(bibstem:ApJ)",
+    "category": "operator"
+  },
+  {
+    "nl": "what's hot from MIT researchers",
+    "query": "trending(aff:MIT)",
+    "category": "operator"
+  },
+  {
+    "nl": "trending papers from Caltech",
+    "query": "trending(aff:Caltech)",
+    "category": "operator"
+  },
+  {
+    "nl": "reviews by first author Hawking",
+    "query": "reviews(^author:\"Hawking, S\")",
+    "category": "operator"
+  },
+  {
+    "nl": "papers citing Penrose's work",
+    "query": "citations(author:\"Penrose, R\")",
+    "category": "operator"
+  },
+  {
+    "nl": "references in Rubin's papers",
+    "query": "references(author:\"Rubin, V\")",
+    "category": "operator"
+  },
+  {
+    "nl": "useful methodology from Sagan's work",
+    "query": "useful(author:\"Sagan, C\")",
+    "category": "operator"
+  },
+  {
+    "nl": "papers about protoplanetary disks but not debris disks",
+    "query": "abs:\"protoplanetary disk\" NOT abs:\"debris disk\"",
+    "category": "operator"
+  },
+  {
+    "nl": "galaxy papers excluding mergers",
+    "query": "abs:galaxy NOT abs:merger",
+    "category": "operator"
+  },
+  {
+    "nl": "star formation without feedback",
+    "query": "abs:\"star formation\" -abs:feedback",
+    "category": "operator"
+  },
+  {
+    "nl": "cosmology papers not about inflation",
+    "query": "abs:cosmology NOT abs:inflation",
+    "category": "operator"
+  },
+  {
+    "nl": "supernova papers or nova papers",
+    "query": "abs:supernova OR abs:nova",
+    "category": "operator"
+  },
+  {
+    "nl": "black hole or neutron star binaries",
+    "query": "(abs:\"black hole\" OR abs:\"neutron star\") abs:binary",
+    "category": "operator"
+  },
+  {
+    "nl": "ALMA or NOEMA observations",
+    "query": "abs:ALMA OR abs:NOEMA",
+    "category": "operator"
+  },
+  {
+    "nl": "Chandra or XMM Newton X-ray data",
+    "query": "(abs:Chandra OR abs:\"XMM Newton\") abs:\"X-ray\"",
+    "category": "operator"
+  },
+  {
+    "nl": "spectroscopy near exoplanet in abstract",
+    "query": "abs:(spectroscopy NEAR5 exoplanet)",
+    "category": "operator"
+  },
+  {
+    "nl": "papers where transit appears near detection",
+    "query": "abs:(transit NEAR3 detection)",
+    "category": "operator"
+  },
+  {
+    "nl": "redshift near survey in abstract",
+    "query": "abs:(redshift NEAR5 survey)",
+    "category": "operator"
+  },
+  {
+    "nl": "metallicity near abundance in text",
+    "query": "abs:(metallicity NEAR3 abundance)",
+    "category": "operator"
   }
 ]

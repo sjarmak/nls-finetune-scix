@@ -270,8 +270,64 @@
         "Operator queries pass ADS API validation"
       ],
       "priority": 19,
+      "passes": false,
+      "notes": "Previous pass used post-processing hacks which were removed. Model must learn operators natively."
+    },
+    {
+      "id": "data-007",
+      "title": "Expand operator training examples to 10%+ of dataset",
+      "description": "Add ~100 more operator examples to reach 5-10% of training data for reliable pattern learning.",
+      "acceptanceCriteria": [
+        "Gold examples include 100+ operator examples",
+        "Diverse topics (not just exoplanets) - cosmology, gravitational waves, stellar evolution, etc.",
+        "All operator types covered: citations(), reviews(), useful(), similar(), trending(), references(), topn()",
+        "Nested operators included",
+        "Boolean operators (NOT, OR) and NEAR proximity included"
+      ],
+      "priority": 20,
       "passes": true,
-      "notes": "All operator types verified via API route. Added citations() and references() post-processing. All queries pass ADS linter."
+      "notes": "Added 84 new operator examples. Total: 134 operator, 267 total gold examples."
+    },
+    {
+      "id": "data-008",
+      "title": "Regenerate training data with expanded operators",
+      "description": "Rebuild training JSONL with 134 operator examples for better pattern learning.",
+      "acceptanceCriteria": [
+        "train.jsonl regenerated",
+        "Operator examples are 5-10% of training data",
+        "All operator types represented"
+      ],
+      "priority": 21,
+      "passes": false,
+      "notes": "Depends on data-007"
+    },
+    {
+      "id": "train-003",
+      "title": "Retrain model with expanded operator data",
+      "description": "Fine-tune model with 134 operator examples for native operator syntax learning.",
+      "acceptanceCriteria": [
+        "Training completes on Modal",
+        "Model deployed to vLLM endpoint",
+        "Model generates trending(), similar(), citations() natively without post-processing",
+        "Endpoint responds within 2s"
+      ],
+      "priority": 22,
+      "passes": false,
+      "notes": "Depends on data-008. Should achieve reliable operator generation."
+    },
+    {
+      "id": "integ-010",
+      "title": "Add ADS autocomplete for author validation",
+      "description": "Use ADS autocomplete API to validate author names before query submission.",
+      "acceptanceCriteria": [
+        "API route calls ADS autocomplete for author names",
+        "Invalid author names trigger suggestion from autocomplete",
+        "Latency under 200ms with timeout fallback",
+        "Cache autocomplete results for repeated queries"
+      ],
+      "priority": 23,
+      "passes": false,
+      "notes": "From research-001: ADS provides /v1/autocomplete?term=X&field=author"
     }
   ]
 }
