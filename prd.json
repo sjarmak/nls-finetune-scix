@@ -36,7 +36,7 @@
         "Run: mise run test and all tests pass"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Use existing lint_query as base, extend with constraint checking"
     },
     {

@@ -274,3 +274,8 @@ Created `packages/finetune/src/finetune/domains/scix/field_constraints.py` with:
 ### Verification
 - `mise run verify` - All checks pass
 - Module imports correctly with all enums
+
+## Iteration 1 - US-001
+
+**Completed**: Create ADS field constraints module
+

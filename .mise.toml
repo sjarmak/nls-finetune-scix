@@ -100,7 +100,9 @@ description = "Run all tests"
 run = """
 #!/usr/bin/env bash
 set -e
-(cd packages/api && uv run pytest)
+echo "Running finetune tests..."
+uv run pytest packages/finetune/tests/ -v
+echo "Running web lint..."
 (cd packages/web && bun run lint)
 """
 

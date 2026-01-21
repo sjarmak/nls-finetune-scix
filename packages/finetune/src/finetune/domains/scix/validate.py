@@ -6,13 +6,43 @@ Provides both offline linting and API-backed validation against ADS Search API.
 import os
 import re
 from dataclasses import dataclass
+from dataclasses import field as dataclass_field
 
 import httpx
 
+from finetune.domains.scix.field_constraints import FIELD_ENUMS, suggest_correction
 from finetune.domains.scix.fields import ADS_FIELDS
 
 # Valid field prefixes (including ^ for first author), normalized to lowercase
 VALID_FIELD_PREFIXES = {k.lower() for k in ADS_FIELDS.keys()} | {"^author", "^"}
+
+
+@dataclass
+class FieldConstraintError:
+    """Error for an invalid field value."""
+
+    field: str
+    value: str
+    suggestions: list[str] = dataclass_field(default_factory=list)
+
+    def __str__(self) -> str:
+        msg = f"Invalid {self.field} value: '{self.value}'"
+        if self.suggestions:
+            msg += f" (did you mean: {', '.join(self.suggestions)}?)"
+        return msg
+
+
+@dataclass
+class ConstraintValidationResult:
+    """Result of field constraint validation."""
+
+    valid: bool
+    errors: list[FieldConstraintError] = dataclass_field(default_factory=list)
+
+    @property
+    def error_messages(self) -> list[str]:
+        """Get list of error messages as strings."""
+        return [str(e) for e in self.errors]
 
 
 @dataclass
@@ -103,6 +133,80 @@ def lint_query(query: str) -> ValidationResult:
     )
 
 
+def validate_field_constraints(query: str) -> ConstraintValidationResult:
+    """Validate that field values in a query match allowed enumerations.
+
+    Checks doctype:, database:, property:, and bibgroup: field values
+    against their allowed sets defined in field_constraints.py.
+
+    Args:
+        query: The ADS query string to validate
+
+    Returns:
+        ConstraintValidationResult with validity status and list of errors
+        with suggestions for invalid values.
+
+    Example:
+        >>> result = validate_field_constraints('doctype:journal property:openaccess')
+        >>> result.valid
+        False
+        >>> result.errors[0].field
+        'doctype'
+        >>> result.errors[0].value
+        'journal'
+        >>> result.errors[0].suggestions
+        ['article']
+    """
+    errors: list[FieldConstraintError] = []
+
+    # Fields to check - these have constrained vocabularies
+    constrained_fields = ["doctype", "database", "property", "bibgroup"]
+
+    for field_name in constrained_fields:
+        valid_values = FIELD_ENUMS.get(field_name)
+        if valid_values is None:
+            continue
+
+        # Build regex pattern to match field:value or field:"value"
+        # Handles: field:value, field:"value", field:(val1 OR val2)
+        pattern = rf'\b{field_name}:\s*(?:"([^"]+)"|(\([^)]+\))|([^\s()]+))'
+
+        for match in re.finditer(pattern, query, re.IGNORECASE):
+            # Get the matched value from whichever group matched
+            if match.group(1):  # Quoted value
+                value = match.group(1)
+            elif match.group(2):  # Parenthesized group (OR list)
+                # Parse values from (val1 OR val2 OR val3)
+                inner = match.group(2)[1:-1]  # Remove parens
+                # Split on OR and strip whitespace
+                values = [v.strip().strip('"') for v in re.split(r'\s+OR\s+', inner, flags=re.IGNORECASE)]
+                for v in values:
+                    if v and v.lower() not in {val.lower() for val in valid_values}:
+                        suggestions = suggest_correction(field_name, v)
+                        errors.append(FieldConstraintError(
+                            field=field_name,
+                            value=v,
+                            suggestions=suggestions,
+                        ))
+                continue
+            else:  # Unquoted value
+                value = match.group(3)
+
+            # Check if the value is valid (case-insensitive)
+            if value.lower() not in {v.lower() for v in valid_values}:
+                suggestions = suggest_correction(field_name, value)
+                errors.append(FieldConstraintError(
+                    field=field_name,
+                    value=value,
+                    suggestions=suggestions,
+                ))
+
+    return ConstraintValidationResult(
+        valid=len(errors) == 0,
+        errors=errors,
+    )
+
+
 def validate_query(
     query: str,
     api_key: str | None = None,
@@ -157,7 +261,7 @@ def validate_query(
                 valid=True,
                 errors=[],
                 warnings=lint_result.warnings
-                + ([f"Query returned 0 results"] if num_found == 0 else []),
+                + (["Query returned 0 results"] if num_found == 0 else []),
                 normalized=query,  # ADS doesn't return normalized form
             )
 
