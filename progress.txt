@@ -174,3 +174,18 @@ Started: 2026-01-21
 - Feature flags must be enabled in test environment
 - Check network requests to verify all API calls succeed
 ---
+
+## 2026-01-21 - integ-007
+- Created /api/search API route at ~/ads-dev/nectar/src/pages/api/search/index.ts
+- Proxies GET requests to ADS search API (https://api.adsabs.harvard.edu/v1/search/query)
+- Uses iron-session to get user's access_token for Bearer authentication
+- Handles query params: q, rows, fl, sort, start
+- Returns full ADS API response including response.numFound for result count preview
+- Playwright tests pass with route working properly
+- Files changed: ~/ads-dev/nectar/src/pages/api/search/index.ts, prd.json, features.json
+- **Learnings for future iterations:**
+  - Use getIronSession(req, res, sessionConfig) to access session token
+  - session.token.access_token contains the Bearer token for ADS API
+  - API_HOST_SERVER env var contains the ADS API base URL
+  - Existing build errors in nectar unrelated to this change (authoraffiliations page router issue)
+---

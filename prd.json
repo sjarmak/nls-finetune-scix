@@ -139,7 +139,7 @@
         "Result count appears in NL search suggestion box"
       ],
       "priority": 10,
-      "passes": false,
+      "passes": true,
       "notes": "Bug: /api/search returns 404. See beads issue nls-finetune-scix-h1y"
     },
     {

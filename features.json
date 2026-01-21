@@ -174,7 +174,7 @@
       "id": "integ-007",
       "name": "Search API proxy for result count preview",
       "category": "integration",
-      "status": "failing",
+      "status": "passing",
       "verification": "curl -s 'http://localhost:8000/api/search?q=author:Einstein&rows=0' | grep -q 'numFound'",
       "notes": "Bug: /api/search returns 404. Creates proxy to ADS search API. See beads: nls-finetune-scix-h1y"
     },
