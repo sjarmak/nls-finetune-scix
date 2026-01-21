@@ -1,0 +1,165 @@
+[tools]
+python = "3.12"
+bun = "1.1"
+
+[env]
+VIRTUAL_ENV = "{{config_root}}/.venv"
+
+# ===========================================
+# SETUP
+# ===========================================
+
+[tasks.install]
+description = "Install all dependencies"
+run = """
+#!/usr/bin/env bash
+set -e
+echo "Installing runtimes..."
+mise install
+
+echo "Installing Python dependencies (workspace)..."
+uv sync
+
+echo "Installing Python dependencies (api package)..."
+(cd packages/api && uv sync)
+
+echo "Installing Node dependencies..."
+(cd packages/web && bun install)
+
+echo ""
+echo "Done! Run 'mise run verify' to check setup, then 'mise run dev' to start."
+"""
+
+[tasks.init]
+description = "Initialize environment (first-time setup)"
+run = "./scripts/init.sh"
+
+# ===========================================
+# DEVELOPMENT
+# ===========================================
+
+[tasks.dev]
+description = "Start API and web servers (parallel)"
+depends = ["dev-api", "dev-web"]
+
+[tasks.dev-api]
+description = "Start API server only (port 8000)"
+run = "cd packages/api && uv run uvicorn api.main:app --reload --host 127.0.0.1 --port 8000"
+
+[tasks.dev-web]
+description = "Start web dev server only (port 5173)"
+run = "cd packages/web && bun run dev"
+
+# ===========================================
+# VERIFICATION
+# ===========================================
+
+[tasks.verify]
+description = "Run all checks (lint, types, data validation)"
+run = "./scripts/verify.sh"
+
+[tasks.verify-full]
+description = "Run all checks including frontend build"
+run = "./scripts/verify.sh --full"
+
+[tasks.verify-api]
+description = "Verify API only"
+run = "./scripts/verify-api.sh"
+
+[tasks.verify-web]
+description = "Verify web only (lint + build)"
+run = "cd packages/web && bun run lint && bun run build"
+
+# ===========================================
+# CODE QUALITY
+# ===========================================
+
+[tasks.lint]
+description = "Run linters (Python + TypeScript)"
+run = """
+#!/usr/bin/env bash
+set -e
+echo "Linting Python..."
+(cd packages/api && uv run ruff check .)
+uv run ruff check packages/finetune/src/
+
+echo "Linting TypeScript..."
+(cd packages/web && bun run lint)
+"""
+
+[tasks.format]
+description = "Format Python code"
+run = """
+#!/usr/bin/env bash
+(cd packages/api && uv run ruff format .)
+uv run ruff format packages/finetune/src/
+"""
+
+[tasks.test]
+description = "Run all tests"
+run = """
+#!/usr/bin/env bash
+set -e
+(cd packages/api && uv run pytest)
+(cd packages/web && bun run lint)
+"""
+
+[tasks.test-api]
+description = "Run API tests only"
+run = "cd packages/api && uv run pytest"
+
+# ===========================================
+# DATASET MANAGEMENT
+# ===========================================
+
+[tasks.generate-data]
+description = "Full data pipeline: extract → generate NL → validate"
+depends = ["extract-queries", "generate-nl", "validate-data"]
+
+[tasks.extract-queries]
+description = "Extract Sourcegraph queries from BigQuery"
+run = "python scripts/extract_queries.py --output data/datasets/raw/extracted_queries.json"
+
+[tasks.generate-nl]
+description = "Generate natural language descriptions (requires ANTHROPIC_API_KEY)"
+run = """
+#!/usr/bin/env bash
+set -e
+if [ -z "$ANTHROPIC_API_KEY" ]; then
+  set -a && source .env && set +a
+fi
+cd packages/api && uv run python ../../scripts/generate_nl.py
+"""
+
+[tasks.validate-data]
+description = "Validate pairs and create train/val split"
+run = "cd packages/api && uv run python ../../scripts/validate_dataset.py"
+
+# ===========================================
+# MODAL (Fine-tuning & Inference)
+# ===========================================
+
+[tasks.modal-deploy]
+description = "Deploy inference endpoint to Modal"
+run = "cd packages/finetune/src/finetune/modal && modal deploy serve_vllm.py"
+
+[tasks.modal-train]
+description = "Run training job on Modal"
+run = "cd packages/finetune/src/finetune/modal && modal run train.py"
+
+# ===========================================
+# CLEANUP
+# ===========================================
+
+[tasks.clean]
+description = "Remove build artifacts and dependencies"
+run = """
+#!/usr/bin/env bash
+rm -rf packages/web/node_modules
+rm -rf packages/web/dist
+rm -rf packages/api/.venv
+rm -rf .venv
+rm -rf __pycache__
+find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
+echo "Cleaned!"
+"""

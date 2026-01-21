@@ -1,0 +1,403 @@
+[
+  {
+    "natural_language": "shell function in gliderlabs ssh at commit 59d6e45",
+    "sourcegraph_query": "repo:^github\\.com/gliderlabs/ssh$@59d6e45 shell'",
+    "candidates": [
+      "github.com/gliderlabs/ssh"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "relation usage in RESIDE codebase",
+    "sourcegraph_query": "repo:^github\\.com/malllabiisc/RESIDE$ relation",
+    "candidates": [
+      "github.com/malllabiisc/RESIDE"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "YumBase class definition in yum repo",
+    "sourcegraph_query": "repo:^github\\.com/rpm-software-management/yum$ YumBase",
+    "candidates": [
+      "github.com/rpm-software-management/yum"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "6326 in macpuffins repo",
+    "sourcegraph_query": "repo:^github\\.com/macpuffin/macpuffins$ 6326 count:1000",
+    "candidates": [
+      "github.com/macpuffin/macpuffins"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "php stream wrapper registration in php-src repo",
+    "sourcegraph_query": "repo:^github\\.com/php/php-src php_register_url_stream_wrapper php_stream_http_wrapper",
+    "candidates": [
+      "github.com/php/php-src"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "golang go repo and hound search code",
+    "sourcegraph_query": "repo:^github\\.com/golang/go$|^github\\.com/hound-search/hound$ ",
+    "candidates": [
+      "github.com/golang/go"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "code in jishin86 repos",
+    "sourcegraph_query": "repo:^github\\.com/jishin86",
+    "candidates": [
+      "github.com/jishin86"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "invalid-argument errors in grpc repo",
+    "sourcegraph_query": "repo:github\\.com/grpc/grpc invalid-argument",
+    "candidates": [
+      "github.com/grpc/grpc"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "CreateProcess repo code",
+    "sourcegraph_query": "repo:^github\\.com/CreateProcess$ ",
+    "candidates": [
+      "github.com/CreateProcess"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "go lang code in quickfix repo",
+    "sourcegraph_query": "repo:^github\\.com/quickfixgo/quickfix \"go \"",
+    "candidates": [
+      "github.com/quickfixgo/quickfix"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "conditions in kapp repo",
+    "sourcegraph_query": "repo:^github\\.com/nimakaviani/kapp$@HEAD conditions",
+    "candidates": [
+      "github.com/nimakaviani/kapp"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "crd handler in clouddriver spinnaker",
+    "sourcegraph_query": "repo:^github\\.com/spinnaker/clouddriver$ crd handler",
+    "candidates": [
+      "github.com/spinnaker/clouddriver"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "http.Client timeout config in sourcegraph repo",
+    "sourcegraph_query": "repo:sourcegraph/sourcegraph$ \"http.Client{:[a], Timeout: :[b], :[c]}\"",
+    "candidates": [
+      "github.com/sourcegraph/sourcegraph"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "QuicClock in envoy codebase",
+    "sourcegraph_query": "repo:^github\\.com/envoyproxy/envoy$ QuicClock",
+    "candidates": [
+      "github.com/envoyproxy/envoy"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "main menu implementation in lick repo",
+    "sourcegraph_query": "repo:^github\\.com/noryb009/lick$ main menu",
+    "candidates": [
+      "github.com/noryb009/lick"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "OpenFileDialog class in theia codebase",
+    "sourcegraph_query": "repo:^github\\.com/eclipse-theia/theia$ \\bOpenFileDialog\\b",
+    "candidates": [
+      "github.com/eclipse-theia/theia"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "cut function in jieba repo",
+    "sourcegraph_query": "repo:^github\\.com/fxsjy/jieba$ cut",
+    "candidates": [
+      "github.com/fxsjy/jieba"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "opentsdb integration in druid codebase",
+    "sourcegraph_query": "repo:^github\\.com/apache/incubator-druid$ opentsdb",
+    "candidates": [
+      "github.com/apache/incubator-druid"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "formcontrol usage in angular repo",
+    "sourcegraph_query": "repo:^github\\.com/angular/angular$ formcontrol",
+    "candidates": [
+      "github.com/angular/angular"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "auth stuff in sourcegraph main repo",
+    "sourcegraph_query": "repo:/sourcegraph/sourcegraph$ auth repo:^github\\.com/sourcegraph/sourcegraph$ ",
+    "candidates": [
+      "github.com//sourcegraph/sourcegraph",
+      "github.com/sourcegraph/sourcegraph"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "readDisable in envoy v1.12.2",
+    "sourcegraph_query": "repo:^github\\.com/envoyproxy/envoy$@v1.12.2 readDisable",
+    "candidates": [
+      "github.com/envoyproxy/envoy"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "ImageItemList in fastai master branch",
+    "sourcegraph_query": "repo:^github\\.com/fastai/fastai$@master ImageItemList",
+    "candidates": [
+      "github.com/fastai/fastai"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "DynamicCatalogController.java in ramveer93 presto repo",
+    "sourcegraph_query": "repo:^github\\.com/ramveer93/presto$ DynamicCatalogController.java",
+    "candidates": [
+      "github.com/ramveer93/presto"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "componentWillMount usage in recharts repo",
+    "sourcegraph_query": "repo:^github\\.com/recharts/recharts$ componentWillMount",
+    "candidates": [
+      "github.com/recharts/recharts"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "sourcegraph appdash repo code",
+    "sourcegraph_query": "repo:^sourcegraph/appdash$ ",
+    "candidates": [
+      "github.com/sourcegraph/appdash"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "where's 192.168.1.1 referenced in padavan-ng",
+    "sourcegraph_query": "repo:^github\\.com/zanezam/padavan-ng$ 192.168.1.1",
+    "candidates": [
+      "github.com/zanezam/padavan-ng"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "errorRetryInterval in swr repo",
+    "sourcegraph_query": "repo:^github\\.com/zeit/swr$ errorRetryInterval",
+    "candidates": [
+      "github.com/zeit/swr"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "3600 timeout config in keystone 10.0.0",
+    "sourcegraph_query": "repo:^github\\.com/openstack/keystone$@10.0.0 3600",
+    "candidates": [
+      "github.com/openstack/keystone"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "s3 put_bucket_policy implementation in ceph at commit 984020b",
+    "sourcegraph_query": "repo:^github\\.com/ceph/ceph$@984020b s3:put_bucket_policy",
+    "candidates": [
+      "github.com/ceph/ceph"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "http stuff in cdproto repo",
+    "sourcegraph_query": "repo:^github\\.com/chromedp/cdproto$ http",
+    "candidates": [
+      "github.com/chromedp/cdproto"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "redis Set function in gorobbs repo",
+    "sourcegraph_query": "repo:github.com/letseeqiji/gorobbs$ package_redis.Set",
+    "candidates": [
+      "github.com/letseeqiji/gorobbs"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "tj co repo generator functions",
+    "sourcegraph_query": "repogroup:freepn repo:^github\\.com/tj/co$ ",
+    "candidates": [
+      "github.com/tj/co"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "waitfor function in dart physics engine",
+    "sourcegraph_query": "repo:^github\\.com/dartsim/dart$ waitfor",
+    "candidates": [
+      "github.com/dartsim/dart"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "for loop examples in golang repo",
+    "sourcegraph_query": "repo:^github\\.com/golang/go$ for count:1000",
+    "candidates": [
+      "github.com/golang/go"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "where's isDownsampleEnabled defined in fresco repo",
+    "sourcegraph_query": "repo:^github\\.com/facebook/fresco$ isDownsampleEnabled",
+    "candidates": [
+      "github.com/facebook/fresco"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "ZIMG_CPU_X86_AVX_SKX in zimg repo",
+    "sourcegraph_query": "repo:^github\\.com/sekrit-twc/zimg$ ZIMG_CPU_X86_AVX_SKX",
+    "candidates": [
+      "github.com/sekrit-twc/zimg"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "CMakeLists for LegacyInterpreter target in iree compiler",
+    "sourcegraph_query": "repo:^github\\.com/google/iree$ iree/compiler/Dialect/HAL/Target/LegacyInterpreter/CMakeLists.txt",
+    "candidates": [
+      "github.com/google/iree"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "schedulejob in airflow repo",
+    "sourcegraph_query": "repo:^github\\.com/apache/airflow$ schedulejob",
+    "candidates": [
+      "github.com/apache/airflow"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "atoull function in envoy codebase",
+    "sourcegraph_query": "repo:^github\\.com/envoyproxy/envoy$ atoull",
+    "candidates": [
+      "github.com/envoyproxy/envoy"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "cert stuff in ssa-daemon repo",
+    "sourcegraph_query": "repo:^github\\.com/markoneill/ssa-daemon$ cert",
+    "candidates": [
+      "github.com/markoneill/ssa-daemon"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "ap function in pytorch vision repo",
+    "sourcegraph_query": "repo:^github\\.com/pytorch/vision$ \\bap\\b",
+    "candidates": [
+      "github.com/pytorch/vision"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "HTTPClientConfig in rancher prometheus-auth repo",
+    "sourcegraph_query": "repo:^github\\.com/rancher/prometheus-auth$ &HTTPClientConfig",
+    "candidates": [
+      "github.com/rancher/prometheus-auth"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "versin typo in elastic repo",
+    "sourcegraph_query": "repo:^github\\.com/olivere/elastic$ versin",
+    "candidates": [
+      "github.com/olivere/elastic"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "go generate in kubernetes release 1.16",
+    "sourcegraph_query": "repo:^github\\.com/kubernetes/kubernetes$@release-1.16 go:generate",
+    "candidates": [
+      "github.com/kubernetes/kubernetes"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "ngx_module_s struct definition nginx codebase",
+    "sourcegraph_query": "repo:^github\\.com/nginx/nginx$ ngx_module_s",
+    "candidates": [
+      "github.com/nginx/nginx"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "encryption key stuff in coolsnowwolf lede repo",
+    "sourcegraph_query": "repo:^github\\.com/coolsnowwolf/lede$ *encryption*key",
+    "candidates": [
+      "github.com/coolsnowwolf/lede"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "where's start process in ssm agent at bc7e780",
+    "sourcegraph_query": "repo:^github\\.com/aws/amazon-ssm-agent$@bc7e780 \"start process\"",
+    "candidates": [
+      "github.com/aws/amazon-ssm-agent"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "communications internal code where's the messaging service",
+    "sourcegraph_query": "repo:^code\\.uber\\.internal/communications/",
+    "candidates": [
+      "github.com/code.uber.internal/communications/"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "ewasm in ethereum tests repo",
+    "sourcegraph_query": "repo:^github\\.com/ethereum/tests$ e\\wasm",
+    "candidates": [
+      "github.com/ethereum/tests"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "QFED2_TOD in geos-chem repo",
+    "sourcegraph_query": "repo:^github\\.com/geoschem/geos-chem$ QFED2_TOD",
+    "candidates": [
+      "github.com/geoschem/geos-chem"
+    ],
+    "category": "repo_scoped"
+  }
+]

@@ -1,0 +1,174 @@
+{
+  "project": "nls-finetune-scix",
+  "description": "Feature tracking for SciX/ADS fine-tuning. Work on ONE failing feature at a time.",
+  "instructions": "Update status to 'passing' ONLY after running 'mise run verify' successfully. Never delete features.",
+  "features": [
+    {
+      "id": "setup-001",
+      "name": "Repository initialized with mise",
+      "category": "setup",
+      "status": "passing",
+      "verification": "mise install && python --version && bun --version"
+    },
+    {
+      "id": "setup-002",
+      "name": "Python dependencies installed",
+      "category": "setup",
+      "status": "passing",
+      "verification": "cd packages/finetune && uv sync"
+    },
+    {
+      "id": "setup-004",
+      "name": "ADS API key configured",
+      "category": "setup",
+      "status": "passing",
+      "verification": "test -n \"$ADS_API_KEY\" && echo 'ADS_API_KEY set'"
+    },
+    {
+      "id": "domain-001",
+      "name": "SciX domain module created with field definitions",
+      "category": "domain",
+      "status": "passing",
+      "verification": "python -c \"from finetune.domains.scix.fields import ADS_FIELDS; assert len(ADS_FIELDS) >= 40\""
+    },
+    {
+      "id": "domain-002",
+      "name": "ADS query linter works offline",
+      "category": "domain",
+      "status": "passing",
+      "verification": "python -c \"from finetune.domains.scix.validate import lint_query; r = lint_query('author:\\\"Einstein\\\"'); assert r.valid\""
+    },
+    {
+      "id": "domain-003",
+      "name": "ADS query validator calls API",
+      "category": "domain",
+      "status": "passing",
+      "verification": "python -c \"from finetune.domains.scix.validate import validate_query; r = validate_query('author:\\\"Einstein\\\"'); print(r)\""
+    },
+    {
+      "id": "domain-004",
+      "name": "NL validation detects ADS syntax leakage",
+      "category": "domain",
+      "status": "passing",
+      "verification": "python -c \"from finetune.domains.scix.validate import validate_nl; ok, issues = validate_nl('author:Einstein papers'); assert not ok\""
+    },
+    {
+      "id": "data-001",
+      "name": "Curated gold examples JSON created",
+      "category": "data",
+      "status": "passing",
+      "verification": "python -c \"import json; d=json.load(open('data/datasets/raw/gold_examples.json')); assert len(d) >= 50\""
+    },
+    {
+      "id": "data-002",
+      "name": "NL generation script updated for ADS",
+      "category": "data",
+      "status": "passing",
+      "verification": "grep -E 'ADS_SYNTAX_MARKERS|finetune.domains.scix.prompts' scripts/generate_nl.py && grep -E 'author:|abs:|pubdate:' scripts/generate_nl.py"
+    },
+    {
+      "id": "data-003",
+      "name": "Dataset validation script uses ADS validator",
+      "category": "data",
+      "status": "passing",
+      "verification": "grep -E 'finetune.domains.scix|lint_query' scripts/validate_dataset.py"
+    },
+    {
+      "id": "data-004",
+      "name": "Training data JSONL created with 500+ examples",
+      "category": "data",
+      "status": "passing",
+      "verification": "test -f data/datasets/processed/train.jsonl && wc -l < data/datasets/processed/train.jsonl | xargs test 500 -lt"
+    },
+    {
+      "id": "modal-001",
+      "name": "Modal train.py syntax valid",
+      "category": "modal",
+      "status": "passing",
+      "verification": "python -m py_compile packages/finetune/src/finetune/modal/train.py"
+    },
+    {
+      "id": "modal-002",
+      "name": "LoRA training completed on Qwen3-1.7B",
+      "category": "modal",
+      "status": "passing",
+      "verification": "curl -s https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/health | grep -q 'ok\\|true' || curl -s https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/models | grep -q 'llm'"
+    },
+    {
+      "id": "modal-003",
+      "name": "vLLM inference endpoint deployed",
+      "category": "modal",
+      "status": "passing",
+      "verification": "curl -s https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/models | grep -q 'llm'"
+    },
+    {
+      "id": "eval-001",
+      "name": "Evaluation module computes result-set overlap",
+      "category": "eval",
+      "status": "passing",
+      "verification": "python -c \"from finetune.domains.scix.eval import compute_overlap_metrics; j, p, r = compute_overlap_metrics(['a','b'], ['b','c']); assert j == 1/3\""
+    },
+    {
+      "id": "eval-002",
+      "name": "Syntactic validity rate metric",
+      "category": "eval",
+      "status": "passing",
+      "verification": "python -c \"from finetune.domains.scix.eval import compute_syntax_validity; assert compute_syntax_validity is not None\""
+    },
+    {
+      "id": "eval-003",
+      "name": "Feature-sliced reporting (author, pubdate, bibstem, object)",
+      "category": "eval",
+      "status": "failing",
+      "verification": "python -c \"from finetune.domains.scix.eval import evaluate_by_category; assert evaluate_by_category is not None\""
+    },
+    {
+      "id": "integ-001",
+      "name": "NL search component added to nectar UI",
+      "category": "integration",
+      "status": "failing",
+      "verification": "test -f ~/ads-dev/nectar/src/components/NLSearch/index.tsx",
+      "notes": "Branch: sj/fine-tune in ~/ads-dev/nectar"
+    },
+    {
+      "id": "integ-002",
+      "name": "Modal endpoint proxy in nectar API routes",
+      "category": "integration",
+      "status": "failing",
+      "verification": "grep -r 'nls-finetune-serve-vllm' ~/ads-dev/nectar/src/",
+      "notes": "Proxy Modal endpoint through Next.js API route"
+    },
+    {
+      "id": "integ-003",
+      "name": "Query suggestion display with copy/apply buttons",
+      "category": "integration",
+      "status": "failing",
+      "verification": "grep -r 'copyToClipboard\\|applyQuery' ~/ads-dev/nectar/src/components/NLSearch/",
+      "notes": "User can copy suggested query or apply directly to search"
+    },
+    {
+      "id": "integ-004",
+      "name": "Preview result count via ADS API",
+      "category": "integration",
+      "status": "failing",
+      "verification": "grep -r 'numFound\\|resultCount' ~/ads-dev/nectar/src/components/NLSearch/",
+      "notes": "Show approximate result count for generated query"
+    },
+    {
+      "id": "integ-005",
+      "name": "Feature flag for NL search toggle",
+      "category": "integration",
+      "status": "failing",
+      "verification": "grep -r 'NEXT_PUBLIC_NL_SEARCH\\|nlSearchEnabled' ~/ads-dev/nectar/",
+      "notes": "Environment variable to enable/disable feature"
+    },
+    {
+      "id": "integ-006",
+      "name": "Playwright e2e test for NL search flow",
+      "category": "integration",
+      "status": "failing",
+      "verification": "test -f ~/ads-dev/nectar/e2e/tests/nl-search.spec.ts && cd ~/ads-dev/nectar && pnpm test:e2e --grep 'NL search'",
+      "notes": "E2E test covering NL input → query suggestion → apply flow"
+    }
+  ]
+}

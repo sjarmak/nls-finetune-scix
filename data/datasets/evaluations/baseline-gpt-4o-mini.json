@@ -1,0 +1,1097 @@
+{
+  "model": "gpt-4o-mini",
+  "timestamp": "2026-01-09T17:01:31.420755",
+  "summary": {
+    "total": 108,
+    "syntax_valid": 108,
+    "semantic_match": 3,
+    "avg_latency_ms": 859.6,
+    "p75_latency_ms": 979.5,
+    "p90_latency_ms": 1167.1,
+    "min_latency_ms": 526.0,
+    "max_latency_ms": 1580.2,
+    "cold_start_latency_ms": 1756.0
+  },
+  "results": [
+    {
+      "id": "ex-000",
+      "input": "who's been contributing scheme code to texmacs?",
+      "expected": "repo:^github.com/texmacs/texmacs$ global-author count:1000 lang:scheme ",
+      "output": "repo:github.com/texmacs/texmacs lang:scheme type:commit",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.25,
+      "latency_ms": 1756.0
+    },
+    {
+      "id": "ex-001",
+      "input": "looking for commit 1c774687cf571a2b710267c2 in LightGBM",
+      "expected": "repo:^github.com/microsoft/LightGBM$ 1c774687cf571a2b710267c2 type:commit",
+      "output": "repo:github.com/microsoft/LightGBM commit:1c774687cf571a2b710267c2",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 1522.9
+    },
+    {
+      "id": "ex-002",
+      "input": "todo changes in sourcegraph",
+      "expected": "repo:sourcegraph type:diff repo:^github.com/sourcegraph/sourcegraph$  todo",
+      "output": "repo:github.com/sourcegraph/sourcegraph todo changes",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.25,
+      "latency_ms": 669.1
+    },
+    {
+      "id": "ex-003",
+      "input": "message queue implementation rocketmq",
+      "expected": "repo:^github.com/apache/rocketmq$@master  ",
+      "output": "repo:github.com/apache/rocketmq message queue implementation",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 688.5
+    },
+    {
+      "id": "ex-004",
+      "input": "test cases in fievel java",
+      "expected": "lang:java r:lm/fievel \"test\"",
+      "output": "test cases in fievel lang:java",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.6666666666666666,
+      "latency_ms": 1056.2
+    },
+    {
+      "id": "ex-005",
+      "input": "indirect dependencies in go.mod",
+      "expected": "file:go.mod \"indirect\"",
+      "output": "`go.mod indirect`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 574.4
+    },
+    {
+      "id": "ex-006",
+      "input": "ImmutableRecipient interface definition",
+      "expected": "public interface ImmutableRecipient",
+      "output": "`type:interface ImmutableRecipient`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 714.3
+    },
+    {
+      "id": "ex-007",
+      "input": "commits mentioning bug 198182",
+      "expected": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=198182",
+      "output": "repo:github.com/WebKit/webkit commits \"bug 198182\"",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 766.6
+    },
+    {
+      "id": "ex-008",
+      "input": "mergo usage in kubernetes main repo",
+      "expected": "repo:^github.com/kubernetes/kubernetes$ mergo -file:(^|/)vendor/ -file:(test|spec) ",
+      "output": "repo:github.com/kubernetes/kubernetes mergo",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.25,
+      "latency_ms": 1002.9
+    },
+    {
+      "id": "ex-009",
+      "input": "lvyue.ncoppo file contents",
+      "expected": "lvyue.ncoppo",
+      "output": "file:lvyue.ncoppo",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 971.1
+    },
+    {
+      "id": "ex-010",
+      "input": "autodiscover implementation in openbilibili",
+      "expected": "repo:^github.com/whjstc/openbilibili-go-common-1$ autodiscover",
+      "output": "repo:github.com/whjstc/openbilibili-go-common-1 autodiscover implementation",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 1313.4
+    },
+    {
+      "id": "ex-011",
+      "input": "e2e test setup sourcegraph",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$ e2e test",
+      "output": "repo:github.com/sourcegraph/sourcegraph e2e test setup",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.6666666666666666,
+      "latency_ms": 1181.7
+    },
+    {
+      "id": "ex-012",
+      "input": "modsecurity core engine implementation",
+      "expected": "repo:^github.com/SpiderLabs/ModSecurity$ ",
+      "output": "repo:github.com/SpiderLabs/ModSecurity \"modsecurity core engine implementation\"",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 969.0
+    },
+    {
+      "id": "ex-013",
+      "input": "read_vectored implementation in futures rust",
+      "expected": "-repo:github.com/rust-lang/rust count:1000 lang:rust  read_vectored repo:^github.com/rust-lang-nursery/futures-rs$ ",
+      "output": "repo:github.com/rust-lang-nursery/futures-rs read_vectored OR implementation OR \"read_vectored\"  \nrepo:github.com/rust-lang/rust read_vectored OR implementation OR \"read_vectored\"",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.2,
+      "latency_ms": 1491.4
+    },
+    {
+      "id": "ex-014",
+      "input": "define macros in darknet c++",
+      "expected": "repo:hgpvision/darknet lang:c++ define",
+      "output": "repo:github.com/hgpvision/darknet define macros in C++",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.3333333333333333,
+      "latency_ms": 865.7
+    },
+    {
+      "id": "ex-015",
+      "input": "clusctor symbol definition",
+      "expected": "clusctor type:symbol",
+      "output": "`clusctor symbol definition`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 859.1
+    },
+    {
+      "id": "ex-016",
+      "input": "file_put function in knProxy",
+      "expected": "repo:^github.com/jabbany/knProxy$ file_put",
+      "output": "repo:github.com/jabbany/knProxy file_put",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 722.0
+    },
+    {
+      "id": "ex-017",
+      "input": "AuthProviders symbol definition",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$  ^AuthProviders$ type:symbol index:only lang:go ",
+      "output": "repo:github.com/sourcegraph/sourcegraph AuthProviders definition",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 793.0
+    },
+    {
+      "id": "ex-018",
+      "input": "alert handling in ambari codebase",
+      "expected": "repo:^github.com/apache/ambari$ alert count:1000",
+      "output": "repo:github.com/apache/ambari alert handling",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.3333333333333333,
+      "latency_ms": 1177.4
+    },
+    {
+      "id": "ex-019",
+      "input": "ovsdb_atom_clone function in ovn-kubernetes",
+      "expected": "repo:^github.com/ovn-org/ovn-kubernetes$ ovsdb_atom_clone repogroup:sample ",
+      "output": "repo:github.com/ovn-org/ovn-kubernetes ovsdb_atom_clone function",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.3333333333333333,
+      "latency_ms": 815.8
+    },
+    {
+      "id": "ex-020",
+      "input": "test functions in codimd",
+      "expected": "repo:^github.com/hackmdio/codimd$ test.* type:symbol",
+      "output": "repo:github.com/hackmdio/codimd test function",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 1091.1
+    },
+    {
+      "id": "ex-021",
+      "input": "Config struct definitions in go",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$@5463b6a type:symbol  case:yes file:.go Config\\b",
+      "output": "repo:github.com/sourcegraph/sourcegraph type:struct config",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 684.5
+    },
+    {
+      "id": "ex-022",
+      "input": "powershell core repo pwsh executable",
+      "expected": "github.com/powershell/powershell pwsh",
+      "output": "repo:github.com/PowerShell/PowerShell pwsh executable",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 739.0
+    },
+    {
+      "id": "ex-023",
+      "input": "Array constructor calls in react codebase",
+      "expected": "repo:^github.com/facebook/react$  'Array(:[x]*:[y])' lang:javascript  count:1000",
+      "output": "repo:github.com/facebook/react Array(",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 587.9
+    },
+    {
+      "id": "ex-024",
+      "input": "commit 455401 changes in kahoot-hack",
+      "expected": "repo:^github.com/unixpickle/kahoot-hack$ 455401 type:diff",
+      "output": "repo:github.com/unixpickle/kahoot-hack commit:455401",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 820.4
+    },
+    {
+      "id": "ex-025",
+      "input": "trigger implementation in buildkite agent",
+      "expected": "repo:^github.com/buildkite/agent$ trigger",
+      "output": "repo:github.com/buildkite/agent trigger implementation",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 756.6
+    },
+    {
+      "id": "ex-026",
+      "input": "what changed in spring social facebook commit ae2234d?",
+      "expected": "repo:^github.com/sematext/spring-social-facebook$@ae2234d repogroup:sample  type:commit",
+      "output": "repo:github.com/sematext/spring-social-facebook commit:ae2234d",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 1019.1
+    },
+    {
+      "id": "ex-027",
+      "input": "tensorpack requirements.txt",
+      "expected": "tensorpack file:requirements",
+      "output": "`file:requirements.txt tensorpack`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 802.7
+    },
+    {
+      "id": "ex-028",
+      "input": "GPU_LOCAL_TREE_WLAK changes in changa",
+      "expected": "repo:^github.com/N-BodyShop/changa$ GPU_LOCAL_TREE_WLAK type:diff",
+      "output": "repo:github.com/N-BodyShop/changa GPU_LOCAL_TREE_WLAK changes",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.3333333333333333,
+      "latency_ms": 773.1
+    },
+    {
+      "id": "ex-029",
+      "input": "hdrhistogram java implementation",
+      "expected": "github.com/HdrHistogram/HdrHistogram",
+      "output": "`hdrhistogram lang:java`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 642.3
+    },
+    {
+      "id": "ex-030",
+      "input": "what's running on port 6069?",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$ :6069",
+      "output": "repo:github.com/sourcegraph/sourcegraph \"6069\" OR \"port 6069\" OR \"listening on 6069\" OR \"running on 6069\"",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 1221.8
+    },
+    {
+      "id": "ex-031",
+      "input": ".Index method usage golang kubernetes",
+      "expected": "repo:^github.com/kubernetes/kubernetes$@v1.12.7 .Index lang:go -file:vendor/ -file:node_modules/ ",
+      "output": "repo:github.com/kubernetes/kubernetes .Index method usage golang",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.2,
+      "latency_ms": 1004.5
+    },
+    {
+      "id": "ex-032",
+      "input": "webkit commits mentioning bug 203661",
+      "expected": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=203661",
+      "output": "repo:github.com/WebKit/webkit commits \"bug 203661\"",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 844.2
+    },
+    {
+      "id": "ex-033",
+      "input": "browserlist config umi",
+      "expected": "repo:^github.com/umijs/umi$ browserlist",
+      "output": "repo:github.com/umijs/umi \"browserlist\" config",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 872.8
+    },
+    {
+      "id": "ex-034",
+      "input": "where's the main entry point?",
+      "expected": "repo:^github.com/prometheus/prometheus$ main",
+      "output": "repo:github.com/prometheus/prometheus \"func main\" OR \"func Main\" OR \"package main\"",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 969.7
+    },
+    {
+      "id": "ex-035",
+      "input": "NID_X9_prime256 curve changes",
+      "expected": "NID_X9_prime256 type:diff",
+      "output": "NID_X9_prime256 AND curve AND changes",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 585.0
+    },
+    {
+      "id": "ex-036",
+      "input": "go func goroutine commits",
+      "expected": "go func() type:commit",
+      "output": "`go func goroutine commits`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 616.6
+    },
+    {
+      "id": "ex-037",
+      "input": "tensor operations with 1000 elements pytorch",
+      "expected": "repo:^github.com/pytorch/pytorch$ Tensor count:1000",
+      "output": "repo:github.com/pytorch/pytorch tensor operations 1000 elements pytorch",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.3333333333333333,
+      "latency_ms": 957.4
+    },
+    {
+      "id": "ex-038",
+      "input": "who wrote the distributed systems paper?",
+      "expected": "author:jeff dean ",
+      "output": "repo:*.pdf \"distributed systems\" author:",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 583.8
+    },
+    {
+      "id": "ex-039",
+      "input": "recent changes to nsq message queue",
+      "expected": "repo:^github.com/nsqio/nsq$  type:diff",
+      "output": "repo:github.com/nsqio/nsq recent changes to nsq message queue",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 768.3
+    },
+    {
+      "id": "ex-040",
+      "input": "InstanceKlass implementation in openjdk",
+      "expected": "repo:^github.com/unofficial-openjdk/openjdk$ InstanceKlass",
+      "output": "repo:github.com/unofficial-openjdk/openjdk InstanceKlass implementation",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 772.5
+    },
+    {
+      "id": "ex-041",
+      "input": "todo fixme hack comments in go code changes",
+      "expected": "repo:github.com/sourcegraph/ lang:go todo|fixme|hack|dragons type:diff timeout:1000sa",
+      "output": "repo:github.com/sourcegraph/ (todo OR fixme OR hack) lang:go",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.4,
+      "latency_ms": 1394.3
+    },
+    {
+      "id": "ex-042",
+      "input": "bitcoin code changes",
+      "expected": "bitcoin type:diff",
+      "output": "repo:bitcoin \"code changes\"",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 642.7
+    },
+    {
+      "id": "ex-043",
+      "input": "navbar course-tabs in openedx",
+      "expected": "repo:^github.com/edx/edx-platform$ file:^openedx/ navbar course-tabs",
+      "output": "repo:github.com/edx/edx-platform navbar course-tabs",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 739.4
+    },
+    {
+      "id": "ex-044",
+      "input": "recent NavLinks changes",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$ explore type:diff f:NavLinks after:\"3 months\"",
+      "output": "repo:github.com/sourcegraph/sourcegraph NavLinks changes after:2023-10-01",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 1507.5
+    },
+    {
+      "id": "ex-045",
+      "input": "rospy usage in tensor2robot",
+      "expected": "repo:^github.com/google-research/tensor2robot$ rospy",
+      "output": "repo:github.com/google-research/tensor2robot rospy",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 788.9
+    },
+    {
+      "id": "ex-046",
+      "input": "error diffs in linux kernel",
+      "expected": "repo:^github.com/torvalds/linux$ type:diff error",
+      "output": "repo:github.com/torvalds/linux error diff",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.3333333333333333,
+      "latency_ms": 1042.7
+    },
+    {
+      "id": "ex-047",
+      "input": "remote connection setup traefik",
+      "expected": "repo:^github.com/containous/traefik$ remote",
+      "output": "repo:github.com/containous/traefik remote connection setup",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 752.5
+    },
+    {
+      "id": "ex-048",
+      "input": "json unmarshal golang examples",
+      "expected": "\"json.Unmarshal\" lang:go",
+      "output": "json unmarshal lang:go examples",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 605.0
+    },
+    {
+      "id": "ex-049",
+      "input": "string to int conversion golang",
+      "expected": "lang:go case:yes string\\(int.*\\)]",
+      "output": "`string to int conversion lang:go`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 701.4
+    },
+    {
+      "id": "ex-050",
+      "input": "ExplorePage component implementation",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$ ExplorePage",
+      "output": "repo:github.com/sourcegraph/sourcegraph file:ExplorePage.tsx OR file:ExplorePage.jsx OR file:ExplorePage.js OR file:ExplorePage/*.tsx OR file:ExplorePage/*.jsx OR file:ExplorePage/*.js",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 1580.2
+    },
+    {
+      "id": "ex-051",
+      "input": "markdown docs in vendor folders from gitlab-org repos",
+      "expected": "repo:^gitlab\\.com/gitlab-org/ lang:markdown after:last year file:(vendor|node_modules)/",
+      "output": "repo:gitlab.com/gitlab-org/ file:vendor/ *.md",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 864.5
+    },
+    {
+      "id": "ex-052",
+      "input": "airbnb master branch code",
+      "expected": "airbnb/airbnb$@master ",
+      "output": "repo:airbnb branch:master",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 569.4
+    },
+    {
+      "id": "ex-053",
+      "input": "typeof LOADING changes in that commit",
+      "expected": "timeout:19s repo:^github.com/sourcegraph/sourcegraph$@7da2f8d type:diff \"typeof LOADING\" ",
+      "output": "repo:github.com/sourcegraph/sourcegraph typeof LOADING file:*.js commit:<commit_hash>",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 799.2
+    },
+    {
+      "id": "ex-054",
+      "input": "webkit bug 190524 commits",
+      "expected": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=190524",
+      "output": "repo:github.com/WebKit/webkit \"bug 190524\" commits",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 796.1
+    },
+    {
+      "id": "ex-055",
+      "input": "rxjs dependencies in package.json",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$ rxjs file:package.json",
+      "output": "repo:github.com/sourcegraph/sourcegraph file:package.json rxjs",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.6666666666666666,
+      "latency_ms": 755.2
+    },
+    {
+      "id": "ex-056",
+      "input": "tensorpack requirements.txt dependencies",
+      "expected": "tensorpack file:requirements.txt",
+      "output": "`file:requirements.txt tensorpack`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 689.5
+    },
+    {
+      "id": "ex-057",
+      "input": "LSM_HOOK_INIT usage in torvalds linux kernel",
+      "expected": "repo:^github.com/torvalds/linux$@95e20af LSM_HOOK_INIT(",
+      "output": "repo:github.com/torvalds/linux LSM_HOOK_INIT",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 1089.7
+    },
+    {
+      "id": "ex-058",
+      "input": "requirements.txt in albertyw's repos",
+      "expected": "repo:github.com/albertyw file:requirements.txt",
+      "output": "repo:github.com/albertyw file:requirements.txt",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "overlap": 1,
+      "latency_ms": 992.2
+    },
+    {
+      "id": "ex-059",
+      "input": "sys.argv usage in bigchaindb",
+      "expected": "repo:^github.com/bigchaindb/bigchaindb$ sys.argv",
+      "output": "repo:github.com/bigchaindb/bigchaindb sys.argv",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 853.7
+    },
+    {
+      "id": "ex-060",
+      "input": "OpenSSL 1.1 commits in php-src",
+      "expected": "repo:^github.com/php/php-src$ OpenSSL 1.1 type:commit",
+      "output": "repo:github.com/php/php-src OpenSSL 1.1 commit",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 818.3
+    },
+    {
+      "id": "ex-061",
+      "input": "transfers api integration test commits",
+      "expected": "Integration tests for {@link TransfersApi} class. type:commit",
+      "output": "`transfers api integration test commits`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.14285714285714285,
+      "latency_ms": 605.8
+    },
+    {
+      "id": "ex-062",
+      "input": "diff implementation in patdiff",
+      "expected": "repo:^github.com/janestreet/patdiff$ diff",
+      "output": "repo:github.com/janestreet/patdiff diff implementation",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 671.3
+    },
+    {
+      "id": "ex-063",
+      "input": "looking for inst: usage in tox codebase",
+      "expected": "repo:^github.com/tox-dev/tox inst\\: case:yes repo:^github.com/tox-dev/tox$  count:1000",
+      "output": "repo:github.com/tox-dev/tox inst:",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 670.5
+    },
+    {
+      "id": "ex-064",
+      "input": "mysql connection pooling examples",
+      "expected": "lang:mysql ",
+      "output": "`mysql connection pooling examples`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 563.9
+    },
+    {
+      "id": "ex-065",
+      "input": "SearchViewed changes in diffs",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$ SearchViewed type:diff",
+      "output": "repo:github.com/sourcegraph/sourcegraph changes \"SearchViewed\" in diff",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.3333333333333333,
+      "latency_ms": 909.6
+    },
+    {
+      "id": "ex-066",
+      "input": "who disabled tslint in recent commits?",
+      "expected": "repo:github.com/sourcegraph/ repo:@*refs/heads/:^master type:diff after:\"1 week ago\" ( tslint:disable)",
+      "output": "repo:github.com/sourcegraph/ or repo:github.com/@*refs/heads/:^master TSLint disabled commit message OR TSLint disabled OR \"disable TSLint\" OR \"disabled TSLint\"",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.2,
+      "latency_ms": 1167.1
+    },
+    {
+      "id": "ex-067",
+      "input": "trait definitions starting with caret",
+      "expected": "repo:github.com/rust-lang/rust  '^ trait'",
+      "output": "repo:github.com/rust-lang/rust type:trait ^trait",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 919.9
+    },
+    {
+      "id": "ex-068",
+      "input": "live_isolated component examples",
+      "expected": "repo:^github.com/chrismccord/phoenix_live_view_example$ live_isolated type:symbol",
+      "output": "repo:github.com/chrismccord/phoenix_live_view_example live_isolated component examples",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.3333333333333333,
+      "latency_ms": 1034.1
+    },
+    {
+      "id": "ex-069",
+      "input": "listening sockets in openvswitch",
+      "expected": "repo:^github.com/openvswitch/ovs listen",
+      "output": "repo:github.com/openvswitch/ovs listening sockets",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 742.6
+    },
+    {
+      "id": "ex-070",
+      "input": "access token regex pattern 85 characters",
+      "expected": "access_token\\\"\\: \\\"[a-z0-9]{85}\\\" ",
+      "output": "`access token regex pattern length:85`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 698.8
+    },
+    {
+      "id": "ex-071",
+      "input": "BasicAWSCredentials usage in android samples",
+      "expected": "repo:^github.com/awslabs/aws-sdk-android-samples$@57baefe BasicAWSCredentials",
+      "output": "repo:github.com/awslabs/aws-sdk-android-samples BasicAWSCredentials",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 757.1
+    },
+    {
+      "id": "ex-072",
+      "input": "who removed reposearcher from sourcegraph?",
+      "expected": "\"r:github.com/sourcegraph/sourcegraph$ type:commit message:remove reposearcher",
+      "output": "removed:reposearcher from:sourcegraph",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 780.7
+    },
+    {
+      "id": "ex-073",
+      "input": "typescript changes to structural search",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$ type:diff .ts structural search",
+      "output": "repo:github.com/sourcegraph/sourcegraph type:diff typescript",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.2,
+      "latency_ms": 1082.9
+    },
+    {
+      "id": "ex-074",
+      "input": "recent changes to sourcegraph codebase including forks",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$ type:diff context fork:yes",
+      "output": "repo:github.com/sourcegraph/sourcegraph type:commit fork:true after:2023-01-01",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 979.5
+    },
+    {
+      "id": "ex-075",
+      "input": "clang checks in v8 codebase",
+      "expected": "repo:^github.com/v8/v8$ is_clang",
+      "output": "repo:github.com/v8/v8 clang checks",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 701.2
+    },
+    {
+      "id": "ex-076",
+      "input": "ihome symbol definition",
+      "expected": "ihome type:symbol",
+      "output": "`def ihome`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 526.0
+    },
+    {
+      "id": "ex-077",
+      "input": "proteus custom node driver error rancher",
+      "expected": "repo:^github.com/rancher/rancher$  There was an error trying to load custom driver proteus. Please verify the custom node driver settings.",
+      "output": "`proteus custom node driver error repo:github.com/rancher/rancher`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.25,
+      "latency_ms": 1085.3
+    },
+    {
+      "id": "ex-078",
+      "input": "tensorpack dependencies requirements",
+      "expected": "tensorpack file:requirements*",
+      "output": "`tensorpack dependencies OR requirements`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 570.3
+    },
+    {
+      "id": "ex-079",
+      "input": "test changes in vsco repos",
+      "expected": "repo:^github.com/vsco/ type:diff file:(test|spec) ",
+      "output": "repo:github.com/vsco/ test changes",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 870.4
+    },
+    {
+      "id": "ex-080",
+      "input": "preconditions implementation in kubernetes go code",
+      "expected": "repo:^github.com/kubernetes/kubernetes$@v1.12.7 Preconditions lang:go",
+      "output": "repo:github.com/kubernetes/kubernetes preconditions implementation lang:go",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.6666666666666666,
+      "latency_ms": 788.1
+    },
+    {
+      "id": "ex-081",
+      "input": "double equality checks in react javascript",
+      "expected": "repo:^github.com/facebook/react$  'if ( [x] === :[y] && :[z] === :[q] )' lang:javascript count:1000",
+      "output": "repo:github.com/facebook/react double == OR double ===",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 640.7
+    },
+    {
+      "id": "ex-082",
+      "input": "rxjs usage in package.json files",
+      "expected": "repo:github.com/sourcegraph/ file:package.json rxjs ",
+      "output": "repo:github.com/sourcegraph/ file:package.json rxjs",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "overlap": 1,
+      "latency_ms": 792.7
+    },
+    {
+      "id": "ex-083",
+      "input": "what changed in scala repo lately?",
+      "expected": "repo:^github.com/xingsuio/scala$@master  type:diff",
+      "output": "repo:github.com/xingsuio/scala type:commit after:2023-10-01",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 873.5
+    },
+    {
+      "id": "ex-084",
+      "input": "flask web framework python",
+      "expected": "github.com/pallets/flask",
+      "output": "repo:flask lang:python OR repo:web lang:python OR repo:flask-framework lang:python",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 1007.4
+    },
+    {
+      "id": "ex-085",
+      "input": "quicksort implementation in C Tencent repos",
+      "expected": "repo:Tencent lang:c quicksort",
+      "output": "repo:Tencent quicksort implementation C",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.6666666666666666,
+      "latency_ms": 638.1
+    },
+    {
+      "id": "ex-086",
+      "input": "OBJLoader implementation three.js",
+      "expected": "repo:^github.com/mrdoob/three\\.js$ OBJLoader",
+      "output": "repo:github.com/mrdoob/three.js OBJLoader implementation",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 774.1
+    },
+    {
+      "id": "ex-087",
+      "input": "webkit bug 197827 commits",
+      "expected": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=197827",
+      "output": "repo:github.com/WebKit/webkit \"bug 197827\" commits",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 758.3
+    },
+    {
+      "id": "ex-088",
+      "input": "intelligent gateway implementation",
+      "expected": "intelligent gateway",
+      "output": "intelligent gateway implementation",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "overlap": 1,
+      "latency_ms": 583.0
+    },
+    {
+      "id": "ex-089",
+      "input": "recent commits to txt and md files in CCSP study repo",
+      "expected": "repo:^github.com/3101010/CCSP-study$  type:commit file:\\.(txt|md)$ ",
+      "output": "repo:github.com/3101010/CCSP-study file:\\.txt$ file:\\.md$ type:commit sort:recent",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.3333333333333333,
+      "latency_ms": 1079.6
+    },
+    {
+      "id": "ex-090",
+      "input": "blockchain implementation core golang",
+      "expected": "core/blockchain.go",
+      "output": "`blockchain implementation core golang`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 721.2
+    },
+    {
+      "id": "ex-091",
+      "input": "floyd warshall algorithm java implementation",
+      "expected": "lang:java class count:1000 file:FloydWarshallAllPairShortestPath.java",
+      "output": "floyd warshall algorithm java implementation",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 556.7
+    },
+    {
+      "id": "ex-092",
+      "input": "priviledge access kubeflow pipelines",
+      "expected": "repo:^github.com/kubeflow/pipelines$@e7c7c51 priviledge",
+      "output": "repo:github.com/kubeflow/pipelines priviledge access kubeflow pipelines",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 807.6
+    },
+    {
+      "id": "ex-093",
+      "input": "tensorpack requirements dependencies",
+      "expected": "tensorpack file:requirements*t",
+      "output": "`tensorpack requirements OR dependencies`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 610.1
+    },
+    {
+      "id": "ex-094",
+      "input": "webkit bug 196494 commits",
+      "expected": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=196494",
+      "output": "repo:github.com/WebKit/webkit \"bug 196494\" commits",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 960.2
+    },
+    {
+      "id": "ex-095",
+      "input": "json config files in hdrapin bash scripts",
+      "expected": "repo:hdrapin lang:bash repogroup:sample file:\\.json$ ",
+      "output": "file:*.json repo:hdrapin lang:bash",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 975.0
+    },
+    {
+      "id": "ex-096",
+      "input": "COINBASE_MATURITY constant bitcoin core",
+      "expected": "repo:^github.com/bitcoin/bitcoin$ COINBASE_MATURITY",
+      "output": "repo:github.com/bitcoin/bitcoin COINBASE_MATURITY constant",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 876.3
+    },
+    {
+      "id": "ex-097",
+      "input": "rtpfb.cc file in webrtc-clone",
+      "expected": "repo:^github.com/notedit/webrtc-clone$rtpfb.cc",
+      "output": "repo:github.com/notedit/webrtc-clone file:rtpfb.cc",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 874.4
+    },
+    {
+      "id": "ex-098",
+      "input": "section config in edx platform",
+      "expected": "repo:^github.com/edx/edx-platform$ section",
+      "output": "repo:github.com/edx/edx-platform section config",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 741.8
+    },
+    {
+      "id": "ex-099",
+      "input": "minecraft hack client source code",
+      "expected": "Minecraft hack",
+      "output": "`\"minecraft hack client\" file:*.java`",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 903.7
+    },
+    {
+      "id": "ex-100",
+      "input": "icon files 30px titanium mobile",
+      "expected": "repo:^github.com/appcelerator/titanium_mobile$ icon 30",
+      "output": "repo:github.com/appcelerator/titanium_mobile icon file 30px",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.3333333333333333,
+      "latency_ms": 1078.7
+    },
+    {
+      "id": "ex-101",
+      "input": "raven aiohttp integration code",
+      "expected": "repo:^github.com/getsentry/raven-aiohttp$ ",
+      "output": "repo:github.com/getsentry/raven-aiohttp integration code",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 1288.8
+    },
+    {
+      "id": "ex-102",
+      "input": "const definitions in upspin",
+      "expected": "repo:^github.com/upspin/upspin$ const count:1000",
+      "output": "repo:github.com/upspin/upspin const definition",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.3333333333333333,
+      "latency_ms": 665.8
+    },
+    {
+      "id": "ex-103",
+      "input": "unicode commits in neovim",
+      "expected": "repo:^github.com/neovim/neovim$ file:^unicode/ case:yes  type:commit",
+      "output": "repo:github.com/neovim/neovim unicode commits",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 889.5
+    },
+    {
+      "id": "ex-104",
+      "input": "webkit commits mentioning bug 203880",
+      "expected": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=203880",
+      "output": "repo:github.com/WebKit/webkit commits \"bug 203880\"",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 981.4
+    },
+    {
+      "id": "ex-105",
+      "input": "commits mentioning webkit bug 197609",
+      "expected": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=197609",
+      "output": "repo:github.com/WebKit/webkit commits \"webkit bug 197609\"",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 829.0
+    },
+    {
+      "id": "ex-106",
+      "input": "test cases numeric hash",
+      "expected": "repo:github.com/FutureAdvisor/numeric_hash tes",
+      "output": "repo:github.com/FutureAdvisor/numeric_hash test cases",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0.5,
+      "latency_ms": 817.4
+    },
+    {
+      "id": "ex-107",
+      "input": "channels.html in goldvod.tv codebase",
+      "expected": "repo:^<URL>$ http://goldvod.tv/channels.html",
+      "output": "repo:goldvod.tv file:channels.html",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "overlap": 0,
+      "latency_ms": 874.3
+    }
+  ]
+}

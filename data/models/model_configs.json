@@ -1,0 +1,24 @@
+{
+  "models": [
+    {
+      "id": "fine-tuned",
+      "name": "Fine-tuned Qwen3-1.7B",
+      "provider": "modal",
+      "base_model": "Qwen/Qwen3-1.7B",
+      "description": "Fine-tuned model for Sourcegraph queries"
+    },
+    {
+      "id": "gpt-4o-mini",
+      "name": "GPT-4o Mini",
+      "provider": "openai",
+      "description": "OpenAI GPT-4o Mini baseline"
+    },
+    {
+      "id": "base-qwen",
+      "name": "Base Qwen3-1.7B",
+      "provider": "modal",
+      "base_model": "Qwen/Qwen3-1.7B",
+      "description": "Base model without fine-tuning (for comparison)"
+    }
+  ]
+}

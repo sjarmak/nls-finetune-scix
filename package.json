@@ -1,0 +1,5 @@
+{
+  "name": "nls-query-finetune",
+  "private": true,
+  "workspaces": ["packages/web"]
+}

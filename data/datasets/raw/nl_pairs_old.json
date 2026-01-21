@@ -1,0 +1,1203 @@
+[
+  {
+    "natural_language": "Find shell in the gliderlabs ssh project at commit 59d6e45",
+    "sourcegraph_query": "repo:^github\\.com/gliderlabs/ssh$@59d6e45 shell'",
+    "candidates": [
+      "github.com/gliderlabs/ssh"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find relation code in the RESIDE project",
+    "sourcegraph_query": "repo:^github\\.com/malllabiisc/RESIDE$ relation",
+    "candidates": [
+      "github.com/malllabiisc/RESIDE"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find YumBase class in the yum package manager repository",
+    "sourcegraph_query": "repo:^github\\.com/rpm-software-management/yum$ YumBase",
+    "candidates": [
+      "github.com/rpm-software-management/yum"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find 6326 in the macpuffins repository",
+    "sourcegraph_query": "repo:^github\\.com/macpuffin/macpuffins$ 6326 count:1000",
+    "candidates": [
+      "github.com/macpuffin/macpuffins"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find php_register_url_stream_wrapper and php_stream_http_wrapper functions in the PHP source code",
+    "sourcegraph_query": "repo:^github\\.com/php/php-src php_register_url_stream_wrapper php_stream_http_wrapper",
+    "candidates": [
+      "github.com/php/php-src"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Search across the Go and Hound repositories",
+    "sourcegraph_query": "repo:^github\\.com/golang/go$|^github\\.com/hound-search/hound$ ",
+    "candidates": [
+      "github.com/golang/go"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me everything in jishin86's repositories",
+    "sourcegraph_query": "repo:^github\\.com/jishin86",
+    "candidates": [
+      "github.com/jishin86"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find invalid-argument errors in the gRPC codebase",
+    "sourcegraph_query": "repo:github\\.com/grpc/grpc invalid-argument",
+    "candidates": [
+      "github.com/grpc/grpc"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me the CreateProcess repository",
+    "sourcegraph_query": "repo:^github\\.com/CreateProcess$ ",
+    "candidates": [
+      "github.com/CreateProcess"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find \"go \" in the quickfix project",
+    "sourcegraph_query": "repo:^github\\.com/quickfixgo/quickfix \"go \"",
+    "candidates": [
+      "github.com/quickfixgo/quickfix"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find conditions in the kapp project on GitHub",
+    "sourcegraph_query": "repo:^github\\.com/nimakaviani/kapp$@HEAD conditions",
+    "candidates": [
+      "github.com/nimakaviani/kapp"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find CRD handler code in the Spinnaker clouddriver project",
+    "sourcegraph_query": "repo:^github\\.com/spinnaker/clouddriver$ crd handler",
+    "candidates": [
+      "github.com/spinnaker/clouddriver"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find http.Client struct initializations with Timeout field in the Sourcegraph codebase",
+    "sourcegraph_query": "repo:sourcegraph/sourcegraph$ \"http.Client{:[a], Timeout: :[b], :[c]}\"",
+    "candidates": [
+      "github.com/sourcegraph/sourcegraph"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find QuicClock in the envoy proxy codebase",
+    "sourcegraph_query": "repo:^github\\.com/envoyproxy/envoy$ QuicClock",
+    "candidates": [
+      "github.com/envoyproxy/envoy"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find main menu code in the lick project",
+    "sourcegraph_query": "repo:^github\\.com/noryb009/lick$ main menu",
+    "candidates": [
+      "github.com/noryb009/lick"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find OpenFileDialog in the Eclipse Theia project",
+    "sourcegraph_query": "repo:^github\\.com/eclipse-theia/theia$ \\bOpenFileDialog\\b",
+    "candidates": [
+      "github.com/eclipse-theia/theia"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "show me where cut is used in the jieba project",
+    "sourcegraph_query": "repo:^github\\.com/fxsjy/jieba$ cut",
+    "candidates": [
+      "github.com/fxsjy/jieba"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find opentsdb references in the Apache Druid incubator project",
+    "sourcegraph_query": "repo:^github\\.com/apache/incubator-druid$ opentsdb",
+    "candidates": [
+      "github.com/apache/incubator-druid"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find formcontrol in the Angular codebase",
+    "sourcegraph_query": "repo:^github\\.com/angular/angular$ formcontrol",
+    "candidates": [
+      "github.com/angular/angular"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find auth code in the sourcegraph repository",
+    "sourcegraph_query": "repo:/sourcegraph/sourcegraph$ auth repo:^github\\.com/sourcegraph/sourcegraph$ ",
+    "candidates": [
+      "github.com//sourcegraph/sourcegraph",
+      "github.com/sourcegraph/sourcegraph"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find readDisable in the Envoy proxy codebase version 1.12.2",
+    "sourcegraph_query": "repo:^github\\.com/envoyproxy/envoy$@v1.12.2 readDisable",
+    "candidates": [
+      "github.com/envoyproxy/envoy"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find ImageItemList in the fastai repository",
+    "sourcegraph_query": "repo:^github\\.com/fastai/fastai$@master ImageItemList",
+    "candidates": [
+      "github.com/fastai/fastai"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find DynamicCatalogController.java in the ramveer93 presto repository",
+    "sourcegraph_query": "repo:^github\\.com/ramveer93/presto$ DynamicCatalogController.java",
+    "candidates": [
+      "github.com/ramveer93/presto"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find componentWillMount usage in the recharts repository",
+    "sourcegraph_query": "repo:^github\\.com/recharts/recharts$ componentWillMount",
+    "candidates": [
+      "github.com/recharts/recharts"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me everything in the sourcegraph appdash repository",
+    "sourcegraph_query": "repo:^sourcegraph/appdash$ ",
+    "candidates": [
+      "github.com/sourcegraph/appdash"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find 192.168.1.1 in the padavan-ng project",
+    "sourcegraph_query": "repo:^github\\.com/zanezam/padavan-ng$ 192.168.1.1",
+    "candidates": [
+      "github.com/zanezam/padavan-ng"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find errorRetryInterval in the SWR codebase",
+    "sourcegraph_query": "repo:^github\\.com/zeit/swr$ errorRetryInterval",
+    "candidates": [
+      "github.com/zeit/swr"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find 3600 in the OpenStack Keystone codebase at version 10.0.0",
+    "sourcegraph_query": "repo:^github\\.com/openstack/keystone$@10.0.0 3600",
+    "candidates": [
+      "github.com/openstack/keystone"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find s3:put_bucket_policy in the ceph project at commit 984020b",
+    "sourcegraph_query": "repo:^github\\.com/ceph/ceph$@984020b s3:put_bucket_policy",
+    "candidates": [
+      "github.com/ceph/ceph"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me http related code in the chromedp cdproto repository",
+    "sourcegraph_query": "repo:^github\\.com/chromedp/cdproto$ http",
+    "candidates": [
+      "github.com/chromedp/cdproto"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me the package_redis.Set function in the gorobbs repository",
+    "sourcegraph_query": "repo:github.com/letseeqiji/gorobbs$ package_redis.Set",
+    "candidates": [
+      "github.com/letseeqiji/gorobbs"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me code in the tj/co repository from the freepn group",
+    "sourcegraph_query": "repogroup:freepn repo:^github\\.com/tj/co$ ",
+    "candidates": [
+      "github.com/tj/co"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find waitfor in the dartsim dart project",
+    "sourcegraph_query": "repo:^github\\.com/dartsim/dart$ waitfor",
+    "candidates": [
+      "github.com/dartsim/dart"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me for loops in the Go repository, need lots of results",
+    "sourcegraph_query": "repo:^github\\.com/golang/go$ for count:1000",
+    "candidates": [
+      "github.com/golang/go"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find isDownsampleEnabled in the Facebook Fresco codebase",
+    "sourcegraph_query": "repo:^github\\.com/facebook/fresco$ isDownsampleEnabled",
+    "candidates": [
+      "github.com/facebook/fresco"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find ZIMG_CPU_X86_AVX_SKX in the zimg repository",
+    "sourcegraph_query": "repo:^github\\.com/sekrit-twc/zimg$ ZIMG_CPU_X86_AVX_SKX",
+    "candidates": [
+      "github.com/sekrit-twc/zimg"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me the CMakeLists.txt file for the HAL Target LegacyInterpreter in the IREE compiler",
+    "sourcegraph_query": "repo:^github\\.com/google/iree$ iree/compiler/Dialect/HAL/Target/LegacyInterpreter/CMakeLists.txt",
+    "candidates": [
+      "github.com/google/iree"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find schedulejob in the Apache Airflow codebase",
+    "sourcegraph_query": "repo:^github\\.com/apache/airflow$ schedulejob",
+    "candidates": [
+      "github.com/apache/airflow"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find atoull in the Envoy proxy codebase",
+    "sourcegraph_query": "repo:^github\\.com/envoyproxy/envoy$ atoull",
+    "candidates": [
+      "github.com/envoyproxy/envoy"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find cert related code in the ssa-daemon repository",
+    "sourcegraph_query": "repo:^github\\.com/markoneill/ssa-daemon$ cert",
+    "candidates": [
+      "github.com/markoneill/ssa-daemon"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find instances of \"ap\" as a whole word in the PyTorch Vision repository",
+    "sourcegraph_query": "repo:^github\\.com/pytorch/vision$ \\bap\\b",
+    "candidates": [
+      "github.com/pytorch/vision"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find HTTPClientConfig in the rancher prometheus-auth repository",
+    "sourcegraph_query": "repo:^github\\.com/rancher/prometheus-auth$ &HTTPClientConfig",
+    "candidates": [
+      "github.com/rancher/prometheus-auth"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find \"versin\" in the olivere/elastic repository",
+    "sourcegraph_query": "repo:^github\\.com/olivere/elastic$ versin",
+    "candidates": [
+      "github.com/olivere/elastic"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find go:generate directives in Kubernetes release 1.16",
+    "sourcegraph_query": "repo:^github\\.com/kubernetes/kubernetes$@release-1.16 go:generate",
+    "candidates": [
+      "github.com/kubernetes/kubernetes"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me ngx_module_s in the nginx codebase",
+    "sourcegraph_query": "repo:^github\\.com/nginx/nginx$ ngx_module_s",
+    "candidates": [
+      "github.com/nginx/nginx"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find encryption key related code in the coolsnowwolf lede project",
+    "sourcegraph_query": "repo:^github\\.com/coolsnowwolf/lede$ *encryption*key",
+    "candidates": [
+      "github.com/coolsnowwolf/lede"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Where does \"start process\" appear in the amazon-ssm-agent repo at commit bc7e780?",
+    "sourcegraph_query": "repo:^github\\.com/aws/amazon-ssm-agent$@bc7e780 \"start process\"",
+    "candidates": [
+      "github.com/aws/amazon-ssm-agent"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me everything in the communications codebase at Uber",
+    "sourcegraph_query": "repo:^code\\.uber\\.internal/communications/",
+    "candidates": [
+      "github.com/code.uber.internal/communications/"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find ewasm references in the ethereum tests repository",
+    "sourcegraph_query": "repo:^github\\.com/ethereum/tests$ e\\wasm",
+    "candidates": [
+      "github.com/ethereum/tests"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find QFED2_TOD in the GEOS-Chem repository",
+    "sourcegraph_query": "repo:^github\\.com/geoschem/geos-chem$ QFED2_TOD",
+    "candidates": [
+      "github.com/geoschem/geos-chem"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find calls to sgx_qe_get_target_info that have errors in the Intel SGX attestation primitives repo",
+    "sourcegraph_query": "repo:^github\\.com/intel/SGXDataCenterAttestationPrimitives$ Call sgx_qe_get_target_info:Error in sgx_qe_get_target_info.",
+    "candidates": [
+      "github.com/intel/SGXDataCenterAttestationPrimitives"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find where BUFSIZ is defined in the util-linux project",
+    "sourcegraph_query": "repo:^github\\.com/karelzak/util-linux$ \"define BUFSIZ\" ",
+    "candidates": [
+      "github.com/karelzak/util-linux"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find ofy().load().entities usage in the Google Nomulus project",
+    "sourcegraph_query": "repo:^github\\.com/google/nomulus$ ofy().load().entities",
+    "candidates": [
+      "github.com/google/nomulus"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me the caddy repository at commit 0a0d2cc",
+    "sourcegraph_query": "repo:^github\\.com/mholt/caddy$@0a0d2cc ",
+    "candidates": [
+      "github.com/mholt/caddy"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find isAuthorizedForImage function in the Kubernetes codebase on master",
+    "sourcegraph_query": "repo:^github\\.com/kubernetes/kubernetes$@master isAuthorizedForImage",
+    "candidates": [
+      "github.com/kubernetes/kubernetes"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find SPEEDSTICK in the DevOps-Demo repository",
+    "sourcegraph_query": "repo:^github\\.com/devops81/DevOps-Demo$ SPEEDSTICK",
+    "candidates": [
+      "github.com/devops81/DevOps-Demo"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "search the android sunflower repository",
+    "sourcegraph_query": "repo:^github\\.com/android/sunflower$  ",
+    "candidates": [
+      "github.com/android/sunflower"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me references to 3080 in the deploy-sourcegraph repository",
+    "sourcegraph_query": "repo:^github\\.com/sourcegraph/deploy-sourcegraph$ 3080",
+    "candidates": [
+      "github.com/sourcegraph/deploy-sourcegraph"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find \"load\" in the PGPortfolio repository",
+    "sourcegraph_query": "repo:^github\\.com/ZhengyaoJiang/PGPortfolio$ load",
+    "candidates": [
+      "github.com/ZhengyaoJiang/PGPortfolio"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find buildProviderModule in the inversify express example repository",
+    "sourcegraph_query": "repo:^github\\.com/inversify/inversify-express-example$ buildProviderModule",
+    "candidates": [
+      "github.com/inversify/inversify-express-example"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find \"home\" in the auth0 react samples repository",
+    "sourcegraph_query": "repo:^github\\.com/auth0-samples/auth0-react-samples$ home",
+    "candidates": [
+      "github.com/auth0-samples/auth0-react-samples"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find the CMN_DIAG_MOD module in the geos-chem repository",
+    "sourcegraph_query": "repo:^github\\.com/geoschem/geos-chem$  module CMN_DIAG_MOD",
+    "candidates": [
+      "github.com/geoschem/geos-chem"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find AddGoogle in the ASP.NET Identity 2.2.0 release",
+    "sourcegraph_query": "repo:^github\\.com/aspnet/Identity$@2.2.0 AddGoogle",
+    "candidates": [
+      "github.com/aspnet/Identity"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find loadbundle in the React Native codebase",
+    "sourcegraph_query": "repo:^github\\.com/facebook/react-native$ loadbundle",
+    "candidates": [
+      "github.com/facebook/react-native"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find \"lite\" in the CPython repository",
+    "sourcegraph_query": "repo:^github\\.com/python/cpython$ lite",
+    "candidates": [
+      "github.com/python/cpython"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find capset in the falco project on the dev branch",
+    "sourcegraph_query": "repo:^github\\.com/falcosecurity/falco$@dev capset",
+    "candidates": [
+      "github.com/falcosecurity/falco"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me code about sending response in the BIND9 project",
+    "sourcegraph_query": "repo:^github\\.com/isc-projects/bind9$ sending response",
+    "candidates": [
+      "github.com/isc-projects/bind9"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find dmcn_im2col_bilinear in the TensorRT-CenterNet repository",
+    "sourcegraph_query": "repo:^github\\.com/CaoWGG/TensorRT-CenterNet$ dmcn_im2col_bilinear",
+    "candidates": [
+      "github.com/CaoWGG/TensorRT-CenterNet"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me where htonl is used in the soramitsu libp2p project",
+    "sourcegraph_query": "repo:^github\\.com/soramitsu/libp2p$ htonl",
+    "candidates": [
+      "github.com/soramitsu/libp2p"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find \"Failed obtaining listen add\" errors in the tor-dht-poc repository",
+    "sourcegraph_query": "repo:^github\\.com/cretz/tor-dht-poc$ Failed obtaining listen add",
+    "candidates": [
+      "github.com/cretz/tor-dht-poc"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find vartag in the mit-gfx recfilter lib directory",
+    "sourcegraph_query": "repo:^github\\.com/mit-gfx/recfilter/lib$ vartag",
+    "candidates": [
+      "github.com/mit-gfx/recfilter/lib"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find Name() function in the miekg/dns repository",
+    "sourcegraph_query": "repo:^github\\.com/miekg/dns$ Name()",
+    "candidates": [
+      "github.com/miekg/dns"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me import save usage in the Mindustry codebase",
+    "sourcegraph_query": "repo:^github\\.com/Anuken/Mindustry$ import save",
+    "candidates": [
+      "github.com/Anuken/Mindustry"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find references to github.com/pingcap/tidb/v3 in the TiDB repository at version 3.0.5",
+    "sourcegraph_query": "repo:^github\\.com/pingcap/tidb$@v3.0.5 github.com/pingcap/tidb/v3",
+    "candidates": [
+      "github.com/pingcap/tidb"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find MAIL_CHECK_ENAB in the util-linux repository",
+    "sourcegraph_query": "repo:^github\\.com/karelzak/util-linux$ MAIL_CHECK_ENAB",
+    "candidates": [
+      "github.com/karelzak/util-linux"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find runtime code in rafi's vim-config repository",
+    "sourcegraph_query": "repo:^github\\.com/rafi/vim-config$ runtime",
+    "candidates": [
+      "github.com/rafi/vim-config"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find C_Sign function usage in the tpm2-pkcs11 project",
+    "sourcegraph_query": "repo:^github\\.com/tpm2-software/tpm2-pkcs11$ \"C_Sign\"",
+    "candidates": [
+      "github.com/tpm2-software/tpm2-pkcs11"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find isInteractive in the CockroachDB codebase",
+    "sourcegraph_query": "repo:^github\\.com/cockroachdb/cockroach$ isInteractive:",
+    "candidates": [
+      "github.com/cockroachdb/cockroach"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find OBJLoader.js in the three.js repository",
+    "sourcegraph_query": "repo:^github\\.com/mrdoob/three\\.js$ OBJLoader.js",
+    "candidates": [
+      "github.com/mrdoob/three.js"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find spawn function calls in the Zig compiler codebase",
+    "sourcegraph_query": "repo:^github\\.com/ziglang/zig$ \\bspawn\\b",
+    "candidates": [
+      "github.com/ziglang/zig"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find restart in the Apache Ambari release 2.7.4 branch, show me 1000 results",
+    "sourcegraph_query": "repo:^github\\.com/apache/ambari$@release-2.7.4 restart count:1000",
+    "candidates": [
+      "github.com/apache/ambari"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find 400 error handling in the actix examples repository",
+    "sourcegraph_query": "repo:^github\\.com/actix/examples$ 400",
+    "candidates": [
+      "github.com/actix/examples"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find DWARF references in the NSA Ghidra project at commit f3dd4ec",
+    "sourcegraph_query": "repo:^github\\.com/NationalSecurityAgency/ghidra$@f3dd4ec DWARF",
+    "candidates": [
+      "github.com/NationalSecurityAgency/ghidra"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me the main branch of edx-platform at commit 0fd3c84",
+    "sourcegraph_query": "repo:^github\\.com/edx/edx-platform$@0fd3c84 #main",
+    "candidates": [
+      "github.com/edx/edx-platform"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find ClusterEntry::connPool in the Envoy proxy codebase",
+    "sourcegraph_query": "repo:^github\\.com/envoyproxy/envoy$ ClusterEntry::connPool",
+    "candidates": [
+      "github.com/envoyproxy/envoy"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "imagenet references in the mlperf training repository",
+    "sourcegraph_query": "repo:^github\\.com/mlperf/training$ imagenet",
+    "candidates": [
+      "github.com/mlperf/training"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find thread usage in window-basic-main.cpp in the OBS Studio project",
+    "sourcegraph_query": "repo:^github\\.com/obsproject/obs-studio$ UI/window-basic-main.cpp thread",
+    "candidates": [
+      "github.com/obsproject/obs-studio"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find ignore pattern in the Oracle OpenGrok project",
+    "sourcegraph_query": "repo:^github\\.com/oracle/opengrok$ ignore pattern",
+    "candidates": [
+      "github.com/oracle/opengrok"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find \"/ns/\" string in the lxcfs repository",
+    "sourcegraph_query": "repo:^github\\.com/lxc/lxcfs$ \"/ns/\"",
+    "candidates": [
+      "github.com/lxc/lxcfs"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find identity in the openshift csi-external-provisioner project at version v0.3.1",
+    "sourcegraph_query": "repo:^github\\.com/openshift/csi-external-provisioner$@v0.3.1 identity",
+    "candidates": [
+      "github.com/openshift/csi-external-provisioner"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me the ceph repository on GitHub",
+    "sourcegraph_query": "repo:github.com/ceph/ceph",
+    "candidates": [
+      "github.com/ceph/ceph"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find upstreamRqStatName in the Envoy proxy codebase",
+    "sourcegraph_query": "repo:^github\\.com/envoyproxy/envoy$ upstreamRqStatName",
+    "candidates": [
+      "github.com/envoyproxy/envoy"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find mapped_index in the binutils-gdb repository",
+    "sourcegraph_query": "repo:^github\\.com/bminor/binutils-gdb$ mapped_index",
+    "candidates": [
+      "github.com/bminor/binutils-gdb"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find rancher-images in the rancher repository",
+    "sourcegraph_query": "repo:^github\\.com/rancher/rancher$ rancher-images",
+    "candidates": [
+      "github.com/rancher/rancher"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find all deprecated annotations in the Sourcegraph repository",
+    "sourcegraph_query": "repo:^github\\.com/sourcegraph/sourcegraph$ \"deprecated\\:\" patterntype=regexp",
+    "candidates": [
+      "github.com/sourcegraph/sourcegraph"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find HandleReadEvent in the Envoy proxy codebase",
+    "sourcegraph_query": "repo:^github\\.com/envoyproxy/envoy$ HandleReadEvent",
+    "candidates": [
+      "github.com/envoyproxy/envoy"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find sdshdr in the redis codebase version 3.0",
+    "sourcegraph_query": "repo:^github\\.com/antirez/redis$@3.0 sdshdr",
+    "candidates": [
+      "github.com/antirez/redis"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find socket usage in the GNOME Ekiga project",
+    "sourcegraph_query": "repo:^github\\.com/GNOME/ekiga$ socket",
+    "candidates": [
+      "github.com/GNOME/ekiga"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find cache-related code in the tensorflow tensor2tensor repository",
+    "sourcegraph_query": "repo:^github\\.com/tensorflow/tensor2tensor$ cache ",
+    "candidates": [
+      "github.com/tensorflow/tensor2tensor"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me where \"create (\" appears in the VS Code codebase",
+    "sourcegraph_query": "repo:^github\\.com/microsoft/vscode$ create (",
+    "candidates": [
+      "github.com/microsoft/vscode"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find Integer references in the fish shell codebase",
+    "sourcegraph_query": "repo:^github\\.com/fish-shell/fish-shell$ Integer in",
+    "candidates": [
+      "github.com/fish-shell/fish-shell"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find fMPI in the ethash repository on GitHub",
+    "sourcegraph_query": "repo:^github\\.com/chfast/ethash$ fMPI",
+    "candidates": [
+      "github.com/chfast/ethash"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find make_context in the boost context library",
+    "sourcegraph_query": "repo:^github\\.com/boostorg/context$ make_context",
+    "candidates": [
+      "github.com/boostorg/context"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me the java-benchmark repository by ihaolin",
+    "sourcegraph_query": "repo:^github\\.com/ihaolin/java-benchmark$ ",
+    "candidates": [
+      "github.com/ihaolin/java-benchmark"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find _type in the liunian1004 go repository",
+    "sourcegraph_query": "repo:^github\\.com/liunian1004/go$ _type",
+    "candidates": [
+      "github.com/liunian1004/go"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find GetAssembly in the ABP framework dev branch",
+    "sourcegraph_query": "repo:^github\\.com/abpframework/abp$@dev GetAssembly",
+    "candidates": [
+      "github.com/abpframework/abp"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me the android architecture components samples repository",
+    "sourcegraph_query": "repo:^github\\.com/android/architecture-components-samples$ ",
+    "candidates": [
+      "github.com/android/architecture-components-samples"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find sys_=get_cwd in the Linux kernel at commit 8fde283",
+    "sourcegraph_query": "repo:^github\\.com/torvalds/linux$@8fde283 sys_=get_cwd",
+    "candidates": [
+      "github.com/torvalds/linux"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find FieldArchived in the sourcegraph repo at commit 9d2c526",
+    "sourcegraph_query": "repo:^github\\.com/sourcegraph/sourcegraph$@9d2c526 FieldArchived",
+    "candidates": [
+      "github.com/sourcegraph/sourcegraph"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find bpmn references in the JanSemorad Slickflow project",
+    "sourcegraph_query": "repo:^github\\.com/JanSemorad/Slickflow$    bpmn count:1000",
+    "candidates": [
+      "github.com/JanSemorad/Slickflow"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find testroute in the gorilla mux repository",
+    "sourcegraph_query": "repo:gorilla/mux* \"testroute\"",
+    "candidates": [
+      "github.com/gorilla/mux*"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me the searchkick repository at commit f548fd8",
+    "sourcegraph_query": "repo:^github\\.com/ankane/searchkick$@f548fd8 ",
+    "candidates": [
+      "github.com/ankane/searchkick"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find transaction code in the EnergyCoin project",
+    "sourcegraph_query": "repo:^github\\.com/EnergyCoin/energycoin$ transaction",
+    "candidates": [
+      "github.com/EnergyCoin/energycoin"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find GotoDeclarationHandler in the lsp4intellij project",
+    "sourcegraph_query": "repo:^github\\.com/ballerina-platform/lsp4intellij$ GotoDeclarationHandler",
+    "candidates": [
+      "github.com/ballerina-platform/lsp4intellij"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me what user has committed in the testcontainers-java project at commit 9a45baa",
+    "sourcegraph_query": "repo:^github\\.com/testcontainers/testcontainers-java$@9a45baa user",
+    "candidates": [
+      "github.com/testcontainers/testcontainers-java"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find ConfigMap usage in the kubernetes codebase",
+    "sourcegraph_query": "repo:^github\\.com/kubernetes/kubernetes$ ConfigMap count:1000",
+    "candidates": [
+      "github.com/kubernetes/kubernetes"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me manager iptables code in the syzkaller project on master branch",
+    "sourcegraph_query": "repo:^github.com/google/syzkaller@master manager iptables",
+    "candidates": [
+      "github.com/google/syzkaller@master"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me the hilarryxu lua repository on GitHub",
+    "sourcegraph_query": "repo:^github\\.com/hilarryxu/lua",
+    "candidates": [
+      "github.com/hilarryxu/lua"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find image references in the pyfpdf project",
+    "sourcegraph_query": "repo:^github\\.com/reingart/pyfpdf$ image ",
+    "candidates": [
+      "github.com/reingart/pyfpdf"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find timetz usage in the PostgreSQL codebase",
+    "sourcegraph_query": "repo:^github.com\\/postgres/postgres$ timetz count:1000",
+    "candidates": [
+      "github.com/postgres/postgres"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find godockerize in the dahernan/godockerize repository",
+    "sourcegraph_query": "repo:^github\\.com/dahernan/godockerize$ godockerize:",
+    "candidates": [
+      "github.com/dahernan/godockerize"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Search in the cugu repository",
+    "sourcegraph_query": "repo:^github\\.com/cugu$ ",
+    "candidates": [
+      "github.com/cugu"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find darkTheme references in the ant design pro codebase",
+    "sourcegraph_query": "repo:^github\\.com/ant-design/ant-design-pro$ darkTheme",
+    "candidates": [
+      "github.com/ant-design/ant-design-pro"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me resolver code in the Vulcan Starter project",
+    "sourcegraph_query": "repo:^github\\.com/VulcanJS/Vulcan-Starter$ resolver",
+    "candidates": [
+      "github.com/VulcanJS/Vulcan-Starter"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find \"wy\" in the godweiyang hexo-matery-modified repository",
+    "sourcegraph_query": "repo:^github\\.com/godweiyang/hexo-matery-modified$ wy",
+    "candidates": [
+      "github.com/godweiyang/hexo-matery-modified"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find lock files in the j360-boot-app-all project",
+    "sourcegraph_query": "repo:^github\\.com/xuminwlt/j360-boot-app-all$ lock",
+    "candidates": [
+      "github.com/xuminwlt/j360-boot-app-all"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find the _typography.scss file in the edx-platform repository",
+    "sourcegraph_query": "repo:^github\\.com/edx/edx-platform$ _typography.scss",
+    "candidates": [
+      "github.com/edx/edx-platform"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find idxkrf in the snappy-store repository",
+    "sourcegraph_query": "repo:^github\\.com/SnappyDataInc/snappy-store$idxkrf",
+    "candidates": [
+      "github.com/SnappyDataInc/snappy-store"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me line 17 where \"conf\" appears in the segmentio/conf repository",
+    "sourcegraph_query": "repo:^github\\.com/segmentio/conf$ \"conf\"#17",
+    "candidates": [
+      "github.com/segmentio/conf"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find results.maxCount in the sourcegraph repository",
+    "sourcegraph_query": "repo:^github\\.com/sourcegraph/sourcegraph$ results.maxCount",
+    "candidates": [
+      "github.com/sourcegraph/sourcegraph"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "search the neovim repository",
+    "sourcegraph_query": "repo:^github\\.com/neovim/neovim$",
+    "candidates": [
+      "github.com/neovim/neovim"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find symbols in sourcegraph repo that have searcher on the next line",
+    "sourcegraph_query": "repo:^github\\.com/sourcegraph/sourcegraph$ symbols.*\\n.*searcher",
+    "candidates": [
+      "github.com/sourcegraph/sourcegraph"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find \"link your personal accounts\" in the edx-platform repo at commit 3857cf1",
+    "sourcegraph_query": "repo:^github\\.com/edx/edx-platform$@3857cf1 \"link your personal accounts\"",
+    "candidates": [
+      "github.com/edx/edx-platform"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find the WithName function in the kubernetes-sigs/controller-runtime project",
+    "sourcegraph_query": "repo:^github\\.com/kubernetes-sigs/controller-runtime$  func WithName ",
+    "candidates": [
+      "github.com/kubernetes-sigs/controller-runtime"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me the flutter_wanandroid repository by Sky24n",
+    "sourcegraph_query": "repo:^github\\.com/Sky24n/flutter_wanandroid$ ",
+    "candidates": [
+      "github.com/Sky24n/flutter_wanandroid"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Run security scan on the OT-SSO-MiniProgram repository",
+    "sourcegraph_query": "repo:^github\\.com/OysterTech/OT-SSO-MiniProgram$ scan",
+    "candidates": [
+      "github.com/OysterTech/OT-SSO-MiniProgram"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find sscan( function calls in the illuminate cache library",
+    "sourcegraph_query": "repo:^github\\.com/illuminate/cache$ sscan(",
+    "candidates": [
+      "github.com/illuminate/cache"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find occurrences of \"set\" in the expo browser-polyfill repository",
+    "sourcegraph_query": "repo:^github\\.com/expo/browser-polyfill$ set",
+    "candidates": [
+      "github.com/expo/browser-polyfill"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find paids in the ngrok project",
+    "sourcegraph_query": "repo:^github\\.com/inconshreveable/ngrok$ paids",
+    "candidates": [
+      "github.com/inconshreveable/ngrok"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find ScreenCaptureButttons in the Facebook Flipper codebase",
+    "sourcegraph_query": "repo:^github\\.com/facebook/flipper$ ScreenCaptureButttons",
+    "candidates": [
+      "github.com/facebook/flipper"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me the axios repository on GitHub",
+    "sourcegraph_query": "repo:^github\\.com/axios/axios$ ",
+    "candidates": [
+      "github.com/axios/axios"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find fetchProductRouteResources in the Mozilla FxA repository",
+    "sourcegraph_query": "repo:^github\\.com/mozilla/fxa$ fetchProductRouteResources",
+    "candidates": [
+      "github.com/mozilla/fxa"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find instances of domain in the Halide codebase",
+    "sourcegraph_query": "repo:^github\\.com/halide/Halide domain",
+    "candidates": [
+      "github.com/halide/Halide"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find 4200 in the EOSTracker codebase",
+    "sourcegraph_query": "repo:^github\\.com/EOSEssentials/EOSTracker$ 4200",
+    "candidates": [
+      "github.com/EOSEssentials/EOSTracker"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Where does the CSRF token invalid forbidden error appear in the Sourcegraph codebase?",
+    "sourcegraph_query": "\"Forbidden - CSRF token invalid\" repo:^github\\.com/sourcegraph/sourcegraph$ ",
+    "candidates": [
+      "github.com/sourcegraph/sourcegraph"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find delete_msg function in mod_voicemail_ivr in the freeswitch repository",
+    "sourcegraph_query": "repo:^github\\.com/signalwire/freeswitch$ mod_voicemail_ivr delete_msg",
+    "candidates": [
+      "github.com/signalwire/freeswitch"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find comments that start with hashtags in the discord.py repository",
+    "sourcegraph_query": "repo:^github\\.com/Rapptz/discord\\.py$ \" #\"",
+    "candidates": [
+      "github.com/Rapptz/discord.py"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Find AddIndexers in kubernetes version 1.12.7",
+    "sourcegraph_query": "repo:^github\\.com/kubernetes/kubernetes$@v1.12.7 AddIndexers",
+    "candidates": [
+      "github.com/kubernetes/kubernetes"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me rte_eth_rx in the F-Stack project at commit 33d130f",
+    "sourcegraph_query": "repo:^github\\.com/F-Stack/f-stack$@33d130f rte_eth_rx",
+    "candidates": [
+      "github.com/F-Stack/f-stack"
+    ],
+    "category": "repo_scoped"
+  },
+  {
+    "natural_language": "Show me boxFilter usage in the OpenCV codebase at commit 92387b1",
+    "sourcegraph_query": "repo:^github\\.com/opencv/opencv$@92387b1 boxFilter",
+    "candidates": [
+      "github.com/opencv/opencv"
+    ],
+    "category": "repo_scoped"
+  }
+]

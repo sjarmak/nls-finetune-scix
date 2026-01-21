@@ -1,0 +1,44 @@
+[project]
+name = "nls-finetune-scix-workspace"
+version = "0.1.0"
+description = "NLS Fine-tuning for SciX/ADS Scientific Literature Search"
+requires-python = ">=3.12"
+dependencies = [
+    "scix-finetune",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.8.0",
+    "pytest>=8.3.0",
+]
+
+# uv workspace configuration
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.8.0",
+    "pytest>=8.3.0",
+]
+
+[tool.uv.workspace]
+members = ["packages/finetune", "packages/api"]
+
+[tool.uv.sources]
+scix-finetune = { workspace = true }
+scix-api = { workspace = true }
+
+# Shared tool configuration
+[tool.ruff]
+src = ["packages/finetune/src", "packages/api/src"]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+# E402: Module level import not at top of file - intentional for load_dotenv()
+"packages/finetune/src/finetune/cli/main.py" = ["E402"]
+
+[tool.pytest.ini_options]
+testpaths = ["packages/*/tests"]

@@ -1,0 +1,2542 @@
+[
+  {
+    "natural_language": "most read brown dwarfs articles",
+    "ads_query": "abs:\"brown dwarfs\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "Queloz's cosmic microwave background papers",
+    "ads_query": "author:\"Queloz, D.\" abs:\"cosmic microwave background\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "refereed journal articles only",
+    "ads_query": "property:refereed",
+    "category": "properties"
+  },
+  {
+    "natural_language": "latest white dwarfs research",
+    "ads_query": "abs:\"white dwarfs\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Rubin Observatory preprints",
+    "ads_query": "abs:\"Rubin Observatory\" doctype:eprint",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "Fermi gamma ray papers",
+    "ads_query": "abs:\"Fermi gamma ray\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "ALMA observations of protoplanetary disks",
+    "ads_query": "abs:ALMA abs:\"protoplanetary disk\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "cosmic rays 2016-2018",
+    "ads_query": "abs:\"cosmic rays\" pubdate:[2016 TO 2018]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "LSST survey",
+    "ads_query": "abs:\"LSST survey\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "any good special relativity reviews?",
+    "ads_query": "abs:\"special relativity\" doctype:article property:refereed",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "conference proceedings on instrumentation",
+    "ads_query": "doctype:inproceedings abs:instrumentation",
+    "category": "properties"
+  },
+  {
+    "natural_language": "popular interstellar medium papers",
+    "ads_query": "abs:\"interstellar medium\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "Harvard astrometry research",
+    "ads_query": "aff:\"Harvard\" abs:\"astrometry\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "neutron star merger gravitational wave papers",
+    "ads_query": "abs:\"neutron star merger\" abs:\"gravitational wave\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "AJ papers on galaxy formation",
+    "ads_query": "abs:\"galaxy formation\" bibstem:AJ",
+    "category": "publication"
+  },
+  {
+    "natural_language": "gamma ray bursts papers",
+    "ads_query": "abs:\"gamma ray bursts\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "studies of the first gravitational wave detection",
+    "ads_query": "object:\"GW150914\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "highly cited James Webb telescope papers",
+    "ads_query": "abs:\"James Webb telescope\" citation_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "black holes reviews",
+    "ads_query": "abs:\"black holes\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "galaxy clusters review",
+    "ads_query": "abs:\"galaxy clusters\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "dark energy from 2024 to 2025",
+    "ads_query": "abs:\"dark energy\" pubdate:[2024 TO 2025]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "new galaxy evolution papers",
+    "ads_query": "abs:\"galaxy evolution\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "paper with DOI 10.1038/nature12888",
+    "ads_query": "doi:10.1038/nature12888",
+    "category": "identifiers"
+  },
+  {
+    "natural_language": "quasars reviews",
+    "ads_query": "abs:\"quasars\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Riccardo Giacconi on supernovae",
+    "ads_query": "author:\"Giacconi, R.\" abs:\"supernovae\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "cosmic rays papers",
+    "ads_query": "abs:\"cosmic rays\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "MIT astrophysics publications",
+    "ads_query": "aff:\"MIT\" database:astronomy",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "studies of the SMC",
+    "ads_query": "object:\"SMC\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "modified gravity 2021-2024",
+    "ads_query": "abs:\"modified gravity\" pubdate:[2021 TO 2024]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "astrometry review",
+    "ads_query": "abs:\"astrometry\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Hubble Space Telescope papers from 2022",
+    "ads_query": "abs:\"Hubble Space Telescope\" pubdate:2022",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Gaia astrometry 2017",
+    "ads_query": "abs:\"Gaia astrometry\" pubdate:2017",
+    "category": "publication"
+  },
+  {
+    "natural_language": "refereed James Webb telescope articles",
+    "ads_query": "abs:\"James Webb telescope\" property:refereed",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "TRAPPIST-1 exoplanet system studies",
+    "ads_query": "object:TRAPPIST-1",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Planck collaboration CMB results",
+    "ads_query": "author:\"Planck Collaboration\" abs:\"cosmic microwave background\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "supernova remnants review",
+    "ads_query": "abs:\"supernova remnants\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "papers from the Max Planck Institute",
+    "ads_query": "aff:\"Max Planck\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "recent JWST spectroscopy papers in Nature",
+    "ads_query": "abs:JWST abs:spectroscopy bibstem:Nature pubdate:[2022 TO 2025]",
+    "category": "compound"
+  },
+  {
+    "natural_language": "MNRAS papers on string theory",
+    "ads_query": "abs:\"string theory\" bibstem:MNRAS",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Andromeda spectroscopy",
+    "ads_query": "object:\"M31\" abs:spectroscopy",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "papers about Orion Nebula",
+    "ads_query": "object:\"Orion Nebula\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "papers by George Smoot",
+    "ads_query": "author:\"Smoot, G.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "papers with JWST in the title",
+    "ads_query": "title:JWST",
+    "category": "content"
+  },
+  {
+    "natural_language": "interested in big bang research",
+    "ads_query": "abs:\"big bang\"",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "JPL papers",
+    "ads_query": "aff:\"JPL\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "papers excluding solar system studies",
+    "ads_query": "abs:exoplanet NOT abs:\"solar system\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "latest interferometry research",
+    "ads_query": "abs:\"interferometry\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Chandrasekhar's gravitational waves papers",
+    "ads_query": "author:\"Chandrasekhar, S.\" abs:\"gravitational waves\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "neural networks 2019-2022",
+    "ads_query": "abs:\"neural networks\" pubdate:[2019 TO 2022]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "open access Hubble Space Telescope papers",
+    "ads_query": "abs:\"Hubble Space Telescope\" property:openaccess",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "recent nucleosynthesis",
+    "ads_query": "abs:\"nucleosynthesis\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "magnetar X-ray observations",
+    "ads_query": "abs:magnetar abs:\"X-ray\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "papers about quasars at high redshift",
+    "ads_query": "abs:quasar abs:\"high redshift\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "machine learning papers",
+    "ads_query": "abs:\"machine learning\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "infrared astronomy preprints",
+    "ads_query": "abs:\"infrared astronomy\" doctype:eprint",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "Crab Nebula structure",
+    "ads_query": "object:\"Crab Nebula\" abs:structure",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Astronomy & Astrophysics review articles",
+    "ads_query": "bibstem:A&A doctype:article property:refereed",
+    "category": "publication"
+  },
+  {
+    "natural_language": "first author papers by Jane Smith",
+    "ads_query": "^author:\"Smith, Jane\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "LISA mission studies",
+    "ads_query": "abs:\"LISA mission\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "spectroscopy papers",
+    "ads_query": "abs:\"spectroscopy\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "papers about the Crab Nebula",
+    "ads_query": "object:\"Crab Nebula\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "star formation",
+    "ads_query": "abs:\"star formation\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "MOND 2019-2022",
+    "ads_query": "abs:\"MOND\" pubdate:[2019 TO 2022]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "need papers on Rubin Observatory",
+    "ads_query": "abs:\"Rubin Observatory\"",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "papers in Astronomy & Astrophysics",
+    "ads_query": "bibstem:A&A",
+    "category": "publication"
+  },
+  {
+    "natural_language": "first author Rubin",
+    "ads_query": "^author:\"Rubin, V.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "Orion Nebula star formation",
+    "ads_query": "object:\"Orion Nebula\" abs:\"star formation\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Kepler mission this decade",
+    "ads_query": "abs:\"Kepler mission\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Stanford planetary atmospheres research",
+    "ads_query": "aff:\"Stanford\" abs:\"planetary atmospheres\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "cosmic microwave background review",
+    "ads_query": "abs:\"cosmic microwave background\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Schmidt's stellar evolution papers",
+    "ads_query": "author:\"Schmidt, B.\" abs:\"stellar evolution\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "active galactic nuclei 2021",
+    "ads_query": "abs:\"active galactic nuclei\" pubdate:2021",
+    "category": "publication"
+  },
+  {
+    "natural_language": "papers about exoplanet atmospheres",
+    "ads_query": "abs:\"exoplanet atmosphere\"",
+    "category": "content"
+  },
+  {
+    "natural_language": "JPL cosmic rays research",
+    "ads_query": "aff:\"JPL\" abs:\"cosmic rays\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "first author Hawking",
+    "ads_query": "^author:\"Hawking, S.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "open access interferometry papers",
+    "ads_query": "abs:\"interferometry\" property:openaccess",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "Vega spectroscopy",
+    "ads_query": "object:\"Vega\" abs:spectroscopy",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "highly cited neutron stars papers",
+    "ads_query": "abs:\"neutron stars\" citation_count:[100 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "Smoot's stellar evolution papers",
+    "ads_query": "author:\"Smoot, G.\" abs:\"stellar evolution\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "galaxy clusters this decade",
+    "ads_query": "abs:\"galaxy clusters\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Chandra X-ray studies",
+    "ads_query": "abs:\"Chandra X-ray\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "image processing reviews",
+    "ads_query": "abs:\"image processing\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "cosmic rays papers from MIT",
+    "ads_query": "aff:\"MIT\" abs:\"cosmic rays\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "general relativity research",
+    "ads_query": "abs:\"general relativity\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "papers by researchers with ORCID 0000-0001-2345-6789",
+    "ads_query": "orcid:0000-0001-2345-6789",
+    "category": "author"
+  },
+  {
+    "natural_language": "Oxford special relativity research",
+    "ads_query": "aff:\"Oxford\" abs:\"special relativity\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "Mather's active galactic nuclei papers",
+    "ads_query": "author:\"Mather, J.\" abs:\"active galactic nuclei\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "highly cited Virgo interferometer papers",
+    "ads_query": "abs:\"Virgo interferometer\" citation_count:[100 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "new protoplanetary disks papers",
+    "ads_query": "abs:\"protoplanetary disks\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Virgo interferometer papers from 2019",
+    "ads_query": "abs:\"Virgo interferometer\" pubdate:2019",
+    "category": "publication"
+  },
+  {
+    "natural_language": "gamma ray astronomy in the 2020s",
+    "ads_query": "abs:\"gamma ray astronomy\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "what are the latest neutron stars discoveries?",
+    "ads_query": "abs:\"neutron stars\" pubdate:[2024 TO 2025]",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "PhD theses on galaxy evolution",
+    "ads_query": "doctype:phdthesis abs:\"galaxy evolution\"",
+    "category": "properties"
+  },
+  {
+    "natural_language": "John Mather on planetary atmospheres",
+    "ads_query": "author:\"Mather, J.\" abs:\"planetary atmospheres\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "refereed white dwarfs articles",
+    "ads_query": "abs:\"white dwarfs\" property:refereed",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "pulsar timing array gravitational wave searches",
+    "ads_query": "abs:\"pulsar timing array\" abs:\"gravitational wave\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "galaxy formation studies",
+    "ads_query": "abs:\"galaxy formation\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "what's new in astrometry?",
+    "ads_query": "abs:\"astrometry\" pubdate:[2024 TO 2025]",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "galaxy clusters papers from JPL",
+    "ads_query": "aff:\"JPL\" abs:\"galaxy clusters\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "uncited papers from the last year",
+    "ads_query": "citation_count:0 pubdate:[2024 TO 2025]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "Perlmutter's white dwarfs papers",
+    "ads_query": "author:\"Perlmutter, S.\" abs:\"white dwarfs\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "MIT cosmological constant research",
+    "ads_query": "aff:\"MIT\" abs:\"cosmological constant\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "highly cited gravitational wave papers",
+    "ads_query": "abs:\"gravitational waves\" citation_count:[100 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "research from NASA",
+    "ads_query": "aff:\"NASA\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "M87 dynamics",
+    "ads_query": "object:\"M87\" abs:dynamics",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "latest active galactic nuclei research",
+    "ads_query": "abs:\"active galactic nuclei\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "latest special relativity research",
+    "ads_query": "abs:\"special relativity\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Science papers on Fermi gamma ray",
+    "ads_query": "abs:\"Fermi gamma ray\" bibstem:Science",
+    "category": "publication"
+  },
+  {
+    "natural_language": "galaxy formation between 2018 and 2023",
+    "ads_query": "abs:\"galaxy formation\" pubdate:[2018 TO 2023]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "big bang 2024-2025",
+    "ads_query": "abs:\"big bang\" pubdate:[2024 TO 2025]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "pulsars",
+    "ads_query": "abs:\"pulsars\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "radio astronomy papers from the VLA",
+    "ads_query": "abs:VLA database:astronomy",
+    "category": "compound"
+  },
+  {
+    "natural_language": "Science papers on Swift bursts",
+    "ads_query": "abs:\"Swift bursts\" bibstem:Science",
+    "category": "publication"
+  },
+  {
+    "natural_language": "open access dark energy reviews",
+    "ads_query": "abs:\"dark energy\" property:openaccess doctype:article property:refereed",
+    "category": "compound"
+  },
+  {
+    "natural_language": "Stanford open clusters research",
+    "ads_query": "aff:\"Stanford\" abs:\"open clusters\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "stellar evolution from 2017 to 2020",
+    "ads_query": "abs:\"stellar evolution\" pubdate:[2017 TO 2020]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Einstein's papers on general relativity",
+    "ads_query": "author:\"Einstein, A\" abs:\"general relativity\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "Gaia astrometry from 2022 to 2025",
+    "ads_query": "abs:\"Gaia astrometry\" pubdate:[2022 TO 2025]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "papers about HD 209458 b",
+    "ads_query": "object:\"HD 209458\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "looking for dark matter papers",
+    "ads_query": "abs:\"dark matter\"",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "latest planetary nebulae research",
+    "ads_query": "abs:\"planetary nebulae\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "papers published between 2015 and 2020",
+    "ads_query": "pubdate:[2015 TO 2020]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "brown dwarf atmospheric modeling",
+    "ads_query": "abs:\"brown dwarf\" abs:atmosphere",
+    "category": "compound"
+  },
+  {
+    "natural_language": "collaborative papers with more than 100 authors",
+    "ads_query": "author_count:[100 TO *]",
+    "category": "author"
+  },
+  {
+    "natural_language": "refereed axions articles",
+    "ads_query": "abs:\"axions\" property:refereed",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "HD 209458 b atmospheric studies",
+    "ads_query": "object:\"HD 209458\" abs:atmosphere",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Stanford spectroscopy research",
+    "ads_query": "aff:\"Stanford\" abs:\"spectroscopy\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "Edwin Hubble on gamma ray bursts",
+    "ads_query": "author:\"Hubble, E.\" abs:\"gamma ray bursts\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "new nucleosynthesis papers",
+    "ads_query": "abs:\"nucleosynthesis\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Perlmutter as lead author",
+    "ads_query": "^author:\"Perlmutter, S.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "radio astronomy review",
+    "ads_query": "abs:\"radio astronomy\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "single-author papers on cosmology",
+    "ads_query": "author_count:1 abs:cosmology",
+    "category": "author"
+  },
+  {
+    "natural_language": "recent TESS exoplanets",
+    "ads_query": "abs:\"TESS exoplanets\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "new Euclid survey papers",
+    "ads_query": "abs:\"Euclid survey\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "papers with associated data products",
+    "ads_query": "property:data",
+    "category": "properties"
+  },
+  {
+    "natural_language": "open access exoplanets papers",
+    "ads_query": "abs:\"exoplanets\" property:openaccess",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "LISA mission papers from 2015",
+    "ads_query": "abs:\"LISA mission\" pubdate:2015",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Thorne's dark matter papers",
+    "ads_query": "author:\"Thorne, K.\" abs:\"dark matter\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "star formation reviews",
+    "ads_query": "abs:\"star formation\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "European Southern Observatory Hubble Space Telescope research",
+    "ads_query": "aff:\"ESO\" abs:\"Hubble Space Telescope\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "popular supernovae papers",
+    "ads_query": "abs:\"supernovae\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "what's new in LIGO gravitational waves?",
+    "ads_query": "abs:\"LIGO gravitational waves\" pubdate:[2024 TO 2025]",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "inflation papers from European Southern Observatory",
+    "ads_query": "aff:\"ESO\" abs:\"inflation\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "X-ray astronomy reviews",
+    "ads_query": "abs:\"X-ray astronomy\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "papers with any identifier matching 2020MNRAS",
+    "ads_query": "identifier:2020MNRAS*",
+    "category": "identifiers"
+  },
+  {
+    "natural_language": "white dwarfs research",
+    "ads_query": "abs:\"white dwarfs\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "PRL papers on white dwarfs",
+    "ads_query": "abs:\"white dwarfs\" bibstem:PhRvL",
+    "category": "publication"
+  },
+  {
+    "natural_language": "physics papers on string theory",
+    "ads_query": "database:physics abs:\"string theory\"",
+    "category": "properties"
+  },
+  {
+    "natural_language": "new interstellar medium papers",
+    "ads_query": "abs:\"interstellar medium\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Harvard Fermi gamma ray research",
+    "ads_query": "aff:\"Harvard\" abs:\"Fermi gamma ray\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "Euclid survey review",
+    "ads_query": "abs:\"Euclid survey\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "recent stellar evolution",
+    "ads_query": "abs:\"stellar evolution\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "interested in galaxy evolution research",
+    "ads_query": "abs:\"galaxy evolution\"",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "recent main sequence stars",
+    "ads_query": "abs:\"main sequence stars\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Crab Nebula photometry",
+    "ads_query": "object:\"Crab Nebula\" abs:photometry",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "optical astronomy research",
+    "ads_query": "abs:\"optical astronomy\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Kepler mission papers from 2018",
+    "ads_query": "abs:\"Kepler mission\" pubdate:2018",
+    "category": "publication"
+  },
+  {
+    "natural_language": "general relativity 2017",
+    "ads_query": "abs:\"general relativity\" pubdate:2017",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Large Magellanic Cloud spectroscopy",
+    "ads_query": "object:\"LMC\" abs:spectroscopy",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "galaxy evolution 2018-2020",
+    "ads_query": "abs:\"galaxy evolution\" pubdate:[2018 TO 2020]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "gamma ray astronomy reviews",
+    "ads_query": "abs:\"gamma ray astronomy\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "dark matter candidates",
+    "ads_query": "abs:\"dark matter candidates\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "active galactic nuclei",
+    "ads_query": "abs:\"active galactic nuclei\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "need papers on TESS exoplanets",
+    "ads_query": "abs:\"TESS exoplanets\"",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "papers in the astronomy database",
+    "ads_query": "database:astronomy",
+    "category": "properties"
+  },
+  {
+    "natural_language": "Adam Riess papers",
+    "ads_query": "author:\"Riess, A.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "most read VLA radio articles",
+    "ads_query": "abs:\"VLA radio\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "studies of the TRAPPIST-1 system",
+    "ads_query": "object:\"TRAPPIST-1\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "MIT gamma ray astronomy research",
+    "ads_query": "aff:\"MIT\" abs:\"gamma ray astronomy\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "latest Rubin Observatory research",
+    "ads_query": "abs:\"Rubin Observatory\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Fermi gamma ray preprints",
+    "ads_query": "abs:\"Fermi gamma ray\" doctype:eprint",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "Oxford papers",
+    "ads_query": "aff:\"Oxford\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "latest quasars research",
+    "ads_query": "abs:\"quasars\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Smoot's star formation papers",
+    "ads_query": "author:\"Smoot, G.\" abs:\"star formation\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "cosmological constant 2015-2017",
+    "ads_query": "abs:\"cosmological constant\" pubdate:[2015 TO 2017]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "planetary atmospheres in Astrophysical Journal",
+    "ads_query": "abs:\"planetary atmospheres\" bibstem:ApJ",
+    "category": "publication"
+  },
+  {
+    "natural_language": "string theory review",
+    "ads_query": "abs:\"string theory\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "refereed black holes articles",
+    "ads_query": "abs:\"black holes\" property:refereed",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "papers about Betelgeuse",
+    "ads_query": "object:\"Betelgeuse\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "planetary atmospheres this decade",
+    "ads_query": "abs:\"planetary atmospheres\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Harvard papers",
+    "ads_query": "aff:\"Harvard\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "Virgo interferometer papers",
+    "ads_query": "abs:\"Virgo interferometer\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "first author Thorne",
+    "ads_query": "^author:\"Thorne, K.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "JWST observations papers from 2022",
+    "ads_query": "abs:\"JWST observations\" pubdate:2022",
+    "category": "publication"
+  },
+  {
+    "natural_language": "looking for supernovae papers",
+    "ads_query": "abs:\"supernovae\"",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "elliptical galaxies preprints",
+    "ads_query": "abs:\"elliptical galaxies\" doctype:eprint",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "radio astronomy from 2022 to 2025",
+    "ads_query": "abs:\"radio astronomy\" pubdate:[2022 TO 2025]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "highly cited HII regions papers",
+    "ads_query": "abs:\"HII regions\" citation_count:[100 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "open access MOND papers",
+    "ads_query": "abs:\"MOND\" property:openaccess",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "stellar evolution reviews",
+    "ads_query": "abs:\"stellar evolution\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Queloz's work",
+    "ads_query": "author:\"Queloz, D.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "neural networks",
+    "ads_query": "abs:\"neural networks\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "landmark papers with extreme citations",
+    "ads_query": "citation_count:[5000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "Edwin Hubble on neutron stars",
+    "ads_query": "author:\"Hubble, E.\" abs:\"neutron stars\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "brown dwarfs papers from 2016",
+    "ads_query": "abs:\"brown dwarfs\" pubdate:2016",
+    "category": "publication"
+  },
+  {
+    "natural_language": "galaxy clusters or groups papers",
+    "ads_query": "abs:\"galaxy cluster\" OR abs:\"galaxy group\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "highly cited Hubble Space Telescope papers",
+    "ads_query": "abs:\"Hubble Space Telescope\" citation_count:[50 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "inflation between 2021 and 2024",
+    "ads_query": "abs:\"inflation\" pubdate:[2021 TO 2024]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "preprints not yet published",
+    "ads_query": "doctype:eprint property:notrefereed",
+    "category": "publication"
+  },
+  {
+    "natural_language": "papers by Stephen Hawking on black holes",
+    "ads_query": "author:\"Hawking, S\" abs:\"black holes\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "Vega dynamics",
+    "ads_query": "object:\"Vega\" abs:dynamics",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "James Webb telescope studies",
+    "ads_query": "abs:\"James Webb telescope\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "optical astronomy from 2022 to 2023",
+    "ads_query": "abs:\"optical astronomy\" pubdate:[2022 TO 2023]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "galaxy evolution papers from 2018",
+    "ads_query": "abs:\"galaxy evolution\" pubdate:2018",
+    "category": "publication"
+  },
+  {
+    "natural_language": "highly cited radio astronomy papers",
+    "ads_query": "abs:\"radio astronomy\" citation_count:[500 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "papers about Vega",
+    "ads_query": "object:\"Vega\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "M87 papers",
+    "ads_query": "object:\"M87\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "top cited supernovae",
+    "ads_query": "abs:\"supernovae\" citation_count:[50 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "interstellar medium dust grain studies",
+    "ads_query": "abs:\"interstellar medium\" abs:\"dust grain\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "open access papers on dark matter",
+    "ads_query": "property:openaccess abs:\"dark matter\"",
+    "category": "properties"
+  },
+  {
+    "natural_language": "AJ papers on LISA mission",
+    "ads_query": "abs:\"LISA mission\" bibstem:AJ",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Physical Review Letters papers on dark energy",
+    "ads_query": "bibstem:PhRvL abs:\"dark energy\"",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Euclid survey between 2020 and 2024",
+    "ads_query": "abs:\"Euclid survey\" pubdate:[2020 TO 2024]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "JWST observations studies",
+    "ads_query": "abs:\"JWST observations\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "interferometry",
+    "ads_query": "abs:\"interferometry\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "gravitational wave detection papers",
+    "ads_query": "abs:\"gravitational wave detection\"",
+    "category": "content"
+  },
+  {
+    "natural_language": "cosmological constant studies",
+    "ads_query": "abs:\"cosmological constant\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "PRD articles",
+    "ads_query": "bibstem:PhRvD",
+    "category": "publication"
+  },
+  {
+    "natural_language": "new ALMA observations papers",
+    "ads_query": "abs:\"ALMA observations\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "ApJL papers on planetary nebulae",
+    "ads_query": "abs:\"planetary nebulae\" bibstem:ApJL",
+    "category": "publication"
+  },
+  {
+    "natural_language": "recent spectroscopy",
+    "ads_query": "abs:\"spectroscopy\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Chandrasekhar as lead author",
+    "ads_query": "^author:\"Chandrasekhar, S.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "latest pulsars research",
+    "ads_query": "abs:\"pulsars\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "gamma ray astronomy 2022",
+    "ads_query": "abs:\"gamma ray astronomy\" pubdate:2022",
+    "category": "publication"
+  },
+  {
+    "natural_language": "NASA Goddard research on exoplanets",
+    "ads_query": "aff:\"Goddard\" abs:exoplanet",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "image processing in Monthly Notices",
+    "ads_query": "abs:\"image processing\" bibstem:MNRAS",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Proxima Centauri variability",
+    "ads_query": "object:\"Proxima Centauri\" abs:variability",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Smoot's supernovae papers",
+    "ads_query": "author:\"Smoot, G.\" abs:\"supernovae\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "inflation 2024-2025",
+    "ads_query": "abs:\"inflation\" pubdate:[2024 TO 2025]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "papers about M31 the Andromeda galaxy",
+    "ads_query": "object:M31",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Sagittarius A star observations",
+    "ads_query": "object:\"Sgr A*\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "software papers in astronomy",
+    "ads_query": "property:software database:astronomy",
+    "category": "properties"
+  },
+  {
+    "natural_language": "most read cosmic microwave background articles",
+    "ads_query": "abs:\"cosmic microwave background\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "MNRAS articles from 2023",
+    "ads_query": "bibstem:MNRAS pubdate:2023",
+    "category": "publication"
+  },
+  {
+    "natural_language": "papers in Monthly Notices",
+    "ads_query": "bibstem:MNRAS",
+    "category": "publication"
+  },
+  {
+    "natural_language": "new galaxy formation papers",
+    "ads_query": "abs:\"galaxy formation\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "deep learning in Astronomical Journal",
+    "ads_query": "abs:\"deep learning\" bibstem:AJ",
+    "category": "publication"
+  },
+  {
+    "natural_language": "JWST observations in ApJ Letters",
+    "ads_query": "abs:\"JWST observations\" bibstem:ApJL",
+    "category": "publication"
+  },
+  {
+    "natural_language": "papers mentioning neural networks in the full text",
+    "ads_query": "full:\"neural network\"",
+    "category": "content"
+  },
+  {
+    "natural_language": "open clusters studies",
+    "ads_query": "abs:\"open clusters\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Chandra X-ray reviews",
+    "ads_query": "abs:\"Chandra X-ray\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "star formation in molecular clouds",
+    "ads_query": "abs:\"star formation\" abs:\"molecular cloud\"",
+    "category": "content"
+  },
+  {
+    "natural_language": "first author Mayor",
+    "ads_query": "^author:\"Mayor, M.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "galaxy formation and evolution",
+    "ads_query": "abs:\"galaxy formation\" OR abs:\"galaxy evolution\"",
+    "category": "content"
+  },
+  {
+    "natural_language": "gravitational waves research",
+    "ads_query": "abs:\"gravitational waves\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "cosmic microwave background papers from 2017",
+    "ads_query": "abs:\"cosmic microwave background\" pubdate:2017",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Brian Schmidt on pulsars",
+    "ads_query": "author:\"Schmidt, B.\" abs:\"pulsars\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "asteroid spectroscopy and composition",
+    "ads_query": "abs:asteroid abs:spectroscopy",
+    "category": "compound"
+  },
+  {
+    "natural_language": "dark energy papers",
+    "ads_query": "abs:\"dark energy\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "recent spiral galaxies",
+    "ads_query": "abs:\"spiral galaxies\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Roman telescope 2023-2025",
+    "ads_query": "abs:\"Roman telescope\" pubdate:[2023 TO 2025]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "VLA radio in the 2020s",
+    "ads_query": "abs:\"VLA radio\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "top cited gamma ray astronomy",
+    "ads_query": "abs:\"gamma ray astronomy\" citation_count:[100 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "popular neutron stars papers",
+    "ads_query": "abs:\"neutron stars\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "new TESS exoplanets papers",
+    "ads_query": "abs:\"TESS exoplanets\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Caltech papers on gravitational waves",
+    "ads_query": "aff:\"Caltech\" abs:\"gravitational waves\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "European Southern Observatory cosmological constant research",
+    "ads_query": "aff:\"ESO\" abs:\"cosmological constant\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "Orion Nebula photometry",
+    "ads_query": "object:\"Orion Nebula\" abs:photometry",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "need papers on neutron stars",
+    "ads_query": "abs:\"neutron stars\"",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "latest star formation research",
+    "ads_query": "abs:\"star formation\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "gamma ray astronomy between 2019 and 2021",
+    "ads_query": "abs:\"gamma ray astronomy\" pubdate:[2019 TO 2021]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "black holes 2019",
+    "ads_query": "abs:\"black holes\" pubdate:2019",
+    "category": "publication"
+  },
+  {
+    "natural_language": "cosmic rays preprints",
+    "ads_query": "abs:\"cosmic rays\" doctype:eprint",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "moderately cited cosmology papers",
+    "ads_query": "abs:cosmology citation_count:[50 TO 200]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "Roman telescope preprints",
+    "ads_query": "abs:\"Roman telescope\" doctype:eprint",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "popular Spitzer infrared papers",
+    "ads_query": "abs:\"Spitzer infrared\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "Nature papers on astronomy",
+    "ads_query": "bibstem:Nature database:astronomy",
+    "category": "publication"
+  },
+  {
+    "natural_language": "binary stars in the 2020s",
+    "ads_query": "abs:\"binary stars\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "star formation in the 2020s",
+    "ads_query": "abs:\"star formation\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "interstellar medium from 2022 to 2025",
+    "ads_query": "abs:\"interstellar medium\" pubdate:[2022 TO 2025]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "recent brown dwarfs",
+    "ads_query": "abs:\"brown dwarfs\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "most read papers on black holes",
+    "ads_query": "abs:\"black hole\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "papers where Vera Rubin is first author",
+    "ads_query": "^author:\"Rubin, V\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "refereed quantum gravity articles",
+    "ads_query": "abs:\"quantum gravity\" property:refereed",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "what's new in red giants?",
+    "ads_query": "abs:\"red giants\" pubdate:[2024 TO 2025]",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "top cited elliptical galaxies",
+    "ads_query": "abs:\"elliptical galaxies\" citation_count:[100 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "neural networks papers from 2017",
+    "ads_query": "abs:\"neural networks\" pubdate:2017",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Schmidt's work",
+    "ads_query": "author:\"Schmidt, B.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "active galactic nuclei variability studies",
+    "ads_query": "abs:\"active galactic nuclei\" abs:variability",
+    "category": "compound"
+  },
+  {
+    "natural_language": "Hubble's work",
+    "ads_query": "author:\"Hubble, E.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "recent LSST survey",
+    "ads_query": "abs:\"LSST survey\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Euclid survey",
+    "ads_query": "abs:\"Euclid survey\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Einstein as lead author",
+    "ads_query": "^author:\"Einstein, A.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "Vega variability",
+    "ads_query": "object:\"Vega\" abs:variability",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "nucleosynthesis 2019",
+    "ads_query": "abs:\"nucleosynthesis\" pubdate:2019",
+    "category": "publication"
+  },
+  {
+    "natural_language": "JPL deep learning research",
+    "ads_query": "aff:\"JPL\" abs:\"deep learning\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "cosmic rays in the 2020s",
+    "ads_query": "abs:\"cosmic rays\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "planetary nebulae 2023-2025",
+    "ads_query": "abs:\"planetary nebulae\" pubdate:[2023 TO 2025]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Science papers on image processing",
+    "ads_query": "abs:\"image processing\" bibstem:Science",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Space Telescope Science Institute deep learning research",
+    "ads_query": "aff:\"STScI\" abs:\"deep learning\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "spectroscopy preprints",
+    "ads_query": "abs:\"spectroscopy\" doctype:eprint",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "gravitational waves review",
+    "ads_query": "abs:\"gravitational waves\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "influential radio astronomy research",
+    "ads_query": "abs:\"radio astronomy\" citation_count:[50 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "gamma ray bursts reviews",
+    "ads_query": "abs:\"gamma ray bursts\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "popular special relativity papers",
+    "ads_query": "abs:\"special relativity\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "gamma ray bursts 2019",
+    "ads_query": "abs:\"gamma ray bursts\" pubdate:2019",
+    "category": "publication"
+  },
+  {
+    "natural_language": "LISA mission preprints",
+    "ads_query": "abs:\"LISA mission\" doctype:eprint",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "radio astronomy studies",
+    "ads_query": "abs:\"radio astronomy\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "UC Berkeley papers",
+    "ads_query": "aff:\"Berkeley\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "papers with more than 1000 citations",
+    "ads_query": "citation_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "highly cited interferometry papers",
+    "ads_query": "abs:\"interferometry\" citation_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "black holes papers from 2016",
+    "ads_query": "abs:\"black holes\" pubdate:2016",
+    "category": "publication"
+  },
+  {
+    "natural_language": "need papers on X-ray astronomy",
+    "ads_query": "abs:\"X-ray astronomy\"",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "recent star formation",
+    "ads_query": "abs:\"star formation\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "first author papers by Penrose on singularities",
+    "ads_query": "^author:\"Penrose, R\" abs:singularity",
+    "category": "compound"
+  },
+  {
+    "natural_language": "dwarf galaxies between 2021 and 2022",
+    "ads_query": "abs:\"dwarf galaxies\" pubdate:[2021 TO 2022]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "papers by Roger Penrose",
+    "ads_query": "author:\"Penrose, R.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "MIT papers",
+    "ads_query": "aff:\"MIT\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "CERN JWST observations research",
+    "ads_query": "aff:\"CERN\" abs:\"JWST observations\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "supernovae review",
+    "ads_query": "abs:\"supernovae\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "highly cited X-ray astronomy papers",
+    "ads_query": "abs:\"X-ray astronomy\" citation_count:[50 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "Swift bursts",
+    "ads_query": "abs:\"Swift bursts\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "new dark matter papers",
+    "ads_query": "abs:\"dark matter\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Queloz as lead author",
+    "ads_query": "^author:\"Queloz, D.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "deep learning",
+    "ads_query": "abs:\"deep learning\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "popular X-ray astronomy papers",
+    "ads_query": "abs:\"X-ray astronomy\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "any good neutron stars reviews?",
+    "ads_query": "abs:\"neutron stars\" doctype:article property:refereed",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "quasars",
+    "ads_query": "abs:\"quasars\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "interested in LIGO gravitational waves research",
+    "ads_query": "abs:\"LIGO gravitational waves\"",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "papers citing the original Hubble constant measurement",
+    "ads_query": "abs:\"Hubble constant\" citation_count:[100 TO *]",
+    "category": "compound"
+  },
+  {
+    "natural_language": "LIGO gravitational waves review",
+    "ads_query": "abs:\"LIGO gravitational waves\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "open access brown dwarfs papers",
+    "ads_query": "abs:\"brown dwarfs\" property:openaccess",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "exoplanets papers from 2023",
+    "ads_query": "abs:\"exoplanets\" pubdate:2023",
+    "category": "publication"
+  },
+  {
+    "natural_language": "MNRAS papers on WIMPs",
+    "ads_query": "abs:\"WIMPs\" bibstem:MNRAS",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Einstein's black holes papers",
+    "ads_query": "author:\"Einstein, A.\" abs:\"black holes\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "Stephen Hawking papers",
+    "ads_query": "author:\"Hawking, S.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "highly cited LIGO papers",
+    "ads_query": "abs:LIGO citation_count:[500 TO *]",
+    "category": "compound"
+  },
+  {
+    "natural_language": "Crab Nebula spectroscopy",
+    "ads_query": "object:\"Crab Nebula\" abs:spectroscopy",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Queloz's pulsars papers",
+    "ads_query": "author:\"Queloz, D.\" abs:\"pulsars\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "protoplanetary disks reviews",
+    "ads_query": "abs:\"protoplanetary disks\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Gaia astrometry studies",
+    "ads_query": "abs:\"Gaia astrometry\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "papers by Saul Perlmutter",
+    "ads_query": "author:\"Perlmutter, S.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "gamma ray burst afterglow observations",
+    "ads_query": "abs:\"gamma ray burst\" abs:afterglow",
+    "category": "compound"
+  },
+  {
+    "natural_language": "new photometry papers",
+    "ads_query": "abs:\"photometry\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Large Magellanic Cloud papers",
+    "ads_query": "object:\"LMC\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Betelgeuse dimming observations",
+    "ads_query": "object:Betelgeuse abs:dimming",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "latest Swift bursts research",
+    "ads_query": "abs:\"Swift bursts\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Hubble Space Telescope in Astronomy & Astrophysics",
+    "ads_query": "abs:\"Hubble Space Telescope\" bibstem:A&A",
+    "category": "publication"
+  },
+  {
+    "natural_language": "open access spectroscopy papers",
+    "ads_query": "abs:\"spectroscopy\" property:openaccess",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "papers by Kip Thorne",
+    "ads_query": "author:\"Thorne, K.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "research from European Southern Observatory",
+    "ads_query": "aff:\"ESO\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "planetary nebulae papers",
+    "ads_query": "abs:\"planetary nebulae\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Chandra X-ray in Science",
+    "ads_query": "abs:\"Chandra X-ray\" bibstem:Science",
+    "category": "publication"
+  },
+  {
+    "natural_language": "white dwarf cooling sequences",
+    "ads_query": "abs:\"white dwarf\" abs:cooling",
+    "category": "compound"
+  },
+  {
+    "natural_language": "paper with bibcode 2019ApJ...887L...1K",
+    "ads_query": "bibcode:2019ApJ...887L...1K",
+    "category": "identifiers"
+  },
+  {
+    "natural_language": "AJ papers in volume 165",
+    "ads_query": "bibstem:AJ volume:165",
+    "category": "publication"
+  },
+  {
+    "natural_language": "highly cited Rubin Observatory papers",
+    "ads_query": "abs:\"Rubin Observatory\" citation_count:[50 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "PRD papers on white dwarfs",
+    "ads_query": "abs:\"white dwarfs\" bibstem:PhRvD",
+    "category": "publication"
+  },
+  {
+    "natural_language": "research from CERN",
+    "ads_query": "aff:\"CERN\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "most read Chandra X-ray articles",
+    "ads_query": "abs:\"Chandra X-ray\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "arXiv preprint 2301.12345",
+    "ads_query": "arXiv:2301.12345",
+    "category": "identifiers"
+  },
+  {
+    "natural_language": "recent globular clusters",
+    "ads_query": "abs:\"globular clusters\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "gamma ray bursts in the 2020s",
+    "ads_query": "abs:\"gamma ray bursts\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "tidal disruption events in ApJ",
+    "ads_query": "abs:\"tidal disruption event\" bibstem:ApJ",
+    "category": "compound"
+  },
+  {
+    "natural_language": "papers in Astronomical Journal",
+    "ads_query": "bibstem:AJ",
+    "category": "publication"
+  },
+  {
+    "natural_language": "GW150914 structure",
+    "ads_query": "object:\"GW150914\" abs:structure",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Chandrasekhar on gamma ray bursts",
+    "ads_query": "author:\"Chandrasekhar, S.\" abs:\"gamma ray bursts\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "what's new in exoplanets?",
+    "ads_query": "abs:\"exoplanets\" pubdate:[2024 TO 2025]",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "molecular clouds review",
+    "ads_query": "abs:\"molecular clouds\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "interested in HII regions research",
+    "ads_query": "abs:\"HII regions\"",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "Rubin Observatory review",
+    "ads_query": "abs:\"Rubin Observatory\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "dark matter candidates 2024",
+    "ads_query": "abs:\"dark matter candidates\" pubdate:2024",
+    "category": "publication"
+  },
+  {
+    "natural_language": "recent cosmic rays",
+    "ads_query": "abs:\"cosmic rays\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "open access Chandra X-ray papers",
+    "ads_query": "abs:\"Chandra X-ray\" property:openaccess",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "MNRAS papers on galaxy evolution",
+    "ads_query": "abs:\"galaxy evolution\" bibstem:MNRAS",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Einstein's work",
+    "ads_query": "author:\"Einstein, A.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "elliptical galaxies in the 2020s",
+    "ads_query": "abs:\"elliptical galaxies\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Kepler mission from 2021 to 2025",
+    "ads_query": "abs:\"Kepler mission\" pubdate:[2021 TO 2025]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Swift bursts in the 2020s",
+    "ads_query": "abs:\"Swift bursts\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "machine learning applications in astronomy",
+    "ads_query": "abs:\"machine learning\" database:astronomy",
+    "category": "content"
+  },
+  {
+    "natural_language": "molecular clouds studies",
+    "ads_query": "abs:\"molecular clouds\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Proxima Centauri papers",
+    "ads_query": "object:\"Proxima Centauri\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "MIT and Caltech joint publications on gravitational waves",
+    "ads_query": "aff:\"MIT\" aff:\"Caltech\" abs:\"gravitational waves\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "highly cited string theory papers",
+    "ads_query": "abs:\"string theory\" citation_count:[100 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "Hawking's neutron stars papers",
+    "ads_query": "author:\"Hawking, S.\" abs:\"neutron stars\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "Andromeda variability",
+    "ads_query": "object:\"M31\" abs:variability",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Mayor's work",
+    "ads_query": "author:\"Mayor, M.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "binary stars reviews",
+    "ads_query": "abs:\"binary stars\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Andromeda papers",
+    "ads_query": "object:\"M31\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Space Telescope Science Institute papers",
+    "ads_query": "aff:\"STScI\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "Thorne's gravitational waves papers",
+    "ads_query": "author:\"Thorne, K.\" abs:\"gravitational waves\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "quantum gravity in Astrophysical Journal",
+    "ads_query": "abs:\"quantum gravity\" bibstem:ApJ",
+    "category": "publication"
+  },
+  {
+    "natural_language": "GW150914 variability",
+    "ads_query": "object:\"GW150914\" abs:variability",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Spitzer infrared papers",
+    "ads_query": "abs:\"Spitzer infrared\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "PRL articles",
+    "ads_query": "bibstem:PhRvL",
+    "category": "publication"
+  },
+  {
+    "natural_language": "influential dark matter candidates research",
+    "ads_query": "abs:\"dark matter candidates\" citation_count:[50 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "top cited image processing",
+    "ads_query": "abs:\"image processing\" citation_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "open clusters between 2023 and 2025",
+    "ads_query": "abs:\"open clusters\" pubdate:[2023 TO 2025]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Hubble Space Telescope papers",
+    "ads_query": "abs:\"Hubble Space Telescope\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "cosmic microwave background anisotropies",
+    "ads_query": "abs:\"cosmic microwave background\" abs:anisotropy",
+    "category": "content"
+  },
+  {
+    "natural_language": "European Southern Observatory spectroscopy research",
+    "ads_query": "aff:\"ESO\" abs:\"spectroscopy\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "Kip Thorne's work on gravitational waves",
+    "ads_query": "author:\"Thorne, K\" abs:\"gravitational waves\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "Science papers on VLA radio",
+    "ads_query": "abs:\"VLA radio\" bibstem:Science",
+    "category": "publication"
+  },
+  {
+    "natural_language": "HII regions papers from NASA",
+    "ads_query": "aff:\"NASA\" abs:\"HII regions\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "Chandrasekhar's work",
+    "ads_query": "author:\"Chandrasekhar, S.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "planetary atmospheres research",
+    "ads_query": "abs:\"planetary atmospheres\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "refereed cosmological constant articles",
+    "ads_query": "abs:\"cosmological constant\" property:refereed",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "open access gamma ray astronomy papers",
+    "ads_query": "abs:\"gamma ray astronomy\" property:openaccess",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "VLA radio",
+    "ads_query": "abs:\"VLA radio\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Space Telescope Science Institute supernovae research",
+    "ads_query": "aff:\"STScI\" abs:\"supernovae\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "papers in ApJ Letters",
+    "ads_query": "bibstem:ApJL",
+    "category": "publication"
+  },
+  {
+    "natural_language": "stellar evolution in globular clusters",
+    "ads_query": "abs:\"stellar evolution\" abs:\"globular cluster\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "Riccardo Giacconi on cosmic microwave background",
+    "ads_query": "author:\"Giacconi, R.\" abs:\"cosmic microwave background\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "what are the latest MOND discoveries?",
+    "ads_query": "abs:\"MOND\" pubdate:[2024 TO 2025]",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "top cited brown dwarfs",
+    "ads_query": "abs:\"brown dwarfs\" citation_count:[50 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "latest infrared astronomy research",
+    "ads_query": "abs:\"infrared astronomy\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "galaxy clusters research",
+    "ads_query": "abs:\"galaxy clusters\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "open access supernovae papers",
+    "ads_query": "abs:\"supernovae\" property:openaccess",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "TRAPPIST-1 variability",
+    "ads_query": "object:\"TRAPPIST-1\" abs:variability",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "popular string theory papers",
+    "ads_query": "abs:\"string theory\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "high-energy astrophysics arXiv papers",
+    "ads_query": "arxiv_class:astro-ph.HE",
+    "category": "identifiers"
+  },
+  {
+    "natural_language": "Max Planck Chandra X-ray research",
+    "ads_query": "aff:\"Max Planck\" abs:\"Chandra X-ray\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "Small Magellanic Cloud structure",
+    "ads_query": "object:\"SMC\" abs:structure",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Cambridge papers",
+    "ads_query": "aff:\"Cambridge\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "recent dwarf galaxies",
+    "ads_query": "abs:\"dwarf galaxies\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "cosmic rays reviews",
+    "ads_query": "abs:\"cosmic rays\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "interferometry in the 2020s",
+    "ads_query": "abs:\"interferometry\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "infrared astronomy papers",
+    "ads_query": "abs:\"infrared astronomy\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Chandrasekhar on supernovae",
+    "ads_query": "author:\"Chandrasekhar, S.\" abs:\"supernovae\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "Proxima Centauri planet discoveries",
+    "ads_query": "object:\"Proxima Centauri\" abs:planet",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "papers from the 1990s on quasars",
+    "ads_query": "pubdate:[1990 TO 1999] abs:quasar",
+    "category": "publication"
+  },
+  {
+    "natural_language": "cosmic microwave background studies",
+    "ads_query": "abs:\"cosmic microwave background\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "first author Penrose",
+    "ads_query": "^author:\"Penrose, R.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "any good active galactic nuclei reviews?",
+    "ads_query": "abs:\"active galactic nuclei\" doctype:article property:refereed",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "red giants",
+    "ads_query": "abs:\"red giants\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "papers from Harvard on cosmology",
+    "ads_query": "aff:\"Harvard\" abs:cosmology",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "string theory studies",
+    "ads_query": "abs:\"string theory\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "most read neural networks articles",
+    "ads_query": "abs:\"neural networks\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "open access cosmic rays papers",
+    "ads_query": "abs:\"cosmic rays\" property:openaccess",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "molecular clouds from 2016 to 2019",
+    "ads_query": "abs:\"molecular clouds\" pubdate:[2016 TO 2019]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "STScI publications on Hubble",
+    "ads_query": "aff:\"STScI\" abs:Hubble",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "new quantum gravity papers",
+    "ads_query": "abs:\"quantum gravity\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "red giants 2019",
+    "ads_query": "abs:\"red giants\" pubdate:2019",
+    "category": "publication"
+  },
+  {
+    "natural_language": "refereed optical astronomy articles",
+    "ads_query": "abs:\"optical astronomy\" property:refereed",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "stellar evolution studies",
+    "ads_query": "abs:\"stellar evolution\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "exomoon or exoring detection papers",
+    "ads_query": "abs:exomoon OR abs:exoring",
+    "category": "compound"
+  },
+  {
+    "natural_language": "need papers on protoplanetary disks",
+    "ads_query": "abs:\"protoplanetary disks\"",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "Queloz's gravitational waves papers",
+    "ads_query": "author:\"Queloz, D.\" abs:\"gravitational waves\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "Small Magellanic Cloud variability",
+    "ads_query": "object:\"SMC\" abs:variability",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Hawking papers on black hole radiation from the 1970s",
+    "ads_query": "author:\"Hawking, S\" abs:\"black hole radiation\" pubdate:[1970 TO 1979]",
+    "category": "compound"
+  },
+  {
+    "natural_language": "latest elliptical galaxies research",
+    "ads_query": "abs:\"elliptical galaxies\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "recent machine learning papers from top institutions",
+    "ads_query": "abs:\"machine learning\" pubdate:[2023 TO 2025] (aff:\"MIT\" OR aff:\"Stanford\" OR aff:\"Berkeley\")",
+    "category": "compound"
+  },
+  {
+    "natural_language": "exoplanets studies",
+    "ads_query": "abs:\"exoplanets\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "CERN LIGO gravitational waves research",
+    "ads_query": "aff:\"CERN\" abs:\"LIGO gravitational waves\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "Rubin Observatory 2019",
+    "ads_query": "abs:\"Rubin Observatory\" pubdate:2019",
+    "category": "publication"
+  },
+  {
+    "natural_language": "Gaia satellite stellar parallax measurements",
+    "ads_query": "abs:Gaia abs:parallax",
+    "category": "compound"
+  },
+  {
+    "natural_language": "new main sequence stars papers",
+    "ads_query": "abs:\"main sequence stars\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Swift bursts in Astronomical Journal",
+    "ads_query": "abs:\"Swift bursts\" bibstem:AJ",
+    "category": "publication"
+  },
+  {
+    "natural_language": "interested in axions research",
+    "ads_query": "abs:\"axions\"",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "interstellar medium research",
+    "ads_query": "abs:\"interstellar medium\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "MOND in Nature",
+    "ads_query": "abs:\"MOND\" bibstem:Nature",
+    "category": "publication"
+  },
+  {
+    "natural_language": "recent interstellar medium",
+    "ads_query": "abs:\"interstellar medium\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "most read galaxy evolution articles",
+    "ads_query": "abs:\"galaxy evolution\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "supernova cosmology studies",
+    "ads_query": "abs:supernova abs:cosmology",
+    "category": "content"
+  },
+  {
+    "natural_language": "first author Mather",
+    "ads_query": "^author:\"Mather, J.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "open access gravitational waves papers",
+    "ads_query": "abs:\"gravitational waves\" property:openaccess",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "Cambridge University dark matter research",
+    "ads_query": "aff:\"Cambridge\" abs:\"dark matter\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "M87 black hole observations",
+    "ads_query": "object:M87 abs:\"black hole\"",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "VLA radio 2016",
+    "ads_query": "abs:\"VLA radio\" pubdate:2016",
+    "category": "publication"
+  },
+  {
+    "natural_language": "CERN main sequence stars research",
+    "ads_query": "aff:\"CERN\" abs:\"main sequence stars\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "Stephen Hawking on gamma ray bursts",
+    "ads_query": "author:\"Hawking, S.\" abs:\"gamma ray bursts\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "globular clusters papers",
+    "ads_query": "abs:\"globular clusters\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "GW150914 observations",
+    "ads_query": "object:\"GW150914\" abs:observations",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "Hubble Space Telescope this decade",
+    "ads_query": "abs:\"Hubble Space Telescope\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "LISA mission review",
+    "ads_query": "abs:\"LISA mission\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "papers from 2024",
+    "ads_query": "pubdate:2024",
+    "category": "publication"
+  },
+  {
+    "natural_language": "John Mather papers",
+    "ads_query": "author:\"Mather, J.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "VLA radio papers from 2021",
+    "ads_query": "abs:\"VLA radio\" pubdate:2021",
+    "category": "publication"
+  },
+  {
+    "natural_language": "what are the latest Virgo interferometer discoveries?",
+    "ads_query": "abs:\"Virgo interferometer\" pubdate:[2024 TO 2025]",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "Gaia astrometry review",
+    "ads_query": "abs:\"Gaia astrometry\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Andromeda photometry",
+    "ads_query": "object:\"M31\" abs:photometry",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "elliptical galaxies review",
+    "ads_query": "abs:\"elliptical galaxies\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "dark matter candidates papers from 2017",
+    "ads_query": "abs:\"dark matter candidates\" pubdate:2017",
+    "category": "publication"
+  },
+  {
+    "natural_language": "European Southern Observatory research",
+    "ads_query": "aff:\"ESO\" OR aff:\"European Southern Observatory\"",
+    "category": "affiliation"
+  },
+  {
+    "natural_language": "quantum gravity in the 2020s",
+    "ads_query": "abs:\"quantum gravity\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "spectroscopy from 2020 to 2021",
+    "ads_query": "abs:\"spectroscopy\" pubdate:[2020 TO 2021]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "molecular clouds between 2022 and 2025",
+    "ads_query": "abs:\"molecular clouds\" pubdate:[2022 TO 2025]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "latest spiral galaxies research",
+    "ads_query": "abs:\"spiral galaxies\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "exoplanets between 2023 and 2025",
+    "ads_query": "abs:\"exoplanets\" pubdate:[2023 TO 2025]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "recent fast radio burst discoveries",
+    "ads_query": "abs:\"fast radio burst\" pubdate:[2020 TO 2025]",
+    "category": "compound"
+  },
+  {
+    "natural_language": "VLA radio 2015",
+    "ads_query": "abs:\"VLA radio\" pubdate:2015",
+    "category": "publication"
+  },
+  {
+    "natural_language": "looking for inflation papers",
+    "ads_query": "abs:\"inflation\"",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "Adam Riess on gravitational waves",
+    "ads_query": "author:\"Riess, A.\" abs:\"gravitational waves\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "latest optical astronomy research",
+    "ads_query": "abs:\"optical astronomy\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "ALMA observations research",
+    "ads_query": "abs:\"ALMA observations\"",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "Rubin Observatory in the 2020s",
+    "ads_query": "abs:\"Rubin Observatory\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "what are the latest cosmic microwave background discoveries?",
+    "ads_query": "abs:\"cosmic microwave background\" pubdate:[2024 TO 2025]",
+    "category": "conversational"
+  },
+  {
+    "natural_language": "radio astronomy this decade",
+    "ads_query": "abs:\"radio astronomy\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "ALMA observations 2022",
+    "ads_query": "abs:\"ALMA observations\" pubdate:2022",
+    "category": "publication"
+  },
+  {
+    "natural_language": "astroph preprints on cosmology",
+    "ads_query": "arxiv_class:astro-ph.CO",
+    "category": "identifiers"
+  },
+  {
+    "natural_language": "dark matter review articles",
+    "ads_query": "abs:\"dark matter\" doctype:article property:refereed",
+    "category": "content"
+  },
+  {
+    "natural_language": "Hawking's galaxy formation papers",
+    "ads_query": "author:\"Hawking, S.\" abs:\"galaxy formation\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "red giants reviews",
+    "ads_query": "abs:\"red giants\" doctype:article property:refereed",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "papers on the Large Magellanic Cloud",
+    "ads_query": "object:LMC",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "most read MOND articles",
+    "ads_query": "abs:\"MOND\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "John Mather on gravitational waves",
+    "ads_query": "author:\"Mather, J.\" abs:\"gravitational waves\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "Betelgeuse spectroscopy",
+    "ads_query": "object:\"Betelgeuse\" abs:spectroscopy",
+    "category": "astronomy"
+  },
+  {
+    "natural_language": "TESS exoplanets in the 2020s",
+    "ads_query": "abs:\"TESS exoplanets\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "recent VLA radio",
+    "ads_query": "abs:\"VLA radio\" pubdate:[2023 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "influential supernova remnants research",
+    "ads_query": "abs:\"supernova remnants\" citation_count:[50 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "influential WIMPs research",
+    "ads_query": "abs:\"WIMPs\" citation_count:[100 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "Vera Rubin papers",
+    "ads_query": "author:\"Rubin, V.\"",
+    "category": "author"
+  },
+  {
+    "natural_language": "influential neural networks research",
+    "ads_query": "abs:\"neural networks\" citation_count:[50 TO *]",
+    "category": "metrics"
+  },
+  {
+    "natural_language": "papers in the Astrophysical Journal",
+    "ads_query": "bibstem:ApJ",
+    "category": "publication"
+  },
+  {
+    "natural_language": "new supernova remnants papers",
+    "ads_query": "abs:\"supernova remnants\" pubdate:[2024 TO 2025]",
+    "category": "unfielded"
+  },
+  {
+    "natural_language": "cosmological simulations of structure formation",
+    "ads_query": "abs:\"cosmological simulation\" abs:\"structure formation\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "Roman telescope this decade",
+    "ads_query": "abs:\"Roman telescope\" pubdate:[2020 TO 2029]",
+    "category": "publication"
+  },
+  {
+    "natural_language": "supermassive black hole formation theories",
+    "ads_query": "abs:\"supermassive black hole\" abs:formation",
+    "category": "compound"
+  }
+]

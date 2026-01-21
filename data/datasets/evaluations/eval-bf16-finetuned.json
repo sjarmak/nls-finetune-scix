@@ -1,0 +1,2468 @@
+{
+  "id": "eval-20251223-160721",
+  "timestamp": "2025-12-23T16:07:21.030040",
+  "models": {
+    "fine_tuned": "sourcegraph--nls-finetune-serve-vllm-serve.modal.run",
+    "baseline": "gpt-4o-mini"
+  },
+  "summary": {
+    "total": 108,
+    "fine_tuned": {
+      "syntax_valid": 103,
+      "semantic_match": 72,
+      "avg_latency_ms": 542.5,
+      "p75_latency_ms": 545.5,
+      "p90_latency_ms": 644.5,
+      "min_latency_ms": 408.9,
+      "max_latency_ms": 1675.5,
+      "cold_start_latency_ms": 1078.6
+    },
+    "latency_breakdown": {
+      "network_rtt_ms": 370.8,
+      "connection_overhead_ms": 730.9,
+      "estimated_inference_ms": 171.7,
+      "server_metrics": {
+        "ttft_ms": 53.59,
+        "itl_ms": 3.31,
+        "e2e_ms": 123.48
+      }
+    },
+    "baseline": {
+      "total": 108,
+      "syntax_valid": 90,
+      "semantic_match": 50,
+      "avg_latency_ms": 889.1,
+      "p75_latency_ms": 987.0,
+      "p90_latency_ms": 1120.5,
+      "min_latency_ms": 571.4,
+      "max_latency_ms": 2697.3,
+      "cold_start_latency_ms": 852.0
+    }
+  },
+  "results": [
+    {
+      "id": "ex-000",
+      "input": "golang WriteHeader() case sensitive",
+      "expected": "lang:go case:yes  ) WriteHeader() ",
+      "fine_tuned": {
+        "output": "github.com/golang/go/blob/master/net/http/httptest.go#L1069 case:yes WriteHeader",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 1078.6,
+        "prompt_tokens": 55,
+        "completion_tokens": 25
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "`WriteHeader` case:golang",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 852.0
+      }
+    },
+    {
+      "id": "ex-001",
+      "input": "third party commits in gatsby lumen starter",
+      "expected": "repo:^github.com/alxshelepenok/gatsby-starter-lumen$ third type:commit",
+      "fine_tuned": {
+        "output": "repo:^github.com/alxshelepenok/gatsby-starter-lumen$ type:commit third party -file:(test|spec) -file:node_modules -file:vendor -file:package.json -file:package-lock.json -file:*.md -file:*.html -file:*.css",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 711.1,
+        "prompt_tokens": 76,
+        "completion_tokens": 64
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/alxshelepenok/gatsby-starter-lumen type:commit author:third-party",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 992.6
+      }
+    },
+    {
+      "id": "ex-002",
+      "input": "kahoot-flood changes for 483267",
+      "expected": "repo:^github.com/unixpickle/kahoot-hack$ file:^kahoot-flood/ 483267 type:diff",
+      "fine_tuned": {
+        "output": "repo:^github.com/unixpickle/kahoot-hack$ file:^kahoot-flood/ type:diff 483267",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 551.0,
+        "prompt_tokens": 77,
+        "completion_tokens": 31
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/unixpickle/kahoot-hack kahoot-flood changes 483267",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 1015.8
+      }
+    },
+    {
+      "id": "ex-003",
+      "input": "UseAuthorization middleware usage in aspnet core",
+      "expected": "repo:^github.com/aspnet/AspNetCore$@3b7cdc1 UseAuthorization count:1000",
+      "fine_tuned": {
+        "output": "repo:^github.com/aspnet/AspNetCore$ UseAuthorization type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 431.4,
+        "prompt_tokens": 70,
+        "completion_tokens": 17
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/aspnet/AspNetCore UseAuthorization middleware",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 886.2
+      }
+    },
+    {
+      "id": "ex-004",
+      "input": "golang default value handling qri jsonschema",
+      "expected": "repo:^github.com/qri-io/jsonschema$ default lang:go ",
+      "fine_tuned": {
+        "output": "repo:^github.com/qri-io/jsonschema$ \"default value\" count:1000",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 464.5,
+        "prompt_tokens": 69,
+        "completion_tokens": 21
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/qri-io/jsonschema golang default value handling",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 936.9
+      }
+    },
+    {
+      "id": "ex-005",
+      "input": "rxjs in package.json files",
+      "expected": "repo:github.com/sourcegraph/ file:package.json rxjs",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/ file:package.json rxjs -file:node_modules/ -file:vendor/ -file:*.test.js -file:*.spec.js",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 571.1,
+        "prompt_tokens": 64,
+        "completion_tokens": 37
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/sourcegraph/ file:package.json rxjs",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 762.2
+      }
+    },
+    {
+      "id": "ex-006",
+      "input": "foldingtext directory structure",
+      "expected": "foldingtext/",
+      "fine_tuned": {
+        "output": "foldingtext type:dir",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 408.9,
+        "prompt_tokens": 52,
+        "completion_tokens": 7
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:foldingtext path:directory structure",
+        "syntax_valid": false,
+        "hallucinations": [
+          "path"
+        ],
+        "semantic_match": false,
+        "latency_ms": 743.9
+      }
+    },
+    {
+      "id": "ex-007",
+      "input": "yaml changes in jenkins jira trigger commits",
+      "expected": "repo:^github.com/jenkinsci/jira-trigger-plugin$ yaml type:commit",
+      "fine_tuned": {
+        "output": "repo:^github.com/jenkinsci/jira-trigger-plugin$ type:diff yaml --file=*.yml \"trigger\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 488.3,
+        "prompt_tokens": 71,
+        "completion_tokens": 26
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/jenkinsci/jira-trigger-plugin file:*.yaml changes commits",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 832.5
+      }
+    },
+    {
+      "id": "ex-008",
+      "input": "AbpIdentityApplicationContractsModule in AspNetCore framework",
+      "expected": "repo:^github.com/abpframework/abp$@d235737 file:^framework/src/Volo\\.Abp\\.AspNetCore/ AbpIdentityApplicationContractsModule",
+      "fine_tuned": {
+        "output": "repo:^github.com/abpframework/abp$@master AbpIdentityApplicationContractsModule",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 537.9,
+        "prompt_tokens": 73,
+        "completion_tokens": 21
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/abpframework/abp AbpIdentityApplicationContractsModule in:all language:go",
+        "syntax_valid": false,
+        "hallucinations": [
+          "in"
+        ],
+        "semantic_match": false,
+        "latency_ms": 955.9
+      }
+    },
+    {
+      "id": "ex-009",
+      "input": "kops kubernetes cluster management",
+      "expected": "github.com//kubernetes/kops",
+      "fine_tuned": {
+        "output": "kops repo:^github.com/kubernetes/kops$ cluster management",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 797.9,
+        "prompt_tokens": 54,
+        "completion_tokens": 13
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "kops AND \"kubernetes\" AND \"cluster management\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 1198.1
+      }
+    },
+    {
+      "id": "ex-010",
+      "input": "where are the functions defined?",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$ case:yes [Ff]unc count:1000",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ f:func count:1000",
+        "syntax_valid": false,
+        "hallucinations": [
+          "f"
+        ],
+        "semantic_match": false,
+        "latency_ms": 493.8,
+        "prompt_tokens": 64,
+        "completion_tokens": 19
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/sourcegraph/sourcegraph type:functions",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 714.8
+      }
+    },
+    {
+      "id": "ex-011",
+      "input": "dmcn_im2col_bilinear implementation",
+      "expected": "repo:^github.com/CaoWGG/TensorRT-CenterNet$ dmcn_im2col_bilinear",
+      "fine_tuned": {
+        "output": "repo:^github.com/CaoWGG/TensorRT-CenterNet$ dmcn_im2col_bilinear type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 544.8,
+        "prompt_tokens": 74,
+        "completion_tokens": 27
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/CaoWGG/TensorRT-CenterNet dmcn_im2col_bilinear implementation",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 1083.9
+      }
+    },
+    {
+      "id": "ex-012",
+      "input": "vive project code structure",
+      "expected": "repo:^github.com/JamesBear/vive$   ",
+      "fine_tuned": {
+        "output": "repo:^github.com/JamesBear/vive$@*refs/heads/:^refs/heads/master file:^vive/ type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 546.1,
+        "prompt_tokens": 64,
+        "completion_tokens": 30
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/JamesBear/vive code structure",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 678.6
+      }
+    },
+    {
+      "id": "ex-013",
+      "input": "dart classes starting with S",
+      "expected": "repo:^github.com/phoenixsky/fun_android_flutter$ [S]{1} count:1206 lang:dart",
+      "fine_tuned": {
+        "output": "repo:^github.com/phoenixsky/fun_android_flutter$ S\\.[a-zA-Z0-9]+ type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 474.7,
+        "prompt_tokens": 67,
+        "completion_tokens": 26
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/phoenixsky/fun_android_flutter file:*.dart class S*",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 868.2
+      }
+    },
+    {
+      "id": "ex-014",
+      "input": "rsa decrypt examples golang",
+      "expected": "rsa.DecryptOAEP lang:go -file:(^|/)vendor/ ",
+      "fine_tuned": {
+        "output": "github.com/golang/go/search?q=rsa.decrypt&type=file",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 455.2,
+        "prompt_tokens": 53,
+        "completion_tokens": 14
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "`rsa decrypt examples golang`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 667.8
+      }
+    },
+    {
+      "id": "ex-015",
+      "input": "rpc client implementation symbols",
+      "expected": "repo:^github.com/hzy38324/simple-rpc$  type:symbol",
+      "fine_tuned": {
+        "output": "repo:^github.com/hzy38324/simple-rpc$ rpc client implementation count:1000 type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 509.0,
+        "prompt_tokens": 69,
+        "completion_tokens": 28
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/hzy38324/simple-rpc rpc client implementation symbols",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 718.8
+      }
+    },
+    {
+      "id": "ex-016",
+      "input": "waitfor function in dart physics engine",
+      "expected": "repo:^github.com/dartsim/dart$ waitfor",
+      "fine_tuned": {
+        "output": "repo:^github.com/dartsim/dart$ waitfor",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 504.1,
+        "prompt_tokens": 67,
+        "completion_tokens": 13
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/dartsim/dart waitfor function",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 946.4
+      }
+    },
+    {
+      "id": "ex-017",
+      "input": "Apache symbol definition in chrishantha sample java programs",
+      "expected": "repo:^github.com/chrishantha/sample-java-programs$ Apache type:symbol",
+      "fine_tuned": {
+        "output": "repo:^github.com/chrishantha/sample-java-programs$ Apache type:symbol case:yes",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 519.1,
+        "prompt_tokens": 73,
+        "completion_tokens": 21
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/chrishantha/sample-java-programs type:symbol Apache",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 822.8
+      }
+    },
+    {
+      "id": "ex-018",
+      "input": "nav-item component in masterlab",
+      "expected": "repo:^github.com/gopeak/masterlab$ nav-item",
+      "fine_tuned": {
+        "output": "repo:^github.com/gopeak/masterlab$ nav-item type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 432.2,
+        "prompt_tokens": 66,
+        "completion_tokens": 16
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/gopeak/masterlab nav-item component",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 710.6
+      }
+    },
+    {
+      "id": "ex-019",
+      "input": "port 3080 configuration in deploy sourcegraph",
+      "expected": "repo:^github.com/sourcegraph/deploy-sourcegraph$ 3080",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/deploy-sourcegraph$ port 3080 type:config",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 500.3,
+        "prompt_tokens": 72,
+        "completion_tokens": 21
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/sourcegraph/deploy-sourcegraph \"port 3080\" configuration",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 809.0
+      }
+    },
+    {
+      "id": "ex-020",
+      "input": "Reevaluate symbol in msbuild",
+      "expected": "repo:^github.com/microsoft/msbuild$ Reevaluate type:symbol",
+      "fine_tuned": {
+        "output": "repo:^github.com/microsoft/msbuild$@master Reevaluate type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 432.9,
+        "prompt_tokens": 65,
+        "completion_tokens": 17
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/microsoft/msbuild reevaluate symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 758.0
+      }
+    },
+    {
+      "id": "ex-021",
+      "input": "macro definitions in rust",
+      "expected": "Macros repo:^github.com/rust-lang/rust$@0bbab7d  count:1000 type:symbol#33",
+      "fine_tuned": {
+        "output": "repo:^github.com/rust-lang/rust$ file:^src/lib.rs$ \"macro\" count:1000",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 1083.9,
+        "prompt_tokens": 64,
+        "completion_tokens": 26
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/rust-lang/rust type:rust macro_rules!",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 808.8
+      }
+    },
+    {
+      "id": "ex-022",
+      "input": "api_success implementation",
+      "expected": "api_success",
+      "fine_tuned": {
+        "output": "api_success lang:go repogroup:sourcegraph",
+        "syntax_valid": false,
+        "hallucinations": [
+          "repogroup"
+        ],
+        "semantic_match": true,
+        "latency_ms": 484.1,
+        "prompt_tokens": 51,
+        "completion_tokens": 12
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "`api_success implementation`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 715.4
+      }
+    },
+    {
+      "id": "ex-023",
+      "input": "copy method in structlog python",
+      "expected": "repo:^github.com/hynek/structlog$@18.2.0 copy lang:python ",
+      "fine_tuned": {
+        "output": "repo:^github.com/hynek/structlog$ copy()",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 439.9,
+        "prompt_tokens": 67,
+        "completion_tokens": 14
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/hynek/structlog copy method",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 766.4
+      }
+    },
+    {
+      "id": "ex-024",
+      "input": "todo comments in sourcegraph auth code",
+      "expected": "repo:github.com/sourcegraph authz lang:go  todo|fix|hack type:diff",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph$ file:^auth/ type:diff todo count:1000",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 879.7,
+        "prompt_tokens": 64,
+        "completion_tokens": 22
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/sourcegraph todo",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 634.3
+      }
+    },
+    {
+      "id": "ex-025",
+      "input": "submarine project structure",
+      "expected": "repo:^github.com/apache/submarine$ (",
+      "fine_tuned": {
+        "output": "repo:^github.com/apache/submarine$ submarine$ submittable",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 554.8,
+        "prompt_tokens": 61,
+        "completion_tokens": 14
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/apache/submarine \"project structure\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 764.4
+      }
+    },
+    {
+      "id": "ex-026",
+      "input": "webkit bug 190625 commits",
+      "expected": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=190625",
+      "fine_tuned": {
+        "output": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=190625",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 513.8,
+        "prompt_tokens": 70,
+        "completion_tokens": 32
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/WebKit/webkit \"bug 190625\" commits",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 773.8
+      }
+    },
+    {
+      "id": "ex-027",
+      "input": "sigs.k8s.io/kustomize/api in go.mod",
+      "expected": "sigs.k8s.io/kustomize/api file:go.mod repo:^github.com/kubernetes-sigs/kustomize$ ",
+      "fine_tuned": {
+        "output": "repo:^github.com/kubernetes-sigs/kustomize$ file:^go.mod$ sigs.k8s.io/kustomize/api",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 506.8,
+        "prompt_tokens": 74,
+        "completion_tokens": 27
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/kubernetes-sigs/kustomize file:go.mod sigs.k8s.io/kustomize/api",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 1180.7
+      }
+    },
+    {
+      "id": "ex-028",
+      "input": "migration changes in dev folder",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$ type:diff f:^(migrations|dev)/ migrat",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ file:^dev/ migration type:diff",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 485.3,
+        "prompt_tokens": 64,
+        "completion_tokens": 18
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/sourcegraph/sourcegraph path:dev/ migration changes",
+        "syntax_valid": false,
+        "hallucinations": [
+          "path"
+        ],
+        "semantic_match": false,
+        "latency_ms": 800.9
+      }
+    },
+    {
+      "id": "ex-029",
+      "input": "export default arrow functions",
+      "expected": "export default () =>",
+      "fine_tuned": {
+        "output": "export default (x) => x",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 430.0,
+        "prompt_tokens": 52,
+        "completion_tokens": 8
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "`export default arrow function`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 670.9
+      }
+    },
+    {
+      "id": "ex-030",
+      "input": "forum navigation browse title text",
+      "expected": "repo:^github.com/edx/cs_comments_service$ forum-nav-browse-title",
+      "fine_tuned": {
+        "output": "repo:^github.com/edx/cs_comments_service$ \"browse title\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 442.4,
+        "prompt_tokens": 65,
+        "completion_tokens": 15
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/edx/cs_comments_service forum navigation browse title text",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 885.0
+      }
+    },
+    {
+      "id": "ex-031",
+      "input": "woocommerce hack code examples",
+      "expected": "repo:^github.com/woocommerce/woocommerce$ $woocommerce lang:hack ",
+      "fine_tuned": {
+        "output": "repo:^github.com/woocommerce/woocommerce$ hack|security|vulnerable|exploit|bug|issue|sqli|sql injection|xss|cross site scripting|injection|suspicious|malicious|error|bug|vulnerable|exploit|hack|security|sqli|sql",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 648.3,
+        "prompt_tokens": 64,
+        "completion_tokens": 64
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/woocommerce/woocommerce \"hack\" \"code example\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 1062.6
+      }
+    },
+    {
+      "id": "ex-032",
+      "input": "recent commit errors",
+      "expected": " error type:commit",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ type:commit timeout:30s \"Error: \"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 470.2,
+        "prompt_tokens": 51,
+        "completion_tokens": 22
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "commit:errors type:commit sort:recent",
+        "syntax_valid": false,
+        "hallucinations": [
+          "commit",
+          "sort"
+        ],
+        "semantic_match": true,
+        "latency_ms": 699.9
+      }
+    },
+    {
+      "id": "ex-033",
+      "input": "doMigrate function usage",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$ \"doMigrate\"",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ doMigrate count:1000000 type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 498.1,
+        "prompt_tokens": 64,
+        "completion_tokens": 25
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/sourcegraph/sourcegraph doMigrate function",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 796.8
+      }
+    },
+    {
+      "id": "ex-034",
+      "input": "bucket region cache elasticsearch",
+      "expected": "repo:^github.com/elastic/elasticsearch$@v6.5.1 Bucket region cache",
+      "fine_tuned": {
+        "output": "repo:^github.com/elastic/elasticsearch$ bucket region cache",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 489.1,
+        "prompt_tokens": 64,
+        "completion_tokens": 13
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/elastic/elasticsearch bucket region cache elasticsearch",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 788.7
+      }
+    },
+    {
+      "id": "ex-035",
+      "input": "recent changes to ACM ICPC solutions",
+      "expected": "repo:^github.com/bingoidea/ACM-ICPC$  type:diff",
+      "fine_tuned": {
+        "output": "repo:^github.com/bingoidea/ACM-ICPC$ type:diff after:\\\"1 week ago\\\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 467.8,
+        "prompt_tokens": 71,
+        "completion_tokens": 25
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/bingoidea/ACM-ICPC type:commit recent:30",
+        "syntax_valid": false,
+        "hallucinations": [
+          "recent"
+        ],
+        "semantic_match": true,
+        "latency_ms": 987.0
+      }
+    },
+    {
+      "id": "ex-036",
+      "input": "structural search commits in main repo",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$ type:commit structural search",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ structural type:commit timeout:30s",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 440.5,
+        "prompt_tokens": 65,
+        "completion_tokens": 19
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/sourcegraph/sourcegraph type:commit structural:search",
+        "syntax_valid": false,
+        "hallucinations": [
+          "structural"
+        ],
+        "semantic_match": true,
+        "latency_ms": 851.8
+      }
+    },
+    {
+      "id": "ex-037",
+      "input": "ssh_py_shim base implementation saltstack",
+      "expected": "repo:^github.com/saltstack/salt$ ssh_py_shim base",
+      "fine_tuned": {
+        "output": "repo:^github.com/saltstack/salt$ ssh_py_shim base type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 470.7,
+        "prompt_tokens": 68,
+        "completion_tokens": 19
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/saltstack/salt ssh_py_shim base implementation",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 1051.7
+      }
+    },
+    {
+      "id": "ex-038",
+      "input": "Cody Schroeder's recent commits",
+      "expected": "author:Cody Schroeder",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ author:Cody Schroeder type:commit after:\\\"1 week ago\\\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 489.7,
+        "prompt_tokens": 54,
+        "completion_tokens": 24
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "author:\"Cody Schroeder\" type:commit sort:recent",
+        "syntax_valid": false,
+        "hallucinations": [
+          "sort"
+        ],
+        "semantic_match": true,
+        "latency_ms": 777.7
+      }
+    },
+    {
+      "id": "ex-039",
+      "input": "what changed in recent searches?",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$  type:diff recent_searches ",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ type:diff after:\\\"recent search\\\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 474.3,
+        "prompt_tokens": 64,
+        "completion_tokens": 18
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/sourcegraph/sourcegraph path:search/ type:commit recent:100",
+        "syntax_valid": false,
+        "hallucinations": [
+          "path",
+          "recent"
+        ],
+        "semantic_match": true,
+        "latency_ms": 1002.8
+      }
+    },
+    {
+      "id": "ex-040",
+      "input": "tidb v3 package imports",
+      "expected": "repo:^github.com/pingcap/tidb$@v3.0.5 github.com/pingcap/tidb/v3",
+      "fine_tuned": {
+        "output": "repo:^github.com/pingcap/tidb$ tidb/v3 package imports",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 447.7,
+        "prompt_tokens": 67,
+        "completion_tokens": 18
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/pingcap/tidb import \"v3\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 1027.1
+      }
+    },
+    {
+      "id": "ex-041",
+      "input": "IProxyService changes in steveleeCN87 doteasy rpc",
+      "expected": "repo:^github.com/steveleeCN87/doteasy\\.rpc$ IProxyService type:diff",
+      "fine_tuned": {
+        "output": "repo:^github.com/steveleeCN87/doteasy.rpc$@*IProxyService type:diff",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 460.1,
+        "prompt_tokens": 81,
+        "completion_tokens": 25
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/steveleeCN87/doteasy.rpc IProxyService changes",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 778.8
+      }
+    },
+    {
+      "id": "ex-042",
+      "input": "task changes in Microsoft repos last month excluding master",
+      "expected": "repo:^github.com/Microsoft/*$@*refs/heads/:^refs/heads/master type:diff after:\"1 month ago\" task",
+      "fine_tuned": {
+        "output": "repo:^github.com/Microsoft/* type:diff after:\\\"1 month ago\\\" task -file:(test|spec) -file:node_modules/ -file:package.json -file:package-lock.json -file:package.yaml -file:package.tgz -file:package-lock.json -file:node_modules/",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 665.6,
+        "prompt_tokens": 67,
+        "completion_tokens": 64
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/Microsoft/* type:commit task changes -branch:master after:2023-09-01 before:2023-09-30",
+        "syntax_valid": false,
+        "hallucinations": [
+          "branch"
+        ],
+        "semantic_match": true,
+        "latency_ms": 1120.5
+      }
+    },
+    {
+      "id": "ex-043",
+      "input": "testify dependency in go.mod",
+      "expected": "//testify file:go\\.mod$",
+      "fine_tuned": {
+        "output": "go.mod file: \"github.com/stretchr/testify\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 415.0,
+        "prompt_tokens": 53,
+        "completion_tokens": 11
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "`testify go.mod`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 630.6
+      }
+    },
+    {
+      "id": "ex-044",
+      "input": "recent changes to sourcegraph codebase",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$  type:diff",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ type:diff after:\\\"1 week ago\\\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 444.6,
+        "prompt_tokens": 66,
+        "completion_tokens": 19
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/sourcegraph/sourcegraph type:commit sort:recent",
+        "syntax_valid": false,
+        "hallucinations": [
+          "sort"
+        ],
+        "semantic_match": true,
+        "latency_ms": 860.3
+      }
+    },
+    {
+      "id": "ex-045",
+      "input": "map implementation kenlm",
+      "expected": "repo:^github.com/kpu/kenlm$@f39edc3 map",
+      "fine_tuned": {
+        "output": "repo:^github.com/kpu/kenlm$ map type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 481.3,
+        "prompt_tokens": 64,
+        "completion_tokens": 15
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/kpu/kenlm map implementation",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 726.4
+      }
+    },
+    {
+      "id": "ex-046",
+      "input": "ruby fixme hack kludge changes last 2 weeks gitlab",
+      "expected": "timeout:19s repo:^gitlab.com/gitlab-org/gitlab$ fixme|hack|kludge lang:ruby type:diff before:\"2 weeks ago\" ",
+      "fine_tuned": {
+        "output": "repo:^gitlab.com/gitlab-org/gitlab$ fixme|hack|kludge type:diff after:\\\"2 weeks ago\\\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 526.4,
+        "prompt_tokens": 74,
+        "completion_tokens": 29
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:gitlab.com/gitlab-org/gitlab fixme OR hack OR kludge after:2023-10-01",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 877.3
+      }
+    },
+    {
+      "id": "ex-047",
+      "input": "classProperties usage in docz",
+      "expected": "repo:^github.com/doczjs/docz$ classProperties",
+      "fine_tuned": {
+        "output": "repo:^github.com/doczjs/docz$@df0669a classProperties type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 475.6,
+        "prompt_tokens": 66,
+        "completion_tokens": 23
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/doczjs/docz classProperties",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 687.0
+      }
+    },
+    {
+      "id": "ex-048",
+      "input": "test handler golang code",
+      "expected": "file:test lang:go file:handler",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ file:^github.com/sourcegraph/sourcegraph$ test handler lang:go case:yes",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 483.9,
+        "prompt_tokens": 53,
+        "completion_tokens": 27
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "`test handler lang:go`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 571.4
+      }
+    },
+    {
+      "id": "ex-049",
+      "input": "where's the Index implementation in kubernetes go code?",
+      "expected": "repo:^github.com/kubernetes/kubernetes$@v1.12.7 .Index lang:go -file:vendor/ -file:node_modules/ ",
+      "fine_tuned": {
+        "output": "repo:^github.com/kubernetes/kubernetes$ Index.go",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 421.9,
+        "prompt_tokens": 67,
+        "completion_tokens": 10
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/kubernetes/kubernetes Index implementation file:*.go",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 767.3
+      }
+    },
+    {
+      "id": "ex-050",
+      "input": "go func goroutines in Snorlax",
+      "expected": "repo:^github.com/UsrAlpha/Snorlax$ go func",
+      "fine_tuned": {
+        "output": "repo:^github.com/UsrAlpha/Snorlax$ go func goroutines count:1000 -file:(test|spec) -file:vendor -file:node_modules -file:package.json -file:package-lock.json -file:package.yaml",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 1041.0,
+        "prompt_tokens": 72,
+        "completion_tokens": 56
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/UsrAlpha/Snorlax go func goroutines",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 822.3
+      }
+    },
+    {
+      "id": "ex-051",
+      "input": "aa variable declaration c code",
+      "expected": "repo:sourcegraph/sourcegraph lang:c aa",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ aa type:symbol count:1000 file:(test|spec)  file:(\\b|/)/i  lang:c  case:yes  file:only",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 612.2,
+        "prompt_tokens": 64,
+        "completion_tokens": 46
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/sourcegraph/sourcegraph aa variable declaration lang:c",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 843.2
+      }
+    },
+    {
+      "id": "ex-052",
+      "input": "context timeout golang examples",
+      "expected": "timeoutContext context.Context",
+      "fine_tuned": {
+        "output": "timeout context golang examples",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 439.4,
+        "prompt_tokens": 53,
+        "completion_tokens": 6
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "`context timeout golang` file:*.go` `",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 778.4
+      }
+    },
+    {
+      "id": "ex-053",
+      "input": "what changed in vscode master branch this month?",
+      "expected": "repo:^github.com/Microsoft/vscode$@*refs/heads/:^refs/heads/master type:diff after:\"1 month ago\" task timeout:300s",
+      "fine_tuned": {
+        "output": "repo:^github.com/Microsoft/vscode$ type:diff after:\"1 month ago\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 484.9,
+        "prompt_tokens": 68,
+        "completion_tokens": 20
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/Microsoft/vscode branch:master after:2023-10-01 before:2023-10-31",
+        "syntax_valid": false,
+        "hallucinations": [
+          "branch"
+        ],
+        "semantic_match": false,
+        "latency_ms": 1145.2
+      }
+    },
+    {
+      "id": "ex-054",
+      "input": "access_token regex pattern 85 characters",
+      "expected": "access_token\": \"[a-z0-9]{85}\"",
+      "fine_tuned": {
+        "output": "access_token:(\".*$|..{85}$\")",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 483.8,
+        "prompt_tokens": 56,
+        "completion_tokens": 14
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "`access_token:/.{85}/`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 668.0
+      }
+    },
+    {
+      "id": "ex-055",
+      "input": "lodash utils in typescript sample repos",
+      "expected": "lodash -file:(test|spec) -file:package.json$ file:..ts$ repogroup:sample ",
+      "fine_tuned": {
+        "output": "lodash -file:(test|spec) -file:node_modules/ -file:package.json$ file:(test|spec) -file:node_modules/ -file:package.json$  type:symbol  repo:github.com/sourcegraph/  lang:typescript  count:100",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 644.5,
+        "prompt_tokens": 55,
+        "completion_tokens": 61
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:*.ts lang:typescript lodash utils",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 776.8
+      }
+    },
+    {
+      "id": "ex-056",
+      "input": "tensorpack dependencies requirements.txt",
+      "expected": "tensorpack file:requirements.tx",
+      "fine_tuned": {
+        "output": "repo:^tensorpack$ file:requirements.txt$",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 457.2,
+        "prompt_tokens": 53,
+        "completion_tokens": 11
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "`tensorpack file:requirements.txt`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 613.9
+      }
+    },
+    {
+      "id": "ex-057",
+      "input": "liferay-web.xml config in liferay portal",
+      "expected": "repo:^github.com/liferay/liferay-portal$ liferay-web.xml",
+      "fine_tuned": {
+        "output": "repo:^github.com/liferay/liferay-portal$ liferay-web.xml type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 509.1,
+        "prompt_tokens": 72,
+        "completion_tokens": 20
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/liferay/liferay-portal file:liferay-web.xml config",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 809.6
+      }
+    },
+    {
+      "id": "ex-058",
+      "input": "package.json in tmobile jazz repo",
+      "expected": "repo:^github.com/tmobile/jazz$ file:package.json",
+      "fine_tuned": {
+        "output": "repo:^github.com/tmobile/jazz$ file:package.json",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 507.8,
+        "prompt_tokens": 66,
+        "completion_tokens": 14
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/tmobile/jazz file:package.json",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 1069.8
+      }
+    },
+    {
+      "id": "ex-059",
+      "input": "cargo breaking changes in parity",
+      "expected": "repo:github.com/paritytech cargo breaking",
+      "fine_tuned": {
+        "output": "repo:^github.com/paritytech$ cargo type:diff breaking changes",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 473.0,
+        "prompt_tokens": 63,
+        "completion_tokens": 15
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/paritytech cargo breaking changes",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 848.1
+      }
+    },
+    {
+      "id": "ex-060",
+      "input": "webkit commit 320b1fc",
+      "expected": "timeout:19s repo:^github.com/WebKit/webkit$ type:commit \"320b1fc\" ",
+      "fine_tuned": {
+        "output": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s 320b1fc",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 505.9,
+        "prompt_tokens": 69,
+        "completion_tokens": 25
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/WebKit/webkit commit:320b1fc",
+        "syntax_valid": false,
+        "hallucinations": [
+          "commit"
+        ],
+        "semantic_match": false,
+        "latency_ms": 768.9
+      }
+    },
+    {
+      "id": "ex-061",
+      "input": "looking for 1.1 commits in php core",
+      "expected": "repo:^github.com/php/php-src$ 1\\.1 type:commit timeout:6s",
+      "fine_tuned": {
+        "output": "repo:^github.com/php/php-src$ 1.1 type:commit -file:vendor/ -file:node_modules/ -file:tests/ -file:docs/ -file:examples/",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 562.4,
+        "prompt_tokens": 68,
+        "completion_tokens": 42
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/php/php-src commit 1.1",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 1522.9
+      }
+    },
+    {
+      "id": "ex-062",
+      "input": "rancher-images script in rancher repo",
+      "expected": "repo:^github.com/rancher/rancher$ rancher-images",
+      "fine_tuned": {
+        "output": "repo:^github.com/rancher/rancher$ rancher-images type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 489.9,
+        "prompt_tokens": 69,
+        "completion_tokens": 18
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/rancher/rancher file:rancher-images script",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 2697.3
+      }
+    },
+    {
+      "id": "ex-063",
+      "input": "domain implementation in halide compiler",
+      "expected": "repo:^github.com/halide/Halide domain",
+      "fine_tuned": {
+        "output": "repo:^github.com/halide/Halide$ domain type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 511.7,
+        "prompt_tokens": 67,
+        "completion_tokens": 16
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/halide/Halide domain implementation halide compiler",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 794.0
+      }
+    },
+    {
+      "id": "ex-064",
+      "input": "go string conversion int64 functions",
+      "expected": "lang:go case:yes string\\(int64.*\\)]",
+      "fine_tuned": {
+        "output": "github.com/golang/go/search?q=func&type=func  -file:(test|spec) -file:vendor -file:node_modules -file:package.json -file:package-lock.json",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 571.2,
+        "prompt_tokens": 55,
+        "completion_tokens": 41
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:.*\\.go$ string conversion int64 functions",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 998.2
+      }
+    },
+    {
+      "id": "ex-065",
+      "input": "lodash changes in javascript files",
+      "expected": "lodash lang:javascript repo:sourcegraph type:diff",
+      "fine_tuned": {
+        "output": "lodash$ file:(test|spec) -file:(test|spec) -file:(test|spec) type:diff",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 557.1,
+        "prompt_tokens": 53,
+        "completion_tokens": 27
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:lodash file:*.js changes",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 2449.0
+      }
+    },
+    {
+      "id": "ex-066",
+      "input": "looking for test diffs",
+      "expected": "test type:diff",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ file:^test/ type:diff",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 517.3,
+        "prompt_tokens": 52,
+        "completion_tokens": 17
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "test diff",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 627.6
+      }
+    },
+    {
+      "id": "ex-067",
+      "input": "vehicle velocity measured in uber xviz",
+      "expected": "repo:^github.com/uber/xviz$ /vehicle/velocity/measured",
+      "fine_tuned": {
+        "output": "repo:^github.com/uber/xviz$ vehicle velocity type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 477.5,
+        "prompt_tokens": 66,
+        "completion_tokens": 15
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/uber/xviz vehicle velocity",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 709.3
+      }
+    },
+    {
+      "id": "ex-068",
+      "input": "kahoot v2 symbols",
+      "expected": "repo:^github.com/unixpickle/kahoot-hack$ kahoot/v2/ type:symbol",
+      "fine_tuned": {
+        "output": "repo:^github.com/unixpickle/kahoot-hack$@v2 kahoot-v2-symbols",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 516.1,
+        "prompt_tokens": 69,
+        "completion_tokens": 24
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/unixpickle/kahoot-hack kahoot v2 symbols",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 791.7
+      }
+    },
+    {
+      "id": "ex-069",
+      "input": "looking for kubeedge edge node management code",
+      "expected": "repo:^github.com/zhangshen023/kubeedge_copy$@e697130 ",
+      "fine_tuned": {
+        "output": "repo:^github.com/zhangshen023/kubeedge_copy$@*edge node management*",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 517.9,
+        "prompt_tokens": 74,
+        "completion_tokens": 23
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/zhangshen023/kubeedge_copy edge node management",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 1128.6
+      }
+    },
+    {
+      "id": "ex-070",
+      "input": "poolparty snapshot implementation",
+      "expected": "snapshot poolparty",
+      "fine_tuned": {
+        "output": "poolparty snapshot count:1000 repogroup:master type:symbol",
+        "syntax_valid": false,
+        "hallucinations": [
+          "repogroup"
+        ],
+        "semantic_match": true,
+        "latency_ms": 506.6,
+        "prompt_tokens": 52,
+        "completion_tokens": 18
+      },
+      "verdict": "baseline_better",
+      "baseline": {
+        "output": "`poolparty snapshot implementation`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 969.8
+      }
+    },
+    {
+      "id": "ex-071",
+      "input": "/ns/ namespace handling in lxcfs",
+      "expected": "repo:^github.com/lxc/lxcfs$ \"/ns/\"",
+      "fine_tuned": {
+        "output": "repo:^github.com/lxc/lxcfs$ ns/ type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 479.5,
+        "prompt_tokens": 69,
+        "completion_tokens": 16
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/lxc/lxcfs /ns/ namespace handling",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 802.1
+      }
+    },
+    {
+      "id": "ex-072",
+      "input": "commits removing reposearcher interface",
+      "expected": "r:github.com/sourcegraph/sourcegraph$ type:commit message:\"remove reposearcher interface\"",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ reposearcher type:commit -file:(test|spec) -file:vendor/ -file:node_modules/ -file:package.json -file:package-lock.json -file:*.md -file:*.html -file:*.css -file:*.",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 636.5,
+        "prompt_tokens": 55,
+        "completion_tokens": 64
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "`commit:reposearcher` `-reposearcher`",
+        "syntax_valid": false,
+        "hallucinations": [
+          "commit"
+        ],
+        "semantic_match": false,
+        "latency_ms": 895.0
+      }
+    },
+    {
+      "id": "ex-073",
+      "input": "spring batch admin code changes",
+      "expected": "repo:^github.com/spring-attic/spring-batch-admin$ type:diff",
+      "fine_tuned": {
+        "output": "repo:^github.com/spring-attic/spring-batch-admin$ type:diff \"admin\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 515.5,
+        "prompt_tokens": 70,
+        "completion_tokens": 23
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/spring-attic/spring-batch-admin \"code changes\" OR \"update\" OR \"modified\" OR \"refactor\" OR \"fix\" OR \"improvement\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 1474.1
+      }
+    },
+    {
+      "id": "ex-074",
+      "input": "https changes in deploy repo",
+      "expected": "type:diff https com repo:sourcegraph/deploy count:2",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/deploy$ type:diff url:https*",
+        "syntax_valid": false,
+        "hallucinations": [
+          "url"
+        ],
+        "semantic_match": false,
+        "latency_ms": 486.0,
+        "prompt_tokens": 64,
+        "completion_tokens": 17
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/sourcegraph/deploy https changes",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 695.7
+      }
+    },
+    {
+      "id": "ex-075",
+      "input": "OnData method in envoy proxy",
+      "expected": "repo:^github.com/envoyproxy/envoy$ OnData",
+      "fine_tuned": {
+        "output": "repo:^github.com/envoyproxy/envoy$ OnData",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 489.3,
+        "prompt_tokens": 66,
+        "completion_tokens": 13
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/envoyproxy/envoy OnData method",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 917.3
+      }
+    },
+    {
+      "id": "ex-076",
+      "input": "Collection interface openjdk",
+      "expected": "repo:^github.com/openjdk/jdk$ Collection type:symbol",
+      "fine_tuned": {
+        "output": "repo:^github.com/openjdk/jdk$@df3006f Collection interface",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 522.1,
+        "prompt_tokens": 63,
+        "completion_tokens": 19
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/openjdk/jdk Collection interface",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 999.4
+      }
+    },
+    {
+      "id": "ex-077",
+      "input": "rasa endpoint configurations",
+      "expected": "repo:^github.com/RasaHQ/rasa$ endpoint count:1000",
+      "fine_tuned": {
+        "output": "repo:^github.com/RasaHQ/rasa$ rasa endpoint config",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 474.0,
+        "prompt_tokens": 64,
+        "completion_tokens": 15
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/RasaHQ/rasa \"endpoint configurations\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 774.1
+      }
+    },
+    {
+      "id": "ex-078",
+      "input": "lodash utility functions in js files",
+      "expected": "lodash -file:(test|spec) -file:package.json$ file:..js$ ",
+      "fine_tuned": {
+        "output": "lodash -file:(test|spec) -file:node_modules/ -file:package.json$ -file:package-lock.json$ -file:*.md$ -file:*.html$ -file:*.css$ -file:*.jsx$ -file:*.js$",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 1675.5,
+        "prompt_tokens": 54,
+        "completion_tokens": 58
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "`lodash file:*.js`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 585.5
+      }
+    },
+    {
+      "id": "ex-079",
+      "input": "access token changes in sourcegraph",
+      "expected": "repo:^github.com/sourcegraph/sourcegraph$ access token   type:diff",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$@*token|password|secret|key|pass|auth|authz|token|tokenauth|tokenauthz|tokenauthz2|tokenauthz3|tokenauthz4|tokenauthz5|tokenauthz6|tokenauthz7",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 1181.9,
+        "prompt_tokens": 65,
+        "completion_tokens": 64
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/sourcegraph/sourcegraph access token changes",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 747.5
+      }
+    },
+    {
+      "id": "ex-080",
+      "input": "ScannerStrin java code in cordova media plugin",
+      "expected": "repo:apache/cordova-plugin-media lang:java ScannerStrin",
+      "fine_tuned": {
+        "output": "repo:^github.com/apache/cordova-plugin-media$ ScannerStrin type:symbol case:yes",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 482.6,
+        "prompt_tokens": 70,
+        "completion_tokens": 20
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "repo:github.com/apache/cordova-plugin-media ScannerString java",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 747.8
+      }
+    },
+    {
+      "id": "ex-081",
+      "input": "static methods apache java",
+      "expected": "repo:apache lang:java static",
+      "fine_tuned": {
+        "output": "repo:apache lang:java count:1000 static -file:(test|spec) -file:vendor/ -file:node_modules/ -file:framework/ -file:gradle/ -file:*.md -file:*.html -file:*.css -file:*.js -file",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 678.6,
+        "prompt_tokens": 52,
+        "completion_tokens": 64
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "`static methods apache java`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 572.0
+      }
+    },
+    {
+      "id": "ex-082",
+      "input": "bootstrap version 3 in package.json",
+      "expected": "file:package.json \\\"bootstrap\\\" \\\"3|^3",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ file:^package.json \"bootstrap 3\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 499.6,
+        "prompt_tokens": 55,
+        "completion_tokens": 19
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "`package.json bootstrap version:3`",
+        "syntax_valid": false,
+        "hallucinations": [
+          "version"
+        ],
+        "semantic_match": false,
+        "latency_ms": 673.7
+      }
+    },
+    {
+      "id": "ex-083",
+      "input": "what changed in go1.13.1",
+      "expected": "repo:^github.com/golang/go$@go1.13.1  type:diff",
+      "fine_tuned": {
+        "output": "repo:^github.com/golang/go$@go1.13.1 type:diff",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 490.0,
+        "prompt_tokens": 68,
+        "completion_tokens": 20
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/golang/go version:1.13.1",
+        "syntax_valid": false,
+        "hallucinations": [
+          "version"
+        ],
+        "semantic_match": false,
+        "latency_ms": 867.5
+      }
+    },
+    {
+      "id": "ex-084",
+      "input": "fastai version 0.7 docs",
+      "expected": "fastai==0.7",
+      "fine_tuned": {
+        "output": "repo:^fastai.github.com/fastai/ fastai@v0.7.0 docs",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 491.2,
+        "prompt_tokens": 56,
+        "completion_tokens": 20
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "`fastai version:0.7 docs`",
+        "syntax_valid": false,
+        "hallucinations": [
+          "version"
+        ],
+        "semantic_match": false,
+        "latency_ms": 742.2
+      }
+    },
+    {
+      "id": "ex-085",
+      "input": "python navigation implementation examples",
+      "expected": "lang:python navigation count:100000",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ lang:python \"navigation\" count:1000",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 519.6,
+        "prompt_tokens": 52,
+        "completion_tokens": 22
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "`python navigation implementation examples`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 628.1
+      }
+    },
+    {
+      "id": "ex-086",
+      "input": "QuicClock implementation in envoy",
+      "expected": "repo:^github.com/envoyproxy/envoy$ QuicClock",
+      "fine_tuned": {
+        "output": "repo:^github.com/envoyproxy/envoy$ QuicClock type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 545.5,
+        "prompt_tokens": 66,
+        "completion_tokens": 17
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/envoyproxy/envoy QuicClock",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 842.1
+      }
+    },
+    {
+      "id": "ex-087",
+      "input": "commits about webkit bug 168567",
+      "expected": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=168567",
+      "fine_tuned": {
+        "output": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=168567",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 586.9,
+        "prompt_tokens": 71,
+        "completion_tokens": 32
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/WebKit/webkit commits \"webkit bug 168567\"",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 842.0
+      }
+    },
+    {
+      "id": "ex-088",
+      "input": "NID_X9_prime25 openssl definition",
+      "expected": "NID_X9_prime25",
+      "fine_tuned": {
+        "output": "repo:^github.com/openssl/openssl$ NID_X9_prime25",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 475.9,
+        "prompt_tokens": 57,
+        "completion_tokens": 17
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "`NID_X9_prime25 definition file:openssl`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 871.7
+      }
+    },
+    {
+      "id": "ex-089",
+      "input": "webkit bug 196896 commits",
+      "expected": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=196896",
+      "fine_tuned": {
+        "output": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=196896",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 540.0,
+        "prompt_tokens": 70,
+        "completion_tokens": 32
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/WebKit/webkit \"bug 196896\" commits",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 1182.1
+      }
+    },
+    {
+      "id": "ex-090",
+      "input": "pouchdb server setup",
+      "expected": "pouchdb/pouchdb-server ",
+      "fine_tuned": {
+        "output": "pouchdb server repo:github.com/pouchdb/pouchdb repo:github.com/pouchdb/pouchdb server setup",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 520.0,
+        "prompt_tokens": 52,
+        "completion_tokens": 27
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "pouchdb server setup",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 640.3
+      }
+    },
+    {
+      "id": "ex-091",
+      "input": "Avros.reflect usage in java",
+      "expected": "\"Avros.reflect\" repo:crunch lang:java timeout:10s",
+      "fine_tuned": {
+        "output": "Avros.reflect lang:java count:1000",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 479.3,
+        "prompt_tokens": 54,
+        "completion_tokens": 13
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "`Avros.reflect` lang:java`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 672.3
+      }
+    },
+    {
+      "id": "ex-092",
+      "input": "who calls isAuthorizedForImage in kubernetes?",
+      "expected": "repo:^github.com/kubernetes/kubernetes$@master isAuthorizedForImage",
+      "fine_tuned": {
+        "output": "repo:^github.com/kubernetes/kubernetes$ isAuthorizedForImage count:1000 type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 533.7,
+        "prompt_tokens": 66,
+        "completion_tokens": 21
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/kubernetes/kubernetes isAuthorizedForImage() callsite",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 804.7
+      }
+    },
+    {
+      "id": "ex-093",
+      "input": "lodash typescript definitions in DefinitelyTyped",
+      "expected": "lodash -file:(test|spec) -file:package.json$ file:..ts$ count:1000 repogroup:DefinitetelyTyped ",
+      "fine_tuned": {
+        "output": "lodash$ file:(test|spec) -file:(test|spec)  type:symbol  lang:typescript  repogroup:default  repo:DefinitelyTyped/DefinitelyTyped",
+        "syntax_valid": false,
+        "hallucinations": [
+          "repogroup"
+        ],
+        "semantic_match": false,
+        "latency_ms": 575.2,
+        "prompt_tokens": 55,
+        "completion_tokens": 40
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "`lodash typescript definitions repo:DefinitelyTyped`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 776.2
+      }
+    },
+    {
+      "id": "ex-094",
+      "input": "print statements in recent commits",
+      "expected": "print type:commit",
+      "fine_tuned": {
+        "output": "repo:^github.com/sourcegraph/sourcegraph$ print count:1000 after:1 week ago",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 500.2,
+        "prompt_tokens": 53,
+        "completion_tokens": 22
+      },
+      "verdict": "baseline_better",
+      "baseline": {
+        "output": "`print lang:python type:commit`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 852.7
+      }
+    },
+    {
+      "id": "ex-095",
+      "input": "floyd warshall algorithm java implementation",
+      "expected": "lang:java floyd count:1000",
+      "fine_tuned": {
+        "output": "floyd-warshall-algorithm java implementation",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 448.8,
+        "prompt_tokens": 55,
+        "completion_tokens": 9
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "floyd warshall algorithm java implementation",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 1001.1
+      }
+    },
+    {
+      "id": "ex-096",
+      "input": "django cms 2.1.x branch code",
+      "expected": "repo:^github.com/divio/django-cms/tree/release/2.1.x$ ",
+      "fine_tuned": {
+        "output": "repo:^github.com/divio/django-cms/tree/release/2.1.x$  type:commit  timeout:30s",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 560.1,
+        "prompt_tokens": 77,
+        "completion_tokens": 29
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/divio/django-cms branch:release/2.1.x",
+        "syntax_valid": false,
+        "hallucinations": [
+          "branch"
+        ],
+        "semantic_match": true,
+        "latency_ms": 1096.3
+      }
+    },
+    {
+      "id": "ex-097",
+      "input": "CMN_DIAG_MOD module in geos-chem",
+      "expected": "repo:^github.com/geoschem/geos-chem$  module CMN_DIAG_MOD",
+      "fine_tuned": {
+        "output": "repo:^github.com/geoschem/geos-chem$ CMN_DIAG_MOD module",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 498.1,
+        "prompt_tokens": 72,
+        "completion_tokens": 18
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/geoschem/geos-chem CMN_DIAG_MOD",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 739.6
+      }
+    },
+    {
+      "id": "ex-098",
+      "input": "capset usage in falco dev branch",
+      "expected": "repo:^github.com/falcosecurity/falco$@dev capset",
+      "fine_tuned": {
+        "output": "repo:^github.com/falcosecurity/falco$@dev branch capset count:1000",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 511.9,
+        "prompt_tokens": 70,
+        "completion_tokens": 24
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/falcosecurity/falco branch:dev capset",
+        "syntax_valid": false,
+        "hallucinations": [
+          "branch"
+        ],
+        "semantic_match": true,
+        "latency_ms": 1614.5
+      }
+    },
+    {
+      "id": "ex-099",
+      "input": "website search alert injection vulnerability",
+      "expected": "Search%2bthis%2bwebsite%252671879%3balert(1)%2f%2f593",
+      "fine_tuned": {
+        "output": "repo:^github.com/apache/trafficserver$ \"alert injection\" type:diff",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 502.6,
+        "prompt_tokens": 53,
+        "completion_tokens": 17
+      },
+      "verdict": "both_wrong",
+      "baseline": {
+        "output": "`\"website search\" \"alert injection vulnerability\"`",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 714.4
+      }
+    },
+    {
+      "id": "ex-100",
+      "input": "computer vision api wrapper python",
+      "expected": "repo:^github.com/goberoi/cloudy_vision$",
+      "fine_tuned": {
+        "output": "repo:^github.com/goberoi/cloudy_vision$ \"Computer Vision API\" lang:python count:1000",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 538.1,
+        "prompt_tokens": 67,
+        "completion_tokens": 27
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/goberoi/cloudy_vision computer vision api wrapper python",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 1030.3
+      }
+    },
+    {
+      "id": "ex-101",
+      "input": "apisix gateway configuration examples",
+      "expected": "repo:^github.com/apache/incubator-apisix$ ",
+      "fine_tuned": {
+        "output": "repo:^github.com/apache/incubator-apisix$@master config/ gateway/  type:symbol",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 503.7,
+        "prompt_tokens": 67,
+        "completion_tokens": 24
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/apache/incubator-apisix \"gateway configuration\" examples",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 773.3
+      }
+    },
+    {
+      "id": "ex-102",
+      "input": "MPartitionColumnStatistics usage in hive",
+      "expected": "repo:^github.com/apache/hive$ MPartitionColumnStatistics",
+      "fine_tuned": {
+        "output": "repo:^github.com/apache/hive$ MPartitionColumnStatistics",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 460.2,
+        "prompt_tokens": 65,
+        "completion_tokens": 13
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/apache/hive MPartitionColumnStatistics",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 880.4
+      }
+    },
+    {
+      "id": "ex-103",
+      "input": "bug 197926 commits webkit",
+      "expected": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=197926",
+      "fine_tuned": {
+        "output": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=197926",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 558.6,
+        "prompt_tokens": 70,
+        "completion_tokens": 32
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/WebKit/webkit bug 197926 commits",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 954.4
+      }
+    },
+    {
+      "id": "ex-104",
+      "input": "webkit bug 202984 commits",
+      "expected": "repo:^github.com/WebKit/webkit$ bugs.webkit.org/show_bug.cgi?id=202984 type:commit timeout:30s",
+      "fine_tuned": {
+        "output": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=202984",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 533.0,
+        "prompt_tokens": 70,
+        "completion_tokens": 32
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/WebKit/webkit \"webkit bug 202984\" commits",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 1033.9
+      }
+    },
+    {
+      "id": "ex-105",
+      "input": "webkit bug 202534 commits",
+      "expected": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=202534",
+      "fine_tuned": {
+        "output": "repo:^github.com/WebKit/webkit$ type:commit timeout:30s bugs.webkit.org/show_bug.cgi?id=202534",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 554.7,
+        "prompt_tokens": 70,
+        "completion_tokens": 32
+      },
+      "verdict": "fine_tuned_better",
+      "baseline": {
+        "output": "repo:github.com/WebKit/webkit \"webkit bug 202534\" commits",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": false,
+        "latency_ms": 791.6
+      }
+    },
+    {
+      "id": "ex-106",
+      "input": "BUFSIZ definition in util-linux",
+      "expected": "repo:^github.com/karelzak/util-linux$ \"define BUFSIZ\" ",
+      "fine_tuned": {
+        "output": "repo:^github.com/karelzak/util-linux$ BUFSIZ count:1000",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 613.8,
+        "prompt_tokens": 68,
+        "completion_tokens": 21
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/karelzak/util-linux BUFSIZ definition",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 875.6
+      }
+    },
+    {
+      "id": "ex-107",
+      "input": "what does g_umiuiBlockAddEditMode do?",
+      "expected": "repo:^github.com/umijs/umi$@cf3884d g_umiuiBlockAddEditMode",
+      "fine_tuned": {
+        "output": "repo:^github.com/umijs/umi$ g_umiuiBlockAddEditMode$",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 531.9,
+        "prompt_tokens": 70,
+        "completion_tokens": 19
+      },
+      "verdict": "tie",
+      "baseline": {
+        "output": "repo:github.com/umijs/umi g_umiuiBlockAddEditMode",
+        "syntax_valid": true,
+        "hallucinations": [],
+        "semantic_match": true,
+        "latency_ms": 1021.8
+      }
+    }
+  ]
+}

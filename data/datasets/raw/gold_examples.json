@@ -1,0 +1,482 @@
+[
+  {
+    "nl": "papers by Stephen Hawking on black holes",
+    "query": "author:\"Hawking, S\" abs:\"black holes\"",
+    "category": "author"
+  },
+  {
+    "nl": "Einstein's papers on general relativity",
+    "query": "author:\"Einstein, A\" abs:\"general relativity\"",
+    "category": "author"
+  },
+  {
+    "nl": "first author papers by Jane Smith",
+    "query": "^author:\"Smith, Jane\"",
+    "category": "author"
+  },
+  {
+    "nl": "papers where Vera Rubin is first author",
+    "query": "^author:\"Rubin, V\"",
+    "category": "author"
+  },
+  {
+    "nl": "collaborative papers with more than 100 authors",
+    "query": "author_count:[100 TO *]",
+    "category": "author"
+  },
+  {
+    "nl": "papers by researchers with ORCID 0000-0001-2345-6789",
+    "query": "orcid:0000-0001-2345-6789",
+    "category": "author"
+  },
+  {
+    "nl": "single-author papers on cosmology",
+    "query": "author_count:1 abs:cosmology",
+    "category": "author"
+  },
+  {
+    "nl": "Kip Thorne's work on gravitational waves",
+    "query": "author:\"Thorne, K\" abs:\"gravitational waves\"",
+    "category": "author"
+  },
+  {
+    "nl": "dark matter review articles",
+    "query": "abs:\"dark matter\" doctype:article property:refereed",
+    "category": "content"
+  },
+  {
+    "nl": "papers about exoplanet atmospheres",
+    "query": "abs:\"exoplanet atmosphere\"",
+    "category": "content"
+  },
+  {
+    "nl": "machine learning applications in astronomy",
+    "query": "abs:\"machine learning\" database:astronomy",
+    "category": "content"
+  },
+  {
+    "nl": "papers with JWST in the title",
+    "query": "title:JWST",
+    "category": "content"
+  },
+  {
+    "nl": "gravitational wave detection papers",
+    "query": "abs:\"gravitational wave detection\"",
+    "category": "content"
+  },
+  {
+    "nl": "galaxy formation and evolution",
+    "query": "abs:\"galaxy formation\" OR abs:\"galaxy evolution\"",
+    "category": "content"
+  },
+  {
+    "nl": "supernova cosmology studies",
+    "query": "abs:supernova abs:cosmology",
+    "category": "content"
+  },
+  {
+    "nl": "papers mentioning neural networks in the full text",
+    "query": "full:\"neural network\"",
+    "category": "content"
+  },
+  {
+    "nl": "cosmic microwave background anisotropies",
+    "query": "abs:\"cosmic microwave background\" abs:anisotropy",
+    "category": "content"
+  },
+  {
+    "nl": "star formation in molecular clouds",
+    "query": "abs:\"star formation\" abs:\"molecular cloud\"",
+    "category": "content"
+  },
+  {
+    "nl": "papers in the Astrophysical Journal",
+    "query": "bibstem:ApJ",
+    "category": "publication"
+  },
+  {
+    "nl": "MNRAS articles from 2023",
+    "query": "bibstem:MNRAS pubdate:2023",
+    "category": "publication"
+  },
+  {
+    "nl": "Nature papers on astronomy",
+    "query": "bibstem:Nature database:astronomy",
+    "category": "publication"
+  },
+  {
+    "nl": "papers published between 2015 and 2020",
+    "query": "pubdate:[2015 TO 2020]",
+    "category": "publication"
+  },
+  {
+    "nl": "Astronomy & Astrophysics review articles",
+    "query": "bibstem:A&A doctype:article property:refereed",
+    "category": "publication"
+  },
+  {
+    "nl": "Physical Review Letters papers on dark energy",
+    "query": "bibstem:PhRvL abs:\"dark energy\"",
+    "category": "publication"
+  },
+  {
+    "nl": "papers from 2024",
+    "query": "pubdate:2024",
+    "category": "publication"
+  },
+  {
+    "nl": "AJ papers in volume 165",
+    "query": "bibstem:AJ volume:165",
+    "category": "publication"
+  },
+  {
+    "nl": "preprints not yet published",
+    "query": "doctype:eprint property:notrefereed",
+    "category": "publication"
+  },
+  {
+    "nl": "papers from the 1990s on quasars",
+    "query": "pubdate:[1990 TO 1999] abs:quasar",
+    "category": "publication"
+  },
+  {
+    "nl": "paper with DOI 10.1038/nature12888",
+    "query": "doi:10.1038/nature12888",
+    "category": "identifiers"
+  },
+  {
+    "nl": "arXiv preprint 2301.12345",
+    "query": "arXiv:2301.12345",
+    "category": "identifiers"
+  },
+  {
+    "nl": "paper with bibcode 2019ApJ...887L...1K",
+    "query": "bibcode:2019ApJ...887L...1K",
+    "category": "identifiers"
+  },
+  {
+    "nl": "astroph preprints on cosmology",
+    "query": "arxiv_class:astro-ph.CO",
+    "category": "identifiers"
+  },
+  {
+    "nl": "high-energy astrophysics arXiv papers",
+    "query": "arxiv_class:astro-ph.HE",
+    "category": "identifiers"
+  },
+  {
+    "nl": "papers with any identifier matching 2020MNRAS",
+    "query": "identifier:2020MNRAS*",
+    "category": "identifiers"
+  },
+  {
+    "nl": "highly cited gravitational wave papers",
+    "query": "abs:\"gravitational waves\" citation_count:[100 TO *]",
+    "category": "metrics"
+  },
+  {
+    "nl": "papers with more than 1000 citations",
+    "query": "citation_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "nl": "most read papers on black holes",
+    "query": "abs:\"black hole\" read_count:[1000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "nl": "uncited papers from the last year",
+    "query": "citation_count:0 pubdate:[2024 TO 2025]",
+    "category": "metrics"
+  },
+  {
+    "nl": "moderately cited cosmology papers",
+    "query": "abs:cosmology citation_count:[50 TO 200]",
+    "category": "metrics"
+  },
+  {
+    "nl": "landmark papers with extreme citations",
+    "query": "citation_count:[5000 TO *]",
+    "category": "metrics"
+  },
+  {
+    "nl": "papers from Harvard on cosmology",
+    "query": "aff:\"Harvard\" abs:cosmology",
+    "category": "affiliation"
+  },
+  {
+    "nl": "MIT astrophysics publications",
+    "query": "aff:\"MIT\" database:astronomy",
+    "category": "affiliation"
+  },
+  {
+    "nl": "Caltech papers on gravitational waves",
+    "query": "aff:\"Caltech\" abs:\"gravitational waves\"",
+    "category": "affiliation"
+  },
+  {
+    "nl": "European Southern Observatory research",
+    "query": "aff:\"ESO\" OR aff:\"European Southern Observatory\"",
+    "category": "affiliation"
+  },
+  {
+    "nl": "papers from the Max Planck Institute",
+    "query": "aff:\"Max Planck\"",
+    "category": "affiliation"
+  },
+  {
+    "nl": "STScI publications on Hubble",
+    "query": "aff:\"STScI\" abs:Hubble",
+    "category": "affiliation"
+  },
+  {
+    "nl": "NASA Goddard research on exoplanets",
+    "query": "aff:\"Goddard\" abs:exoplanet",
+    "category": "affiliation"
+  },
+  {
+    "nl": "Cambridge University dark matter research",
+    "query": "aff:\"Cambridge\" abs:\"dark matter\"",
+    "category": "affiliation"
+  },
+  {
+    "nl": "papers about M31 the Andromeda galaxy",
+    "query": "object:M31",
+    "category": "astronomy"
+  },
+  {
+    "nl": "Sagittarius A star observations",
+    "query": "object:\"Sgr A*\"",
+    "category": "astronomy"
+  },
+  {
+    "nl": "papers about the Crab Nebula",
+    "query": "object:\"Crab Nebula\"",
+    "category": "astronomy"
+  },
+  {
+    "nl": "TRAPPIST-1 exoplanet system studies",
+    "query": "object:TRAPPIST-1",
+    "category": "astronomy"
+  },
+  {
+    "nl": "M87 black hole observations",
+    "query": "object:M87 abs:\"black hole\"",
+    "category": "astronomy"
+  },
+  {
+    "nl": "papers on the Large Magellanic Cloud",
+    "query": "object:LMC",
+    "category": "astronomy"
+  },
+  {
+    "nl": "Proxima Centauri planet discoveries",
+    "query": "object:\"Proxima Centauri\" abs:planet",
+    "category": "astronomy"
+  },
+  {
+    "nl": "Orion Nebula star formation",
+    "query": "object:\"Orion Nebula\" abs:\"star formation\"",
+    "category": "astronomy"
+  },
+  {
+    "nl": "HD 209458 b atmospheric studies",
+    "query": "object:\"HD 209458\" abs:atmosphere",
+    "category": "astronomy"
+  },
+  {
+    "nl": "Betelgeuse dimming observations",
+    "query": "object:Betelgeuse abs:dimming",
+    "category": "astronomy"
+  },
+  {
+    "nl": "refereed journal articles only",
+    "query": "property:refereed",
+    "category": "properties"
+  },
+  {
+    "nl": "open access papers on dark matter",
+    "query": "property:openaccess abs:\"dark matter\"",
+    "category": "properties"
+  },
+  {
+    "nl": "papers in the astronomy database",
+    "query": "database:astronomy",
+    "category": "properties"
+  },
+  {
+    "nl": "physics papers on string theory",
+    "query": "database:physics abs:\"string theory\"",
+    "category": "properties"
+  },
+  {
+    "nl": "papers with associated data products",
+    "query": "property:data",
+    "category": "properties"
+  },
+  {
+    "nl": "software papers in astronomy",
+    "query": "property:software database:astronomy",
+    "category": "properties"
+  },
+  {
+    "nl": "PhD theses on galaxy evolution",
+    "query": "doctype:phdthesis abs:\"galaxy evolution\"",
+    "category": "properties"
+  },
+  {
+    "nl": "conference proceedings on instrumentation",
+    "query": "doctype:inproceedings abs:instrumentation",
+    "category": "properties"
+  },
+  {
+    "nl": "Hawking papers on black hole radiation from the 1970s",
+    "query": "author:\"Hawking, S\" abs:\"black hole radiation\" pubdate:[1970 TO 1979]",
+    "category": "compound"
+  },
+  {
+    "nl": "highly cited LIGO papers",
+    "query": "abs:LIGO citation_count:[500 TO *]",
+    "category": "compound"
+  },
+  {
+    "nl": "recent JWST spectroscopy papers in Nature",
+    "query": "abs:JWST abs:spectroscopy bibstem:Nature pubdate:[2022 TO 2025]",
+    "category": "compound"
+  },
+  {
+    "nl": "first author papers by Penrose on singularities",
+    "query": "^author:\"Penrose, R\" abs:singularity",
+    "category": "compound"
+  },
+  {
+    "nl": "open access dark energy reviews",
+    "query": "abs:\"dark energy\" property:openaccess doctype:article property:refereed",
+    "category": "compound"
+  },
+  {
+    "nl": "MIT and Caltech joint publications on gravitational waves",
+    "query": "aff:\"MIT\" aff:\"Caltech\" abs:\"gravitational waves\"",
+    "category": "compound"
+  },
+  {
+    "nl": "papers excluding solar system studies",
+    "query": "abs:exoplanet NOT abs:\"solar system\"",
+    "category": "compound"
+  },
+  {
+    "nl": "galaxy clusters or groups papers",
+    "query": "abs:\"galaxy cluster\" OR abs:\"galaxy group\"",
+    "category": "compound"
+  },
+  {
+    "nl": "recent machine learning papers from top institutions",
+    "query": "abs:\"machine learning\" pubdate:[2023 TO 2025] (aff:\"MIT\" OR aff:\"Stanford\" OR aff:\"Berkeley\")",
+    "category": "compound"
+  },
+  {
+    "nl": "exomoon or exoring detection papers",
+    "query": "abs:exomoon OR abs:exoring",
+    "category": "compound"
+  },
+  {
+    "nl": "Planck collaboration CMB results",
+    "query": "author:\"Planck Collaboration\" abs:\"cosmic microwave background\"",
+    "category": "compound"
+  },
+  {
+    "nl": "neutron star merger gravitational wave papers",
+    "query": "abs:\"neutron star merger\" abs:\"gravitational wave\"",
+    "category": "compound"
+  },
+  {
+    "nl": "papers citing the original Hubble constant measurement",
+    "query": "abs:\"Hubble constant\" citation_count:[100 TO *]",
+    "category": "compound"
+  },
+  {
+    "nl": "ALMA observations of protoplanetary disks",
+    "query": "abs:ALMA abs:\"protoplanetary disk\"",
+    "category": "compound"
+  },
+  {
+    "nl": "recent fast radio burst discoveries",
+    "query": "abs:\"fast radio burst\" pubdate:[2020 TO 2025]",
+    "category": "compound"
+  },
+  {
+    "nl": "tidal disruption events in ApJ",
+    "query": "abs:\"tidal disruption event\" bibstem:ApJ",
+    "category": "compound"
+  },
+  {
+    "nl": "papers about quasars at high redshift",
+    "query": "abs:quasar abs:\"high redshift\"",
+    "category": "compound"
+  },
+  {
+    "nl": "stellar evolution in globular clusters",
+    "query": "abs:\"stellar evolution\" abs:\"globular cluster\"",
+    "category": "compound"
+  },
+  {
+    "nl": "radio astronomy papers from the VLA",
+    "query": "abs:VLA database:astronomy",
+    "category": "compound"
+  },
+  {
+    "nl": "active galactic nuclei variability studies",
+    "query": "abs:\"active galactic nuclei\" abs:variability",
+    "category": "compound"
+  },
+  {
+    "nl": "Gaia satellite stellar parallax measurements",
+    "query": "abs:Gaia abs:parallax",
+    "category": "compound"
+  },
+  {
+    "nl": "pulsar timing array gravitational wave searches",
+    "query": "abs:\"pulsar timing array\" abs:\"gravitational wave\"",
+    "category": "compound"
+  },
+  {
+    "nl": "interstellar medium dust grain studies",
+    "query": "abs:\"interstellar medium\" abs:\"dust grain\"",
+    "category": "compound"
+  },
+  {
+    "nl": "magnetar X-ray observations",
+    "query": "abs:magnetar abs:\"X-ray\"",
+    "category": "compound"
+  },
+  {
+    "nl": "brown dwarf atmospheric modeling",
+    "query": "abs:\"brown dwarf\" abs:atmosphere",
+    "category": "compound"
+  },
+  {
+    "nl": "supermassive black hole formation theories",
+    "query": "abs:\"supermassive black hole\" abs:formation",
+    "category": "compound"
+  },
+  {
+    "nl": "cosmological simulations of structure formation",
+    "query": "abs:\"cosmological simulation\" abs:\"structure formation\"",
+    "category": "compound"
+  },
+  {
+    "nl": "gamma ray burst afterglow observations",
+    "query": "abs:\"gamma ray burst\" abs:afterglow",
+    "category": "compound"
+  },
+  {
+    "nl": "white dwarf cooling sequences",
+    "query": "abs:\"white dwarf\" abs:cooling",
+    "category": "compound"
+  },
+  {
+    "nl": "asteroid spectroscopy and composition",
+    "query": "abs:asteroid abs:spectroscopy",
+    "category": "compound"
+  }
+]

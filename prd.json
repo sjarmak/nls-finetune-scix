@@ -1,0 +1,131 @@
+{
+  "project": "nls-finetune-scix",
+  "branchName": "sj/fine-tune",
+  "description": "SciX Query Translation - Fine-tuned model integration with local SciX playground",
+  "userStories": [
+    {
+      "id": "eval-001",
+      "title": "Compute result-set overlap metrics",
+      "description": "Add evaluation module that computes Jaccard similarity, Precision@N, and Recall between model-generated queries and gold queries.",
+      "acceptanceCriteria": [
+        "Create finetune/domains/scix/eval.py with compute_overlap_metrics function",
+        "Function takes two lists of bibcodes and returns (jaccard, precision, recall)",
+        "Typecheck passes: cd ~/nls-finetune-scix && mise run verify"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Work in ~/nls-finetune-scix/packages/finetune/src/finetune/domains/scix/"
+    },
+    {
+      "id": "eval-002",
+      "title": "Add syntactic validity rate metric",
+      "description": "Add function to compute what percentage of generated queries pass the ADS linter.",
+      "acceptanceCriteria": [
+        "Add compute_syntax_validity function to eval.py",
+        "Takes list of queries, returns validity rate 0.0-1.0",
+        "Uses existing lint_query from validate.py",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": ""
+    },
+    {
+      "id": "eval-003",
+      "title": "Feature-sliced evaluation reporting",
+      "description": "Add ability to evaluate queries by category (author, pubdate, bibstem, object) separately.",
+      "acceptanceCriteria": [
+        "Add evaluate_by_category function to eval.py",
+        "Returns dict mapping category to metrics",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "integ-001",
+      "title": "Add NL search component to nectar UI",
+      "description": "Create a React component for natural language search input in the SciX frontend.",
+      "acceptanceCriteria": [
+        "Create ~/ads-dev/nectar/src/components/NLSearch/index.tsx",
+        "Component has text input for natural language query",
+        "Shows loading state while fetching",
+        "pnpm lint passes in nectar directory"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": "Work in ~/ads-dev/nectar on branch sj/fine-tune"
+    },
+    {
+      "id": "integ-002",
+      "title": "Add Modal endpoint proxy API route",
+      "description": "Create Next.js API route to proxy requests to the Modal vLLM endpoint.",
+      "acceptanceCriteria": [
+        "Create API route at ~/ads-dev/nectar/src/app/api/nl-search/route.ts",
+        "Proxies to https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/chat/completions",
+        "Uses system prompt and user message format from PRD",
+        "pnpm lint passes"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": "Model name is 'llm', use OpenAI chat completions format"
+    },
+    {
+      "id": "integ-003",
+      "title": "Add copy/apply buttons for query suggestion",
+      "description": "Add buttons to copy the generated query to clipboard or apply it directly to the search.",
+      "acceptanceCriteria": [
+        "Copy button copies query text to clipboard",
+        "Apply button navigates to search results with generated query",
+        "Buttons have appropriate icons and hover states",
+        "pnpm lint passes"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "integ-004",
+      "title": "Preview result count via ADS API",
+      "description": "Show approximate result count for the generated query before user applies it.",
+      "acceptanceCriteria": [
+        "Call ADS API with rows=0 to get numFound",
+        "Display result count near query suggestion",
+        "Handle loading and error states",
+        "pnpm lint passes"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "integ-005",
+      "title": "Add feature flag for NL search",
+      "description": "Add environment variable to enable/disable the NL search feature.",
+      "acceptanceCriteria": [
+        "NEXT_PUBLIC_NL_SEARCH env var controls feature visibility",
+        "When disabled, NL search UI is not rendered",
+        "Add to .env.local.sample with comment",
+        "pnpm lint passes"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "integ-006",
+      "title": "Playwright e2e test for NL search flow",
+      "description": "Create end-to-end test that verifies the complete NL search workflow.",
+      "acceptanceCriteria": [
+        "Create ~/ads-dev/nectar/e2e/tests/nl-search.spec.ts",
+        "Test enters NL query, waits for suggestion, clicks apply",
+        "Verifies navigation to search results",
+        "pnpm test:e2e passes (or test runs successfully in isolation)"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": "Run with: cd ~/ads-dev/nectar && pnpm test:e2e -- e2e/tests/nl-search.spec.ts"
+    }
+  ]
+}

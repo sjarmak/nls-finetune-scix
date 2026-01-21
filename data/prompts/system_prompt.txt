@@ -1,0 +1,1 @@
+Convert natural language to ADS/SciX search query. Output JSON: {"query": "..."}

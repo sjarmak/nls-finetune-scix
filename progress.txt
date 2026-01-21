@@ -1,0 +1,54 @@
+# Ralph Progress Log - SciX Fine-tuning
+
+Started: 2026-01-21
+
+## Codebase Patterns
+
+- Modal endpoint: https://sjarmak--nls-finetune-serve-vllm-serve.modal.run (model name: 'llm')
+- System prompt: 'Convert natural language to ADS search query. Output JSON: {"query": "..."}'
+- User message format: 'Query: {nl}\nDate: {date}'
+- Integration work happens in ~/ads-dev/nectar on branch sj/fine-tune
+- Playwright tests: cd ~/ads-dev/nectar && pnpm test:e2e
+- For eval features: work in ~/nls-finetune-scix/packages/finetune/src/finetune/domains/scix/
+- Verification: mise run verify (finetune) or pnpm lint && pnpm test (nectar)
+- Use existing lint_query() from validate.py for syntax validation
+
+## Completed Work (Pre-Ralph)
+
+### Phase 0-2: Bootstrap, Domain, Data (CLOSED)
+- Repository structure with monorepo layout
+- finetune/domains/scix/fields.py - 40+ ADS field definitions
+- finetune/domains/scix/validate.py - Offline linter + API validation
+- finetune/domains/scix/prompts.py - Training/generation prompts
+- 2,447 training pairs from gold (96), synthetic (505), NL pairs (2000)
+
+### Phase 3: Training + Inference (CLOSED)
+- LoRA training on Qwen3-1.7B (~12.5 min on H100, 93% token accuracy)
+- vLLM inference endpoint deployed
+- Training cost: ~$1.50
+
+---
+
+## Session Log
+
+## 2026-01-21 - eval-001
+- Verified compute_overlap_metrics function exists in finetune/domains/scix/eval.py
+- Function computes Jaccard, Precision, and Recall from two bibcode lists
+- Fixed TypeScript verification by installing packages/web dependencies (bun install)
+- All acceptance criteria met, mise run verify passes
+- Files changed: prd.json (marked eval-001 passes: true), features.json (status: passing)
+- **Learnings for future iterations:**
+  - packages/web dependencies need to be installed for TypeScript checks to pass
+  - eval.py already had full implementation including fetch_bibcodes, evaluate_pair, summarize_results
+---
+
+
+## 2026-01-21 - eval-002
+- Added `compute_syntax_validity` function to eval.py
+- Function takes list of queries and returns validity rate 0.0-1.0
+- Uses existing `lint_query` from validate.py for offline syntax checking
+- Files changed: packages/finetune/src/finetune/domains/scix/eval.py, prd.json, features.json
+- **Learnings for future iterations:**
+  - `lint_query` does fast offline validation, `validate_query` calls ADS API
+  - Branch sj/fine-tune doesn't exist in this repo, work continues on main
+---
