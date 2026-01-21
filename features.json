@@ -158,7 +158,7 @@
       "id": "integ-005",
       "name": "Feature flag for NL search toggle",
       "category": "integration",
-      "status": "failing",
+      "status": "passing",
       "verification": "grep -r 'NEXT_PUBLIC_NL_SEARCH\\|nlSearchEnabled' ~/ads-dev/nectar/",
       "notes": "Environment variable to enable/disable feature"
     },

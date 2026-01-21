@@ -116,3 +116,16 @@ Started: 2026-01-21
   - Use rows=0 for count-only queries to minimize response size
   - Search API available at /api/search endpoint
 ---
+
+## 2026-01-21 - integ-005
+- Added NEXT_PUBLIC_NL_SEARCH feature flag to control NL search visibility
+- Added TypeScript type declaration in global.d.ts
+- Created isNLSearchEnabled() utility function for checking the flag
+- Added NLSearchWithFlag wrapper component that conditionally renders
+- When NEXT_PUBLIC_NL_SEARCH is not 'enabled', NL search UI is not rendered
+- Files changed: ~/ads-dev/nectar/src/components/NLSearch/index.tsx, src/types/global.d.ts
+- **Learnings for future iterations:**
+  - NEXT_PUBLIC_ prefix required for client-side access in Next.js
+  - Use 'enabled' string value for boolean-like env vars (consistent with NEXT_PUBLIC_API_MOCKING)
+  - lint-staged auto-fixes formatting on commit
+---
