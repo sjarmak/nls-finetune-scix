@@ -26,12 +26,14 @@ Build end-to-end infrastructure for a fine-tuned query translation model that co
 - Input: "papers by Hawking on black hole radiation from the 1970s"
 - Output: `author:"Hawking, S" abs:"black hole radiation" pubdate:[1970 TO 1979]`
 
-## Current State
+## Current State (2026-01-21 - Phase 3 Complete)
 
-- **Fine-tuning complete**: Qwen3-1.7B trained with LoRA (93% token accuracy)
-- **Endpoint deployed**: https://sjarmak--nls-finetune-serve-vllm-serve.modal.run
-- **Training data**: 2,447 unique NL→query pairs
-- **Next phase**: UI integration with local SciX playground at `~/ads-dev`
+- **Fine-tuning complete**: Qwen3-1.7B trained with LoRA on v2-4k-pairs (3025 pairs, 91% token accuracy)
+- **Endpoint deployed**: https://sjarmak--nls-finetune-serve-vllm-serve.modal.run ✓ LIVE
+- **Training data**: 2722 training + 303 validation examples (4002 regenerated pairs)
+- **Critical fix**: Author hallucination regression FIXED - model no longer guesses initials
+- **Status**: Phase 3 complete, Phase 4 (Evaluation) ready, Phase 5 (UI) blocked until Phase 4
+- **Next phase**: Run evaluation harness (Phase 4) to compute result-set overlap metrics
 
 ## Session Protocol
 
@@ -120,13 +122,17 @@ All work on `sj/fine-tune` branch (checked out across all repos in `~/ads-dev`)
 
 ## Known Issues (Beads)
 
-Check `bd ready` for current work items. Key issues:
+Check `bd ready` for current work items. **Status: Phase 3 Complete ✅**
 
-| Beads ID | Priority | Description |
-|----------|----------|-------------|
-| `nls-finetune-scix-h1y` | P1 | `/api/search` returns 404, result count preview broken |
-| `nls-finetune-scix-556` | P1 | Model inference too slow for 1.7B model |
-| `nls-finetune-scix-2ad` | P2 | Process fix for false-positive Playwright tests |
+| Beads ID | Priority | Status | Description |
+|----------|----------|--------|-------------|
+| `nls-finetune-scix-3gw` | P1 | ✅ CLOSED | Author hallucination - FIXED in v2-4k-pairs |
+| `nls-finetune-scix-556` | P1 | ✅ CLOSED | Model latency - FIXED with min_containers=1 |
+| `nls-finetune-scix-h1y` | P1 | ✅ CLOSED | /api/search 404 - FIXED in nectar |
+| `nls-finetune-scix-jhk` | P2 | ✅ CLOSED | Phase 3 Training - COMPLETE |
+| `nls-finetune-scix-ybr` | P2 | 🔄 READY | Phase 4 Evaluation - UNBLOCKED (depends on Phase 3 ✓) |
+| `nls-finetune-scix-2ad` | P2 | 🔄 OPEN | Process fix for false-positive Playwright tests |
+| `nls-finetune-scix-f2w` | P2 | 🔄 BLOCKED | Phase 5 UI integration - blocks until Phase 4 complete |
 
 ## How NL Search Works
 

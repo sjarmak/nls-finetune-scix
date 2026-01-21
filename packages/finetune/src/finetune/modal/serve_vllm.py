@@ -58,9 +58,12 @@ def serve():
 
     # Sort by modification time (newest last)
     merged_runs.sort(key=lambda x: x[1])
-    latest_run = merged_runs[-1][0].name
+    latest_run_dir = merged_runs[-1][0]
+    latest_run = latest_run_dir.name
     model_path = f"/runs/{latest_run}/merged"
-    print(f"Using model: {model_path}")
+    print(f"✓ Found {len(merged_runs)} merged models")
+    print(f"✓ Using latest model: {latest_run}")
+    print(f"✓ Model path: {model_path}")
 
     cmd = [
         "vllm", "serve",
