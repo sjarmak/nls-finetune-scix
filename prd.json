@@ -212,6 +212,66 @@
       "priority": 15,
       "passes": true,
       "notes": "Research complete. Recommend ADS autocomplete for author validation. See docs/research/query-expansion.md"
+    },
+    {
+      "id": "data-005",
+      "title": "Add second-order operator training examples",
+      "description": "Add training examples for ADS second-order operators: trending(), similar(), useful(), reviews(), citations(), references(), topn(). Also add NEAR proximity, NOT/OR boolean operators, property:, and data: filters.",
+      "acceptanceCriteria": [
+        "Gold examples include trending(), similar(), useful(), reviews() operators",
+        "Gold examples include citations(), references(), topn() operators",
+        "Gold examples include nested operators like trending(similar())",
+        "Gold examples include NEAR proximity operators",
+        "Gold examples include NOT, OR boolean operators",
+        "Gold examples include property: and data: filters",
+        "At least 50 new operator examples added"
+      ],
+      "priority": 16,
+      "passes": true,
+      "notes": "Added 56 new examples. Reference: https://ui.adsabs.harvard.edu/help/search/"
+    },
+    {
+      "id": "data-006",
+      "title": "Regenerate training JSONL with operator examples",
+      "description": "Rebuild the processed training dataset to include the new operator examples.",
+      "acceptanceCriteria": [
+        "Run dataset generation scripts",
+        "train.jsonl includes operator examples",
+        "Validation passes for new examples",
+        "Total training examples > 2500"
+      ],
+      "priority": 17,
+      "passes": false,
+      "notes": "Depends on data-005"
+    },
+    {
+      "id": "train-002",
+      "title": "Retrain model with operator-aware data",
+      "description": "Fine-tune model on updated dataset including second-order operators.",
+      "acceptanceCriteria": [
+        "LoRA training completes on Modal",
+        "Model deployed to vLLM endpoint",
+        "Model correctly generates trending(), similar() etc for appropriate queries",
+        "Endpoint responds within 2s (warm)"
+      ],
+      "priority": 18,
+      "passes": false,
+      "notes": "Depends on data-006"
+    },
+    {
+      "id": "eval-006",
+      "title": "Verify operator query generation",
+      "description": "Test that the retrained model generates correct second-order operator queries.",
+      "acceptanceCriteria": [
+        "'trending papers on exoplanets' generates trending(abs:exoplanet)",
+        "'papers similar to 2019ApJ...887L...1K' generates similar(bibcode:...)",
+        "'useful papers for weak lensing' generates useful(abs:...)",
+        "'papers citing dark matter research' generates citations(abs:...)",
+        "Operator queries pass ADS API validation"
+      ],
+      "priority": 19,
+      "passes": false,
+      "notes": "Depends on train-002. Manual verification via curl or Playwright test."
     }
   ]
 }
