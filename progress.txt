@@ -78,3 +78,26 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - Bibgroup synonyms file enables future NL->code mapping in NER
   - Tests should cover all new enum values to prevent regressions
 ---
+
+## 2026-01-22 - US-004: Expand operator trigger patterns for flexibility
+- **Implemented**: 70+ new operator trigger patterns for natural language variations
+- **Files modified**:
+  - `packages/finetune/src/finetune/domains/scix/ner.py` - Expanded OPERATOR_PATTERNS and OPERATOR_REMOVAL_PATTERNS
+  - `tests/test_ner.py` - Added 100+ unit tests for new patterns
+  - `tests/regression/test_operator_conflation.py` - Updated test for new expected behavior
+- **Key changes**:
+  - citations(): papers that cite, work/research/studies/articles citing, show/list citations
+  - references(): sources/works cited by, what does X cite, papers it/they cite, show/list references
+  - trending(): hot topics/papers, what's trending, trending research/topics, popular now/recently
+  - similar(): related to/papers, work similar to, studies/papers resembling, comparable papers/work
+  - useful(): helpful papers/research/work, foundational work/papers, essential reading/papers, must-read, key papers, seminal/landmark papers
+  - reviews(): survey papers/articles, overviews of, comprehensive reviews/survey, literature review, systematic review, tutorial on, introduction to
+- **Technical improvements**:
+  - Reordered OPERATOR_PATTERNS dict to check "references" before "citations" for proper pattern priority
+  - Made "references in" pattern more specific (requires paper/bibliography/appendix context) to avoid false positives on generic text
+- **Learnings for future iterations**:
+  - Dict order matters for pattern matching - more specific patterns should come first
+  - Overly broad patterns like "references in X" can match unintended text - require additional context words
+  - The parametrized test approach (pytest.mark.parametrize) makes testing many patterns efficient
+  - When adding new patterns, check existing negative test cases to ensure they still pass
+---
