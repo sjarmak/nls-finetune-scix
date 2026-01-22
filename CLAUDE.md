@@ -1,1 +1,1 @@
-PROMPT.md
+prompt.md
