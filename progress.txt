@@ -144,3 +144,20 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - Topic lists per property improve relevance (e.g., INSPIRE -> particle physics topics)
   - Use case-insensitive deduplication to catch subtle duplicates
 ---
+
+## 2026-01-22 - US-007: Generate doctype training examples for underrepresented values
+- **Implemented**: Training data generation for doctype-based queries
+- **Files created**:
+  - `scripts/generate_doctype_examples.py` - Generates doctype-filtered training examples
+  - `data/datasets/generated/doctype_examples.json` - 91 unique examples
+- **Key details**:
+  - 13 underrepresented doctypes covered: abstract, bookreview, circular, editorial, erratum, inbook, mastersthesis, misc, newsletter, obituary, pressrelease, talk, proceedings
+  - 7 examples per doctype (3 simple + 2 topic + 2 combined)
+  - NL variations: "conference talks" -> doctype:talk, "press releases" -> doctype:pressrelease, "book chapters" -> doctype:inbook
+  - Combined queries: doctype + topic, doctype + year, doctype + author, doctype + refereed (where applicable)
+  - Filtered refereed templates for doctypes that don't make sense with peer review (abstracts, circulars, newsletters, etc.)
+- **Learnings for future iterations**:
+  - Some doctypes are inherently not peer-reviewed (circulars, newsletters, press releases, obituaries, misc) - filter out refereed templates
+  - Doctype-specific topics improve relevance (e.g., circulars -> transients, supernovae, GRBs)
+  - The generator pattern is now well-established: config dict + simple/topic/combined templates
+---

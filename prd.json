@@ -117,8 +117,8 @@
         "Run: mise run lint - passes"
       ],
       "priority": 7,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Completed 2026-01-22: Created generate_doctype_examples.py generating 91 examples (7 per doctype) across 13 underrepresented doctypes with NL variations."
     },
     {
       "id": "US-008",
