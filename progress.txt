@@ -265,3 +265,45 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - Normalized NL comparison handles whitespace variations
   - The merge report provides breakdown by source file and category
 ---
+
+## 2026-01-22 - US-012: Create benchmark evaluation set
+- **Implemented**: Comprehensive benchmark evaluation set for NL-to-ADS query translation
+- **Files created**:
+  - `scripts/create_benchmark.py` - Benchmark generation script
+  - `data/datasets/benchmark/benchmark_queries.json` - 301 test cases
+- **Key details**:
+  - Field type benchmarks: 66 examples across content, author, identifier, metric, date
+    - 15 content (abs, title, abstract, full, keyword, ack)
+    - 15 author (author, first_author, aff, inst, author_count)
+    - 12 identifier (bibcode, doi, arxiv, bibstem)
+    - 12 metric (citation_count, read_count, page_count ranges)
+    - 12 date (year, pubdate, entry_date, ranges)
+  - Operator benchmarks: 105 examples (15 per operator)
+    - citations, references, trending, similar, useful, reviews, topn
+  - Enum field benchmarks: 55 examples
+    - property: 15 (refereed, openaccess, eprint, data, etc.)
+    - doctype: 15 (article, phdthesis, inproceedings, etc.)
+    - bibgroup: 15 (HST, JWST, ALMA, etc.)
+    - database: 10 (astronomy, physics, general, earthscience)
+  - Edge cases: 45 examples covering:
+    - Ambiguous operator words (citing/reference as nouns)
+    - Complex boolean logic (OR, NOT, compound filters)
+    - Nested operator requests
+    - Parentheses edge cases
+    - Empty/whitespace inputs
+    - ADS syntax passthrough
+    - Special characters (H-alpha, Sgr A*, 21-cm)
+    - Combined multi-filter queries
+  - Regression tests: 30 examples covering:
+    - Malformed concatenation patterns (citationsabs:, referencesabs:)
+    - Operator conflation (usefulcitations, similarreferences)
+    - Field name duplication
+    - Enum value concatenation
+    - Invalid enum values
+- **Learnings for future iterations**:
+  - Benchmark structure groups tests by category for easy analysis
+  - Each test includes difficulty rating (simple, medium, complex, edge, regression)
+  - expected_query vs expected_behavior for different test types
+  - forbidden_patterns array enables negative assertion testing
+  - Test IDs follow consistent naming (category-NNN) for traceability
+---
