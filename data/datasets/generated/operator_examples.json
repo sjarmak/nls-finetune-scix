@@ -1,0 +1,854 @@
+[
+  {
+    "natural_language": "papers citing the Riess et al. 2018 paper",
+    "ads_query": "citations(author:Riess)",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "papers that cite Planck 2018 results",
+    "ads_query": "citations(abs:\"Planck 2018 results\")",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "work citing Einstein 1905",
+    "ads_query": "citations(author:Einstein)",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "research citing Hawking 1974 paper on black holes",
+    "ads_query": "citations(author:Hawking)",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "studies citing the LIGO detection paper",
+    "ads_query": "citations(abs:\"the LIGO detection paper\")",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "articles citing Gaia DR2 paper",
+    "ads_query": "citations(abs:\"Gaia DR2 paper\")",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "works that cite the original SDSS paper",
+    "ads_query": "citations(abs:\"the original SDSS paper\")",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "papers which cite Hubble deep field paper",
+    "ads_query": "citations(abs:\"Hubble deep field paper\")",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "the CMB discovery paper cited by",
+    "ads_query": "citations(abs:\"the CMB discovery paper\")",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "who cited WMAP results",
+    "ads_query": "citations(abs:\"WMAP results\")",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "citations to this paper",
+    "ads_query": "citations(bibcode:PLACEHOLDER)",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "citations of that article",
+    "ads_query": "citations(bibcode:PLACEHOLDER)",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "find citations to the 2016 gravitational wave paper",
+    "ads_query": "citations(abs:\"the 2016 gravitational wave paper\")",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "get citations of Perlmutter et al. supernova paper",
+    "ads_query": "citations(author:Perlmutter)",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "show citations to Mayor & Queloz exoplanet paper",
+    "ads_query": "citations(abs:\"Mayor & Queloz exoplanet paper\")",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "list citations of the 2019 black hole image paper",
+    "ads_query": "citations(abs:\"the 2019 black hole image paper\")",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "how many papers cite Hawking",
+    "ads_query": "citations(author:Hawking)",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "what research cites Einstein papers",
+    "ads_query": "citations(author:Einstein)",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "references of the Riess et al. 2018 paper",
+    "ads_query": "references(author:Riess)",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "references from Planck 2018 results",
+    "ads_query": "references(abs:\"Planck 2018 results\")",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "papers referenced by Einstein 1905",
+    "ads_query": "references(author:Einstein)",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "bibliography of Hawking 1974 paper on black holes",
+    "ads_query": "references(author:Hawking)",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "papers cited in the LIGO detection paper",
+    "ads_query": "references(abs:\"the LIGO detection paper\")",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "sources cited by Gaia DR2 paper",
+    "ads_query": "references(abs:\"Gaia DR2 paper\")",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "works cited by the original SDSS paper",
+    "ads_query": "references(abs:\"the original SDSS paper\")",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "what does Hubble deep field paper cite",
+    "ads_query": "references(abs:\"Hubble deep field paper\")",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "what papers does the CMB discovery paper cite",
+    "ads_query": "references(abs:\"the CMB discovery paper\")",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "papers WMAP results cites",
+    "ads_query": "references(abs:\"WMAP results\")",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "papers they cite in this paper",
+    "ads_query": "references(bibcode:PLACEHOLDER)",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "show references of that article",
+    "ads_query": "references(bibcode:PLACEHOLDER)",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "list references from the 2016 gravitational wave paper",
+    "ads_query": "references(abs:\"the 2016 gravitational wave paper\")",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "what sources did Perlmutter et al. supernova paper use",
+    "ads_query": "references(author:Perlmutter)",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "references used in Mayor & Queloz exoplanet paper",
+    "ads_query": "references(abs:\"Mayor & Queloz exoplanet paper\")",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "hot topics in dark matter",
+    "ads_query": "trending(abs:\"dark matter\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "hot papers in dark energy",
+    "ads_query": "trending(abs:\"dark energy\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "hot research in black holes",
+    "ads_query": "trending(abs:\"black holes\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "what's hot in exoplanets",
+    "ads_query": "trending(abs:\"exoplanets\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "trending papers in galaxy formation",
+    "ads_query": "trending(abs:\"galaxy formation\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "trending research in gravitational waves",
+    "ads_query": "trending(abs:\"gravitational waves\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "trending topics in cosmic microwave background",
+    "ads_query": "trending(abs:\"cosmic microwave background\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "what's trending in neutron stars",
+    "ads_query": "trending(abs:\"neutron stars\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "trending now in supernovae",
+    "ads_query": "trending(abs:\"supernovae\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "popular papers in stellar evolution",
+    "ads_query": "trending(abs:\"stellar evolution\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "popular research in cosmology",
+    "ads_query": "trending(abs:\"cosmology\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "currently popular in quasars",
+    "ads_query": "trending(abs:\"quasars\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "popular now in AGN",
+    "ads_query": "trending(abs:\"AGN\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "popular recently in star formation",
+    "ads_query": "trending(abs:\"star formation\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "recently popular in galactic dynamics",
+    "ads_query": "trending(abs:\"galactic dynamics\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "what's popular in interstellar medium",
+    "ads_query": "trending(abs:\"interstellar medium\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "hot in planet formation",
+    "ads_query": "trending(abs:\"planet formation\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "similar to the Riess et al. 2018 paper",
+    "ads_query": "similar(author:Riess)",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "similar papers to Planck 2018 results",
+    "ads_query": "similar(abs:\"Planck 2018 results\")",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "papers similar to Einstein 1905",
+    "ads_query": "similar(author:Einstein)",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "work similar to Hawking 1974 paper on black holes",
+    "ads_query": "similar(author:Hawking)",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "studies similar to the LIGO detection paper",
+    "ads_query": "similar(abs:\"the LIGO detection paper\")",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "find similar to Gaia DR2 paper",
+    "ads_query": "similar(abs:\"Gaia DR2 paper\")",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "related to the original SDSS paper",
+    "ads_query": "similar(abs:\"the original SDSS paper\")",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "related papers to Hubble deep field paper",
+    "ads_query": "similar(abs:\"Hubble deep field paper\")",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "research related to the CMB discovery paper",
+    "ads_query": "similar(abs:\"the CMB discovery paper\")",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "papers like WMAP results",
+    "ads_query": "similar(abs:\"WMAP results\")",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "works like this paper",
+    "ads_query": "similar(bibcode:PLACEHOLDER)",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "articles like that article",
+    "ads_query": "similar(bibcode:PLACEHOLDER)",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "studies like the 2016 gravitational wave paper",
+    "ads_query": "similar(abs:\"the 2016 gravitational wave paper\")",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "papers resembling Perlmutter et al. supernova paper",
+    "ads_query": "similar(author:Perlmutter)",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "studies resembling Mayor & Queloz exoplanet paper",
+    "ads_query": "similar(abs:\"Mayor & Queloz exoplanet paper\")",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "similar work to the 2019 black hole image paper",
+    "ads_query": "similar(abs:\"the 2019 black hole image paper\")",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "similar research to Hawking",
+    "ads_query": "similar(author:Hawking)",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "similar studies to Einstein papers",
+    "ads_query": "similar(author:Einstein)",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "comparable papers to Penrose publications",
+    "ads_query": "similar(author:Penrose)",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "comparable work to Riess et al.",
+    "ads_query": "similar(author:Riess)",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "useful papers on dark matter",
+    "ads_query": "useful(abs:\"dark matter\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "most useful papers on dark energy",
+    "ads_query": "useful(abs:\"dark energy\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "high utility papers on black holes",
+    "ads_query": "useful(abs:\"black holes\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "helpful papers on exoplanets",
+    "ads_query": "useful(abs:\"exoplanets\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "helpful research on galaxy formation",
+    "ads_query": "useful(abs:\"galaxy formation\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "helpful work on gravitational waves",
+    "ads_query": "useful(abs:\"gravitational waves\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "foundational work on cosmic microwave background",
+    "ads_query": "useful(abs:\"cosmic microwave background\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "foundational papers on neutron stars",
+    "ads_query": "useful(abs:\"neutron stars\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "essential reading on supernovae",
+    "ads_query": "useful(abs:\"supernovae\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "essential papers on stellar evolution",
+    "ads_query": "useful(abs:\"stellar evolution\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "must-read papers on cosmology",
+    "ads_query": "useful(abs:\"cosmology\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "must read papers on quasars",
+    "ads_query": "useful(abs:\"quasars\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "key papers on AGN",
+    "ads_query": "useful(abs:\"AGN\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "key references on star formation",
+    "ads_query": "useful(abs:\"star formation\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "seminal papers on galactic dynamics",
+    "ads_query": "useful(abs:\"galactic dynamics\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "seminal work on interstellar medium",
+    "ads_query": "useful(abs:\"interstellar medium\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "landmark papers in planet formation",
+    "ads_query": "useful(abs:\"planet formation\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "important papers on galaxy clusters",
+    "ads_query": "useful(abs:\"galaxy clusters\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "review articles on dark matter",
+    "ads_query": "reviews(abs:\"dark matter\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "review papers on dark energy",
+    "ads_query": "reviews(abs:\"dark energy\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "reviews of black holes",
+    "ads_query": "reviews(abs:\"black holes\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "reviews on exoplanets",
+    "ads_query": "reviews(abs:\"exoplanets\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "reviews about galaxy formation",
+    "ads_query": "reviews(abs:\"galaxy formation\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "find reviews on gravitational waves",
+    "ads_query": "reviews(abs:\"gravitational waves\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "survey papers on cosmic microwave background",
+    "ads_query": "reviews(abs:\"cosmic microwave background\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "survey articles on neutron stars",
+    "ads_query": "reviews(abs:\"neutron stars\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "survey of supernovae",
+    "ads_query": "reviews(abs:\"supernovae\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "survey on stellar evolution",
+    "ads_query": "reviews(abs:\"stellar evolution\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "survey about cosmology",
+    "ads_query": "reviews(abs:\"cosmology\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "overviews of quasars",
+    "ads_query": "reviews(abs:\"quasars\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "overview papers on AGN",
+    "ads_query": "reviews(abs:\"AGN\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "comprehensive reviews on star formation",
+    "ads_query": "reviews(abs:\"star formation\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "comprehensive survey of galactic dynamics",
+    "ads_query": "reviews(abs:\"galactic dynamics\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "literature review on interstellar medium",
+    "ads_query": "reviews(abs:\"interstellar medium\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "review of the literature on planet formation",
+    "ads_query": "reviews(abs:\"planet formation\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "systematic review of galaxy clusters",
+    "ads_query": "reviews(abs:\"galaxy clusters\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "state-of-the-art review on gamma-ray bursts",
+    "ads_query": "reviews(abs:\"gamma-ray bursts\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "tutorial on pulsars",
+    "ads_query": "reviews(abs:\"pulsars\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "tutorial papers on redshift surveys",
+    "ads_query": "reviews(abs:\"redshift surveys\")",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "top 10 papers on dark matter",
+    "ads_query": "topn(10, abs:\"dark matter\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "top 10 papers about dark energy",
+    "ads_query": "topn(10, abs:\"dark energy\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "top 5 papers on black holes",
+    "ads_query": "topn(5, abs:\"black holes\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "top 20 papers on exoplanets",
+    "ads_query": "topn(20, abs:\"exoplanets\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "top 100 papers on galaxy formation",
+    "ads_query": "topn(10, abs:\"galaxy formation\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "most cited papers on gravitational waves",
+    "ads_query": "topn(10, abs:\"gravitational waves\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "most cited papers in cosmic microwave background",
+    "ads_query": "topn(10, abs:\"cosmic microwave background\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "most cited articles on neutron stars",
+    "ads_query": "topn(10, abs:\"neutron stars\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "highest cited papers on supernovae",
+    "ads_query": "topn(10, abs:\"supernovae\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "highly cited papers on stellar evolution",
+    "ads_query": "topn(10, abs:\"stellar evolution\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "best papers on cosmology",
+    "ads_query": "topn(10, abs:\"cosmology\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "best papers about quasars",
+    "ads_query": "topn(10, abs:\"quasars\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "best papers in AGN",
+    "ads_query": "topn(10, abs:\"AGN\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "top ranked papers on star formation",
+    "ads_query": "topn(10, abs:\"star formation\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "top papers on galactic dynamics",
+    "ads_query": "topn(10, abs:\"galactic dynamics\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "top papers in interstellar medium",
+    "ads_query": "topn(10, abs:\"interstellar medium\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "papers with most citations on planet formation",
+    "ads_query": "topn(10, abs:\"planet formation\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "papers with highest citation count on galaxy clusters",
+    "ads_query": "topn(10, abs:\"galaxy clusters\", citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "citations to dark matter papers from 2020",
+    "ads_query": "citations(abs:\"dark matter\" year:2020)",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "who cited Hawking's papers since 2015",
+    "ads_query": "citations(author:Hawking) year:[2015 TO *]",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "recent papers citing the CMB discovery",
+    "ads_query": "citations(abs:\"cosmic microwave background\") year:[2020 TO *]",
+    "category": "operator",
+    "operator": "citations"
+  },
+  {
+    "natural_language": "refereed papers in the references of Planck 2018",
+    "ads_query": "references(abs:\"Planck 2018\") property:refereed",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "what sources did the LIGO paper cite",
+    "ads_query": "references(abs:\"LIGO gravitational wave\")",
+    "category": "operator",
+    "operator": "references"
+  },
+  {
+    "natural_language": "hot topics in exoplanets this year",
+    "ads_query": "trending(abs:\"exoplanets\") year:2025",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "currently trending in machine learning astronomy",
+    "ads_query": "trending(abs:\"machine learning astronomy\")",
+    "category": "operator",
+    "operator": "trending"
+  },
+  {
+    "natural_language": "papers similar to Weinberg's cosmology work",
+    "ads_query": "similar(author:Weinberg abs:\"cosmology\")",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "find similar to the dark energy papers",
+    "ads_query": "similar(abs:\"dark energy\")",
+    "category": "operator",
+    "operator": "similar"
+  },
+  {
+    "natural_language": "foundational papers on galaxy formation by Rees",
+    "ads_query": "useful(abs:\"galaxy formation\" author:Rees)",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "must-read papers on gravitational lensing",
+    "ads_query": "useful(abs:\"gravitational lensing\")",
+    "category": "operator",
+    "operator": "useful"
+  },
+  {
+    "natural_language": "recent review articles on black holes",
+    "ads_query": "reviews(abs:\"black holes\") year:[2020 TO *]",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "survey papers on stellar evolution from 2019",
+    "ads_query": "reviews(abs:\"stellar evolution\") year:2019",
+    "category": "operator",
+    "operator": "reviews"
+  },
+  {
+    "natural_language": "top 10 refereed papers on supernovae",
+    "ads_query": "topn(10, abs:\"supernovae\" property:refereed, citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  },
+  {
+    "natural_language": "most cited papers on neutron stars from 2015",
+    "ads_query": "topn(10, abs:\"neutron stars\" year:[2015 TO *], citation_count)",
+    "category": "operator",
+    "operator": "topn"
+  }
+]

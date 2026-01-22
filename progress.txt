@@ -185,3 +185,30 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - The synonyms file reverse_lookup enables future NL->code mapping in NER
   - Coverage increased from 5/53 bibgroups (9.4%) to all 55 bibgroups (100%)
 ---
+
+## 2026-01-22 - US-009: Generate operator variation training examples
+- **Implemented**: Training data generation for operator-based queries with diverse trigger phrases
+- **Files created**:
+  - `scripts/generate_operator_examples.py` - Generates operator training examples
+  - `data/datasets/generated/operator_examples.json` - 142 unique examples
+- **Key details**:
+  - 7 operators covered: citations, references, trending, similar, useful, reviews, topn
+  - 17-23 examples per operator (all ≥15 as required)
+  - Trigger phrase variations aligned with OPERATOR_PATTERNS from ner.py (US-004)
+  - Combined examples with filters (date, refereed, topic combinations)
+  - Paper targets use abs: search, author targets use author: field
+  - topn() includes variable N values (5, 10, 20, 100) and citation_count sorting
+- **Example queries generated**:
+  - "papers citing the Riess et al. 2018 paper" -> `citations(author:Riess)`
+  - "what does Einstein cite" -> `references(author:Einstein)`
+  - "hot topics in dark matter" -> `trending(abs:"dark matter")`
+  - "papers similar to the LIGO detection paper" -> `similar(abs:"the LIGO detection paper")`
+  - "foundational work on cosmology" -> `useful(abs:"cosmology")`
+  - "review articles on black holes" -> `reviews(abs:"black holes")`
+  - "top 10 papers on exoplanets" -> `topn(10, abs:"exoplanets", citation_count)`
+- **Learnings for future iterations**:
+  - When extracting author names from target strings, search for known names rather than using split()[0] which can capture articles like "the"
+  - Operator examples benefit from both paper targets (abs: search) and author targets (author: field)
+  - Combined examples showing operator + filter combinations help model learn compositionality
+  - The topn operator requires three arguments: count, query, sort_field
+---
