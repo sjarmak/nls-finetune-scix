@@ -5,7 +5,7 @@ Performance benchmarks for the hybrid NER pipeline.
 ## Summary
 
 - **Queries tested**: 100
-- **Date**: 2026-01-21 22:03:15
+- **Date**: 2026-01-21 22:07:38
 
 ## Targets
 
@@ -22,14 +22,14 @@ Performance benchmarks for the hybrid NER pipeline.
 
 | Component                   |    p50 |    p95 |    p99 |   Mean |   Min |    Max | Status   |
 |-----------------------------|--------|--------|--------|--------|-------|--------|----------|
-| NER Extraction            |    0.07 |    0.09 |    0.63 |    0.08 |   0.05 |    0.63 | ✅ PASS   |
-| Retrieval (k=5)           |    3.38 |    5.33 |    6.23 |    3.50 |   1.19 |    6.23 | ✅ PASS   |
-| Assembly                  |    0.03 |    0.04 |    0.97 |    0.04 |   0.02 |    0.98 | ✅ PASS   |
-| Full Pipeline (no LLM)    |    3.37 |    5.28 |    6.36 |    3.51 |   1.21 |    6.36 | ✅ PASS   |
+| NER Extraction            |    0.08 |    0.10 |    0.70 |    0.09 |   0.06 |    0.71 | ✅ PASS   |
+| Retrieval (k=5)           |    3.90 |    6.10 |    6.50 |    4.04 |   1.00 |    6.50 | ✅ PASS   |
+| Assembly                  |    0.03 |    0.04 |    1.02 |    0.04 |   0.02 |    1.03 | ✅ PASS   |
+| Full Pipeline (no LLM)    |    3.87 |    5.47 |    6.48 |    3.90 |   1.34 |    6.49 | ✅ PASS   |
 
 ## Overall: ✅ **PASS**
 
-Pipeline p95 latency: **5.28ms** (target: < 50ms local)
+Pipeline p95 latency: **5.47ms** (target: < 50ms local)
 
 ## Notes
 

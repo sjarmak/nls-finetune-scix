@@ -287,7 +287,7 @@
         "Merge hybrid-ner-pipeline branch to main"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "This is the final gate. All acceptance criteria must pass."
     }
   ]
