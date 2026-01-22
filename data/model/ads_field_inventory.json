@@ -1,0 +1,1096 @@
+{
+  "version": "1.0.0",
+  "source": "ADS Solr Schema and Search Syntax Documentation",
+  "last_updated": "2026-01-22",
+  "references": [
+    "https://ui.adsabs.harvard.edu/help/search/search-syntax",
+    "https://ui.adsabs.harvard.edu/help/search/comprehensive-solr-term-list",
+    "https://github.com/adsabs/montysolr/blob/main/deploy/adsabs/server/solr/collection1/conf/schema.xml"
+  ],
+  "field_groups": {
+    "content": {
+      "description": "Fields for searching document content (abstract, title, body text)",
+      "fields": ["abs", "title", "abstract", "body", "full", "ack", "caption"]
+    },
+    "author": {
+      "description": "Fields for author and affiliation searches",
+      "fields": ["author", "first_author", "author_count", "aff", "inst", "orcid", "orcid_pub", "orcid_user", "orcid_other"]
+    },
+    "enum": {
+      "description": "Fields with constrained vocabulary (enumerated values)",
+      "fields": ["doctype", "property", "database", "bibgroup", "esources", "data"]
+    },
+    "identifier": {
+      "description": "Fields for unique record identifiers",
+      "fields": ["bibcode", "alternate_bibcode", "doi", "arxiv", "identifier"]
+    },
+    "metric": {
+      "description": "Numeric fields for citation and engagement metrics",
+      "fields": ["citation_count", "citation_count_norm", "read_count", "author_count", "page_count"]
+    },
+    "date": {
+      "description": "Fields for temporal/date searches",
+      "fields": ["year", "pubdate", "entry_date", "entdate"]
+    },
+    "publication": {
+      "description": "Fields for publication venue identification",
+      "fields": ["bibstem", "pub", "volume", "issue", "page"]
+    },
+    "classification": {
+      "description": "Fields for subject/topic classification",
+      "fields": ["keyword", "keyword_norm", "arxiv_class", "vizier", "object", "simbad"]
+    },
+    "special": {
+      "description": "Fields with special syntax or operator requirements",
+      "fields": ["citation", "references", "trending", "similar", "useful", "reviews", "topn", "pos"]
+    }
+  },
+  "fields": {
+    "abs": {
+      "name": "abs",
+      "aliases": ["abstract_title_keywords"],
+      "type": "text",
+      "group": "content",
+      "description": "Virtual field searching title, abstract, and keywords simultaneously",
+      "example_values": ["dark matter", "exoplanets", "gravitational waves"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": true,
+        "exact_prefix": "="
+      },
+      "notes": "Most common field for general topic searches"
+    },
+    "title": {
+      "name": "title",
+      "aliases": [],
+      "type": "text",
+      "group": "content",
+      "description": "Document title field only",
+      "example_values": ["Detection of gravitational waves", "Exoplanet atmospheres"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": true,
+        "exact_prefix": "="
+      },
+      "notes": "Use when specifically searching titles, not abstracts"
+    },
+    "abstract": {
+      "name": "abstract",
+      "aliases": [],
+      "type": "text",
+      "group": "content",
+      "description": "Paper abstract content only",
+      "example_values": ["We present observations of", "In this paper we analyze"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": true,
+        "exact_prefix": "="
+      },
+      "notes": "For abstract-only searches; use abs: for broader content search"
+    },
+    "body": {
+      "name": "body",
+      "aliases": [],
+      "type": "text",
+      "group": "content",
+      "description": "Full text body (excluding acknowledgments)",
+      "example_values": ["methodology", "results show"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": true,
+        "exact_prefix": "="
+      },
+      "notes": "Only available for articles with full text indexed"
+    },
+    "full": {
+      "name": "full",
+      "aliases": ["fulltext"],
+      "type": "text",
+      "group": "content",
+      "description": "Searches title, abstract, body, acknowledgments, and keywords",
+      "example_values": ["HST observations", "Chandra data"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": true,
+        "exact_prefix": "="
+      },
+      "notes": "Most comprehensive content search"
+    },
+    "ack": {
+      "name": "ack",
+      "aliases": ["acknowledgments"],
+      "type": "text",
+      "group": "content",
+      "description": "Paper acknowledgment section text",
+      "example_values": ["NASA grant", "HST program", "NSF support"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Useful for finding papers funded by specific grants or using specific facilities"
+    },
+    "caption": {
+      "name": "caption",
+      "aliases": [],
+      "type": "text",
+      "group": "content",
+      "description": "Figure and table caption text",
+      "example_values": ["color-magnitude diagram", "light curve"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Searches illustration and table descriptions"
+    },
+    "author": {
+      "name": "author",
+      "aliases": [],
+      "type": "text",
+      "group": "author",
+      "description": "Author names (surname first format)",
+      "example_values": ["Einstein, A", "Hawking, Stephen", "^Smith, John"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": false,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": "=",
+        "first_author_prefix": "^"
+      },
+      "notes": "Use ^ prefix for first author only. Quotes for exact name matching."
+    },
+    "first_author": {
+      "name": "first_author",
+      "aliases": [],
+      "type": "text",
+      "group": "author",
+      "description": "Lead author of the paper",
+      "example_values": ["Einstein, A", "Hawking, S"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": false,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": "="
+      },
+      "notes": "Alternative to author:^name syntax"
+    },
+    "author_count": {
+      "name": "author_count",
+      "aliases": [],
+      "type": "metric",
+      "group": "metric",
+      "description": "Number of authors on the paper",
+      "example_values": ["1", "10", "[5 TO 20]"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "supports_range": true
+      },
+      "notes": "Integer field supporting exact match and range queries"
+    },
+    "aff": {
+      "name": "aff",
+      "aliases": ["affiliation"],
+      "type": "text",
+      "group": "author",
+      "description": "Author affiliation strings (raw text)",
+      "example_values": ["Harvard", "MIT", "Caltech"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Searches raw affiliation text; use inst: for curated institution names"
+    },
+    "inst": {
+      "name": "inst",
+      "aliases": ["institution"],
+      "type": "text",
+      "group": "author",
+      "description": "Curated institutional affiliation names",
+      "example_values": ["CfA", "Caltech", "UCLA/IGPP"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": false,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": null,
+        "hierarchical": true
+      },
+      "notes": "Supports hierarchical structure like UCLA/IGPP"
+    },
+    "orcid": {
+      "name": "orcid",
+      "aliases": [],
+      "type": "identifier",
+      "group": "author",
+      "description": "Virtual field searching all ORCID variants",
+      "example_values": ["0000-0001-2345-6789"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Searches orcid_pub, orcid_user, and orcid_other combined"
+    },
+    "orcid_pub": {
+      "name": "orcid_pub",
+      "aliases": [],
+      "type": "identifier",
+      "group": "author",
+      "description": "Publisher-supplied ORCID identifiers",
+      "example_values": ["0000-0001-2345-6789"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "ORCIDs provided by publishers"
+    },
+    "orcid_user": {
+      "name": "orcid_user",
+      "aliases": [],
+      "type": "identifier",
+      "group": "author",
+      "description": "User-claimed ORCID identifiers with consent",
+      "example_values": ["0000-0001-2345-6789"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Public ORCID claims made by users"
+    },
+    "orcid_other": {
+      "name": "orcid_other",
+      "aliases": [],
+      "type": "identifier",
+      "group": "author",
+      "description": "Non-public ORCID claims",
+      "example_values": ["0000-0001-2345-6789"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "ORCIDs from non-public sources"
+    },
+    "doctype": {
+      "name": "doctype",
+      "aliases": [],
+      "type": "enum",
+      "group": "enum",
+      "description": "Document type classification",
+      "example_values": ["article", "eprint", "inproceedings", "book", "phdthesis", "software"],
+      "valid_values": [
+        "abstract", "article", "book", "bookreview", "catalog", "circular",
+        "editorial", "eprint", "erratum", "inbook", "inproceedings",
+        "mastersthesis", "misc", "newsletter", "obituary", "phdthesis",
+        "pressrelease", "proceedings", "proposal", "software", "talk", "techreport"
+      ],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Constrained vocabulary field"
+    },
+    "property": {
+      "name": "property",
+      "aliases": [],
+      "type": "enum",
+      "group": "enum",
+      "description": "Record property flags for filtering",
+      "example_values": ["refereed", "openaccess", "data", "eprint", "notrefereed"],
+      "valid_values": [
+        "ads_openaccess", "author_openaccess", "eprint_openaccess", "pub_openaccess",
+        "openaccess", "article", "nonarticle", "refereed", "notrefereed", "eprint",
+        "inproceedings", "software", "catalog", "associated", "data", "esource",
+        "inspire", "library_catalog", "presentation", "toc", "ocr_abstract"
+      ],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Constrained vocabulary field for record attributes"
+    },
+    "database": {
+      "name": "database",
+      "aliases": ["collection"],
+      "type": "enum",
+      "group": "enum",
+      "description": "Collection/database membership",
+      "example_values": ["astronomy", "physics", "general"],
+      "valid_values": ["astronomy", "physics", "general", "earthscience"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Limits search to specific ADS collections"
+    },
+    "bibgroup": {
+      "name": "bibgroup",
+      "aliases": [],
+      "type": "enum",
+      "group": "enum",
+      "description": "Curated bibliographic group membership",
+      "example_values": ["HST", "JWST", "ALMA", "Chandra", "Spitzer"],
+      "valid_values": [
+        "HST", "JWST", "Spitzer", "Chandra", "XMM", "GALEX", "Kepler", "K2",
+        "TESS", "FUSE", "IUE", "EUVE", "Copernicus", "IRAS", "WISE", "NEOWISE",
+        "Fermi", "Swift", "RXTE", "NuSTAR", "SOHO", "STEREO", "SDO",
+        "ESO/Telescopes", "CFHT", "Gemini", "Keck", "VLT", "Subaru", "NOAO",
+        "NOIRLab", "CTIO", "KPNO", "Pan-STARRS", "SDSS", "2MASS", "UKIRT",
+        "ALMA", "JCMT", "APEX", "ARECIBO", "VLA", "VLBA", "GBT", "LOFAR",
+        "MeerKAT", "SKA", "Gaia", "Hipparcos", "CfA", "NASA PubSpace", "LISA", "LIGO"
+      ],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Hand-curated bibliographies by institution librarians"
+    },
+    "esources": {
+      "name": "esources",
+      "aliases": [],
+      "type": "enum",
+      "group": "enum",
+      "description": "Available electronic source formats",
+      "example_values": ["PUB_PDF", "EPRINT_PDF", "ADS_SCAN"],
+      "valid_values": [
+        "PUB_PDF", "PUB_HTML", "EPRINT_PDF", "EPRINT_HTML",
+        "AUTHOR_PDF", "AUTHOR_HTML", "ADS_PDF", "ADS_SCAN"
+      ],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Indicates what electronic formats are available"
+    },
+    "data": {
+      "name": "data",
+      "aliases": [],
+      "type": "enum",
+      "group": "enum",
+      "description": "Associated data archive sources",
+      "example_values": ["MAST", "NED", "SIMBAD", "Chandra"],
+      "valid_values": [
+        "ARI", "BICEP2", "Chandra", "CXO", "ESA", "ESO", "GCPD", "GTC",
+        "HEASARC", "Herschel", "INES", "IRSA", "ISO", "KOA", "MAST", "NED",
+        "NExScI", "NOAO", "PDS", "SIMBAD", "Spitzer", "TNS", "VizieR", "XMM"
+      ],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Archives that have data linked to the record"
+    },
+    "bibcode": {
+      "name": "bibcode",
+      "aliases": [],
+      "type": "identifier",
+      "group": "identifier",
+      "description": "ADS bibliographic code identifier",
+      "example_values": ["2020ApJ...900..100S", "2023Natur.615..605H"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "19-character unique identifier for each record"
+    },
+    "alternate_bibcode": {
+      "name": "alternate_bibcode",
+      "aliases": [],
+      "type": "identifier",
+      "group": "identifier",
+      "description": "Alternative bibcode identifiers",
+      "example_values": ["2020arXiv200100001A"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Searches alternate versions (e.g., arXiv version of published paper)"
+    },
+    "doi": {
+      "name": "doi",
+      "aliases": [],
+      "type": "identifier",
+      "group": "identifier",
+      "description": "Digital Object Identifier",
+      "example_values": ["10.1086/345794", "10.1038/nature12917"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "DOI must match exactly"
+    },
+    "arxiv": {
+      "name": "arxiv",
+      "aliases": ["arXiv"],
+      "type": "identifier",
+      "group": "identifier",
+      "description": "arXiv preprint identifier",
+      "example_values": ["2301.00001", "astro-ph/0401001"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Supports both new and old arXiv ID formats"
+    },
+    "identifier": {
+      "name": "identifier",
+      "aliases": [],
+      "type": "identifier",
+      "group": "identifier",
+      "description": "Virtual field searching all identifier types",
+      "example_values": ["2020ApJ...900..100S", "10.1086/345794"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Searches bibcode, DOI, arXiv, and other identifiers"
+    },
+    "citation_count": {
+      "name": "citation_count",
+      "aliases": [],
+      "type": "metric",
+      "group": "metric",
+      "description": "Total number of citations received",
+      "example_values": ["100", "[50 TO 200]", "[100 TO *]"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "supports_range": true
+      },
+      "notes": "Integer field supporting range queries"
+    },
+    "citation_count_norm": {
+      "name": "citation_count_norm",
+      "aliases": [],
+      "type": "metric",
+      "group": "metric",
+      "description": "Citations normalized by author count",
+      "example_values": ["10.5", "[5.0 TO 20.0]"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "supports_range": true
+      },
+      "notes": "Float field for per-author citation credit"
+    },
+    "read_count": {
+      "name": "read_count",
+      "aliases": [],
+      "type": "metric",
+      "group": "metric",
+      "description": "Recent reader engagement metric",
+      "example_values": ["100", "[50 TO *]"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "supports_range": true
+      },
+      "notes": "Based on recent ADS abstract page views"
+    },
+    "page_count": {
+      "name": "page_count",
+      "aliases": [],
+      "type": "metric",
+      "group": "metric",
+      "description": "Number of pages in the document",
+      "example_values": ["10", "[5 TO 20]"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "supports_range": true
+      },
+      "notes": "Integer field"
+    },
+    "year": {
+      "name": "year",
+      "aliases": [],
+      "type": "date",
+      "group": "date",
+      "description": "Publication year",
+      "example_values": ["2023", "2020-2023", "[2020 TO 2023]"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "supports_range": true,
+        "range_format": "YYYY or YYYY-YYYY"
+      },
+      "notes": "Supports single year or ranges with - or [TO] syntax"
+    },
+    "pubdate": {
+      "name": "pubdate",
+      "aliases": [],
+      "type": "date",
+      "group": "date",
+      "description": "Publication date (year-month precision)",
+      "example_values": ["[2020-01 TO 2020-12]", "[2023-06 TO *]"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "supports_range": true,
+        "range_format": "[YYYY-MM TO YYYY-MM]"
+      },
+      "notes": "For monthly publication date range searches"
+    },
+    "entry_date": {
+      "name": "entry_date",
+      "aliases": ["entdate"],
+      "type": "date",
+      "group": "date",
+      "description": "Date record was added to ADS",
+      "example_values": ["[2023-01-01 TO 2023-12-31]"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "supports_range": true,
+        "range_format": "[YYYY-MM-DD TO YYYY-MM-DD]"
+      },
+      "notes": "Useful for finding recently added records"
+    },
+    "bibstem": {
+      "name": "bibstem",
+      "aliases": [],
+      "type": "text",
+      "group": "publication",
+      "description": "Journal/publication abbreviation code",
+      "example_values": ["ApJ", "MNRAS", "A&A", "Nature", "Sci"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Standard ADS journal abbreviations"
+    },
+    "pub": {
+      "name": "pub",
+      "aliases": ["publication"],
+      "type": "text",
+      "group": "publication",
+      "description": "Full publication/journal name",
+      "example_values": ["Astrophysical Journal", "Monthly Notices"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Canonical publication name"
+    },
+    "volume": {
+      "name": "volume",
+      "aliases": [],
+      "type": "text",
+      "group": "publication",
+      "description": "Journal volume number",
+      "example_values": ["900", "615"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Volume locator information"
+    },
+    "issue": {
+      "name": "issue",
+      "aliases": [],
+      "type": "text",
+      "group": "publication",
+      "description": "Journal issue number",
+      "example_values": ["1", "12"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Issue locator information"
+    },
+    "page": {
+      "name": "page",
+      "aliases": [],
+      "type": "text",
+      "group": "publication",
+      "description": "Page number or article ID",
+      "example_values": ["100", "L12", "123456"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Page or electronic ID (eid)"
+    },
+    "keyword": {
+      "name": "keyword",
+      "aliases": [],
+      "type": "text",
+      "group": "classification",
+      "description": "Author/publisher-supplied keywords",
+      "example_values": ["black holes", "exoplanets", "gravitational waves"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": true,
+        "exact_prefix": "="
+      },
+      "notes": "Combined normalized and non-normalized keywords"
+    },
+    "keyword_norm": {
+      "name": "keyword_norm",
+      "aliases": [],
+      "type": "text",
+      "group": "classification",
+      "description": "Controlled vocabulary keywords",
+      "example_values": ["stars: neutron", "galaxies: evolution"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Standardized astronomical keywords"
+    },
+    "arxiv_class": {
+      "name": "arxiv_class",
+      "aliases": [],
+      "type": "text",
+      "group": "classification",
+      "description": "arXiv classification category",
+      "example_values": ["astro-ph.GA", "astro-ph.CO", "gr-qc", "hep-th"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "arXiv subject classifications"
+    },
+    "vizier": {
+      "name": "vizier",
+      "aliases": [],
+      "type": "text",
+      "group": "classification",
+      "description": "VizieR catalog keywords",
+      "example_values": ["stellar", "photometry"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Keywords from VizieR astronomy catalog service"
+    },
+    "object": {
+      "name": "object",
+      "aliases": [],
+      "type": "special",
+      "group": "classification",
+      "description": "Astronomical object name or coordinate search",
+      "example_values": ["M31", "NGC 1234", "Proxima Centauri", "05 23 34.5 -69 45 22:0.166"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": false,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": null,
+        "cone_search_format": "RA Dec:radius"
+      },
+      "notes": "Searches SIMBAD/NED tagged objects or performs cone searches"
+    },
+    "simbad": {
+      "name": "simbad",
+      "aliases": [],
+      "type": "text",
+      "group": "classification",
+      "description": "SIMBAD object identifiers",
+      "example_values": ["M 31", "* alf CMa"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": false,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Objects resolved through SIMBAD"
+    },
+    "citation": {
+      "name": "citation",
+      "aliases": [],
+      "type": "special",
+      "group": "special",
+      "description": "List of bibcodes that cite this paper (used in citations() operator)",
+      "example_values": ["2020ApJ...900..100S"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null,
+        "operator": "citations()"
+      },
+      "notes": "Used with citations() operator to find papers citing a query"
+    },
+    "references": {
+      "name": "references",
+      "aliases": [],
+      "type": "special",
+      "group": "special",
+      "description": "List of bibcodes referenced by this paper (used in references() operator)",
+      "example_values": ["2020ApJ...900..100S"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null,
+        "operator": "references()"
+      },
+      "notes": "Used with references() operator to find papers cited by a query"
+    },
+    "trending": {
+      "name": "trending",
+      "aliases": [],
+      "type": "special",
+      "group": "special",
+      "description": "Returns papers currently trending (high recent reads)",
+      "example_values": [],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null,
+        "operator": "trending()"
+      },
+      "notes": "Operator for finding currently popular papers"
+    },
+    "similar": {
+      "name": "similar",
+      "aliases": [],
+      "type": "special",
+      "group": "special",
+      "description": "Returns papers similar to query results",
+      "example_values": [],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null,
+        "operator": "similar()"
+      },
+      "notes": "Operator for finding related papers"
+    },
+    "useful": {
+      "name": "useful",
+      "aliases": [],
+      "type": "special",
+      "group": "special",
+      "description": "Returns highly read papers matching query",
+      "example_values": [],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null,
+        "operator": "useful()"
+      },
+      "notes": "Operator for finding foundational/frequently-read papers"
+    },
+    "reviews": {
+      "name": "reviews",
+      "aliases": [],
+      "type": "special",
+      "group": "special",
+      "description": "Returns review articles for a topic",
+      "example_values": [],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null,
+        "operator": "reviews()"
+      },
+      "notes": "Operator for finding review/survey papers"
+    },
+    "topn": {
+      "name": "topn",
+      "aliases": [],
+      "type": "special",
+      "group": "special",
+      "description": "Returns top N results by a sort criteria",
+      "example_values": ["10", "100"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null,
+        "operator": "topn(N, query, sort_field)"
+      },
+      "notes": "Operator for getting top N results (e.g., most cited)"
+    },
+    "pos": {
+      "name": "pos",
+      "aliases": [],
+      "type": "special",
+      "group": "special",
+      "description": "Positional search within author list",
+      "example_values": ["pos(author:\"Smith\", 1, 3)"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null,
+        "operator": "pos(query, start, end)"
+      },
+      "notes": "Find authors in specific position ranges"
+    },
+    "grant": {
+      "name": "grant",
+      "aliases": [],
+      "type": "text",
+      "group": "publication",
+      "description": "Grant identifiers and funding agencies",
+      "example_values": ["NASA", "NSF", "NNX12AB34G"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Searches grant agencies and grant numbers"
+    },
+    "facility": {
+      "name": "facility",
+      "aliases": [],
+      "type": "text",
+      "group": "publication",
+      "description": "Observational facilities declared in paper",
+      "example_values": ["VLT", "HST", "Keck"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": false,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Facilities tagged in the paper metadata"
+    },
+    "lang": {
+      "name": "lang",
+      "aliases": ["language"],
+      "type": "text",
+      "group": "publication",
+      "description": "Document language (primarily title)",
+      "example_values": ["en", "de", "fr", "es"],
+      "syntax": {
+        "supports_wildcards": false,
+        "supports_proximity": false,
+        "supports_phrase": false,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "ISO 639-1 language codes"
+    },
+    "copyright": {
+      "name": "copyright",
+      "aliases": [],
+      "type": "text",
+      "group": "publication",
+      "description": "Publisher copyright attribution",
+      "example_values": ["AAS", "IOP", "EDP Sciences"],
+      "syntax": {
+        "supports_wildcards": true,
+        "supports_proximity": true,
+        "supports_phrase": true,
+        "supports_synonyms": false,
+        "exact_prefix": null
+      },
+      "notes": "Copyright holder text"
+    }
+  },
+  "operators": {
+    "citations": {
+      "syntax": "citations(query)",
+      "description": "Find papers that cite the results of the inner query",
+      "example": "citations(author:\"Einstein\" year:1905)",
+      "notes": "Returns papers that cite any paper matching the inner query"
+    },
+    "references": {
+      "syntax": "references(query)",
+      "description": "Find papers referenced by the results of the inner query",
+      "example": "references(bibcode:2020ApJ...900..100S)",
+      "notes": "Returns papers in the reference list of papers matching the inner query"
+    },
+    "trending": {
+      "syntax": "trending(query)",
+      "description": "Find trending papers (high recent read counts) matching query",
+      "example": "trending(abs:\"dark energy\")",
+      "notes": "Papers with unusually high recent readership"
+    },
+    "similar": {
+      "syntax": "similar(query)",
+      "description": "Find papers similar to the results of the inner query",
+      "example": "similar(bibcode:2020ApJ...900..100S)",
+      "notes": "Uses text similarity to find related papers"
+    },
+    "useful": {
+      "syntax": "useful(query)",
+      "description": "Find useful/foundational papers for a topic",
+      "example": "useful(abs:\"machine learning astronomy\")",
+      "notes": "Highly-read papers in the topic area"
+    },
+    "reviews": {
+      "syntax": "reviews(query)",
+      "description": "Find review articles on a topic",
+      "example": "reviews(abs:\"exoplanet atmospheres\")",
+      "notes": "Returns review and survey papers"
+    },
+    "topn": {
+      "syntax": "topn(N, query, sort_field)",
+      "description": "Return top N results sorted by a field",
+      "example": "topn(10, abs:\"gravitational waves\", citation_count desc)",
+      "notes": "N is the count, sort_field defaults to citation_count desc"
+    },
+    "pos": {
+      "syntax": "pos(query, start, end)",
+      "description": "Search for authors in specific positions",
+      "example": "pos(author:\"Smith\", 1, 3)",
+      "notes": "Find authors in position range [start, end] of author list"
+    }
+  },
+  "boolean_operators": {
+    "AND": "Both terms must match (default operator between terms)",
+    "OR": "Either term can match",
+    "NOT": "Exclude records matching the term",
+    "-": "Prefix equivalent to NOT",
+    "+": "Prefix requiring term must match"
+  },
+  "special_syntax": {
+    "wildcards": {
+      "*": "Matches zero or more characters",
+      "?": "Matches exactly one character",
+      "notes": "Not all fields support wildcards"
+    },
+    "proximity": {
+      "NEAR": "Terms within N words of each other",
+      "example": "\"dark matter\" NEAR5 \"detection\"",
+      "notes": "Supported in text fields"
+    },
+    "ranges": {
+      "syntax": "[min TO max]",
+      "example": "year:[2020 TO 2023]",
+      "notes": "Use * for unbounded: [2020 TO *]"
+    },
+    "phrase": {
+      "syntax": "\"exact phrase\"",
+      "example": "title:\"dark matter detection\"",
+      "notes": "Matches words in exact order"
+    },
+    "exact_match": {
+      "prefix": "=",
+      "example": "=author:\"Smith, John\"",
+      "notes": "Disables synonym expansion and fuzzy matching"
+    },
+    "first_author": {
+      "prefix": "^",
+      "example": "author:\"^Smith, John\"",
+      "notes": "Match first author only"
+    }
+  }
+}
