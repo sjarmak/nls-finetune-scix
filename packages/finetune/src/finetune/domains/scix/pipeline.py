@@ -143,19 +143,10 @@ def process_query(nl_text: str) -> PipelineResult:
     debug_info.retrieval_time_ms = (time.perf_counter() - retrieval_start) * 1000
 
     # Stage 3: Query Assembly
-    # TODO: Implement in US-004 (assembler.py)
+    from .assembler import assemble_query
+
     assembly_start = time.perf_counter()
-
-    # Placeholder: simple abs: query from free text
-    if intent.free_text_terms:
-        topic = intent.free_text_terms[0]
-        if " " in topic:
-            final_query = f'abs:"{topic}"'
-        else:
-            final_query = f"abs:{topic}"
-    else:
-        final_query = ""
-
+    final_query = assemble_query(intent, retrieved_examples)
     debug_info.assembly_time_ms = (time.perf_counter() - assembly_start) * 1000
 
     # Total timing

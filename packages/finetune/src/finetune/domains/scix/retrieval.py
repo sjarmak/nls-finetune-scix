@@ -18,7 +18,13 @@ from .intent_spec import OPERATORS, IntentSpec
 from .pipeline import GoldExample
 
 # Default path to gold examples file (relative to package root)
-DEFAULT_GOLD_EXAMPLES_PATH = Path(__file__).parent.parent.parent.parent.parent.parent.parent / "data" / "datasets" / "raw" / "gold_examples.json"
+DEFAULT_GOLD_EXAMPLES_PATH = (
+    Path(__file__).parent.parent.parent.parent.parent.parent.parent
+    / "data"
+    / "datasets"
+    / "raw"
+    / "gold_examples.json"
+)
 
 
 @dataclass
@@ -56,22 +62,126 @@ class IndexedExample:
 
 
 # Stopwords to filter from NL queries for better matching
-STOPWORDS: frozenset[str] = frozenset({
-    "a", "an", "the", "and", "or", "but", "in", "on", "at", "to", "for",
-    "of", "with", "by", "from", "as", "is", "was", "are", "were", "been",
-    "be", "have", "has", "had", "do", "does", "did", "will", "would",
-    "could", "should", "may", "might", "must", "shall", "can", "need",
-    "about", "above", "after", "before", "between", "into", "through",
-    "during", "under", "again", "further", "then", "once", "here",
-    "there", "when", "where", "why", "how", "all", "each", "few",
-    "more", "most", "other", "some", "such", "no", "not", "only",
-    "own", "same", "so", "than", "too", "very", "just", "also",
-    "now", "papers", "paper", "articles", "article", "studies", "study",
-    "research", "work", "works", "published", "find", "search", "looking",
-    "want", "need", "show", "me", "get", "list", "i", "my", "we", "our",
-    "you", "your", "it", "its", "this", "that", "these", "those", "which",
-    "what", "who", "whose", "whom", "any", "every", "many"
-})
+STOPWORDS: frozenset[str] = frozenset(
+    {
+        "a",
+        "an",
+        "the",
+        "and",
+        "or",
+        "but",
+        "in",
+        "on",
+        "at",
+        "to",
+        "for",
+        "of",
+        "with",
+        "by",
+        "from",
+        "as",
+        "is",
+        "was",
+        "are",
+        "were",
+        "been",
+        "be",
+        "have",
+        "has",
+        "had",
+        "do",
+        "does",
+        "did",
+        "will",
+        "would",
+        "could",
+        "should",
+        "may",
+        "might",
+        "must",
+        "shall",
+        "can",
+        "need",
+        "about",
+        "above",
+        "after",
+        "before",
+        "between",
+        "into",
+        "through",
+        "during",
+        "under",
+        "again",
+        "further",
+        "then",
+        "once",
+        "here",
+        "there",
+        "when",
+        "where",
+        "why",
+        "how",
+        "all",
+        "each",
+        "few",
+        "more",
+        "most",
+        "other",
+        "some",
+        "such",
+        "no",
+        "not",
+        "only",
+        "own",
+        "same",
+        "so",
+        "than",
+        "too",
+        "very",
+        "just",
+        "also",
+        "now",
+        "papers",
+        "paper",
+        "articles",
+        "article",
+        "studies",
+        "study",
+        "research",
+        "work",
+        "works",
+        "published",
+        "find",
+        "search",
+        "looking",
+        "want",
+        "need",
+        "show",
+        "me",
+        "get",
+        "list",
+        "i",
+        "my",
+        "we",
+        "our",
+        "you",
+        "your",
+        "it",
+        "its",
+        "this",
+        "that",
+        "these",
+        "those",
+        "which",
+        "what",
+        "who",
+        "whose",
+        "whom",
+        "any",
+        "every",
+        "many",
+    }
+)
 
 
 def tokenize(text: str) -> set[str]:
@@ -357,12 +467,14 @@ class GoldExampleIndex:
                 "doctypes": sorted(example.doctypes),
                 "properties": sorted(example.properties),
             }
-            results.append(GoldExample(
-                nl_query=example.nl_query,
-                ads_query=example.ads_query,
-                features=features,
-                score=score,
-            ))
+            results.append(
+                GoldExample(
+                    nl_query=example.nl_query,
+                    ads_query=example.ads_query,
+                    features=features,
+                    score=score,
+                )
+            )
 
         return results
 
