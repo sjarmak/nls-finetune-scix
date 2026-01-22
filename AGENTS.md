@@ -213,6 +213,75 @@ The canonical forms ensure consistent matching across variations (e.g., "CfA", "
 - **Bibgroups FAQ**: https://ui.adsabs.harvard.edu/help/data_faq/Bibgroups
 - **Solr Schema**: https://github.com/adsabs/montysolr/blob/main/deploy/adsabs/server/solr/collection1/conf/schema.xml
 
+## Training Iteration Decision Tree (US-015)
+
+When tests fail in US-011-014, follow this decision tree:
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                      RUN TEST SUITE                                  │
+│               (US-011, US-012, US-013, US-014)                      │
+└─────────────────────────────────────────────────────────────────────┘
+                              │
+                    ┌─────────▼─────────┐
+                    │   ALL TESTS PASS? │
+                    └─────────┬─────────┘
+                              │
+           ┌──────────────────┴──────────────────┐
+           │                                      │
+     ┌─────▼─────┐                          ┌────▼────┐
+     │    YES    │                          │   NO    │
+     └─────┬─────┘                          └────┬────┘
+           │                                      │
+           ▼                                      ▼
+   ┌───────────────┐                   ┌────────────────────┐
+   │ 1. Mark done  │                   │ ANALYZE FAILURE:   │
+   │ 2. Merge to   │                   │ Is it a DATA issue │
+   │    main       │                   │ or MODEL issue?    │
+   │ 3. Update     │                   └────────┬───────────┘
+   │    progress   │                            │
+   └───────────────┘               ┌────────────┴────────────┐
+                                   │                          │
+                            ┌──────▼──────┐            ┌──────▼──────┐
+                            │ DATA ISSUE  │            │ MODEL ISSUE │
+                            └──────┬──────┘            └──────┬──────┘
+                                   │                          │
+                                   ▼                          ▼
+                        ┌─────────────────────┐   ┌──────────────────────┐
+                        │ Symptoms:           │   │ Symptoms:            │
+                        │ - Wrong patterns    │   │ - Overfitting        │
+                        │ - Missing coverage  │   │ - Underfitting       │
+                        │ - Malformed syntax  │   │ - Slow convergence   │
+                        │ - Bad field values  │   │ - High loss          │
+                        └─────────┬───────────┘   └──────────┬───────────┘
+                                  │                          │
+                                  ▼                          ▼
+                        ┌─────────────────────┐   ┌──────────────────────┐
+                        │ FIX:                │   │ FIX:                 │
+                        │ 1. Add examples to  │   │ 1. Adjust hyperparams│
+                        │    gold_examples    │   │    in train.py:      │
+                        │ 2. Run data pipeline│   │    - learning_rate   │
+                        │ 3. Goto US-008      │   │    - epochs          │
+                        └─────────────────────┘   │    - batch_size      │
+                                                  │ 2. Goto US-009       │
+                                                  └──────────────────────┘
+```
+
+### Data Issue Indicators
+- Model outputs bare field values (e.g., `bibstem:ApJ` instead of `bibstem:"ApJ"`)
+- Model hallucinate initials (e.g., `author:"kelbert, M"`)
+- Missing operator quoting (e.g., `citations(abs:cosmology)`)
+- Invalid field enum values (e.g., `doctype:journal`)
+
+### Model Issue Indicators
+- Training loss doesn't decrease
+- Token accuracy plateaus below 85%
+- Model repeats tokens (e.g., `abs:abs:abs:abs:...`)
+- All outputs look similar regardless of input
+
+### Ralph Loop Reference
+See `progress.txt` for full iteration history and metrics.
+
 ## References
 
 - `README.md` - Commands, project structure, setup
