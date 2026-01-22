@@ -128,14 +128,10 @@ def process_query(nl_text: str) -> PipelineResult:
     debug_info = DebugInfo()
 
     # Stage 1: NER Extraction
-    # TODO: Implement in US-002 (ner.py)
+    from .ner import extract_intent
+
     ner_start = time.perf_counter()
-    intent = IntentSpec(raw_user_text=nl_text)
-
-    # Placeholder: use entire text as topic
-    # Real implementation in ner.py will do proper extraction
-    intent.free_text_terms = [nl_text]  # Fallback: use entire text as topic
-
+    intent = extract_intent(nl_text)
     debug_info.ner_time_ms = (time.perf_counter() - ner_start) * 1000
     debug_info.raw_extracted = intent.to_dict()
 
