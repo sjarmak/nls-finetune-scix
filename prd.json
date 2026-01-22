@@ -282,7 +282,7 @@
         "Update Ralph loop documentation with lessons learned"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Iteration loop: identify failure → fix root cause → retrain → redeploy → retest. Repeat until all pass."
     }
   ]
