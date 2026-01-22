@@ -143,3 +143,44 @@ Thread: https://ampcode.com/threads/T-019be38b-459d-7747-b213-ec86be101471
 - **Singleton with reset for testing**: Global index pattern with `reset_index()` enables test isolation
 
 ---
+
+## 2026-01-22 - US-004: Implement deterministic template assembler
+Thread: https://ampcode.com/threads/T-019be38e-d572-7067-b3aa-69ad38bf950b
+
+### What was implemented
+- Created `assembler.py` with deterministic query assembly from IntentSpec:
+  - `assemble_query(intent, examples)` - main entry point
+  - `_build_author_clause()` - formats authors as `author:"Last, F"`
+  - `_build_abs_clause()` - handles topics with proper quoting
+  - `_build_year_clause()` - creates `pubdate:[YYYY TO YYYY]` ranges
+  - `_build_object_clause()` - astronomical object formatting
+  - `_build_affiliation_clause()` - institution formatting
+  - `_build_enum_clause()` - enum-constrained fields (doctype, property, etc.)
+  - `_wrap_with_operator()` - wraps query with citations/references/etc.
+  - `_validate_enum_values()` - validates against FIELD_ENUMS
+  - `validate_query_syntax()` - checks for malformed patterns
+- Integrated assembler into pipeline.py Stage 3
+- Added 73 unit tests covering:
+  - Quoting logic (single-word vs multi-word)
+  - Enum validation (valid/invalid values)
+  - Individual clause building
+  - Operator wrapping
+  - Full assembly with complex intents
+  - Syntax validation
+  - Fuzz tests for malformed operator prevention
+
+### Files changed
+- packages/finetune/src/finetune/domains/scix/assembler.py (new - 320 lines)
+- packages/finetune/src/finetune/domains/scix/pipeline.py (modified - integrated assembler)
+- packages/finetune/src/finetune/domains/scix/retrieval.py (reformatted by linter)
+- tests/test_assembler.py (new - 73 tests)
+- prd.json (updated US-004 passes: true)
+
+### Learnings for future iterations
+- **Quote all author names**: Always use `author:"Name"` syntax since names often contain commas
+- **Enum case canonicalization**: FIELD_ENUMS uses canonical casing, need to match against lowercase and return canonical
+- **Fuzz testing critical**: Random insertion of operator words ("citations", "references") must never produce malformed concatenations
+- **Validation fallback**: If >50% of constraints are dropped, fall back to simpler query
+- **constrain_query_output() as safety net**: Run existing constraint filter as final step
+
+---
