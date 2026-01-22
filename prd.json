@@ -189,7 +189,7 @@
         "Run: mise run test:e2e - all pass"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "These tests catch the original malformed operator bug. Run after every deploy."
     },
     {

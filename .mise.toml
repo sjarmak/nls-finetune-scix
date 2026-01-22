@@ -110,6 +110,17 @@ echo "Running web lint..."
 description = "Run API tests only"
 run = "cd packages/api && uv run pytest"
 
+[tasks."test:e2e"]
+description = "Run E2E tests (requires nectar dev server on localhost:8000)"
+run = """
+#!/usr/bin/env bash
+set -e
+echo "Running Playwright E2E tests..."
+echo "Prerequisites: nectar dev server must be running on localhost:8000"
+echo ""
+cd ~/ads-dev/nectar && pnpm test:e2e tests/nl-search-operators.spec.ts
+"""
+
 # ===========================================
 # DATASET MANAGEMENT
 # ===========================================

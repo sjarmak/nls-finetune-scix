@@ -336,3 +336,38 @@ Thread: https://ampcode.com/threads/T-019be39d-72b6-72ff-9f55-b23400d24e77
 2026-01-22 02:55 EST
 
 ---
+
+## 2026-01-22 - US-008: Playwright UI tests for operator queries
+Thread: https://ampcode.com/threads/T-019be3a3-85b9-765e-8519-f4608a111def
+
+### What was implemented
+- Created `~/ads-dev/nectar/e2e/tests/nl-search-operators.spec.ts` with 12 E2E tests:
+  - Test 1: "refereed open access papers about JWST since 2022" - property/year validation
+  - Test 2: "papers citing Hubble deep field paper" - citations() operator syntax
+  - Test 3: "references of the Planck 2018 cosmology paper" - references() operator syntax
+  - Test 4: "trending papers on exoplanets" - trending() operator syntax
+  - Test 5: "papers about references in stellar spectra" - NO operator (references is topic)
+  - 4 edge case tests: citing/reference/useful/similar as topics NOT operators
+  - 3 regression tests: known failure patterns that caused the refactor
+
+- Implemented helper functions:
+  - `containsMalformedPattern()` - checks 9 known malformed patterns
+  - `hasBalancedParentheses()` - verifies parentheses balance
+  - `getGeneratedQuery()` - extracts query from UI suggestion
+
+- Added `mise run test:e2e` task in `.mise.toml` for running E2E tests
+
+### Files changed
+- ~/ads-dev/nectar/e2e/tests/nl-search-operators.spec.ts (new - 320 lines)
+- .mise.toml (modified - added test:e2e task)
+- prd.json (updated US-008 passes: true)
+
+### Learnings for future iterations
+- **Live tests vs mocked tests**: E2E tests should NOT mock API to verify real pipeline behavior
+- **Malformed pattern regex**: Use `/citationsabs:/i` patterns to catch concatenation bugs
+- **Parentheses balance check**: Simple counter algorithm works for ADS query validation
+- **Feature flag via cookie/URL**: Use `NEXT_PUBLIC_NL_SEARCH=enabled` query param for testing
+- **Skip gracefully**: Use `test.skip()` when feature flag not enabled to avoid false failures
+- **Test data-testid**: Existing nl-search tests use data-testid attributes for element selection
+
+---
