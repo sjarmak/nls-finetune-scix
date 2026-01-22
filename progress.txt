@@ -161,3 +161,27 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - Doctype-specific topics improve relevance (e.g., circulars -> transients, supernovae, GRBs)
   - The generator pattern is now well-established: config dict + simple/topic/combined templates
 ---
+
+## 2026-01-22 - US-008: Generate bibgroup training examples for all telescopes
+- **Implemented**: Training data generation for bibgroup (telescope/survey) queries
+- **Files created**:
+  - `scripts/generate_bibgroup_examples.py` - Generates bibgroup-filtered training examples
+  - `data/datasets/generated/bibgroup_examples.json` - 328 unique examples
+- **Key details**:
+  - All 55 bibgroups covered with 5-6 examples each
+  - Uses bibgroup_synonyms.json for telescope name variations (Hubble->HST, Webb->JWST, etc.)
+  - Telescope-specific topics for better relevance (e.g., HST: Cepheid variables, deep field; LIGO: gravitational waves)
+  - Combined queries: bibgroup + refereed, bibgroup + topic, bibgroup + citations operator
+  - Proper quoting for bibgroup codes with special characters (`"NASA PubSpace"`, `"ESO/Telescopes"`)
+- **Example queries generated**:
+  - "HST papers" -> `bibgroup:HST`
+  - "Hubble Space Telescope observations" -> `bibgroup:HST`
+  - "refereed JWST papers" -> `bibgroup:JWST property:refereed`
+  - "papers citing ALMA observations" -> `citations(bibgroup:ALMA)`
+  - "NASA Public Access data" -> `bibgroup:"NASA PubSpace"`
+- **Learnings for future iterations**:
+  - Bibgroup codes with spaces or slashes need quoting in ADS query syntax
+  - Telescope-specific topic lists significantly improve relevance over generic topics
+  - The synonyms file reverse_lookup enables future NL->code mapping in NER
+  - Coverage increased from 5/53 bibgroups (9.4%) to all 55 bibgroups (100%)
+---
