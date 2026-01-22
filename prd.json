@@ -102,8 +102,8 @@
         "Run: mise run lint - passes"
       ],
       "priority": 6,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Completed 2026-01-22: Created generate_property_examples.py generating 140 unique examples across 17 property values (7-15 examples each). Includes negation patterns for notrefereed and nonarticle."
     },
     {
       "id": "US-007",

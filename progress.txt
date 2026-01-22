@@ -120,3 +120,27 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - Use deduplication on natural_language field since random generation can create duplicates
   - Template-based generation with separate topic/date/combined categories works well
 ---
+
+## 2026-01-22 - US-006: Generate property training examples for underrepresented values
+- **Implemented**: Training data generation for property-based queries
+- **Files created**:
+  - `scripts/generate_property_examples.py` - Generates property-filtered training examples
+  - `data/datasets/generated/property_examples.json` - 140 unique examples
+- **Key details**:
+  - 17 properties covered (16 underrepresented + software for more coverage)
+  - 7-15 examples per property (notrefereed: 15, nonarticle: 13, others: 7)
+  - NL variations: "preprints" -> property:eprint, "arxiv papers" -> property:eprint
+  - Negation patterns: "papers that are not refereed" -> property:notrefereed
+  - Combined queries: property + topic, property + date, property + author
+  - Prevented conflicting combinations (e.g., notrefereed with refereed filter)
+- **Properties with examples**:
+  - notrefereed, eprint, catalog, article, nonarticle, inproceedings
+  - associated, toc, presentation, esource, inspire, library_catalog
+  - ads_openaccess, author_openaccess, eprint_openaccess, pub_openaccess
+  - ocr_abstract, software
+- **Learnings for future iterations**:
+  - Some properties semantically conflict (notrefereed + refereed) - filter templates by property
+  - Negation forms provide natural language diversity ("not refereed", "exclude peer-reviewed")
+  - Topic lists per property improve relevance (e.g., INSPIRE -> particle physics topics)
+  - Use case-insensitive deduplication to catch subtle duplicates
+---

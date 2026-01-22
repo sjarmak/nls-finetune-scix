@@ -1,0 +1,702 @@
+[
+  {
+    "natural_language": "get non-peer-reviewed papers",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "find non-refereed papers",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers that aren't peer-reviewed",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "unrefereed papers related to exoplanets",
+    "ads_query": "property:notrefereed abs:\"exoplanets\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers that aren't peer-reviewed on dark matter",
+    "ads_query": "property:notrefereed abs:\"dark matter\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "non-refereed papers by Smith",
+    "ads_query": "property:notrefereed author:\"Smith\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers without peer review from 2018",
+    "ads_query": "property:notrefereed year:2018",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers that are not refereed",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers that are not refereed about cosmology",
+    "ads_query": "property:notrefereed abs:\"cosmology\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers not peer reviewed",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers not peer reviewed about cosmology",
+    "ads_query": "property:notrefereed abs:\"cosmology\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me exclude peer-reviewed papers",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "exclude peer-reviewed papers about dark matter",
+    "ads_query": "property:notrefereed abs:\"dark matter\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "find only non-refereed",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "only non-refereed about cosmology",
+    "ads_query": "property:notrefereed abs:\"cosmology\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for preprints",
+    "ads_query": "property:eprint",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for arxiv papers",
+    "ads_query": "property:eprint",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me preprint papers",
+    "ads_query": "property:eprint",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers on arxiv on gravitational waves",
+    "ads_query": "property:eprint abs:\"gravitational waves\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "pre-publication papers about gravitational waves",
+    "ads_query": "property:eprint abs:\"gravitational waves\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers on arxiv published in 2025",
+    "ads_query": "property:eprint year:2025",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent arxiv papers on quasars",
+    "ads_query": "property:eprint abs:\"quasars\" pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "I want data catalogs",
+    "ads_query": "property:catalog",
+    "category": "property"
+  },
+  {
+    "natural_language": "get catalog papers",
+    "ads_query": "property:catalog",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for astronomical catalogs",
+    "ads_query": "property:catalog",
+    "category": "property"
+  },
+  {
+    "natural_language": "galaxies catalog data products",
+    "ads_query": "property:catalog abs:\"galaxies\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "catalog papers related to stellar populations",
+    "ads_query": "property:catalog abs:\"stellar populations\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent survey catalogs",
+    "ads_query": "property:catalog pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent survey catalogs on transients",
+    "ads_query": "property:catalog abs:\"transients\" pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for regular articles",
+    "ads_query": "property:article",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for journal articles only",
+    "ads_query": "property:article",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me standard articles",
+    "ads_query": "property:article",
+    "category": "property"
+  },
+  {
+    "natural_language": "full journal articles related to spectroscopy",
+    "ads_query": "property:article abs:\"spectroscopy\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "standard articles discussing photometry",
+    "ads_query": "property:article abs:\"photometry\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "traditional articles from 2021",
+    "ads_query": "property:article year:2021",
+    "category": "property"
+  },
+  {
+    "natural_language": "regular articles about photometry from 2023",
+    "ads_query": "property:article abs:\"photometry\" year:2023",
+    "category": "property"
+  },
+  {
+    "natural_language": "non-article papers",
+    "ads_query": "property:nonarticle",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for non-articles",
+    "ads_query": "property:nonarticle",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers that are not articles",
+    "ads_query": "property:nonarticle",
+    "category": "property"
+  },
+  {
+    "natural_language": "posters and abstracts on star formation",
+    "ads_query": "property:nonarticle abs:\"star formation\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "abstracts and proceedings related to instrumentation",
+    "ads_query": "property:nonarticle abs:\"instrumentation\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "abstracts and proceedings by Jones",
+    "ads_query": "property:nonarticle author:\"Jones\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent conference abstracts",
+    "ads_query": "property:nonarticle pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me exclude regular articles",
+    "ads_query": "property:nonarticle",
+    "category": "property"
+  },
+  {
+    "natural_language": "exclude regular articles about star formation",
+    "ads_query": "property:nonarticle abs:\"star formation\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "find not regular articles",
+    "ads_query": "property:nonarticle",
+    "category": "property"
+  },
+  {
+    "natural_language": "not regular articles about instrumentation",
+    "ads_query": "property:nonarticle abs:\"instrumentation\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "only non-articles",
+    "ads_query": "property:nonarticle",
+    "category": "property"
+  },
+  {
+    "natural_language": "only non-articles about AGN",
+    "ads_query": "property:nonarticle abs:\"AGN\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "I want conference papers",
+    "ads_query": "property:inproceedings",
+    "category": "property"
+  },
+  {
+    "natural_language": "find conference proceedings",
+    "ads_query": "property:inproceedings",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me proceedings papers",
+    "ads_query": "property:inproceedings",
+    "category": "property"
+  },
+  {
+    "natural_language": "proceedings papers related to detector technology",
+    "ads_query": "property:inproceedings abs:\"detector technology\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "conference proceedings discussing detector technology",
+    "ads_query": "property:inproceedings abs:\"detector technology\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent symposium papers on telescope design",
+    "ads_query": "property:inproceedings abs:\"telescope design\" pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed conference publications",
+    "ads_query": "property:inproceedings property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with associated articles",
+    "ads_query": "property:associated",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me articles with companion papers",
+    "ads_query": "property:associated",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers having associated content",
+    "ads_query": "property:associated",
+    "category": "property"
+  },
+  {
+    "natural_language": "articles with associated publications about multi-wavelength studies",
+    "ads_query": "property:associated abs:\"multi-wavelength studies\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers with linked articles about surveys",
+    "ads_query": "property:associated abs:\"surveys\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed articles with associated publications",
+    "ads_query": "property:associated property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers having associated content from 2018",
+    "ads_query": "property:associated year:2018",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for papers with table of contents",
+    "ads_query": "property:toc",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for articles with toc",
+    "ads_query": "property:toc",
+    "category": "property"
+  },
+  {
+    "natural_language": "publications with table of contents",
+    "ads_query": "property:toc",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with table of contents about textbooks",
+    "ads_query": "property:toc abs:\"textbooks\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "reviews publications with table of contents",
+    "ads_query": "property:toc abs:\"reviews\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "refereed articles with toc",
+    "ads_query": "property:toc property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with table of contents by Williams",
+    "ads_query": "property:toc author:\"Williams\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "get papers with presentations",
+    "ads_query": "property:presentation",
+    "category": "property"
+  },
+  {
+    "natural_language": "articles with media presentations",
+    "ads_query": "property:presentation",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for publications with video presentations",
+    "ads_query": "property:presentation",
+    "category": "property"
+  },
+  {
+    "natural_language": "publications with video presentations on survey results",
+    "ads_query": "property:presentation abs:\"survey results\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "data analysis methods articles with recorded talks",
+    "ads_query": "property:presentation abs:\"data analysis methods\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent articles with recorded talks",
+    "ads_query": "property:presentation pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent papers with associated presentations on survey results",
+    "ads_query": "property:presentation abs:\"survey results\" pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for papers with electronic sources",
+    "ads_query": "property:esource",
+    "category": "property"
+  },
+  {
+    "natural_language": "articles with online access",
+    "ads_query": "property:esource",
+    "category": "property"
+  },
+  {
+    "natural_language": "find publications with electronic versions",
+    "ads_query": "property:esource",
+    "category": "property"
+  },
+  {
+    "natural_language": "articles with online access on recent research",
+    "ads_query": "property:esource abs:\"recent research\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers with electronic sources about current studies",
+    "ads_query": "property:esource abs:\"current studies\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent articles with e-sources",
+    "ads_query": "property:esource pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "refereed articles with online access",
+    "ads_query": "property:esource property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers in INSPIRE",
+    "ads_query": "property:inspire",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for INSPIRE database papers",
+    "ads_query": "property:inspire",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me articles indexed in INSPIRE",
+    "ads_query": "property:inspire",
+    "category": "property"
+  },
+  {
+    "natural_language": "find INSPIRE-indexed articles about collider physics",
+    "ads_query": "property:inspire abs:\"collider physics\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers from INSPIRE on high energy physics",
+    "ads_query": "property:inspire abs:\"high energy physics\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "INSPIRE database papers by Miller",
+    "ads_query": "property:inspire author:\"Miller\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed papers in INSPIRE",
+    "ads_query": "property:inspire property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers in library catalogs",
+    "ads_query": "property:library_catalog",
+    "category": "property"
+  },
+  {
+    "natural_language": "library catalog entries",
+    "ads_query": "property:library_catalog",
+    "category": "property"
+  },
+  {
+    "natural_language": "I want cataloged library papers",
+    "ads_query": "property:library_catalog",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers in library catalogs related to foundational research",
+    "ads_query": "property:library_catalog abs:\"foundational research\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "articles in library systems related to historical astronomy",
+    "ads_query": "property:library_catalog abs:\"historical astronomy\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "refereed papers indexed in library catalogs",
+    "ads_query": "property:library_catalog property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent library catalog entries",
+    "ads_query": "property:library_catalog pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me papers with ADS open access",
+    "ads_query": "property:ads_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "ADS open access papers",
+    "ads_query": "property:ads_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me open access from ADS",
+    "ads_query": "property:ads_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers freely available through ADS about solar physics",
+    "ads_query": "property:ads_openaccess abs:\"solar physics\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "stellar astrophysics papers with ADS open access",
+    "ads_query": "property:ads_openaccess abs:\"stellar astrophysics\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed papers with ADS open access",
+    "ads_query": "property:ads_openaccess property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed ADS open access papers",
+    "ads_query": "property:ads_openaccess property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "author-submitted open access papers",
+    "ads_query": "property:author_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me papers with author-provided open access",
+    "ads_query": "property:author_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "I want author open access versions",
+    "ads_query": "property:author_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me author-submitted open access papers on theoretical models",
+    "ads_query": "property:author_openaccess abs:\"theoretical models\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me author-submitted open access papers on simulations",
+    "ads_query": "property:author_openaccess abs:\"simulations\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with author-hosted PDFs published in 2025",
+    "ads_query": "property:author_openaccess year:2025",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with author-provided open access from 2018",
+    "ads_query": "property:author_openaccess year:2018",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for papers with arxiv open access",
+    "ads_query": "property:eprint_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "get preprint open access papers",
+    "ads_query": "property:eprint_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for open access from preprint servers",
+    "ads_query": "property:eprint_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "open access preprints about extragalactic astronomy",
+    "ads_query": "property:eprint_openaccess abs:\"extragalactic astronomy\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with arxiv open access about dark energy",
+    "ads_query": "property:eprint_openaccess abs:\"dark energy\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "eprint open access versions by Williams",
+    "ads_query": "property:eprint_openaccess author:\"Williams\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed preprint open access papers",
+    "ads_query": "property:eprint_openaccess property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "get publisher open access papers",
+    "ads_query": "property:pub_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "I want papers with publisher open access",
+    "ads_query": "property:pub_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me open access from publishers",
+    "ads_query": "property:pub_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me publisher open access papers on high-impact journals",
+    "ads_query": "property:pub_openaccess abs:\"high-impact journals\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers freely available from publisher on high-impact journals",
+    "ads_query": "property:pub_openaccess abs:\"high-impact journals\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "refereed papers freely available from publisher",
+    "ads_query": "property:pub_openaccess property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with publisher open access published in 2021",
+    "ads_query": "property:pub_openaccess year:2021",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for papers with OCR abstracts",
+    "ads_query": "property:ocr_abstract",
+    "category": "property"
+  },
+  {
+    "natural_language": "articles with scanned abstracts",
+    "ads_query": "property:ocr_abstract",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me papers with digitized abstracts",
+    "ads_query": "property:ocr_abstract",
+    "category": "property"
+  },
+  {
+    "natural_language": "scanned paper abstracts related to early discoveries",
+    "ads_query": "property:ocr_abstract abs:\"early discoveries\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me papers with digitized abstracts on historical observations",
+    "ads_query": "property:ocr_abstract abs:\"historical observations\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "refereed OCR-processed abstracts",
+    "ads_query": "property:ocr_abstract property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed papers with optical character recognition abstracts",
+    "ads_query": "property:ocr_abstract property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me software papers",
+    "ads_query": "property:software",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for papers about software",
+    "ads_query": "property:software",
+    "category": "property"
+  },
+  {
+    "natural_language": "find software publications",
+    "ads_query": "property:software",
+    "category": "property"
+  },
+  {
+    "natural_language": "software publications on analysis tools",
+    "ads_query": "property:software abs:\"analysis tools\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "code papers on visualization software",
+    "ads_query": "property:software abs:\"visualization software\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers describing software published in 2018",
+    "ads_query": "property:software year:2018",
+    "category": "property"
+  },
+  {
+    "natural_language": "software documentation papers published in 2022",
+    "ads_query": "property:software year:2022",
+    "category": "property"
+  }
+]
