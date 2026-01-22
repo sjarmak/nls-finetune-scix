@@ -49,8 +49,8 @@
         "Run: mise run test - all tests pass"
       ],
       "priority": 3,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Completed 2026-01-22: Added earthscience to DATABASES, created bibgroup_synonyms.json with 53 mappings, added SETI and ESO bibgroups, added tests."
     },
     {
       "id": "US-004",

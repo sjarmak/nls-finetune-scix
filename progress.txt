@@ -7,10 +7,15 @@ Started: Thu Jan 22 17:48:07 EST 2026
 - `packages/finetune/src/finetune/domains/scix/field_constraints.py` contains all enum field validations
 - DOCTYPES: 22 valid values (article, eprint, inproceedings, etc.)
 - PROPERTIES: 21 valid values (refereed, openaccess, data, eprint, etc.)
-- DATABASES: 3 valid values (astronomy, physics, general) - note: earthscience needs to be added
-- BIBGROUPS: 48 valid values (HST, JWST, ALMA, etc.)
+- DATABASES: 4 valid values (astronomy, physics, general, earthscience)
+- BIBGROUPS: 55 valid values (HST, JWST, ALMA, SETI, ESO, etc.)
 - ESOURCES: 8 valid values (PUB_PDF, EPRINT_PDF, etc.)
 - DATA_SOURCES: 24 valid values (MAST, NED, SIMBAD, etc.)
+
+### Bibgroup Synonyms
+- `data/model/bibgroup_synonyms.json` - Telescope/survey common name to bibgroup code mappings
+- 53 bibgroup entries with synonyms (Hubble->HST, Webb->JWST, Sloan->SDSS, etc.)
+- reverse_lookup section for easy NL->code conversion
 
 ### Data Model Files
 - `data/model/ads_field_inventory.json` - Complete field inventory with 57 fields, 8 operators, 9 field groups
@@ -55,4 +60,21 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - gold_examples.json uses categories like 'first_author', 'author', 'filters', 'content', etc.
   - The inventory can have values not yet in field_constraints.py (e.g., earthscience)
   - Coverage audit should run after each batch of example generation to track progress
+---
+
+## 2026-01-22 - US-003: Add earthscience to DATABASES and update bibgroup synonyms
+- **Implemented**: Database and bibgroup constraint updates
+- **Files created/modified**:
+  - `packages/finetune/src/finetune/domains/scix/field_constraints.py` - Added earthscience to DATABASES, SETI and ESO to BIBGROUPS
+  - `data/model/bibgroup_synonyms.json` - Created with 53 telescope/survey mappings
+  - `packages/finetune/tests/test_validate.py` - Added tests for earthscience, SETI, ESO
+  - `tests/test_constraint_edge_cases.py` - Added earthscience test case
+- **Key changes**:
+  - DATABASES now has 4 values: astronomy, physics, general, earthscience
+  - BIBGROUPS now has 55 values (added SETI, ESO)
+  - bibgroup_synonyms.json has reverse_lookup for common names
+- **Learnings for future iterations**:
+  - Coverage audit identified unknown values like SETI and ESO that needed to be added
+  - Bibgroup synonyms file enables future NL->code mapping in NER
+  - Tests should cover all new enum values to prevent regressions
 ---
