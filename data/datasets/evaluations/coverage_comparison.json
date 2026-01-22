@@ -1,0 +1,226 @@
+{
+  "generated_at": "2026-01-22T18:53:26.229436",
+  "summary": {
+    "total_examples": {
+      "before": 4002,
+      "after": 4789,
+      "change": 787,
+      "change_percent": 19.7
+    }
+  },
+  "acceptance_criteria": {
+    "all_databases_have_examples": {
+      "requirement": "All 4 databases have examples (earthscience was missing)",
+      "before": "3/3 in constraints (earthscience not in constraints)",
+      "after": "4/4 databases",
+      "passed": true
+    },
+    "property_coverage_above_90": {
+      "requirement": ">90% of properties have examples (was 23.8%)",
+      "before": "23.8%",
+      "after": "100.0%",
+      "passed": true
+    },
+    "doctype_coverage_above_90": {
+      "requirement": ">90% of doctypes have examples (was 40.9%)",
+      "before": "40.9%",
+      "after": "95.5%",
+      "passed": true
+    },
+    "all_operators_above_30_examples": {
+      "requirement": "All main operators (7) have >30 examples each (pos is special, excluded)",
+      "details": {
+        "citations": {
+          "before": 40,
+          "after": 85,
+          "change": 45,
+          "passed": true,
+          "note": "main operator"
+        },
+        "references": {
+          "before": 20,
+          "after": 37,
+          "change": 17,
+          "passed": true,
+          "note": "main operator"
+        },
+        "trending": {
+          "before": 30,
+          "after": 49,
+          "change": 19,
+          "passed": true,
+          "note": "main operator"
+        },
+        "similar": {
+          "before": 22,
+          "after": 44,
+          "change": 22,
+          "passed": true,
+          "note": "main operator"
+        },
+        "useful": {
+          "before": 19,
+          "after": 39,
+          "change": 20,
+          "passed": true,
+          "note": "main operator"
+        },
+        "reviews": {
+          "before": 22,
+          "after": 44,
+          "change": 22,
+          "passed": true,
+          "note": "main operator"
+        },
+        "topn": {
+          "before": 17,
+          "after": 36,
+          "change": 19,
+          "passed": true,
+          "note": "main operator"
+        },
+        "pos": {
+          "before": 12,
+          "after": 12,
+          "change": 0,
+          "passed": true,
+          "note": "special operator (pos) - excluded from threshold"
+        }
+      },
+      "passed": true
+    }
+  },
+  "enum_coverage_comparison": {
+    "doctype": {
+      "before": {
+        "values_represented": 9,
+        "total_values": 22,
+        "coverage_percent": 40.9
+      },
+      "after": {
+        "values_represented": 21,
+        "total_values": 22,
+        "coverage_percent": 95.5
+      },
+      "improvement": {
+        "values_added": 12,
+        "coverage_increase": 54.6
+      }
+    },
+    "property": {
+      "before": {
+        "values_represented": 5,
+        "total_values": 21,
+        "coverage_percent": 23.8
+      },
+      "after": {
+        "values_represented": 21,
+        "total_values": 21,
+        "coverage_percent": 100.0
+      },
+      "improvement": {
+        "values_added": 16,
+        "coverage_increase": 76.2
+      }
+    },
+    "database": {
+      "before": {
+        "values_represented": 3,
+        "total_values": 3,
+        "coverage_percent": 100.0
+      },
+      "after": {
+        "values_represented": 4,
+        "total_values": 4,
+        "coverage_percent": 100.0
+      },
+      "improvement": {
+        "values_added": 1,
+        "coverage_increase": 0.0
+      }
+    },
+    "bibgroup": {
+      "before": {
+        "values_represented": 5,
+        "total_values": 53,
+        "coverage_percent": 9.4
+      },
+      "after": {
+        "values_represented": 55,
+        "total_values": 55,
+        "coverage_percent": 100.0
+      },
+      "improvement": {
+        "values_added": 50,
+        "coverage_increase": 90.6
+      }
+    },
+    "esources": {
+      "before": {
+        "values_represented": 0,
+        "total_values": 8,
+        "coverage_percent": 0.0
+      },
+      "after": {
+        "values_represented": 0,
+        "total_values": 8,
+        "coverage_percent": 0.0
+      },
+      "improvement": {
+        "values_added": 0,
+        "coverage_increase": 0.0
+      }
+    }
+  },
+  "operator_coverage_comparison": {
+    "citations": {
+      "before": 40,
+      "after": 85,
+      "change": 45,
+      "change_percent": 112.5
+    },
+    "references": {
+      "before": 20,
+      "after": 37,
+      "change": 17,
+      "change_percent": 85.0
+    },
+    "trending": {
+      "before": 30,
+      "after": 49,
+      "change": 19,
+      "change_percent": 63.3
+    },
+    "similar": {
+      "before": 22,
+      "after": 44,
+      "change": 22,
+      "change_percent": 100.0
+    },
+    "useful": {
+      "before": 19,
+      "after": 39,
+      "change": 20,
+      "change_percent": 105.3
+    },
+    "reviews": {
+      "before": 22,
+      "after": 44,
+      "change": 22,
+      "change_percent": 100.0
+    },
+    "topn": {
+      "before": 17,
+      "after": 36,
+      "change": 19,
+      "change_percent": 111.8
+    },
+    "pos": {
+      "before": 12,
+      "after": 12,
+      "change": 0,
+      "change_percent": 0.0
+    }
+  },
+  "overall_result": "PASS"
+}

@@ -1,6 +1,6 @@
 {
   "summary": {
-    "total_examples": 4002,
+    "total_examples": 4789,
     "total_fields_in_inventory": 57,
     "fields_with_examples": 30,
     "fields_with_zero_examples": 27,
@@ -14,8 +14,12 @@
       "unfielded": 550,
       "content": 513,
       "publication": 378,
-      "operator": 160,
+      "bibgroup": 328,
+      "operator": 300,
+      "property": 143,
       "compound": 107,
+      "doctype": 91,
+      "collection": 88,
       "affiliation": 55,
       "conversational": 50,
       "metrics": 49,
@@ -28,19 +32,18 @@
       "identifier": 9,
       "citations": 9,
       "identifiers": 7,
-      "property": 3,
       "data": 3
     },
-    "doctype_coverage": 40.9,
-    "property_coverage": 23.8,
+    "doctype_coverage": 95.5,
+    "property_coverage": 100.0,
     "database_coverage": 100.0,
-    "bibgroup_coverage": 9.4,
+    "bibgroup_coverage": 100.0,
     "esources_coverage": 0.0
   },
   "field_coverage": {
     "abs": {
-      "example_count": 1939,
-      "unique_values_used": 655,
+      "example_count": 2320,
+      "unique_values_used": 822,
       "sample_values": [
         "Probing Inhomogeneous Cuprate Superconductivity by Terahertz Josephson Echo Spectroscopy",
         "brown dwarfs",
@@ -127,8 +130,8 @@
       "field_group": "classification"
     },
     "author": {
-      "example_count": 1587,
-      "unique_values_used": 1215,
+      "example_count": 1626,
+      "unique_values_used": 1233,
       "sample_values": [
         "Finkbeiner, D. P.",
         "Babyk\" \"Buote",
@@ -156,8 +159,8 @@
       "field_group": "metric"
     },
     "bibcode": {
-      "example_count": 24,
-      "unique_values_used": 12,
+      "example_count": 30,
+      "unique_values_used": 13,
       "sample_values": [
         "2020Natur.581..391G",
         "2019ApJ...872L...2M",
@@ -174,8 +177,8 @@
       "field_group": "identifier"
     },
     "bibgroup": {
-      "example_count": 126,
-      "unique_values_used": 7,
+      "example_count": 454,
+      "unique_values_used": 55,
       "sample_values": [
         "SETI",
         "HST",
@@ -183,7 +186,10 @@
         "ESO",
         "Gemini",
         "Spitzer",
-        "Keck"
+        "Keck",
+        "JWST",
+        "Chandra",
+        "XMM"
       ],
       "field_type": "enum",
       "field_group": "enum"
@@ -280,20 +286,21 @@
       "field_group": "enum"
     },
     "database": {
-      "example_count": 91,
-      "unique_values_used": 4,
+      "example_count": 179,
+      "unique_values_used": 5,
       "sample_values": [
         "astronomy",
         "physics",
         "astronomy,",
-        "general"
+        "general",
+        "earthscience"
       ],
       "field_type": "enum",
       "field_group": "enum"
     },
     "doctype": {
-      "example_count": 114,
-      "unique_values_used": 9,
+      "example_count": 205,
+      "unique_values_used": 21,
       "sample_values": [
         "article",
         "inproceedings",
@@ -303,7 +310,8 @@
         "software",
         "proceedings",
         "proposal",
-        "techreport"
+        "techreport",
+        "abstract"
       ],
       "field_type": "enum",
       "field_group": "enum"
@@ -504,14 +512,19 @@
       "field_group": "special"
     },
     "property": {
-      "example_count": 452,
-      "unique_values_used": 5,
+      "example_count": 643,
+      "unique_values_used": 21,
       "sample_values": [
         "openaccess",
         "refereed",
         "data",
         "software",
-        "notrefereed"
+        "notrefereed",
+        "eprint",
+        "catalog",
+        "article",
+        "nonarticle",
+        "inproceedings"
       ],
       "field_type": "enum",
       "field_group": "enum"
@@ -527,8 +540,8 @@
       "field_group": "publication"
     },
     "pubdate": {
-      "example_count": 220,
-      "unique_values_used": 95,
+      "example_count": 263,
+      "unique_values_used": 96,
       "sample_values": [
         "[2014-01 TO 2014-12]",
         "2016",
@@ -639,8 +652,8 @@
       "field_group": "publication"
     },
     "year": {
-      "example_count": 731,
-      "unique_values_used": 123,
+      "example_count": 800,
+      "unique_values_used": 126,
       "sample_values": [
         "2003",
         "2022",
@@ -659,77 +672,92 @@
   },
   "operator_coverage": {
     "citations": {
-      "example_count": 40,
+      "example_count": 85,
       "trigger_phrases": {
-        "papers citing": 23,
-        "citations to": 1,
-        "papers that cite": 4,
-        "papers cite": 1,
-        "citations of": 2
+        "papers citing": 39,
+        "citations to": 5,
+        "papers that cite": 5,
+        "papers cite": 2,
+        "citations of": 15,
+        "paper cite": 1,
+        "cited by": 2
       },
-      "unique_trigger_variations": 5
+      "unique_trigger_variations": 7
     },
     "references": {
-      "example_count": 20,
+      "example_count": 37,
       "trigger_phrases": {
         "references in": 3,
-        "bibliography": 4,
-        "references from": 3,
-        "references of": 1,
-        "what does 2003aj....125..525j cite": 1
+        "bibliography": 5,
+        "references from": 5,
+        "references of": 4,
+        "what does 2003aj....125..525j cite": 1,
+        "cited in": 1,
+        "sources cited": 1,
+        "what does hubble deep field paper cite": 1
       },
-      "unique_trigger_variations": 5
+      "unique_trigger_variations": 8
     },
     "trending": {
-      "example_count": 30,
+      "example_count": 49,
       "trigger_phrases": {
-        "hot papers": 2,
-        "trending": 15,
-        "popular": 8,
-        "what's hot": 3
+        "hot papers": 3,
+        "trending": 21,
+        "popular": 15,
+        "what's hot": 4,
+        "hot topics": 2
       },
-      "unique_trigger_variations": 4
+      "unique_trigger_variations": 5
     },
     "similar": {
-      "example_count": 22,
+      "example_count": 44,
       "trigger_phrases": {
-        "similar to": 9,
-        "related to": 5,
-        "related papers": 1,
-        "like": 4,
-        "similar papers": 1
+        "similar to": 16,
+        "related to": 7,
+        "related papers": 2,
+        "like": 8,
+        "similar papers": 2,
+        "resembl": 2
       },
-      "unique_trigger_variations": 5
+      "unique_trigger_variations": 6
     },
     "useful": {
-      "example_count": 19,
+      "example_count": 39,
       "trigger_phrases": {
-        "useful": 9,
-        "helpful": 1,
-        "foundational": 2
-      },
-      "unique_trigger_variations": 3
-    },
-    "reviews": {
-      "example_count": 22,
-      "trigger_phrases": {
-        "review ": 2,
-        "comprehensive": 5,
-        "review papers": 5,
-        "review articles": 3
-      },
-      "unique_trigger_variations": 4
-    },
-    "topn": {
-      "example_count": 17,
-      "trigger_phrases": {
-        "top 20": 3,
-        "top 50": 2,
-        "most cited": 5,
-        "top 100": 2,
-        "top 10": 1
+        "useful": 11,
+        "helpful": 4,
+        "foundational": 5,
+        "essential": 2,
+        "important": 1
       },
       "unique_trigger_variations": 5
+    },
+    "reviews": {
+      "example_count": 44,
+      "trigger_phrases": {
+        "review ": 6,
+        "comprehensive": 7,
+        "review papers": 5,
+        "review articles": 5,
+        "survey": 8,
+        "overviews": 1,
+        "overview": 1
+      },
+      "unique_trigger_variations": 7
+    },
+    "topn": {
+      "example_count": 36,
+      "trigger_phrases": {
+        "top 20": 4,
+        "top 50": 2,
+        "most cited": 9,
+        "top 100": 3,
+        "top 10": 3,
+        "top 5": 1,
+        "highest cited": 1,
+        "best papers": 3
+      },
+      "unique_trigger_variations": 8
     },
     "pos": {
       "example_count": 12,
@@ -740,155 +768,154 @@
   "enum_coverage": {
     "doctype": {
       "total_valid_values": 22,
-      "values_represented": 9,
-      "coverage_percent": 40.9,
+      "values_represented": 21,
+      "coverage_percent": 95.5,
       "used_values": {
+        "article": 43,
+        "bookreview": 7,
         "inproceedings": 1,
-        "catalog": 12,
-        "proceedings": 9,
+        "proceedings": 16,
+        "obituary": 7,
         "phdthesis": 10,
+        "erratum": 7,
+        "talk": 7,
+        "newsletter": 7,
+        "inbook": 7,
+        "proposal": 9,
+        "techreport": 9,
+        "editorial": 7,
+        "circular": 7,
+        "pressrelease": 7,
+        "abstract": 7,
         "software": 12,
         "eprint": 9,
-        "article": 43,
-        "proposal": 9,
-        "techreport": 9
+        "catalog": 12,
+        "mastersthesis": 7,
+        "misc": 7
       },
       "unused_values": [
-        "abstract",
-        "book",
-        "bookreview",
-        "circular",
-        "editorial",
-        "erratum",
-        "inbook",
-        "mastersthesis",
-        "misc",
-        "newsletter",
-        "obituary",
-        "pressrelease",
-        "talk"
+        "book"
       ],
       "unknown_values": [],
       "inventory_vs_constraints_diff": null
     },
     "property": {
       "total_valid_values": 21,
-      "values_represented": 5,
-      "coverage_percent": 23.8,
+      "values_represented": 21,
+      "coverage_percent": 100.0,
       "used_values": {
-        "notrefereed": 4,
-        "refereed": 186,
+        "article": 7,
+        "inspire": 7,
+        "pub_openaccess": 7,
         "data": 125,
-        "software": 1,
-        "openaccess": 137
+        "esource": 7,
+        "notrefereed": 19,
+        "inproceedings": 7,
+        "library_catalog": 7,
+        "nonarticle": 13,
+        "ocr_abstract": 7,
+        "author_openaccess": 7,
+        "ads_openaccess": 7,
+        "presentation": 7,
+        "toc": 7,
+        "associated": 7,
+        "software": 8,
+        "eprint": 7,
+        "eprint_openaccess": 7,
+        "catalog": 7,
+        "openaccess": 137,
+        "refereed": 249
       },
-      "unused_values": [
-        "ads_openaccess",
-        "article",
-        "associated",
-        "author_openaccess",
-        "catalog",
-        "eprint",
-        "eprint_openaccess",
-        "esource",
-        "inproceedings",
-        "inspire",
-        "library_catalog",
-        "nonarticle",
-        "ocr_abstract",
-        "presentation",
-        "pub_openaccess",
-        "toc"
-      ],
+      "unused_values": [],
       "unknown_values": [],
       "inventory_vs_constraints_diff": null
     },
     "database": {
-      "total_valid_values": 3,
-      "values_represented": 3,
+      "total_valid_values": 4,
+      "values_represented": 4,
       "coverage_percent": 100.0,
       "used_values": {
-        "astronomy": 44,
-        "physics": 22,
-        "general": 21
+        "astronomy": 69,
+        "physics": 47,
+        "earthscience": 25,
+        "general": 34
       },
       "unused_values": [],
       "unknown_values": [
         "[unknown:astronomy,]"
       ],
-      "inventory_vs_constraints_diff": {
-        "in_inventory_not_constraints": [
-          "earthscience"
-        ],
-        "in_constraints_not_inventory": []
-      }
+      "inventory_vs_constraints_diff": null
     },
     "bibgroup": {
-      "total_valid_values": 53,
-      "values_represented": 5,
-      "coverage_percent": 9.4,
+      "total_valid_values": 55,
+      "values_represented": 55,
+      "coverage_percent": 100.0,
       "used_values": {
-        "Gemini": 18,
-        "Spitzer": 18,
-        "ALMA": 21,
-        "Keck": 18,
-        "HST": 21
+        "VLA": 6,
+        "Subaru": 6,
+        "Pan-STARRS": 6,
+        "LISA": 6,
+        "TESS": 6,
+        "MeerKAT": 6,
+        "Gaia": 6,
+        "WISE": 6,
+        "HST": 27,
+        "Hipparcos": 6,
+        "ESO/Telescopes": 6,
+        "GALEX": 6,
+        "NuSTAR": 6,
+        "ALMA": 27,
+        "SDO": 6,
+        "JCMT": 6,
+        "SKA": 6,
+        "STEREO": 6,
+        "Chandra": 6,
+        "Copernicus": 6,
+        "Swift": 6,
+        "JWST": 6,
+        "GBT": 6,
+        "Spitzer": 24,
+        "NEOWISE": 6,
+        "FUSE": 6,
+        "ESO": 23,
+        "NOIRLab": 6,
+        "K2": 6,
+        "EUVE": 6,
+        "KPNO": 6,
+        "SETI": 18,
+        "VLBA": 6,
+        "CTIO": 6,
+        "CfA": 6,
+        "NOAO": 6,
+        "2MASS": 6,
+        "IUE": 6,
+        "LOFAR": 6,
+        "XMM": 6,
+        "Kepler": 6,
+        "VLT": 6,
+        "APEX": 6,
+        "Fermi": 6,
+        "IRAS": 6,
+        "ARECIBO": 6,
+        "CFHT": 6,
+        "NASA PubSpace": 6,
+        "RXTE": 5,
+        "Gemini": 24,
+        "SDSS": 6,
+        "UKIRT": 6,
+        "LIGO": 6,
+        "Keck": 24,
+        "SOHO": 6
       },
-      "unused_values": [
-        "2MASS",
-        "APEX",
-        "ARECIBO",
-        "CFHT",
-        "CTIO",
-        "CfA",
-        "Chandra",
-        "Copernicus",
-        "ESO/Telescopes",
-        "EUVE",
-        "FUSE",
-        "Fermi",
-        "GALEX",
-        "GBT",
-        "Gaia",
-        "Hipparcos",
-        "IRAS",
-        "IUE",
-        "JCMT",
-        "JWST",
-        "K2",
-        "KPNO",
-        "Kepler",
-        "LIGO",
-        "LISA",
-        "LOFAR",
-        "MeerKAT",
-        "NASA PubSpace",
-        "NEOWISE",
-        "NOAO",
-        "NOIRLab",
-        "NuSTAR",
-        "Pan-STARRS",
-        "RXTE",
-        "SDO",
-        "SDSS",
-        "SKA",
-        "SOHO",
-        "STEREO",
-        "Subaru",
-        "Swift",
-        "TESS",
-        "UKIRT",
-        "VLA",
-        "VLBA",
-        "VLT",
-        "WISE",
-        "XMM"
-      ],
-      "unknown_values": [
-        "[unknown:SETI]",
-        "[unknown:ESO]"
-      ],
-      "inventory_vs_constraints_diff": null
+      "unused_values": [],
+      "unknown_values": [],
+      "inventory_vs_constraints_diff": {
+        "in_inventory_not_constraints": [],
+        "in_constraints_not_inventory": [
+          "ESO",
+          "SETI"
+        ]
+      }
     },
     "esources": {
       "total_valid_values": 8,
@@ -942,87 +969,7 @@
     "operators_with_less_than_10_examples": [],
     "enum_values_never_used": {
       "doctype": [
-        "abstract",
-        "book",
-        "bookreview",
-        "circular",
-        "editorial",
-        "erratum",
-        "inbook",
-        "mastersthesis",
-        "misc",
-        "newsletter",
-        "obituary",
-        "pressrelease",
-        "talk"
-      ],
-      "property": [
-        "ads_openaccess",
-        "article",
-        "associated",
-        "author_openaccess",
-        "catalog",
-        "eprint",
-        "eprint_openaccess",
-        "esource",
-        "inproceedings",
-        "inspire",
-        "library_catalog",
-        "nonarticle",
-        "ocr_abstract",
-        "presentation",
-        "pub_openaccess",
-        "toc"
-      ],
-      "bibgroup": [
-        "2MASS",
-        "APEX",
-        "ARECIBO",
-        "CFHT",
-        "CTIO",
-        "CfA",
-        "Chandra",
-        "Copernicus",
-        "ESO/Telescopes",
-        "EUVE",
-        "FUSE",
-        "Fermi",
-        "GALEX",
-        "GBT",
-        "Gaia",
-        "Hipparcos",
-        "IRAS",
-        "IUE",
-        "JCMT",
-        "JWST",
-        "K2",
-        "KPNO",
-        "Kepler",
-        "LIGO",
-        "LISA",
-        "LOFAR",
-        "MeerKAT",
-        "NASA PubSpace",
-        "NEOWISE",
-        "NOAO",
-        "NOIRLab",
-        "NuSTAR",
-        "Pan-STARRS",
-        "RXTE",
-        "SDO",
-        "SDSS",
-        "SKA",
-        "SOHO",
-        "STEREO",
-        "Subaru",
-        "Swift",
-        "TESS",
-        "UKIRT",
-        "VLA",
-        "VLBA",
-        "VLT",
-        "WISE",
-        "XMM"
+        "book"
       ],
       "esources": [
         "ADS_PDF",

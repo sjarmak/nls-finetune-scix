@@ -339,3 +339,32 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - The normalize_query function is crucial for fair comparison
   - Use category-specific assertions for different test types (behavior vs exact match)
 ---
+
+## 2026-01-22 - US-014: Run updated coverage audit post-generation
+- **Implemented**: Coverage verification and comparison report
+- **Files created**:
+  - `scripts/compare_coverage.py` - Before vs after coverage comparison script
+  - `data/datasets/evaluations/coverage_comparison.json` - Detailed comparison report
+- **Files modified**:
+  - `data/datasets/evaluations/coverage_audit.json` - Updated with current coverage
+- **Key results**:
+  - Total examples: 4002 -> 4789 (+19.7%)
+  - Databases: 3/3 -> 4/4 (100%) - earthscience now covered
+  - Properties: 5/21 (23.8%) -> 21/21 (100%)
+  - Doctypes: 9/22 (40.9%) -> 21/22 (95.5%)
+  - Bibgroups: 5/53 (9.4%) -> 55/55 (100%)
+  - All 7 main operators now have >30 examples each
+- **Operator improvements**:
+  - citations: 40 -> 85 (+112.5%)
+  - references: 20 -> 37 (+85.0%)
+  - trending: 30 -> 49 (+63.3%)
+  - similar: 22 -> 44 (+100.0%)
+  - useful: 19 -> 39 (+105.3%)
+  - reviews: 22 -> 44 (+100.0%)
+  - topn: 17 -> 36 (+111.8%)
+- **Learnings for future iterations**:
+  - The `pos` operator is special (positional search) and was excluded from >30 threshold
+  - Baseline values should be hardcoded for comparison since previous audit file gets overwritten
+  - The compare_coverage.py script validates all acceptance criteria automatically
+  - esources field still has 0% coverage - could be addressed in future stories
+---
