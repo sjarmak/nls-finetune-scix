@@ -33,3 +33,26 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - bibgroup synonyms needed (Hubble->HST, Webb->JWST, etc.)
   - Operator trigger patterns need expansion for NL variations
 ---
+
+## 2026-01-22 - US-002: Audit current training data coverage
+- **Implemented**: Comprehensive training data coverage audit script
+- **Files created**:
+  - `scripts/audit_training_coverage.py` - Coverage audit script
+  - `data/datasets/evaluations/coverage_audit.json` - Detailed audit report
+- **Key findings from audit**:
+  - 4002 total examples in gold_examples.json
+  - Field coverage: 30/57 fields have examples (27 with zero examples)
+  - Operator coverage: All 8 operators have 10+ examples
+  - Enum coverage:
+    - doctype: 9/22 values (40.9%) - 13 unused including bookreview, circular, mastersthesis
+    - property: 5/21 values (23.8%) - 16 unused including eprint, catalog, inspire
+    - database: 3/3 values (100%) - but earthscience missing from constraints
+    - bibgroup: 5/53 values (9.4%) - 48 unused telescopes/surveys
+    - esources: 0/8 values (0%) - completely unused
+  - Fields with zero examples: ack, caption, grant, lang, orcid variants, etc.
+- **Learnings for future iterations**:
+  - Use regex `(\w+):(?:\"([^\"]+)\"|(\([^)]+\))|(\[[^\]]+\])|(\S+))` to extract field:value pairs from queries
+  - gold_examples.json uses categories like 'first_author', 'author', 'filters', 'content', etc.
+  - The inventory can have values not yet in field_constraints.py (e.g., earthscience)
+  - Coverage audit should run after each batch of example generation to track progress
+---
