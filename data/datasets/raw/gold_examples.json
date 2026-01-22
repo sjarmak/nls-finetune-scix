@@ -20008,5 +20008,3940 @@
     "natural_language": "exactly 10 reads",
     "ads_query": "read_count:10",
     "category": "metrics"
+  },
+  {
+    "natural_language": "studies using HST data",
+    "ads_query": "bibgroup:HST",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Hubble papers",
+    "ads_query": "bibgroup:HST",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Hubble Space Telescope Cepheid variables papers",
+    "ads_query": "bibgroup:HST abs:\"Cepheid variables\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "HST observations of galaxy morphology",
+    "ads_query": "bibgroup:HST abs:\"galaxy morphology\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "peer-reviewed Hubble Space Telescope observations",
+    "ads_query": "bibgroup:HST property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent Hubble deep field research",
+    "ads_query": "bibgroup:HST abs:\"deep field\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "JWST papers",
+    "ads_query": "bibgroup:JWST",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Webb observations",
+    "ads_query": "bibgroup:JWST",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "James Webb observations of brown dwarfs",
+    "ads_query": "bibgroup:JWST abs:\"brown dwarfs\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "James Webb protoplanetary disks papers",
+    "ads_query": "bibgroup:JWST abs:\"protoplanetary disks\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed James Webb brown dwarfs studies",
+    "ads_query": "bibgroup:JWST abs:\"brown dwarfs\" property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Webb papers from 2022",
+    "ads_query": "bibgroup:JWST year:2022",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Spitzer publications",
+    "ads_query": "bibgroup:Spitzer",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Spitzer Space Telescope publications",
+    "ads_query": "bibgroup:Spitzer",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Spitzer infrared spectroscopy papers",
+    "ads_query": "bibgroup:Spitzer abs:\"infrared spectroscopy\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "protostellar disks studies using Spitzer Space Telescope",
+    "ads_query": "bibgroup:Spitzer abs:\"protostellar disks\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Spitzer Space Telescope papers from 2019",
+    "ads_query": "bibgroup:Spitzer year:2019",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing Spitzer observations",
+    "ads_query": "citations(bibgroup:Spitzer)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "research with Chandra",
+    "ads_query": "bibgroup:Chandra",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Chandra X-ray data",
+    "ads_query": "bibgroup:Chandra",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Chandra Observatory neutron stars papers",
+    "ads_query": "bibgroup:Chandra abs:\"neutron stars\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Chandra neutron stars observations",
+    "ads_query": "bibgroup:Chandra abs:\"neutron stars\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "peer-reviewed Chandra Observatory observations",
+    "ads_query": "bibgroup:Chandra property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent Chandra X-ray emission research",
+    "ads_query": "bibgroup:Chandra abs:\"X-ray emission\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using XMM data",
+    "ads_query": "bibgroup:XMM",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "XMM-Newton observations",
+    "ads_query": "bibgroup:XMM",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "AGN variability studies using XMM",
+    "ads_query": "bibgroup:XMM abs:\"AGN variability\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "XMM-Newton hot gas papers",
+    "ads_query": "bibgroup:XMM abs:\"hot gas\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "citations of Newton X-ray results",
+    "ads_query": "citations(bibgroup:XMM)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "XMM-Newton data releases in 2022",
+    "ads_query": "bibgroup:XMM year:2022",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using GALEX data",
+    "ads_query": "bibgroup:GALEX",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using Galaxy Evolution Explorer data",
+    "ads_query": "bibgroup:GALEX",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "GALEX UV luminosity function papers",
+    "ads_query": "bibgroup:GALEX abs:\"UV luminosity function\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "GALEX observations of galactic extinction",
+    "ads_query": "bibgroup:GALEX abs:\"galactic extinction\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing Galaxy Evolution Explorer observations",
+    "ads_query": "citations(bibgroup:GALEX)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed Galaxy Evolution Explorer UV emission studies",
+    "ads_query": "bibgroup:GALEX abs:\"UV emission\" property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Kepler publications",
+    "ads_query": "bibgroup:Kepler",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Kepler Mission papers",
+    "ads_query": "bibgroup:Kepler",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "eclipsing binaries studies using Kepler Mission",
+    "ads_query": "bibgroup:Kepler abs:\"eclipsing binaries\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Kepler asteroseismology papers",
+    "ads_query": "bibgroup:Kepler abs:\"asteroseismology\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Kepler data releases in 2024",
+    "ads_query": "bibgroup:Kepler year:2024",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed Kepler Mission stellar oscillations studies",
+    "ads_query": "bibgroup:Kepler abs:\"stellar oscillations\" property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "K2 observations",
+    "ads_query": "bibgroup:K2",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Kepler K2 observations",
+    "ads_query": "bibgroup:K2",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "K2 Mission open clusters observations",
+    "ads_query": "bibgroup:K2 abs:\"open clusters\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Kepler K2 asteroids observations",
+    "ads_query": "bibgroup:K2 abs:\"asteroids\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing Kepler K2 observations",
+    "ads_query": "citations(bibgroup:K2)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Kepler K2 extended mission papers from 2018",
+    "ads_query": "bibgroup:K2 abs:\"extended mission\" year:2018",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "TESS publications",
+    "ads_query": "bibgroup:TESS",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Transiting Exoplanet Survey Satellite papers",
+    "ads_query": "bibgroup:TESS",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "TESS observations of stellar variability",
+    "ads_query": "bibgroup:TESS abs:\"stellar variability\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "TESS stellar variability observations",
+    "ads_query": "bibgroup:TESS abs:\"stellar variability\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing Transiting Exoplanet Survey Satellite observations",
+    "ads_query": "citations(bibgroup:TESS)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "TESS transiting planets papers from 2022",
+    "ads_query": "bibgroup:TESS abs:\"transiting planets\" year:2022",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "FUSE publications",
+    "ads_query": "bibgroup:FUSE",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using Far Ultraviolet Spectroscopic Explorer data",
+    "ads_query": "bibgroup:FUSE",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "O VI absorption studies using FUSE",
+    "ads_query": "bibgroup:FUSE abs:\"O VI absorption\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "hot gas research with FUSE",
+    "ads_query": "bibgroup:FUSE abs:\"hot gas\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed Far Ultraviolet Spectroscopic Explorer papers",
+    "ads_query": "bibgroup:FUSE property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "FUSE O VI absorption papers from 2021",
+    "ads_query": "bibgroup:FUSE abs:\"O VI absorption\" year:2021",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "IUE observations",
+    "ads_query": "bibgroup:IUE",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "International Ultraviolet Explorer data",
+    "ads_query": "bibgroup:IUE",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "IUE observations of binary stars",
+    "ads_query": "bibgroup:IUE abs:\"binary stars\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "ultraviolet spectra studies using International Ultraviolet Explorer",
+    "ads_query": "bibgroup:IUE abs:\"ultraviolet spectra\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "peer-reviewed International Ultraviolet Explorer observations",
+    "ads_query": "bibgroup:IUE property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed IUE papers",
+    "ads_query": "bibgroup:IUE property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "EUVE papers",
+    "ads_query": "bibgroup:EUVE",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using Extreme Ultraviolet Explorer data",
+    "ads_query": "bibgroup:EUVE",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "hot stars research with EUVE",
+    "ads_query": "bibgroup:EUVE abs:\"hot stars\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "EUVE observations of interstellar medium",
+    "ads_query": "bibgroup:EUVE abs:\"interstellar medium\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "EUVE stellar coronae papers from 2024",
+    "ads_query": "bibgroup:EUVE abs:\"stellar coronae\" year:2024",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "EUVE papers from 2024",
+    "ads_query": "bibgroup:EUVE year:2024",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using Copernicus data",
+    "ads_query": "bibgroup:Copernicus",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using OAO-3 data",
+    "ads_query": "bibgroup:Copernicus",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "hot stars studies using OAO-3",
+    "ads_query": "bibgroup:Copernicus abs:\"hot stars\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "interstellar medium research with Copernicus",
+    "ads_query": "bibgroup:Copernicus abs:\"interstellar medium\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Copernicus papers from 2018",
+    "ads_query": "bibgroup:Copernicus year:2018",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent Copernicus Satellite interstellar medium research",
+    "ads_query": "bibgroup:Copernicus abs:\"interstellar medium\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "IRAS papers",
+    "ads_query": "bibgroup:IRAS",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Infrared Astronomical Satellite papers",
+    "ads_query": "bibgroup:IRAS",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "IRAS infrared sources papers",
+    "ads_query": "bibgroup:IRAS abs:\"infrared sources\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Infrared Astronomical Satellite infrared sources papers",
+    "ads_query": "bibgroup:IRAS abs:\"infrared sources\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "IRAS circumstellar disks papers from 2025",
+    "ads_query": "bibgroup:IRAS abs:\"circumstellar disks\" year:2025",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "IRAS papers from 2025",
+    "ads_query": "bibgroup:IRAS year:2025",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "WISE observations",
+    "ads_query": "bibgroup:WISE",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Wide-field Infrared Survey Explorer publications",
+    "ads_query": "bibgroup:WISE",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "asteroids research with Wide-field Infrared Survey Explorer",
+    "ads_query": "bibgroup:WISE abs:\"asteroids\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "WISE YSOs papers",
+    "ads_query": "bibgroup:WISE abs:\"YSOs\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Wide-field Infrared Survey Explorer data releases in 2025",
+    "ads_query": "bibgroup:WISE year:2025",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed WISE papers",
+    "ads_query": "bibgroup:WISE property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using NEOWISE data",
+    "ads_query": "bibgroup:NEOWISE",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "NEOWISE Mission data",
+    "ads_query": "bibgroup:NEOWISE",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "NEOWISE asteroid properties papers",
+    "ads_query": "bibgroup:NEOWISE abs:\"asteroid properties\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "NEOWISE Mission observations of asteroid properties",
+    "ads_query": "bibgroup:NEOWISE abs:\"asteroid properties\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing NEOWISE observations",
+    "ads_query": "citations(bibgroup:NEOWISE)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "NEOWISE papers from 2019",
+    "ads_query": "bibgroup:NEOWISE year:2019",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Fermi papers",
+    "ads_query": "bibgroup:Fermi",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using Fermi Gamma-ray data",
+    "ads_query": "bibgroup:Fermi",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Fermi gamma-ray emission observations",
+    "ads_query": "bibgroup:Fermi abs:\"gamma-ray emission\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Fermi observations of diffuse emission",
+    "ads_query": "bibgroup:Fermi abs:\"diffuse emission\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "citations of Fermi Gamma-ray results",
+    "ads_query": "citations(bibgroup:Fermi)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed Fermi papers",
+    "ads_query": "bibgroup:Fermi property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers using Swift",
+    "ads_query": "bibgroup:Swift",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Swift Observatory data",
+    "ads_query": "bibgroup:Swift",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "tidal disruption events research with Swift Observatory",
+    "ads_query": "bibgroup:Swift abs:\"tidal disruption events\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Swift Gamma-Ray Burst tidal disruption events observations",
+    "ads_query": "bibgroup:Swift abs:\"tidal disruption events\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed papers using Swift",
+    "ads_query": "bibgroup:Swift property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed Swift Gamma-Ray Burst papers",
+    "ads_query": "bibgroup:Swift property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using RXTE data",
+    "ads_query": "bibgroup:RXTE",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Rossi X-ray Timing Explorer data",
+    "ads_query": "bibgroup:RXTE",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "RXTE X-ray bursts papers",
+    "ads_query": "bibgroup:RXTE abs:\"X-ray bursts\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "X-ray bursts research with Rossi XTE",
+    "ads_query": "bibgroup:RXTE abs:\"X-ray bursts\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed papers using RXTE",
+    "ads_query": "bibgroup:RXTE property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using NuSTAR data",
+    "ads_query": "bibgroup:NuSTAR",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Nuclear Spectroscopic Telescope Array publications",
+    "ads_query": "bibgroup:NuSTAR",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Nuclear Spectroscopic Telescope Array observations of hard X-rays",
+    "ads_query": "bibgroup:NuSTAR abs:\"hard X-rays\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "NuSTAR black hole spin observations",
+    "ads_query": "bibgroup:NuSTAR abs:\"black hole spin\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent NuSTAR black hole spin research",
+    "ads_query": "bibgroup:NuSTAR abs:\"black hole spin\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing Nuclear Spectroscopic Telescope Array observations",
+    "ads_query": "citations(bibgroup:NuSTAR)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using SOHO data",
+    "ads_query": "bibgroup:SOHO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using Solar and Heliospheric Observatory data",
+    "ads_query": "bibgroup:SOHO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "helioseismology studies using SOHO",
+    "ads_query": "bibgroup:SOHO abs:\"helioseismology\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "helioseismology research with SOHO",
+    "ads_query": "bibgroup:SOHO abs:\"helioseismology\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "citations of Solar and Heliospheric Observatory results",
+    "ads_query": "citations(bibgroup:SOHO)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "citations of SOHO results",
+    "ads_query": "citations(bibgroup:SOHO)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "research with STEREO",
+    "ads_query": "bibgroup:STEREO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Solar TErrestrial RElations Observatory data",
+    "ads_query": "bibgroup:STEREO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Solar TErrestrial RElations Observatory observations of solar stereoscopy",
+    "ads_query": "bibgroup:STEREO abs:\"solar stereoscopy\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Solar TErrestrial RElations Observatory observations of heliospheric imaging",
+    "ads_query": "bibgroup:STEREO abs:\"heliospheric imaging\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed papers using Solar TErrestrial RElations Observatory",
+    "ads_query": "bibgroup:STEREO property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent STEREO space weather research",
+    "ads_query": "bibgroup:STEREO abs:\"space weather\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using SDO data",
+    "ads_query": "bibgroup:SDO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Solar Dynamics Observatory papers",
+    "ads_query": "bibgroup:SDO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Solar Dynamics Observatory observations of solar dynamics",
+    "ads_query": "bibgroup:SDO abs:\"solar dynamics\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "SDO magnetic field papers",
+    "ads_query": "bibgroup:SDO abs:\"magnetic field\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent SDO observations",
+    "ads_query": "bibgroup:SDO pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed Solar Dynamics Observatory coronal loops studies",
+    "ads_query": "bibgroup:SDO abs:\"coronal loops\" property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "ESO/Telescopes data",
+    "ads_query": "bibgroup:\"ESO/Telescopes\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "ESO publications",
+    "ads_query": "bibgroup:\"ESO/Telescopes\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "ESO/Telescopes instrumentation papers",
+    "ads_query": "bibgroup:\"ESO/Telescopes\" abs:\"instrumentation\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "VLT observations studies using ESO/Telescopes",
+    "ads_query": "bibgroup:\"ESO/Telescopes\" abs:\"VLT observations\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "ESO/Telescopes data releases in 2020",
+    "ads_query": "bibgroup:\"ESO/Telescopes\" year:2020",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "citations of European Southern Observatory results",
+    "ads_query": "citations(bibgroup:\"ESO/Telescopes\")",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "CFHT papers",
+    "ads_query": "bibgroup:CFHT",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Canada-France-Hawaii Telescope papers",
+    "ads_query": "bibgroup:CFHT",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "CFHT observations of galaxy clusters",
+    "ads_query": "bibgroup:CFHT abs:\"galaxy clusters\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "CFHT stellar streams observations",
+    "ads_query": "bibgroup:CFHT abs:\"stellar streams\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed papers using CFHT",
+    "ads_query": "bibgroup:CFHT property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed Canada-France-Hawaii Telescope papers",
+    "ads_query": "bibgroup:CFHT property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using Gemini data",
+    "ads_query": "bibgroup:Gemini",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Gemini Observatory papers",
+    "ads_query": "bibgroup:Gemini",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "stellar populations studies using Gemini North",
+    "ads_query": "bibgroup:Gemini abs:\"stellar populations\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Gemini North AO observations observations",
+    "ads_query": "bibgroup:Gemini abs:\"AO observations\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Gemini papers from 2024",
+    "ads_query": "bibgroup:Gemini year:2024",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed Gemini papers",
+    "ads_query": "bibgroup:Gemini property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Keck publications",
+    "ads_query": "bibgroup:Keck",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using W.M. Keck Observatory data",
+    "ads_query": "bibgroup:Keck",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "W.M. Keck Observatory observations of adaptive optics",
+    "ads_query": "bibgroup:Keck abs:\"adaptive optics\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "W.M. Keck Observatory spectroscopy papers",
+    "ads_query": "bibgroup:Keck abs:\"spectroscopy\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "citations of Keck results",
+    "ads_query": "citations(bibgroup:Keck)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "W.M. Keck Observatory data releases in 2021",
+    "ads_query": "bibgroup:Keck year:2021",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "VLT papers",
+    "ads_query": "bibgroup:VLT",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using Very Large Telescope data",
+    "ads_query": "bibgroup:VLT",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Very Large Telescope observations of galactic center",
+    "ads_query": "bibgroup:VLT abs:\"galactic center\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "galactic center studies using VLT",
+    "ads_query": "bibgroup:VLT abs:\"galactic center\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Very Large Telescope data releases in 2023",
+    "ads_query": "bibgroup:VLT year:2023",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed VLT papers",
+    "ads_query": "bibgroup:VLT property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "research with Subaru",
+    "ads_query": "bibgroup:Subaru",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Subaru Telescope data",
+    "ads_query": "bibgroup:Subaru",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Subaru weak lensing papers",
+    "ads_query": "bibgroup:Subaru abs:\"weak lensing\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Lyman-alpha emitters research with Subaru Telescope",
+    "ads_query": "bibgroup:Subaru abs:\"Lyman-alpha emitters\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing Subaru observations",
+    "ads_query": "citations(bibgroup:Subaru)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent Subaru observations",
+    "ads_query": "bibgroup:Subaru pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "research with NOAO",
+    "ads_query": "bibgroup:NOAO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "National Optical Astronomy Observatory publications",
+    "ads_query": "bibgroup:NOAO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "NOAO instrumentation observations",
+    "ads_query": "bibgroup:NOAO abs:\"instrumentation\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "instrumentation research with NOAO",
+    "ads_query": "bibgroup:NOAO abs:\"instrumentation\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent National Optical Astronomy Observatory observing programs research",
+    "ads_query": "bibgroup:NOAO abs:\"observing programs\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "National Optical Astronomy Observatory survey data papers from 2023",
+    "ads_query": "bibgroup:NOAO abs:\"survey data\" year:2023",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers using NOIRLab",
+    "ads_query": "bibgroup:NOIRLab",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using NSF NOIRLab data",
+    "ads_query": "bibgroup:NOIRLab",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "CTIO data studies using National Optical-Infrared Astronomy Research Laboratory",
+    "ads_query": "bibgroup:NOIRLab abs:\"CTIO data\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "NSF NOIRLab observations of Rubin Observatory",
+    "ads_query": "bibgroup:NOIRLab abs:\"Rubin Observatory\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed National Optical-Infrared Astronomy Research Laboratory CTIO data studies",
+    "ads_query": "bibgroup:NOIRLab abs:\"CTIO data\" property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing National Optical-Infrared Astronomy Research Laboratory observations",
+    "ads_query": "citations(bibgroup:NOIRLab)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "CTIO data",
+    "ads_query": "bibgroup:CTIO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Cerro Tololo observations",
+    "ads_query": "bibgroup:CTIO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "transient follow-up research with Cerro Tololo Inter-American Observatory",
+    "ads_query": "bibgroup:CTIO abs:\"transient follow-up\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "galaxy surveys studies using Cerro Tololo",
+    "ads_query": "bibgroup:CTIO abs:\"galaxy surveys\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "citations of Cerro Tololo Inter-American Observatory results",
+    "ads_query": "citations(bibgroup:CTIO)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed papers using Cerro Tololo Inter-American Observatory",
+    "ads_query": "bibgroup:CTIO property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "research with KPNO",
+    "ads_query": "bibgroup:KPNO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using Kitt Peak data",
+    "ads_query": "bibgroup:KPNO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Kitt Peak northern sky observations",
+    "ads_query": "bibgroup:KPNO abs:\"northern sky\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Kitt Peak National Observatory observations of photometry",
+    "ads_query": "bibgroup:KPNO abs:\"photometry\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "KPNO papers from 2018",
+    "ads_query": "bibgroup:KPNO year:2018",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed KPNO papers",
+    "ads_query": "bibgroup:KPNO property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers using Pan-STARRS",
+    "ads_query": "bibgroup:Pan-STARRS",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers using PanSTARRS",
+    "ads_query": "bibgroup:Pan-STARRS",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Pan-STARRS photometric surveys observations",
+    "ads_query": "bibgroup:Pan-STARRS abs:\"photometric surveys\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "asteroid detection research with PanSTARRS",
+    "ads_query": "bibgroup:Pan-STARRS abs:\"asteroid detection\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed papers using Panoramic Survey Telescope",
+    "ads_query": "bibgroup:Pan-STARRS property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing Pan-STARRS observations",
+    "ads_query": "citations(bibgroup:Pan-STARRS)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "SDSS papers",
+    "ads_query": "bibgroup:SDSS",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "research with Sloan",
+    "ads_query": "bibgroup:SDSS",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "SDSS observations of quasar catalog",
+    "ads_query": "bibgroup:SDSS abs:\"quasar catalog\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Sloan observations of stellar parameters",
+    "ads_query": "bibgroup:SDSS abs:\"stellar parameters\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Sloan Digital Sky Survey galaxy redshifts papers from 2025",
+    "ads_query": "bibgroup:SDSS abs:\"galaxy redshifts\" year:2025",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent Sloan Digital Sky Survey stellar parameters research",
+    "ads_query": "bibgroup:SDSS abs:\"stellar parameters\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "2MASS publications",
+    "ads_query": "bibgroup:2MASS",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "research with Two Micron All Sky Survey",
+    "ads_query": "bibgroup:2MASS",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "brown dwarf searches research with 2MASS",
+    "ads_query": "bibgroup:2MASS abs:\"brown dwarf searches\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "point source catalog research with Two Micron All Sky Survey",
+    "ads_query": "bibgroup:2MASS abs:\"point source catalog\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed Two Micron All Sky Survey galactic structure studies",
+    "ads_query": "bibgroup:2MASS abs:\"galactic structure\" property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed 2MASS extended sources studies",
+    "ads_query": "bibgroup:2MASS abs:\"extended sources\" property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "UKIRT papers",
+    "ads_query": "bibgroup:UKIRT",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using United Kingdom Infrared Telescope data",
+    "ads_query": "bibgroup:UKIRT",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "brown dwarf searches studies using UKIRT",
+    "ads_query": "bibgroup:UKIRT abs:\"brown dwarf searches\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "spectroscopy studies using United Kingdom Infrared Telescope",
+    "ads_query": "bibgroup:UKIRT abs:\"spectroscopy\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "peer-reviewed UKIRT observations",
+    "ads_query": "bibgroup:UKIRT property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing UKIRT observations",
+    "ads_query": "citations(bibgroup:UKIRT)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers using ALMA",
+    "ads_query": "bibgroup:ALMA",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers using Atacama Large Millimeter Array",
+    "ads_query": "bibgroup:ALMA",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "high-z dust studies using Atacama Array",
+    "ads_query": "bibgroup:ALMA abs:\"high-z dust\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "protoplanetary disks research with ALMA",
+    "ads_query": "bibgroup:ALMA abs:\"protoplanetary disks\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing Atacama Large Millimeter Array observations",
+    "ads_query": "citations(bibgroup:ALMA)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent Atacama Large Millimeter Array high-z dust research",
+    "ads_query": "bibgroup:ALMA abs:\"high-z dust\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "JCMT data",
+    "ads_query": "bibgroup:JCMT",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "James Clerk Maxwell Telescope data",
+    "ads_query": "bibgroup:JCMT",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "polarimetry research with James Clerk Maxwell Telescope",
+    "ads_query": "bibgroup:JCMT abs:\"polarimetry\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "JCMT debris disks observations",
+    "ads_query": "bibgroup:JCMT abs:\"debris disks\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "James Clerk Maxwell Telescope papers from 2025",
+    "ads_query": "bibgroup:JCMT year:2025",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed James Clerk Maxwell Telescope papers",
+    "ads_query": "bibgroup:JCMT property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using APEX data",
+    "ads_query": "bibgroup:APEX",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Atacama Pathfinder Experiment observations",
+    "ads_query": "bibgroup:APEX",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "dust emission research with APEX",
+    "ads_query": "bibgroup:APEX abs:\"dust emission\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "APEX Galactic plane observations",
+    "ads_query": "bibgroup:APEX abs:\"Galactic plane\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent APEX submillimeter research",
+    "ads_query": "bibgroup:APEX abs:\"submillimeter\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed papers using Atacama Pathfinder Experiment",
+    "ads_query": "bibgroup:APEX property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "ARECIBO data",
+    "ads_query": "bibgroup:ARECIBO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers using Arecibo Observatory",
+    "ads_query": "bibgroup:ARECIBO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "HI surveys studies using ARECIBO",
+    "ads_query": "bibgroup:ARECIBO abs:\"HI surveys\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "HI surveys studies using Arecibo Observatory",
+    "ads_query": "bibgroup:ARECIBO abs:\"HI surveys\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent Arecibo Observatory observations",
+    "ads_query": "bibgroup:ARECIBO pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "citations of ARECIBO results",
+    "ads_query": "citations(bibgroup:ARECIBO)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "VLA data",
+    "ads_query": "bibgroup:VLA",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Very Large Array observations",
+    "ads_query": "bibgroup:VLA",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Karl G. Jansky VLA radio continuum papers",
+    "ads_query": "bibgroup:VLA abs:\"radio continuum\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "VLA radio transients papers",
+    "ads_query": "bibgroup:VLA abs:\"radio transients\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed Karl G. Jansky VLA papers",
+    "ads_query": "bibgroup:VLA property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed papers using Very Large Array",
+    "ads_query": "bibgroup:VLA property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers using VLBA",
+    "ads_query": "bibgroup:VLBA",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using Very Long Baseline Array data",
+    "ads_query": "bibgroup:VLBA",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "maser emission studies using Very Long Baseline Array",
+    "ads_query": "bibgroup:VLBA abs:\"maser emission\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "VLBA maser emission observations",
+    "ads_query": "bibgroup:VLBA abs:\"maser emission\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent VLBA observations",
+    "ads_query": "bibgroup:VLBA pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent Very Long Baseline Array observations",
+    "ads_query": "bibgroup:VLBA pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "GBT papers",
+    "ads_query": "bibgroup:GBT",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "research with Green Bank Telescope",
+    "ads_query": "bibgroup:GBT",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "GBT observations of fast radio bursts",
+    "ads_query": "bibgroup:GBT abs:\"fast radio bursts\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "GBT CMB observations",
+    "ads_query": "bibgroup:GBT abs:\"CMB\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed Green Bank Telescope papers",
+    "ads_query": "bibgroup:GBT property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed Green Bank Telescope pulsar surveys studies",
+    "ads_query": "bibgroup:GBT abs:\"pulsar surveys\" property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "LOFAR papers",
+    "ads_query": "bibgroup:LOFAR",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Low-Frequency Array publications",
+    "ads_query": "bibgroup:LOFAR",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "low-frequency radio research with Low-Frequency Array",
+    "ads_query": "bibgroup:LOFAR abs:\"low-frequency radio\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "epoch of reionization research with Low-Frequency Array",
+    "ads_query": "bibgroup:LOFAR abs:\"epoch of reionization\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed papers using Low-Frequency Array",
+    "ads_query": "bibgroup:LOFAR property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent Low-Frequency Array epoch of reionization research",
+    "ads_query": "bibgroup:LOFAR abs:\"epoch of reionization\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "MeerKAT publications",
+    "ads_query": "bibgroup:MeerKAT",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using MeerKAT Radio Telescope data",
+    "ads_query": "bibgroup:MeerKAT",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "MeerKAT Radio Telescope pulsars observations",
+    "ads_query": "bibgroup:MeerKAT abs:\"pulsars\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "MeerKAT observations of pulsars",
+    "ads_query": "bibgroup:MeerKAT abs:\"pulsars\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "citations of MeerKAT results",
+    "ads_query": "citations(bibgroup:MeerKAT)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "MeerKAT data releases in 2023",
+    "ads_query": "bibgroup:MeerKAT year:2023",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "SKA observations",
+    "ads_query": "bibgroup:SKA",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers using Square Kilometre Array",
+    "ads_query": "bibgroup:SKA",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Square Kilometre Array observations of epoch of reionization",
+    "ads_query": "bibgroup:SKA abs:\"epoch of reionization\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "HI cosmology studies using Square Kilometre Array",
+    "ads_query": "bibgroup:SKA abs:\"HI cosmology\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent SKA observations",
+    "ads_query": "bibgroup:SKA pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "peer-reviewed SKA observations",
+    "ads_query": "bibgroup:SKA property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "research with Gaia",
+    "ads_query": "bibgroup:Gaia",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Gaia Mission publications",
+    "ads_query": "bibgroup:Gaia",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Gaia Satellite observations of galactic structure",
+    "ads_query": "bibgroup:Gaia abs:\"galactic structure\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "parallaxes research with Gaia Mission",
+    "ads_query": "bibgroup:Gaia abs:\"parallaxes\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "peer-reviewed Gaia Mission observations",
+    "ads_query": "bibgroup:Gaia property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Gaia Mission papers from 2023",
+    "ads_query": "bibgroup:Gaia year:2023",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers using Hipparcos",
+    "ads_query": "bibgroup:Hipparcos",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "research with Hipparcos Satellite",
+    "ads_query": "bibgroup:Hipparcos",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Hipparcos Satellite HR diagram observations",
+    "ads_query": "bibgroup:Hipparcos abs:\"HR diagram\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Hipparcos Satellite stellar kinematics observations",
+    "ads_query": "bibgroup:Hipparcos abs:\"stellar kinematics\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "citations of Hipparcos Satellite results",
+    "ads_query": "citations(bibgroup:Hipparcos)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Hipparcos papers from 2023",
+    "ads_query": "bibgroup:Hipparcos year:2023",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "CfA papers",
+    "ads_query": "bibgroup:CfA",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "studies using Center for Astrophysics data",
+    "ads_query": "bibgroup:CfA",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Harvard CfA stellar astrophysics observations",
+    "ads_query": "bibgroup:CfA abs:\"stellar astrophysics\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "CfA observations of theoretical research",
+    "ads_query": "bibgroup:CfA abs:\"theoretical research\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent Harvard CfA observations",
+    "ads_query": "bibgroup:CfA pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "peer-reviewed CfA observations",
+    "ads_query": "bibgroup:CfA property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "NASA PubSpace data",
+    "ads_query": "bibgroup:\"NASA PubSpace\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "NASA Public Access observations",
+    "ads_query": "bibgroup:\"NASA PubSpace\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "astrophysics studies using NASA PubSpace",
+    "ads_query": "bibgroup:\"NASA PubSpace\" abs:\"astrophysics\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "NASA Public Access observations of NASA missions",
+    "ads_query": "bibgroup:\"NASA PubSpace\" abs:\"NASA missions\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed NASA PubSpace Repository papers",
+    "ads_query": "bibgroup:\"NASA PubSpace\" property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed NASA Public Access NASA missions studies",
+    "ads_query": "bibgroup:\"NASA PubSpace\" abs:\"NASA missions\" property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "research with LISA",
+    "ads_query": "bibgroup:LISA",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Laser Interferometer Space Antenna data",
+    "ads_query": "bibgroup:LISA",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "EMRI research with Laser Interferometer Space Antenna",
+    "ads_query": "bibgroup:LISA abs:\"EMRI\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "space-based interferometry studies using LISA",
+    "ads_query": "bibgroup:LISA abs:\"space-based interferometry\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent Laser Interferometer Space Antenna observations",
+    "ads_query": "bibgroup:LISA pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing Laser Interferometer Space Antenna observations",
+    "ads_query": "citations(bibgroup:LISA)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "LIGO observations",
+    "ads_query": "bibgroup:LIGO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Laser Interferometer Gravitational-Wave Observatory observations",
+    "ads_query": "bibgroup:LIGO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Laser Interferometer Gravitational-Wave Observatory gravitational waves observations",
+    "ads_query": "bibgroup:LIGO abs:\"gravitational waves\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "LIGO observations of detector sensitivity",
+    "ads_query": "bibgroup:LIGO abs:\"detector sensitivity\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing LIGO Observatory observations",
+    "ads_query": "citations(bibgroup:LIGO)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Laser Interferometer Gravitational-Wave Observatory compact binaries papers from 2025",
+    "ads_query": "bibgroup:LIGO abs:\"compact binaries\" year:2025",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "SETI data",
+    "ads_query": "bibgroup:SETI",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "SETI Institute publications",
+    "ads_query": "bibgroup:SETI",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "SETI Institute exoplanet biosignatures observations",
+    "ads_query": "bibgroup:SETI abs:\"exoplanet biosignatures\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "Search for Extraterrestrial Intelligence technosignatures observations",
+    "ads_query": "bibgroup:SETI abs:\"technosignatures\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent Search for Extraterrestrial Intelligence technosignatures research",
+    "ads_query": "bibgroup:SETI abs:\"technosignatures\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "refereed SETI exoplanet biosignatures studies",
+    "ads_query": "bibgroup:SETI abs:\"exoplanet biosignatures\" property:refereed",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "ESO observations",
+    "ads_query": "bibgroup:ESO",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "ESO observations of spectroscopy",
+    "ads_query": "bibgroup:ESO abs:\"spectroscopy\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "ESO VLT observations papers",
+    "ads_query": "bibgroup:ESO abs:\"VLT observations\"",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "papers citing ESO observations",
+    "ads_query": "citations(bibgroup:ESO)",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "recent ESO observations",
+    "ads_query": "bibgroup:ESO pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup"
+  },
+  {
+    "natural_language": "astronomical research",
+    "ads_query": "database:astronomy",
+    "category": "collection"
+  },
+  {
+    "natural_language": "looking for astrophysics literature",
+    "ads_query": "database:astronomy",
+    "category": "collection"
+  },
+  {
+    "natural_language": "show me papers in astrophysics",
+    "ads_query": "database:astronomy",
+    "category": "collection"
+  },
+  {
+    "natural_language": "find astrophysics papers",
+    "ads_query": "database:astronomy",
+    "category": "collection"
+  },
+  {
+    "natural_language": "search for astrophysical papers",
+    "ads_query": "database:astronomy",
+    "category": "collection"
+  },
+  {
+    "natural_language": "astronomical studies on supernovae",
+    "ads_query": "database:astronomy abs:\"supernovae\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "astronomy papers about black holes",
+    "ads_query": "database:astronomy abs:\"black holes\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "show me astronomical research on cosmic microwave background",
+    "ads_query": "database:astronomy abs:\"cosmic microwave background\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "astronomy collection papers about stellar evolution",
+    "ads_query": "database:astronomy abs:\"stellar evolution\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "astronomical research related to neutron stars",
+    "ads_query": "database:astronomy abs:\"neutron stars\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "astronomy papers covering planetary nebulae",
+    "ads_query": "database:astronomy abs:\"planetary nebulae\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "find papers in astrophysics about supernovae",
+    "ads_query": "database:astronomy abs:\"supernovae\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "astronomy articles discussing galaxy formation",
+    "ads_query": "database:astronomy abs:\"galaxy formation\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "show me astrophysics research on black holes",
+    "ads_query": "database:astronomy abs:\"black holes\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "papers from the astronomy database on black holes",
+    "ads_query": "database:astronomy abs:\"black holes\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "recent astrophysics research",
+    "ads_query": "database:astronomy pubdate:[2023-01 TO 2026-12]",
+    "category": "collection"
+  },
+  {
+    "natural_language": "recent astronomy papers about star formation",
+    "ads_query": "database:astronomy pubdate:[2023-01 TO 2026-12]",
+    "category": "collection"
+  },
+  {
+    "natural_language": "astrophysics papers about binary stars from 2024",
+    "ads_query": "database:astronomy abs:\"binary stars\" year:2024",
+    "category": "collection"
+  },
+  {
+    "natural_language": "astronomy collection papers from 2023",
+    "ads_query": "database:astronomy year:2023",
+    "category": "collection"
+  },
+  {
+    "natural_language": "astronomical research about star formation from 2019",
+    "ads_query": "database:astronomy abs:\"star formation\" year:2019",
+    "category": "collection"
+  },
+  {
+    "natural_language": "refereed astrophysical papers",
+    "ads_query": "database:astronomy property:refereed",
+    "category": "collection"
+  },
+  {
+    "natural_language": "astrophysics papers by Davis",
+    "ads_query": "database:astronomy author:\"Davis\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "refereed astrophysics literature about gravitational waves from 2021",
+    "ads_query": "database:astronomy abs:\"gravitational waves\" property:refereed year:2021",
+    "category": "collection"
+  },
+  {
+    "natural_language": "Jones's papers in astrophysics",
+    "ads_query": "database:astronomy author:\"Jones\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "astrophysics literature by Wilson",
+    "ads_query": "database:astronomy author:\"Wilson\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "looking for physics articles",
+    "ads_query": "database:physics",
+    "category": "collection"
+  },
+  {
+    "natural_language": "find physics papers",
+    "ads_query": "database:physics",
+    "category": "collection"
+  },
+  {
+    "natural_language": "show me physics collection papers",
+    "ads_query": "database:physics",
+    "category": "collection"
+  },
+  {
+    "natural_language": "search for physics journal articles",
+    "ads_query": "database:physics",
+    "category": "collection"
+  },
+  {
+    "natural_language": "papers from the physics database",
+    "ads_query": "database:physics",
+    "category": "collection"
+  },
+  {
+    "natural_language": "physics articles on quantum computing",
+    "ads_query": "database:physics abs:\"quantum computing\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "physics articles discussing superconductivity",
+    "ads_query": "database:physics abs:\"superconductivity\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "search physics journal articles for superconductivity",
+    "ads_query": "database:physics abs:\"superconductivity\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "search physics research for quantum field theory",
+    "ads_query": "database:physics abs:\"quantum field theory\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "find physics articles about electromagnetism",
+    "ads_query": "database:physics abs:\"electromagnetism\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "papers in physics covering nuclear physics",
+    "ads_query": "database:physics abs:\"nuclear physics\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "physics collection papers related to condensed matter",
+    "ads_query": "database:physics abs:\"condensed matter\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "find physical sciences papers about plasma physics",
+    "ads_query": "database:physics abs:\"plasma physics\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "physics papers on high energy physics",
+    "ads_query": "database:physics abs:\"high energy physics\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "physics research on superconductivity",
+    "ads_query": "database:physics abs:\"superconductivity\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "physics journal articles published in 2019",
+    "ads_query": "database:physics year:2019",
+    "category": "collection"
+  },
+  {
+    "natural_language": "latest physics journal articles",
+    "ads_query": "database:physics pubdate:[2023-01 TO 2026-12]",
+    "category": "collection"
+  },
+  {
+    "natural_language": "papers from the physics database about atomic physics from 2018",
+    "ads_query": "database:physics abs:\"atomic physics\" year:2018",
+    "category": "collection"
+  },
+  {
+    "natural_language": "physics literature on superconductivity published in 2022",
+    "ads_query": "database:physics abs:\"superconductivity\" year:2022",
+    "category": "collection"
+  },
+  {
+    "natural_language": "recent physics collection papers about string theory",
+    "ads_query": "database:physics pubdate:[2023-01 TO 2026-12]",
+    "category": "collection"
+  },
+  {
+    "natural_language": "physics research about plasma physics by Smith",
+    "ads_query": "database:physics abs:\"plasma physics\" author:\"Smith\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "refereed physical sciences papers about string theory",
+    "ads_query": "database:physics abs:\"string theory\" property:refereed",
+    "category": "collection"
+  },
+  {
+    "natural_language": "refereed physics collection papers about statistical mechanics",
+    "ads_query": "database:physics abs:\"statistical mechanics\" property:refereed",
+    "category": "collection"
+  },
+  {
+    "natural_language": "refereed physics studies about quantum mechanics from 2023",
+    "ads_query": "database:physics abs:\"quantum mechanics\" property:refereed year:2023",
+    "category": "collection"
+  },
+  {
+    "natural_language": "Brown's physics articles",
+    "ads_query": "database:physics author:\"Brown\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "general collection papers",
+    "ads_query": "database:general",
+    "category": "collection"
+  },
+  {
+    "natural_language": "search for general collection papers",
+    "ads_query": "database:general",
+    "category": "collection"
+  },
+  {
+    "natural_language": "looking for general science articles",
+    "ads_query": "database:general",
+    "category": "collection"
+  },
+  {
+    "natural_language": "find general science literature about scientific instruments",
+    "ads_query": "database:general abs:\"scientific instruments\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "papers from the general database related to scientific instruments",
+    "ads_query": "database:general abs:\"scientific instruments\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "show me general science literature on science policy",
+    "ads_query": "database:general abs:\"science policy\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "general science articles discussing scientific instruments",
+    "ads_query": "database:general abs:\"scientific instruments\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "search interdisciplinary papers for data science",
+    "ads_query": "database:general abs:\"data science\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "interdisciplinary papers published in 2018",
+    "ads_query": "database:general year:2018",
+    "category": "collection"
+  },
+  {
+    "natural_language": "papers from the general database about measurement techniques from 2021",
+    "ads_query": "database:general abs:\"measurement techniques\" year:2021",
+    "category": "collection"
+  },
+  {
+    "natural_language": "interdisciplinary papers from 2021",
+    "ads_query": "database:general year:2021",
+    "category": "collection"
+  },
+  {
+    "natural_language": "peer-reviewed general science papers",
+    "ads_query": "database:general property:refereed",
+    "category": "collection"
+  },
+  {
+    "natural_language": "Taylor's general science articles",
+    "ads_query": "database:general author:\"Taylor\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "looking for papers from the earth science database",
+    "ads_query": "database:earthscience",
+    "category": "collection"
+  },
+  {
+    "natural_language": "search for earth science literature",
+    "ads_query": "database:earthscience",
+    "category": "collection"
+  },
+  {
+    "natural_language": "earth science literature",
+    "ads_query": "database:earthscience",
+    "category": "collection"
+  },
+  {
+    "natural_language": "find climate research papers",
+    "ads_query": "database:earthscience",
+    "category": "collection"
+  },
+  {
+    "natural_language": "show me atmospheric science papers",
+    "ads_query": "database:earthscience",
+    "category": "collection"
+  },
+  {
+    "natural_language": "climate research papers related to planetary surfaces",
+    "ads_query": "database:earthscience abs:\"planetary surfaces\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "earth science literature about planetary atmospheres",
+    "ads_query": "database:earthscience abs:\"planetary atmospheres\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "geology papers related to Venus atmosphere",
+    "ads_query": "database:earthscience abs:\"Venus atmosphere\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "show me papers from the earth science database on meteorites",
+    "ads_query": "database:earthscience abs:\"meteorites\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "search planetary science research for space weather",
+    "ads_query": "database:earthscience abs:\"space weather\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "find earth and planetary papers about planetary surfaces",
+    "ads_query": "database:earthscience abs:\"planetary surfaces\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "show me geoscience papers on planetary surfaces",
+    "ads_query": "database:earthscience abs:\"planetary surfaces\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "planetary science papers on geochemistry",
+    "ads_query": "database:earthscience abs:\"geochemistry\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "geoscience papers about plate tectonics",
+    "ads_query": "database:earthscience abs:\"plate tectonics\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "find climate research papers about ice sheets",
+    "ads_query": "database:earthscience abs:\"ice sheets\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "latest papers from the earth science database",
+    "ads_query": "database:earthscience pubdate:[2023-01 TO 2026-12]",
+    "category": "collection"
+  },
+  {
+    "natural_language": "oceanography papers published in 2024",
+    "ads_query": "database:earthscience year:2024",
+    "category": "collection"
+  },
+  {
+    "natural_language": "recent earth system science papers",
+    "ads_query": "database:earthscience pubdate:[2023-01 TO 2026-12]",
+    "category": "collection"
+  },
+  {
+    "natural_language": "space weather research on lunar science published in 2021",
+    "ads_query": "database:earthscience abs:\"lunar science\" year:2021",
+    "category": "collection"
+  },
+  {
+    "natural_language": "recent papers from the earth science database",
+    "ads_query": "database:earthscience pubdate:[2023-01 TO 2026-12]",
+    "category": "collection"
+  },
+  {
+    "natural_language": "refereed planetary science papers about planetary atmospheres from 2025",
+    "ads_query": "database:earthscience abs:\"planetary atmospheres\" property:refereed year:2025",
+    "category": "collection"
+  },
+  {
+    "natural_language": "refereed planetary science papers about paleoclimate",
+    "ads_query": "database:earthscience abs:\"paleoclimate\" property:refereed",
+    "category": "collection"
+  },
+  {
+    "natural_language": "peer-reviewed geoscience papers",
+    "ads_query": "database:earthscience property:refereed",
+    "category": "collection"
+  },
+  {
+    "natural_language": "planetary science papers by Wilson",
+    "ads_query": "database:earthscience author:\"Wilson\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "Brown's papers from the earth science database",
+    "ads_query": "database:earthscience author:\"Brown\"",
+    "category": "collection"
+  },
+  {
+    "natural_language": "get meeting abstracts",
+    "ads_query": "doctype:abstract",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find conference abstracts",
+    "ads_query": "doctype:abstract",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find AAS meeting abstracts",
+    "ads_query": "doctype:abstract",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "poster abstracts related to black holes",
+    "ads_query": "doctype:abstract abs:\"black holes\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "AAS meeting abstracts on exoplanets",
+    "ads_query": "doctype:abstract abs:\"exoplanets\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "conference abstracts by Rubin",
+    "ads_query": "doctype:abstract author:\"Rubin\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "conference abstracts from 2018",
+    "ads_query": "doctype:abstract year:2018",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "looking for book reviews",
+    "ads_query": "doctype:bookreview",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "show me reviews of books",
+    "ads_query": "doctype:bookreview",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "get published book reviews",
+    "ads_query": "doctype:bookreview",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "textbook reviews related to astrophysics",
+    "ads_query": "doctype:bookreview abs:\"astrophysics\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "show me book evaluations on cosmology",
+    "ads_query": "doctype:bookreview abs:\"cosmology\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "textbook reviews from 2020",
+    "ads_query": "doctype:bookreview year:2020",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent reviews of astronomy books",
+    "ads_query": "doctype:bookreview pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find circulars",
+    "ads_query": "doctype:circular",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "search for astronomer's telegrams",
+    "ads_query": "doctype:circular",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "I want ATels",
+    "ads_query": "doctype:circular",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find transient circulars about supernovae",
+    "ads_query": "doctype:circular abs:\"supernovae\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "discovery circulars related to fast radio bursts",
+    "ads_query": "doctype:circular abs:\"fast radio bursts\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "observation circulars from 2022",
+    "ads_query": "doctype:circular year:2022",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "IAU circulars by Riess",
+    "ads_query": "doctype:circular author:\"Riess\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find editorials",
+    "ads_query": "doctype:editorial",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "get editor's notes",
+    "ads_query": "doctype:editorial",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "show me editorial content",
+    "ads_query": "doctype:editorial",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "astronomy policy editor comments",
+    "ads_query": "doctype:editorial abs:\"astronomy policy\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "astronomy policy journal editorials",
+    "ads_query": "doctype:editorial abs:\"astronomy policy\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "editor comments about peer review from 2020",
+    "ads_query": "doctype:editorial abs:\"peer review\" year:2020",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "editorial pieces published in 2019",
+    "ads_query": "doctype:editorial year:2019",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "looking for errata",
+    "ads_query": "doctype:erratum",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "get corrections",
+    "ads_query": "doctype:erratum",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "show me erratum notices",
+    "ads_query": "doctype:erratum",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "corrigenda discussing photometry",
+    "ads_query": "doctype:erratum abs:\"photometry\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "show me erratum to papers on data analysis",
+    "ads_query": "doctype:erratum abs:\"data analysis\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent article corrections",
+    "ads_query": "doctype:erratum pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "erratum to papers about data analysis from 2021",
+    "ads_query": "doctype:erratum abs:\"data analysis\" year:2021",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "looking for book chapters",
+    "ads_query": "doctype:inbook",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "get chapters in books",
+    "ads_query": "doctype:inbook",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "search for book sections",
+    "ads_query": "doctype:inbook",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "handbook chapters on radiative transfer",
+    "ads_query": "doctype:inbook abs:\"radiative transfer\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "handbook chapters related to interstellar medium",
+    "ads_query": "doctype:inbook abs:\"interstellar medium\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "book sections published in 2022",
+    "ads_query": "doctype:inbook year:2022",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent chapters from textbooks on galactic structure",
+    "ads_query": "doctype:inbook abs:\"galactic structure\" pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "looking for masters theses",
+    "ads_query": "doctype:mastersthesis",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "master's thesis",
+    "ads_query": "doctype:mastersthesis",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find MS theses",
+    "ads_query": "doctype:mastersthesis",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "variable stars masters theses",
+    "ads_query": "doctype:mastersthesis abs:\"variable stars\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "MS theses on planetary atmospheres",
+    "ads_query": "doctype:mastersthesis abs:\"planetary atmospheres\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "peer-reviewed masters dissertations",
+    "ads_query": "doctype:mastersthesis property:refereed",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "masters theses published in 2022",
+    "ads_query": "doctype:mastersthesis year:2022",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "I want miscellaneous documents",
+    "ads_query": "doctype:misc",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "get uncategorized papers",
+    "ads_query": "doctype:misc",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "search for other documents",
+    "ads_query": "doctype:misc",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "other records about facility documentation",
+    "ads_query": "doctype:misc abs:\"facility documentation\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "other content on astronomy history",
+    "ads_query": "doctype:misc abs:\"astronomy history\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "other records by Perlmutter",
+    "ads_query": "doctype:misc author:\"Perlmutter\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "other records by Thorne",
+    "ads_query": "doctype:misc author:\"Thorne\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "show me newsletters",
+    "ads_query": "doctype:newsletter",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "search for society newsletters",
+    "ads_query": "doctype:newsletter",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "I want observatory newsletters",
+    "ads_query": "doctype:newsletter",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "newsletters on funding news",
+    "ads_query": "doctype:newsletter abs:\"funding news\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find institutional newsletters about observatory news",
+    "ads_query": "doctype:newsletter abs:\"observatory news\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "astronomical newsletters from 2018",
+    "ads_query": "doctype:newsletter year:2018",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent society newsletters",
+    "ads_query": "doctype:newsletter pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "I want obituaries",
+    "ads_query": "doctype:obituary",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "looking for memorial articles",
+    "ads_query": "doctype:obituary",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "I want tributes",
+    "ads_query": "doctype:obituary",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "tributes on observatory directors",
+    "ads_query": "doctype:obituary abs:\"observatory directors\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "tributes discussing Nobel laureates",
+    "ads_query": "doctype:obituary abs:\"Nobel laureates\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent obituary notices on astrophysicists",
+    "ads_query": "doctype:obituary abs:\"astrophysicists\" pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "biographical memoirs by Ghez",
+    "ads_query": "doctype:obituary author:\"Ghez\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "looking for press releases",
+    "ads_query": "doctype:pressrelease",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "news releases",
+    "ads_query": "doctype:pressrelease",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find media releases",
+    "ads_query": "doctype:pressrelease",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "NASA press releases on exoplanet discoveries",
+    "ads_query": "doctype:pressrelease abs:\"exoplanet discoveries\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find press releases about major discoveries",
+    "ads_query": "doctype:pressrelease abs:\"major discoveries\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent NASA press releases on major discoveries",
+    "ads_query": "doctype:pressrelease abs:\"major discoveries\" pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "press releases from 2018",
+    "ads_query": "doctype:pressrelease year:2018",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "I want conference talks",
+    "ads_query": "doctype:talk",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "search for research talks",
+    "ads_query": "doctype:talk",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find invited talks",
+    "ads_query": "doctype:talk",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "presentations discussing numerical simulations",
+    "ads_query": "doctype:talk abs:\"numerical simulations\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "oral presentations related to data science",
+    "ads_query": "doctype:talk abs:\"data science\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "oral presentations from 2024",
+    "ads_query": "doctype:talk year:2024",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent research talks",
+    "ads_query": "doctype:talk pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "proceedings volumes",
+    "ads_query": "doctype:proceedings",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "conference proceedings",
+    "ads_query": "doctype:proceedings",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "proceedings books",
+    "ads_query": "doctype:proceedings",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "IAU symposia proceedings volumes",
+    "ads_query": "doctype:proceedings abs:\"IAU symposia\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "proceedings of conferences about ASP conferences",
+    "ads_query": "doctype:proceedings abs:\"ASP conferences\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "peer-reviewed symposium proceedings",
+    "ads_query": "doctype:proceedings property:refereed",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "proceedings of conferences from 2025",
+    "ads_query": "doctype:proceedings year:2025",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "papers citing the Riess et al. 2018 paper",
+    "ads_query": "citations(author:Riess)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers that cite Planck 2018 results",
+    "ads_query": "citations(abs:\"Planck 2018 results\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "work citing Einstein 1905",
+    "ads_query": "citations(author:Einstein)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "research citing Hawking 1974 paper on black holes",
+    "ads_query": "citations(author:Hawking)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "studies citing the LIGO detection paper",
+    "ads_query": "citations(abs:\"the LIGO detection paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "articles citing Gaia DR2 paper",
+    "ads_query": "citations(abs:\"Gaia DR2 paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "works that cite the original SDSS paper",
+    "ads_query": "citations(abs:\"the original SDSS paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers which cite Hubble deep field paper",
+    "ads_query": "citations(abs:\"Hubble deep field paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "the CMB discovery paper cited by",
+    "ads_query": "citations(abs:\"the CMB discovery paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "who cited WMAP results",
+    "ads_query": "citations(abs:\"WMAP results\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "citations to this paper",
+    "ads_query": "citations(bibcode:PLACEHOLDER)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "citations of that article",
+    "ads_query": "citations(bibcode:PLACEHOLDER)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "find citations to the 2016 gravitational wave paper",
+    "ads_query": "citations(abs:\"the 2016 gravitational wave paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "get citations of Perlmutter et al. supernova paper",
+    "ads_query": "citations(author:Perlmutter)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "show citations to Mayor & Queloz exoplanet paper",
+    "ads_query": "citations(abs:\"Mayor & Queloz exoplanet paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "list citations of the 2019 black hole image paper",
+    "ads_query": "citations(abs:\"the 2019 black hole image paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "how many papers cite Hawking",
+    "ads_query": "citations(author:Hawking)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "what research cites Einstein papers",
+    "ads_query": "citations(author:Einstein)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "references of the Riess et al. 2018 paper",
+    "ads_query": "references(author:Riess)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "references from Planck 2018 results",
+    "ads_query": "references(abs:\"Planck 2018 results\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers referenced by Einstein 1905",
+    "ads_query": "references(author:Einstein)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "bibliography of Hawking 1974 paper on black holes",
+    "ads_query": "references(author:Hawking)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers cited in the LIGO detection paper",
+    "ads_query": "references(abs:\"the LIGO detection paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "sources cited by Gaia DR2 paper",
+    "ads_query": "references(abs:\"Gaia DR2 paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "works cited by the original SDSS paper",
+    "ads_query": "references(abs:\"the original SDSS paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "what does Hubble deep field paper cite",
+    "ads_query": "references(abs:\"Hubble deep field paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "what papers does the CMB discovery paper cite",
+    "ads_query": "references(abs:\"the CMB discovery paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers WMAP results cites",
+    "ads_query": "references(abs:\"WMAP results\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers they cite in this paper",
+    "ads_query": "references(bibcode:PLACEHOLDER)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "show references of that article",
+    "ads_query": "references(bibcode:PLACEHOLDER)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "list references from the 2016 gravitational wave paper",
+    "ads_query": "references(abs:\"the 2016 gravitational wave paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "what sources did Perlmutter et al. supernova paper use",
+    "ads_query": "references(author:Perlmutter)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "references used in Mayor & Queloz exoplanet paper",
+    "ads_query": "references(abs:\"Mayor & Queloz exoplanet paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "hot topics in dark matter",
+    "ads_query": "trending(abs:\"dark matter\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "hot papers in dark energy",
+    "ads_query": "trending(abs:\"dark energy\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "hot research in black holes",
+    "ads_query": "trending(abs:\"black holes\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "what's hot in exoplanets",
+    "ads_query": "trending(abs:\"exoplanets\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "trending papers in galaxy formation",
+    "ads_query": "trending(abs:\"galaxy formation\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "trending research in gravitational waves",
+    "ads_query": "trending(abs:\"gravitational waves\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "trending topics in cosmic microwave background",
+    "ads_query": "trending(abs:\"cosmic microwave background\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "what's trending in neutron stars",
+    "ads_query": "trending(abs:\"neutron stars\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "trending now in supernovae",
+    "ads_query": "trending(abs:\"supernovae\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "popular papers in stellar evolution",
+    "ads_query": "trending(abs:\"stellar evolution\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "popular research in cosmology",
+    "ads_query": "trending(abs:\"cosmology\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "currently popular in quasars",
+    "ads_query": "trending(abs:\"quasars\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "popular now in AGN",
+    "ads_query": "trending(abs:\"AGN\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "popular recently in star formation",
+    "ads_query": "trending(abs:\"star formation\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "recently popular in galactic dynamics",
+    "ads_query": "trending(abs:\"galactic dynamics\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "what's popular in interstellar medium",
+    "ads_query": "trending(abs:\"interstellar medium\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "hot in planet formation",
+    "ads_query": "trending(abs:\"planet formation\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "similar to the Riess et al. 2018 paper",
+    "ads_query": "similar(author:Riess)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "similar papers to Planck 2018 results",
+    "ads_query": "similar(abs:\"Planck 2018 results\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers similar to Einstein 1905",
+    "ads_query": "similar(author:Einstein)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "work similar to Hawking 1974 paper on black holes",
+    "ads_query": "similar(author:Hawking)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "studies similar to the LIGO detection paper",
+    "ads_query": "similar(abs:\"the LIGO detection paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "find similar to Gaia DR2 paper",
+    "ads_query": "similar(abs:\"Gaia DR2 paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "related to the original SDSS paper",
+    "ads_query": "similar(abs:\"the original SDSS paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "related papers to Hubble deep field paper",
+    "ads_query": "similar(abs:\"Hubble deep field paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "research related to the CMB discovery paper",
+    "ads_query": "similar(abs:\"the CMB discovery paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers like WMAP results",
+    "ads_query": "similar(abs:\"WMAP results\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "works like this paper",
+    "ads_query": "similar(bibcode:PLACEHOLDER)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "articles like that article",
+    "ads_query": "similar(bibcode:PLACEHOLDER)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "studies like the 2016 gravitational wave paper",
+    "ads_query": "similar(abs:\"the 2016 gravitational wave paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers resembling Perlmutter et al. supernova paper",
+    "ads_query": "similar(author:Perlmutter)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "studies resembling Mayor & Queloz exoplanet paper",
+    "ads_query": "similar(abs:\"Mayor & Queloz exoplanet paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "similar work to the 2019 black hole image paper",
+    "ads_query": "similar(abs:\"the 2019 black hole image paper\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "similar research to Hawking",
+    "ads_query": "similar(author:Hawking)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "similar studies to Einstein papers",
+    "ads_query": "similar(author:Einstein)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "comparable papers to Penrose publications",
+    "ads_query": "similar(author:Penrose)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "comparable work to Riess et al.",
+    "ads_query": "similar(author:Riess)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "useful papers on dark matter",
+    "ads_query": "useful(abs:\"dark matter\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "most useful papers on dark energy",
+    "ads_query": "useful(abs:\"dark energy\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "high utility papers on black holes",
+    "ads_query": "useful(abs:\"black holes\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "helpful papers on exoplanets",
+    "ads_query": "useful(abs:\"exoplanets\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "helpful research on galaxy formation",
+    "ads_query": "useful(abs:\"galaxy formation\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "helpful work on gravitational waves",
+    "ads_query": "useful(abs:\"gravitational waves\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "foundational work on cosmic microwave background",
+    "ads_query": "useful(abs:\"cosmic microwave background\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "foundational papers on neutron stars",
+    "ads_query": "useful(abs:\"neutron stars\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "essential reading on supernovae",
+    "ads_query": "useful(abs:\"supernovae\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "essential papers on stellar evolution",
+    "ads_query": "useful(abs:\"stellar evolution\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "must-read papers on cosmology",
+    "ads_query": "useful(abs:\"cosmology\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "must read papers on quasars",
+    "ads_query": "useful(abs:\"quasars\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "key papers on AGN",
+    "ads_query": "useful(abs:\"AGN\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "key references on star formation",
+    "ads_query": "useful(abs:\"star formation\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "seminal papers on galactic dynamics",
+    "ads_query": "useful(abs:\"galactic dynamics\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "seminal work on interstellar medium",
+    "ads_query": "useful(abs:\"interstellar medium\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "landmark papers in planet formation",
+    "ads_query": "useful(abs:\"planet formation\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "important papers on galaxy clusters",
+    "ads_query": "useful(abs:\"galaxy clusters\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "review articles on dark matter",
+    "ads_query": "reviews(abs:\"dark matter\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "reviews of black holes",
+    "ads_query": "reviews(abs:\"black holes\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "reviews on exoplanets",
+    "ads_query": "reviews(abs:\"exoplanets\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "reviews about galaxy formation",
+    "ads_query": "reviews(abs:\"galaxy formation\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "find reviews on gravitational waves",
+    "ads_query": "reviews(abs:\"gravitational waves\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "survey papers on cosmic microwave background",
+    "ads_query": "reviews(abs:\"cosmic microwave background\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "survey articles on neutron stars",
+    "ads_query": "reviews(abs:\"neutron stars\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "survey of supernovae",
+    "ads_query": "reviews(abs:\"supernovae\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "survey on stellar evolution",
+    "ads_query": "reviews(abs:\"stellar evolution\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "survey about cosmology",
+    "ads_query": "reviews(abs:\"cosmology\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "overviews of quasars",
+    "ads_query": "reviews(abs:\"quasars\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "overview papers on AGN",
+    "ads_query": "reviews(abs:\"AGN\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "comprehensive reviews on star formation",
+    "ads_query": "reviews(abs:\"star formation\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "comprehensive survey of galactic dynamics",
+    "ads_query": "reviews(abs:\"galactic dynamics\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "literature review on interstellar medium",
+    "ads_query": "reviews(abs:\"interstellar medium\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "review of the literature on planet formation",
+    "ads_query": "reviews(abs:\"planet formation\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "systematic review of galaxy clusters",
+    "ads_query": "reviews(abs:\"galaxy clusters\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "state-of-the-art review on gamma-ray bursts",
+    "ads_query": "reviews(abs:\"gamma-ray bursts\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "tutorial on pulsars",
+    "ads_query": "reviews(abs:\"pulsars\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "tutorial papers on redshift surveys",
+    "ads_query": "reviews(abs:\"redshift surveys\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "top 10 papers on dark matter",
+    "ads_query": "topn(10, abs:\"dark matter\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "top 10 papers about dark energy",
+    "ads_query": "topn(10, abs:\"dark energy\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "top 5 papers on black holes",
+    "ads_query": "topn(5, abs:\"black holes\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "top 20 papers on exoplanets",
+    "ads_query": "topn(20, abs:\"exoplanets\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "top 100 papers on galaxy formation",
+    "ads_query": "topn(10, abs:\"galaxy formation\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "most cited papers on gravitational waves",
+    "ads_query": "topn(10, abs:\"gravitational waves\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "most cited papers in cosmic microwave background",
+    "ads_query": "topn(10, abs:\"cosmic microwave background\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "most cited articles on neutron stars",
+    "ads_query": "topn(10, abs:\"neutron stars\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "highest cited papers on supernovae",
+    "ads_query": "topn(10, abs:\"supernovae\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "highly cited papers on stellar evolution",
+    "ads_query": "topn(10, abs:\"stellar evolution\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "best papers on cosmology",
+    "ads_query": "topn(10, abs:\"cosmology\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "best papers about quasars",
+    "ads_query": "topn(10, abs:\"quasars\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "best papers in AGN",
+    "ads_query": "topn(10, abs:\"AGN\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "top ranked papers on star formation",
+    "ads_query": "topn(10, abs:\"star formation\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "top papers on galactic dynamics",
+    "ads_query": "topn(10, abs:\"galactic dynamics\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "top papers in interstellar medium",
+    "ads_query": "topn(10, abs:\"interstellar medium\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers with most citations on planet formation",
+    "ads_query": "topn(10, abs:\"planet formation\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers with highest citation count on galaxy clusters",
+    "ads_query": "topn(10, abs:\"galaxy clusters\", citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "citations to dark matter papers from 2020",
+    "ads_query": "citations(abs:\"dark matter\" year:2020)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "who cited Hawking's papers since 2015",
+    "ads_query": "citations(author:Hawking) year:[2015 TO *]",
+    "category": "operator"
+  },
+  {
+    "natural_language": "recent papers citing the CMB discovery",
+    "ads_query": "citations(abs:\"cosmic microwave background\") year:[2020 TO *]",
+    "category": "operator"
+  },
+  {
+    "natural_language": "refereed papers in the references of Planck 2018",
+    "ads_query": "references(abs:\"Planck 2018\") property:refereed",
+    "category": "operator"
+  },
+  {
+    "natural_language": "what sources did the LIGO paper cite",
+    "ads_query": "references(abs:\"LIGO gravitational wave\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "hot topics in exoplanets this year",
+    "ads_query": "trending(abs:\"exoplanets\") year:2025",
+    "category": "operator"
+  },
+  {
+    "natural_language": "currently trending in machine learning astronomy",
+    "ads_query": "trending(abs:\"machine learning astronomy\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers similar to Weinberg's cosmology work",
+    "ads_query": "similar(author:Weinberg abs:\"cosmology\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "find similar to the dark energy papers",
+    "ads_query": "similar(abs:\"dark energy\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "foundational papers on galaxy formation by Rees",
+    "ads_query": "useful(abs:\"galaxy formation\" author:Rees)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "must-read papers on gravitational lensing",
+    "ads_query": "useful(abs:\"gravitational lensing\")",
+    "category": "operator"
+  },
+  {
+    "natural_language": "recent review articles on black holes",
+    "ads_query": "reviews(abs:\"black holes\") year:[2020 TO *]",
+    "category": "operator"
+  },
+  {
+    "natural_language": "survey papers on stellar evolution from 2019",
+    "ads_query": "reviews(abs:\"stellar evolution\") year:2019",
+    "category": "operator"
+  },
+  {
+    "natural_language": "most cited papers on neutron stars from 2015",
+    "ads_query": "topn(10, abs:\"neutron stars\" year:[2015 TO *], citation_count)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "get non-peer-reviewed papers",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "find non-refereed papers",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers that aren't peer-reviewed",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "unrefereed papers related to exoplanets",
+    "ads_query": "property:notrefereed abs:\"exoplanets\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers that aren't peer-reviewed on dark matter",
+    "ads_query": "property:notrefereed abs:\"dark matter\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "non-refereed papers by Smith",
+    "ads_query": "property:notrefereed author:\"Smith\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers without peer review from 2018",
+    "ads_query": "property:notrefereed year:2018",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers that are not refereed",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers that are not refereed about cosmology",
+    "ads_query": "property:notrefereed abs:\"cosmology\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers not peer reviewed",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers not peer reviewed about cosmology",
+    "ads_query": "property:notrefereed abs:\"cosmology\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me exclude peer-reviewed papers",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "exclude peer-reviewed papers about dark matter",
+    "ads_query": "property:notrefereed abs:\"dark matter\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "find only non-refereed",
+    "ads_query": "property:notrefereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "only non-refereed about cosmology",
+    "ads_query": "property:notrefereed abs:\"cosmology\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for preprints",
+    "ads_query": "property:eprint",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for arxiv papers",
+    "ads_query": "property:eprint",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me preprint papers",
+    "ads_query": "property:eprint",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers on arxiv on gravitational waves",
+    "ads_query": "property:eprint abs:\"gravitational waves\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "pre-publication papers about gravitational waves",
+    "ads_query": "property:eprint abs:\"gravitational waves\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers on arxiv published in 2025",
+    "ads_query": "property:eprint year:2025",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent arxiv papers on quasars",
+    "ads_query": "property:eprint abs:\"quasars\" pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "I want data catalogs",
+    "ads_query": "property:catalog",
+    "category": "property"
+  },
+  {
+    "natural_language": "get catalog papers",
+    "ads_query": "property:catalog",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for astronomical catalogs",
+    "ads_query": "property:catalog",
+    "category": "property"
+  },
+  {
+    "natural_language": "galaxies catalog data products",
+    "ads_query": "property:catalog abs:\"galaxies\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "catalog papers related to stellar populations",
+    "ads_query": "property:catalog abs:\"stellar populations\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent survey catalogs",
+    "ads_query": "property:catalog pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent survey catalogs on transients",
+    "ads_query": "property:catalog abs:\"transients\" pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for regular articles",
+    "ads_query": "property:article",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for journal articles only",
+    "ads_query": "property:article",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me standard articles",
+    "ads_query": "property:article",
+    "category": "property"
+  },
+  {
+    "natural_language": "full journal articles related to spectroscopy",
+    "ads_query": "property:article abs:\"spectroscopy\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "standard articles discussing photometry",
+    "ads_query": "property:article abs:\"photometry\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "traditional articles from 2021",
+    "ads_query": "property:article year:2021",
+    "category": "property"
+  },
+  {
+    "natural_language": "regular articles about photometry from 2023",
+    "ads_query": "property:article abs:\"photometry\" year:2023",
+    "category": "property"
+  },
+  {
+    "natural_language": "non-article papers",
+    "ads_query": "property:nonarticle",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for non-articles",
+    "ads_query": "property:nonarticle",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers that are not articles",
+    "ads_query": "property:nonarticle",
+    "category": "property"
+  },
+  {
+    "natural_language": "posters and abstracts on star formation",
+    "ads_query": "property:nonarticle abs:\"star formation\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "abstracts and proceedings related to instrumentation",
+    "ads_query": "property:nonarticle abs:\"instrumentation\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "abstracts and proceedings by Jones",
+    "ads_query": "property:nonarticle author:\"Jones\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent conference abstracts",
+    "ads_query": "property:nonarticle pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me exclude regular articles",
+    "ads_query": "property:nonarticle",
+    "category": "property"
+  },
+  {
+    "natural_language": "exclude regular articles about star formation",
+    "ads_query": "property:nonarticle abs:\"star formation\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "find not regular articles",
+    "ads_query": "property:nonarticle",
+    "category": "property"
+  },
+  {
+    "natural_language": "not regular articles about instrumentation",
+    "ads_query": "property:nonarticle abs:\"instrumentation\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "only non-articles",
+    "ads_query": "property:nonarticle",
+    "category": "property"
+  },
+  {
+    "natural_language": "only non-articles about AGN",
+    "ads_query": "property:nonarticle abs:\"AGN\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "I want conference papers",
+    "ads_query": "property:inproceedings",
+    "category": "property"
+  },
+  {
+    "natural_language": "find conference proceedings",
+    "ads_query": "property:inproceedings",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me proceedings papers",
+    "ads_query": "property:inproceedings",
+    "category": "property"
+  },
+  {
+    "natural_language": "proceedings papers related to detector technology",
+    "ads_query": "property:inproceedings abs:\"detector technology\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "conference proceedings discussing detector technology",
+    "ads_query": "property:inproceedings abs:\"detector technology\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent symposium papers on telescope design",
+    "ads_query": "property:inproceedings abs:\"telescope design\" pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed conference publications",
+    "ads_query": "property:inproceedings property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with associated articles",
+    "ads_query": "property:associated",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me articles with companion papers",
+    "ads_query": "property:associated",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers having associated content",
+    "ads_query": "property:associated",
+    "category": "property"
+  },
+  {
+    "natural_language": "articles with associated publications about multi-wavelength studies",
+    "ads_query": "property:associated abs:\"multi-wavelength studies\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers with linked articles about surveys",
+    "ads_query": "property:associated abs:\"surveys\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed articles with associated publications",
+    "ads_query": "property:associated property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers having associated content from 2018",
+    "ads_query": "property:associated year:2018",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for papers with table of contents",
+    "ads_query": "property:toc",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for articles with toc",
+    "ads_query": "property:toc",
+    "category": "property"
+  },
+  {
+    "natural_language": "publications with table of contents",
+    "ads_query": "property:toc",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with table of contents about textbooks",
+    "ads_query": "property:toc abs:\"textbooks\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "reviews publications with table of contents",
+    "ads_query": "property:toc abs:\"reviews\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "refereed articles with toc",
+    "ads_query": "property:toc property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with table of contents by Williams",
+    "ads_query": "property:toc author:\"Williams\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "get papers with presentations",
+    "ads_query": "property:presentation",
+    "category": "property"
+  },
+  {
+    "natural_language": "articles with media presentations",
+    "ads_query": "property:presentation",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for publications with video presentations",
+    "ads_query": "property:presentation",
+    "category": "property"
+  },
+  {
+    "natural_language": "publications with video presentations on survey results",
+    "ads_query": "property:presentation abs:\"survey results\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "data analysis methods articles with recorded talks",
+    "ads_query": "property:presentation abs:\"data analysis methods\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent articles with recorded talks",
+    "ads_query": "property:presentation pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent papers with associated presentations on survey results",
+    "ads_query": "property:presentation abs:\"survey results\" pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for papers with electronic sources",
+    "ads_query": "property:esource",
+    "category": "property"
+  },
+  {
+    "natural_language": "articles with online access",
+    "ads_query": "property:esource",
+    "category": "property"
+  },
+  {
+    "natural_language": "find publications with electronic versions",
+    "ads_query": "property:esource",
+    "category": "property"
+  },
+  {
+    "natural_language": "articles with online access on recent research",
+    "ads_query": "property:esource abs:\"recent research\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers with electronic sources about current studies",
+    "ads_query": "property:esource abs:\"current studies\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent articles with e-sources",
+    "ads_query": "property:esource pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "refereed articles with online access",
+    "ads_query": "property:esource property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers in INSPIRE",
+    "ads_query": "property:inspire",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for INSPIRE database papers",
+    "ads_query": "property:inspire",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me articles indexed in INSPIRE",
+    "ads_query": "property:inspire",
+    "category": "property"
+  },
+  {
+    "natural_language": "find INSPIRE-indexed articles about collider physics",
+    "ads_query": "property:inspire abs:\"collider physics\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers from INSPIRE on high energy physics",
+    "ads_query": "property:inspire abs:\"high energy physics\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "INSPIRE database papers by Miller",
+    "ads_query": "property:inspire author:\"Miller\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed papers in INSPIRE",
+    "ads_query": "property:inspire property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers in library catalogs",
+    "ads_query": "property:library_catalog",
+    "category": "property"
+  },
+  {
+    "natural_language": "library catalog entries",
+    "ads_query": "property:library_catalog",
+    "category": "property"
+  },
+  {
+    "natural_language": "I want cataloged library papers",
+    "ads_query": "property:library_catalog",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers in library catalogs related to foundational research",
+    "ads_query": "property:library_catalog abs:\"foundational research\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "articles in library systems related to historical astronomy",
+    "ads_query": "property:library_catalog abs:\"historical astronomy\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "refereed papers indexed in library catalogs",
+    "ads_query": "property:library_catalog property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "recent library catalog entries",
+    "ads_query": "property:library_catalog pubdate:[2023-01 TO 2026-12]",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me papers with ADS open access",
+    "ads_query": "property:ads_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "ADS open access papers",
+    "ads_query": "property:ads_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me open access from ADS",
+    "ads_query": "property:ads_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "find papers freely available through ADS about solar physics",
+    "ads_query": "property:ads_openaccess abs:\"solar physics\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "stellar astrophysics papers with ADS open access",
+    "ads_query": "property:ads_openaccess abs:\"stellar astrophysics\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed papers with ADS open access",
+    "ads_query": "property:ads_openaccess property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed ADS open access papers",
+    "ads_query": "property:ads_openaccess property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "author-submitted open access papers",
+    "ads_query": "property:author_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me papers with author-provided open access",
+    "ads_query": "property:author_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "I want author open access versions",
+    "ads_query": "property:author_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me author-submitted open access papers on theoretical models",
+    "ads_query": "property:author_openaccess abs:\"theoretical models\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me author-submitted open access papers on simulations",
+    "ads_query": "property:author_openaccess abs:\"simulations\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with author-hosted PDFs published in 2025",
+    "ads_query": "property:author_openaccess year:2025",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with author-provided open access from 2018",
+    "ads_query": "property:author_openaccess year:2018",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for papers with arxiv open access",
+    "ads_query": "property:eprint_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "get preprint open access papers",
+    "ads_query": "property:eprint_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "looking for open access from preprint servers",
+    "ads_query": "property:eprint_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "open access preprints about extragalactic astronomy",
+    "ads_query": "property:eprint_openaccess abs:\"extragalactic astronomy\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with arxiv open access about dark energy",
+    "ads_query": "property:eprint_openaccess abs:\"dark energy\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "eprint open access versions by Williams",
+    "ads_query": "property:eprint_openaccess author:\"Williams\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed preprint open access papers",
+    "ads_query": "property:eprint_openaccess property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "get publisher open access papers",
+    "ads_query": "property:pub_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "I want papers with publisher open access",
+    "ads_query": "property:pub_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me open access from publishers",
+    "ads_query": "property:pub_openaccess",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me publisher open access papers on high-impact journals",
+    "ads_query": "property:pub_openaccess abs:\"high-impact journals\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers freely available from publisher on high-impact journals",
+    "ads_query": "property:pub_openaccess abs:\"high-impact journals\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "refereed papers freely available from publisher",
+    "ads_query": "property:pub_openaccess property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers with publisher open access published in 2021",
+    "ads_query": "property:pub_openaccess year:2021",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for papers with OCR abstracts",
+    "ads_query": "property:ocr_abstract",
+    "category": "property"
+  },
+  {
+    "natural_language": "articles with scanned abstracts",
+    "ads_query": "property:ocr_abstract",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me papers with digitized abstracts",
+    "ads_query": "property:ocr_abstract",
+    "category": "property"
+  },
+  {
+    "natural_language": "scanned paper abstracts related to early discoveries",
+    "ads_query": "property:ocr_abstract abs:\"early discoveries\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me papers with digitized abstracts on historical observations",
+    "ads_query": "property:ocr_abstract abs:\"historical observations\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "refereed OCR-processed abstracts",
+    "ads_query": "property:ocr_abstract property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "peer-reviewed papers with optical character recognition abstracts",
+    "ads_query": "property:ocr_abstract property:refereed",
+    "category": "property"
+  },
+  {
+    "natural_language": "show me software papers",
+    "ads_query": "property:software",
+    "category": "property"
+  },
+  {
+    "natural_language": "search for papers about software",
+    "ads_query": "property:software",
+    "category": "property"
+  },
+  {
+    "natural_language": "find software publications",
+    "ads_query": "property:software",
+    "category": "property"
+  },
+  {
+    "natural_language": "software publications on analysis tools",
+    "ads_query": "property:software abs:\"analysis tools\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "code papers on visualization software",
+    "ads_query": "property:software abs:\"visualization software\"",
+    "category": "property"
+  },
+  {
+    "natural_language": "papers describing software published in 2018",
+    "ads_query": "property:software year:2018",
+    "category": "property"
+  },
+  {
+    "natural_language": "software documentation papers published in 2022",
+    "ads_query": "property:software year:2022",
+    "category": "property"
   }
 ]
