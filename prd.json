@@ -140,7 +140,7 @@
         "Manual verification: test 3 queries in browser"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Cross-repo change. Nectar consumes the pipeline output."
     },
     {

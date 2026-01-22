@@ -254,3 +254,38 @@ Thread: https://ampcode.com/threads/T-019be395-dcf2-765f-b1b4-b518cd8e8bc4
 - **Separate concerns**: Different test classes for different failure categories makes maintenance easier
 
 ---
+
+## 2026-01-22 - US-006: Integrate pipeline into Nectar API endpoint
+Thread: https://ampcode.com/threads/T-019be398-4d8d-7495-82e7-af35615da979
+
+### What was implemented
+- Created `serve_pipeline.py` in packages/finetune/src/finetune/modal/ with:
+  - `PipelineServer` Modal class with preloaded gold_examples index
+  - `/query` endpoint for direct pipeline calls  
+  - `/v1/chat/completions` OpenAI-compatible endpoint for drop-in replacement
+  - CPU-only deployment (deterministic pipeline, no GPU needed)
+  - Warm latency target: <200ms
+
+- Updated `~/ads-dev/nectar/src/pages/api/nl-search.ts` with:
+  - `PIPELINE_ENDPOINT` constant pointing to new Modal endpoint
+  - TypeScript types: `PipelineDebugInfo`, `PipelineRetrievedExample`, `PipelineResult`, `PipelineChatResponse`
+  - `callPipeline()` helper with 2s timeout
+  - `callVLLM()` fallback helper
+  - Handler logic: try pipeline first, fall back to vLLM on failure
+  - Skip operator post-processing when pipeline used (pipeline handles correctly)
+  - Return `pipelineDebug` in response with intent, examples, timing, corrections
+  - Added `usePipeline` request option (default: true)
+
+### Files changed
+- packages/finetune/src/finetune/modal/serve_pipeline.py (new - 275 lines)
+- ~/ads-dev/nectar/src/pages/api/nl-search.ts (modified - +216, -37 lines)
+- prd.json (updated US-006 passes: true)
+
+### Learnings for future iterations
+- **OpenAI-compatible endpoints ease integration**: Using chat completions format allows drop-in replacement with minimal API changes
+- **Pipeline-first with fallback**: Always try deterministic pipeline first; LLM-based endpoint is fallback
+- **Timeout handling is critical**: Pipeline should respond quickly; 2s timeout catches cold starts
+- **Skip redundant post-processing**: When pipeline used, operator post-processing is redundant (and could conflict)
+- **Debug info enables observability**: Returning timing/intent/examples helps monitor pipeline quality in production
+
+---
