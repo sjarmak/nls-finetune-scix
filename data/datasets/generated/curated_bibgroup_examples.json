@@ -1,0 +1,1970 @@
+[
+  {
+    "natural_language": "studies using HST data",
+    "ads_query": "bibgroup:HST",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Hubble papers",
+    "ads_query": "bibgroup:HST",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Hubble Space Telescope Cepheid variables papers",
+    "ads_query": "bibgroup:HST abs:\"Cepheid variables\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "HST observations of galaxy morphology",
+    "ads_query": "bibgroup:HST abs:\"galaxy morphology\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "peer-reviewed Hubble Space Telescope observations",
+    "ads_query": "bibgroup:HST property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent Hubble deep field research",
+    "ads_query": "bibgroup:HST abs:\"deep field\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "JWST papers",
+    "ads_query": "bibgroup:JWST",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Webb observations",
+    "ads_query": "bibgroup:JWST",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "James Webb observations of brown dwarfs",
+    "ads_query": "bibgroup:JWST abs:\"brown dwarfs\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "James Webb protoplanetary disks papers",
+    "ads_query": "bibgroup:JWST abs:\"protoplanetary disks\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed James Webb brown dwarfs studies",
+    "ads_query": "bibgroup:JWST abs:\"brown dwarfs\" property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Webb papers from 2022",
+    "ads_query": "bibgroup:JWST year:2022",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Spitzer publications",
+    "ads_query": "bibgroup:Spitzer",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Spitzer Space Telescope publications",
+    "ads_query": "bibgroup:Spitzer",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Spitzer infrared spectroscopy papers",
+    "ads_query": "bibgroup:Spitzer abs:\"infrared spectroscopy\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "protostellar disks studies using Spitzer Space Telescope",
+    "ads_query": "bibgroup:Spitzer abs:\"protostellar disks\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Spitzer Space Telescope papers from 2019",
+    "ads_query": "bibgroup:Spitzer year:2019",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing Spitzer observations",
+    "ads_query": "citations(bibgroup:Spitzer)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "research with Chandra",
+    "ads_query": "bibgroup:Chandra",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Chandra X-ray data",
+    "ads_query": "bibgroup:Chandra",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Chandra Observatory neutron stars papers",
+    "ads_query": "bibgroup:Chandra abs:\"neutron stars\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Chandra neutron stars observations",
+    "ads_query": "bibgroup:Chandra abs:\"neutron stars\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "peer-reviewed Chandra Observatory observations",
+    "ads_query": "bibgroup:Chandra property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent Chandra X-ray emission research",
+    "ads_query": "bibgroup:Chandra abs:\"X-ray emission\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using XMM data",
+    "ads_query": "bibgroup:XMM",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "XMM-Newton observations",
+    "ads_query": "bibgroup:XMM",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "AGN variability studies using XMM",
+    "ads_query": "bibgroup:XMM abs:\"AGN variability\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "XMM-Newton hot gas papers",
+    "ads_query": "bibgroup:XMM abs:\"hot gas\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "citations of Newton X-ray results",
+    "ads_query": "citations(bibgroup:XMM)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "XMM-Newton data releases in 2022",
+    "ads_query": "bibgroup:XMM year:2022",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using GALEX data",
+    "ads_query": "bibgroup:GALEX",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using Galaxy Evolution Explorer data",
+    "ads_query": "bibgroup:GALEX",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "GALEX UV luminosity function papers",
+    "ads_query": "bibgroup:GALEX abs:\"UV luminosity function\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "GALEX observations of galactic extinction",
+    "ads_query": "bibgroup:GALEX abs:\"galactic extinction\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing Galaxy Evolution Explorer observations",
+    "ads_query": "citations(bibgroup:GALEX)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed Galaxy Evolution Explorer UV emission studies",
+    "ads_query": "bibgroup:GALEX abs:\"UV emission\" property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Kepler publications",
+    "ads_query": "bibgroup:Kepler",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Kepler Mission papers",
+    "ads_query": "bibgroup:Kepler",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "eclipsing binaries studies using Kepler Mission",
+    "ads_query": "bibgroup:Kepler abs:\"eclipsing binaries\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Kepler asteroseismology papers",
+    "ads_query": "bibgroup:Kepler abs:\"asteroseismology\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Kepler data releases in 2024",
+    "ads_query": "bibgroup:Kepler year:2024",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed Kepler Mission stellar oscillations studies",
+    "ads_query": "bibgroup:Kepler abs:\"stellar oscillations\" property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "K2 observations",
+    "ads_query": "bibgroup:K2",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Kepler K2 observations",
+    "ads_query": "bibgroup:K2",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "K2 Mission open clusters observations",
+    "ads_query": "bibgroup:K2 abs:\"open clusters\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Kepler K2 asteroids observations",
+    "ads_query": "bibgroup:K2 abs:\"asteroids\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing Kepler K2 observations",
+    "ads_query": "citations(bibgroup:K2)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Kepler K2 extended mission papers from 2018",
+    "ads_query": "bibgroup:K2 abs:\"extended mission\" year:2018",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "TESS publications",
+    "ads_query": "bibgroup:TESS",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Transiting Exoplanet Survey Satellite papers",
+    "ads_query": "bibgroup:TESS",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "TESS observations of stellar variability",
+    "ads_query": "bibgroup:TESS abs:\"stellar variability\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "TESS stellar variability observations",
+    "ads_query": "bibgroup:TESS abs:\"stellar variability\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing Transiting Exoplanet Survey Satellite observations",
+    "ads_query": "citations(bibgroup:TESS)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "TESS transiting planets papers from 2022",
+    "ads_query": "bibgroup:TESS abs:\"transiting planets\" year:2022",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "FUSE publications",
+    "ads_query": "bibgroup:FUSE",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using Far Ultraviolet Spectroscopic Explorer data",
+    "ads_query": "bibgroup:FUSE",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "O VI absorption studies using FUSE",
+    "ads_query": "bibgroup:FUSE abs:\"O VI absorption\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "hot gas research with FUSE",
+    "ads_query": "bibgroup:FUSE abs:\"hot gas\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed Far Ultraviolet Spectroscopic Explorer papers",
+    "ads_query": "bibgroup:FUSE property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "FUSE O VI absorption papers from 2021",
+    "ads_query": "bibgroup:FUSE abs:\"O VI absorption\" year:2021",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "IUE observations",
+    "ads_query": "bibgroup:IUE",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "International Ultraviolet Explorer data",
+    "ads_query": "bibgroup:IUE",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "IUE observations of binary stars",
+    "ads_query": "bibgroup:IUE abs:\"binary stars\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "ultraviolet spectra studies using International Ultraviolet Explorer",
+    "ads_query": "bibgroup:IUE abs:\"ultraviolet spectra\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "peer-reviewed International Ultraviolet Explorer observations",
+    "ads_query": "bibgroup:IUE property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed IUE papers",
+    "ads_query": "bibgroup:IUE property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "EUVE papers",
+    "ads_query": "bibgroup:EUVE",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using Extreme Ultraviolet Explorer data",
+    "ads_query": "bibgroup:EUVE",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "hot stars research with EUVE",
+    "ads_query": "bibgroup:EUVE abs:\"hot stars\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "EUVE observations of interstellar medium",
+    "ads_query": "bibgroup:EUVE abs:\"interstellar medium\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "EUVE stellar coronae papers from 2024",
+    "ads_query": "bibgroup:EUVE abs:\"stellar coronae\" year:2024",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "EUVE papers from 2024",
+    "ads_query": "bibgroup:EUVE year:2024",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using Copernicus data",
+    "ads_query": "bibgroup:Copernicus",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using OAO-3 data",
+    "ads_query": "bibgroup:Copernicus",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "hot stars studies using OAO-3",
+    "ads_query": "bibgroup:Copernicus abs:\"hot stars\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "interstellar medium research with Copernicus",
+    "ads_query": "bibgroup:Copernicus abs:\"interstellar medium\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Copernicus papers from 2018",
+    "ads_query": "bibgroup:Copernicus year:2018",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent Copernicus Satellite interstellar medium research",
+    "ads_query": "bibgroup:Copernicus abs:\"interstellar medium\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "IRAS papers",
+    "ads_query": "bibgroup:IRAS",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Infrared Astronomical Satellite papers",
+    "ads_query": "bibgroup:IRAS",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "IRAS infrared sources papers",
+    "ads_query": "bibgroup:IRAS abs:\"infrared sources\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Infrared Astronomical Satellite infrared sources papers",
+    "ads_query": "bibgroup:IRAS abs:\"infrared sources\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "IRAS circumstellar disks papers from 2025",
+    "ads_query": "bibgroup:IRAS abs:\"circumstellar disks\" year:2025",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "IRAS papers from 2025",
+    "ads_query": "bibgroup:IRAS year:2025",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "WISE observations",
+    "ads_query": "bibgroup:WISE",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Wide-field Infrared Survey Explorer publications",
+    "ads_query": "bibgroup:WISE",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "asteroids research with Wide-field Infrared Survey Explorer",
+    "ads_query": "bibgroup:WISE abs:\"asteroids\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "WISE YSOs papers",
+    "ads_query": "bibgroup:WISE abs:\"YSOs\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Wide-field Infrared Survey Explorer data releases in 2025",
+    "ads_query": "bibgroup:WISE year:2025",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed WISE papers",
+    "ads_query": "bibgroup:WISE property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using NEOWISE data",
+    "ads_query": "bibgroup:NEOWISE",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "NEOWISE Mission data",
+    "ads_query": "bibgroup:NEOWISE",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "NEOWISE asteroid properties papers",
+    "ads_query": "bibgroup:NEOWISE abs:\"asteroid properties\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "NEOWISE Mission observations of asteroid properties",
+    "ads_query": "bibgroup:NEOWISE abs:\"asteroid properties\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing NEOWISE observations",
+    "ads_query": "citations(bibgroup:NEOWISE)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "NEOWISE papers from 2019",
+    "ads_query": "bibgroup:NEOWISE year:2019",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Fermi papers",
+    "ads_query": "bibgroup:Fermi",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using Fermi Gamma-ray data",
+    "ads_query": "bibgroup:Fermi",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Fermi gamma-ray emission observations",
+    "ads_query": "bibgroup:Fermi abs:\"gamma-ray emission\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Fermi observations of diffuse emission",
+    "ads_query": "bibgroup:Fermi abs:\"diffuse emission\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "citations of Fermi Gamma-ray results",
+    "ads_query": "citations(bibgroup:Fermi)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed Fermi papers",
+    "ads_query": "bibgroup:Fermi property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers using Swift",
+    "ads_query": "bibgroup:Swift",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Swift Observatory data",
+    "ads_query": "bibgroup:Swift",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "tidal disruption events research with Swift Observatory",
+    "ads_query": "bibgroup:Swift abs:\"tidal disruption events\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Swift Gamma-Ray Burst tidal disruption events observations",
+    "ads_query": "bibgroup:Swift abs:\"tidal disruption events\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed papers using Swift",
+    "ads_query": "bibgroup:Swift property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed Swift Gamma-Ray Burst papers",
+    "ads_query": "bibgroup:Swift property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using RXTE data",
+    "ads_query": "bibgroup:RXTE",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Rossi X-ray Timing Explorer data",
+    "ads_query": "bibgroup:RXTE",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "RXTE X-ray bursts papers",
+    "ads_query": "bibgroup:RXTE abs:\"X-ray bursts\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "X-ray bursts research with Rossi XTE",
+    "ads_query": "bibgroup:RXTE abs:\"X-ray bursts\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed papers using RXTE",
+    "ads_query": "bibgroup:RXTE property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using NuSTAR data",
+    "ads_query": "bibgroup:NuSTAR",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Nuclear Spectroscopic Telescope Array publications",
+    "ads_query": "bibgroup:NuSTAR",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Nuclear Spectroscopic Telescope Array observations of hard X-rays",
+    "ads_query": "bibgroup:NuSTAR abs:\"hard X-rays\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "NuSTAR black hole spin observations",
+    "ads_query": "bibgroup:NuSTAR abs:\"black hole spin\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent NuSTAR black hole spin research",
+    "ads_query": "bibgroup:NuSTAR abs:\"black hole spin\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing Nuclear Spectroscopic Telescope Array observations",
+    "ads_query": "citations(bibgroup:NuSTAR)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using SOHO data",
+    "ads_query": "bibgroup:SOHO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using Solar and Heliospheric Observatory data",
+    "ads_query": "bibgroup:SOHO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "helioseismology studies using SOHO",
+    "ads_query": "bibgroup:SOHO abs:\"helioseismology\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "helioseismology research with SOHO",
+    "ads_query": "bibgroup:SOHO abs:\"helioseismology\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "citations of Solar and Heliospheric Observatory results",
+    "ads_query": "citations(bibgroup:SOHO)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "citations of SOHO results",
+    "ads_query": "citations(bibgroup:SOHO)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "research with STEREO",
+    "ads_query": "bibgroup:STEREO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Solar TErrestrial RElations Observatory data",
+    "ads_query": "bibgroup:STEREO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Solar TErrestrial RElations Observatory observations of solar stereoscopy",
+    "ads_query": "bibgroup:STEREO abs:\"solar stereoscopy\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Solar TErrestrial RElations Observatory observations of heliospheric imaging",
+    "ads_query": "bibgroup:STEREO abs:\"heliospheric imaging\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed papers using Solar TErrestrial RElations Observatory",
+    "ads_query": "bibgroup:STEREO property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent STEREO space weather research",
+    "ads_query": "bibgroup:STEREO abs:\"space weather\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using SDO data",
+    "ads_query": "bibgroup:SDO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Solar Dynamics Observatory papers",
+    "ads_query": "bibgroup:SDO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Solar Dynamics Observatory observations of solar dynamics",
+    "ads_query": "bibgroup:SDO abs:\"solar dynamics\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "SDO magnetic field papers",
+    "ads_query": "bibgroup:SDO abs:\"magnetic field\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent SDO observations",
+    "ads_query": "bibgroup:SDO pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed Solar Dynamics Observatory coronal loops studies",
+    "ads_query": "bibgroup:SDO abs:\"coronal loops\" property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "ESO/Telescopes data",
+    "ads_query": "bibgroup:\"ESO/Telescopes\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "ESO publications",
+    "ads_query": "bibgroup:\"ESO/Telescopes\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "ESO/Telescopes instrumentation papers",
+    "ads_query": "bibgroup:\"ESO/Telescopes\" abs:\"instrumentation\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "VLT observations studies using ESO/Telescopes",
+    "ads_query": "bibgroup:\"ESO/Telescopes\" abs:\"VLT observations\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "ESO/Telescopes data releases in 2020",
+    "ads_query": "bibgroup:\"ESO/Telescopes\" year:2020",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "citations of European Southern Observatory results",
+    "ads_query": "citations(bibgroup:\"ESO/Telescopes\")",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "CFHT papers",
+    "ads_query": "bibgroup:CFHT",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Canada-France-Hawaii Telescope papers",
+    "ads_query": "bibgroup:CFHT",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "CFHT observations of galaxy clusters",
+    "ads_query": "bibgroup:CFHT abs:\"galaxy clusters\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "CFHT stellar streams observations",
+    "ads_query": "bibgroup:CFHT abs:\"stellar streams\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed papers using CFHT",
+    "ads_query": "bibgroup:CFHT property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed Canada-France-Hawaii Telescope papers",
+    "ads_query": "bibgroup:CFHT property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using Gemini data",
+    "ads_query": "bibgroup:Gemini",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Gemini Observatory papers",
+    "ads_query": "bibgroup:Gemini",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "stellar populations studies using Gemini North",
+    "ads_query": "bibgroup:Gemini abs:\"stellar populations\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Gemini North AO observations observations",
+    "ads_query": "bibgroup:Gemini abs:\"AO observations\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Gemini papers from 2024",
+    "ads_query": "bibgroup:Gemini year:2024",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed Gemini papers",
+    "ads_query": "bibgroup:Gemini property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Keck publications",
+    "ads_query": "bibgroup:Keck",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using W.M. Keck Observatory data",
+    "ads_query": "bibgroup:Keck",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "W.M. Keck Observatory observations of adaptive optics",
+    "ads_query": "bibgroup:Keck abs:\"adaptive optics\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "W.M. Keck Observatory spectroscopy papers",
+    "ads_query": "bibgroup:Keck abs:\"spectroscopy\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "citations of Keck results",
+    "ads_query": "citations(bibgroup:Keck)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "W.M. Keck Observatory data releases in 2021",
+    "ads_query": "bibgroup:Keck year:2021",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "VLT papers",
+    "ads_query": "bibgroup:VLT",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using Very Large Telescope data",
+    "ads_query": "bibgroup:VLT",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Very Large Telescope observations of galactic center",
+    "ads_query": "bibgroup:VLT abs:\"galactic center\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "galactic center studies using VLT",
+    "ads_query": "bibgroup:VLT abs:\"galactic center\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Very Large Telescope data releases in 2023",
+    "ads_query": "bibgroup:VLT year:2023",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed VLT papers",
+    "ads_query": "bibgroup:VLT property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "research with Subaru",
+    "ads_query": "bibgroup:Subaru",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Subaru Telescope data",
+    "ads_query": "bibgroup:Subaru",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Subaru weak lensing papers",
+    "ads_query": "bibgroup:Subaru abs:\"weak lensing\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Lyman-alpha emitters research with Subaru Telescope",
+    "ads_query": "bibgroup:Subaru abs:\"Lyman-alpha emitters\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing Subaru observations",
+    "ads_query": "citations(bibgroup:Subaru)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent Subaru observations",
+    "ads_query": "bibgroup:Subaru pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "research with NOAO",
+    "ads_query": "bibgroup:NOAO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "National Optical Astronomy Observatory publications",
+    "ads_query": "bibgroup:NOAO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "NOAO instrumentation observations",
+    "ads_query": "bibgroup:NOAO abs:\"instrumentation\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "instrumentation research with NOAO",
+    "ads_query": "bibgroup:NOAO abs:\"instrumentation\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent National Optical Astronomy Observatory observing programs research",
+    "ads_query": "bibgroup:NOAO abs:\"observing programs\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "National Optical Astronomy Observatory survey data papers from 2023",
+    "ads_query": "bibgroup:NOAO abs:\"survey data\" year:2023",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers using NOIRLab",
+    "ads_query": "bibgroup:NOIRLab",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using NSF NOIRLab data",
+    "ads_query": "bibgroup:NOIRLab",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "CTIO data studies using National Optical-Infrared Astronomy Research Laboratory",
+    "ads_query": "bibgroup:NOIRLab abs:\"CTIO data\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "NSF NOIRLab observations of Rubin Observatory",
+    "ads_query": "bibgroup:NOIRLab abs:\"Rubin Observatory\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed National Optical-Infrared Astronomy Research Laboratory CTIO data studies",
+    "ads_query": "bibgroup:NOIRLab abs:\"CTIO data\" property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing National Optical-Infrared Astronomy Research Laboratory observations",
+    "ads_query": "citations(bibgroup:NOIRLab)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "CTIO data",
+    "ads_query": "bibgroup:CTIO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Cerro Tololo observations",
+    "ads_query": "bibgroup:CTIO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "transient follow-up research with Cerro Tololo Inter-American Observatory",
+    "ads_query": "bibgroup:CTIO abs:\"transient follow-up\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "galaxy surveys studies using Cerro Tololo",
+    "ads_query": "bibgroup:CTIO abs:\"galaxy surveys\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "citations of Cerro Tololo Inter-American Observatory results",
+    "ads_query": "citations(bibgroup:CTIO)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed papers using Cerro Tololo Inter-American Observatory",
+    "ads_query": "bibgroup:CTIO property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "research with KPNO",
+    "ads_query": "bibgroup:KPNO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using Kitt Peak data",
+    "ads_query": "bibgroup:KPNO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Kitt Peak northern sky observations",
+    "ads_query": "bibgroup:KPNO abs:\"northern sky\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Kitt Peak National Observatory observations of photometry",
+    "ads_query": "bibgroup:KPNO abs:\"photometry\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "KPNO papers from 2018",
+    "ads_query": "bibgroup:KPNO year:2018",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed KPNO papers",
+    "ads_query": "bibgroup:KPNO property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers using Pan-STARRS",
+    "ads_query": "bibgroup:Pan-STARRS",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers using PanSTARRS",
+    "ads_query": "bibgroup:Pan-STARRS",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Pan-STARRS photometric surveys observations",
+    "ads_query": "bibgroup:Pan-STARRS abs:\"photometric surveys\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "asteroid detection research with PanSTARRS",
+    "ads_query": "bibgroup:Pan-STARRS abs:\"asteroid detection\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed papers using Panoramic Survey Telescope",
+    "ads_query": "bibgroup:Pan-STARRS property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing Pan-STARRS observations",
+    "ads_query": "citations(bibgroup:Pan-STARRS)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "SDSS papers",
+    "ads_query": "bibgroup:SDSS",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "research with Sloan",
+    "ads_query": "bibgroup:SDSS",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "SDSS observations of quasar catalog",
+    "ads_query": "bibgroup:SDSS abs:\"quasar catalog\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Sloan observations of stellar parameters",
+    "ads_query": "bibgroup:SDSS abs:\"stellar parameters\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Sloan Digital Sky Survey galaxy redshifts papers from 2025",
+    "ads_query": "bibgroup:SDSS abs:\"galaxy redshifts\" year:2025",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent Sloan Digital Sky Survey stellar parameters research",
+    "ads_query": "bibgroup:SDSS abs:\"stellar parameters\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "2MASS publications",
+    "ads_query": "bibgroup:2MASS",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "research with Two Micron All Sky Survey",
+    "ads_query": "bibgroup:2MASS",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "brown dwarf searches research with 2MASS",
+    "ads_query": "bibgroup:2MASS abs:\"brown dwarf searches\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "point source catalog research with Two Micron All Sky Survey",
+    "ads_query": "bibgroup:2MASS abs:\"point source catalog\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed Two Micron All Sky Survey galactic structure studies",
+    "ads_query": "bibgroup:2MASS abs:\"galactic structure\" property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed 2MASS extended sources studies",
+    "ads_query": "bibgroup:2MASS abs:\"extended sources\" property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "UKIRT papers",
+    "ads_query": "bibgroup:UKIRT",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using United Kingdom Infrared Telescope data",
+    "ads_query": "bibgroup:UKIRT",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "brown dwarf searches studies using UKIRT",
+    "ads_query": "bibgroup:UKIRT abs:\"brown dwarf searches\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "spectroscopy studies using United Kingdom Infrared Telescope",
+    "ads_query": "bibgroup:UKIRT abs:\"spectroscopy\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "peer-reviewed UKIRT observations",
+    "ads_query": "bibgroup:UKIRT property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing UKIRT observations",
+    "ads_query": "citations(bibgroup:UKIRT)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers using ALMA",
+    "ads_query": "bibgroup:ALMA",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers using Atacama Large Millimeter Array",
+    "ads_query": "bibgroup:ALMA",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "high-z dust studies using Atacama Array",
+    "ads_query": "bibgroup:ALMA abs:\"high-z dust\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "protoplanetary disks research with ALMA",
+    "ads_query": "bibgroup:ALMA abs:\"protoplanetary disks\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing Atacama Large Millimeter Array observations",
+    "ads_query": "citations(bibgroup:ALMA)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent Atacama Large Millimeter Array high-z dust research",
+    "ads_query": "bibgroup:ALMA abs:\"high-z dust\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "JCMT data",
+    "ads_query": "bibgroup:JCMT",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "James Clerk Maxwell Telescope data",
+    "ads_query": "bibgroup:JCMT",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "polarimetry research with James Clerk Maxwell Telescope",
+    "ads_query": "bibgroup:JCMT abs:\"polarimetry\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "JCMT debris disks observations",
+    "ads_query": "bibgroup:JCMT abs:\"debris disks\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "James Clerk Maxwell Telescope papers from 2025",
+    "ads_query": "bibgroup:JCMT year:2025",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed James Clerk Maxwell Telescope papers",
+    "ads_query": "bibgroup:JCMT property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using APEX data",
+    "ads_query": "bibgroup:APEX",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Atacama Pathfinder Experiment observations",
+    "ads_query": "bibgroup:APEX",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "dust emission research with APEX",
+    "ads_query": "bibgroup:APEX abs:\"dust emission\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "APEX Galactic plane observations",
+    "ads_query": "bibgroup:APEX abs:\"Galactic plane\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent APEX submillimeter research",
+    "ads_query": "bibgroup:APEX abs:\"submillimeter\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed papers using Atacama Pathfinder Experiment",
+    "ads_query": "bibgroup:APEX property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "ARECIBO data",
+    "ads_query": "bibgroup:ARECIBO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers using Arecibo Observatory",
+    "ads_query": "bibgroup:ARECIBO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "HI surveys studies using ARECIBO",
+    "ads_query": "bibgroup:ARECIBO abs:\"HI surveys\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "HI surveys studies using Arecibo Observatory",
+    "ads_query": "bibgroup:ARECIBO abs:\"HI surveys\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent Arecibo Observatory observations",
+    "ads_query": "bibgroup:ARECIBO pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "citations of ARECIBO results",
+    "ads_query": "citations(bibgroup:ARECIBO)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "VLA data",
+    "ads_query": "bibgroup:VLA",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Very Large Array observations",
+    "ads_query": "bibgroup:VLA",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Karl G. Jansky VLA radio continuum papers",
+    "ads_query": "bibgroup:VLA abs:\"radio continuum\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "VLA radio transients papers",
+    "ads_query": "bibgroup:VLA abs:\"radio transients\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed Karl G. Jansky VLA papers",
+    "ads_query": "bibgroup:VLA property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed papers using Very Large Array",
+    "ads_query": "bibgroup:VLA property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers using VLBA",
+    "ads_query": "bibgroup:VLBA",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using Very Long Baseline Array data",
+    "ads_query": "bibgroup:VLBA",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "maser emission studies using Very Long Baseline Array",
+    "ads_query": "bibgroup:VLBA abs:\"maser emission\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "VLBA maser emission observations",
+    "ads_query": "bibgroup:VLBA abs:\"maser emission\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent VLBA observations",
+    "ads_query": "bibgroup:VLBA pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent Very Long Baseline Array observations",
+    "ads_query": "bibgroup:VLBA pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "GBT papers",
+    "ads_query": "bibgroup:GBT",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "research with Green Bank Telescope",
+    "ads_query": "bibgroup:GBT",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "GBT observations of fast radio bursts",
+    "ads_query": "bibgroup:GBT abs:\"fast radio bursts\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "GBT CMB observations",
+    "ads_query": "bibgroup:GBT abs:\"CMB\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed Green Bank Telescope papers",
+    "ads_query": "bibgroup:GBT property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed Green Bank Telescope pulsar surveys studies",
+    "ads_query": "bibgroup:GBT abs:\"pulsar surveys\" property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "LOFAR papers",
+    "ads_query": "bibgroup:LOFAR",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Low-Frequency Array publications",
+    "ads_query": "bibgroup:LOFAR",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "low-frequency radio research with Low-Frequency Array",
+    "ads_query": "bibgroup:LOFAR abs:\"low-frequency radio\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "epoch of reionization research with Low-Frequency Array",
+    "ads_query": "bibgroup:LOFAR abs:\"epoch of reionization\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed papers using Low-Frequency Array",
+    "ads_query": "bibgroup:LOFAR property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent Low-Frequency Array epoch of reionization research",
+    "ads_query": "bibgroup:LOFAR abs:\"epoch of reionization\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "MeerKAT publications",
+    "ads_query": "bibgroup:MeerKAT",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using MeerKAT Radio Telescope data",
+    "ads_query": "bibgroup:MeerKAT",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "MeerKAT Radio Telescope pulsars observations",
+    "ads_query": "bibgroup:MeerKAT abs:\"pulsars\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "MeerKAT observations of pulsars",
+    "ads_query": "bibgroup:MeerKAT abs:\"pulsars\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "citations of MeerKAT results",
+    "ads_query": "citations(bibgroup:MeerKAT)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "MeerKAT data releases in 2023",
+    "ads_query": "bibgroup:MeerKAT year:2023",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "SKA observations",
+    "ads_query": "bibgroup:SKA",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers using Square Kilometre Array",
+    "ads_query": "bibgroup:SKA",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Square Kilometre Array observations of epoch of reionization",
+    "ads_query": "bibgroup:SKA abs:\"epoch of reionization\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "HI cosmology studies using Square Kilometre Array",
+    "ads_query": "bibgroup:SKA abs:\"HI cosmology\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent SKA observations",
+    "ads_query": "bibgroup:SKA pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "peer-reviewed SKA observations",
+    "ads_query": "bibgroup:SKA property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "research with Gaia",
+    "ads_query": "bibgroup:Gaia",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Gaia Mission publications",
+    "ads_query": "bibgroup:Gaia",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Gaia Satellite observations of galactic structure",
+    "ads_query": "bibgroup:Gaia abs:\"galactic structure\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "parallaxes research with Gaia Mission",
+    "ads_query": "bibgroup:Gaia abs:\"parallaxes\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "peer-reviewed Gaia Mission observations",
+    "ads_query": "bibgroup:Gaia property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Gaia Mission papers from 2023",
+    "ads_query": "bibgroup:Gaia year:2023",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers using Hipparcos",
+    "ads_query": "bibgroup:Hipparcos",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "research with Hipparcos Satellite",
+    "ads_query": "bibgroup:Hipparcos",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Hipparcos Satellite HR diagram observations",
+    "ads_query": "bibgroup:Hipparcos abs:\"HR diagram\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Hipparcos Satellite stellar kinematics observations",
+    "ads_query": "bibgroup:Hipparcos abs:\"stellar kinematics\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "citations of Hipparcos Satellite results",
+    "ads_query": "citations(bibgroup:Hipparcos)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Hipparcos papers from 2023",
+    "ads_query": "bibgroup:Hipparcos year:2023",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "CfA papers",
+    "ads_query": "bibgroup:CfA",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "studies using Center for Astrophysics data",
+    "ads_query": "bibgroup:CfA",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Harvard CfA stellar astrophysics observations",
+    "ads_query": "bibgroup:CfA abs:\"stellar astrophysics\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "CfA observations of theoretical research",
+    "ads_query": "bibgroup:CfA abs:\"theoretical research\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent Harvard CfA observations",
+    "ads_query": "bibgroup:CfA pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "peer-reviewed CfA observations",
+    "ads_query": "bibgroup:CfA property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "NASA PubSpace data",
+    "ads_query": "bibgroup:\"NASA PubSpace\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "NASA Public Access observations",
+    "ads_query": "bibgroup:\"NASA PubSpace\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "astrophysics studies using NASA PubSpace",
+    "ads_query": "bibgroup:\"NASA PubSpace\" abs:\"astrophysics\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "NASA Public Access observations of NASA missions",
+    "ads_query": "bibgroup:\"NASA PubSpace\" abs:\"NASA missions\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed NASA PubSpace Repository papers",
+    "ads_query": "bibgroup:\"NASA PubSpace\" property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed NASA Public Access NASA missions studies",
+    "ads_query": "bibgroup:\"NASA PubSpace\" abs:\"NASA missions\" property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "research with LISA",
+    "ads_query": "bibgroup:LISA",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Laser Interferometer Space Antenna data",
+    "ads_query": "bibgroup:LISA",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "EMRI research with Laser Interferometer Space Antenna",
+    "ads_query": "bibgroup:LISA abs:\"EMRI\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "space-based interferometry studies using LISA",
+    "ads_query": "bibgroup:LISA abs:\"space-based interferometry\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent Laser Interferometer Space Antenna observations",
+    "ads_query": "bibgroup:LISA pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing Laser Interferometer Space Antenna observations",
+    "ads_query": "citations(bibgroup:LISA)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "LIGO observations",
+    "ads_query": "bibgroup:LIGO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Laser Interferometer Gravitational-Wave Observatory observations",
+    "ads_query": "bibgroup:LIGO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Laser Interferometer Gravitational-Wave Observatory gravitational waves observations",
+    "ads_query": "bibgroup:LIGO abs:\"gravitational waves\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "LIGO observations of detector sensitivity",
+    "ads_query": "bibgroup:LIGO abs:\"detector sensitivity\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing LIGO Observatory observations",
+    "ads_query": "citations(bibgroup:LIGO)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Laser Interferometer Gravitational-Wave Observatory compact binaries papers from 2025",
+    "ads_query": "bibgroup:LIGO abs:\"compact binaries\" year:2025",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "SETI data",
+    "ads_query": "bibgroup:SETI",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "SETI Institute publications",
+    "ads_query": "bibgroup:SETI",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "SETI Institute exoplanet biosignatures observations",
+    "ads_query": "bibgroup:SETI abs:\"exoplanet biosignatures\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Search for Extraterrestrial Intelligence technosignatures observations",
+    "ads_query": "bibgroup:SETI abs:\"technosignatures\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent Search for Extraterrestrial Intelligence technosignatures research",
+    "ads_query": "bibgroup:SETI abs:\"technosignatures\" pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed SETI exoplanet biosignatures studies",
+    "ads_query": "bibgroup:SETI abs:\"exoplanet biosignatures\" property:refereed",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "ESO observations",
+    "ads_query": "bibgroup:ESO",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "ESO observations of spectroscopy",
+    "ads_query": "bibgroup:ESO abs:\"spectroscopy\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "ESO VLT observations papers",
+    "ads_query": "bibgroup:ESO abs:\"VLT observations\"",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers citing ESO observations",
+    "ads_query": "citations(bibgroup:ESO)",
+    "category": "bibgroup",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent ESO observations",
+    "ads_query": "bibgroup:ESO pubdate:[2023-01 TO 2026-12]",
+    "category": "bibgroup",
+    "llm_score": 5
+  }
+]

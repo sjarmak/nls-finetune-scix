@@ -172,8 +172,8 @@
         "Run: mise run lint - passes"
       ],
       "priority": 10,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Completed 2026-01-22: Created curate_generated_examples.py with LLM judge (Claude Sonnet) + syntax/constraint/NL validation. Processed 789 examples: 788 curated (99.9%), 1 quarantined. Outputs curated_*.json files and quarantine_report.json."
     },
     {
       "id": "US-011",

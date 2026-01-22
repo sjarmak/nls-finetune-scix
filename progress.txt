@@ -212,3 +212,35 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - Combined examples showing operator + filter combinations help model learn compositionality
   - The topn operator requires three arguments: count, query, sort_field
 ---
+
+## 2026-01-22 - US-010: Curate generated examples with LLM judge
+- **Implemented**: Curation pipeline with LLM judge and syntax validation
+- **Files created**:
+  - `scripts/curate_generated_examples.py` - Curation script with LLM + syntax validation
+  - `data/datasets/generated/curated_*.json` - 5 curated example files
+  - `data/datasets/generated/quarantine_report.json` - Quarantine report with failure reasons
+- **Key details**:
+  - Processes all generated/*.json files automatically
+  - Triple validation: 1) NL validation (no ADS syntax leakage), 2) ADS syntax linting, 3) Field constraint validation
+  - Optional LLM judge (Claude Sonnet) for semantic quality scoring (1-5 scale)
+  - Quarantine threshold: score < 3 OR syntax/constraint errors
+  - Supports --skip-llm flag for syntax-only validation
+  - Progress reporting and detailed failure reasons in quarantine report
+- **Curation results**:
+  - Total processed: 789 examples
+  - Curated (passed): 788 examples (99.9%)
+  - Quarantined (failed): 1 example (topn operator with comma-in-value false positive)
+  - By file: bibgroup_examples 328/328, collection_examples 88/88, doctype_examples 91/91, operator_examples 141/142, property_examples 140/140
+- **Outputs**:
+  - curated_bibgroup_examples.json (328 examples)
+  - curated_collection_examples.json (88 examples)
+  - curated_doctype_examples.json (91 examples)
+  - curated_operator_examples.json (141 examples)
+  - curated_property_examples.json (140 examples)
+  - quarantine_report.json (summary + 1 quarantined example)
+- **Learnings for future iterations**:
+  - Field constraint validation regex has a false positive with topn() operator syntax where comma is part of operator not field value
+  - The quarantine report provides valuable debugging info for improving generators
+  - Running with --skip-llm is useful for fast syntax-only validation during development
+  - The curation script is idempotent and can be re-run safely
+---

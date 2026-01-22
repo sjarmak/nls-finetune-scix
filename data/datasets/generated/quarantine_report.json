@@ -1,0 +1,63 @@
+{
+  "summary": {
+    "total_processed": 789,
+    "total_curated": 788,
+    "total_quarantined": 1,
+    "overall_pass_rate": 99.87325728770595
+  },
+  "by_file": {
+    "bibgroup_examples": {
+      "total": 328,
+      "curated": 328,
+      "quarantined": 0,
+      "pass_rate": 100.0
+    },
+    "collection_examples": {
+      "total": 88,
+      "curated": 88,
+      "quarantined": 0,
+      "pass_rate": 100.0
+    },
+    "doctype_examples": {
+      "total": 91,
+      "curated": 91,
+      "quarantined": 0,
+      "pass_rate": 100.0
+    },
+    "operator_examples": {
+      "total": 142,
+      "curated": 141,
+      "quarantined": 1,
+      "pass_rate": 99.29577464788733
+    },
+    "property_examples": {
+      "total": 140,
+      "curated": 140,
+      "quarantined": 0,
+      "pass_rate": 100.0
+    }
+  },
+  "quarantined_examples": [
+    {
+      "example": {
+        "natural_language": "top 10 refereed papers on supernovae",
+        "ads_query": "topn(10, abs:\"supernovae\" property:refereed, citation_count)",
+        "category": "operator",
+        "operator": "topn"
+      },
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "constraint_valid": false,
+      "constraint_errors": [
+        "Invalid property value: 'refereed,' (did you mean: refereed?)"
+      ],
+      "nl_valid": true,
+      "nl_issues": [],
+      "llm_score": 5,
+      "llm_reason": "LLM judge skipped",
+      "failure_reasons": [
+        "Constraint errors: Invalid property value: 'refereed,' (did you mean: refereed?)"
+      ]
+    }
+  ]
+}

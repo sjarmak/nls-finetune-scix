@@ -1,0 +1,530 @@
+[
+  {
+    "natural_language": "astronomical research",
+    "ads_query": "database:astronomy",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "looking for astrophysics literature",
+    "ads_query": "database:astronomy",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "show me papers in astrophysics",
+    "ads_query": "database:astronomy",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "find astrophysics papers",
+    "ads_query": "database:astronomy",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "search for astrophysical papers",
+    "ads_query": "database:astronomy",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "astronomical studies on supernovae",
+    "ads_query": "database:astronomy abs:\"supernovae\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "astronomy papers about black holes",
+    "ads_query": "database:astronomy abs:\"black holes\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "show me astronomical research on cosmic microwave background",
+    "ads_query": "database:astronomy abs:\"cosmic microwave background\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "astronomy collection papers about stellar evolution",
+    "ads_query": "database:astronomy abs:\"stellar evolution\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "astronomical research related to neutron stars",
+    "ads_query": "database:astronomy abs:\"neutron stars\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "astronomy papers covering planetary nebulae",
+    "ads_query": "database:astronomy abs:\"planetary nebulae\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "find papers in astrophysics about supernovae",
+    "ads_query": "database:astronomy abs:\"supernovae\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "astronomy articles discussing galaxy formation",
+    "ads_query": "database:astronomy abs:\"galaxy formation\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "show me astrophysics research on black holes",
+    "ads_query": "database:astronomy abs:\"black holes\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers from the astronomy database on black holes",
+    "ads_query": "database:astronomy abs:\"black holes\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent astrophysics research",
+    "ads_query": "database:astronomy pubdate:[2023-01 TO 2026-12]",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent astronomy papers about star formation",
+    "ads_query": "database:astronomy pubdate:[2023-01 TO 2026-12]",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "astrophysics papers about binary stars from 2024",
+    "ads_query": "database:astronomy abs:\"binary stars\" year:2024",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "astronomy collection papers from 2023",
+    "ads_query": "database:astronomy year:2023",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "astronomical research about star formation from 2019",
+    "ads_query": "database:astronomy abs:\"star formation\" year:2019",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed astrophysical papers",
+    "ads_query": "database:astronomy property:refereed",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "astrophysics papers by Davis",
+    "ads_query": "database:astronomy author:\"Davis\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed astrophysics literature about gravitational waves from 2021",
+    "ads_query": "database:astronomy abs:\"gravitational waves\" property:refereed year:2021",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Jones's papers in astrophysics",
+    "ads_query": "database:astronomy author:\"Jones\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "astrophysics literature by Wilson",
+    "ads_query": "database:astronomy author:\"Wilson\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "looking for physics articles",
+    "ads_query": "database:physics",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "find physics papers",
+    "ads_query": "database:physics",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "show me physics collection papers",
+    "ads_query": "database:physics",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "search for physics journal articles",
+    "ads_query": "database:physics",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers from the physics database",
+    "ads_query": "database:physics",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "physics articles on quantum computing",
+    "ads_query": "database:physics abs:\"quantum computing\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "physics articles discussing superconductivity",
+    "ads_query": "database:physics abs:\"superconductivity\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "search physics journal articles for superconductivity",
+    "ads_query": "database:physics abs:\"superconductivity\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "search physics research for quantum field theory",
+    "ads_query": "database:physics abs:\"quantum field theory\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "find physics articles about electromagnetism",
+    "ads_query": "database:physics abs:\"electromagnetism\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers in physics covering nuclear physics",
+    "ads_query": "database:physics abs:\"nuclear physics\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "physics collection papers related to condensed matter",
+    "ads_query": "database:physics abs:\"condensed matter\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "find physical sciences papers about plasma physics",
+    "ads_query": "database:physics abs:\"plasma physics\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "physics papers on high energy physics",
+    "ads_query": "database:physics abs:\"high energy physics\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "physics research on superconductivity",
+    "ads_query": "database:physics abs:\"superconductivity\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "physics journal articles published in 2019",
+    "ads_query": "database:physics year:2019",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "latest physics journal articles",
+    "ads_query": "database:physics pubdate:[2023-01 TO 2026-12]",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers from the physics database about atomic physics from 2018",
+    "ads_query": "database:physics abs:\"atomic physics\" year:2018",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "physics literature on superconductivity published in 2022",
+    "ads_query": "database:physics abs:\"superconductivity\" year:2022",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent physics collection papers about string theory",
+    "ads_query": "database:physics pubdate:[2023-01 TO 2026-12]",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "physics research about plasma physics by Smith",
+    "ads_query": "database:physics abs:\"plasma physics\" author:\"Smith\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed physical sciences papers about string theory",
+    "ads_query": "database:physics abs:\"string theory\" property:refereed",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed physics collection papers about statistical mechanics",
+    "ads_query": "database:physics abs:\"statistical mechanics\" property:refereed",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed physics studies about quantum mechanics from 2023",
+    "ads_query": "database:physics abs:\"quantum mechanics\" property:refereed year:2023",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Brown's physics articles",
+    "ads_query": "database:physics author:\"Brown\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "general collection papers",
+    "ads_query": "database:general",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "search for general collection papers",
+    "ads_query": "database:general",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "looking for general science articles",
+    "ads_query": "database:general",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "find general science literature about scientific instruments",
+    "ads_query": "database:general abs:\"scientific instruments\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers from the general database related to scientific instruments",
+    "ads_query": "database:general abs:\"scientific instruments\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "show me general science literature on science policy",
+    "ads_query": "database:general abs:\"science policy\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "general science articles discussing scientific instruments",
+    "ads_query": "database:general abs:\"scientific instruments\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "search interdisciplinary papers for data science",
+    "ads_query": "database:general abs:\"data science\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "interdisciplinary papers published in 2018",
+    "ads_query": "database:general year:2018",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "papers from the general database about measurement techniques from 2021",
+    "ads_query": "database:general abs:\"measurement techniques\" year:2021",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "interdisciplinary papers from 2021",
+    "ads_query": "database:general year:2021",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "peer-reviewed general science papers",
+    "ads_query": "database:general property:refereed",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Taylor's general science articles",
+    "ads_query": "database:general author:\"Taylor\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "looking for papers from the earth science database",
+    "ads_query": "database:earthscience",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "search for earth science literature",
+    "ads_query": "database:earthscience",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "earth science literature",
+    "ads_query": "database:earthscience",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "find climate research papers",
+    "ads_query": "database:earthscience",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "show me atmospheric science papers",
+    "ads_query": "database:earthscience",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "climate research papers related to planetary surfaces",
+    "ads_query": "database:earthscience abs:\"planetary surfaces\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "earth science literature about planetary atmospheres",
+    "ads_query": "database:earthscience abs:\"planetary atmospheres\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "geology papers related to Venus atmosphere",
+    "ads_query": "database:earthscience abs:\"Venus atmosphere\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "show me papers from the earth science database on meteorites",
+    "ads_query": "database:earthscience abs:\"meteorites\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "search planetary science research for space weather",
+    "ads_query": "database:earthscience abs:\"space weather\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "find earth and planetary papers about planetary surfaces",
+    "ads_query": "database:earthscience abs:\"planetary surfaces\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "show me geoscience papers on planetary surfaces",
+    "ads_query": "database:earthscience abs:\"planetary surfaces\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "planetary science papers on geochemistry",
+    "ads_query": "database:earthscience abs:\"geochemistry\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "geoscience papers about plate tectonics",
+    "ads_query": "database:earthscience abs:\"plate tectonics\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "find climate research papers about ice sheets",
+    "ads_query": "database:earthscience abs:\"ice sheets\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "latest papers from the earth science database",
+    "ads_query": "database:earthscience pubdate:[2023-01 TO 2026-12]",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "oceanography papers published in 2024",
+    "ads_query": "database:earthscience year:2024",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent earth system science papers",
+    "ads_query": "database:earthscience pubdate:[2023-01 TO 2026-12]",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "space weather research on lunar science published in 2021",
+    "ads_query": "database:earthscience abs:\"lunar science\" year:2021",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "recent papers from the earth science database",
+    "ads_query": "database:earthscience pubdate:[2023-01 TO 2026-12]",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed planetary science papers about planetary atmospheres from 2025",
+    "ads_query": "database:earthscience abs:\"planetary atmospheres\" property:refereed year:2025",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "refereed planetary science papers about paleoclimate",
+    "ads_query": "database:earthscience abs:\"paleoclimate\" property:refereed",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "peer-reviewed geoscience papers",
+    "ads_query": "database:earthscience property:refereed",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "planetary science papers by Wilson",
+    "ads_query": "database:earthscience author:\"Wilson\"",
+    "category": "collection",
+    "llm_score": 5
+  },
+  {
+    "natural_language": "Brown's papers from the earth science database",
+    "ads_query": "database:earthscience author:\"Brown\"",
+    "category": "collection",
+    "llm_score": 5
+  }
+]
