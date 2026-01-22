@@ -1,0 +1,457 @@
+[
+  {
+    "natural_language": "get meeting abstracts",
+    "ads_query": "doctype:abstract",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find conference abstracts",
+    "ads_query": "doctype:abstract",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find AAS meeting abstracts",
+    "ads_query": "doctype:abstract",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "poster abstracts related to black holes",
+    "ads_query": "doctype:abstract abs:\"black holes\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "AAS meeting abstracts on exoplanets",
+    "ads_query": "doctype:abstract abs:\"exoplanets\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "conference abstracts by Rubin",
+    "ads_query": "doctype:abstract author:\"Rubin\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "conference abstracts from 2018",
+    "ads_query": "doctype:abstract year:2018",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "looking for book reviews",
+    "ads_query": "doctype:bookreview",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "show me reviews of books",
+    "ads_query": "doctype:bookreview",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "get published book reviews",
+    "ads_query": "doctype:bookreview",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "textbook reviews related to astrophysics",
+    "ads_query": "doctype:bookreview abs:\"astrophysics\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "show me book evaluations on cosmology",
+    "ads_query": "doctype:bookreview abs:\"cosmology\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "textbook reviews from 2020",
+    "ads_query": "doctype:bookreview year:2020",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent reviews of astronomy books",
+    "ads_query": "doctype:bookreview pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find circulars",
+    "ads_query": "doctype:circular",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "search for astronomer's telegrams",
+    "ads_query": "doctype:circular",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "I want ATels",
+    "ads_query": "doctype:circular",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find transient circulars about supernovae",
+    "ads_query": "doctype:circular abs:\"supernovae\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "discovery circulars related to fast radio bursts",
+    "ads_query": "doctype:circular abs:\"fast radio bursts\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "observation circulars from 2022",
+    "ads_query": "doctype:circular year:2022",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "IAU circulars by Riess",
+    "ads_query": "doctype:circular author:\"Riess\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find editorials",
+    "ads_query": "doctype:editorial",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "get editor's notes",
+    "ads_query": "doctype:editorial",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "show me editorial content",
+    "ads_query": "doctype:editorial",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "astronomy policy editor comments",
+    "ads_query": "doctype:editorial abs:\"astronomy policy\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "astronomy policy journal editorials",
+    "ads_query": "doctype:editorial abs:\"astronomy policy\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "editor comments about peer review from 2020",
+    "ads_query": "doctype:editorial abs:\"peer review\" year:2020",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "editorial pieces published in 2019",
+    "ads_query": "doctype:editorial year:2019",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "looking for errata",
+    "ads_query": "doctype:erratum",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "get corrections",
+    "ads_query": "doctype:erratum",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "show me erratum notices",
+    "ads_query": "doctype:erratum",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "corrigenda discussing photometry",
+    "ads_query": "doctype:erratum abs:\"photometry\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "show me erratum to papers on data analysis",
+    "ads_query": "doctype:erratum abs:\"data analysis\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent article corrections",
+    "ads_query": "doctype:erratum pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "erratum to papers about data analysis from 2021",
+    "ads_query": "doctype:erratum abs:\"data analysis\" year:2021",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "looking for book chapters",
+    "ads_query": "doctype:inbook",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "get chapters in books",
+    "ads_query": "doctype:inbook",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "search for book sections",
+    "ads_query": "doctype:inbook",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "handbook chapters on radiative transfer",
+    "ads_query": "doctype:inbook abs:\"radiative transfer\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "handbook chapters related to interstellar medium",
+    "ads_query": "doctype:inbook abs:\"interstellar medium\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "book sections published in 2022",
+    "ads_query": "doctype:inbook year:2022",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent chapters from textbooks on galactic structure",
+    "ads_query": "doctype:inbook abs:\"galactic structure\" pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "looking for masters theses",
+    "ads_query": "doctype:mastersthesis",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "master's thesis",
+    "ads_query": "doctype:mastersthesis",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find MS theses",
+    "ads_query": "doctype:mastersthesis",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "variable stars masters theses",
+    "ads_query": "doctype:mastersthesis abs:\"variable stars\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "MS theses on planetary atmospheres",
+    "ads_query": "doctype:mastersthesis abs:\"planetary atmospheres\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "peer-reviewed masters dissertations",
+    "ads_query": "doctype:mastersthesis property:refereed",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "masters theses published in 2022",
+    "ads_query": "doctype:mastersthesis year:2022",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "I want miscellaneous documents",
+    "ads_query": "doctype:misc",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "get uncategorized papers",
+    "ads_query": "doctype:misc",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "search for other documents",
+    "ads_query": "doctype:misc",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "other records about facility documentation",
+    "ads_query": "doctype:misc abs:\"facility documentation\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "other content on astronomy history",
+    "ads_query": "doctype:misc abs:\"astronomy history\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "other records by Perlmutter",
+    "ads_query": "doctype:misc author:\"Perlmutter\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "other records by Thorne",
+    "ads_query": "doctype:misc author:\"Thorne\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "show me newsletters",
+    "ads_query": "doctype:newsletter",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "search for society newsletters",
+    "ads_query": "doctype:newsletter",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "I want observatory newsletters",
+    "ads_query": "doctype:newsletter",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "newsletters on funding news",
+    "ads_query": "doctype:newsletter abs:\"funding news\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find institutional newsletters about observatory news",
+    "ads_query": "doctype:newsletter abs:\"observatory news\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "astronomical newsletters from 2018",
+    "ads_query": "doctype:newsletter year:2018",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent society newsletters",
+    "ads_query": "doctype:newsletter pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "I want obituaries",
+    "ads_query": "doctype:obituary",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "looking for memorial articles",
+    "ads_query": "doctype:obituary",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "I want tributes",
+    "ads_query": "doctype:obituary",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "tributes on observatory directors",
+    "ads_query": "doctype:obituary abs:\"observatory directors\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "tributes discussing Nobel laureates",
+    "ads_query": "doctype:obituary abs:\"Nobel laureates\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent obituary notices on astrophysicists",
+    "ads_query": "doctype:obituary abs:\"astrophysicists\" pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "biographical memoirs by Ghez",
+    "ads_query": "doctype:obituary author:\"Ghez\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "looking for press releases",
+    "ads_query": "doctype:pressrelease",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "news releases",
+    "ads_query": "doctype:pressrelease",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find media releases",
+    "ads_query": "doctype:pressrelease",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "NASA press releases on exoplanet discoveries",
+    "ads_query": "doctype:pressrelease abs:\"exoplanet discoveries\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find press releases about major discoveries",
+    "ads_query": "doctype:pressrelease abs:\"major discoveries\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent NASA press releases on major discoveries",
+    "ads_query": "doctype:pressrelease abs:\"major discoveries\" pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "press releases from 2018",
+    "ads_query": "doctype:pressrelease year:2018",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "I want conference talks",
+    "ads_query": "doctype:talk",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "search for research talks",
+    "ads_query": "doctype:talk",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "find invited talks",
+    "ads_query": "doctype:talk",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "presentations discussing numerical simulations",
+    "ads_query": "doctype:talk abs:\"numerical simulations\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "oral presentations related to data science",
+    "ads_query": "doctype:talk abs:\"data science\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "oral presentations from 2024",
+    "ads_query": "doctype:talk year:2024",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "recent research talks",
+    "ads_query": "doctype:talk pubdate:[2023-01 TO 2026-12]",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "proceedings volumes",
+    "ads_query": "doctype:proceedings",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "conference proceedings",
+    "ads_query": "doctype:proceedings",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "proceedings books",
+    "ads_query": "doctype:proceedings",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "IAU symposia proceedings volumes",
+    "ads_query": "doctype:proceedings abs:\"IAU symposia\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "proceedings of conferences about ASP conferences",
+    "ads_query": "doctype:proceedings abs:\"ASP conferences\"",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "peer-reviewed symposium proceedings",
+    "ads_query": "doctype:proceedings property:refereed",
+    "category": "doctype"
+  },
+  {
+    "natural_language": "proceedings of conferences from 2025",
+    "ads_query": "doctype:proceedings year:2025",
+    "category": "doctype"
+  }
+]
