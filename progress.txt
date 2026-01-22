@@ -215,3 +215,42 @@ Thread: https://ampcode.com/threads/T-019be392-f26d-71eb-8906-3f5967bddac7
 - **Normal queries must never trigger LLM**: Extensive negative test cases validate this
 
 ---
+
+## 2026-01-22 - US-009: Regression test suite for known failure patterns
+Thread: https://ampcode.com/threads/T-019be395-dcf2-765f-b1b4-b518cd8e8bc4
+
+### What was implemented
+- Created `tests/regression/test_operator_conflation.py` with 63 comprehensive tests
+- Test classes covering all acceptance criteria:
+  - `TestOperatorConflationRegression`: 20 tests for operator word gating
+    - Operator words as topics (citing, references, etc.) don't trigger operators
+    - Explicit operator patterns (papers citing X) DO trigger operators correctly
+  - `TestMalformedConcatenationPatterns`: 10 tests for known failure inputs
+    - Ensures no `citationsabs:`, `referencesabs:` patterns ever appear
+  - `TestNestedOperatorEdgeCases`: 4 tests for nested operator requests
+    - Graceful handling (single operator or no operator output)
+  - `TestEmptyAndPassthroughInputs`: 6 tests for edge cases
+    - Empty/whitespace input produces valid (possibly empty) response
+    - Already-ADS-syntax input passes through with validation
+  - `TestEnumValueValidation`: 8 tests for FIELD_ENUMS validation
+    - All doctype/property/database/bibgroup values in output are valid
+  - `TestParenthesesBalance`: 5 tests for parentheses balancing
+    - Inputs containing parentheses produce balanced output
+  - `TestKnownFailureStrings`: 10 tests for known failure strings
+    - 9 known failure patterns that should NEVER appear in output
+- Helper functions for pattern checking: `check_no_malformed_patterns()`, `check_balanced_parentheses()`, `check_enum_values()`
+- All 63 tests pass
+
+### Files changed
+- tests/regression/__init__.py (new - package init)
+- tests/regression/test_operator_conflation.py (new - 380 lines, 63 tests)
+- prd.json (updated US-009 passes: true)
+
+### Learnings for future iterations
+- **Parametrized tests are powerful**: Using `@pytest.mark.parametrize` allows testing many inputs with single test logic
+- **Negative pattern matching**: Using regex to detect malformed patterns is more robust than substring matching
+- **Known failure strings list**: Maintaining an explicit list of known failures ensures they never regress
+- **Test the pipeline end-to-end**: These regression tests call `process_query()` directly, validating the full pipeline
+- **Separate concerns**: Different test classes for different failure categories makes maintenance easier
+
+---
