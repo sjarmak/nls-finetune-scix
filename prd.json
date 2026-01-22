@@ -71,7 +71,7 @@
         "Run: mise run test - all pass"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Retrieval provides pattern guidance for assembly, not direct query copying."
     },
     {

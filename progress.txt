@@ -109,3 +109,37 @@ Thread: https://ampcode.com/threads/T-019be384-fa87-76de-aa3b-e57df1c17263
 - **Test negative cases extensively**: Operator gating requires testing both positive patterns AND ensuring generic uses don't trigger operators
 
 ---
+
+## 2026-01-22 - US-003: Implement few-shot retrieval over gold_examples.json
+Thread: https://ampcode.com/threads/T-019be38b-459d-7747-b213-ec86be101471
+
+### What was implemented
+- Created `retrieval.py` with BM25-like scoring over 4002 gold examples
+- `GoldExampleIndex` class for preloading and indexing examples at startup:
+  - Tokenization with stopword removal
+  - IDF computation for BM25 scoring
+  - Feature extraction from ADS queries (operators, doctypes, properties, etc.)
+- `retrieve_similar(intent: IntentSpec, k: int = 5) -> list[GoldExample]` main entry point
+- Feature-based boosting:
+  - +5.0 for exact operator match
+  - +2.0 for author presence match
+  - +1.5 for year/pubdate presence match
+  - +1.5 per matching doctype/property/bibgroup/database
+  - +1.0 for category match (operator, author, property categories)
+- Singleton pattern for global index to avoid reloading on every request
+- Performance: avg 0.5ms per retrieval (well under 20ms target)
+- Integrated into pipeline.process_query() Stage 2
+
+### Files changed
+- packages/finetune/src/finetune/domains/scix/retrieval.py (new - 350 lines)
+- packages/finetune/src/finetune/domains/scix/pipeline.py (modified - integrated retrieval)
+- tests/test_retrieval.py (new - 29 tests)
+- prd.json (updated US-003 passes: true)
+
+### Learnings for future iterations
+- **BM25 IDF formula matters**: Using `log((N - df + 0.5) / (df + 0.5) + 1)` for proper term weighting
+- **Feature boosting > pure token overlap**: Matching structural features (operators, doctypes) is more important than word similarity for ADS queries
+- **Precompute everything possible**: Tokenization and IDF at index load time keeps retrieval fast
+- **Singleton with reset for testing**: Global index pattern with `reset_index()` enables test isolation
+
+---
