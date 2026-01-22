@@ -1001,3 +1001,10 @@ trending(abs:supernova)
 - Valid ADS syntax: 5/5
 - Queries with results: 5/5
 - All fixes verified: ✓ YES
+
+## Iteration 3 - US-013
+
+**Status**: ✓ PASSED
+**Title**: Regression test: verify original issues are fixed
+**Summary**: Implemented regression tests for US-004 and US-008 fixes. Created tests/test_regression_us013.py (25 unit tests) covering: bare field detection, hallucinated initial patterns, operator syntax validation, parentheses balancing. Created scripts/test_regression_us013.py for live model testing. Fixed a bug in constrain.py where operator parentheses (citations(), trending(), similar()) were incorrectly removed. All 5 regression queries generate valid ADS syntax. All 90 tests pass. Quality gates: lint ✓, test ✓, verify ✓. Results logged to progress.txt.
+
