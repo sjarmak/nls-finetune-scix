@@ -35,9 +35,24 @@ class TestValidateFieldConstraints:
         result = validate_field_constraints("database:astronomy")
         assert result.valid is True
 
+    def test_valid_database_earthscience(self):
+        """Valid earthscience database value should pass."""
+        result = validate_field_constraints("database:earthscience")
+        assert result.valid is True
+
     def test_valid_bibgroup_hst(self):
         """Valid bibgroup value should pass."""
         result = validate_field_constraints("bibgroup:HST")
+        assert result.valid is True
+
+    def test_valid_bibgroup_seti(self):
+        """SETI bibgroup should be valid."""
+        result = validate_field_constraints("bibgroup:SETI")
+        assert result.valid is True
+
+    def test_valid_bibgroup_eso(self):
+        """ESO bibgroup (alias for ESO/Telescopes) should be valid."""
+        result = validate_field_constraints("bibgroup:ESO")
         assert result.valid is True
 
     def test_valid_multiple_fields(self):

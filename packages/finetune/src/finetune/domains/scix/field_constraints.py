@@ -78,6 +78,7 @@ DATABASES: frozenset[str] = frozenset(
         "astronomy",  # Astronomy and astrophysics collection
         "physics",  # Physics collection
         "general",  # General science collection
+        "earthscience",  # Earth and planetary science collection
     }
 )
 
@@ -145,6 +146,8 @@ BIBGROUPS: frozenset[str] = frozenset(
         "NASA PubSpace",  # NASA public access repository
         "LISA",  # Laser Interferometer Space Antenna
         "LIGO",  # Laser Interferometer Gravitational-Wave Observatory
+        "SETI",  # SETI Institute publications
+        "ESO",  # European Southern Observatory (alias for ESO/Telescopes)
     }
 )
 

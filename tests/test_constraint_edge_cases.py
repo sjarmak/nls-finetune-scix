@@ -55,6 +55,16 @@ class TestConstraintEdgeCases:
         assert "database:astronomy" in constrained
         assert "abs:papers" in constrained
 
+    def test_edge_case_1d_valid_database_earthscience_kept(self) -> None:
+        """Test 1d: Valid database 'earthscience' should be kept."""
+        raw_output = "database:earthscience abs:planetary"
+
+        constrained = constrain_query_output(raw_output)
+
+        # Valid database:earthscience should be kept
+        assert "database:earthscience" in constrained
+        assert "abs:planetary" in constrained
+
     def test_edge_case_2_property_refereed_valid(self) -> None:
         """Test 2: 'refereed articles' - property:refereed is valid, should be kept."""
         raw_output = "property:refereed abs:exoplanets"

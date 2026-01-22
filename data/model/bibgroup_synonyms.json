@@ -1,0 +1,325 @@
+{
+  "version": "1.0.0",
+  "description": "Common name to bibgroup code mappings for telescope/survey synonyms",
+  "last_updated": "2026-01-22",
+  "references": [
+    "https://ui.adsabs.harvard.edu/help/data_faq/Bibgroups"
+  ],
+  "notes": "These mappings allow natural language queries using common telescope names to match official bibgroup codes",
+  "synonyms": {
+    "HST": {
+      "common_names": ["Hubble", "Hubble Space Telescope", "Hubble Telescope"],
+      "description": "Hubble Space Telescope bibliographic group"
+    },
+    "JWST": {
+      "common_names": ["Webb", "James Webb", "James Webb Space Telescope", "JWST Telescope"],
+      "description": "James Webb Space Telescope bibliographic group"
+    },
+    "Spitzer": {
+      "common_names": ["Spitzer Space Telescope", "Spitzer Infrared"],
+      "description": "Spitzer Space Telescope bibliographic group"
+    },
+    "Chandra": {
+      "common_names": ["Chandra X-ray", "Chandra Observatory", "CXO"],
+      "description": "Chandra X-ray Observatory bibliographic group"
+    },
+    "XMM": {
+      "common_names": ["XMM-Newton", "Newton X-ray"],
+      "description": "XMM-Newton X-ray Observatory bibliographic group"
+    },
+    "GALEX": {
+      "common_names": ["Galaxy Evolution Explorer"],
+      "description": "Galaxy Evolution Explorer bibliographic group"
+    },
+    "Kepler": {
+      "common_names": ["Kepler Mission", "Kepler Space Telescope"],
+      "description": "Kepler mission bibliographic group"
+    },
+    "K2": {
+      "common_names": ["Kepler K2", "K2 Mission"],
+      "description": "K2 mission (repurposed Kepler) bibliographic group"
+    },
+    "TESS": {
+      "common_names": ["Transiting Exoplanet Survey Satellite"],
+      "description": "TESS mission bibliographic group"
+    },
+    "FUSE": {
+      "common_names": ["Far Ultraviolet Spectroscopic Explorer"],
+      "description": "FUSE mission bibliographic group"
+    },
+    "IUE": {
+      "common_names": ["International Ultraviolet Explorer"],
+      "description": "IUE mission bibliographic group"
+    },
+    "EUVE": {
+      "common_names": ["Extreme Ultraviolet Explorer"],
+      "description": "EUVE mission bibliographic group"
+    },
+    "Copernicus": {
+      "common_names": ["OAO-3", "Copernicus Satellite"],
+      "description": "Copernicus (OAO-3) satellite bibliographic group"
+    },
+    "IRAS": {
+      "common_names": ["Infrared Astronomical Satellite"],
+      "description": "IRAS mission bibliographic group"
+    },
+    "WISE": {
+      "common_names": ["Wide-field Infrared Survey Explorer"],
+      "description": "WISE mission bibliographic group"
+    },
+    "NEOWISE": {
+      "common_names": ["NEOWISE Mission"],
+      "description": "NEOWISE mission bibliographic group"
+    },
+    "Fermi": {
+      "common_names": ["Fermi Gamma-ray", "GLAST", "Fermi Space Telescope"],
+      "description": "Fermi Gamma-ray Space Telescope bibliographic group"
+    },
+    "Swift": {
+      "common_names": ["Swift Observatory", "Swift Gamma-Ray Burst"],
+      "description": "Swift Observatory bibliographic group"
+    },
+    "RXTE": {
+      "common_names": ["Rossi X-ray Timing Explorer", "Rossi XTE"],
+      "description": "RXTE mission bibliographic group"
+    },
+    "NuSTAR": {
+      "common_names": ["Nuclear Spectroscopic Telescope Array"],
+      "description": "NuSTAR mission bibliographic group"
+    },
+    "SOHO": {
+      "common_names": ["Solar and Heliospheric Observatory"],
+      "description": "SOHO mission bibliographic group"
+    },
+    "STEREO": {
+      "common_names": ["Solar TErrestrial RElations Observatory"],
+      "description": "STEREO mission bibliographic group"
+    },
+    "SDO": {
+      "common_names": ["Solar Dynamics Observatory"],
+      "description": "SDO mission bibliographic group"
+    },
+    "ESO/Telescopes": {
+      "common_names": ["ESO", "European Southern Observatory"],
+      "description": "European Southern Observatory bibliographic group"
+    },
+    "CFHT": {
+      "common_names": ["Canada-France-Hawaii Telescope"],
+      "description": "CFHT bibliographic group"
+    },
+    "Gemini": {
+      "common_names": ["Gemini Observatory", "Gemini North", "Gemini South"],
+      "description": "Gemini Observatory bibliographic group"
+    },
+    "Keck": {
+      "common_names": ["W.M. Keck Observatory", "Keck Observatory", "Keck Telescope"],
+      "description": "Keck Observatory bibliographic group"
+    },
+    "VLT": {
+      "common_names": ["Very Large Telescope"],
+      "description": "VLT bibliographic group"
+    },
+    "Subaru": {
+      "common_names": ["Subaru Telescope"],
+      "description": "Subaru Telescope bibliographic group"
+    },
+    "NOAO": {
+      "common_names": ["National Optical Astronomy Observatory"],
+      "description": "NOAO bibliographic group"
+    },
+    "NOIRLab": {
+      "common_names": ["NSF NOIRLab", "National Optical-Infrared Astronomy Research Laboratory"],
+      "description": "NOIRLab bibliographic group"
+    },
+    "CTIO": {
+      "common_names": ["Cerro Tololo", "Cerro Tololo Inter-American Observatory"],
+      "description": "CTIO bibliographic group"
+    },
+    "KPNO": {
+      "common_names": ["Kitt Peak", "Kitt Peak National Observatory"],
+      "description": "KPNO bibliographic group"
+    },
+    "Pan-STARRS": {
+      "common_names": ["PanSTARRS", "Panoramic Survey Telescope"],
+      "description": "Pan-STARRS survey bibliographic group"
+    },
+    "SDSS": {
+      "common_names": ["Sloan", "Sloan Digital Sky Survey"],
+      "description": "SDSS bibliographic group"
+    },
+    "2MASS": {
+      "common_names": ["Two Micron All Sky Survey", "2 Micron All Sky Survey"],
+      "description": "2MASS survey bibliographic group"
+    },
+    "UKIRT": {
+      "common_names": ["United Kingdom Infrared Telescope"],
+      "description": "UKIRT bibliographic group"
+    },
+    "ALMA": {
+      "common_names": ["Atacama Large Millimeter Array", "Atacama Array"],
+      "description": "ALMA bibliographic group"
+    },
+    "JCMT": {
+      "common_names": ["James Clerk Maxwell Telescope"],
+      "description": "JCMT bibliographic group"
+    },
+    "APEX": {
+      "common_names": ["Atacama Pathfinder Experiment"],
+      "description": "APEX bibliographic group"
+    },
+    "ARECIBO": {
+      "common_names": ["Arecibo Observatory", "Arecibo Radio Telescope"],
+      "description": "Arecibo Observatory bibliographic group"
+    },
+    "VLA": {
+      "common_names": ["Very Large Array", "Karl G. Jansky VLA", "EVLA"],
+      "description": "VLA bibliographic group"
+    },
+    "VLBA": {
+      "common_names": ["Very Long Baseline Array"],
+      "description": "VLBA bibliographic group"
+    },
+    "GBT": {
+      "common_names": ["Green Bank Telescope", "Green Bank"],
+      "description": "GBT bibliographic group"
+    },
+    "LOFAR": {
+      "common_names": ["Low-Frequency Array"],
+      "description": "LOFAR bibliographic group"
+    },
+    "MeerKAT": {
+      "common_names": ["MeerKAT Radio Telescope"],
+      "description": "MeerKAT bibliographic group"
+    },
+    "SKA": {
+      "common_names": ["Square Kilometre Array"],
+      "description": "SKA bibliographic group"
+    },
+    "Gaia": {
+      "common_names": ["Gaia Mission", "Gaia Satellite"],
+      "description": "Gaia mission bibliographic group"
+    },
+    "Hipparcos": {
+      "common_names": ["Hipparcos Satellite", "Hipparcos Mission"],
+      "description": "Hipparcos mission bibliographic group"
+    },
+    "CfA": {
+      "common_names": ["Center for Astrophysics", "Harvard CfA"],
+      "description": "Center for Astrophysics publications bibliographic group"
+    },
+    "NASA PubSpace": {
+      "common_names": ["NASA Public Access", "NASA PubSpace Repository"],
+      "description": "NASA public access repository bibliographic group"
+    },
+    "LISA": {
+      "common_names": ["Laser Interferometer Space Antenna"],
+      "description": "LISA mission bibliographic group"
+    },
+    "LIGO": {
+      "common_names": ["Laser Interferometer Gravitational-Wave Observatory", "LIGO Observatory"],
+      "description": "LIGO observatory bibliographic group"
+    },
+    "SETI": {
+      "common_names": ["SETI Institute", "Search for Extraterrestrial Intelligence"],
+      "description": "SETI Institute publications bibliographic group"
+    },
+    "ESO": {
+      "common_names": [],
+      "description": "European Southern Observatory (alias for ESO/Telescopes)"
+    }
+  },
+  "reverse_lookup": {
+    "Hubble": "HST",
+    "Hubble Space Telescope": "HST",
+    "Hubble Telescope": "HST",
+    "Webb": "JWST",
+    "James Webb": "JWST",
+    "James Webb Space Telescope": "JWST",
+    "JWST Telescope": "JWST",
+    "Spitzer Space Telescope": "Spitzer",
+    "Spitzer Infrared": "Spitzer",
+    "Chandra X-ray": "Chandra",
+    "Chandra Observatory": "Chandra",
+    "CXO": "Chandra",
+    "XMM-Newton": "XMM",
+    "Newton X-ray": "XMM",
+    "Galaxy Evolution Explorer": "GALEX",
+    "Kepler Mission": "Kepler",
+    "Kepler Space Telescope": "Kepler",
+    "Kepler K2": "K2",
+    "K2 Mission": "K2",
+    "Transiting Exoplanet Survey Satellite": "TESS",
+    "Far Ultraviolet Spectroscopic Explorer": "FUSE",
+    "International Ultraviolet Explorer": "IUE",
+    "Extreme Ultraviolet Explorer": "EUVE",
+    "OAO-3": "Copernicus",
+    "Copernicus Satellite": "Copernicus",
+    "Infrared Astronomical Satellite": "IRAS",
+    "Wide-field Infrared Survey Explorer": "WISE",
+    "NEOWISE Mission": "NEOWISE",
+    "Fermi Gamma-ray": "Fermi",
+    "GLAST": "Fermi",
+    "Fermi Space Telescope": "Fermi",
+    "Swift Observatory": "Swift",
+    "Swift Gamma-Ray Burst": "Swift",
+    "Rossi X-ray Timing Explorer": "RXTE",
+    "Rossi XTE": "RXTE",
+    "Nuclear Spectroscopic Telescope Array": "NuSTAR",
+    "Solar and Heliospheric Observatory": "SOHO",
+    "Solar TErrestrial RElations Observatory": "STEREO",
+    "Solar Dynamics Observatory": "SDO",
+    "ESO": "ESO/Telescopes",
+    "European Southern Observatory": "ESO/Telescopes",
+    "Canada-France-Hawaii Telescope": "CFHT",
+    "Gemini Observatory": "Gemini",
+    "Gemini North": "Gemini",
+    "Gemini South": "Gemini",
+    "W.M. Keck Observatory": "Keck",
+    "Keck Observatory": "Keck",
+    "Keck Telescope": "Keck",
+    "Very Large Telescope": "VLT",
+    "Subaru Telescope": "Subaru",
+    "National Optical Astronomy Observatory": "NOAO",
+    "NSF NOIRLab": "NOIRLab",
+    "National Optical-Infrared Astronomy Research Laboratory": "NOIRLab",
+    "Cerro Tololo": "CTIO",
+    "Cerro Tololo Inter-American Observatory": "CTIO",
+    "Kitt Peak": "KPNO",
+    "Kitt Peak National Observatory": "KPNO",
+    "PanSTARRS": "Pan-STARRS",
+    "Panoramic Survey Telescope": "Pan-STARRS",
+    "Sloan": "SDSS",
+    "Sloan Digital Sky Survey": "SDSS",
+    "Two Micron All Sky Survey": "2MASS",
+    "2 Micron All Sky Survey": "2MASS",
+    "United Kingdom Infrared Telescope": "UKIRT",
+    "Atacama Large Millimeter Array": "ALMA",
+    "Atacama Array": "ALMA",
+    "James Clerk Maxwell Telescope": "JCMT",
+    "Atacama Pathfinder Experiment": "APEX",
+    "Arecibo Observatory": "ARECIBO",
+    "Arecibo Radio Telescope": "ARECIBO",
+    "Very Large Array": "VLA",
+    "Karl G. Jansky VLA": "VLA",
+    "EVLA": "VLA",
+    "Very Long Baseline Array": "VLBA",
+    "Green Bank Telescope": "GBT",
+    "Green Bank": "GBT",
+    "Low-Frequency Array": "LOFAR",
+    "MeerKAT Radio Telescope": "MeerKAT",
+    "Square Kilometre Array": "SKA",
+    "Gaia Mission": "Gaia",
+    "Gaia Satellite": "Gaia",
+    "Hipparcos Satellite": "Hipparcos",
+    "Hipparcos Mission": "Hipparcos",
+    "Center for Astrophysics": "CfA",
+    "Harvard CfA": "CfA",
+    "NASA Public Access": "NASA PubSpace",
+    "NASA PubSpace Repository": "NASA PubSpace",
+    "Laser Interferometer Space Antenna": "LISA",
+    "Laser Interferometer Gravitational-Wave Observatory": "LIGO",
+    "LIGO Observatory": "LIGO",
+    "SETI Institute": "SETI",
+    "Search for Extraterrestrial Intelligence": "SETI"
+  }
+}
