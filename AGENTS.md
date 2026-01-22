@@ -282,8 +282,93 @@ When tests fail in US-011-014, follow this decision tree:
 ### Ralph Loop Reference
 See `progress.txt` for full iteration history and metrics.
 
+## Hybrid NER Pipeline Architecture (NEW)
+
+### Overview
+
+The project has transitioned from end-to-end fine-tuned generation to a **hybrid NER + template assembly pipeline**. This eliminates malformed operator syntax caused by the model conflating natural language with ADS operators.
+
+### Why End-to-End Generation Failed
+
+The fine-tuned Qwen3-1.7B model learned to inject operator names into field values:
+- Input: "papers about references in stellar spectra"
+- **Bad output**: `citations(abs:referencesabs:stellar spectra)`
+- **Root cause**: Training data conflated NL words with ADS operators
+
+### New Pipeline Architecture
+
+```
+User NL → [NER Extractor] → IntentSpec → [Retrieval] → [Assembler] → Valid Query
+                                              ↓
+                                     gold_examples.json
+                                              ↓
+                                     (optional LLM for paper resolution)
+```
+
+### IntentSpec Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `free_text_terms` | list[str] | Topic phrases for abs:/title: |
+| `authors` | list[str] | Author names |
+| `year_from`, `year_to` | int | Year range |
+| `doctype` | set[str] | Must be in FIELD_ENUMS |
+| `property` | set[str] | Must be in FIELD_ENUMS |
+| `database` | set[str] | Must be in FIELD_ENUMS |
+| `bibgroup` | set[str] | Must be in FIELD_ENUMS |
+| `operator` | str | None or one of: citations, references, trending, useful, similar, reviews |
+| `operator_target` | str | Optional bibcode/identifier for operator |
+
+### CRITICAL: Operator Gating Rules
+
+**Set operator ONLY when explicit patterns match:**
+
+| Pattern | Operator Set |
+|---------|--------------|
+| "papers citing X", "cited by", "who cited" | `citations` |
+| "references of", "papers referenced by", "bibliography of" | `references` |
+| "similar to this paper", "like <paper>" | `similar` |
+| "trending papers on", "what's hot in" | `trending` |
+| "most useful papers on" | `useful` |
+| "reviews of", "review articles on" | `reviews` |
+
+**Do NOT set operator for:**
+- "citing" as a topic (e.g., "papers about citing practices")
+- "references" as a topic (e.g., "papers about references in spectra")
+- Generic use of these words without explicit operator intent
+
+### Synonym Maps for Enum Values
+
+| User Input | Maps To |
+|------------|---------|
+| "refereed", "peer reviewed" | `property:refereed` |
+| "open access", "oa" | `property:openaccess` |
+| "arxiv", "preprint" | `property:eprint` |
+| "Hubble" | `bibgroup:HST` |
+| "Webb", "James Webb" | `bibgroup:JWST` |
+| "Sloan" | `bibgroup:SDSS` |
+
+### Key Files (Hybrid Pipeline)
+
+| File | Purpose |
+|------|---------|
+| `intent_spec.py` | IntentSpec dataclass definition |
+| `ner.py` | Rules-based NER with operator gating |
+| `retrieval.py` | Few-shot retrieval from gold_examples |
+| `assembler.py` | Deterministic query assembly |
+| `resolver.py` | Optional LLM for paper reference resolution |
+| `pipeline.py` | Main pipeline orchestration |
+
+### Testing Requirements
+
+1. **Operator gating tests**: Verify "citing" as topic ≠ citations() operator
+2. **Enum validation tests**: All values validated against FIELD_ENUMS
+3. **Playwright E2E tests**: Browser tests on localhost:8000
+4. **Regression tests**: Known failure patterns never appear in output
+
 ## References
 
 - `README.md` - Commands, project structure, setup
 - `features.json` - Feature tracking
 - `docs/fine-tuning-cli.md` - Fine-tuning CLI setup and usage
+- `docs/HYBRID_PIPELINE.md` - Hybrid pipeline architecture (created by US-011)

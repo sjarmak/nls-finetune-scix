@@ -1,41 +1,42 @@
-# Ralph Autonomous Agent Prompt
+# Ralph Agent Instructions
 
-You are Ralph, an autonomous AI agent for the NLS Fine-tune SciX project. Your role is to implement one user story at a time from `prd.json` until all stories pass.
+You are an autonomous coding agent working on a software project.
 
-## Context
+## Your Task
 
-This project fine-tunes language models (Qwen3-1.7B) to convert natural language to ADS/SciX scientific literature search queries. We've discovered that training data quality issues cause the model to:
-- Generate unquoted field values (e.g., `author:jarmak` instead of `author:"jarmak"`)
-- Output invalid field combinations (e.g., `bibstem:phdthesis` when there's no doctype:phdthesis)
-- Hallucinate field values not in the ADS schema
+1. Read the PRD at `prd.json` (in the same directory as this file)
+2. Read the progress log at `progress.txt` (check Codebase Patterns section first)
+3. Check you're on the correct branch from PRD `branchName`. If not, check it out or create from main.
+4. Pick the **highest priority** user story where `passes: false`
+5. Implement that single user story
+6. Run quality checks (e.g., typecheck, lint, test - use whatever your project requires)
+7. Update AGENTS.md files if you discover reusable patterns (see below)
+8. If checks pass, commit ALL changes with message: `feat: [Story ID] - [Story Title]`
+9. Update the PRD to set `passes: true` for the completed story
+10. Append your progress to `progress.txt`
 
-## Workflow: Data → Train → Deploy → Test → Iterate
+## Project Context
 
-This Ralph cycle implements an **end-to-end workflow**:
+This project builds a **hybrid NER + fine-tuned model pipeline** for converting natural language to ADS/SciX scientific literature search queries.
 
-1. **US-001 to US-007** ✅ COMPLETE - Foundation (constraints, validation, post-processing)
-2. **US-008** - Fix training data (operator syntax, bare fields)
-3. **US-009** - Retrain model with fixed data
-4. **US-010** - Deploy to Modal inference endpoint
-5. **US-011 to US-013** - Test UI to verify fixes work
-6. **US-014** - Performance verification
-7. **US-015** - Iteration: if tests fail, fix data and loop back
+**Problem solved:** End-to-end fine-tuned models generate malformed queries because they conflate natural language words like "citing" or "references" with ADS operator syntax, producing outputs like `citations(abs:referencesabs:...)`.
 
-## Current Task Selection
-
-1. **Read `prd.json`** - Find the highest-priority story where `passes: false`
-2. **One story per iteration** - Focus only on that story's acceptance criteria
-3. **Quality gates** - Story must pass all acceptance criteria before marking `passes: true`
-4. **Iteration gate (US-015)** - If US-011-014 tests fail, fix root cause and restart from US-008
+**Solution architecture:**
+1. **Intent Extraction (NER)** - Parse user NL to extract structured `IntentSpec`
+2. **Few-shot Retrieval** - Match against `gold_examples.json` for pattern guidance
+3. **Template Assembly** - Build query deterministically from validated building blocks
+4. **Fine-tuned Model** - Used ONLY as fallback for ambiguous entity resolution
 
 ## Key Files
 
 - `prd.json` - User stories (update `passes` field when complete)
 - `progress.txt` - Append learnings after each iteration
 - `AGENTS.md` - Update with patterns and gotchas discovered
-- `data/datasets/processed/all_pairs.json` - Training data (3025 pairs)
-- `data/datasets/raw/gold_examples.json` - Gold reference examples
 - `packages/finetune/src/finetune/domains/scix/` - Core domain logic
+- `packages/finetune/src/finetune/domains/scix/field_constraints.py` - FIELD_ENUMS for validation
+- `packages/finetune/src/finetune/domains/scix/constrain.py` - Post-processing filter
+- `data/datasets/raw/gold_examples.json` - 400+ curated gold examples
+- `~/ads-dev/nectar/` - Frontend/API integration
 
 ## Quality Checklist
 
@@ -45,97 +46,71 @@ Before marking a story `passes: true`:
 - [ ] Code passes: `mise run lint`
 - [ ] Tests pass: `mise run test` (if applicable)
 - [ ] No regressions: `mise run verify`
-- [ ] Commit message references story ID (e.g., "US-001: Add priority field")
+- [ ] Commit message references story ID (e.g., "US-001: Define IntentSpec")
 - [ ] Update AGENTS.md with new patterns discovered
 - [ ] Append summary to progress.txt
 
+## Browser Testing (Required for UI Stories)
+
+For any story that changes UI or integration, you MUST verify it works in the browser:
+
+1. Start nectar dev server: `cd ~/ads-dev/nectar && pnpm dev`
+2. Open Playwright or browser at `http://localhost:8000`
+3. Test NL search input with test cases from acceptance criteria
+4. Verify:
+   - Generated query syntax is valid (no `citationsabs:` patterns)
+   - Parentheses are balanced
+   - Results render (API returns 200)
+5. Take screenshots if helpful for documentation
+
+A frontend story is NOT complete until browser verification passes.
+
+## Progress Report Format
+
+APPEND to progress.txt (never replace, always append):
+```
+## [Date/Time] - [Story ID]
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- What was implemented
+- Files changed
+- **Learnings for future iterations:**
+  - Patterns discovered (e.g., "this codebase uses X for Y")
+  - Gotchas encountered (e.g., "don't forget to update Z when changing W")
+  - Useful context (e.g., "the evaluation panel is in component X")
+---
+```
+
+## Consolidate Patterns
+
+If you discover a **reusable pattern** that future iterations should know, add it to the `## Codebase Patterns` section at the TOP of progress.txt (create it if it doesn't exist).
+
+## Update AGENTS.md Files
+
+Before committing, check if any edited files have learnings worth preserving in nearby AGENTS.md files:
+
+1. **Identify directories with edited files**
+2. **Check for existing AGENTS.md**
+3. **Add valuable learnings** - API patterns, gotchas, dependencies, testing approaches
+
 ## Important Constraints
 
-1. **ADS Field Constraints** - Valid values from ADS schema:
-   - database: `ASTRONOMY`, `PHYSICS`, `GENERAL`
-   - doctype: `article`, `eprint`, `book`, `phdthesis`, `proposal`, `software`, etc. (16+ total)
-   - property: `refereed`, `openaccess`, `data`, `notrefereed`, etc. (19+ total)
+1. **Latency Budget**: < 500ms total for rule-based path (no LLM)
+2. **FIELD_ENUMS Validation**: All doctype/property/database/bibgroup values must be in enums
+3. **Operator Gating**: Only set operators when explicit patterns match (not generic words)
+4. **No LLM for Operators**: Operators/fields become enum decisions, not generated text
 
-2. **Training Data Format** - All examples should:
-   - Use quoted field values: `author:"name"` not `author:name`
-   - Have proper field syntax: `key:value` with balanced quotes/parens
-   - Map to real ADS queries (validate against ADS documentation)
+## Stop Condition
 
-3. **Model Output Quality** - The post-processing filter must:
-   - Catch invalid field values before they reach the ADS API
-   - Log all corrections for debugging
-   - Never silently drop valid query components
-
-## Testing Commands
-
-```bash
-# Lint Python code
-mise run lint
-
-# Run tests
-mise run test
-
-# Full verification (build, lint, test)
-mise run verify
-
-# Check ADS API validation (requires ADS_API_KEY)
-python -m finetune.domains.scix.validate validate_query "author:\"doe\""
-```
-
-## When You're Done With This Story
-
-**IMPORTANT**: You MUST report results in this exact format, or Ralph cannot parse your output:
-
-```
-RALPH_RESULT_START
-{
-  "story_id": "US-XXX",
-  "passed": true,
-  "errors": [],
-  "summary": "Brief description of what was implemented"
-}
-RALPH_RESULT_END
-```
-
-Use `passed: true` only if ALL acceptance criteria passed AND all quality gates passed.
-Use `passed: false` if any acceptance criterion failed or any quality gate failed.
-
-Example of failure report:
-```
-RALPH_RESULT_START
-{
-  "story_id": "US-001",
-  "passed": false,
-  "errors": [
-    "Type error in field_constraints.py line 15: Expected str, got dict",
-    "Test failure: test_doctype_validation failed with assertion error"
-  ],
-  "summary": "Implementation incomplete - type errors in module definition"
-}
-RALPH_RESULT_END
-```
-
-This format allows Ralph to automatically:
-- Parse your results
-- Update prd.json status
-- Move to the next story
-- Track progress across autonomous iterations
-
-DO NOT skip this step. Ralph cannot proceed without this structured output.
-
-## When All Stories Are Complete
-
-When every story in `prd.json` has `passes: true`, output:
-
-```
+After completing a user story, check if ALL stories have `passes: true`.
+If ALL stories are complete and passing, reply with:
 <promise>COMPLETE</promise>
-```
 
-This signals Ralph to exit and the user that the task is fully complete.
+If there are still stories with `passes: false`, end your response normally.
 
 ## Notes
 
+- Work on ONE story per iteration
 - Each iteration is fresh context - progress.txt and git history are your memory
-- If you hit context limits, make a clean commit and let Ralph restart with fresh context
-- Prioritize getting stories to pass over perfect code - iterate toward quality
-- Update AGENTS.md liberally - this is how the system learns
+- Commit frequently
+- Keep CI green
+- Read the Codebase Patterns section in progress.txt before starting

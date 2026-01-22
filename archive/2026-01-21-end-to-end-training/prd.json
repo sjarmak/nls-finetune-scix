@@ -1,0 +1,289 @@
+{
+  "project": "NLS Fine-tune SciX",
+  "branchName": "improve-training-data",
+  "description": "Improve training data quality and post-processing validation using ADS field constraints and metadata",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Create ADS field constraints module",
+      "description": "As a developer, I need enumerated field values from ADS API schema so the system can validate queries at inference time.",
+      "acceptanceCriteria": [
+        "Create packages/finetune/src/finetune/domains/scix/field_constraints.py with FIELD_ENUMS dict",
+        "Include all 16+ doctypes: article, eprint, book, phdthesis, proposal, software, etc.",
+        "Include all 19+ properties: refereed, openaccess, data, notrefereed, etc.",
+        "Include 3 databases: ASTRONOMY, PHYSICS, GENERAL",
+        "Include bibgroup values from ADS (30+ institutional/telescope groups)",
+        "Include esources enum (PUB_PDF, EPRINT_PDF, AUTHOR_PDF, etc.)",
+        "Add docstrings with ADS schema sources",
+        "Run: mise run lint and verify no errors"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Reference: ADS montysolr schema.xml and GitHub.com/adsabs documentation"
+    },
+    {
+      "id": "US-002",
+      "title": "Add query constraint validation function",
+      "description": "As a system, I need to validate generated queries against field constraints to catch invalid field combinations.",
+      "acceptanceCriteria": [
+        "Create validate.py function: validate_field_constraints(query: str) -> ValidationResult",
+        "Check all doctype: values against FIELD_ENUMS['doctype']",
+        "Check all database: values against FIELD_ENUMS['database']",
+        "Check all property: values against FIELD_ENUMS['property']",
+        "Check all bibgroup: values against FIELD_ENUMS['bibgroup']",
+        "Return list of invalid fields with suggestions for correction",
+        "Add unit tests in test_validate.py for 10+ queries (valid and invalid)",
+        "Run: mise run test and all tests pass"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Use existing lint_query as base, extend with constraint checking"
+    },
+    {
+      "id": "US-003",
+      "title": "Implement post-processing filter for model output",
+      "description": "As a system, I need to clean up model-generated queries by removing invalid field combinations and enforcing constraints.",
+      "acceptanceCriteria": [
+        "Create function: constrain_query_output(query: str) -> str",
+        "Remove any doctype/database/property values not in FIELD_ENUMS",
+        "Log warnings for removed invalid fields",
+        "Preserve valid field combinations (e.g., doctype:article AND property:refereed)",
+        "Handle edge cases: empty fields, trailing operators, malformed parentheses",
+        "Add 15+ test cases covering common model hallucinations",
+        "Run: mise run test and verify all tests pass"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "This is the safety net to prevent model from outputting nonsense like 'bibstem:phdthesis'"
+    },
+    {
+      "id": "US-004",
+      "title": "Audit and fix remaining bare fields in training data",
+      "description": "As a developer, I need to ensure all author/abs/title fields are properly quoted to teach the model correct syntax.",
+      "acceptanceCriteria": [
+        "Run audit script: python scripts/audit_bare_fields.py",
+        "Find all remaining unquoted bare fields (45 identified from previous audit)",
+        "Fix in all_pairs.json and gold_examples.json",
+        "Verify queries pass validate.py lint_query with no errors",
+        "Document count of fixed fields in commit message",
+        "Run: mise run verify to confirm no regressions"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "45 bare fields remain from previous fix (mostly in complex expressions like author:(...))"
+    },
+    {
+      "id": "US-005",
+      "title": "Create training data quality report",
+      "description": "As a project manager, I need a comprehensive report of training data quality metrics and issues.",
+      "acceptanceCriteria": [
+        "Generate report: data/datasets/QUALITY_REPORT.md",
+        "Total pairs: count and breakdown by category",
+        "Validation pass rate: % of pairs that pass lint_query",
+        "Invalid fields report: list of invalid doctype/database/property/bibgroup values found",
+        "Bare field summary: count of unquoted fields by type",
+        "Examples section: show 5 'good' and 5 'bad' examples from training data",
+        "Recommendations: list of top 5 improvements needed",
+        "Include before/after metrics from this task"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Use for presentation and tracking progress"
+    },
+    {
+      "id": "US-006",
+      "title": "Integrate field constraints into API validation layer",
+      "description": "As an API, I need to apply field constraints to model output before returning to user.",
+      "acceptanceCriteria": [
+        "Update ~/ads-dev/nectar/src/pages/api/nl-search.ts to use constrain_query_output",
+        "Call new constraint validation after model inference, before ADS API call",
+        "Log all corrections made for debugging",
+        "Return constraint violation details to frontend if violations detected",
+        "Test with 10+ real queries that have field constraint issues",
+        "Run: npm run build and npm run test in ads-dev/nectar"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Cross-repo change - coordinate with ads-dev project structure"
+    },
+    {
+      "id": "US-007",
+      "title": "Document field constraint patterns in AGENTS.md",
+      "description": "As a future developer, I need to understand ADS field constraints and how the model learns them.",
+      "acceptanceCriteria": [
+        "Update AGENTS.md with ADS Field Constraints section",
+        "Document all FIELD_ENUMS values and their meanings",
+        "Explain why bare fields are problematic (model learns to not quote)",
+        "Show example of good vs bad training pairs for each field type",
+        "Include links to ADS documentation sources",
+        "List common model hallucinations and how constrain_query_output fixes them",
+        "Add note about CanonicalAffiliations for future affiliation-based training"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Knowledge base for future iterations"
+    },
+    {
+      "id": "US-008",
+      "title": "Fix operator syntax in training data (citations, trending, useful, etc.)",
+      "description": "As a developer, I need to fix malformed operator syntax in training data so the model learns correct function call patterns.",
+      "acceptanceCriteria": [
+        "Audit all operator examples: citations(), trending(), useful(), reviews(), similar(), references()",
+        "Fix 37 bad operator examples found in all_pairs.json and gold_examples.json",
+        "Ensure all field values inside operators are quoted: citations(abs:\"topic\") not citations(abs:topic)",
+        "Remove extra/malformed parentheses: trending(abs:\"topic\") not trending(abs:(topic))",
+        "Verify all corrected queries pass lint_query validation",
+        "Run: python scripts/audit_operators.py (new script) to verify no remaining bad patterns",
+        "Run: mise run verify to ensure no regressions",
+        "Document operator syntax rules in AGENTS.md"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "37 bad operator examples identified in training data. Critical for model to learn correct syntax for citations(author:\"jarmak\") pattern."
+    },
+    {
+      "id": "US-009",
+      "title": "Retrain model with fixed operator data",
+      "description": "As a system, I need to retrain the model with the corrected training data from US-008 so the model learns correct operator syntax patterns.",
+      "acceptanceCriteria": [
+        "Run fine-tuning: scix-finetune train --run-name v3-operators",
+        "Wait for training to complete (estimated 40 minutes on H100)",
+        "Verify training output: model checkpoint created in /runs/v3-operators/",
+        "Check final training loss decreased from previous version",
+        "Merge LoRA weights: scix-finetune merge --checkpoint /runs/v3-operators/checkpoint-700",
+        "Verify merged model exists at /runs/v3-operators/merged",
+        "Test model locally with 3 operator queries to confirm it generates valid syntax",
+        "Log training metrics in progress.txt"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Retraining must complete before deployment. Uses same infrastructure as previous runs. Checkpoint selection based on final loss metrics."
+    },
+    {
+      "id": "US-010",
+      "title": "Deploy retrained model to Modal",
+      "description": "As an API, I need to deploy the retrained model so the inference endpoint uses the corrected operators.",
+      "acceptanceCriteria": [
+        "Run: modal deploy serve_vllm.py",
+        "Wait for deployment to complete (estimated 5-10 minutes)",
+        "Verify endpoint is live: curl https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/models",
+        "Endpoint returns model 'llm' in response",
+        "Test with 3 warm requests, measure latency (should be ~0.4-0.5s)",
+        "Verify Modal logs show model loading from /runs/v3-operators/merged",
+        "Test with one operator query: 'trending papers on black holes' → should return trending(abs:\"black holes\")",
+        "Log deployment timestamp and endpoint status in progress.txt"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Deployment picks latest merged model by mtime. Typically <1 minute after training completes. Verify warm container is running."
+    },
+    {
+      "id": "US-011",
+      "title": "Test UI with operator queries via nectar",
+      "description": "As a user, I need to test the NL search feature in the SciX UI to verify that operator syntax is now correct.",
+      "acceptanceCriteria": [
+        "Start nectar dev server: cd ~/ads-dev/nectar && pnpm dev (if not already running)",
+        "Test 5 operator query cases via NL search input:",
+        "  1. 'papers similar to 2019ApJ...887L...1K' → similar(bibcode:2019ApJ...887L...1K) or similar(bibcode:\"2019ApJ...887L...1K\") [both valid]",
+        "  2. 'trending papers on exoplanets' → trending(abs:exoplanets) or trending(abs:\"exoplanets\") [both valid - single word doesn't need quotes]",
+        "  3. 'papers citing gravitational waves' → citations(abs:\"gravitational waves\") [multi-word phrase REQUIRES quotes]",
+        "  4. 'useful papers on dark matter' → useful(abs:\"dark matter\") [multi-word phrase REQUIRES quotes]",
+        "  5. 'reviews of cosmology' → reviews(abs:cosmology) or reviews(abs:\"cosmology\") [both valid - single word optional]",
+        "For each test: verify query syntax is correct per ADS rules (multi-word phrases quoted, single words optional, balanced parentheses)",
+        "Verify result count is > 0 (no empty results from syntax errors)",
+        "Verify post-processing filter doesn't remove valid fields",
+        "Take screenshots of working queries for documentation",
+        "Log test results in progress.txt"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "ADS accepts both quoted and unquoted single-word values. Quotes required for: multi-word phrases, special characters, bibcodes. Single-word values are equivalent with or without quotes (abs:exoplanet == abs:\"exoplanet\")."
+    },
+    {
+      "id": "US-012",
+      "title": "Test edge cases and verify constraint validation",
+      "description": "As a system, I need to verify that invalid field constraints are caught and corrected before reaching ADS.",
+      "acceptanceCriteria": [
+        "Test 5 constraint edge cases via NL search:",
+        "  1. 'ADS papers' → model may output invalid database → post-processing removes it",
+        "  2. 'refereed articles' → property:refereed (valid, should be kept)",
+        "  3. 'papers by Hubble' → may output bibgroup:Hubble → corrected to HST",
+        "  4. 'PhD theses' → doctype:phdthesis (valid, should be kept)",
+        "  5. 'data papers with open access' → property:openaccess AND property:data (valid)",
+        "Verify constraint violations are logged in browser console (debug logs)",
+        "For any invalid fields removed, verify they don't appear in final ADS query",
+        "Verify results still valid (not empty due to over-aggressive filtering)",
+        "Compare with v2-4k-pairs baseline to ensure no regressions",
+        "Log edge case results in progress.txt"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Tests the interaction between model output and post-processing filter. Ensure filter doesn't over-correct."
+    },
+    {
+      "id": "US-013",
+      "title": "Regression test: verify original issues are fixed",
+      "description": "As a developer, I need to confirm that the original training data issues (bare fields, malformed operators) no longer cause problems.",
+      "acceptanceCriteria": [
+        "Test original bug cases that were fixed in US-004 and US-008:",
+        "  1. 'papers by jarmak' → author:\"jarmak\" (no bare fields)",
+        "  2. 'papers by kelbert' → author:\"kelbert\" (no hallucinated initials from US-004)",
+        "  3. 'citations from gravitational wave papers' → citations(abs:\"gravitational waves\") (correct operator syntax)",
+        "  4. 'trending papers on cosmology' → trending(abs:\"cosmology\") (proper quoted values inside operator)",
+        "  5. 'papers similar to famous paper' → similar(bibcode:\"...\") (balanced parentheses)",
+        "Verify all 5 queries generate valid ADS syntax",
+        "Verify all 5 queries return results (not empty)",
+        "Compare model output before/after improvements (using v2-4k-pairs baseline)",
+        "Document that all fixes are working correctly",
+        "Log regression test results in progress.txt"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Critical for confirming that training data fixes actually solved the problems. Compare outputs to show improvement."
+    },
+    {
+      "id": "US-014",
+      "title": "Performance verification and final sign-off",
+      "description": "As a system owner, I need to verify that the improved model meets performance targets before marking complete.",
+      "acceptanceCriteria": [
+        "Measure model latency: warm request time (should be < 0.5s)",
+        "Verify cold start time (should be < 1.5s with min_containers=1)",
+        "Run evaluation against 20+ gold examples to measure syntax validity",
+        "  Expected: > 95% of generated queries have valid ADS syntax",
+        "Check that post-processing doesn't remove too much (< 5% correction rate)",
+        "Verify error rates: < 5% queries result in empty ADS result set",
+        "Compare metrics before/after (v2-4k-pairs vs v3-operators):",
+        "  - Syntax validity improvement",
+        "  - Operator accuracy",
+        "  - False correction rate",
+        "Document all metrics in data/datasets/OPERATOR_METRICS.md",
+        "Confirm all 5 previous user stories (US-008-012) are passing",
+        "Generate final report with recommendations"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "This is the final gate before marking complete. All metrics must be acceptable or workflow returns to iteration."
+    },
+    {
+      "id": "US-015",
+      "title": "Iteration control: if tests fail, return to data fixes",
+      "description": "As a QA process, if any tests in US-011-014 fail, I need to identify issues and iterate back to fix training data.",
+      "acceptanceCriteria": [
+        "IF any test in US-011-014 fails:",
+        "  1. Analyze failure: is it a data issue (training) or model issue (hyperparameters)?",
+        "  2. IF data issue: add more examples to fix gap, goto US-008",
+        "  3. IF model issue: adjust hyperparameters in train.py, goto US-009",
+        "  4. Re-run failed test to verify fix works",
+        "IF all tests pass:",
+        "  1. Mark US-008 through US-014 as complete",
+        "  2. Merge improve-training-data branch to main",
+        "  3. Create summary in progress.txt with before/after metrics",
+        "Create decision tree in AGENTS.md documenting iteration logic",
+        "Update Ralph loop documentation with lessons learned"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Iteration loop: identify failure → fix root cause → retrain → redeploy → retest. Repeat until all pass."
+    }
+  ]
+}
