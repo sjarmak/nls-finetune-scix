@@ -33,3 +33,42 @@ This Ralph cycle implements a **hybrid NER + fine-tuned model pipeline** to repl
 (Entries will be appended below as stories are completed)
 
 ---
+## 2026-01-21 - US-001: Define IntentSpec dataclass and pipeline skeleton
+Thread: https://ampcode.com/threads/T-019be380-a26d-74a8-a7bf-01162d7c7510
+
+### What was implemented
+- Created `intent_spec.py` with typed IntentSpec dataclass:
+  - All required fields: free_text_terms, authors, affiliations, objects, year_from, year_to
+  - Enum constraint fields: doctype, property, database, bibgroup, esources, data (as set[str])
+  - Operator fields: operator (validated against OPERATORS frozenset), operator_target
+  - Metadata: raw_user_text, confidence dict
+  - Methods: has_constraints(), has_content(), to_dict(), to_json(), from_dict(), from_json()
+  - Operator validation in __post_init__
+
+- Created `pipeline.py` with skeleton:
+  - GoldExample dataclass for retrieval results
+  - DebugInfo dataclass with timing fields
+  - PipelineResult with intent, retrieved_examples, final_query, debug_info, success, error
+  - process_query() function with placeholder implementations for each stage
+  - is_ads_query() helper for detecting pre-formed ADS syntax
+
+- Added 36 unit tests in tests/test_intent_spec.py:
+  - IntentSpec instantiation, serialization, deserialization, roundtrip
+  - Operator validation (valid/invalid)
+  - has_constraints() and has_content() helpers
+  - Pipeline returns stable keys
+  - is_ads_query() detection
+
+### Files changed
+- packages/finetune/src/finetune/domains/scix/intent_spec.py (new)
+- packages/finetune/src/finetune/domains/scix/pipeline.py (new)
+- tests/test_intent_spec.py (new)
+- prd.json (updated US-001 passes: true)
+
+### Learnings for future iterations
+- Use `X | None` instead of `Optional[X]` for type annotations (ruff UP045)
+- Import order must be alphabetical within stdlib/third-party groups (ruff I001)
+- Sets must be converted to sorted lists for deterministic JSON serialization
+- OPERATORS frozenset prevents invalid operator values at construction time
+
+---

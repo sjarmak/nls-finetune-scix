@@ -20,7 +20,7 @@
         "Run: mise run lint and mise run test - all pass"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "Foundation for all other stories. No LLM call in default path."
     },
     {
