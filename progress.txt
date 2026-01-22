@@ -101,3 +101,22 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - The parametrized test approach (pytest.mark.parametrize) makes testing many patterns efficient
   - When adding new patterns, check existing negative test cases to ensure they still pass
 ---
+
+## 2026-01-22 - US-005: Generate database/collection training examples
+- **Implemented**: Training data generation for database/collection queries
+- **Files created**:
+  - `scripts/generate_collection_examples.py` - Generates database-filtered training examples
+  - `data/datasets/generated/collection_examples.json` - 88 unique examples
+- **Key details**:
+  - 25 astronomy examples (with 15 topics like dark matter, black holes, galaxy formation)
+  - 25 physics examples (with 14 topics like quantum mechanics, string theory)
+  - 13 general examples (interdisciplinary science)
+  - 25 earthscience examples (previously 0 coverage) - Mars geology, climate, space weather
+  - Combined queries: database + topic, database + date, database + refereed + topic + author
+  - NL variations: "astronomy papers", "astrophysics literature", "earth science research", etc.
+- **Learnings for future iterations**:
+  - NL trigger phrases must be complete sentences/phrases that work in all template positions
+  - Avoid partial phrases like "in astronomy" that break when prefixed with "get me" or "I want"
+  - Use deduplication on natural_language field since random generation can create duplicates
+  - Template-based generation with separate topic/date/combined categories works well
+---
