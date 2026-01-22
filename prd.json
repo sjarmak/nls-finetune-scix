@@ -120,7 +120,7 @@
         "Run: mise run test - all pass"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "LLM is fallback only. Most queries should not trigger this."
     },
     {

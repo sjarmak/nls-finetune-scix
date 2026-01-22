@@ -184,3 +184,34 @@ Thread: https://ampcode.com/threads/T-019be38e-d572-7067-b3aa-69ad38bf950b
 - **constrain_query_output() as safety net**: Run existing constraint filter as final step
 
 ---
+
+## 2026-01-22 - US-005: Implement optional LLM resolver for ambiguous paper references
+Thread: https://ampcode.com/threads/T-019be392-f26d-71eb-8906-3f5967bddac7
+
+### What was implemented
+- Created `resolver.py` with optional LLM paper reference resolution:
+  - `needs_resolution()` - Gating function that returns True ONLY when:
+    - Operator is citations/references/similar (requires target)
+    - No explicit target bibcode provided
+    - Text contains ambiguous patterns ("this paper", "famous paper", etc.)
+  - `extract_paper_hint()` - Extracts topic/author/year hints from user text
+  - `resolve_via_ads_search()` - Deterministic resolution via ADS (most-cited match)
+  - `resolve_via_llm()` - Fallback LLM call with 300ms timeout
+  - `resolve_paper_reference()` - Main entry point orchestrating resolution
+- ResolverResult dataclass with: success, bibcode, paper_title, fallback_reason, timing
+- OPERATORS_REQUIRING_TARGET = {citations, references, similar}
+- AMBIGUOUS_REFERENCE_PATTERNS = 11 patterns for detecting ambiguous refs
+
+### Files changed
+- packages/finetune/src/finetune/domains/scix/resolver.py (new - 330 lines)
+- tests/test_resolver.py (new - 52 tests)
+- prd.json (updated US-005 passes: true)
+
+### Learnings for future iterations
+- **Gating is critical**: LLM should ONLY be called for specific conditions (operator + ambiguous ref)
+- **Two-stage resolution**: Try ADS search from hint first, LLM only as fallback
+- **Deterministic bibcode selection**: Sort by citation_count desc ensures reproducible results
+- **Mock both httpx.get and httpx.post**: ADS uses GET, OpenAI uses POST
+- **Normal queries must never trigger LLM**: Extensive negative test cases validate this
+
+---
