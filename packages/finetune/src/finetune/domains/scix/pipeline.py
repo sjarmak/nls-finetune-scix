@@ -136,9 +136,10 @@ def process_query(nl_text: str) -> PipelineResult:
     debug_info.raw_extracted = intent.to_dict()
 
     # Stage 2: Few-shot Retrieval
-    # TODO: Implement in US-003 (retrieval.py)
+    from .retrieval import retrieve_similar
+
     retrieval_start = time.perf_counter()
-    retrieved_examples: list[GoldExample] = []
+    retrieved_examples = retrieve_similar(intent, k=5)
     debug_info.retrieval_time_ms = (time.perf_counter() - retrieval_start) * 1000
 
     # Stage 3: Query Assembly
