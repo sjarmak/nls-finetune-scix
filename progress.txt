@@ -307,3 +307,35 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - forbidden_patterns array enables negative assertion testing
   - Test IDs follow consistent naming (category-NNN) for traceability
 ---
+
+## 2026-01-22 - US-013: Automated benchmark evaluation script
+- **Implemented**: Comprehensive benchmark evaluation script
+- **Files created**:
+  - `scripts/evaluate_benchmark.py` - Runs model against benchmark tests and calculates metrics
+- **Files modified**:
+  - `.mise.toml` - Added eval:benchmark and eval:benchmark:ci tasks
+- **Key details**:
+  - Evaluates 301 benchmark test cases from benchmark_queries.json
+  - Calculates metrics: exact match rate (11.6%), syntax validity (98.0%), constraint validity (100%), pass rate (98.7%)
+  - Results breakdown by:
+    - Category: field_types, operators, enum_fields, edge_cases, regression_tests
+    - Subcategory: content, author, citations, property, doctype, etc.
+    - Difficulty: simple, medium, complex, edge, regression
+  - Outputs JSON report to data/datasets/evaluations/benchmark_results.json
+  - Supports --verbose flag for progress output
+  - Supports --ci flag for CI mode (fails if pass rate < 80%)
+  - Uses process_query() from pipeline.py to run each NL through the NER system
+  - Validates syntax with lint_query() and constraints with validate_field_constraints()
+- **Evaluation results**:
+  - 297/301 tests passed (98.7% pass rate)
+  - 4 failures: 1 reference operator pattern, 3 ADS syntax passthrough edge cases
+  - 100% pass rate on field_types, enum_fields, regression_tests
+  - 99% pass rate on operators (14/15 references tests pass)
+  - 93.3% pass rate on edge_cases (passthrough cases fail with empty queries)
+- **Learnings for future iterations**:
+  - The "what does X cite" pattern needs the simpler version added to OPERATOR_PATTERNS
+  - ADS syntax passthrough cases return empty queries - needs handling in pipeline
+  - Exact match rate is low (11.6%) but pass rate is high - outputs are syntactically valid but phrased differently
+  - The normalize_query function is crucial for fair comparison
+  - Use category-specific assertions for different test types (behavior vs exact match)
+---

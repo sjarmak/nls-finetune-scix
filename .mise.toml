@@ -136,6 +136,23 @@ description = "Run benchmark with CI check (fails if p95 > 500ms)"
 run = "uv run python scripts/benchmark_pipeline.py --queries 100 --ci"
 
 # ===========================================
+# EVALUATION
+# ===========================================
+
+[tasks."eval:benchmark"]
+description = "Run benchmark evaluation against test set"
+run = """
+#!/usr/bin/env bash
+set -e
+echo "Running benchmark evaluation..."
+uv run python scripts/evaluate_benchmark.py --verbose
+"""
+
+[tasks."eval:benchmark:ci"]
+description = "Run benchmark evaluation with CI check (fails if pass rate < 80%)"
+run = "uv run python scripts/evaluate_benchmark.py --ci"
+
+# ===========================================
 # DATASET MANAGEMENT
 # ===========================================
 
