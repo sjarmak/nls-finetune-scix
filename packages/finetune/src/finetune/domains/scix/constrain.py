@@ -11,6 +11,54 @@ from finetune.domains.scix.field_constraints import FIELD_ENUMS
 
 logger = logging.getLogger(__name__)
 
+# Operator names that may be malformed
+OPERATORS = {"citations", "references", "trending", "useful", "similar", "reviews", "topn"}
+
+
+def _fix_malformed_operators(query: str) -> str:
+    """Fix malformed operator syntax like 'citationsauthor:' -> 'citations(author:...')'.
+
+    Model sometimes concatenates operator name directly with field name instead of
+    using parentheses. This reconstructs the correct syntax.
+
+    Handles patterns like:
+    - citationsauthor:"query" -> citations(author:"query")
+    - trendingabs:exoplanet -> trending(abs:exoplanet)
+    - usefulabs:"cosmology" -> useful(abs:"cosmology")
+    """
+    for op in OPERATORS:
+        # Pattern: operator followed directly by field name + colon
+        # Match: citations + author: -> citations(author:
+        pattern = rf'\b{op}((?:author|abs|title|pubdate|bibstem|object|keyword|doctype|property|database|bibgroup|aff|full|identifier):)'
+        
+        def replace_op(match: re.Match) -> str:
+            field_part = match.group(1)
+            logger.warning(f"Fixed malformed operator: {op}{field_part} -> {op}({field_part}")
+            return f"{op}({field_part}"
+        
+        query = re.sub(pattern, replace_op, query, flags=re.IGNORECASE)
+
+    # Balance parentheses if the fix introduced unbalanced ones
+    while query.count("(") > query.count(")"):
+        # Add closing paren to last unclosed operator
+        # Find the position of the last ( without a matching )
+        last_unclosed = -1
+        paren_count = 0
+        for i, c in enumerate(query):
+            if c == '(':
+                paren_count += 1
+                last_unclosed = i
+            elif c == ')':
+                paren_count -= 1
+        
+        if last_unclosed >= 0:
+            # Insert ) at the end, before any trailing operators or whitespace
+            query = query + ")"
+        else:
+            break
+
+    return query
+
 
 def constrain_query_output(query: str) -> str:
     """Clean up model-generated query by removing invalid field values.
@@ -35,6 +83,9 @@ def constrain_query_output(query: str) -> str:
         return ""
 
     result = query.strip()
+
+    # Fix malformed operators (e.g., citationsauthor: -> citations(author:...))
+    result = _fix_malformed_operators(result)
 
     # Process each constrained field
     for field_name, valid_values in FIELD_ENUMS.items():

@@ -1103,3 +1103,10 @@ Following the decision tree in AGENTS.md:
 3. Monitor production metrics
 4. Collect user feedback for next training iteration
 
+
+## Iteration 5 - US-015
+
+**Status**: ✓ PASSED
+**Title**: Iteration control: if tests fail, return to data fixes
+**Summary**: Iteration control complete. All tests US-008-014 passing. Added decision tree to AGENTS.md with data vs model issue diagnosis. Created final summary in progress.txt with before/after metrics: +2.6% syntax validity (95.4% → 98.0%), 100% operator accuracy, latency improved 10-12%. Quality gates: lint ✓, test (65 passed) ✓, verify ✓. Branch improve-training-data ready for merge to main.
+
