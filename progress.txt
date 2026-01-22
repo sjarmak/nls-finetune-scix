@@ -70,5 +70,42 @@ Thread: https://ampcode.com/threads/T-019be380-a26d-74a8-a7bf-01162d7c7510
 - Import order must be alphabetical within stdlib/third-party groups (ruff I001)
 - Sets must be converted to sorted lists for deterministic JSON serialization
 - OPERATORS frozenset prevents invalid operator values at construction time
+- **Word Boundary Matching**: Always use `\b` regex boundaries for synonym extraction to avoid partial matches (e.g., "oa" falsely matching inside "sloan")
+
+---
+
+## 2026-01-21 - US-002: Implement rules-based NER with strict operator gating
+Thread: https://ampcode.com/threads/T-019be384-fa87-76de-aa3b-e57df1c17263
+
+### What was implemented
+- Created `ner.py` with `extract_intent(text: str) -> IntentSpec` function
+- Implemented strict operator gating with explicit pattern matching:
+  - citations: 'papers citing', 'cited by', 'who cited'
+  - references: 'references of', 'bibliography of', 'papers referenced by'
+  - similar: 'similar to this paper', 'papers like'
+  - trending: 'trending papers', 'what's hot'
+  - useful: 'most useful'
+  - reviews: 'review articles on', 'reviews of'
+- Added synonym maps for all enum types:
+  - PROPERTY_SYNONYMS: refereed, peer reviewed, open access, oa, arxiv, preprint
+  - DOCTYPE_SYNONYMS: article, thesis, conference, software, book
+  - BIBGROUP_SYNONYMS: hubble→HST, webb→JWST, sloan→SDSS, ligo→LIGO
+  - DATABASE_SYNONYMS: astronomy, astrophysics, physics, general
+- Year extraction patterns: from/to, since, after, before, last N years, decade
+- Author extraction: by <name>, first author, et al.
+- ADS query passthrough detection (skip NER for pre-formed syntax)
+- Integrated into pipeline.process_query()
+
+### Files changed
+- packages/finetune/src/finetune/domains/scix/ner.py (new - 777 lines)
+- packages/finetune/src/finetune/domains/scix/pipeline.py (modified - use NER)
+- tests/test_ner.py (new - 75 tests)
+- prd.json (updated US-002 passes: true)
+
+### Learnings for future iterations
+- **Word boundary matching is critical**: Substring matching causes false positives (e.g., "oa" in "sloan" matching openaccess synonym)
+- **Author regex should not be greedy**: Avoid matching stopwords like "on" as part of author names
+- **Stopwords must include "of"**: Was missing from initial stopwords set
+- **Test negative cases extensively**: Operator gating requires testing both positive patterns AND ensuring generic uses don't trigger operators
 
 ---
