@@ -154,12 +154,25 @@ def _cleanup_query(query: str) -> str:
 
     # Remove parentheses that now contain only a single term (no operators)
     # e.g., "(article)" -> "article"
+    # BUT preserve operator calls like citations(), trending(), similar(), etc.
+    operator_names = r'(citations|references|trending|useful|similar|reviews|topn)'
+    
     def unwrap_single_term(match: re.Match[str]) -> str:
         inner = match.group(1).strip()
+        full_match = match.group(0)
+        start_pos = match.start()
+        
+        # Check if this is preceded by an operator name (e.g., citations(), trending())
+        # Look at what's before the opening paren in the original query
+        prefix = query[:start_pos]
+        if re.search(rf'{operator_names}$', prefix, re.IGNORECASE):
+            # This is an operator call - preserve the parentheses
+            return full_match
+        
         # Check if inner contains no boolean operators (AND, OR, NOT)
         if not re.search(r'\b(AND|OR|NOT)\b', inner, re.IGNORECASE):
             return inner
-        return match.group(0)
+        return full_match
 
     query = re.sub(r'\(([^()]+)\)', unwrap_single_term, query)
 

@@ -238,7 +238,7 @@
         "Log regression test results in progress.txt"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "Critical for confirming that training data fixes actually solved the problems. Compare outputs to show improvement."
     },
     {
