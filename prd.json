@@ -190,8 +190,8 @@
         "Run: mise run lint - passes"
       ],
       "priority": 11,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Completed 2026-01-22: Created merge_examples.py. Merged 787 new examples (1 duplicate skipped). Final count: 4789 examples (+20% growth). Categories: bibgroup 328, property 140, operator 140, doctype 91, collection 88."
     },
     {
       "id": "US-012",

@@ -244,3 +244,24 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - Running with --skip-llm is useful for fast syntax-only validation during development
   - The curation script is idempotent and can be re-run safely
 ---
+
+## 2026-01-22 - US-011: Merge curated examples into gold_examples.json
+- **Implemented**: Merge script to combine curated examples into main training dataset
+- **Files created**:
+  - `scripts/merge_examples.py` - Merge script with deduplication and categorization
+  - `data/datasets/evaluations/merge_report.json` - Detailed merge statistics
+- **Files modified**:
+  - `data/datasets/raw/gold_examples.json` - Now contains 4789 examples
+- **Key details**:
+  - Merged 787 new examples from 5 curated files (1 duplicate skipped)
+  - Original count: 4002 -> Final count: 4789 (+20% growth)
+  - By category: bibgroup 328, property 140, operator 140, doctype 91, collection 88
+  - Deduplication uses case-insensitive, whitespace-normalized NL text comparison
+  - Each curated file maps to a category: bibgroup, collection, doctype, operator, property
+  - Supports --dry-run flag for testing without modifying files
+- **Learnings for future iterations**:
+  - The merge script preserves existing examples and only appends new ones
+  - Case-insensitive deduplication catches subtle duplicates
+  - Normalized NL comparison handles whitespace variations
+  - The merge report provides breakdown by source file and category
+---
