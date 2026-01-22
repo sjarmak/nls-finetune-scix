@@ -134,8 +134,8 @@
         "Run: mise run lint - passes"
       ],
       "priority": 8,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Completed 2026-01-22: Created generate_bibgroup_examples.py generating 328 unique examples across all 55 bibgroups (5-6 examples each). Includes telescope-specific topics, synonym variations, and combined queries with refereed/citations operators."
     },
     {
       "id": "US-009",
