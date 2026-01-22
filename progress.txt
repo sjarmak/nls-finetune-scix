@@ -289,3 +289,50 @@ Thread: https://ampcode.com/threads/T-019be398-4d8d-7495-82e7-af35615da979
 - **Debug info enables observability**: Returning timing/intent/examples helps monitor pipeline quality in production
 
 ---
+
+## 2026-01-22 - US-007: Deploy pipeline to Modal with preloaded indexes
+Thread: https://ampcode.com/threads/T-019be39d-72b6-72ff-9f55-b23400d24e77
+
+### What was implemented
+- Updated `serve_pipeline.py` with Modal deployment configuration:
+  - Added `add_local_dir` (replacing deprecated `copy_local_dir`) to copy finetune package
+  - Updated to `fastapi_endpoint` (replacing deprecated `web_endpoint`)
+  - Added `fastapi` and `httpx` to pip dependencies
+  - Removed custom `__init__` (deprecated) in favor of class attributes
+- Created `/v1/query` endpoint as specified in acceptance criteria:
+  - Accepts `{"nl_text": "..."}` JSON body
+  - Returns `{query, intent, retrieved_examples, debug_info, success}`
+- Preloading at container startup (`@modal.enter()`):
+  - FIELD_ENUMS for constraint validation
+  - NER synonym maps (PROPERTY_SYNONYMS, DOCTYPE_SYNONYMS, etc.)
+  - Retrieval index via `get_index()` with gold_examples.json from Modal volume
+- Added `GOLD_EXAMPLES_PATH` environment variable support in `retrieval.py`
+- Added `num_examples` property to `GoldExampleIndex` for monitoring
+- Uploaded gold_examples.json to Modal volume `nls-query-data`
+- Verified deployment with 3 curl tests:
+  - Test 1: `papers about exoplanets` → 767ms (cold), 220ms (warm)
+  - Test 2: `refereed papers on dark matter since 2020` → 220ms (warm)
+  - Test 3: `papers citing Hawking radiation paper` → 271ms (warm)
+
+### Endpoints deployed
+- `/v1/query`: https://sjarmak--v1-query.modal.run
+- `/v1/chat/completions`: https://sjarmak--v1-chat-completions.modal.run
+- `/query`: https://sjarmak--nls-finetune-pipeline-query.modal.run
+
+### Files changed
+- packages/finetune/src/finetune/modal/serve_pipeline.py (modified - +160, -40 lines)
+- packages/finetune/src/finetune/domains/scix/retrieval.py (modified - +17, -8 lines)
+- packages/finetune/src/finetune/domains/scix/resolver.py (reformatted)
+- prd.json (updated US-007 passes: true)
+
+### Learnings for future iterations
+- **Modal API changed**: Use `add_local_dir` instead of deprecated `copy_local_dir`, `fastapi_endpoint` instead of `web_endpoint`
+- **Modal images need fastapi**: Web endpoints now require explicit `fastapi` pip install
+- **Environment variables for paths**: Use `os.environ.get("GOLD_EXAMPLES_PATH")` pattern to allow runtime override for Modal volumes
+- **Cold start vs warm latency**: First request may take 700-800ms (index loading), subsequent requests ~20ms (well under 200ms target)
+- **httpx required**: The resolver module imports httpx, so must be installed even if LLM fallback is rarely used
+
+### Deployment timestamp
+2026-01-22 02:55 EST
+
+---

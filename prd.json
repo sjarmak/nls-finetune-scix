@@ -160,7 +160,7 @@
         "Log deployment timestamp in progress.txt"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Preloading is critical for latency. No per-request file loading."
     },
     {

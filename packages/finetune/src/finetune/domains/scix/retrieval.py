@@ -17,14 +17,25 @@ from pathlib import Path
 from .intent_spec import OPERATORS, IntentSpec
 from .pipeline import GoldExample
 
-# Default path to gold examples file (relative to package root)
-DEFAULT_GOLD_EXAMPLES_PATH = (
-    Path(__file__).parent.parent.parent.parent.parent.parent.parent
-    / "data"
-    / "datasets"
-    / "raw"
-    / "gold_examples.json"
-)
+
+# Default path to gold examples file
+# In Modal deployment, this is overridden by GOLD_EXAMPLES_PATH env var
+def _get_gold_examples_path() -> Path:
+    """Get path to gold_examples.json, checking env var first."""
+    env_path = os.environ.get("GOLD_EXAMPLES_PATH")
+    if env_path:
+        return Path(env_path)
+    # Default: relative to package root (for local development)
+    return (
+        Path(__file__).parent.parent.parent.parent.parent.parent.parent
+        / "data"
+        / "datasets"
+        / "raw"
+        / "gold_examples.json"
+    )
+
+
+DEFAULT_GOLD_EXAMPLES_PATH = _get_gold_examples_path()
 
 
 @dataclass
@@ -334,6 +345,11 @@ class GoldExampleIndex:
         self._document_frequencies = token_doc_count
         self._total_docs = len(self._examples)
         self._avg_doc_length = total_tokens / max(self._total_docs, 1)
+
+    @property
+    def num_examples(self) -> int:
+        """Return the number of indexed examples."""
+        return self._total_docs
 
     def _compute_idf(self, token: str) -> float:
         """Compute IDF score for a token using BM25 formula.

@@ -261,7 +261,7 @@ def resolve_via_llm(
     prompt = f"""You are helping resolve a paper reference from a search query.
 
 User query: "{raw_text}"
-{f'Context: {context}' if context else ''}
+{f"Context: {context}" if context else ""}
 
 Based on this query, identify which specific paper the user is referring to.
 Return JSON with:
