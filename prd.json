@@ -237,7 +237,7 @@
         "Run: mise run benchmark"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Latency is a hard constraint. Pipeline must be faster than end-to-end model."
     },
     {

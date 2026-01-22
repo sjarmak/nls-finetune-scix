@@ -371,3 +371,41 @@ Thread: https://ampcode.com/threads/T-019be3a3-85b9-765e-8519-f4608a111def
 - **Test data-testid**: Existing nl-search tests use data-testid attributes for element selection
 
 ---
+
+## 2026-01-21 - US-010: Performance benchmarks and latency verification
+Thread: https://ampcode.com/threads/T-019be3a6-ef81-70cb-8161-fd73ae15197c
+
+### What was implemented
+- Created `scripts/benchmark_pipeline.py` with comprehensive benchmarking:
+  - `BenchmarkResult` dataclass with p50/p95/p99/mean/min/max properties
+  - `load_sample_queries()` - samples N queries from gold_examples.json
+  - `benchmark_ner()` - times NER extraction component
+  - `benchmark_retrieval()` - times retrieval with warm index
+  - `benchmark_assembly()` - times query assembly
+  - `benchmark_full_pipeline()` - end-to-end pipeline timing
+  - `generate_markdown_report()` - creates formatted docs/LATENCY_BENCHMARKS.md
+  - `--ci` flag for CI integration (exit 1 if p95 > 500ms)
+
+- Added mise tasks:
+  - `mise run benchmark` - run benchmarks and generate docs
+  - `mise run benchmark:ci` - CI mode with pass/fail check
+
+### Results (100 queries)
+- NER Extraction: p95 = 0.09ms (target: <10ms) ✅
+- Retrieval (k=5): p95 = 5.33ms (target: <20ms) ✅
+- Assembly: p95 = 0.04ms (target: <5ms) ✅
+- Full Pipeline: p95 = 5.28ms (target: <50ms local) ✅
+
+### Files changed
+- scripts/benchmark_pipeline.py (new - 280 lines)
+- docs/LATENCY_BENCHMARKS.md (new - generated)
+- .mise.toml (modified - added benchmark tasks)
+- prd.json (updated US-010 passes: true)
+
+### Learnings for future iterations
+- **Warm up the index**: First retrieval includes index load time; benchmark warm requests separately
+- **Use perf_counter for precision**: `time.perf_counter()` provides sub-millisecond accuracy
+- **Percentile calculation needs samples**: Use `statistics.quantiles()` but need sufficient samples (20+ for p95, 100+ for p99)
+- **Pipeline is extremely fast**: p95 = 5.28ms is 10x faster than target; retrieval dominates time
+
+---
