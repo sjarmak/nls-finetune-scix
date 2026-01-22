@@ -19,6 +19,10 @@ app = modal.App("nls-finetune-pipeline")
 # Volume for gold_examples.json (mounted from data volume)
 data_volume = modal.Volume.from_name("nls-query-data", create_if_missing=True)
 
+# Get the path to the finetune package source
+import pathlib
+PACKAGE_ROOT = pathlib.Path(__file__).parent.parent  # packages/finetune/src/finetune
+
 # CPU-only image with minimal dependencies
 PIPELINE_IMAGE = (
     modal.Image.debian_slim(python_version="3.12")
@@ -26,6 +30,11 @@ PIPELINE_IMAGE = (
         "pydantic>=2.0",
     )
     .env({"PYTHONDONTWRITEBYTECODE": "1"})
+    .copy_local_dir(str(PACKAGE_ROOT), "/root/finetune")
+    .run_commands(
+        "cd /root && python -c \"import sys; sys.path.insert(0, '/root')\"",
+    )
+    .env({"PYTHONPATH": "/root"})
 )
 
 
