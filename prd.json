@@ -261,7 +261,7 @@
         "Run: mise run verify - docs build without errors"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "Documentation enables future iteration and onboarding."
     },
     {

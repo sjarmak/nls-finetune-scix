@@ -154,16 +154,38 @@ The model learns to generate queries using [ADS Search Syntax](https://ui.adsabs
 | `features.json` | Feature tracking - find failing features to work on |
 | `.env.example` | Environment variables template |
 
+## Architecture Overview
+
+The project uses a **hybrid NER + template assembly pipeline** to convert natural language to ADS queries. This approach eliminates malformed operator syntax that end-to-end models produce.
+
+```
+User NL → [NER Extraction] → IntentSpec → [Retrieval] → [Assembler] → Valid Query
+```
+
+**Key stages:**
+
+1. **NER Extraction** (`ner.py`): Extracts structured intent from natural language with strict operator gating
+2. **Few-shot Retrieval** (`retrieval.py`): Finds similar gold examples for pattern guidance  
+3. **Template Assembly** (`assembler.py`): Deterministically builds queries from validated building blocks
+4. **Optional LLM Resolution** (`resolver.py`): Resolves ambiguous paper references (rarely triggered)
+
+**Why not end-to-end generation?** Fine-tuned models conflate natural language words with ADS operators, producing malformed syntax like `citations(abs:referencesabs:...)`.
+
+See [docs/HYBRID_PIPELINE.md](docs/HYBRID_PIPELINE.md) for detailed architecture documentation.
+
 ## Tech Stack
 
 - **Frontend**: React 19, TypeScript, Vite, Tailwind CSS, shadcn/ui, TanStack Query
 - **Backend**: FastAPI, Pydantic, Python 3.12
-- **Training**: Modal (H100 GPUs), TRL, LoRA, Qwen3-1.7B
+- **NL Pipeline**: Rules-based NER, BM25 retrieval, deterministic assembly
+- **Training**: Modal (H100 GPUs), TRL, LoRA, Qwen3-1.7B (for LLM fallback only)
 - **Validation**: ADS Search API
 - **Tools**: mise (runtimes), uv (Python), Bun (Node)
 
 ## Documentation
 
 - [Development Guide](DEVELOPMENT.md) - Architecture, workflows
+- [Hybrid Pipeline Architecture](docs/HYBRID_PIPELINE.md) - NER + retrieval + assembly pipeline
 - [Fine-Tuning CLI](docs/fine-tuning-cli.md) - Training pipeline documentation
+- [Latency Benchmarks](docs/LATENCY_BENCHMARKS.md) - Pipeline performance metrics
 - [ADS Search Syntax](https://ui.adsabs.harvard.edu/help/search/search-syntax) - Official ADS docs

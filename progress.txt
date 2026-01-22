@@ -409,3 +409,44 @@ Thread: https://ampcode.com/threads/T-019be3a6-ef81-70cb-8161-fd73ae15197c
 - **Pipeline is extremely fast**: p95 = 5.28ms is 10x faster than target; retrieval dominates time
 
 ---
+
+## 2026-01-21 - US-011: Documentation and AGENTS.md updates
+Thread: https://ampcode.com/threads/T-019be3a9-24e9-75c8-a0d2-90e0d7ed890b
+
+### What was implemented
+- Created `docs/HYBRID_PIPELINE.md` with comprehensive pipeline documentation:
+  - Architecture diagram (mermaid flowchart)
+  - Data flow explanation for all 4 stages
+  - IntentSpec fields table with types and descriptions
+  - Operator gating rules with explicit pattern tables
+  - Synonym maps for all enum types
+  - Step-by-step guides for adding new operators and synonyms
+  - Pipeline debugging guide with code examples
+  - Troubleshooting section for common issues
+  - Latency targets table
+
+- Updated `README.md` with:
+  - New "Architecture Overview" section explaining hybrid pipeline
+  - Pipeline diagram showing data flow
+  - Link to docs/HYBRID_PIPELINE.md
+  - Updated Tech Stack to include "NL Pipeline" component
+  - Added Latency Benchmarks to documentation list
+
+- AGENTS.md already contained Hybrid NER Pipeline Architecture section (lines 285-374) with:
+  - IntentSpec fields documentation
+  - Operator gating rules
+  - Synonym maps
+  - Key files table
+
+### Files changed
+- docs/HYBRID_PIPELINE.md (new - 320 lines)
+- README.md (modified - +25 lines)
+- prd.json (updated US-011 passes: true)
+
+### Learnings for future iterations
+- **Documentation should be created alongside code**: Having docs written by the same thread that implemented the feature ensures accuracy
+- **Mermaid diagrams help understanding**: Visual architecture diagrams are worth the effort
+- **Link docs from multiple places**: README links to detailed docs, AGENTS.md provides quick reference
+- **Include debugging guides**: Future developers need to know how to troubleshoot, not just how to use
+
+---
