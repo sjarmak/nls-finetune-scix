@@ -122,7 +122,9 @@ class TestOperatorConflationRegression:
             ("the citing behavior of astronomers", True),
             ("useful citations for students", True),
             ("similar references across journals", True),
-            ("trending topics in cosmology", True),  # "trending" as adjective
+            # Note: "trending topics in X" now DOES trigger operator (US-004)
+            # Use "trending towards X" for non-operator adjective usage
+            ("trending towards lower masses", True),  # "trending" as adjective
             # Edge cases with operator words embedded
             ("papers about citation analysis", True),
             ("study of reference patterns", True),
