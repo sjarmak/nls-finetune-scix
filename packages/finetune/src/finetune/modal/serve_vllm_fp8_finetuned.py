@@ -20,10 +20,12 @@ VLLM_FP8_IMAGE = (
         "flashinfer-python==0.5.2",
         "compressed-tensors>=0.6.0",  # Required for FP8 quantized models
     )
-    .env({
-        "VLLM_ATTENTION_BACKEND": "FLASH_ATTN",
-        "VLLM_USE_TRITON_FLASH_ATTN": "True",
-    })
+    .env(
+        {
+            "VLLM_ATTENTION_BACKEND": "FLASH_ATTN",
+            "VLLM_USE_TRITON_FLASH_ATTN": "True",
+        }
+    )
 )
 
 app = modal.App("nls-finetune-serve-vllm-fp8-finetuned")
@@ -52,12 +54,11 @@ def serve():
 
     # Find latest FP8 quantized model
     runs_dir = Path("/runs")
-    fp8_runs = sorted([
-        d.name for d in runs_dir.iterdir()
-        if d.is_dir() and (d / "fp8").exists()
-    ])
+    fp8_runs = sorted([d.name for d in runs_dir.iterdir() if d.is_dir() and (d / "fp8").exists()])
     if not fp8_runs:
-        raise FileNotFoundError("No FP8 quantized models found. Run 'nls-finetune quantize --method fp8' first.")
+        raise FileNotFoundError(
+            "No FP8 quantized models found. Run 'nls-finetune quantize --method fp8' first."
+        )
 
     model_path = f"/runs/{fp8_runs[-1]}/fp8"
     print(f"Using FP8 model: {model_path}")
@@ -65,17 +66,25 @@ def serve():
     # Latency-optimized for short sequences (Sourcegraph queries)
     # V0 flags outperform V1 auto-tuning for single-request, short-sequence workloads
     cmd = [
-        "vllm", "serve",
+        "vllm",
+        "serve",
         model_path,
-        "--host", "0.0.0.0",
-        "--port", str(VLLM_PORT),
-        "--max-model-len", str(MAX_MODEL_LEN),
-        "--gpu-memory-utilization", "0.95",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        str(VLLM_PORT),
+        "--max-model-len",
+        str(MAX_MODEL_LEN),
+        "--gpu-memory-utilization",
+        "0.95",
         "--trust-remote-code",
-        "--served-model-name", "llm",
+        "--served-model-name",
+        "llm",
         "--enable-prefix-caching",
-        "--max-num-batched-tokens", "512",  # Optimize for short sequences
-        "--max-num-seqs", "4",  # Limit batching for single-request latency
+        "--max-num-batched-tokens",
+        "512",  # Optimize for short sequences
+        "--max-num-seqs",
+        "4",  # Limit batching for single-request latency
         "--disable-log-requests",
         "--disable-cascade-attn",
     ]

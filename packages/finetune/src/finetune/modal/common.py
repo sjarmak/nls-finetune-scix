@@ -37,10 +37,12 @@ VLLM_IMAGE = (
         "huggingface-hub>=0.24.0",
         "flashinfer-python==0.5.2",
     )
-    .env({
-        "VLLM_ATTENTION_BACKEND": "FLASH_ATTN",
-        "VLLM_USE_TRITON_FLASH_ATTN": "True",
-    })
+    .env(
+        {
+            "VLLM_ATTENTION_BACKEND": "FLASH_ATTN",
+            "VLLM_USE_TRITON_FLASH_ATTN": "True",
+        }
+    )
 )
 
 # ============================================

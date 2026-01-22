@@ -29,13 +29,13 @@ def _fix_malformed_operators(query: str) -> str:
     for op in OPERATORS:
         # Pattern: operator followed directly by field name + colon
         # Match: citations + author: -> citations(author:
-        pattern = rf'\b{op}((?:author|abs|title|pubdate|bibstem|object|keyword|doctype|property|database|bibgroup|aff|full|identifier):)'
-        
+        pattern = rf"\b{op}((?:author|abs|title|pubdate|bibstem|object|keyword|doctype|property|database|bibgroup|aff|full|identifier):)"
+
         def replace_op(match: re.Match) -> str:
             field_part = match.group(1)
             logger.warning(f"Fixed malformed operator: {op}{field_part} -> {op}({field_part}")
             return f"{op}({field_part}"
-        
+
         query = re.sub(pattern, replace_op, query, flags=re.IGNORECASE)
 
     # Balance parentheses if the fix introduced unbalanced ones
@@ -45,12 +45,12 @@ def _fix_malformed_operators(query: str) -> str:
         last_unclosed = -1
         paren_count = 0
         for i, c in enumerate(query):
-            if c == '(':
+            if c == "(":
                 paren_count += 1
                 last_unclosed = i
-            elif c == ')':
+            elif c == ")":
                 paren_count -= 1
-        
+
         if last_unclosed >= 0:
             # Insert ) at the end, before any trailing operators or whitespace
             query = query + ")"
@@ -107,12 +107,12 @@ def _filter_field(query: str, field_name: str, valid_lower: set[str]) -> str:
     - field:(val1 OR val2 OR val3) (OR list)
     """
     # Pattern for OR list: field:(val1 OR val2)
-    or_pattern = rf'\b{field_name}:\s*\(([^)]+)\)'
+    or_pattern = rf"\b{field_name}:\s*\(([^)]+)\)"
 
     def process_or_list(match: re.Match[str]) -> str:
         inner = match.group(1)
         # Split on OR, preserving whitespace for reconstruction
-        parts = re.split(r'\s+OR\s+', inner, flags=re.IGNORECASE)
+        parts = re.split(r"\s+OR\s+", inner, flags=re.IGNORECASE)
         valid_parts = []
         for part in parts:
             # Strip quotes if present
@@ -173,20 +173,20 @@ def _cleanup_query(query: str) -> str:
     - Extra whitespace
     """
     # Remove empty parentheses (possibly with whitespace)
-    query = re.sub(r'\(\s*\)', '', query)
+    query = re.sub(r"\(\s*\)", "", query)
 
     # Remove leading boolean operators
-    query = re.sub(r'^\s*(AND|OR|NOT)\s+', '', query, flags=re.IGNORECASE)
+    query = re.sub(r"^\s*(AND|OR|NOT)\s+", "", query, flags=re.IGNORECASE)
 
     # Remove trailing boolean operators
-    query = re.sub(r'\s+(AND|OR|NOT)\s*$', '', query, flags=re.IGNORECASE)
+    query = re.sub(r"\s+(AND|OR|NOT)\s*$", "", query, flags=re.IGNORECASE)
 
     # Remove double boolean operators (AND AND -> AND, OR OR -> OR)
     # Also handles AND OR, OR AND combinations
     while True:
         new_query = re.sub(
-            r'\b(AND|OR|NOT)\s+(AND|OR)\b',
-            r'\2',  # Keep the second operator
+            r"\b(AND|OR|NOT)\s+(AND|OR)\b",
+            r"\2",  # Keep the second operator
             query,
             flags=re.IGNORECASE,
         )
@@ -195,52 +195,52 @@ def _cleanup_query(query: str) -> str:
         query = new_query
 
     # Handle "field:value AND" at start becoming "AND" orphan
-    query = re.sub(r'^\s*(AND|OR)\s+', '', query, flags=re.IGNORECASE)
+    query = re.sub(r"^\s*(AND|OR)\s+", "", query, flags=re.IGNORECASE)
 
     # Handle "AND field:value" at end becoming orphan "AND"
-    query = re.sub(r'\s+(AND|OR|NOT)\s*$', '', query, flags=re.IGNORECASE)
+    query = re.sub(r"\s+(AND|OR|NOT)\s*$", "", query, flags=re.IGNORECASE)
 
     # Collapse multiple spaces into one
-    query = re.sub(r'\s+', ' ', query)
+    query = re.sub(r"\s+", " ", query)
 
     # Remove parentheses that now contain only a single term (no operators)
     # e.g., "(article)" -> "article"
     # BUT preserve operator calls like citations(), trending(), similar(), etc.
-    operator_names = r'(citations|references|trending|useful|similar|reviews|topn)'
-    
+    operator_names = r"(citations|references|trending|useful|similar|reviews|topn)"
+
     def unwrap_single_term(match: re.Match[str]) -> str:
         inner = match.group(1).strip()
         full_match = match.group(0)
         start_pos = match.start()
-        
+
         # Check if this is preceded by an operator name (e.g., citations(), trending())
         # Look at what's before the opening paren in the original query
         prefix = query[:start_pos]
-        if re.search(rf'{operator_names}$', prefix, re.IGNORECASE):
+        if re.search(rf"{operator_names}$", prefix, re.IGNORECASE):
             # This is an operator call - preserve the parentheses
             return full_match
-        
+
         # Check if inner contains no boolean operators (AND, OR, NOT)
-        if not re.search(r'\b(AND|OR|NOT)\b', inner, re.IGNORECASE):
+        if not re.search(r"\b(AND|OR|NOT)\b", inner, re.IGNORECASE):
             return inner
         return full_match
 
-    query = re.sub(r'\(([^()]+)\)', unwrap_single_term, query)
+    query = re.sub(r"\(([^()]+)\)", unwrap_single_term, query)
 
     # Fix malformed parentheses - remove unbalanced ones
     while True:
-        open_count = query.count('(')
-        close_count = query.count(')')
+        open_count = query.count("(")
+        close_count = query.count(")")
         if open_count == close_count:
             break
 
         if open_count > close_count:
             # Remove rightmost unmatched opening paren
-            idx = query.rfind('(')
+            idx = query.rfind("(")
             query = query[:idx] + query[idx + 1 :]
         else:
             # Remove leftmost unmatched closing paren
-            idx = query.find(')')
+            idx = query.find(")")
             query = query[:idx] + query[idx + 1 :]
 
     return query.strip()

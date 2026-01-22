@@ -79,34 +79,34 @@ FIELD_CATEGORIES = {
 
 # Common bibstems for synthetic data generation
 COMMON_BIBSTEMS = [
-    "ApJ",      # Astrophysical Journal
-    "MNRAS",    # Monthly Notices of the Royal Astronomical Society
-    "A&A",      # Astronomy & Astrophysics
-    "AJ",       # Astronomical Journal
-    "Nature",   # Nature
+    "ApJ",  # Astrophysical Journal
+    "MNRAS",  # Monthly Notices of the Royal Astronomical Society
+    "A&A",  # Astronomy & Astrophysics
+    "AJ",  # Astronomical Journal
+    "Nature",  # Nature
     "Science",  # Science
-    "PhRvL",    # Physical Review Letters
-    "PhRvD",    # Physical Review D
-    "ApJL",     # Astrophysical Journal Letters
-    "ApJS",     # Astrophysical Journal Supplement
-    "PASP",     # Publications of the Astronomical Society of the Pacific
-    "ARA&A",    # Annual Review of Astronomy and Astrophysics
-    "Icar",     # Icarus
-    "P&SS",     # Planetary and Space Science
-    "JGRE",     # Journal of Geophysical Research: Planets
+    "PhRvL",  # Physical Review Letters
+    "PhRvD",  # Physical Review D
+    "ApJL",  # Astrophysical Journal Letters
+    "ApJS",  # Astrophysical Journal Supplement
+    "PASP",  # Publications of the Astronomical Society of the Pacific
+    "ARA&A",  # Annual Review of Astronomy and Astrophysics
+    "Icar",  # Icarus
+    "P&SS",  # Planetary and Space Science
+    "JGRE",  # Journal of Geophysical Research: Planets
 ]
 
 # Common astronomical objects for synthetic data
 COMMON_OBJECTS = [
-    "M31",          # Andromeda Galaxy
-    "M87",          # Virgo A
-    "Sgr A*",       # Sagittarius A*
+    "M31",  # Andromeda Galaxy
+    "M87",  # Virgo A
+    "Sgr A*",  # Sagittarius A*
     "Crab Nebula",
     "Orion Nebula",
-    "LMC",          # Large Magellanic Cloud
-    "SMC",          # Small Magellanic Cloud
-    "NGC 1234",     # Example NGC object
-    "HD 209458",    # Famous exoplanet host
+    "LMC",  # Large Magellanic Cloud
+    "SMC",  # Small Magellanic Cloud
+    "NGC 1234",  # Example NGC object
+    "HD 209458",  # Famous exoplanet host
     "TRAPPIST-1",
     "Proxima Centauri",
     "Alpha Centauri",
@@ -150,7 +150,7 @@ PROPERTIES = [
     "software",
     "citation",
     "reference",
-    "toc",          # Table of contents
+    "toc",  # Table of contents
     "catalog",
     "associated",
 ]

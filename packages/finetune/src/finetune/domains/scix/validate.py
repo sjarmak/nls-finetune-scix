@@ -179,15 +179,19 @@ def validate_field_constraints(query: str) -> ConstraintValidationResult:
                 # Parse values from (val1 OR val2 OR val3)
                 inner = match.group(2)[1:-1]  # Remove parens
                 # Split on OR and strip whitespace
-                values = [v.strip().strip('"') for v in re.split(r'\s+OR\s+', inner, flags=re.IGNORECASE)]
+                values = [
+                    v.strip().strip('"') for v in re.split(r"\s+OR\s+", inner, flags=re.IGNORECASE)
+                ]
                 for v in values:
                     if v and v.lower() not in {val.lower() for val in valid_values}:
                         suggestions = suggest_correction(field_name, v)
-                        errors.append(FieldConstraintError(
-                            field=field_name,
-                            value=v,
-                            suggestions=suggestions,
-                        ))
+                        errors.append(
+                            FieldConstraintError(
+                                field=field_name,
+                                value=v,
+                                suggestions=suggestions,
+                            )
+                        )
                 continue
             else:  # Unquoted value
                 value = match.group(3)
@@ -195,11 +199,13 @@ def validate_field_constraints(query: str) -> ConstraintValidationResult:
             # Check if the value is valid (case-insensitive)
             if value.lower() not in {v.lower() for v in valid_values}:
                 suggestions = suggest_correction(field_name, value)
-                errors.append(FieldConstraintError(
-                    field=field_name,
-                    value=value,
-                    suggestions=suggestions,
-                ))
+                errors.append(
+                    FieldConstraintError(
+                        field=field_name,
+                        value=value,
+                        suggestions=suggestions,
+                    )
+                )
 
     return ConstraintValidationResult(
         valid=len(errors) == 0,

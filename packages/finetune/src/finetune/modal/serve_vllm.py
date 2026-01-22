@@ -16,10 +16,12 @@ VLLM_IMAGE = (
         "huggingface-hub>=0.24.0",
         "flashinfer-python==0.5.2",
     )
-    .env({
-        "VLLM_ATTENTION_BACKEND": "FLASH_ATTN",
-        "VLLM_USE_TRITON_FLASH_ATTN": "True",
-    })
+    .env(
+        {
+            "VLLM_ATTENTION_BACKEND": "FLASH_ATTN",
+            "VLLM_USE_TRITON_FLASH_ATTN": "True",
+        }
+    )
 )
 
 app = modal.App("nls-finetune-serve-vllm")
@@ -50,8 +52,7 @@ def serve():
     # Find latest merged model (by modification time, not alphabetical)
     runs_dir = Path("/runs")
     merged_runs = [
-        (d, d.stat().st_mtime) for d in runs_dir.iterdir()
-        if d.is_dir() and (d / "merged").exists()
+        (d, d.stat().st_mtime) for d in runs_dir.iterdir() if d.is_dir() and (d / "merged").exists()
     ]
     if not merged_runs:
         raise FileNotFoundError("No merged models found")
@@ -66,18 +67,26 @@ def serve():
     print(f"✓ Model path: {model_path}")
 
     cmd = [
-        "vllm", "serve",
+        "vllm",
+        "serve",
         model_path,
-        "--host", "0.0.0.0",
-        "--port", str(VLLM_PORT),
-        "--max-model-len", str(MAX_MODEL_LEN),
-        "--gpu-memory-utilization", "0.95",  # Higher util for better KV cache
+        "--host",
+        "0.0.0.0",
+        "--port",
+        str(VLLM_PORT),
+        "--max-model-len",
+        str(MAX_MODEL_LEN),
+        "--gpu-memory-utilization",
+        "0.95",  # Higher util for better KV cache
         "--trust-remote-code",
-        "--served-model-name", "llm",  # Simpler model name for API calls
+        "--served-model-name",
+        "llm",  # Simpler model name for API calls
         "--enable-prefix-caching",  # Cache system prompt KV states
         # Small model latency optimizations
-        "--max-num-batched-tokens", "512",  # Optimize for short sequences
-        "--max-num-seqs", "4",  # Limit concurrent batching for latency
+        "--max-num-batched-tokens",
+        "512",  # Optimize for short sequences
+        "--max-num-seqs",
+        "4",  # Limit concurrent batching for latency
         "--disable-log-requests",  # Reduce logging overhead
         "--disable-cascade-attn",  # Prevent numerical issues causing repetition
     ]

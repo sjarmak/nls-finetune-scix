@@ -271,9 +271,15 @@ def summarize_results(results: list[EvalResult]) -> EvalSummary:
     syntactically_valid = len(valid_results)
 
     # Compute means (only over valid results for semantic metrics)
-    mean_jaccard = sum(r.jaccard_overlap for r in valid_results) / len(valid_results) if valid_results else 0.0
-    mean_precision = sum(r.precision_at_n for r in valid_results) / len(valid_results) if valid_results else 0.0
-    mean_recall = sum(r.recall_at_n for r in valid_results) / len(valid_results) if valid_results else 0.0
+    mean_jaccard = (
+        sum(r.jaccard_overlap for r in valid_results) / len(valid_results) if valid_results else 0.0
+    )
+    mean_precision = (
+        sum(r.precision_at_n for r in valid_results) / len(valid_results) if valid_results else 0.0
+    )
+    mean_recall = (
+        sum(r.recall_at_n for r in valid_results) / len(valid_results) if valid_results else 0.0
+    )
 
     # Group by category
     by_category: dict[str, dict] = {}

@@ -109,8 +109,13 @@ def run_training_unsloth(run_name: str, use_wandb: bool = False) -> dict:
         model,
         r=16,
         target_modules=[
-            "q_proj", "k_proj", "v_proj", "o_proj",
-            "gate_proj", "up_proj", "down_proj",
+            "q_proj",
+            "k_proj",
+            "v_proj",
+            "o_proj",
+            "gate_proj",
+            "up_proj",
+            "down_proj",
         ],
         lora_alpha=32,
         lora_dropout=0,  # 0 is optimized for Unsloth
@@ -122,7 +127,9 @@ def run_training_unsloth(run_name: str, use_wandb: bool = False) -> dict:
 
     trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     total_params = sum(p.numel() for p in model.parameters())
-    print(f"✓ LoRA: {trainable_params:,} trainable / {total_params:,} total ({100 * trainable_params / total_params:.2f}%)")
+    print(
+        f"✓ LoRA: {trainable_params:,} trainable / {total_params:,} total ({100 * trainable_params / total_params:.2f}%)"
+    )
 
     # Training config using UnslothTrainer to avoid TRL patching issues
     training_args = UnslothTrainingArguments(
