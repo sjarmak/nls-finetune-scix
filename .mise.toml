@@ -121,6 +121,20 @@ echo ""
 cd ~/ads-dev/nectar && pnpm test:e2e tests/nl-search-operators.spec.ts
 """
 
+[tasks.benchmark]
+description = "Run pipeline latency benchmarks"
+run = """
+#!/usr/bin/env bash
+set -e
+uv run python scripts/benchmark_pipeline.py --queries 100 --output docs/LATENCY_BENCHMARKS.md
+echo ""
+echo "Report written to docs/LATENCY_BENCHMARKS.md"
+"""
+
+[tasks."benchmark:ci"]
+description = "Run benchmark with CI check (fails if p95 > 500ms)"
+run = "uv run python scripts/benchmark_pipeline.py --queries 100 --ci"
+
 # ===========================================
 # DATASET MANAGEMENT
 # ===========================================
