@@ -4881,7 +4881,7 @@
   },
   {
     "natural_language": "rigby 2016 fellwalker algorithm",
-    "ads_query": "author:\"rigby\" year:2016 keyword:\"fellwalker\"",
+    "ads_query": "author:\"rigby\" year:2016 abs:fellwalker",
     "category": "author"
   },
   {
@@ -20736,7 +20736,7 @@
   },
   {
     "natural_language": "refereed physical sciences papers about string theory",
-    "ads_query": "collection:physics (abs:string OR keyword:\"string theory\") property:refereed doctype:article",
+    "ads_query": "collection:physics abs:(string AND theory) property:refereed doctype:article",
     "category": "collection"
   },
   {
@@ -21636,7 +21636,7 @@
   },
   {
     "natural_language": "recently popular in galactic dynamics",
-    "ads_query": "trending(abs:galactic OR keyword:\"galactic dynamics\") collection:astronomy",
+    "ads_query": "trending(abs:galactic OR keyword:\"galaxy dynamics\") collection:astronomy",
     "category": "operator"
   },
   {
