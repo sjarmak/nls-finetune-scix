@@ -259,8 +259,8 @@
         "Run: mise run lint - passes"
       ],
       "priority": 15,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Completed 2026-01-22: Ran curation on enhanced gold_examples.json - 4776 valid examples (239% of 2000+ target). Trained model data-model-coverage-v1 with Unsloth on H100 (final loss 0.6484). Deployed to Modal. Benchmark: 98.7% pass rate, 100% constraint valid."
     },
     {
       "id": "US-016",
