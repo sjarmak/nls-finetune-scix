@@ -40,58 +40,192 @@ from finetune.domains.scix.validate import lint_query, validate_field_constraint
 ADS_DOCUMENTATION = """
 ## ADS/SciX Search Query Syntax Reference
 
-### Valid Fields
-- `abs:` - Search abstract, title, keywords (most common for topics)
-- `title:` - Search title only
-- `author:` - Author search (use "Last" or "Last, F" format)
-- `=author:` - Exact author match
-- `^author:` or `author:"^Last"` - First author search
-- `aff:` - Affiliation search
-- `year:` - Single year (e.g., year:2020)
-- `pubdate:` - Date range (e.g., pubdate:[2020 TO 2024])
-- `doctype:` - Document type filter
-- `property:` - Property filter
-- `collection:` - Collection/database filter (astronomy, physics, general, earthscience)
-- `bibgroup:` - Bibliographic group (telescope/mission, e.g., HST, JWST)
-- `object:` - Astronomical object (resolved via SIMBAD)
-- `bibcode:` - Exact bibcode lookup
-- `identifier:` - DOI, arXiv ID, or other identifier
+This is the complete reference for valid ADS query syntax. Use this to validate training examples.
 
-### Valid Doctypes
+---
+
+### VALID SEARCH FIELDS
+
+#### Content Fields (for topic searches)
+- `abs:` - Search abstract, title, AND keywords together (MOST COMMON for topics)
+- `title:` - Search title only
+- `abstract:` - Search abstract only (distinct from abs:)
+- `keyword:` - Publisher or author-supplied keywords only
+- `full:` - Fulltext + acknowledgements + abstract + title + keywords
+- `body:` - Full text only (minus acknowledgements)
+- `ack:` - Acknowledgements section only
+
+#### Author Fields
+- `author:` - Author name. Valid formats:
+  - `author:"Last"` - Any author with this last name
+  - `author:"Last, F"` - Author with last name and first initial
+  - `author:"Last, First"` - Author with full name
+  - `^author:"Last"` or `author:"^Last"` - FIRST author only
+  - `=author:"Last, First M"` - EXACT match (use sparingly)
+- `author_count:` - Number of authors (e.g., `author_count:[1 TO 5]`)
+- `orcid:` - ORCID identifier
+
+#### Affiliation Fields
+- `aff:` - Raw affiliation string search
+- `aff_id:` - Canonical affiliation ID
+- `inst:` - Curated institution abbreviation (e.g., `inst:"CfA"`)
+
+#### Publication Fields
+- `bibstem:` - Journal abbreviation (e.g., `bibstem:ApJ`, `bibstem:MNRAS`)
+- `pub:` - Full publication name
+- `year:` - Publication year (single: `year:2020`, range: `year:2018-2022`)
+- `pubdate:` - Date range with brackets: `pubdate:[2020-01 TO 2024-12]`
+- `volume:` - Volume number
+- `issue:` - Issue number
+- `page:` - Page number
+
+#### Identifier Fields
+- `bibcode:` - ADS bibcode (e.g., `bibcode:2020ApJ...900..123S`)
+- `doi:` - Digital Object Identifier
+- `arXiv:` - arXiv identifier (e.g., `arXiv:2301.12345`)
+- `arxiv_class:` - arXiv classification (e.g., `arxiv_class:astro-ph.GA`)
+- `identifier:` - Any identifier (bibcode, DOI, arXiv)
+
+#### Metric Fields
+- `citation_count:` - Number of citations (e.g., `citation_count:[100 TO *]`)
+- `read_count:` - Number of reads
+
+#### Filter Fields (ENUMERATED - must use exact values)
+- `doctype:` - Document type (see VALID DOCTYPES below)
+- `property:` - Record properties (see VALID PROPERTIES below)
+- `collection:` - Database/collection filter (see VALID COLLECTIONS below)
+- `database:` - Alias for collection
+- `bibgroup:` - Bibliographic group (see VALID BIBGROUPS below)
+
+#### Astronomy-Specific Fields
+- `object:` - Astronomical object name or coordinates (resolved via SIMBAD)
+  - Examples: `object:"M31"`, `object:"NGC 1234"`, `object:"05h23m34.6s -69d45m22s:0.1667"`
+- `data:` - Data source links
+
+---
+
+### VALID DOCTYPES (doctype: field)
+Only these values are valid for doctype: (case-insensitive):
 {doctypes}
 
-### Valid Properties
+Common mappings:
+- "papers", "articles", "publications" → doctype:article
+- "preprints" → doctype:eprint
+- "theses", "dissertations" → doctype:phdthesis OR doctype:mastersthesis
+- "conference papers" → doctype:inproceedings
+- "books" → doctype:book
+- "software" → doctype:software
+- "proposals" → doctype:proposal
+
+---
+
+### VALID PROPERTIES (property: field)
+Only these values are valid for property: (case-insensitive):
 {properties}
 
-### Valid Collections
+Common mappings:
+- "peer-reviewed", "refereed" → property:refereed
+- "open access" → property:openaccess
+- "has data" → property:data
+
+---
+
+### VALID COLLECTIONS (collection: or database: field)
+Only these values are valid:
 {collections}
 
-### Valid Bibgroups (telescopes/missions)
+---
+
+### VALID BIBGROUPS (bibgroup: field)
+Curated lists of papers using data from specific telescopes/missions:
 {bibgroups}
 
-### Second-Order Operators
-- `citations(query)` - Find papers that cite papers matching query
-- `references(query)` - Find papers cited by papers matching query
-- `similar(query)` - Find similar papers
-- `trending(query)` - Find trending papers on topic
-- `useful(query)` - Find highly useful papers
-- `reviews(query)` - Find review articles
+Common mappings:
+- "Hubble papers" → bibgroup:HST
+- "JWST observations" → bibgroup:JWST
+- "Chandra data" → bibgroup:Chandra
 
-### Boolean Operators
-- `AND` - Both terms required (implicit between separate abs: clauses)
-- `OR` - Either term acceptable (use within parentheses: `abs:(term1 OR term2)`)
-- `NOT` - Exclude term
-- Parentheses for grouping
+---
 
-### Project Goals
-This training data is for a model that translates natural language to ADS queries.
-Key principles:
-1. LITERAL translation - only extract what user explicitly states
-2. NO fabrication - don't invent author initials, years, or details not in input
-3. NO over-quoting - only quote when exact phrase is explicitly requested
-4. Topics should use boolean operators, not exact phrases
-5. Add `doctype:article` when user mentions "papers", "articles", "publications"
-6. Bibcode lookups are NOT translation - they should be removed from training data
+### SECOND-ORDER OPERATORS
+
+These operators take a query as input and return related papers:
+
+| Operator | Syntax | Description |
+|----------|--------|-------------|
+| citations() | `citations(author:"Einstein")` | Papers that CITE papers matching the inner query |
+| references() | `references(bibcode:2020ApJ...)` | Papers CITED BY papers matching the inner query |
+| similar() | `similar(abs:exoplanets)` | Papers similar to those matching the query |
+| trending() | `trending(abs:"black holes")` | Currently trending papers on topic |
+| useful() | `useful(abs:cosmology)` | Highly useful/cited papers on topic |
+| reviews() | `reviews(abs:"dark matter")` | Review articles on topic |
+| topn() | `topn(100, abs:exoplanets, citation_count desc)` | Top N papers by metric |
+
+**CRITICAL**: Operators must have balanced parentheses and valid inner queries.
+- WRONG: `citationsabs:exoplanets` (missing parentheses)
+- WRONG: `citations(abs:exoplanets` (unbalanced)
+- CORRECT: `citations(abs:exoplanets)`
+
+---
+
+### BOOLEAN OPERATORS
+
+| Operator | Usage | Notes |
+|----------|-------|-------|
+| AND | `abs:exoplanets AND abs:JWST` | Both terms required (implicit between separate field clauses) |
+| OR | `abs:(exoplanets OR "extrasolar planets")` | Either term acceptable |
+| NOT | `abs:galaxies NOT abs:simulation` | Exclude term |
+| - | `abs:galaxies -abs:simulation` | Shorthand for NOT |
+
+**Boolean Logic Guidelines**:
+- Use AND when ALL terms must appear (more precise, usually correct)
+- Use OR only for true alternatives (synonyms, spelling variants)
+- WRONG: `abs:(failed OR novae OR blue)` - too permissive, returns papers with just "failed"
+- CORRECT: `abs:(novae AND blue)` or `abs:("blue novae")`
+
+---
+
+### RANGE SYNTAX
+
+For numeric and date ranges:
+- `year:2020` - Exact year
+- `year:2018-2022` - Year range (shorthand)
+- `pubdate:[2020-01 TO 2024-12]` - Date range with brackets
+- `pubdate:[2020 TO *]` - From 2020 to present (* = wildcard)
+- `citation_count:[100 TO *]` - 100+ citations
+- `citation_count:[10 TO 50]` - Between 10 and 50
+
+---
+
+### QUOTING RULES
+
+- Use quotes for multi-word exact phrases: `author:"van der Waals"`
+- Use quotes for phrases with special chars: `abs:"H_2O"`
+- Single words don't need quotes: `abs:exoplanets`
+- Parentheses for boolean grouping: `abs:(term1 AND term2)`
+
+---
+
+### PROJECT GOALS FOR TRAINING DATA
+
+This training data teaches a model to translate natural language to ADS queries.
+
+**Core Principles**:
+1. **LITERAL translation** - Only extract what user explicitly states
+2. **NO fabrication** - Never invent author initials, years, or details not in input
+3. **NO over-quoting** - Only quote when exact phrase is explicitly requested
+4. **Topics use boolean operators** - Not long quoted phrases
+5. **Add doctype:article** when user mentions "papers", "articles", "publications"
+6. **Bibcode lookups are NOT translation** - Remove from training data
+7. **Enumerated fields must use valid values** - doctype, property, collection, bibgroup
+
+**Common Errors to Catch**:
+- `author:"Hawking, S."` when NL only said "Hawking" (fabricated initials)
+- `abs:"The Search for Extraterrestrial Intelligence"` (exact title, not topic terms)
+- `abs:(failed OR novae OR blue)` (OR too permissive for topics)
+- `doctype:journal` (invalid - should be doctype:article)
+- `property:peerreviewed` (invalid - should be property:refereed)
+- `citationsabs:exoplanets` (malformed operator syntax)
 """
 
 REVIEW_PROMPT = """You are a strict data quality reviewer for ADS/SciX search query training data.
@@ -119,20 +253,20 @@ Exception: If NL explicitly says "S. Hawking" or "Stephen Hawking", initials are
 
 ### 2. Exact Titles in abs: (CRITICAL)
 The abs: field should contain topic keywords, NOT exact paper titles.
-If the abs: content looks like a paper title (capitalized words, "The X of Y", etc.), it's WRONG.
+If the abs: content looks like a paper title (capitalized words, "The X of Y", specific paper names), it's WRONG.
 - WRONG: `abs:(Mapping the Spatial Distribution of H_2 in Nearby Galaxies)`
-- CORRECT: `abs:(H2 OR "molecular hydrogen") abs:galaxies abs:Spitzer`
+- CORRECT: `abs:(H2 AND galaxies AND Spitzer)` - topic terms with AND
 
 ### 3. Over-Quoted Phrases
 Only use quotes when the user explicitly requests an exact phrase.
-Multi-word topics should use boolean operators (AND for all required, OR for alternatives).
+Multi-word topics should use boolean operators (AND for all required, OR for synonyms).
 - WRONG: `abs:"JWST observations of exoplanets"`
 - CORRECT: `abs:(JWST AND exoplanets)` or `abs:JWST abs:exoplanets`
 
-### 4. Boolean Logic (Important)
-When breaking up topics, use:
-- AND when all terms must appear (more restrictive, usually correct)
-- OR when alternatives are acceptable (user says "X or Y")
+### 4. Boolean Logic (CRITICAL)
+When breaking up topics:
+- Use AND when all terms must appear (more restrictive, usually correct for topics)
+- Use OR ONLY for true alternatives/synonyms (e.g., "exoplanets OR extrasolar")
 - WRONG for general topics: `abs:(failed OR novae OR blue)` - too permissive!
 - CORRECT: `abs:(novae AND blue)` or just the most distinctive terms
 
@@ -144,21 +278,67 @@ the query should include `doctype:article`.
 ### 6. Bibcode Lookups (REMOVE from training)
 Queries that are just bibcode lookups are NOT translation - they're retrieval.
 These should be flagged for removal.
-- WRONG as training: NL "find 2020ApJ...900..123S" → query "bibcode:2020ApJ...900..123S"
+- WRONG as training: NL "find 2020ApJ...900...123S" → query "bibcode:2020ApJ...900...123S"
 
-### 7. Category Validity
-Category should be descriptive (author, topic, operator, etc.), not "unfielded".
+### 7. Invalid Field Names (CRITICAL)
+Check that all field prefixes are valid ADS fields. Invalid fields include:
+- `journal:` (use bibstem: instead)
+- `date:` (use pubdate: or year: instead)
+- `text:` (use abs: or full: instead)
+- `name:` (use author: instead)
+- Any field not in the valid fields list in the documentation above
 
-### 8. Query-NL Alignment
-The query should represent ONLY what the NL explicitly states.
+### 8. Invalid Enumerated Values (CRITICAL)
+Enumerated fields MUST use exact valid values from the documentation:
+- doctype: must be one of: article, eprint, inproceedings, book, phdthesis, mastersthesis, etc.
+  - WRONG: `doctype:journal`, `doctype:paper`, `doctype:preprint`
+  - CORRECT: `doctype:article`, `doctype:eprint`
+- property: must be one of: refereed, notrefereed, openaccess, eprint, data, etc.
+  - WRONG: `property:peerreviewed`, `property:peer-reviewed`
+  - CORRECT: `property:refereed`
+- collection/database: must be one of: astronomy, physics, general, earthscience
+  - WRONG: `collection:astrophysics`, `database:astro`
+  - CORRECT: `collection:astronomy`
+- bibgroup: must be valid telescope/mission name from the list above
+  - WRONG: `bibgroup:hubble` (should be HST)
+  - CORRECT: `bibgroup:HST`
+
+### 9. Malformed Operator Syntax (CRITICAL)
+Second-order operators must have proper syntax with balanced parentheses:
+- WRONG: `citationsabs:exoplanets` (missing parentheses)
+- WRONG: `citations(abs:exoplanets` (unbalanced parentheses)
+- WRONG: `citations author:Smith` (missing parentheses)
+- CORRECT: `citations(abs:exoplanets)`
+- CORRECT: `citations(author:"Smith")`
+
+### 10. Syntax Validity
+- Balanced parentheses: count of ( must equal count of )
+- Balanced quotes: even number of " characters
+- Balanced brackets: count of [ must equal count of ]
+- No trailing/leading boolean operators (AND, OR, NOT)
+- No consecutive boolean operators (AND AND, OR OR)
+
+### 11. Query-NL Alignment
+The query should represent ONLY what the NL explicitly states:
 - If NL says "by Smith", use author: not abs:
 - If NL mentions a year, use year: or pubdate:
+- If NL mentions "first author", use ^author: or author:"^Name"
 - Don't add constraints the user didn't request
+- Don't omit constraints the user did request
 
-### 9. Syntax Validity
-- Balanced parentheses and quotes
-- Valid field names
-- Valid enum values for doctype:, property:, collection:, bibgroup:
+### 12. Category Validity
+Category should be descriptive (author, topic, operator, etc.), not "unfielded" or empty.
+
+### 13. Year/Date Formatting
+- Single year: `year:2020` (correct)
+- Year range: `year:2018-2022` or `pubdate:[2018 TO 2022]` (correct)
+- WRONG: `year:[2018 TO 2022]` (year doesn't use brackets)
+- WRONG: `pubdate:2020-2024` (pubdate needs brackets for ranges)
+
+### 14. First Author Syntax
+When NL specifies "first author" or "lead author":
+- CORRECT: `^author:"Smith"` or `author:"^Smith"`
+- WRONG: `author:"Smith"` without the ^ indicator
 
 ---
 
@@ -169,15 +349,20 @@ The query should represent ONLY what the NL explicitly states.
   "has_issues": true/false,
   "issues": [
     {{
-      "type": "author_initials|exact_title|over_quoted|boolean_logic|missing_doctype|bibcode_lookup|category|alignment|syntax",
+      "type": "author_initials|exact_title|over_quoted|boolean_logic|missing_doctype|bibcode_lookup|invalid_field|invalid_enum|malformed_operator|syntax|alignment|category|date_format|first_author",
       "severity": "critical|high|medium",
-      "description": "Brief description",
-      "suggested_fix": "Corrected query or null"
+      "description": "Brief description of the issue",
+      "suggested_fix": "Corrected query or null if removal recommended"
     }}
   ],
   "recommended_action": "keep|fix|remove"
 }}
 ```
+
+Severity Guide:
+- critical: Must be fixed or removed (fabricated data, invalid syntax, invalid enums)
+- high: Should be fixed (wrong field usage, missing constraints)
+- medium: Could be improved (style issues, category)
 
 If no issues: `{{"has_issues": false, "issues": [], "recommended_action": "keep"}}`
 """
