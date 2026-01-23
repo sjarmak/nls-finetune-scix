@@ -1,7 +1,7 @@
 [
   {
     "natural_language": "terahertz josephson echo spectroscopy cuprate superconductors inhomogeneity",
-    "ads_query": "abs:(Probing AND Inhomogeneous AND Cuprate)",
+    "ads_query": "abs:(terahertz AND Josephson AND echo AND spectroscopy AND cuprate AND superconductor* AND inhomogene*)",
     "category": "topic"
   },
   {
@@ -101,7 +101,7 @@
   },
   {
     "natural_language": "papers by guillermo chiape",
-    "ads_query": "abs:(guillermo chiape) doctype:article",
+    "ads_query": "author:\"Chiape\" doctype:article",
     "category": "topic"
   },
   {
@@ -198,11 +198,6 @@
     "natural_language": "supernova papers or nova papers",
     "ads_query": "abs:\"supernova\" OR abs:\"nova\" doctype:article",
     "category": "operator"
-  },
-  {
-    "natural_language": "papers by guptke first author",
-    "ads_query": "author:(\"^guptke\") doctype:article",
-    "category": "first_author"
   },
   {
     "natural_language": "papers by Cheung E from 2014",
@@ -398,11 +393,6 @@
     "natural_language": "papers by Agol on exoplanet transits",
     "ads_query": "author:\"^agol\" doctype:article",
     "category": "first_author"
-  },
-  {
-    "natural_language": "papers by Piskunov from 2016",
-    "ads_query": "pubdate:[2016-01 TO 2016-12] author:(\"Piskunov, a. e.\") doctype:article",
-    "category": "author"
   },
   {
     "natural_language": "Chandrasekhar's gravitational waves papers",
@@ -601,7 +591,7 @@
   },
   {
     "natural_language": "work similar to Fermi gamma ray research",
-    "ads_query": "similar(abs:\"Fermi\" AND abs:\"gamma ray\")",
+    "ads_query": "similar(abs:(Fermi AND gamma ray))",
     "category": "operator"
   },
   {
@@ -901,7 +891,7 @@
   },
   {
     "natural_language": "RX J1615 X-ray source observations",
-    "ads_query": "abs:(RX J1615)",
+    "ads_query": "abs:(\"RX J1615\" AND (\"X-ray\" OR xray) AND (observation* OR observ*))",
     "category": "topic"
   },
   {
@@ -1000,11 +990,6 @@
     "category": "operator"
   },
   {
-    "natural_language": "papers by L on arXiv from 2022",
-    "ads_query": "abs:(2022arXiv220605745L) doctype:article",
-    "category": "topic"
-  },
-  {
     "natural_language": "dynamical mass measurements M35 open cluster",
     "ads_query": "abs:(dynamical mass+ M35)",
     "category": "topic"
@@ -1098,11 +1083,6 @@
     "natural_language": "papers about Betelgeuse",
     "ads_query": "object:\"Betelgeuse\" doctype:article",
     "category": "astronomy"
-  },
-  {
-    "natural_language": "papers by napolitano nicola",
-    "ads_query": "abs:(napolitano, nicola) doctype:article",
-    "category": "topic"
   },
   {
     "natural_language": "papers by kaur first author",
@@ -1301,7 +1281,7 @@
   },
   {
     "natural_language": "A peek at Napa Valley's hidden past",
-    "ads_query": "title:(peek OR Napa OR Valley's OR hidden OR past)",
+    "ads_query": "title:(peek AND Napa AND hidden AND past)",
     "category": "content"
   },
   {
@@ -1400,11 +1380,6 @@
     "category": "author"
   },
   {
-    "natural_language": "papers by Lyra first author 2021",
-    "ads_query": "pubdate:[2021-01 TO 2021-12] author:(\"^Lyra\") doctype:article",
-    "category": "first_author"
-  },
-  {
     "natural_language": "papers by Michael Patel on quantum computing",
     "ads_query": "author:\"Michael Patel\" doctype:article",
     "category": "topic"
@@ -1501,7 +1476,7 @@
   },
   {
     "natural_language": "papers by davies on sky subtraction",
-    "ads_query": "author:(\"davies\") abs:(sky subtraction) doctype:article",
+    "ads_query": "author:\"davies\" abs:(sky AND subtraction) doctype:article",
     "category": "author"
   },
   {
@@ -1598,11 +1573,6 @@
     "natural_language": "papers titled CentOS-7 from 2009",
     "ads_query": "title:\"CentOS-7 (2009)\" doctype:article",
     "category": "content"
-  },
-  {
-    "natural_language": "papers by Aguilera-Gomez 2018",
-    "ads_query": "pubdate:[2018-01 TO 2018-12] author:(\"Aguilera-Gomez, C.\") doctype:article",
-    "category": "author"
   },
   {
     "natural_language": "papers by Weinberg 2022",
@@ -1900,11 +1870,6 @@
     "category": "first_author"
   },
   {
-    "natural_language": "Chandrasekhar as lead author",
-    "ads_query": "author:\"^Chandrasekhar, S.\"",
-    "category": "author"
-  },
-  {
     "natural_language": "papers by Barnes on magnetic fields",
     "ads_query": "author:\"Barnes\" magnetic fields doctype:article",
     "category": "author"
@@ -2100,11 +2065,6 @@
     "category": "author"
   },
   {
-    "natural_language": "papers by Cuk on planetary dynamics",
-    "ads_query": "author:\"Cuk, Matija\" kw4 doctype:article",
-    "category": "author"
-  },
-  {
     "natural_language": "nustar hot gas mass measurements in galaxy clusters",
     "ads_query": "abs:(nustar hot gas mass)",
     "category": "topic"
@@ -2198,11 +2158,6 @@
     "natural_language": "Thorne's dark matter papers",
     "ads_query": "author:\"Thorne, K.\" abs:\"dark matter\" doctype:article",
     "category": "author"
-  },
-  {
-    "natural_language": "papers by Mittal, Stanimirovic, and Babler on interstellar medium",
-    "ads_query": "author:(\"^Mittal\" \"Stanimirovic\" \"Babler\") doctype:article",
-    "category": "first_author"
   },
   {
     "natural_language": "papers by Heyl or Richer from 1960 onwards",
@@ -2400,11 +2355,6 @@
     "category": "first_author"
   },
   {
-    "natural_language": "papers by de Zeeuw P T from 1999",
-    "ads_query": "author:\"^de Zeeuw P. T\" year:1999 doctype:article",
-    "category": "first_author"
-  },
-  {
     "natural_language": "papers by Zhou and White",
     "ads_query": "author:\"^Zhou\" author:\"White\" doctype:article",
     "category": "first_author"
@@ -2498,11 +2448,6 @@
     "natural_language": "best 25 papers on galaxy formation",
     "ads_query": "topn(25, abs:\"galaxy formation\", citation_count desc) doctype:article",
     "category": "operator"
-  },
-  {
-    "natural_language": "nautical charts South Australia coast Cape Du Couedic Whidbey Isles",
-    "ads_query": "title:(Chart OR Aus343: OR Australia OR South OR Coast)",
-    "category": "content"
   },
   {
     "natural_language": "papers by Gehrels and Ramirez-Ruiz on gamma ray bursts",
@@ -2601,7 +2546,7 @@
   },
   {
     "natural_language": "papers by Helled on planetary formation",
-    "ads_query": "author:\"^Helled\" doctype:article",
+    "ads_query": "author:\"^Helled\" abs:(planetary AND formation) doctype:article",
     "category": "first_author"
   },
   {
@@ -2698,11 +2643,6 @@
     "natural_language": "papers by bromley but not miley zigler sosolik gulati or guesmi",
     "ads_query": "author:\"bromley, b.c.\" -author:\"miley\" -author:\"zigler\" -author:\"sosolik\" -author:\"gulati\" -author:\"guesmi\" doctype:article",
     "category": "author"
-  },
-  {
-    "natural_language": "papers by Sarkar K C since 2015",
-    "ads_query": "author:\"^Sarkar\", year:2015- doctype:article",
-    "category": "first_author"
   },
   {
     "natural_language": "papers with associated data",
@@ -2901,7 +2841,7 @@
   },
   {
     "natural_language": "surgical scalpel design and safety studies",
-    "ads_query": "abs:(SCALPELS) doctype:article",
+    "ads_query": "abs:(scalpel* AND design AND safety) doctype:article",
     "category": "topic"
   },
   {
@@ -3001,7 +2941,7 @@
   },
   {
     "natural_language": "moving boundary electrophoresis methods and applications",
-    "ads_query": "abs:(Moving boundary electrophoresis)",
+    "ads_query": "abs:(\"moving boundary electrophoresis\" AND (method* OR technique* OR application*))",
     "category": "topic"
   },
   {
@@ -3401,7 +3341,7 @@
   },
   {
     "natural_language": "papers on fast blue optical transients and choked gamma ray bursts",
-    "ads_query": "abs:\"FBOTs\" abs:\"choked GRBs\" doctype:article",
+    "ads_query": "abs:(FBOTs AND \"choked\" AND GRBs) doctype:article",
     "category": "content"
   },
   {
@@ -4000,11 +3940,6 @@
     "category": "publication"
   },
   {
-    "natural_language": "papers by Carlson and Meixner from 2012",
-    "ads_query": "pubdate:[2012-01 TO 2012-12] author:(\"carlson\" \"Meixner\") doctype:article",
-    "category": "author"
-  },
-  {
     "natural_language": "papers by azabaijan",
     "ads_query": "author:\"^azabaijan\" doctype:article",
     "category": "first_author"
@@ -4098,11 +4033,6 @@
     "natural_language": "papers by desai niyati first author",
     "ads_query": "author:\"^desai, niyati\" doctype:article",
     "category": "first_author"
-  },
-  {
-    "natural_language": "History of Idaho; a narrative account of its historical progress, its people and its principal interests",
-    "ads_query": "title:(History OR Idaho; OR narrative OR account OR its)",
-    "category": "content"
   },
   {
     "natural_language": "papers by kovacs on supernovae",
@@ -4400,11 +4330,6 @@
     "category": "conversational"
   },
   {
-    "natural_language": "2015ApJ...799...71G",
-    "ads_query": "identifier:\"2015ApJ...799\u202671G\"",
-    "category": "compound"
-  },
-  {
     "natural_language": "papers by Galvan-Madrid on star formation",
     "ads_query": "author:\"^Galvan-Madrid\" doctype:article",
     "category": "first_author"
@@ -4498,11 +4423,6 @@
     "natural_language": "who cites JWST papers",
     "ads_query": "citations(abs:JWST) doctype:article",
     "category": "operator"
-  },
-  {
-    "natural_language": "windows XP service pack 2 springboard longhorn microsoft operating system",
-    "ads_query": "title:(Windows OR SP2 OR 'Springboard' OR Longhorn)",
-    "category": "content"
   },
   {
     "natural_language": "papers by Massaro F",
@@ -4601,7 +4521,7 @@
   },
   {
     "natural_language": "Vera Rubin Observatory near earth objects",
-    "ads_query": "abs:(Vera Rubin NEO)",
+    "ads_query": "abs:(\"Vera Rubin\" AND (NEO OR \"near earth object\" OR \"near-earth object\" OR \"near earth objects\"))",
     "category": "topic"
   },
   {
@@ -4800,11 +4720,6 @@
     "category": "topic"
   },
   {
-    "natural_language": "papers by Khaymovich on localization",
-    "ads_query": "author:(\"Khaymovich, Ivan M\" OR \"Khaimovich, Ivan M\") doctype:article",
-    "category": "author"
-  },
-  {
     "natural_language": "papers by Farmer R",
     "ads_query": "author:(\"^Farmer, R\") doctype:article",
     "category": "first_author"
@@ -4898,11 +4813,6 @@
     "natural_language": "canonical correlation analysis principal component analysis",
     "ads_query": "abs:(CCF pca)",
     "category": "topic"
-  },
-  {
-    "natural_language": "papers by sunyaev 2021",
-    "ads_query": "^sunyaev year:2021 doctype:article",
-    "category": "publication"
   },
   {
     "natural_language": "papers by sahai 2007",
@@ -5100,11 +5010,6 @@
     "category": "first_author"
   },
   {
-    "natural_language": "NGC 3690 papers citing \"A Digital Archive of H I 21 Centimeter Line Spectra of Optically Targeted Galaxies\"",
-    "ads_query": "abs: NGC 3690 citations(title:A Digital Archive of H I 21 Centimeter Line Spectra of Optically Targeted Galaxies) doctype:article",
-    "category": "content"
-  },
-  {
     "natural_language": "papers by Faber on galaxy formation",
     "ads_query": "author:\"^Faber\" doctype:article",
     "category": "first_author"
@@ -5200,11 +5105,6 @@
     "category": "first_author"
   },
   {
-    "natural_language": "papers by szalai and shahbandeh on supernovae",
-    "ads_query": "author:\"szalai, t\" author:\"shahbandeh\" doctype:article",
-    "category": "author"
-  },
-  {
     "natural_language": "papers by Palacios 2008 to 2016",
     "ads_query": "pubdate:[2008-01 TO 2016-12] author:(\"Palacios, A.\") doctype:article",
     "category": "author"
@@ -5298,11 +5198,6 @@
     "natural_language": "papers about machine learning",
     "ads_query": "abs:\"machine learning\" doctype:article",
     "category": "content"
-  },
-  {
-    "natural_language": "papers by espinasse from 1820",
-    "ads_query": "author:\"^espinasse\" title\"1820\" doctype:article",
-    "category": "first_author"
   },
   {
     "natural_language": "stellar evolution from 2017 to 2020",
@@ -5700,11 +5595,6 @@
     "category": "content"
   },
   {
-    "natural_language": "papers by Barklem from 2005",
-    "ads_query": "pubdate:[2005-01 TO 2005-12] author:(\"Barklem.,\") doctype:article",
-    "category": "author"
-  },
-  {
     "natural_language": "papers by Strolger from 2000 to 2004",
     "ads_query": "author:\"^Strolger\" year:2000-2004 doctype:article",
     "category": "first_author"
@@ -5801,7 +5691,7 @@
   },
   {
     "natural_language": "black holes reviews",
-    "ads_query": "abs:\"black holes\" doctype:article property:refereed",
+    "ads_query": "reviews(abs:(black AND holes))",
     "category": "property"
   },
   {
@@ -6300,11 +6190,6 @@
     "category": "author"
   },
   {
-    "natural_language": "papers by libanore",
-    "ads_query": "author:(\"^libanore\") doctype:article",
-    "category": "first_author"
-  },
-  {
     "natural_language": "papers by kochanek from 2017",
     "ads_query": "author:\"^kochanek\" 2017 doctype:article",
     "category": "author"
@@ -6401,7 +6286,7 @@
   },
   {
     "natural_language": "cosmological simulations of structure formation",
-    "ads_query": "abs:\"cosmological simulation\" abs:\"structure formation\"",
+    "ads_query": "abs:(cosmological AND simulations) abs:(structure AND formation)",
     "category": "compound"
   },
   {
@@ -6700,11 +6585,6 @@
     "category": "metrics"
   },
   {
-    "natural_language": "\"\u041f\u0430\u0440\u0430\u0434 \u0430\u043d\u0441\u0430\u043c\u0431\u043b\u0435\u0439\" \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 \u0417\u0430\u0441\u0435\u0434\u0430\u0442\u0435\u043b\u0435\u0432 \u0412\u0418\u0410 \u041b\u0435\u0439\u0441\u044f musical ensemble",
-    "ads_query": "title:(\u041f\u0430\u0440\u0430\u0434 OR \u0430\u043d\u0441\u0430\u043c\u0431\u043b\u0435\u0439 OR \u043c\u0443\u0437\u044b\u043a\u0430\u043d\u0442: OR \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 OR \u0417\u0430\u0441\u0435\u0434\u0430\u0442\u0435\u043b\u0435\u0432)",
-    "category": "content"
-  },
-  {
     "natural_language": "papers by Lancaster and Ostriker",
     "ads_query": "author:(\"Lancaster\" \"Ostriker\") doctype:article",
     "category": "author"
@@ -6801,7 +6681,7 @@
   },
   {
     "natural_language": "papers by Springel and Hernquist on galaxy simulations",
-    "ads_query": "author:\"^springel\" author:\"hernquisrt\" doctype:article",
+    "ads_query": "author:\"Springel\" author:\"Hernquist\" doctype:article",
     "category": "first_author"
   },
   {
@@ -6898,11 +6778,6 @@
     "natural_language": "papers by Bevacqua 2021",
     "ads_query": "author:\"^Bevacqua\" year:2021 doctype:article",
     "category": "first_author"
-  },
-  {
-    "natural_language": "\"An Introduction to Geography, Intended for Little Children\" third edition",
-    "ads_query": "title:(Introduction OR Geography, OR Intended OR Little OR Children,)3rd ed.\"\"",
-    "category": "content"
   },
   {
     "natural_language": "RR Lyrae variables in the Large Magellanic Cloud",
@@ -7098,11 +6973,6 @@
     "natural_language": "papers by dedner 2002",
     "ads_query": "author:\"^dedner\" 2002 doctype:article",
     "category": "author"
-  },
-  {
-    "natural_language": "papers by coutu first author",
-    "ads_query": "author:\"^coutu, s\" doctype:article",
-    "category": "first_author"
   },
   {
     "natural_language": "Crab Nebula spectroscopy",
@@ -7301,7 +7171,7 @@
   },
   {
     "natural_language": "papers by Gruzinov and Levin on plasma physics",
-    "ads_query": "author:(\"Gruzinov\" \"Levin\") doctype:article",
+    "ads_query": "author:(\"Gruzinov\" \"Levin\") abs:(plasma AND physics) doctype:article",
     "category": "author"
   },
   {
@@ -7700,11 +7570,6 @@
     "category": "content"
   },
   {
-    "natural_language": "papers by Piskunov 2013",
-    "ads_query": "pubdate:[2013-01 TO 2013-12] author:(\"Piskunov, a. e.\") doctype:article",
-    "category": "author"
-  },
-  {
     "natural_language": "papers by Massey P 2022",
     "ads_query": "author:\"^Massey\" year:2022 doctype:article",
     "category": "first_author"
@@ -7797,11 +7662,6 @@
   {
     "natural_language": "papers by Breivik from 2020",
     "ads_query": "author:\"^Breivik\" year:2020 doctype:article",
-    "category": "first_author"
-  },
-  {
-    "natural_language": "papers by alfaro and ruiz",
-    "ads_query": "author:\"^alfaro\", author:\"ruiz\" doctype:article",
     "category": "first_author"
   },
   {
@@ -7901,7 +7761,7 @@
   },
   {
     "natural_language": "papers about \"Haa L\u00e9elk'w H\u00e1s Aan\u00ed Saax'\u00fa\"",
-    "ads_query": "title:(Haa OR L\u00e9elk'w OR H\u00e1s OR Aan\u00ed OR Saax'\u00fa) doctype:article",
+    "ads_query": "title:\"Haa L\u00e9elk'w H\u00e1s Aan\u00ed Saax'\u00fa\" doctype:article",
     "category": "content"
   },
   {
@@ -8001,7 +7861,7 @@
   },
   {
     "natural_language": "papers by wang ji 2010 to 2023",
-    "ads_query": "pubdate:[2010-01 TO 2023-12] author:(\"wang.ji\") doctype:article",
+    "ads_query": "pubdate:[2010-01 TO 2023-12] author:\"Wang, Ji\" doctype:article",
     "category": "author"
   },
   {
@@ -8200,11 +8060,6 @@
     "category": "first_author"
   },
   {
-    "natural_language": "papers about stellar evolution in binary systems",
-    "ads_query": "abs:(docs(737b696a11688efba2211131338d529e)) doctype:article",
-    "category": "topic"
-  },
-  {
     "natural_language": "papers by Sari Reem",
     "ads_query": "author:\"Sari, Re'em\" doctype:article",
     "category": "author"
@@ -8400,11 +8255,6 @@
     "category": "author"
   },
   {
-    "natural_language": "papers about Jack London's Call of the Wild in literary criticism",
-    "ads_query": "title:(Jack OR London's OR 'The OR Call OR Wild') doctype:article",
-    "category": "content"
-  },
-  {
     "natural_language": "papers by Magg 2022",
     "ads_query": "author:\"^magg\" year:2022 doctype:article",
     "category": "first_author"
@@ -8497,11 +8347,6 @@
   {
     "natural_language": "SETI machine learning algorithms signal detection",
     "ads_query": "abs:(SETI artificial intelligence)",
-    "category": "topic"
-  },
-  {
-    "natural_language": "papers about HD 110058 stellar properties",
-    "ads_query": "abs:(HD 110058) doctype:article",
     "category": "topic"
   },
   {
@@ -8601,7 +8446,7 @@
   },
   {
     "natural_language": "spatially resolved JWST observations and analysis",
-    "ads_query": "abs:(Spatially Resolved JWST)",
+    "ads_query": "abs:(\"spatially resolved\" AND JWST AND observation* AND analys*)",
     "category": "topic"
   },
   {
@@ -8701,7 +8546,7 @@
   },
   {
     "natural_language": "fast blue optical transients gamma-ray bursts",
-    "ads_query": "abs:\"FBOTs\" abs:\"GRB\"",
+    "ads_query": "abs:(\"fast blue optical transients\" AND \"gamma-ray bursts\")",
     "category": "content"
   },
   {
@@ -9101,7 +8946,7 @@
   },
   {
     "natural_language": "papers by Iben Rood",
-    "ads_query": "author:(\"Iben\" \"Rood\") doctype:article",
+    "ads_query": "author:(\"Iben\" OR \"Rood\") doctype:article",
     "category": "author"
   },
   {
@@ -9501,7 +9346,7 @@
   },
   {
     "natural_language": "10.1016/0010-0277(92)90053-K",
-    "ads_query": "identifier:\"10.1016/0010-0277(92)90053-K\"",
+    "ads_query": "identifier:10.1016/0010-0277(92)90053-K",
     "category": "compound"
   },
   {
@@ -9801,7 +9646,7 @@
   },
   {
     "natural_language": "papers by O'Sullivan on x-ray",
-    "ads_query": "author:\"^O'sullivan\" x-ray doctype:article",
+    "ads_query": "author:\"O'sullivan\" abs:x-ray doctype:article",
     "category": "first_author"
   },
   {
@@ -10000,11 +9845,6 @@
     "category": "first_author"
   },
   {
-    "natural_language": "combustion flame extinction limits flammability",
-    "ads_query": "identifier:\"10.1016/S0010-2180(00)00101-2\"",
-    "category": "compound"
-  },
-  {
     "natural_language": "refereed papers by Mu\u00f1oz-Darias",
     "ads_query": "Mu\u00f1oz-Darias property:refereed doctype:article",
     "category": "properties"
@@ -10098,11 +9938,6 @@
     "natural_language": "Chandra or XMM Newton X-ray data",
     "ads_query": "(abs:\"Chandra\" OR abs:\"XMM Newton\") abs:\"X-ray\"",
     "category": "operator"
-  },
-  {
-    "natural_language": "papers by Ladjelate first author 2020",
-    "ads_query": "pubdate:[2020-01 TO 2020-12] author:(\"^Ladjelate, B.\") doctype:article",
-    "category": "first_author"
   },
   {
     "natural_language": "papers by Kado-Fong and Greene on galaxy evolution",
@@ -10200,11 +10035,6 @@
     "category": "compound"
   },
   {
-    "natural_language": "machine learning applications in stellar classification 2023",
-    "ads_query": "year:2023 +docs(library/dRo9vFA1RxqDt9sUc-Cb3Q)",
-    "category": "publication"
-  },
-  {
     "natural_language": "10.1002/1097-0142(19931101)72:9<2746::AID-CNCR2820720936>3.0.CO;2-W",
     "ads_query": "identifier:\"10.1002/1097-0142(19931101)72:9<2746::AID-CNCR2820720936>3.0.CO;2-W\"",
     "category": "compound"
@@ -10298,11 +10128,6 @@
     "natural_language": "GRB 231115A in The Astronomer's Telegram",
     "ads_query": "pub:\"The Astronomer's Telegram\" title:\"GRB 231115A\"",
     "category": "content"
-  },
-  {
-    "natural_language": "papers by j.v. rodriguez from 2017 to 2023 mentioning 2017",
-    "ads_query": "author:\"j.v. rodriguez\" year:2017-2023 abs:\"2017\" doctype:article",
-    "category": "author"
   },
   {
     "natural_language": "\u041f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442 \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0438 \u0411\u0435\u043b\u0430\u0440\u0443\u0441\u044c \u0443\u0437\u043d\u0430\u0433\u0430\u0440\u043e\u0434\u0436\u0430\u043d\u043d\u0435 \u0411\u0430\u0431\u043ai\u043d\u0430\u0439",
@@ -10600,11 +10425,6 @@
     "category": "author"
   },
   {
-    "natural_language": "\"BY THE GREAT HORN SPOON\" Kirkus Reviews",
-    "ads_query": "title:(GREAT OR HORN OR SPOON! OR Kirkus OR Reviews)",
-    "category": "content"
-  },
-  {
     "natural_language": "polar ring galaxy Subaru Deep Field",
     "ads_query": "abs:(galaxy AND Subaru AND Deep)",
     "category": "topic"
@@ -10801,7 +10621,7 @@
   },
   {
     "natural_language": "papers on oneAPI Threading Building Blocks oneTBB parallel computing",
-    "ads_query": "title:(oneAPI OR Threading OR Building OR Blocks OR (oneTBB)) doctype:article",
+    "ads_query": "abs:(\"oneTBB\" OR \"Threading Building Blocks\" OR \"oneAPI Threading Building Blocks\") AND abs:(parallel OR concurrency OR multithread*) doctype:article",
     "category": "content"
   },
   {
@@ -11001,7 +10821,7 @@
   },
   {
     "natural_language": "galaxy interaction simulation AM 2229-735",
-    "ads_query": "abs:(Simulating AND galactic AND interaction)",
+    "ads_query": "abs:(simulation AND interaction AND \"AM 2229-735\")",
     "category": "topic"
   },
   {
@@ -11101,7 +10921,7 @@
   },
   {
     "natural_language": "cosmic rays reviews",
-    "ads_query": "abs:\"cosmic rays\" doctype:article property:refereed",
+    "ads_query": "reviews(abs:(cosmic AND rays))",
     "category": "property"
   },
   {
@@ -11501,7 +11321,7 @@
   },
   {
     "natural_language": "papers from mcmath observatory solar research",
-    "ads_query": "abs:(mcmath observatory) doctype:article",
+    "ads_query": "abs:(mcmath AND observatory AND solar AND research) doctype:article",
     "category": "topic"
   },
   {
@@ -11600,11 +11420,6 @@
     "category": "author"
   },
   {
-    "natural_language": "papers about Wyatt Earp frontier lawman",
-    "ads_query": "title:(Who OR Wyatt OR Earp?) doctype:article",
-    "category": "content"
-  },
-  {
     "natural_language": "wolf-rayet galaxies 2010 to 2023",
     "ads_query": "wolf-rayet galaxy year:2010-2023",
     "category": "publication"
@@ -11701,7 +11516,7 @@
   },
   {
     "natural_language": "stellar flares filament eruptions solar-type stars",
-    "ads_query": "abs:(Probable AND eruptive AND filament)",
+    "ads_query": "abs:(stellar AND flares AND filament AND eruption AND \"solar-type\")",
     "category": "topic"
   },
   {
@@ -11801,7 +11616,7 @@
   },
   {
     "natural_language": "papers by munoz jaramillo on solar cycle",
-    "ads_query": "abs:(munoz jaramillo) doctype:article",
+    "ads_query": "author:\"Munoz Jaramillo\" abs:(solar AND cycle) doctype:article",
     "category": "topic"
   },
   {
@@ -11998,11 +11813,6 @@
     "natural_language": "papers by leschinski",
     "ads_query": "author:\"^leschinski\" doctype:article",
     "category": "author"
-  },
-  {
-    "natural_language": "He-who-sees-in-the-dark Boys Story Frederick Burnham American Scout",
-    "ads_query": "title:(He-who-sees-in-the-dark; OR Boys' OR Story OR Frederick OR Burnham,)",
-    "category": "content"
   },
   {
     "natural_language": "first author papers by Jane Smith",
@@ -12301,7 +12111,7 @@
   },
   {
     "natural_language": "brown dwarf lithium depletion boundary stellar evolution",
-    "ads_query": "abs:(lithium depletion boundary)",
+    "ads_query": "abs:(\"lithium depletion boundary\" AND \"brown dwarf\" AND \"stellar evolution\")",
     "category": "topic"
   },
   {
@@ -12398,11 +12208,6 @@
     "natural_language": "Gaia astrometry from 2022 to 2025",
     "ads_query": "abs:\"Gaia astrometry\" year:2022-2025",
     "category": "publication"
-  },
-  {
-    "natural_language": "X-ray binary luminosity functions M81 spiral galaxy globular clusters",
-    "ads_query": "abs:(Calibrating AND X-ray AND XLF AND X-ray)",
-    "category": "topic"
   },
   {
     "natural_language": "papers by colwell",
@@ -12701,7 +12506,7 @@
   },
   {
     "natural_language": "any good active galactic nuclei reviews?",
-    "ads_query": "abs:(galactic AND active AND nuclei) doctype:article property:refereed",
+    "ads_query": "reviews(abs:(active AND galactic AND nuclei))",
     "category": "conversational"
   },
   {
@@ -12996,11 +12801,6 @@
   },
   {
     "natural_language": "title has star but not acronym STAR",
-    "ads_query": "title:(=star -STAR)",
-    "category": "syntax"
-  },
-  {
-    "natural_language": "exclude STAR acronym but include star",
     "ads_query": "title:(=star -STAR)",
     "category": "syntax"
   },
@@ -13301,7 +13101,7 @@
   },
   {
     "natural_language": "useful papers for m31",
-    "ads_query": "useful(abs:\"M31\") doctype:article",
+    "ads_query": "useful(abs:M31) doctype:article",
     "category": "second_order"
   },
   {
@@ -13401,7 +13201,7 @@
   },
   {
     "natural_language": "papers about gravitational waves",
-    "ads_query": "title:\"gravitational waves\" doctype:article",
+    "ads_query": "title:(gravitational AND waves) doctype:article",
     "category": "content"
   },
   {
@@ -13501,7 +13301,7 @@
   },
   {
     "natural_language": "papers about dark energy",
-    "ads_query": "title:\"dark energy\" doctype:article",
+    "ads_query": "abs:(dark AND energy) doctype:article",
     "category": "content"
   },
   {
@@ -13601,7 +13401,7 @@
   },
   {
     "natural_language": "papers about weak lensing",
-    "ads_query": "title:\"weak lensing\" doctype:article",
+    "ads_query": "title:(weak AND lensing) doctype:article",
     "category": "content"
   },
   {
@@ -13701,7 +13501,7 @@
   },
   {
     "natural_language": "papers about solar wind",
-    "ads_query": "title:\"solar wind\" doctype:article",
+    "ads_query": "title:(solar AND wind) doctype:article",
     "category": "content"
   },
   {
@@ -13801,7 +13601,7 @@
   },
   {
     "natural_language": "papers about coronal mass ejections",
-    "ads_query": "title:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "abs:(coronal AND mass AND ejections) doctype:article",
     "category": "content"
   },
   {
@@ -13901,7 +13701,7 @@
   },
   {
     "natural_language": "papers about infrared astronomy",
-    "ads_query": "title:\"infrared astronomy\" doctype:article",
+    "ads_query": "abs:(infrared AND astronomy) doctype:article",
     "category": "content"
   },
   {
@@ -14001,7 +13801,7 @@
   },
   {
     "natural_language": "papers about exoplanets",
-    "ads_query": "title:\"exoplanets\" doctype:article",
+    "ads_query": "abs:exoplanets doctype:article",
     "category": "content"
   },
   {
@@ -14101,7 +13901,7 @@
   },
   {
     "natural_language": "papers about interstellar medium",
-    "ads_query": "title:\"interstellar medium\" doctype:article",
+    "ads_query": "abs:(interstellar AND medium) doctype:article",
     "category": "content"
   },
   {
@@ -14201,7 +14001,7 @@
   },
   {
     "natural_language": "papers about cosmic microwave background",
-    "ads_query": "title:(cosmic OR microwave OR background) doctype:article",
+    "ads_query": "abs:(cosmic AND microwave AND background) doctype:article",
     "category": "content"
   },
   {
@@ -14301,7 +14101,7 @@
   },
   {
     "natural_language": "papers about magnetosphere",
-    "ads_query": "title:\"magnetosphere\" doctype:article",
+    "ads_query": "title:magnetosphere doctype:article",
     "category": "content"
   },
   {
@@ -14401,7 +14201,7 @@
   },
   {
     "natural_language": "papers about planetary atmospheres",
-    "ads_query": "title:\"planetary atmospheres\" doctype:article",
+    "ads_query": "abs:(planetary AND atmospheres) doctype:article",
     "category": "content"
   },
   {
@@ -14501,7 +14301,7 @@
   },
   {
     "natural_language": "papers about asteroid composition",
-    "ads_query": "title:\"asteroid composition\" doctype:article",
+    "ads_query": "title:(asteroid AND composition) doctype:article",
     "category": "content"
   },
   {
@@ -14601,7 +14401,7 @@
   },
   {
     "natural_language": "papers about stellar winds",
-    "ads_query": "title:\"stellar winds\" doctype:article",
+    "ads_query": "title:(stellar AND winds) doctype:article",
     "category": "content"
   },
   {
@@ -14701,7 +14501,7 @@
   },
   {
     "natural_language": "papers about mars atmosphere",
-    "ads_query": "title:\"mars atmosphere\" doctype:article",
+    "ads_query": "abs:(mars AND atmosphere) doctype:article",
     "category": "content"
   },
   {
@@ -15901,7 +15701,7 @@
   },
   {
     "natural_language": "papers by smith j on dark energy since 2018",
-    "ads_query": "author:\"smith, j\" abs:\"dark energy\" year:2018-2023 doctype:article",
+    "ads_query": "author:\"smith, j\" abs:(dark AND energy) year:2018-2023 doctype:article",
     "category": "publication"
   },
   {
@@ -16001,7 +15801,7 @@
   },
   {
     "natural_language": "papers by smith j on coronal mass ejections since 2018",
-    "ads_query": "author:\"smith, j\" abs:(coronal AND ejections AND mass) year:2018-2023 doctype:article",
+    "ads_query": "author:\"smith, j\" abs:(coronal AND mass AND ejections) year:2018-2026 doctype:article",
     "category": "publication"
   },
   {
@@ -16100,11 +15900,6 @@
     "category": "publication"
   },
   {
-    "natural_language": "papers by vera rubin on dark energy since 2018",
-    "ads_query": "author:\"rubin, v\" abs:\"dark energy\" year:2018-2023 doctype:article",
-    "category": "publication"
-  },
-  {
     "natural_language": "papers by Rubin, Vera about weak lensing",
     "ads_query": "author:\"Rubin\" abs:\"weak lensing\" doctype:article",
     "category": "author"
@@ -16198,11 +15993,6 @@
     "natural_language": "coronal mass ejections by Rubin, Vera 2018 to 2023",
     "ads_query": "author:\"Rubin\" abs:(coronal AND ejections AND mass) year:2018-2023",
     "category": "publication"
-  },
-  {
-    "natural_language": "vera rubin infrared astronomy",
-    "ads_query": "author:\"rubin, v\" abs:\"infrared astronomy\"",
-    "category": "author"
   },
   {
     "natural_language": "papers by Rubin, Vera about infrared astronomy",
@@ -16300,11 +16090,6 @@
     "category": "publication"
   },
   {
-    "natural_language": "oort j weak lensing",
-    "ads_query": "author:\"oort, j\" abs:\"weak lensing\"",
-    "category": "author"
-  },
-  {
     "natural_language": "papers by Oort, J about weak lensing",
     "ads_query": "author:\"Oort\" abs:\"weak lensing\" doctype:article",
     "category": "author"
@@ -16398,11 +16183,6 @@
     "natural_language": "papers by oort j on coronal mass ejections since 2018",
     "ads_query": "author:\"oort, j\" abs:(coronal AND ejections AND mass) year:2018-2023 doctype:article",
     "category": "publication"
-  },
-  {
-    "natural_language": "oort j infrared astronomy",
-    "ads_query": "author:\"oort, j\" abs:\"infrared astronomy\"",
-    "category": "author"
   },
   {
     "natural_language": "papers by Oort, J about infrared astronomy",
@@ -18401,7 +18181,7 @@
   },
   {
     "natural_language": "data Science papers on coronal mass ejections",
-    "ads_query": "bibstem:\"Science\" property:data abs:(coronal AND ejections AND mass) doctype:article",
+    "ads_query": "bibstem:\"Science\" abs:(coronal AND mass AND ejections) doctype:article",
     "category": "filters"
   },
   {
@@ -19297,11 +19077,6 @@
   {
     "natural_language": "huchra exclude 2mass in title",
     "ads_query": "author:\"huchra, j\" -title:2mass",
-    "category": "syntax"
-  },
-  {
-    "natural_language": "papers by huchra not 2mass",
-    "ads_query": "author:\"huchra, j\" -title:2mass doctype:article",
     "category": "syntax"
   },
   {
@@ -20901,7 +20676,7 @@
   },
   {
     "natural_language": "recent Laser Interferometer Space Antenna observations",
-    "ads_query": "bibgroup:LISA pubdate:[2023-01 TO 2026-12]",
+    "ads_query": "bibgroup:LISA abs:observations pubdate:[2023-01 TO 2026-12]",
     "category": "bibgroup"
   },
   {
@@ -21201,7 +20976,7 @@
   },
   {
     "natural_language": "latest physics journal articles",
-    "ads_query": "collection:physics pubdate:[2023-01 TO 2026-12] doctype:article",
+    "ads_query": "collection:physics doctype:article sort:date desc",
     "category": "collection"
   },
   {
@@ -21401,7 +21176,7 @@
   },
   {
     "natural_language": "space weather research on lunar science published in 2021",
-    "ads_query": "collection:earthscience abs:\"lunar science\" year:2021",
+    "ads_query": "collection:earthscience abs:(\"space weather\" AND \"lunar science\") year:2021",
     "category": "collection"
   },
   {
@@ -21501,7 +21276,7 @@
   },
   {
     "natural_language": "recent reviews of astronomy books",
-    "ads_query": "doctype:bookreview pubdate:[2023-01 TO 2026-12]",
+    "ads_query": "doctype:bookreview pubdate:[2023-01 TO 2026-12] abs:astronomy",
     "category": "doctype"
   },
   {
@@ -21701,7 +21476,7 @@
   },
   {
     "natural_language": "other content on astronomy history",
-    "ads_query": "doctype:misc abs:\"astronomy history\"",
+    "ads_query": "abs:(astronomy AND history)",
     "category": "doctype"
   },
   {
@@ -21901,7 +21676,7 @@
   },
   {
     "natural_language": "work citing Einstein 1905",
-    "ads_query": "citations(author:Einstein)",
+    "ads_query": "citations(author:\"Einstein\" year:1905)",
     "category": "operator"
   },
   {
@@ -22201,7 +21976,7 @@
   },
   {
     "natural_language": "studies like the 2016 gravitational wave paper",
-    "ads_query": "similar(abs:(gravitational AND 2016 AND wave)) doctype:article",
+    "ads_query": "similar(abs:(gravitational AND wave) year:2016) doctype:article",
     "category": "operator"
   },
   {
@@ -22501,7 +22276,7 @@
   },
   {
     "natural_language": "top papers on galactic dynamics",
-    "ads_query": "topn(10, abs:\"galactic dynamics\", citation_count) doctype:article",
+    "ads_query": "topn(10, abs:(galactic AND dynamics), citation_count desc) doctype:article",
     "category": "operator"
   },
   {
@@ -22801,7 +22576,7 @@
   },
   {
     "natural_language": "recent conference abstracts",
-    "ads_query": "property:nonarticle pubdate:[2023-01 TO 2026-12]",
+    "ads_query": "doctype:abstract pubdate:[2023-01 TO 2026-12]",
     "category": "property"
   },
   {
@@ -23001,7 +22776,7 @@
   },
   {
     "natural_language": "recent articles with e-sources",
-    "ads_query": "property:esource pubdate:[2023-01 TO 2026-12] doctype:article",
+    "ads_query": "property:esource doctype:article",
     "category": "property"
   },
   {
@@ -23201,7 +22976,7 @@
   },
   {
     "natural_language": "show me publisher open access papers on high-impact journals",
-    "ads_query": "property:pub_openaccess abs:\"high-impact journals\" doctype:article",
+    "ads_query": "property:pub_openaccess abs:(high-impact AND journals) doctype:article",
     "category": "property"
   },
   {

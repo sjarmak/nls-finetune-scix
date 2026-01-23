@@ -1,6 +1,6 @@
 {
   "removed_at": "2026-01-23T10:33:52.340353",
-  "count": 64,
+  "count": 109,
   "examples": [
     {
       "index": 0,
@@ -1609,6 +1609,1114 @@
         }
       ],
       "recommended_action": "remove"
+    },
+    {
+      "index": 40,
+      "nl": "papers by guptke first author",
+      "query": "author:(\"^guptke\") doctype:article",
+      "category": "first_author",
+      "issues": [
+        {
+          "type": "first_author",
+          "severity": "critical",
+          "description": "First-author syntax is incorrect: author:(\"^guptke\") is not a valid way to indicate first author. Should use ^author:\"guptke\" or author:\"^guptke\".",
+          "suggested_fix": "^author:\"guptke\" doctype:article"
+        },
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "author:(\"^guptke\") uses unnecessary parentheses and quoting; while not necessarily invalid, it is nonstandard and may not parse as intended for first-author matching.",
+          "suggested_fix": "^author:\"guptke\" doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 80,
+      "nl": "papers by Piskunov from 2016",
+      "query": "pubdate:[2016-01 TO 2016-12] author:(\"Piskunov, a. e.\") doctype:article",
+      "category": "author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "NL specifies only last name \"Piskunov\" but query fabricates initials and full name/format: author:(\"Piskunov, a. e.\").",
+          "suggested_fix": "pubdate:[2016-01 TO 2016-12] author:\"Piskunov\" doctype:article"
+        },
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Author clause uses unnecessary parentheses and quotes around a single author string; also uses lowercase initials with punctuation inside quotes, which is atypical and may reduce match quality.",
+          "suggested_fix": "pubdate:[2016-01 TO 2016-12] author:\"Piskunov\" doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 200,
+      "nl": "papers by L on arXiv from 2022",
+      "query": "abs:(2022arXiv220605745L) doctype:article",
+      "category": "topic",
+      "issues": [
+        {
+          "type": "alignment",
+          "severity": "critical",
+          "description": "Natural language asks for papers by an author with last name 'L' on arXiv from 2022, but the query uses abs: with a bibcode-like token and does not constrain author, arXiv/eprint status, or year.",
+          "suggested_fix": "author:\"L\" year:2022 doctype:eprint"
+        },
+        {
+          "type": "missing_doctype",
+          "severity": "high",
+          "description": "NL says 'papers' but query uses doctype:article; for 'on arXiv' it should be doctype:eprint (or property:eprint).",
+          "suggested_fix": "author:\"L\" year:2022 doctype:eprint"
+        },
+        {
+          "type": "bibcode_lookup",
+          "severity": "critical",
+          "description": "Query appears to be attempting a bibcode lookup (2022arXiv220605745L) placed in abs:, which is not a valid NL-to-query topic translation and teaches bad habits.",
+          "suggested_fix": null
+        },
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category labeled 'topic' but the NL intent is primarily an author + arXiv/year filter (author/filters).",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 220,
+      "nl": "papers by napolitano nicola",
+      "query": "abs:(napolitano, nicola) doctype:article",
+      "category": "topic",
+      "issues": [
+        {
+          "type": "alignment",
+          "severity": "critical",
+          "description": "Natural language requests papers by an author, but the query uses abs: (topic/content field) instead of author:.",
+          "suggested_fix": "author:\"Napolitano, Nicola\" doctype:article"
+        },
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "abs:(napolitano, nicola) uses a comma inside parentheses without quotes; this is non-idiomatic and may parse unexpectedly. For names, use author: with quotes.",
+          "suggested_fix": "author:\"Napolitano, Nicola\" doctype:article"
+        },
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is labeled 'topic' but the intent is an author search.",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 280,
+      "nl": "papers by Lyra first author 2021",
+      "query": "pubdate:[2021-01 TO 2021-12] author:(\"^Lyra\") doctype:article",
+      "category": "first_author",
+      "issues": [
+        {
+          "type": "first_author",
+          "severity": "critical",
+          "description": "First-author syntax is incorrect: author:(\"^Lyra\") is not a valid way to indicate first author. Should use ^author:\"Lyra\" or author:\"^Lyra\".",
+          "suggested_fix": "pubdate:[2021-01 TO 2021-12] ^author:\"Lyra\" doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 320,
+      "nl": "papers by Aguilera-Gomez 2018",
+      "query": "pubdate:[2018-01 TO 2018-12] author:(\"Aguilera-Gomez, C.\") doctype:article",
+      "category": "author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Natural language specifies only the last name \"Aguilera-Gomez\", but the query fabricates the initial \"C.\" in the author field.",
+          "suggested_fix": "pubdate:[2018-01 TO 2018-12] author:\"Aguilera-Gomez\" doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 380,
+      "nl": "Chandrasekhar as lead author",
+      "query": "author:\"^Chandrasekhar, S.\"",
+      "category": "author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Natural language specifies only last name 'Chandrasekhar' but query fabricates the initial 'S.'",
+          "suggested_fix": "author:\"^Chandrasekhar\""
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 420,
+      "nl": "papers by Cuk on planetary dynamics",
+      "query": "author:\"Cuk, Matija\" kw4 doctype:article",
+      "category": "author",
+      "issues": [
+        {
+          "type": "alignment",
+          "severity": "critical",
+          "description": "Query does not reflect the natural language: it uses an invalid/undefined token `kw4` and does not include the requested topic constraint for planetary dynamics (e.g., abs: terms).",
+          "suggested_fix": "author:\"Cuk\" abs:(\"planetary dynamics\") doctype:article"
+        },
+        {
+          "type": "invalid_field",
+          "severity": "critical",
+          "description": "`kw4` is not a valid ADS/SciX field or operator in the provided syntax reference.",
+          "suggested_fix": "author:\"Cuk\" abs:(\"planetary dynamics\") doctype:article"
+        },
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Natural language only specifies last name 'Cuk'; query fabricates full name 'Matija'.",
+          "suggested_fix": "author:\"Cuk\" abs:(\"planetary dynamics\") doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 440,
+      "nl": "papers by Mittal, Stanimirovic, and Babler on interstellar medium",
+      "query": "author:(\"^Mittal\" \"Stanimirovic\" \"Babler\") doctype:article",
+      "category": "first_author",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Invalid author field syntax: author:(\"^Mittal\" \"Stanimirovic\" \"Babler\") is missing boolean operators between terms; this is not valid ADS query syntax.",
+          "suggested_fix": "author:(\"^Mittal\" OR \"Stanimirovic\" OR \"Babler\") doctype:article abs:(\"interstellar medium\")"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Natural language requests papers 'on interstellar medium' but the query only constrains authors and doctype; topic constraint is missing.",
+          "suggested_fix": "author:(\"^Mittal\" OR \"Stanimirovic\" OR \"Babler\") abs:(interstellar AND medium) doctype:article"
+        },
+        {
+          "type": "first_author",
+          "severity": "high",
+          "description": "Category is first_author, but only Mittal is marked as first author (^). NL does not specify first author, and if it did, it should apply consistently or be clarified.",
+          "suggested_fix": "author:(\"Mittal\" OR \"Stanimirovic\" OR \"Babler\") abs:(interstellar AND medium) doctype:article"
+        },
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category 'first_author' does not match the NL intent (no explicit first-author request) and the query behavior (only one author is first-author constrained).",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 480,
+      "nl": "papers by de Zeeuw P T from 1999",
+      "query": "author:\"^de Zeeuw P. T\" year:1999 doctype:article",
+      "category": "first_author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Natural language specifies last name plus initials (\"de Zeeuw P T\"), but the query uses a different/extra initial formatting (\"P. T\"), which is not a literal translation and risks teaching the model to alter author initials.",
+          "suggested_fix": "author:\"^de Zeeuw, P T\" year:1999 doctype:article"
+        },
+        {
+          "type": "first_author",
+          "severity": "high",
+          "description": "First-author constraint is applied (^) but the NL does not explicitly say \"first author\"; it only says \"papers by\". This adds an unrequested constraint.",
+          "suggested_fix": "author:\"de Zeeuw, P T\" year:1999 doctype:article"
+        },
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Author string formatting is nonstandard/ambiguous (missing comma and unmatched quote placement around ^). Prefer canonical ADS author format with comma and ^ outside or inside consistently.",
+          "suggested_fix": "author:\"^de Zeeuw, P T\" year:1999 doctype:article"
+        },
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is \"first_author\" but NL does not request first author; category should reflect a standard author+year query.",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 500,
+      "nl": "nautical charts South Australia coast Cape Du Couedic Whidbey Isles",
+      "query": "title:(Chart OR Aus343: OR Australia OR South OR Coast)",
+      "category": "content",
+      "issues": [
+        {
+          "type": "boolean_logic",
+          "severity": "high",
+          "description": "Uses OR between mostly non-synonymous terms, making the query overly permissive and not aligned with the specific place-focused NL input.",
+          "suggested_fix": "title:(\"South Australia\" AND coast AND chart AND (\"Cape Du Couedic\" OR \"Whidbey Isles\"))"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Query omits key NL entities (\"Cape Du Couedic\", \"Whidbey Isles\") and adds an unexplained token (\"Aus343:\") not present in the NL input.",
+          "suggested_fix": "title:(\"South Australia\" AND coast AND chart AND (\"Cape Du Couedic\" OR \"Whidbey Isles\"))"
+        },
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Invalid token in boolean list: \"Aus343:\" includes a trailing colon inside the term list, which is not a valid fielded clause and is likely a malformed field prefix/term.",
+          "suggested_fix": "title:(chart AND (Australia OR \"South Australia\") AND coast AND (\"Cape Du Couedic\" OR \"Whidbey Isles\"))"
+        },
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category 'content' is too generic; this is specifically a title/topic query.",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 540,
+      "nl": "papers by Sarkar K C since 2015",
+      "query": "author:\"^Sarkar\", year:2015- doctype:article",
+      "category": "first_author",
+      "issues": [
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Natural language specifies the full author name/initials \"Sarkar K C\" but the query only uses last name \"Sarkar\", which is less specific than requested.",
+          "suggested_fix": "author:\"^Sarkar, K C\" year:2015- doctype:article"
+        },
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Query uses a comma between clauses (\"author:\"^Sarkar\", year:2015-\"); ADS query syntax should not use commas as separators.",
+          "suggested_fix": "author:\"^Sarkar, K C\" year:2015- doctype:article"
+        },
+        {
+          "type": "date_format",
+          "severity": "high",
+          "description": "Year range is malformed: \"year:2015-\" is not a valid year range format. Use \"year:2015-*\" or a pubdate range.",
+          "suggested_fix": "author:\"^Sarkar, K C\" year:2015-* doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 800,
+      "nl": "papers by Carlson and Meixner from 2012",
+      "query": "pubdate:[2012-01 TO 2012-12] author:(\"carlson\" \"Meixner\") doctype:article",
+      "category": "author",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Invalid author field syntax: author:(\"carlson\" \"Meixner\") lacks a boolean operator between names; this is not valid ADS query syntax for combining multiple authors.",
+          "suggested_fix": "pubdate:[2012-01 TO 2012-12] author:(\"Carlson\" OR \"Meixner\") doctype:article"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Natural language implies papers by both Carlson and Meixner; using OR returns papers by either author, not necessarily both.",
+          "suggested_fix": "pubdate:[2012-01 TO 2012-12] author:\"Carlson\" author:\"Meixner\" doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 820,
+      "nl": "History of Idaho; a narrative account of its historical progress, its people and its principal interests",
+      "query": "title:(History OR Idaho; OR narrative OR account OR its)",
+      "category": "content",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Unescaped special character ';' is included as a token inside the title field, which can break parsing or produce unintended behavior.",
+          "suggested_fix": "title:(History AND Idaho AND narrative AND account AND historical AND progress AND people AND interests)"
+        },
+        {
+          "type": "boolean_logic",
+          "severity": "high",
+          "description": "Uses OR between many non-synonymous terms, making the query far too permissive (matches papers with any single word). For topic/title-like inputs, terms should generally be combined with AND (or a quoted phrase if exact title is intended).",
+          "suggested_fix": "title:(History AND Idaho AND narrative AND account AND historical AND progress AND people AND interests)"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "The natural language appears to be a full book title; the query truncates and drops key terms (e.g., 'historical progress', 'people', 'principal interests') and adds stopwords ('its').",
+          "suggested_fix": "title:\"History of Idaho; a narrative account of its historical progress, its people and its principal interests\""
+        },
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category 'content' is too vague; this is specifically a title search example.",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 880,
+      "nl": "2015ApJ...799...71G",
+      "query": "identifier:\"2015ApJ...799\u202671G\"",
+      "category": "compound",
+      "issues": [
+        {
+          "type": "bibcode_lookup",
+          "severity": "critical",
+          "description": "Natural language input is a bibcode; this is a direct identifier lookup rather than NL-to-query translation and should be removed from training data.",
+          "suggested_fix": null
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Query uses identifier:\"...\" instead of the more specific bibcode: field for a bibcode string, but this is moot since bibcode lookups should be removed.",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 900,
+      "nl": "windows XP service pack 2 springboard longhorn microsoft operating system",
+      "query": "title:(Windows OR SP2 OR 'Springboard' OR Longhorn)",
+      "category": "content",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Uses single quotes around Springboard inside a fielded query; ADS query syntax requires double quotes for phrases and does not support single-quoted strings.",
+          "suggested_fix": "title:(Windows OR SP2 OR \"Springboard\" OR Longhorn)"
+        },
+        {
+          "type": "boolean_logic",
+          "severity": "high",
+          "description": "Uses OR between multiple topic terms, making the query overly permissive (matches any one term) rather than requiring the combined topic implied by the NL input.",
+          "suggested_fix": "title:(Windows AND (XP OR \"service pack 2\" OR SP2) AND (Springboard OR Longhorn) AND Microsoft AND \"operating system\")"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "NL includes 'XP', 'service pack 2', 'microsoft', and 'operating system' but the query omits XP, Microsoft, and operating system, and reduces 'service pack 2' to SP2 only.",
+          "suggested_fix": "title:(Windows AND XP AND (\"service pack 2\" OR SP2) AND (Springboard OR Longhorn) AND Microsoft AND \"operating system\")"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 960,
+      "nl": "papers by Khaymovich on localization",
+      "query": "author:(\"Khaymovich, Ivan M\" OR \"Khaimovich, Ivan M\") doctype:article",
+      "category": "author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Natural language only specifies last name \"Khaymovich\", but the query fabricates full given name and middle initial (\"Ivan M\").",
+          "suggested_fix": "author:(\"Khaymovich\" OR \"Khaimovich\") abs:localization doctype:article"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Natural language includes topic constraint \"on localization\" but the query only filters by author and doctype, omitting the topic.",
+          "suggested_fix": "author:(\"Khaymovich\" OR \"Khaimovich\") abs:localization doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 980,
+      "nl": "papers by sunyaev 2021",
+      "query": "^sunyaev year:2021 doctype:article",
+      "category": "publication",
+      "issues": [
+        {
+          "type": "invalid_field",
+          "severity": "critical",
+          "description": "Query uses '^sunyaev' without a valid field prefix; '^' first-author operator must be applied to author: (e.g., ^author:\"Name\").",
+          "suggested_fix": "author:\"Sunyaev\" year:2021 doctype:article"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "NL says 'papers by sunyaev' (author constraint) but query does not explicitly use author: field; also '^' implies first author, which was not requested.",
+          "suggested_fix": "author:\"Sunyaev\" year:2021 doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1020,
+      "nl": "NGC 3690 papers citing \"A Digital Archive of H I 21 Centimeter Line Spectra of Optically Targeted Galaxies\"",
+      "query": "abs: NGC 3690 citations(title:A Digital Archive of H I 21 Centimeter Line Spectra of Optically Targeted Galaxies) doctype:article",
+      "category": "content",
+      "issues": [
+        {
+          "type": "malformed_operator",
+          "severity": "critical",
+          "description": "Second-order operator syntax is invalid: citations() must wrap the entire inner query, not appear as a standalone token after abs:.",
+          "suggested_fix": "citations(title:\"A Digital Archive of H I 21 Centimeter Line Spectra of Optically Targeted Galaxies\") abs:\"NGC 3690\" doctype:article"
+        },
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Invalid field clause formatting: `abs: NGC 3690` contains a space after the colon and a multi-word value without quotes/parentheses.",
+          "suggested_fix": "citations(title:\"A Digital Archive of H I 21 Centimeter Line Spectra of Optically Targeted Galaxies\") abs:\"NGC 3690\" doctype:article"
+        },
+        {
+          "type": "exact_title",
+          "severity": "high",
+          "description": "The cited work appears to be an exact paper title but is placed in title: without quotes, which can break parsing and teaches inconsistent title handling.",
+          "suggested_fix": "citations(title:\"A Digital Archive of H I 21 Centimeter Line Spectra of Optically Targeted Galaxies\") abs:\"NGC 3690\" doctype:article"
+        },
+        {
+          "type": "alignment",
+          "severity": "medium",
+          "description": "NL requests papers about object NGC 3690 that cite a specific paper; using abs: for the object is acceptable but object: would better match intent if treating NGC 3690 as an astronomical object name.",
+          "suggested_fix": "citations(title:\"A Digital Archive of H I 21 Centimeter Line Spectra of Optically Targeted Galaxies\") object:\"NGC 3690\" doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1040,
+      "nl": "papers by szalai and shahbandeh on supernovae",
+      "query": "author:\"szalai, t\" author:\"shahbandeh\" doctype:article",
+      "category": "author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Natural language input only provides last name \"szalai\" but query fabricates an initial (\"szalai, t\").",
+          "suggested_fix": "author:\"szalai\" author:\"shahbandeh\" abs:supernovae doctype:article"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Natural language requests papers by the authors \"on supernovae\" but the query omits the supernovae topic constraint.",
+          "suggested_fix": "author:\"szalai\" author:\"shahbandeh\" abs:supernovae doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1060,
+      "nl": "papers by espinasse from 1820",
+      "query": "author:\"^espinasse\" title\"1820\" doctype:article",
+      "category": "first_author",
+      "issues": [
+        {
+          "type": "invalid_field",
+          "severity": "critical",
+          "description": "Invalid field syntax: `title\"1820\"` is missing the required colon after the field name (`title:`).",
+          "suggested_fix": "author:\"^espinasse\" year:1820 doctype:article"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Year constraint is incorrectly expressed as a title search for \"1820\" instead of using `year:` as implied by 'from 1820'.",
+          "suggested_fix": "author:\"^espinasse\" year:1820 doctype:article"
+        },
+        {
+          "type": "first_author",
+          "severity": "medium",
+          "description": "Query uses first-author restriction (`^espinasse`) but NL only says 'papers by espinasse' (not explicitly first author).",
+          "suggested_fix": "author:\"espinasse\" year:1820 doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1140,
+      "nl": "papers by Barklem from 2005",
+      "query": "pubdate:[2005-01 TO 2005-12] author:(\"Barklem.,\") doctype:article",
+      "category": "author",
+      "issues": [
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Author field is malformed and does not correctly represent last-name-only author search for 'Barklem'.",
+          "suggested_fix": "pubdate:[2005-01 TO 2005-12] author:\"Barklem\" doctype:article"
+        },
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Invalid author clause syntax: author:(\"Barklem.,\") includes stray punctuation and unnecessary parentheses/quotes that likely break intended matching.",
+          "suggested_fix": "pubdate:[2005-01 TO 2005-12] author:\"Barklem\" doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1260,
+      "nl": "papers by libanore",
+      "query": "author:(\"^libanore\") doctype:article",
+      "category": "first_author",
+      "issues": [
+        {
+          "type": "first_author",
+          "severity": "critical",
+          "description": "First-author syntax is incorrect: author:(\"^libanore\") uses parentheses and quotes around a caret-prefixed token; ADS first-author should be expressed as ^author:\"Name\" or author:\"^Name\".",
+          "suggested_fix": "^author:\"libanore\" doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1340,
+      "nl": "\"\u041f\u0430\u0440\u0430\u0434 \u0430\u043d\u0441\u0430\u043c\u0431\u043b\u0435\u0439\" \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 \u0417\u0430\u0441\u0435\u0434\u0430\u0442\u0435\u043b\u0435\u0432 \u0412\u0418\u0410 \u041b\u0435\u0439\u0441\u044f musical ensemble",
+      "query": "title:(\u041f\u0430\u0440\u0430\u0434 OR \u0430\u043d\u0441\u0430\u043c\u0431\u043b\u0435\u0439 OR \u043c\u0443\u0437\u044b\u043a\u0430\u043d\u0442: OR \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 OR \u0417\u0430\u0441\u0435\u0434\u0430\u0442\u0435\u043b\u0435\u0432)",
+      "category": "content",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Unbalanced parentheses: query has an opening '(' after title: but no matching closing ')'.",
+          "suggested_fix": "title:(\u041f\u0430\u0440\u0430\u0434 AND \u0430\u043d\u0441\u0430\u043c\u0431\u043b\u0435\u0439 AND \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 AND \u0417\u0430\u0441\u0435\u0434\u0430\u0442\u0435\u043b\u0435\u0432)"
+        },
+        {
+          "type": "invalid_field",
+          "severity": "critical",
+          "description": "Uses an invalid field token inside the title clause: \"\u043c\u0443\u0437\u044b\u043a\u0430\u043d\u0442:\" is not a valid ADS field and the trailing colon makes it malformed as a term.",
+          "suggested_fix": "title:(\u041f\u0430\u0440\u0430\u0434 AND \u0430\u043d\u0441\u0430\u043c\u0431\u043b\u0435\u0439 AND \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 AND \u0417\u0430\u0441\u0435\u0434\u0430\u0442\u0435\u043b\u0435\u0432 AND \u043c\u0443\u0437\u044b\u043a\u0430\u043d\u0442)"
+        },
+        {
+          "type": "boolean_logic",
+          "severity": "high",
+          "description": "Uses OR between multiple non-synonymous terms, making the query overly permissive for a specific phrase/name search.",
+          "suggested_fix": "title:(\u041f\u0430\u0440\u0430\u0434 AND \u0430\u043d\u0441\u0430\u043c\u0431\u043b\u0435\u0439 AND \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 AND \u0417\u0430\u0441\u0435\u0434\u0430\u0442\u0435\u043b\u0435\u0432)"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Natural language includes additional constraints (e.g., \"\u0412\u0418\u0410 \u041b\u0435\u0439\u0441\u044f\" / musical ensemble) that are omitted from the query.",
+          "suggested_fix": "title:(\u041f\u0430\u0440\u0430\u0434 AND \u0430\u043d\u0441\u0430\u043c\u0431\u043b\u0435\u0439 AND \u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440 AND \u0417\u0430\u0441\u0435\u0434\u0430\u0442\u0435\u043b\u0435\u0432 AND \u0412\u0418\u0410 AND \u041b\u0435\u0439\u0441\u044f)"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1380,
+      "nl": "\"An Introduction to Geography, Intended for Little Children\" third edition",
+      "query": "title:(Introduction OR Geography, OR Intended OR Little OR Children,)3rd ed.\"\"",
+      "category": "content",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Query has unbalanced quotes and malformed structure (e.g., trailing '3rd ed.\"\"' and mismatched parentheses/quotes).",
+          "suggested_fix": "title:(\"An Introduction to Geography\" AND \"Intended for Little Children\")"
+        },
+        {
+          "type": "boolean_logic",
+          "severity": "high",
+          "description": "Uses OR between many non-synonymous title words, making the query far too permissive and not aligned with an exact title request.",
+          "suggested_fix": "title:(\"An Introduction to Geography\" AND \"Intended for Little Children\")"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Natural language requests a specific work and edition ('third edition'), but the query does not represent edition information in a valid/meaningful way and includes stray punctuation tokens (commas).",
+          "suggested_fix": "title:(\"An Introduction to Geography\" AND \"Intended for Little Children\" AND (\"third edition\" OR \"3rd edition\"))"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1420,
+      "nl": "papers by coutu first author",
+      "query": "author:\"^coutu, s\" doctype:article",
+      "category": "first_author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Natural language only specifies last name \"coutu\"; query fabricates initial \"s\".",
+          "suggested_fix": "author:\"^coutu\" doctype:article"
+        },
+        {
+          "type": "first_author",
+          "severity": "high",
+          "description": "First-author constraint is expressed, but uses a nonstandard pattern with an added initial; better to use ^ with last name only.",
+          "suggested_fix": "author:\"^coutu\" doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1540,
+      "nl": "papers by Piskunov 2013",
+      "query": "pubdate:[2013-01 TO 2013-12] author:(\"Piskunov, a. e.\") doctype:article",
+      "category": "author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Natural language only specifies last name \"Piskunov\", but query fabricates initials and lowercases them: author:(\"Piskunov, a. e.\").",
+          "suggested_fix": "pubdate:[2013-01 TO 2013-12] author:\"Piskunov\" doctype:article"
+        },
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Author clause uses parentheses and quotes in a nonstandard way for a single author name: author:(\"...\"). Prefer author:\"...\".",
+          "suggested_fix": "pubdate:[2013-01 TO 2013-12] author:\"Piskunov\" doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1560,
+      "nl": "papers by alfaro and ruiz",
+      "query": "author:\"^alfaro\", author:\"ruiz\" doctype:article",
+      "category": "first_author",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Query uses a comma between clauses; ADS query syntax requires boolean operators or whitespace, not commas.",
+          "suggested_fix": "author:\"^alfaro\" author:\"ruiz\" doctype:article"
+        },
+        {
+          "type": "first_author",
+          "severity": "high",
+          "description": "First-author marker is applied to alfaro, but the NL input does not explicitly request first author.",
+          "suggested_fix": "author:\"alfaro\" author:\"ruiz\" doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1640,
+      "nl": "papers about stellar evolution in binary systems",
+      "query": "abs:(docs(737b696a11688efba2211131338d529e)) doctype:article",
+      "category": "topic",
+      "issues": [
+        {
+          "type": "invalid_field",
+          "severity": "critical",
+          "description": "Query uses invalid/unknown field/operator `docs(...)` inside abs:. `docs` is not part of valid ADS query syntax.",
+          "suggested_fix": "abs:(stellar evolution AND binary systems) doctype:article"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Query does not reflect the natural-language topic; it appears to use an opaque token/hash rather than topic terms about stellar evolution and binary systems.",
+          "suggested_fix": "abs:(stellar evolution AND binary systems) doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1680,
+      "nl": "papers about Jack London's Call of the Wild in literary criticism",
+      "query": "title:(Jack OR London's OR 'The OR Call OR Wild') doctype:article",
+      "category": "content",
+      "issues": [
+        {
+          "type": "alignment",
+          "severity": "critical",
+          "description": "Natural language request is about literary criticism of a fiction work (not an ADS/SciX-appropriate scholarly astronomy/physics topic); query attempts to force-match a non-scholarly title-like string and will not teach correct ADS topic translation.",
+          "suggested_fix": null
+        },
+        {
+          "type": "boolean_logic",
+          "severity": "high",
+          "description": "Title clause uses OR between individual words (and even broken tokens like \"London's\" and \"'The\"), making the query far too permissive and not representative of the intended concept.",
+          "suggested_fix": "title:(\"Call of the Wild\" AND London) doctype:article"
+        },
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Unbalanced/invalid quoting in title clause (\"London's\" and \"'The\" introduce problematic apostrophes/quotes that are not valid ADS quoting syntax as written).",
+          "suggested_fix": "title:(\"Call of the Wild\" AND London) doctype:article"
+        },
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category 'content' is too vague; this is primarily a title/topic query example (and also out-of-domain for ADS).",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1700,
+      "nl": "papers about HD 110058 stellar properties",
+      "query": "abs:(HD 110058) doctype:article",
+      "category": "topic",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Unquoted multi-word object name in abs: clause: abs:(HD 110058) will be parsed as separate tokens without explicit boolean/phrase handling.",
+          "suggested_fix": "abs:\"HD 110058\" doctype:article"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Natural language asks for 'stellar properties' but the query only includes the object name and omits the topic constraint.",
+          "suggested_fix": "abs:(\"HD 110058\" AND (stellar OR star) AND (property OR properties)) doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 2000,
+      "nl": "combustion flame extinction limits flammability",
+      "query": "identifier:\"10.1016/S0010-2180(00)00101-2\"",
+      "category": "compound",
+      "issues": [
+        {
+          "type": "alignment",
+          "severity": "critical",
+          "description": "Natural language is a topic query about combustion flame extinction limits/flammability, but the generated query is a DOI/identifier lookup, which does not translate the topic.",
+          "suggested_fix": "abs:(combustion AND flame AND extinction AND (flammability OR flammability-limits)) doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 2020,
+      "nl": "papers by Ladjelate first author 2020",
+      "query": "pubdate:[2020-01 TO 2020-12] author:(\"^Ladjelate, B.\") doctype:article",
+      "category": "first_author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Natural language only specifies last name 'Ladjelate' but query fabricates initial 'B.' in author field.",
+          "suggested_fix": "pubdate:[2020-01 TO 2020-12] author:\"^Ladjelate\" doctype:article"
+        },
+        {
+          "type": "first_author",
+          "severity": "high",
+          "description": "First-author syntax is nonstandard/incorrect: author:(\"^Ladjelate, B.\") uses parentheses and includes fabricated initials; should use ^author:\"Ladjelate\" or author:\"^Ladjelate\".",
+          "suggested_fix": "pubdate:[2020-01 TO 2020-12] ^author:\"Ladjelate\" doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 2040,
+      "nl": "machine learning applications in stellar classification 2023",
+      "query": "year:2023 +docs(library/dRo9vFA1RxqDt9sUc-Cb3Q)",
+      "category": "publication",
+      "issues": [
+        {
+          "type": "invalid_field",
+          "severity": "critical",
+          "description": "Query uses invalid field/operator '+docs(...)' which is not part of ADS/SciX query syntax.",
+          "suggested_fix": "abs:(machine learning AND stellar classification) year:2023"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Query does not represent the natural language topic (machine learning applications in stellar classification); it instead references an internal docs/library identifier.",
+          "suggested_fix": "abs:(machine learning AND stellar classification) year:2023"
+        },
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category 'publication' is not descriptive of the query intent; this is a topic + year constraint.",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 2060,
+      "nl": "papers by j.v. rodriguez from 2017 to 2023 mentioning 2017",
+      "query": "author:\"j.v. rodriguez\" year:2017-2023 abs:\"2017\" doctype:article",
+      "category": "author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "NL specifies author as \"j.v. rodriguez\" (initials before last name), but query uses author:\"j.v. rodriguez\" which is not a valid/robust ADS author format and risks teaching incorrect author formatting. ADS expects \"Last\" or \"Last, F\" / \"Last, First\".",
+          "suggested_fix": "author:\"Rodriguez, J V\" year:2017-2023 abs:2017 doctype:article"
+        },
+        {
+          "type": "over_quoted",
+          "severity": "medium",
+          "description": "The term 2017 is quoted in abs:\"2017\" though it is a single token and does not require quotes.",
+          "suggested_fix": "author:\"Rodriguez, J V\" year:2017-2023 abs:2017 doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 2120,
+      "nl": "\"BY THE GREAT HORN SPOON\" Kirkus Reviews",
+      "query": "title:(GREAT OR HORN OR SPOON! OR Kirkus OR Reviews)",
+      "category": "content",
+      "issues": [
+        {
+          "type": "boolean_logic",
+          "severity": "high",
+          "description": "Query uses OR between all title terms, making it far too permissive and likely to match unrelated records containing any single word (e.g., just 'Great' or 'Reviews').",
+          "suggested_fix": "title:(\"BY THE GREAT HORN SPOON\" AND \"Kirkus Reviews\")"
+        },
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Invalid character '!' included in a token (SPOON!) which can cause parsing issues; punctuation should be removed or the phrase should be quoted as-is without stray punctuation tokens.",
+          "suggested_fix": "title:(\"BY THE GREAT HORN SPOON\" AND \"Kirkus Reviews\")"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Natural language appears to reference a specific titled work and source ('Kirkus Reviews'); the query should target the exact title phrase rather than splitting into individual words.",
+          "suggested_fix": "title:(\"BY THE GREAT HORN SPOON\" AND \"Kirkus Reviews\")"
+        },
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category 'content' is too vague; this is specifically a title search example.",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 2320,
+      "nl": "papers about Wyatt Earp frontier lawman",
+      "query": "title:(Who OR Wyatt OR Earp?) doctype:article",
+      "category": "content",
+      "issues": [
+        {
+          "type": "alignment",
+          "severity": "critical",
+          "description": "Natural language topic (Wyatt Earp frontier lawman) is not an astronomy/physics scholarly topic appropriate for ADS/SciX; query terms are unrelated and appear to be guessing at a specific title ('Who') and adding a wildcard ('Earp?') without NL support.",
+          "suggested_fix": null
+        },
+        {
+          "type": "boolean_logic",
+          "severity": "high",
+          "description": "title:(Who OR Wyatt OR Earp?) is overly permissive and likely to retrieve irrelevant results; for a topic it should use abs: with AND between required concepts rather than OR across unrelated tokens.",
+          "suggested_fix": "abs:(Wyatt AND Earp AND frontier AND lawman) doctype:article"
+        },
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category 'content' is too vague; should be 'topic' (or similar) if kept.",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 2400,
+      "nl": "He-who-sees-in-the-dark Boys Story Frederick Burnham American Scout",
+      "query": "title:(He-who-sees-in-the-dark; OR Boys' OR Story OR Frederick OR Burnham,)",
+      "category": "content",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Malformed title field grouping: contains punctuation tokens (';', ',', \"Boys'\") and an OR placed inside parentheses in a way that is not valid ADS query syntax; also includes a trailing comma inside the field group.",
+          "suggested_fix": "title:(\"He-who-sees-in-the-dark\" AND Boys AND Story AND Frederick AND Burnham AND \"American Scout\")"
+        },
+        {
+          "type": "boolean_logic",
+          "severity": "high",
+          "description": "Uses OR between many non-synonymous terms, making the query far too permissive and not aligned with an intended specific work/topic.",
+          "suggested_fix": "title:(\"He-who-sees-in-the-dark\" AND Burnham)"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Natural language looks like a specific title/entity query; generated query breaks it into many loose OR terms, likely returning unrelated results.",
+          "suggested_fix": "title:\"He-who-sees-in-the-dark\" author:\"Burnham\""
+        },
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category 'content' is too vague; this is primarily a title/known-item lookup style query.",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 2480,
+      "nl": "X-ray binary luminosity functions M81 spiral galaxy globular clusters",
+      "query": "abs:(Calibrating AND X-ray AND XLF AND X-ray)",
+      "category": "topic",
+      "issues": [
+        {
+          "type": "alignment",
+          "severity": "critical",
+          "description": "Query does not reflect the natural language topics (X-ray binary luminosity functions, M81, spiral galaxy, globular clusters). It instead includes unrelated term 'Calibrating' and duplicates 'X-ray', and omits key constraints like M81 and globular clusters.",
+          "suggested_fix": "abs:(\"X-ray binary\" AND (\"luminosity function\" OR XLF) AND M81 AND \"globular cluster*\")"
+        },
+        {
+          "type": "boolean_logic",
+          "severity": "high",
+          "description": "Redundant term 'X-ray' appears twice and the query structure does not include the required topic components from NL.",
+          "suggested_fix": "abs:(\"X-ray binary\" AND (\"luminosity function\" OR XLF) AND M81 AND \"globular cluster*\")"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 2600,
+      "nl": "exclude STAR acronym but include star",
+      "query": "title:(=star -STAR)",
+      "category": "syntax",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "critical",
+          "description": "Invalid use of '=' inside a fielded term: title:(=star -STAR). ADS query syntax does not support '=star' as a term; '=' is only valid as a prefix to the author field for exact matching (e.g., =author:\"...\").",
+          "suggested_fix": "title:(star -STAR)"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Natural language requests excluding the STAR acronym but including the word 'star' generally implies case-sensitive exclusion or acronym handling; ADS queries are typically case-insensitive, so '-STAR' may also exclude 'star' depending on indexing behavior. The query may not reliably satisfy the intent.",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 3220,
+      "nl": "papers by vera rubin on dark energy since 2018",
+      "query": "author:\"rubin, v\" abs:\"dark energy\" year:2018-2023 doctype:article",
+      "category": "publication",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Natural language says 'vera rubin' (full name), but query uses only an initial (author:\"rubin, v\"), which is a lossy/possibly incorrect transformation for training data.",
+          "suggested_fix": "author:\"Rubin, Vera\" abs:(dark AND energy) year:2018-2023 doctype:article"
+        },
+        {
+          "type": "over_quoted",
+          "severity": "medium",
+          "description": "Topic phrase is quoted in abs:\"dark energy\" even though this is a general topic; training should prefer boolean topic terms unless an exact phrase is explicitly requested.",
+          "suggested_fix": "author:\"Rubin, Vera\" abs:(dark AND energy) year:2018-2023 doctype:article"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "NL says 'since 2018' (open-ended), but query constrains to year:2018-2023, adding an upper bound not stated by the user.",
+          "suggested_fix": "author:\"Rubin, Vera\" abs:(dark AND energy) year:2018-* doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 3240,
+      "nl": "vera rubin infrared astronomy",
+      "query": "author:\"rubin, v\" abs:\"infrared astronomy\"",
+      "category": "author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "NL input provides only the last name \"rubin\" but the query fabricates an initial (\"v\").",
+          "suggested_fix": "author:\"Rubin\" abs:(infrared AND astronomy)"
+        },
+        {
+          "type": "over_quoted",
+          "severity": "medium",
+          "description": "The topic phrase \"infrared astronomy\" is quoted without the NL explicitly requesting an exact phrase; topic terms should typically be combined with AND.",
+          "suggested_fix": "author:\"Rubin\" abs:(infrared AND astronomy)"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "NL looks like a topic query (vera rubin + infrared astronomy). The query mixes an author constraint with a quoted phrase; better to treat the topic as keywords with boolean logic and avoid fabricated author details.",
+          "suggested_fix": "author:\"Rubin\" abs:(infrared AND astronomy)"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 3260,
+      "nl": "oort j weak lensing",
+      "query": "author:\"oort, j\" abs:\"weak lensing\"",
+      "category": "author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Natural language only specifies last name 'oort' and initial 'j' separately; the query fabricates a formatted author string with an initial that may not be explicitly intended as an author initial in ADS format.",
+          "suggested_fix": "author:\"Oort\" abs:(weak AND lensing)"
+        },
+        {
+          "type": "over_quoted",
+          "severity": "medium",
+          "description": "The topic phrase \"weak lensing\" is quoted even though the NL does not explicitly request an exact phrase; topic terms should generally be combined with boolean operators.",
+          "suggested_fix": "author:\"Oort\" abs:(weak AND lensing)"
+        },
+        {
+          "type": "boolean_logic",
+          "severity": "medium",
+          "description": "Topic terms are not expressed with boolean logic; using AND between topic keywords is preferred for topic searches.",
+          "suggested_fix": "author:\"Oort\" abs:(weak AND lensing)"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 3280,
+      "nl": "oort j infrared astronomy",
+      "query": "author:\"oort, j\" abs:\"infrared astronomy\"",
+      "category": "author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Natural language input only provides last name/initials as 'oort j' (not an explicit author format like 'J. Oort' or 'Jan Oort'), but query fabricates a specific author string with last name and initial ordering: author:\"oort, j\".",
+          "suggested_fix": "author:\"Oort\" abs:(infrared AND astronomy)"
+        },
+        {
+          "type": "over_quoted",
+          "severity": "medium",
+          "description": "Topic phrase is quoted as an exact phrase in abs:, even though the input does not explicitly request an exact phrase search.",
+          "suggested_fix": "author:\"Oort\" abs:(infrared AND astronomy)"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "Input looks like keywords rather than an explicit author constraint; treating 'oort j' as an author may be incorrect without clearer NL intent (e.g., 'papers by Oort').",
+          "suggested_fix": "abs:(oort AND infrared AND astronomy)"
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 3860,
+      "nl": "papers by huchra not 2mass",
+      "query": "author:\"huchra, j\" -title:2mass doctype:article",
+      "category": "syntax",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Natural language specifies only last name 'huchra' but query fabricates an initial ('j').",
+          "suggested_fix": "author:\"huchra\" -title:2mass doctype:article"
+        },
+        {
+          "type": "alignment",
+          "severity": "high",
+          "description": "NL says 'not 2mass' without specifying field; query restricts exclusion to title only, which may under-exclude compared to user intent.",
+          "suggested_fix": "author:\"huchra\" -abs:2mass doctype:article"
+        }
+      ],
+      "recommended_action": "remove"
     }
-  ]
+  ],
+  "removed_at_v4": "2026-01-23T12:06:02.559731"
 }
