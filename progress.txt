@@ -402,3 +402,30 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - ADS syntax passthrough cases (already-formed queries) return empty - expected behavior
   - Modal deployment is fast (~0.5s) when model is pre-built
 ---
+
+## 2026-01-22 - US-016: Regression testing and browser verification
+- **Implemented**: Comprehensive regression testing after data model enhancement
+- **Test results**:
+  - All finetune tests: 68/68 passed (100%)
+  - All project tests: 482/482 passed (100%)
+  - Benchmark evaluation: 297/301 passed (98.7%)
+  - No regressions from baseline (baseline was also 98.7%)
+- **Category breakdown** (no regressions):
+  - field_types: 100% (66/66) - unchanged from baseline
+  - operators: 99.0% (104/105) - unchanged from baseline
+  - enum_fields: 100% (55/55) - unchanged from baseline
+  - edge_cases: 93.3% (42/45) - unchanged from baseline
+  - regression_tests: 100% (30/30) - all malformed pattern tests pass
+- **Malformed pattern tests**: All pass (0 citationsabs:, 0 referencesabs:, etc.)
+- **Browser verification** (tested on nectar localhost:8000):
+  - "papers by Einstein about relativity from 2010" -> `author:"Einstein" abs:relativity pubdate:[2010 TO 2026] doctype:article` ✓
+  - "refereed JWST papers about exoplanets" -> `abs:(exoplanet OR "extrasolar planet" OR "hot Jupiter" OR "super Earth") doctype:article property:refereed bibgroup:JWST` (~316 results) ✓
+  - "papers citing gravitational wave observations" -> `citations(abs:observations bibgroup:LIGO)` ✓
+  - All queries: valid syntax, balanced parentheses, API returns 200
+- **Regressions found**: None
+- **Learnings for future iterations**:
+  - Browser testing confirms the NL search pipeline works end-to-end
+  - The enhanced data model coverage (bibgroup, property, doctype, database) all work in production
+  - The citations() operator properly wraps queries without malformed concatenation
+  - Integration tests directory exists but is empty - could be added in future
+---
