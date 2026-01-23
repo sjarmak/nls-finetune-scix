@@ -33,15 +33,16 @@ MAX_MODEL_LEN = 512  # Sourcegraph queries are short
 
 @app.function(
     image=VLLM_IMAGE,
-    gpu="H100",  # High-performance for lowest latency
+    gpu="A10G",  # A10G is ~$1.10/hr vs H100 $3.95/hr - plenty for 1.7B model serving
     volumes={
         "/runs": runs_volume,
         "/root/.cache/vllm": vllm_cache,
         "/root/.cache/huggingface": hf_cache,
     },
     secrets=[modal.Secret.from_name("huggingface-secret")],
-    scaledown_window=300,  # 5 minutes
-    min_containers=1,  # Keep one container always warm to avoid cold starts
+    scaledown_window=120,  # 2 minutes - reduced from 5 to save costs
+    # COST SAVINGS: Removed min_containers=1 (was ~$2,844/month for H100!)
+    # Cold start is ~30-60s but saves massive costs. Use pipeline endpoint for low-latency.
     timeout=600,
 )
 @modal.web_server(port=VLLM_PORT, startup_timeout=300)

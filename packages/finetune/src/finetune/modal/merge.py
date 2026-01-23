@@ -19,7 +19,7 @@ app = modal.App("nls-finetune-merge")
 
 @app.function(
     image=merge_image,
-    gpu="H100",
+    gpu="A10G",  # A10G is plenty for merging 1.7B model (saves ~$2.85/hr vs H100)
     timeout=1800,
     volumes={"/runs": runs_volume},
     secrets=[modal.Secret.from_name("huggingface-secret")],

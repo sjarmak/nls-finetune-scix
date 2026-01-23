@@ -56,8 +56,9 @@ PIPELINE_IMAGE = (
 @app.cls(
     image=PIPELINE_IMAGE,
     volumes={"/data": data_volume},
-    scaledown_window=300,  # 5 minutes
-    min_containers=1,  # Keep warm for low latency
+    scaledown_window=120,  # 2 minutes - reduced from 5 for cost savings
+    # COST SAVINGS: Removed min_containers=1 - cold start is only ~3s for CPU
+    # The standalone endpoints below will handle warm container
     timeout=30,  # Pipeline should complete in <1s
 )
 class PipelineServer:
@@ -177,8 +178,8 @@ class PipelineServer:
 @app.function(
     image=PIPELINE_IMAGE,
     volumes={"/data": data_volume},
-    scaledown_window=300,
-    min_containers=1,
+    scaledown_window=120,  # Reduced from 5 min
+    # COST SAVINGS: No min_containers - endpoints share container pool
     timeout=30,
 )
 @modal.fastapi_endpoint(method="POST")
@@ -217,8 +218,8 @@ def query(request: dict) -> dict:
 @app.function(
     image=PIPELINE_IMAGE,
     volumes={"/data": data_volume},
-    scaledown_window=300,
-    min_containers=1,
+    scaledown_window=120,  # Reduced from 5 min
+    # COST SAVINGS: No min_containers - endpoints share container pool
     timeout=30,
 )
 @modal.fastapi_endpoint(method="POST", label="v1-query")
@@ -282,8 +283,8 @@ def v1_query(request: dict) -> dict:
 @app.function(
     image=PIPELINE_IMAGE,
     volumes={"/data": data_volume},
-    scaledown_window=300,
-    min_containers=1,
+    scaledown_window=120,  # Reduced from 5 min
+    # COST SAVINGS: No min_containers - endpoints share container pool
     timeout=30,
 )
 @modal.fastapi_endpoint(method="POST", label="v1-chat-completions")

@@ -37,14 +37,15 @@ MAX_MODEL_LEN = 512
 
 @app.function(
     image=VLLM_FP8_IMAGE,
-    gpu="H100",
+    gpu="H100",  # FP8 requires compute capability > 8.9, so H100 is needed
     volumes={
         "/runs": runs_volume,
         "/root/.cache/vllm": vllm_cache,
         "/root/.cache/huggingface": hf_cache,
     },
     secrets=[modal.Secret.from_name("huggingface-secret")],
-    scaledown_window=300,
+    scaledown_window=120,  # Reduced from 5 min - faster scaledown saves $$
+    # NOTE: No min_containers - pay only when used (cold start ~30-60s)
     timeout=600,
 )
 @modal.web_server(port=VLLM_PORT, startup_timeout=300)
