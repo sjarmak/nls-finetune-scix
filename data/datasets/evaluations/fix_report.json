@@ -1,0 +1,1621 @@
+{
+  "generated_at": "2026-01-22T22:58:11.761262",
+  "input_file": "data/datasets/raw/gold_examples.json",
+  "summary": {
+    "total": 4789,
+    "modified": 723,
+    "author_initials_fixed": 152,
+    "category_fixed": 550,
+    "syntax_fixed": 21,
+    "alignment_fixed": 44
+  },
+  "fixes": [
+    {
+      "index": 1,
+      "original": {
+        "natural_language": "terahertz josephson echo spectroscopy cuprate superconductors inhomogeneity",
+        "ads_query": "abs:(Probing Inhomogeneous Cuprate Superconductivity by Terahertz Josephson Echo Spectroscopy)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "terahertz josephson echo spectroscopy cuprate superconductors inhomogeneity",
+        "ads_query": "abs:(Probing Inhomogeneous Cuprate Superconductivity by Terahertz Josephson Echo Spectroscopy)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 5,
+      "original": {
+        "natural_language": "papers by Drake 2003",
+        "ads_query": "author:\"^drake, j. j.\" year:2003",
+        "category": "first_author"
+      },
+      "fixed": {
+        "natural_language": "papers by Drake 2003",
+        "ads_query": "author:\"^Drake\" year:2003",
+        "category": "first_author"
+      },
+      "fixes": [
+        "Removed fabricated initials for author 'Drake'"
+      ]
+    },
+    {
+      "index": 8,
+      "original": {
+        "natural_language": "H2 molecular hydrogen spatial distribution nearby galaxies Spitzer infrared spectrograph",
+        "ads_query": "abs:(Mapping the Spatial Distribution of H_2 in Nearby Galaxies with the Spitzer Infrared Spectrograph)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "H2 molecular hydrogen spatial distribution nearby galaxies Spitzer infrared spectrograph",
+        "ads_query": "abs:(Mapping the Spatial Distribution of H_2 in Nearby Galaxies with the Spitzer Infrared Spectrograph)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 14,
+      "original": {
+        "natural_language": "\"2023 VB\" asteroid discovery papers",
+        "ads_query": "abs:(2023 VB)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "\"2023 VB\" asteroid discovery papers",
+        "ads_query": "abs:(2023 VB)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 15,
+      "original": {
+        "natural_language": "JWST observations studies",
+        "ads_query": "abs:\"JWST observations\"",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "JWST observations studies",
+        "ads_query": "abs:\"JWST observations\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 17,
+      "original": {
+        "natural_language": "papers by L in Astronomy and Astrophysics 2022",
+        "ads_query": "abs:(2022A&A...658L..10L)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by L in Astronomy and Astrophysics 2022",
+        "ads_query": "abs:(2022A&A...658L..10L)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 18,
+      "original": {
+        "natural_language": "cosmological constant studies",
+        "ads_query": "abs:\"cosmological constant\"",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "cosmological constant studies",
+        "ads_query": "abs:\"cosmological constant\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 22,
+      "original": {
+        "natural_language": "papers by guillermo chiape",
+        "ads_query": "abs:(guillermo chiape)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by guillermo chiape",
+        "ads_query": "abs:(guillermo chiape)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 23,
+      "original": {
+        "natural_language": "papers by Rayner 2022",
+        "ads_query": "author:\"^Rayner, j.\" year:2022",
+        "category": "first_author"
+      },
+      "fixed": {
+        "natural_language": "papers by Rayner 2022",
+        "ads_query": "author:\"^Rayner\" year:2022",
+        "category": "first_author"
+      },
+      "fixes": [
+        "Removed fabricated initials for author 'Rayner'"
+      ]
+    },
+    {
+      "index": 38,
+      "original": {
+        "natural_language": "papers by Rubin on galaxy rotation curves",
+        "ads_query": "abs:(Rubin)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by Rubin on galaxy rotation curves",
+        "ads_query": "author:\"Rubin\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'",
+        "Moved author 'Rubin' from abs: to author: field"
+      ]
+    },
+    {
+      "index": 52,
+      "original": {
+        "natural_language": "latest infrared astronomy research",
+        "ads_query": "abs:\"infrared astronomy\" year:2024-2025",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "latest infrared astronomy research",
+        "ads_query": "abs:\"infrared astronomy\" year:2024-2025",
+        "category": "temporal"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'temporal'"
+      ]
+    },
+    {
+      "index": 54,
+      "original": {
+        "natural_language": "ring galaxies formation mechanisms recent papers",
+        "ads_query": "abs:(Ring Galaxies)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "ring galaxies formation mechanisms recent papers",
+        "ads_query": "abs:(Ring Galaxies)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 63,
+      "original": {
+        "natural_language": "failed novae turning blue after outburst",
+        "ads_query": "abs:(failed novae blue)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "failed novae turning blue after outburst",
+        "ads_query": "abs:(failed novae blue)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 73,
+      "original": {
+        "natural_language": "Luna-19 radio transparency circumlunar space",
+        "ads_query": "abs:(Radio transparency of circumlunar space using the Luna-19 station)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "Luna-19 radio transparency circumlunar space",
+        "ads_query": "abs:(Radio transparency of circumlunar space using the Luna-19 station)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 76,
+      "original": {
+        "natural_language": "latest spiral galaxies research",
+        "ads_query": "abs:\"spiral galaxies\" year:2024-2025",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "latest spiral galaxies research",
+        "ads_query": "abs:\"spiral galaxies\" year:2024-2025",
+        "category": "temporal"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'temporal'"
+      ]
+    },
+    {
+      "index": 77,
+      "original": {
+        "natural_language": "papers by Mainzer A",
+        "ads_query": "author:\"^Mainzer, A\"",
+        "category": "first_author"
+      },
+      "fixed": {
+        "natural_language": "papers by Mainzer A",
+        "ads_query": "author:\"^Mainzer\"",
+        "category": "first_author"
+      },
+      "fixes": [
+        "Removed fabricated initials for author 'Mainzer'"
+      ]
+    },
+    {
+      "index": 88,
+      "original": {
+        "natural_language": "new ALMA observations papers",
+        "ads_query": "abs:\"ALMA observations\" year:2024-2025",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "new ALMA observations papers",
+        "ads_query": "abs:\"ALMA observations\" year:2024-2025",
+        "category": "temporal"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'temporal'"
+      ]
+    },
+    {
+      "index": 111,
+      "original": {
+        "natural_language": "non-negative matrix factorization gpu acceleration",
+        "ads_query": "abs:(nmf gpu)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "non-negative matrix factorization gpu acceleration",
+        "ads_query": "abs:(nmf gpu)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 113,
+      "original": {
+        "natural_language": "hot gas mass in galaxy clusters",
+        "ads_query": "abs:(hot gas mass)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "hot gas mass in galaxy clusters",
+        "ads_query": "abs:(hot gas mass)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 115,
+      "original": {
+        "natural_language": "papers about machine learning applications in stellar classification",
+        "ads_query": "abs:(docs(ee0441a31e5b598d10c8d7fe0854a2a9))",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers about machine learning applications in stellar classification",
+        "ads_query": "abs:(docs(ee0441a31e5b598d10c8d7fe0854a2a9))",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 123,
+      "original": {
+        "natural_language": "solar interior models sun structure",
+        "ads_query": "collection:astronomy abstract:(solar,) abstract:(interior,) abstract:(sun,) abstract:(model)",
+        "category": "properties"
+      },
+      "fixed": {
+        "natural_language": "solar interior models sun structure",
+        "ads_query": "collection:astronomy abs:(solar,) abs:(interior,) abs:(sun,) abs:(model)",
+        "category": "properties"
+      },
+      "fixes": [
+        "Fixed field name: \\babstract: -> abs:"
+      ]
+    },
+    {
+      "index": 132,
+      "original": {
+        "natural_language": "papers by Hauschildt 1999",
+        "ads_query": "author:\"^hauschildt, p. h.\" year:1999",
+        "category": "first_author"
+      },
+      "fixed": {
+        "natural_language": "papers by Hauschildt 1999",
+        "ads_query": "author:\"^Hauschildt\" year:1999",
+        "category": "first_author"
+      },
+      "fixes": [
+        "Removed fabricated initials for author 'Hauschildt'"
+      ]
+    },
+    {
+      "index": 134,
+      "original": {
+        "natural_language": "papers by Andreoni 2019 arxiv",
+        "ads_query": "abs:(2019arXiv190711125A)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by Andreoni 2019 arxiv",
+        "ads_query": "abs:(2019arXiv190711125A)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 138,
+      "original": {
+        "natural_language": "papers by stuchlik on black holes",
+        "ads_query": "abs:(stuchlik,z)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by stuchlik on black holes",
+        "ads_query": "abs:(stuchlik,z)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 140,
+      "original": {
+        "natural_language": "numerical modeling scour bridge abutment simulation",
+        "ads_query": "abs:(Numerical Model For Simulation Of Scour Around Bridge Abutment)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "numerical modeling scour bridge abutment simulation",
+        "ads_query": "abs:(Numerical Model For Simulation Of Scour Around Bridge Abutment)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 141,
+      "original": {
+        "natural_language": "mimes survey papers",
+        "ads_query": "abs:(mimes survey)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "mimes survey papers",
+        "ads_query": "abs:(mimes survey)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 148,
+      "original": {
+        "natural_language": "papers using the Dark Energy Camera DECam",
+        "ads_query": "abs:(The Dark Energy Camera (DECam))",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers using the Dark Energy Camera DECam",
+        "ads_query": "abs:(The Dark Energy Camera (DECam))",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 155,
+      "original": {
+        "natural_language": "star formation",
+        "ads_query": "abs:\"star formation\"",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "star formation",
+        "ads_query": "abs:\"star formation\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 163,
+      "original": {
+        "natural_language": "papers by guijarro a",
+        "ads_query": "abs:(guijarro, a.)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by guijarro a",
+        "ads_query": "abs:(guijarro, a.)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 164,
+      "original": {
+        "natural_language": "papers by Massana P",
+        "ads_query": "author:\"^massana, p.\"",
+        "category": "first_author"
+      },
+      "fixed": {
+        "natural_language": "papers by Massana P",
+        "ads_query": "author:\"^Massana\"",
+        "category": "first_author"
+      },
+      "fixes": [
+        "Removed fabricated initials for author 'Massana'"
+      ]
+    },
+    {
+      "index": 170,
+      "original": {
+        "natural_language": "electronic payment security solata digital transactions",
+        "ads_query": "abs:(Security of Electronic Payment Systems Solata)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "electronic payment security solata digital transactions",
+        "ads_query": "abs:(Security of Electronic Payment Systems Solata)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 178,
+      "original": {
+        "natural_language": "papers by Hut 1985",
+        "ads_query": "abs:(Hut 1985)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by Hut 1985",
+        "ads_query": "author:\"Hut\" abs:\"1985\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'",
+        "Moved author 'Hut' from abs: to author: field"
+      ]
+    },
+    {
+      "index": 180,
+      "original": {
+        "natural_language": "papers by Newberg from 2002",
+        "ads_query": "author:\"^newberg, h\" year:2002",
+        "category": "first_author"
+      },
+      "fixed": {
+        "natural_language": "papers by Newberg from 2002",
+        "ads_query": "author:\"^Newberg\" year:2002",
+        "category": "first_author"
+      },
+      "fixes": [
+        "Removed fabricated initials for author 'Newberg'"
+      ]
+    },
+    {
+      "index": 181,
+      "original": {
+        "natural_language": "latest optical astronomy research",
+        "ads_query": "abs:\"optical astronomy\" year:2024-2025",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "latest optical astronomy research",
+        "ads_query": "abs:\"optical astronomy\" year:2024-2025",
+        "category": "temporal"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'temporal'"
+      ]
+    },
+    {
+      "index": 182,
+      "original": {
+        "natural_language": "Apollo light scattering lunar exosphere dust reanalysis",
+        "ads_query": "abs:(A reanalysis of the Apollo light scattering observations, and implications for lunar exospheric dust)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "Apollo light scattering lunar exosphere dust reanalysis",
+        "ads_query": "abs:(A reanalysis of the Apollo light scattering observations, and implications for lunar exospheric dust)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 186,
+      "original": {
+        "natural_language": "RX J1615 X-ray source observations",
+        "ads_query": "abs:(RX J1615)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "RX J1615 X-ray source observations",
+        "ads_query": "abs:(RX J1615)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 197,
+      "original": {
+        "natural_language": "stellar evolution reviews",
+        "ads_query": "abs:\"stellar evolution\" doctype:article property:refereed",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "stellar evolution reviews",
+        "ads_query": "abs:\"stellar evolution\" doctype:article property:refereed",
+        "category": "property"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'property'"
+      ]
+    },
+    {
+      "index": 199,
+      "original": {
+        "natural_language": "papers by olejak",
+        "ads_query": "abs:(olejak, a)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by olejak",
+        "ads_query": "abs:(olejak, a)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 207,
+      "original": {
+        "natural_language": "papers by L on arXiv from 2022",
+        "ads_query": "abs:(2022arXiv220605745L)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by L on arXiv from 2022",
+        "ads_query": "abs:(2022arXiv220605745L)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 208,
+      "original": {
+        "natural_language": "dynamical mass measurements M35 open cluster",
+        "ads_query": "abs:(dynamical mass+ M35)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "dynamical mass measurements M35 open cluster",
+        "ads_query": "abs:(dynamical mass+ M35)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 215,
+      "original": {
+        "natural_language": "red giants reviews",
+        "ads_query": "abs:\"red giants\" doctype:article property:refereed",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "red giants reviews",
+        "ads_query": "abs:\"red giants\" doctype:article property:refereed",
+        "category": "property"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'property'"
+      ]
+    },
+    {
+      "index": 221,
+      "original": {
+        "natural_language": "papers by Bao, Zhenan on organic electronics",
+        "ads_query": "abs:(author\"Bao, Zhenan\")",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by Bao, Zhenan on organic electronics",
+        "ads_query": "author:\"Bao\" abs:\"author\", Zhenan\"\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'",
+        "Moved author 'Bao' from abs: to author: field"
+      ]
+    },
+    {
+      "index": 226,
+      "original": {
+        "natural_language": "Croton medicinal properties and phytochemistry",
+        "ads_query": "abs:(Croton)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "Croton medicinal properties and phytochemistry",
+        "ads_query": "abs:(Croton)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 228,
+      "original": {
+        "natural_language": "papers by napolitano nicola",
+        "ads_query": "abs:(napolitano, nicola)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by napolitano nicola",
+        "ads_query": "abs:(napolitano, nicola)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 234,
+      "original": {
+        "natural_language": "Dyson sphere megastructures around stars",
+        "ads_query": "abs:(Dyson Sphere)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "Dyson sphere megastructures around stars",
+        "ads_query": "abs:(Dyson Sphere)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 235,
+      "original": {
+        "natural_language": "cloudy 2017 release photoionization code",
+        "ads_query": "abs:(the 2017 release of cloudy)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "cloudy 2017 release photoionization code",
+        "ads_query": "abs:(the 2017 release of cloudy)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 239,
+      "original": {
+        "natural_language": "RMxAC telescope observations and data analysis",
+        "ads_query": "abs:(RMxAC)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "RMxAC telescope observations and data analysis",
+        "ads_query": "abs:(RMxAC)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 243,
+      "original": {
+        "natural_language": "papers by kaylin bugbee",
+        "ads_query": "abs:(kaylin bugbee)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by kaylin bugbee",
+        "ads_query": "abs:(kaylin bugbee)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 244,
+      "original": {
+        "natural_language": "new TESS exoplanets papers",
+        "ads_query": "abs:\"TESS exoplanets\" year:2024-2025",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "new TESS exoplanets papers",
+        "ads_query": "abs:\"TESS exoplanets\" year:2024-2025",
+        "category": "temporal"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'temporal'"
+      ]
+    },
+    {
+      "index": 248,
+      "original": {
+        "natural_language": "Zimmermann Nature 1978 pain",
+        "ads_query": "abs:(M. Zimmermann, Nature 271 (1978) 524)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "Zimmermann Nature 1978 pain",
+        "ads_query": "abs:(M. Zimmermann, Nature 271 (1978) 524)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 250,
+      "original": {
+        "natural_language": "fast radio burst localized massive galaxy host",
+        "ads_query": "abs:(A fast radio burst localized to a massive galaxy)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "fast radio burst localized massive galaxy host",
+        "ads_query": "abs:(A fast radio burst localized to a massive galaxy)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 254,
+      "original": {
+        "natural_language": "galactic system AM 2229-735 polar ring formation simulations",
+        "ads_query": "abs:(Simulating the galactic system in interaction AM 2229-735 and the formation of its polar structure)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "galactic system AM 2229-735 polar ring formation simulations",
+        "ads_query": "abs:(Simulating the galactic system in interaction AM 2229-735 and the formation of its polar structure)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 262,
+      "original": {
+        "natural_language": "papers by Hughes M 2018 reviews",
+        "ads_query": "author:\"^hughes,M\" year:2018 review",
+        "category": "first_author"
+      },
+      "fixed": {
+        "natural_language": "papers by Hughes M 2018 reviews",
+        "ads_query": "author:\"^Hughes\" year:2018 review",
+        "category": "first_author"
+      },
+      "fixes": [
+        "Removed fabricated initials for author 'Hughes'"
+      ]
+    },
+    {
+      "index": 263,
+      "original": {
+        "natural_language": "papers about UY Scuti red supergiant",
+        "ads_query": "abs:(Uy scuti)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers about UY Scuti red supergiant",
+        "ads_query": "abs:(Uy scuti)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 271,
+      "original": {
+        "natural_language": "papers on stellar atmospheres and spectroscopy in astronomy astrophysics",
+        "ads_query": "abs:(10.1051/0004-6361/201525830)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers on stellar atmospheres and spectroscopy in astronomy astrophysics",
+        "ads_query": "abs:(10.1051/0004-6361/201525830)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 273,
+      "original": {
+        "natural_language": "recent spectroscopy",
+        "ads_query": "abs:\"spectroscopy\" year:2023-2025",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "recent spectroscopy",
+        "ads_query": "abs:\"spectroscopy\" year:2023-2025",
+        "category": "temporal"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'temporal'"
+      ]
+    },
+    {
+      "index": 280,
+      "original": {
+        "natural_language": "recent stellar evolution",
+        "ads_query": "abs:\"stellar evolution\" year:2023-2025",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "recent stellar evolution",
+        "ads_query": "abs:\"stellar evolution\" year:2023-2025",
+        "category": "temporal"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'temporal'"
+      ]
+    },
+    {
+      "index": 287,
+      "original": {
+        "natural_language": "papers by Riess on supernovae and cosmology 2022",
+        "ads_query": "abs:(2022A&A...664A..27R)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by Riess on supernovae and cosmology 2022",
+        "ads_query": "abs:(2022A&A...664A..27R)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 289,
+      "original": {
+        "natural_language": "papers by Abaroa",
+        "ads_query": "abs:(Abaroa)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by Abaroa",
+        "ads_query": "author:\"Abaroa\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'",
+        "Moved author 'Abaroa' from abs: to author: field"
+      ]
+    },
+    {
+      "index": 292,
+      "original": {
+        "natural_language": "papers by Michael Patel on quantum computing",
+        "ads_query": "abs:(Michael Patel)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by Michael Patel on quantum computing",
+        "ads_query": "author:\"Michael Patel\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'",
+        "Moved author 'Michael Patel' from abs: to author: field"
+      ]
+    },
+    {
+      "index": 303,
+      "original": {
+        "natural_language": "J0024-7204I pulsar observations",
+        "ads_query": "abs:(J0024-7204I)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "J0024-7204I pulsar observations",
+        "ads_query": "abs:(J0024-7204I)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 309,
+      "original": {
+        "natural_language": "elliptical galaxies review",
+        "ads_query": "abs:\"elliptical galaxies\" doctype:article property:refereed",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "elliptical galaxies review",
+        "ads_query": "abs:\"elliptical galaxies\" doctype:article property:refereed",
+        "category": "property"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'property'"
+      ]
+    },
+    {
+      "index": 310,
+      "original": {
+        "natural_language": "Sloan Lens ACS Survey papers",
+        "ads_query": "abs:(The Sloan Lens ACS Survey X)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "Sloan Lens ACS Survey papers",
+        "ads_query": "abs:(The Sloan Lens ACS Survey X)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 312,
+      "original": {
+        "natural_language": "active galactic nuclei",
+        "ads_query": "abs:\"active galactic nuclei\"",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "active galactic nuclei",
+        "ads_query": "abs:\"active galactic nuclei\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 317,
+      "original": {
+        "natural_language": "papers by Naidu on reionization 2018",
+        "ads_query": "abs:(2018ApJ...866L..24N)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by Naidu on reionization 2018",
+        "ads_query": "abs:(2018ApJ...866L..24N)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 320,
+      "original": {
+        "natural_language": "neural networks",
+        "ads_query": "abs:\"neural networks\"",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "neural networks",
+        "ads_query": "abs:\"neural networks\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 324,
+      "original": {
+        "natural_language": "looking for martian surface composition analysis papers",
+        "ads_query": "abs:(10.1029/2000JE001325)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "looking for martian surface composition analysis papers",
+        "ads_query": "abs:(10.1029/2000JE001325)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 330,
+      "original": {
+        "natural_language": "radio astronomy review",
+        "ads_query": "abs:\"radio astronomy\" doctype:article property:refereed",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "radio astronomy review",
+        "ads_query": "abs:\"radio astronomy\" doctype:article property:refereed",
+        "category": "property"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'property'"
+      ]
+    },
+    {
+      "index": 340,
+      "original": {
+        "natural_language": "papers by Wang on Earth and Planetary Science Letters 2002",
+        "ads_query": "abs:(2002E&PSL.201..449W)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by Wang on Earth and Planetary Science Letters 2002",
+        "ads_query": "abs:(2002E&PSL.201..449W)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 345,
+      "original": {
+        "natural_language": "recent interstellar medium",
+        "ads_query": "abs:\"interstellar medium\" year:2023-2025",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "recent interstellar medium",
+        "ads_query": "abs:\"interstellar medium\" year:2023-2025",
+        "category": "temporal"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'temporal'"
+      ]
+    },
+    {
+      "index": 346,
+      "original": {
+        "natural_language": "papers about gassis stellar atmospheres",
+        "ads_query": "abs:(gassis)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers about gassis stellar atmospheres",
+        "ads_query": "abs:(gassis)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 348,
+      "original": {
+        "natural_language": "exomoon detection methods and observations",
+        "ads_query": "abs:(exomoons)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "exomoon detection methods and observations",
+        "ads_query": "abs:(exomoons)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 349,
+      "original": {
+        "natural_language": "Gaia astrometry studies",
+        "ads_query": "abs:\"Gaia astrometry\"",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "Gaia astrometry studies",
+        "ads_query": "abs:\"Gaia astrometry\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 353,
+      "original": {
+        "natural_language": "kepler data reduction pipeline documentation",
+        "ads_query": "abs:(kepler data processing handbook)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "kepler data reduction pipeline documentation",
+        "ads_query": "abs:(kepler data processing handbook)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 367,
+      "original": {
+        "natural_language": "latest interferometry research",
+        "ads_query": "abs:\"interferometry\" year:2024-2025",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "latest interferometry research",
+        "ads_query": "abs:\"interferometry\" year:2024-2025",
+        "category": "temporal"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'temporal'"
+      ]
+    },
+    {
+      "index": 376,
+      "original": {
+        "natural_language": "Gaussian process classification galaxy blending LSST deblending machine learning",
+        "ads_query": "abs:(Gaussian Process Classification for Galaxy Blend Identification in LSST)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "Gaussian process classification galaxy blending LSST deblending machine learning",
+        "ads_query": "abs:(Gaussian Process Classification for Galaxy Blend Identification in LSST)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 377,
+      "original": {
+        "natural_language": "papers by Bogdan A as first author",
+        "ads_query": "author:\"^bogdan,a\"",
+        "category": "first_author"
+      },
+      "fixed": {
+        "natural_language": "papers by Bogdan A as first author",
+        "ads_query": "author:\"^Bogdan\"",
+        "category": "first_author"
+      },
+      "fixes": [
+        "Removed fabricated initials for author 'Bogdan'"
+      ]
+    },
+    {
+      "index": 384,
+      "original": {
+        "natural_language": "supernovae review",
+        "ads_query": "abs:\"supernovae\" doctype:article property:refereed",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "supernovae review",
+        "ads_query": "abs:\"supernovae\" doctype:article property:refereed",
+        "category": "property"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'property'"
+      ]
+    },
+    {
+      "index": 389,
+      "original": {
+        "natural_language": "papers by moreno-insertis on solar physics",
+        "ads_query": "abs:(moreno-insertis)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by moreno-insertis on solar physics",
+        "ads_query": "abs:(moreno-insertis)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 391,
+      "original": {
+        "natural_language": "new nucleosynthesis papers",
+        "ads_query": "abs:\"nucleosynthesis\" year:2024-2025",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "new nucleosynthesis papers",
+        "ads_query": "abs:\"nucleosynthesis\" year:2024-2025",
+        "category": "temporal"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'temporal'"
+      ]
+    },
+    {
+      "index": 400,
+      "original": {
+        "natural_language": "papers by Barnes on magnetic fields",
+        "ads_query": "author:\"Barnes, G.\" magnetic fields",
+        "category": "author"
+      },
+      "fixed": {
+        "natural_language": "papers by Barnes on magnetic fields",
+        "ads_query": "author:\"Barnes\" magnetic fields",
+        "category": "author"
+      },
+      "fixes": [
+        "Removed fabricated initials for author 'Barnes'"
+      ]
+    },
+    {
+      "index": 405,
+      "original": {
+        "natural_language": "deep learning",
+        "ads_query": "abs:\"deep learning\"",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "deep learning",
+        "ads_query": "abs:\"deep learning\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 408,
+      "original": {
+        "natural_language": "Rubin Observatory review",
+        "ads_query": "abs:\"Rubin Observatory\" doctype:article property:refereed",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "Rubin Observatory review",
+        "ads_query": "abs:\"Rubin Observatory\" doctype:article property:refereed",
+        "category": "property"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'property'"
+      ]
+    },
+    {
+      "index": 411,
+      "original": {
+        "natural_language": "supermassive black hole ejection galaxy merger recoiling SMBH gravitational waves",
+        "ads_query": "abs:(Possible evidence for the ejection of a supermassive black hole from an ongoing merger of galaxies)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "supermassive black hole ejection galaxy merger recoiling SMBH gravitational waves",
+        "ads_query": "abs:(Possible evidence for the ejection of a supermassive black hole from an ongoing merger of galaxies)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 412,
+      "original": {
+        "natural_language": "gamma ray astronomy reviews",
+        "ads_query": "abs:\"gamma ray astronomy\" doctype:article property:refereed",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "gamma ray astronomy reviews",
+        "ads_query": "abs:\"gamma ray astronomy\" doctype:article property:refereed",
+        "category": "property"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'property'"
+      ]
+    },
+    {
+      "index": 415,
+      "original": {
+        "natural_language": "exoplanet detection methods 2018-2022",
+        "ads_query": "abs:(exoplanets)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "exoplanet detection methods 2018-2022",
+        "ads_query": "abs:(exoplanets)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 421,
+      "original": {
+        "natural_language": "interstellar medium research",
+        "ads_query": "abs:\"interstellar medium\"",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "interstellar medium research",
+        "ads_query": "abs:\"interstellar medium\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 427,
+      "original": {
+        "natural_language": "papers on skipper ccd development at fermilab",
+        "ads_query": "abs:(fermilab skipper ccd)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers on skipper ccd development at fermilab",
+        "ads_query": "abs:(fermilab skipper ccd)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 429,
+      "original": {
+        "natural_language": "papers by Finkelstein S",
+        "ads_query": "author:\"^Finkelstein,\" S.",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by Finkelstein S",
+        "ads_query": "author:\"^Finkelstein,\" S.",
+        "category": "author"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'author'"
+      ]
+    },
+    {
+      "index": 432,
+      "original": {
+        "natural_language": "Li 2022 astrophysical journal stellar evolution",
+        "ads_query": "abs:(2022ApJ...929..102L)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "Li 2022 astrophysical journal stellar evolution",
+        "ads_query": "abs:(2022ApJ...929..102L)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 436,
+      "original": {
+        "natural_language": "PSR J0312-0921 pulsar observations",
+        "ads_query": "abs:(PSR J0312-0921)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "PSR J0312-0921 pulsar observations",
+        "ads_query": "abs:(PSR J0312-0921)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 439,
+      "original": {
+        "natural_language": "mist alpha stellar formation regions",
+        "ads_query": "abs:(mist alpha)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "mist alpha stellar formation regions",
+        "ads_query": "abs:(mist alpha)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 441,
+      "original": {
+        "natural_language": "papers by hart 2023",
+        "ads_query": "author:\"^hart\" 2023",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by hart 2023",
+        "ads_query": "author:\"^hart\" 2023",
+        "category": "author"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'author'"
+      ]
+    },
+    {
+      "index": 443,
+      "original": {
+        "natural_language": "nustar hot gas mass measurements in galaxy clusters",
+        "ads_query": "abs:(nustar hot gas mass)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "nustar hot gas mass measurements in galaxy clusters",
+        "ads_query": "abs:(nustar hot gas mass)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 453,
+      "original": {
+        "natural_language": "new dark matter papers",
+        "ads_query": "abs:\"dark matter\" year:2024-2025",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "new dark matter papers",
+        "ads_query": "abs:\"dark matter\" year:2024-2025",
+        "category": "temporal"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'temporal'"
+      ]
+    },
+    {
+      "index": 467,
+      "original": {
+        "natural_language": "papers by Sasikumar Raja K",
+        "ads_query": "abs:(Sasikumar Raja, K)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by Sasikumar Raja K",
+        "ads_query": "author:\"Sasikumar Raja\" abs:\", K\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'",
+        "Moved author 'Sasikumar Raja' from abs: to author: field"
+      ]
+    },
+    {
+      "index": 473,
+      "original": {
+        "natural_language": "long term effects of space radiation on astronauts",
+        "ads_query": "abs:(long term)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "long term effects of space radiation on astronauts",
+        "ads_query": "abs:(long term)",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'"
+      ]
+    },
+    {
+      "index": 474,
+      "original": {
+        "natural_language": "papers by Salama on polycyclic aromatic hydrocarbons",
+        "ads_query": "abs:(Salama, Farid)",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by Salama on polycyclic aromatic hydrocarbons",
+        "ads_query": "author:\"Salama\" abs:\", Farid\"",
+        "category": "topic"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'topic'",
+        "Moved author 'Salama' from abs: to author: field"
+      ]
+    },
+    {
+      "index": 475,
+      "original": {
+        "natural_language": "papers by Katz N",
+        "ads_query": "author:\"^Katz,\" N",
+        "category": "unfielded"
+      },
+      "fixed": {
+        "natural_language": "papers by Katz N",
+        "ads_query": "author:\"^Katz,\" N",
+        "category": "author"
+      },
+      "fixes": [
+        "Changed category from 'unfielded' to 'author'"
+      ]
+    },
+    {
+      "index": 476,
+      "original": {
+        "natural_language": "NGC3690 papers citing \"A Digital Archive of H I 21 Centimeter Line Spectra of Optically Targeted Galaxies\"",
+        "ads_query": "abstract: NGC3690 citations(title:A Digital Archive of H I 21 Centimeter Line Spectra of Optically Targeted Galaxies)",
+        "category": "content"
+      },
+      "fixed": {
+        "natural_language": "NGC3690 papers citing \"A Digital Archive of H I 21 Centimeter Line Spectra of Optically Targeted Galaxies\"",
+        "ads_query": "abs: NGC3690 citations(title:A Digital Archive of H I 21 Centimeter Line Spectra of Optically Targeted Galaxies)",
+        "category": "content"
+      },
+      "fixes": [
+        "Fixed field name: \\babstract: -> abs:"
+      ]
+    }
+  ]
+}

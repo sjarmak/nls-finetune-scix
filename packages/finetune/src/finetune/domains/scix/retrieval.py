@@ -54,7 +54,7 @@ class IndexedExample:
         doctypes: Set of doctypes in query
         properties: Set of properties in query
         bibgroups: Set of bibgroups in query
-        databases: Set of databases in query
+        collections: Set of collections in query
         idf_weights: Pre-computed IDF weights for tokens
     """
 
@@ -69,7 +69,7 @@ class IndexedExample:
     doctypes: set[str] = field(default_factory=set)
     properties: set[str] = field(default_factory=set)
     bibgroups: set[str] = field(default_factory=set)
-    databases: set[str] = field(default_factory=set)
+    collections: set[str] = field(default_factory=set)
 
 
 # Stopwords to filter from NL queries for better matching
@@ -226,7 +226,7 @@ def extract_features_from_ads_query(ads_query: str) -> dict:
         "doctypes": set(),
         "properties": set(),
         "bibgroups": set(),
-        "databases": set(),
+        "collections": set(),
     }
 
     query_lower = ads_query.lower()
@@ -258,9 +258,9 @@ def extract_features_from_ads_query(ads_query: str) -> dict:
     for match in re.finditer(r"bibgroup:([a-zA-Z0-9_/-]+)", ads_query):
         features["bibgroups"].add(match.group(1))
 
-    # Extract database values
-    for match in re.finditer(r"database:([a-z]+)", query_lower):
-        features["databases"].add(match.group(1))
+    # Extract collection values (database: is an alias for collection:)
+    for match in re.finditer(r"(?:database|collection):([a-z]+)", query_lower):
+        features["collections"].add(match.group(1))
 
     return features
 
@@ -330,7 +330,7 @@ class GoldExampleIndex:
                 doctypes=features["doctypes"],
                 properties=features["properties"],
                 bibgroups=features["bibgroups"],
-                databases=features["databases"],
+                collections=features["collections"],
             )
             self._examples.append(indexed)
 
@@ -434,9 +434,9 @@ class GoldExampleIndex:
             overlap = intent.bibgroup & example.bibgroups
             score += len(overlap) * 1.5
 
-        # Boost for matching database
-        if intent.database:
-            overlap = intent.database & example.databases
+        # Boost for matching collection
+        if intent.collection:
+            overlap = intent.collection & example.collections
             score += len(overlap) * 1.5
 
         # Boost for category match (if we can infer from intent)

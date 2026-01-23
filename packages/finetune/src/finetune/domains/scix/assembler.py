@@ -109,11 +109,12 @@ def _build_author_clause(authors: Sequence[str]) -> str:
     return " ".join(clauses)
 
 
-def _build_abs_clause(terms: Sequence[str]) -> str:
+def _build_abs_clause(terms: Sequence[str], use_or: bool = False) -> str:
     """Build abstract/topic search clause.
 
     Args:
         terms: List of topic terms/phrases
+        use_or: If True, combine terms with OR instead of AND (implicit)
 
     Returns:
         Abstract clause string, or empty string if no terms
@@ -124,11 +125,17 @@ def _build_abs_clause(terms: Sequence[str]) -> str:
     clauses = []
     for term in terms:
         quoted = _quote_value(term)
-        clauses.append(f"abs:{quoted}")
+        clauses.append(quoted)
 
     if len(clauses) == 1:
-        return clauses[0]
-    return " ".join(clauses)
+        return f"abs:{clauses[0]}"
+
+    if use_or:
+        # Use OR within parentheses: abs:(term1 OR term2)
+        return f"abs:({' OR '.join(clauses)})"
+    else:
+        # Use implicit AND with separate abs: fields
+        return " ".join(f"abs:{c}" for c in clauses)
 
 
 def _build_year_clause(year_from: int | None, year_to: int | None) -> str:
@@ -285,9 +292,15 @@ def assemble_query(intent: IntentSpec, examples: list[GoldExample] | None = None
 
     # Build abstract/topic clause
     if intent.free_text_terms:
-        abs_clause = _build_abs_clause(intent.free_text_terms)
+        abs_clause = _build_abs_clause(intent.free_text_terms, use_or=False)
         if abs_clause:
             clauses.append(abs_clause)
+
+    # Build OR'd topic clause (e.g., "rocks or volcanoes" -> abs:(rocks OR volcanoes))
+    if intent.or_terms:
+        or_clause = _build_abs_clause(intent.or_terms, use_or=True)
+        if or_clause:
+            clauses.append(or_clause)
 
     # Build year range clause
     if intent.year_from is not None or intent.year_to is not None:
@@ -308,7 +321,7 @@ def assemble_query(intent: IntentSpec, examples: list[GoldExample] | None = None
             clauses.append(aff_clause)
 
     # Build enum-constrained field clauses
-    for field_name in ("doctype", "property", "database", "bibgroup", "esources", "data"):
+    for field_name in ("doctype", "property", "collection", "bibgroup", "esources", "data"):
         values = getattr(intent, field_name)
         if values:
             constraint_count_before += len(values)

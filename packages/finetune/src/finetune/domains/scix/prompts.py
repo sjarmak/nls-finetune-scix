@@ -84,7 +84,7 @@ TRAINING_EXAMPLES = [
     },
     {
         "nl": "machine learning in astronomy last 5 years",
-        "query": 'abs:"machine learning" database:astronomy pubdate:[2021 TO 2026]',
+        "query": 'abs:"machine learning" collection:astronomy pubdate:[2021 TO 2026]',
     },
     {
         "nl": "first author papers by Jane Smith on cosmology",

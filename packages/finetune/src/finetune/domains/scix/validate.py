@@ -136,7 +136,7 @@ def lint_query(query: str) -> ValidationResult:
 def validate_field_constraints(query: str) -> ConstraintValidationResult:
     """Validate that field values in a query match allowed enumerations.
 
-    Checks doctype:, database:, property:, and bibgroup: field values
+    Checks doctype:, collection:, property:, and bibgroup: field values
     against their allowed sets defined in field_constraints.py.
 
     Args:
@@ -345,7 +345,7 @@ def validate_nl(nl: str) -> tuple[bool, list[str]]:
         (r"\binst:", "contains 'inst:'"),
         (r"\bcitation_count:", "contains 'citation_count:'"),
         (r"\bproperty:", "contains 'property:'"),
-        (r"\bdatabase:", "contains 'database:'"),
+        (r"\b(?:database|collection):", "contains 'collection:'"),
         (r"\bdoctype:", "contains 'doctype:'"),
         (r"\bfull:", "contains 'full:'"),
         (r"\bbody:", "contains 'body:'"),

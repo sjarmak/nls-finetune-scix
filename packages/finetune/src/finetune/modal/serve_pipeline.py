@@ -84,7 +84,7 @@ class PipelineServer:
         # Preload NER synonym maps
         from finetune.domains.scix.ner import (
             BIBGROUP_SYNONYMS,
-            DATABASE_SYNONYMS,
+            COLLECTION_SYNONYMS,
             DOCTYPE_SYNONYMS,
             PROPERTY_SYNONYMS,
         )
@@ -94,7 +94,7 @@ class PipelineServer:
             f"{len(PROPERTY_SYNONYMS)} property, "
             f"{len(DOCTYPE_SYNONYMS)} doctype, "
             f"{len(BIBGROUP_SYNONYMS)} bibgroup, "
-            f"{len(DATABASE_SYNONYMS)} database"
+            f"{len(COLLECTION_SYNONYMS)} collection"
         )
 
         # Preload retrieval index (this triggers gold_examples.json loading)

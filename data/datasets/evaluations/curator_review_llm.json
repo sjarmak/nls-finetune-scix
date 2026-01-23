@@ -1,0 +1,622 @@
+{
+  "generated_at": "2026-01-22T22:57:02.329216",
+  "summary": {
+    "total_reviewed": 150,
+    "with_issues": 22,
+    "issue_rate": "14.7%",
+    "by_action": {
+      "keep": 128,
+      "review": 14,
+      "fix": 8
+    },
+    "by_issue_type": {
+      "category": 14,
+      "syntax": 7,
+      "author_initials": 1
+    }
+  },
+  "issues_by_type": {
+    "category": [
+      {
+        "index": 8,
+        "nl": "cosmic microwave background review",
+        "query": "abs:\"cosmic microwave background\" doctype:article property:refereed",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 17,
+        "nl": "papers by Shen 2022 astronomy astrophysics",
+        "query": "abs:(2022A&A...666A.134S)",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 21,
+        "nl": "papers by Baghel on stellar evolution",
+        "query": "abs:(Baghel)",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 23,
+        "nl": "papers by R in astrophysical journal 2022",
+        "query": "abs:(2022ApJ...925....7R)",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 31,
+        "nl": "TCP J20315286+2740166 WZ Sge dwarf nova spectroscopic classification",
+        "query": "abs:(Spectroscopic Classification of TCP J20315286+2740166 as a WZ Sge Type Dwarf Nova Outburst)",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 36,
+        "nl": "papers by tojeiro rita",
+        "query": "abs:(tojeiro,rita)",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 50,
+        "nl": "papers by ho on stellar evolution",
+        "query": "author:\"^ho\"",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 62,
+        "nl": "nova outbursts that failed to reach classical brightness",
+        "query": "abs:(failed novae)",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 67,
+        "nl": "papers by shappee 2017",
+        "query": "author:\"^shappee\" 2017",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 80,
+        "nl": "Dyson sphere technosignatures SETI detection methods",
+        "query": "abs:(Dyson SPhere technosignatures)",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 88,
+        "nl": "papers by Ramesh on stellar photometry 2022",
+        "query": "abs:(2022A&A...658A..85R)",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 107,
+        "nl": "pyrogallol effects on catfish hematology biochemistry",
+        "query": "abs:(Exposure to pyrogallol impacts the hemato-biochemical endpoints in catfish)",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 118,
+        "nl": "papers by Guolo M",
+        "query": "author:\"^Guolo,\" M.",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 128,
+        "nl": "M51 supernova observations and analysis",
+        "query": "abs:(M51 supernovae)",
+        "category": "unfielded",
+        "issue": {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      }
+    ],
+    "syntax": [
+      {
+        "index": 18,
+        "nl": "astronomy collection papers about stellar evolution",
+        "query": "collection:astronomy abs:\"stellar evolution\"",
+        "category": "collection",
+        "issue": {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: collection",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 46,
+        "nl": "show me geoscience papers on planetary surfaces",
+        "query": "collection:earthscience abs:\"planetary surfaces\"",
+        "category": "collection",
+        "issue": {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: collection",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 54,
+        "nl": "catalog in astronomy database",
+        "query": "doctype:catalog collection:astronomy",
+        "category": "filters",
+        "issue": {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: collection",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 115,
+        "nl": "astronomy phdthesis",
+        "query": "doctype:phdthesis collection:astronomy",
+        "category": "filters",
+        "issue": {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: collection",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 123,
+        "nl": "planetary science papers on geochemistry",
+        "query": "collection:earthscience abs:\"geochemistry\"",
+        "category": "collection",
+        "issue": {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: collection",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 136,
+        "nl": "facility regex magell.*",
+        "query": "facility:/magell.*/",
+        "category": "syntax",
+        "issue": {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: facility",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 143,
+        "nl": "physics papers on high energy physics",
+        "query": "collection:physics abs:\"high energy physics\"",
+        "category": "collection",
+        "issue": {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: collection",
+          "suggested_fix": null
+        }
+      }
+    ],
+    "author_initials": [
+      {
+        "index": 101,
+        "nl": "papers by Hauschildt 1994",
+        "query": "author:\"Hauschildt, P. H.\" year:1994",
+        "category": "author",
+        "issue": {
+          "type": "author_initials",
+          "severity": "high",
+          "description": "Author 'Hauschildt' in NL got initials 'Hauschildt, P. H.' in query without user providing them",
+          "suggested_fix": "author:\"Hauschildt\""
+        }
+      }
+    ]
+  },
+  "flagged_examples": [
+    {
+      "index": 8,
+      "nl": "cosmic microwave background review",
+      "query": "abs:\"cosmic microwave background\" doctype:article property:refereed",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 17,
+      "nl": "papers by Shen 2022 astronomy astrophysics",
+      "query": "abs:(2022A&A...666A.134S)",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 18,
+      "nl": "astronomy collection papers about stellar evolution",
+      "query": "collection:astronomy abs:\"stellar evolution\"",
+      "category": "collection",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: collection",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "fix"
+    },
+    {
+      "index": 21,
+      "nl": "papers by Baghel on stellar evolution",
+      "query": "abs:(Baghel)",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 23,
+      "nl": "papers by R in astrophysical journal 2022",
+      "query": "abs:(2022ApJ...925....7R)",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 31,
+      "nl": "TCP J20315286+2740166 WZ Sge dwarf nova spectroscopic classification",
+      "query": "abs:(Spectroscopic Classification of TCP J20315286+2740166 as a WZ Sge Type Dwarf Nova Outburst)",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 36,
+      "nl": "papers by tojeiro rita",
+      "query": "abs:(tojeiro,rita)",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 46,
+      "nl": "show me geoscience papers on planetary surfaces",
+      "query": "collection:earthscience abs:\"planetary surfaces\"",
+      "category": "collection",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: collection",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "fix"
+    },
+    {
+      "index": 50,
+      "nl": "papers by ho on stellar evolution",
+      "query": "author:\"^ho\"",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 54,
+      "nl": "catalog in astronomy database",
+      "query": "doctype:catalog collection:astronomy",
+      "category": "filters",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: collection",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "fix"
+    },
+    {
+      "index": 62,
+      "nl": "nova outbursts that failed to reach classical brightness",
+      "query": "abs:(failed novae)",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 67,
+      "nl": "papers by shappee 2017",
+      "query": "author:\"^shappee\" 2017",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 80,
+      "nl": "Dyson sphere technosignatures SETI detection methods",
+      "query": "abs:(Dyson SPhere technosignatures)",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 88,
+      "nl": "papers by Ramesh on stellar photometry 2022",
+      "query": "abs:(2022A&A...658A..85R)",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 101,
+      "nl": "papers by Hauschildt 1994",
+      "query": "author:\"Hauschildt, P. H.\" year:1994",
+      "category": "author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "high",
+          "description": "Author 'Hauschildt' in NL got initials 'Hauschildt, P. H.' in query without user providing them",
+          "suggested_fix": "author:\"Hauschildt\""
+        }
+      ],
+      "recommended_action": "fix"
+    },
+    {
+      "index": 107,
+      "nl": "pyrogallol effects on catfish hematology biochemistry",
+      "query": "abs:(Exposure to pyrogallol impacts the hemato-biochemical endpoints in catfish)",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 115,
+      "nl": "astronomy phdthesis",
+      "query": "doctype:phdthesis collection:astronomy",
+      "category": "filters",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: collection",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "fix"
+    },
+    {
+      "index": 118,
+      "nl": "papers by Guolo M",
+      "query": "author:\"^Guolo,\" M.",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 123,
+      "nl": "planetary science papers on geochemistry",
+      "query": "collection:earthscience abs:\"geochemistry\"",
+      "category": "collection",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: collection",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "fix"
+    },
+    {
+      "index": 128,
+      "nl": "M51 supernova observations and analysis",
+      "query": "abs:(M51 supernovae)",
+      "category": "unfielded",
+      "issues": [
+        {
+          "type": "category",
+          "severity": "medium",
+          "description": "Category is 'unfielded' - should be properly categorized",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 136,
+      "nl": "facility regex magell.*",
+      "query": "facility:/magell.*/",
+      "category": "syntax",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: facility",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "fix"
+    },
+    {
+      "index": 143,
+      "nl": "physics papers on high energy physics",
+      "query": "collection:physics abs:\"high energy physics\"",
+      "category": "collection",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: collection",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "fix"
+    }
+  ]
+}

@@ -11,7 +11,7 @@ Words like "citing", "references", "similar" as topics do NOT trigger operators.
 import re
 from datetime import datetime
 
-from .field_constraints import BIBGROUPS, DATABASES, DOCTYPES, PROPERTIES
+from .field_constraints import BIBGROUPS, COLLECTIONS, DOCTYPES, PROPERTIES
 from .intent_spec import IntentSpec
 from .pipeline import is_ads_query  # noqa: E402
 
@@ -114,12 +114,22 @@ BIBGROUP_SYNONYMS: dict[str, str] = {
     "gravitational waves": "LIGO",
 }
 
-DATABASE_SYNONYMS: dict[str, str] = {
+COLLECTION_SYNONYMS: dict[str, str] = {
     "astronomy": "astronomy",
     "astro": "astronomy",
     "astrophysics": "astronomy",
     "physics": "physics",
     "general": "general",
+    # Earth science / planetary science
+    "earthscience": "earthscience",
+    "earth science": "earthscience",
+    "earth sciences": "earthscience",
+    "geoscience": "earthscience",
+    "geosciences": "earthscience",
+    "planetary science": "earthscience",
+    "planetary sciences": "earthscience",
+    "heliophysics": "earthscience",
+    "space weather": "earthscience",
 }
 
 
@@ -676,10 +686,10 @@ def extract_intent(text: str) -> IntentSpec:
     intent.property, working_text = _extract_properties(working_text)
     intent.doctype, working_text = _extract_doctypes(working_text)
     intent.bibgroup, working_text = _extract_bibgroups(working_text)
-    intent.database, working_text = _extract_databases(working_text)
+    intent.collection, working_text = _extract_collections(working_text)
 
     # Remaining text becomes free text terms (topics)
-    intent.free_text_terms = _extract_topics(working_text)
+    intent.free_text_terms, intent.or_terms = _extract_topics(working_text)
 
     # Set confidence scores
     _set_confidence_scores(intent)
@@ -883,45 +893,84 @@ def _extract_bibgroups(text: str) -> tuple[set[str], str]:
     return bibgroups, cleaned_text
 
 
-def _extract_databases(text: str) -> tuple[set[str], str]:
-    """Extract database values from text using synonym map.
+def _extract_collections(text: str) -> tuple[set[str], str]:
+    """Extract collection values from text using synonym map.
 
     Args:
         text: Input text to scan
 
     Returns:
-        Tuple of (set of valid database values, text with database phrases removed)
+        Tuple of (set of valid collection values, text with collection phrases removed)
     """
-    databases = set()
+    collections = set()
     cleaned_text = text.lower()
 
-    for synonym in sorted(DATABASE_SYNONYMS.keys(), key=len, reverse=True):
+    for synonym in sorted(COLLECTION_SYNONYMS.keys(), key=len, reverse=True):
         # Use word boundary matching to avoid partial matches
         pattern = re.compile(r"\b" + re.escape(synonym) + r"\b")
         if pattern.search(cleaned_text):
-            value = DATABASE_SYNONYMS[synonym]
-            if value in DATABASES:
-                databases.add(value)
+            value = COLLECTION_SYNONYMS[synonym]
+            if value in COLLECTIONS:
+                collections.add(value)
                 cleaned_text = pattern.sub(" ", cleaned_text)
 
     cleaned_text = re.sub(r"\s+", " ", cleaned_text).strip()
-    return databases, cleaned_text
+    return collections, cleaned_text
 
 
-def _extract_topics(text: str) -> list[str]:
+def _extract_topics(text: str) -> tuple[list[str], list[str]]:
     """Extract remaining topic terms from text.
 
     Removes stopwords and noise, returning meaningful topic phrases.
+    Handles "X or Y" patterns by returning them separately for OR combination.
 
     Args:
         text: Input text with other extractions already removed
 
     Returns:
-        List of topic phrases for abs:/title: fields
+        Tuple of (free_text_terms for AND, or_terms for OR combination)
     """
     if not text.strip():
-        return []
+        return [], []
 
+    # Clean term helper
+    def clean_term(term: str) -> str:
+        words = re.findall(r"\b[a-zA-Z0-9][-a-zA-Z0-9]*\b", term.lower())
+        meaningful = [w for w in words if w not in STOPWORDS and len(w) > 1]
+        return " ".join(meaningful)
+
+    # First, check for "X or Y" patterns
+    # This handles cases like "rocks or volcanoes" -> or_terms=["rocks", "volcanoes"]
+    or_pattern = re.compile(r"\b(\S+(?:\s+\S+)*?)\s+or\s+(\S+(?:\s+\S+)*?)\b", re.IGNORECASE)
+    or_match = or_pattern.search(text)
+
+    if or_match:
+        # Found "X or Y" pattern - extract as or_terms
+        term1 = or_match.group(1).strip()
+        term2 = or_match.group(2).strip()
+
+        clean1 = clean_term(term1)
+        clean2 = clean_term(term2)
+
+        # Build or_terms list
+        or_terms = []
+        if clean1:
+            or_terms.append(clean1)
+        if clean2:
+            or_terms.append(clean2)
+
+        # Handle any remaining text outside the OR pattern as free_text_terms
+        remaining = or_pattern.sub(" ", text).strip()
+        free_text = []
+        if remaining:
+            remaining_words = re.findall(r"\b[a-zA-Z0-9][-a-zA-Z0-9]*\b", remaining.lower())
+            remaining_meaningful = [w for w in remaining_words if w not in STOPWORDS and len(w) > 1]
+            if remaining_meaningful:
+                free_text.append(" ".join(remaining_meaningful))
+
+        return free_text, or_terms
+
+    # No OR pattern - standard processing into free_text_terms
     # Tokenize
     words = re.findall(r"\b[a-zA-Z0-9][-a-zA-Z0-9]*\b", text.lower())
 
@@ -929,12 +978,11 @@ def _extract_topics(text: str) -> list[str]:
     meaningful = [w for w in words if w not in STOPWORDS and len(w) > 1]
 
     if not meaningful:
-        return []
+        return [], []
 
     # Group remaining words into a single topic phrase
-    # In future, could split on natural phrase boundaries
     topic = " ".join(meaningful)
-    return [topic] if topic else []
+    return ([topic] if topic else []), []
 
 
 def _set_confidence_scores(intent: IntentSpec) -> None:
@@ -957,9 +1005,11 @@ def _set_confidence_scores(intent: IntentSpec) -> None:
         confidence["doctype"] = 0.9
     if intent.bibgroup:
         confidence["bibgroup"] = 0.9
-    if intent.database:
+    if intent.collection:
         confidence["database"] = 0.9
     if intent.free_text_terms:
         confidence["topics"] = 0.7  # Lower - just remaining words
+    if intent.or_terms:
+        confidence["or_topics"] = 0.85  # Higher - explicit OR pattern detected
 
     intent.confidence = confidence

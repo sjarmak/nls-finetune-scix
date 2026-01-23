@@ -451,7 +451,7 @@
   },
   {
     "natural_language": "machine learning applications in astronomy",
-    "ads_query": "abs:\"machine learning\" database:astronomy",
+    "ads_query": "abs:\"machine learning\" collection:astronomy",
     "category": "content"
   },
   {
@@ -616,7 +616,7 @@
   },
   {
     "natural_language": "solar interior models sun structure",
-    "ads_query": "database:astronomy abstract:(solar,) abstract:(interior,) abstract:(sun,) abstract:(model)",
+    "ads_query": "collection:astronomy abstract:(solar,) abstract:(interior,) abstract:(sun,) abstract:(model)",
     "category": "properties"
   },
   {
@@ -831,7 +831,7 @@
   },
   {
     "natural_language": "MIT astrophysics publications",
-    "ads_query": "aff:\"MIT\" database:astronomy",
+    "ads_query": "aff:\"MIT\" collection:astronomy",
     "category": "affiliation"
   },
   {
@@ -856,7 +856,7 @@
   },
   {
     "natural_language": "convolutional neural networks in astronomy",
-    "ads_query": "abs:\"convolutional neural network\" database:astronomy",
+    "ads_query": "abs:\"convolutional neural network\" collection:astronomy",
     "category": "content"
   },
   {
@@ -1066,7 +1066,7 @@
   },
   {
     "natural_language": "quantum mechanics in astrophysics",
-    "ads_query": "abs:\"quantum mechanics\" database:astronomy",
+    "ads_query": "abs:\"quantum mechanics\" collection:astronomy",
     "category": "content"
   },
   {
@@ -1186,7 +1186,7 @@
   },
   {
     "natural_language": "physics papers on string theory",
-    "ads_query": "database:physics abs:\"string theory\"",
+    "ads_query": "collection:physics abs:\"string theory\"",
     "category": "properties"
   },
   {
@@ -4001,7 +4001,7 @@
   },
   {
     "natural_language": "papers by arevalo astronomy",
-    "ads_query": "author:\"arevalo, p\" database:astronomy",
+    "ads_query": "author:\"arevalo, p\" collection:astronomy",
     "category": "author"
   },
   {
@@ -4276,7 +4276,7 @@
   },
   {
     "natural_language": "solar interior models sun papers",
-    "ads_query": "database:astronomy abstract:(solar,) abstract:(interior,) abstract:(sun,) abstract:(model) title:(sun,)",
+    "ads_query": "collection:astronomy abstract:(solar,) abstract:(interior,) abstract:(sun,) abstract:(model) title:(sun,)",
     "category": "properties"
   },
   {
@@ -5826,7 +5826,7 @@
   },
   {
     "natural_language": "solar interior models papers with sun in title",
-    "ads_query": "database:astronomy abstract:(solar,) abstract:(interior,) abstract:(sun,) abstract:(model) title:(sun,) title:(interior,)",
+    "ads_query": "collection:astronomy abstract:(solar,) abstract:(interior,) abstract:(sun,) abstract:(model) title:(sun,) title:(interior,)",
     "category": "properties"
   },
   {
@@ -6206,7 +6206,7 @@
   },
   {
     "natural_language": "top 100 most cited astronomy papers",
-    "ads_query": "topn(100, database:astronomy, citation_count desc)",
+    "ads_query": "topn(100, collection:astronomy, citation_count desc)",
     "category": "operator"
   },
   {
@@ -6246,7 +6246,7 @@
   },
   {
     "natural_language": "software papers in astronomy",
-    "ads_query": "property:software database:astronomy",
+    "ads_query": "property:software collection:astronomy",
     "category": "properties"
   },
   {
@@ -6336,7 +6336,7 @@
   },
   {
     "natural_language": "papers by Monson astronomy",
-    "ads_query": "author:(\"^Monson,a.\") database:astronomy",
+    "ads_query": "author:(\"^Monson,a.\") collection:astronomy",
     "category": "first_author"
   },
   {
@@ -6761,7 +6761,7 @@
   },
   {
     "natural_language": "popular papers on machine learning in astronomy right now",
-    "ads_query": "trending(abs:\"machine learning\" database:astronomy)",
+    "ads_query": "trending(abs:\"machine learning\" collection:astronomy)",
     "category": "operator"
   },
   {
@@ -7526,7 +7526,7 @@
   },
   {
     "natural_language": "common references for Bayesian analysis in astronomy",
-    "ads_query": "useful(abs:Bayesian database:astronomy)",
+    "ads_query": "useful(abs:Bayesian collection:astronomy)",
     "category": "operator"
   },
   {
@@ -9666,7 +9666,7 @@
   },
   {
     "natural_language": "Nature papers on astronomy",
-    "ads_query": "bibstem:Nature database:astronomy",
+    "ads_query": "bibstem:Nature collection:astronomy",
     "category": "publication"
   },
   {
@@ -10061,7 +10061,7 @@
   },
   {
     "natural_language": "radio astronomy papers from the VLA",
-    "ads_query": "abs:VLA database:astronomy",
+    "ads_query": "abs:VLA collection:astronomy",
     "category": "compound"
   },
   {
@@ -10361,7 +10361,7 @@
   },
   {
     "natural_language": "papers by ibar on astronomy",
-    "ads_query": "author:\"ibar, e\" database:astronomy",
+    "ads_query": "author:\"ibar, e\" collection:astronomy",
     "category": "author"
   },
   {
@@ -11201,7 +11201,7 @@
   },
   {
     "natural_language": "artificial intelligence in astrophysics",
-    "ads_query": "abs:\"artificial intelligence\" database:astronomy",
+    "ads_query": "abs:\"artificial intelligence\" collection:astronomy",
     "category": "content"
   },
   {
@@ -11336,7 +11336,7 @@
   },
   {
     "natural_language": "papers by Espinoza-Retamal first author 2023",
-    "ads_query": "database:astronomy author:\"^espinoza-retamal\" year:2023",
+    "ads_query": "collection:astronomy author:\"^espinoza-retamal\" year:2023",
     "category": "first_author"
   },
   {
@@ -12061,7 +12061,7 @@
   },
   {
     "natural_language": "papers in the astronomy database",
-    "ads_query": "database:astronomy",
+    "ads_query": "collection:astronomy",
     "category": "properties"
   },
   {
@@ -12996,7 +12996,7 @@
   },
   {
     "natural_language": "papers by Monson in astronomy journals",
-    "ads_query": "author:(\"^Monson\") database:astronomy",
+    "ads_query": "author:(\"^Monson\") collection:astronomy",
     "category": "first_author"
   },
   {
@@ -13761,17 +13761,17 @@
   },
   {
     "natural_language": "astronomy database only",
-    "ads_query": "database:astronomy",
+    "ads_query": "collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "limit to astronomy collection",
-    "ads_query": "database:astronomy",
+    "ads_query": "collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "database astronomy",
-    "ads_query": "database:astronomy",
+    "ads_query": "collection:astronomy",
     "category": "filters"
   },
   {
@@ -13956,17 +13956,17 @@
   },
   {
     "natural_language": "top 100 astronomy papers by citations",
-    "ads_query": "topn(100, database:astronomy, citation_count desc)",
+    "ads_query": "topn(100, collection:astronomy, citation_count desc)",
     "category": "second_order"
   },
   {
     "natural_language": "topn 100 astronomy sort by citation_count desc",
-    "ads_query": "topn(100, database:astronomy, citation_count desc)",
+    "ads_query": "topn(100, collection:astronomy, citation_count desc)",
     "category": "second_order"
   },
   {
     "natural_language": "most cited 100 in astronomy database",
-    "ads_query": "topn(100, database:astronomy, citation_count desc)",
+    "ads_query": "topn(100, collection:astronomy, citation_count desc)",
     "category": "second_order"
   },
   {
@@ -19066,317 +19066,317 @@
   },
   {
     "natural_language": "article in astronomy database",
-    "ads_query": "doctype:article database:astronomy",
+    "ads_query": "doctype:article collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "only article records astronomy",
-    "ads_query": "doctype:article database:astronomy",
+    "ads_query": "doctype:article collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "astronomy article",
-    "ads_query": "doctype:article database:astronomy",
+    "ads_query": "doctype:article collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "article in physics database",
-    "ads_query": "doctype:article database:physics",
+    "ads_query": "doctype:article collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "only article records physics",
-    "ads_query": "doctype:article database:physics",
+    "ads_query": "doctype:article collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "physics article",
-    "ads_query": "doctype:article database:physics",
+    "ads_query": "doctype:article collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "article in general database",
-    "ads_query": "doctype:article database:general",
+    "ads_query": "doctype:article collection:general",
     "category": "filters"
   },
   {
     "natural_language": "only article records general",
-    "ads_query": "doctype:article database:general",
+    "ads_query": "doctype:article collection:general",
     "category": "filters"
   },
   {
     "natural_language": "general article",
-    "ads_query": "doctype:article database:general",
+    "ads_query": "doctype:article collection:general",
     "category": "filters"
   },
   {
     "natural_language": "catalog in astronomy database",
-    "ads_query": "doctype:catalog database:astronomy",
+    "ads_query": "doctype:catalog collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "only catalog records astronomy",
-    "ads_query": "doctype:catalog database:astronomy",
+    "ads_query": "doctype:catalog collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "astronomy catalog",
-    "ads_query": "doctype:catalog database:astronomy",
+    "ads_query": "doctype:catalog collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "catalog in physics database",
-    "ads_query": "doctype:catalog database:physics",
+    "ads_query": "doctype:catalog collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "only catalog records physics",
-    "ads_query": "doctype:catalog database:physics",
+    "ads_query": "doctype:catalog collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "physics catalog",
-    "ads_query": "doctype:catalog database:physics",
+    "ads_query": "doctype:catalog collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "catalog in general database",
-    "ads_query": "doctype:catalog database:general",
+    "ads_query": "doctype:catalog collection:general",
     "category": "filters"
   },
   {
     "natural_language": "only catalog records general",
-    "ads_query": "doctype:catalog database:general",
+    "ads_query": "doctype:catalog collection:general",
     "category": "filters"
   },
   {
     "natural_language": "general catalog",
-    "ads_query": "doctype:catalog database:general",
+    "ads_query": "doctype:catalog collection:general",
     "category": "filters"
   },
   {
     "natural_language": "software in astronomy database",
-    "ads_query": "doctype:software database:astronomy",
+    "ads_query": "doctype:software collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "only software records astronomy",
-    "ads_query": "doctype:software database:astronomy",
+    "ads_query": "doctype:software collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "astronomy software",
-    "ads_query": "doctype:software database:astronomy",
+    "ads_query": "doctype:software collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "software in physics database",
-    "ads_query": "doctype:software database:physics",
+    "ads_query": "doctype:software collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "only software records physics",
-    "ads_query": "doctype:software database:physics",
+    "ads_query": "doctype:software collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "physics software",
-    "ads_query": "doctype:software database:physics",
+    "ads_query": "doctype:software collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "software in general database",
-    "ads_query": "doctype:software database:general",
+    "ads_query": "doctype:software collection:general",
     "category": "filters"
   },
   {
     "natural_language": "only software records general",
-    "ads_query": "doctype:software database:general",
+    "ads_query": "doctype:software collection:general",
     "category": "filters"
   },
   {
     "natural_language": "general software",
-    "ads_query": "doctype:software database:general",
+    "ads_query": "doctype:software collection:general",
     "category": "filters"
   },
   {
     "natural_language": "proceedings in astronomy database",
-    "ads_query": "doctype:proceedings database:astronomy",
+    "ads_query": "doctype:proceedings collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "only proceedings records astronomy",
-    "ads_query": "doctype:proceedings database:astronomy",
+    "ads_query": "doctype:proceedings collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "astronomy proceedings",
-    "ads_query": "doctype:proceedings database:astronomy",
+    "ads_query": "doctype:proceedings collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "proceedings in physics database",
-    "ads_query": "doctype:proceedings database:physics",
+    "ads_query": "doctype:proceedings collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "only proceedings records physics",
-    "ads_query": "doctype:proceedings database:physics",
+    "ads_query": "doctype:proceedings collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "physics proceedings",
-    "ads_query": "doctype:proceedings database:physics",
+    "ads_query": "doctype:proceedings collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "proceedings in general database",
-    "ads_query": "doctype:proceedings database:general",
+    "ads_query": "doctype:proceedings collection:general",
     "category": "filters"
   },
   {
     "natural_language": "only proceedings records general",
-    "ads_query": "doctype:proceedings database:general",
+    "ads_query": "doctype:proceedings collection:general",
     "category": "filters"
   },
   {
     "natural_language": "general proceedings",
-    "ads_query": "doctype:proceedings database:general",
+    "ads_query": "doctype:proceedings collection:general",
     "category": "filters"
   },
   {
     "natural_language": "phdthesis in astronomy database",
-    "ads_query": "doctype:phdthesis database:astronomy",
+    "ads_query": "doctype:phdthesis collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "only phdthesis records astronomy",
-    "ads_query": "doctype:phdthesis database:astronomy",
+    "ads_query": "doctype:phdthesis collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "astronomy phdthesis",
-    "ads_query": "doctype:phdthesis database:astronomy",
+    "ads_query": "doctype:phdthesis collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "phdthesis in physics database",
-    "ads_query": "doctype:phdthesis database:physics",
+    "ads_query": "doctype:phdthesis collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "only phdthesis records physics",
-    "ads_query": "doctype:phdthesis database:physics",
+    "ads_query": "doctype:phdthesis collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "physics phdthesis",
-    "ads_query": "doctype:phdthesis database:physics",
+    "ads_query": "doctype:phdthesis collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "phdthesis in general database",
-    "ads_query": "doctype:phdthesis database:general",
+    "ads_query": "doctype:phdthesis collection:general",
     "category": "filters"
   },
   {
     "natural_language": "only phdthesis records general",
-    "ads_query": "doctype:phdthesis database:general",
+    "ads_query": "doctype:phdthesis collection:general",
     "category": "filters"
   },
   {
     "natural_language": "general phdthesis",
-    "ads_query": "doctype:phdthesis database:general",
+    "ads_query": "doctype:phdthesis collection:general",
     "category": "filters"
   },
   {
     "natural_language": "proposal in astronomy database",
-    "ads_query": "doctype:proposal database:astronomy",
+    "ads_query": "doctype:proposal collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "only proposal records astronomy",
-    "ads_query": "doctype:proposal database:astronomy",
+    "ads_query": "doctype:proposal collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "astronomy proposal",
-    "ads_query": "doctype:proposal database:astronomy",
+    "ads_query": "doctype:proposal collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "proposal in physics database",
-    "ads_query": "doctype:proposal database:physics",
+    "ads_query": "doctype:proposal collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "only proposal records physics",
-    "ads_query": "doctype:proposal database:physics",
+    "ads_query": "doctype:proposal collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "physics proposal",
-    "ads_query": "doctype:proposal database:physics",
+    "ads_query": "doctype:proposal collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "proposal in general database",
-    "ads_query": "doctype:proposal database:general",
+    "ads_query": "doctype:proposal collection:general",
     "category": "filters"
   },
   {
     "natural_language": "only proposal records general",
-    "ads_query": "doctype:proposal database:general",
+    "ads_query": "doctype:proposal collection:general",
     "category": "filters"
   },
   {
     "natural_language": "general proposal",
-    "ads_query": "doctype:proposal database:general",
+    "ads_query": "doctype:proposal collection:general",
     "category": "filters"
   },
   {
     "natural_language": "techreport in astronomy database",
-    "ads_query": "doctype:techreport database:astronomy",
+    "ads_query": "doctype:techreport collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "only techreport records astronomy",
-    "ads_query": "doctype:techreport database:astronomy",
+    "ads_query": "doctype:techreport collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "astronomy techreport",
-    "ads_query": "doctype:techreport database:astronomy",
+    "ads_query": "doctype:techreport collection:astronomy",
     "category": "filters"
   },
   {
     "natural_language": "techreport in physics database",
-    "ads_query": "doctype:techreport database:physics",
+    "ads_query": "doctype:techreport collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "only techreport records physics",
-    "ads_query": "doctype:techreport database:physics",
+    "ads_query": "doctype:techreport collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "physics techreport",
-    "ads_query": "doctype:techreport database:physics",
+    "ads_query": "doctype:techreport collection:physics",
     "category": "filters"
   },
   {
     "natural_language": "techreport in general database",
-    "ads_query": "doctype:techreport database:general",
+    "ads_query": "doctype:techreport collection:general",
     "category": "filters"
   },
   {
     "natural_language": "only techreport records general",
-    "ads_query": "doctype:techreport database:general",
+    "ads_query": "doctype:techreport collection:general",
     "category": "filters"
   },
   {
     "natural_language": "general techreport",
-    "ads_query": "doctype:techreport database:general",
+    "ads_query": "doctype:techreport collection:general",
     "category": "filters"
   },
   {

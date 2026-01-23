@@ -53,7 +53,8 @@ ADS_FIELDS = {
     # Astronomy-specific
     "object": "Astronomical object name or coordinates",
     # Other
-    "database": "Database (astronomy, physics, general)",
+    "database": "Database/collection (astronomy, physics, general, earthscience)",
+    "collection": "Collection filter - alias for database (astronomy, physics, general, earthscience)",
     "lang": "Language of the paper",
     "copyright": "Copyright information",
     "grant": "Grant information",

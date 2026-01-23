@@ -182,7 +182,7 @@ def is_ads_query(text: str) -> bool:
         "bibstem:",
         "doctype:",
         "property:",
-        "database:",
+        "collection:",
         "bibgroup:",
         "object:",
         "aff:",

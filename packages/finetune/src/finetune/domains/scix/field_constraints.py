@@ -71,9 +71,10 @@ PROPERTIES: frozenset[str] = frozenset(
     }
 )
 
-# Database collections in ADS
+# Collection (discipline) filters in ADS
+# Note: "database:" and "collection:" are aliases in ADS, but we prefer "collection:"
 # Reference: https://ui.adsabs.harvard.edu/help/search/search-syntax
-DATABASES: frozenset[str] = frozenset(
+COLLECTIONS: frozenset[str] = frozenset(
     {
         "astronomy",  # Astronomy and astrophysics collection
         "physics",  # Physics collection
@@ -200,7 +201,8 @@ DATA_SOURCES: frozenset[str] = frozenset(
 # Combined dict for easier validation lookup
 FIELD_ENUMS = {
     "doctype": DOCTYPES,
-    "database": DATABASES,
+    "collection": COLLECTIONS,
+    "database": COLLECTIONS,  # Alias for collection (both work in ADS)
     "property": PROPERTIES,
     "bibgroup": BIBGROUPS,
     "esources": ESOURCES,

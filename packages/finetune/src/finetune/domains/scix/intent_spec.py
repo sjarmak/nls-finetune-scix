@@ -37,7 +37,8 @@ class IntentSpec:
     against FIELD_ENUMS before use.
 
     Attributes:
-        free_text_terms: Topic phrases to search in abs:/title: fields
+        free_text_terms: Topic phrases to search in abs:/title: fields (AND'd together)
+        or_terms: Topic phrases that should be OR'd together (e.g., "rocks or volcanoes")
         authors: Author names (will be formatted as "Last, F")
         affiliations: Institutional affiliations for aff: field
         objects: Astronomical objects for object: field
@@ -45,7 +46,7 @@ class IntentSpec:
         year_to: End year for pubdate range (inclusive)
         doctype: Document types (must be in DOCTYPES enum)
         property: Record properties (must be in PROPERTIES enum)
-        database: Database collections (must be in DATABASES enum)
+        collection: Collection/discipline filter (must be in COLLECTIONS enum)
         bibgroup: Bibliographic groups (must be in BIBGROUPS enum)
         esources: Electronic source types (must be in ESOURCES enum)
         data: Data archive sources (must be in DATA_SOURCES enum)
@@ -57,6 +58,7 @@ class IntentSpec:
 
     # Free text fields
     free_text_terms: list[str] = field(default_factory=list)
+    or_terms: list[str] = field(default_factory=list)  # Topics to combine with OR
     authors: list[str] = field(default_factory=list)
     affiliations: list[str] = field(default_factory=list)
     objects: list[str] = field(default_factory=list)
@@ -68,7 +70,7 @@ class IntentSpec:
     # Constrained enum fields (must be validated against FIELD_ENUMS)
     doctype: set[str] = field(default_factory=set)
     property: set[str] = field(default_factory=set)
-    database: set[str] = field(default_factory=set)
+    collection: set[str] = field(default_factory=set)
     bibgroup: set[str] = field(default_factory=set)
     esources: set[str] = field(default_factory=set)
     data: set[str] = field(default_factory=set)
@@ -93,7 +95,7 @@ class IntentSpec:
         return bool(
             self.doctype
             or self.property
-            or self.database
+            or self.collection
             or self.bibgroup
             or self.esources
             or self.data
@@ -103,6 +105,7 @@ class IntentSpec:
         """Check if the intent has any searchable content."""
         return bool(
             self.free_text_terms
+            or self.or_terms
             or self.authors
             or self.affiliations
             or self.objects
@@ -118,7 +121,7 @@ class IntentSpec:
         """
         d = asdict(self)
         # Convert sets to sorted lists for JSON serialization
-        for key in ("doctype", "property", "database", "bibgroup", "esources", "data"):
+        for key in ("doctype", "property", "collection", "bibgroup", "esources", "data"):
             d[key] = sorted(d[key])
         return d
 
@@ -133,7 +136,7 @@ class IntentSpec:
         Handles conversion of lists back to sets for enum fields.
         """
         # Convert lists to sets for enum fields
-        for key in ("doctype", "property", "database", "bibgroup", "esources", "data"):
+        for key in ("doctype", "property", "collection", "bibgroup", "esources", "data"):
             if key in d and isinstance(d[key], list):
                 d[key] = set(d[key])
         return cls(**d)
@@ -148,6 +151,8 @@ class IntentSpec:
         parts = []
         if self.free_text_terms:
             parts.append(f"topics={self.free_text_terms}")
+        if self.or_terms:
+            parts.append(f"or_topics={self.or_terms}")
         if self.authors:
             parts.append(f"authors={self.authors}")
         if self.year_from or self.year_to:
