@@ -1,0 +1,283 @@
+{
+  "project": "NLS Fine-tune SciX - Data Model Coverage Enhancement",
+  "branchName": "ralph/data-model-coverage",
+  "description": "Achieve comprehensive coverage of the ADS data model in training data. Generate examples for underrepresented fields (collections, bibgroups, properties, doctypes), improve operator interpretation flexibility, and create grounded training data using indexed content.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Complete field inventory from ADS Solr schema",
+      "description": "As a data engineer, I need a complete inventory of all searchable ADS fields so I know what our training data must cover.",
+      "acceptanceCriteria": [
+        "Create data/model/ directory structure",
+        "Create data/model/ads_field_inventory.json with all ADS fields from Solr schema",
+        "Include for each field: name, type (text/enum/identifier/metric/date/special), description, example values",
+        "Categorize fields into groups: content (abs, title), author (author, aff), enum (doctype, property, database, bibgroup), identifier (bibcode, doi), metric (citation_count), date (pubdate, year)",
+        "Document which fields support wildcards, proximity search, or special syntax",
+        "Run: mise run lint - passes"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "Audit current training data coverage",
+      "description": "As a data engineer, I need to measure current training data coverage against the complete field inventory.",
+      "acceptanceCriteria": [
+        "Create scripts/audit_training_coverage.py",
+        "Load gold_examples.json and analyze query field usage",
+        "For each field in inventory: count examples, list unique values used",
+        "For each operator: count examples, list trigger phrase variations",
+        "For each enum field: count represented values vs total valid values",
+        "Output coverage report to data/datasets/evaluations/coverage_audit.json",
+        "Report should highlight: fields with 0 examples, operators with <10 examples, enum values never used",
+        "Run: mise run lint - passes"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-003",
+      "title": "Add earthscience to DATABASES and update bibgroup synonyms",
+      "description": "As a data engineer, I need to fix missing database values and document bibgroup synonyms.",
+      "acceptanceCriteria": [
+        "Add 'earthscience' to DATABASES in field_constraints.py (confirmed in ADS, currently missing)",
+        "Create data/model/bibgroup_synonyms.json mapping common names to codes: Hubble->HST, Webb->JWST, Sloan->SDSS, etc.",
+        "Add any missing bibgroups discovered from ADS API facets to BIBGROUPS",
+        "Update syntax_validator.py tests to include earthscience",
+        "Run: mise run test - all tests pass"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-004",
+      "title": "Expand operator trigger patterns for flexibility",
+      "description": "As a NER developer, I need more flexible operator detection that handles natural language variations.",
+      "acceptanceCriteria": [
+        "Update guardrail/operator_gating.py OPERATOR_TRIGGER_PATTERNS",
+        "Add citations() patterns: 'papers that cite', 'work citing', 'research citing', 'studies citing', 'articles citing'",
+        "Add references() patterns: 'papers referenced by', 'cited in', 'sources cited by', 'what does X cite'",
+        "Add trending() patterns: 'popular papers', 'hot topics', 'what's trending', 'hot papers'",
+        "Add similar() patterns: 'related to', 'papers like', 'work similar to', 'studies resembling'",
+        "Add useful() patterns: 'helpful papers', 'foundational work', 'essential reading'",
+        "Add reviews() patterns: 'review articles', 'survey papers', 'overviews of', 'comprehensive reviews'",
+        "Add 50+ unit tests for new trigger patterns",
+        "Run: mise run test - all tests pass"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-005",
+      "title": "Generate database/collection training examples",
+      "description": "As a data curator, I need training examples for database/collection filtering since current data has 0 examples.",
+      "acceptanceCriteria": [
+        "Create scripts/generate_collection_examples.py",
+        "Generate 20+ examples for database:astronomy with NL variations: 'astronomy papers', 'astrophysics literature'",
+        "Generate 20+ examples for database:physics with NL variations: 'physics papers', 'physics research'",
+        "Generate 10+ examples for database:general with NL variations: 'general science', 'interdisciplinary'",
+        "Generate 20+ examples for collection:earthscience with NL variations: 'earth science', 'planetary science', 'geoscience'",
+        "Include combined queries: 'astronomy papers about dark matter from 2020'",
+        "Output to data/datasets/generated/collection_examples.json",
+        "Run: mise run lint - passes"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-006",
+      "title": "Generate property training examples for underrepresented values",
+      "description": "As a data curator, I need training examples for property values beyond refereed/openaccess/data.",
+      "acceptanceCriteria": [
+        "Create scripts/generate_property_examples.py",
+        "Generate 5+ examples for each underrepresented property (16 values): notrefereed, eprint, software, catalog, inspire, toc, presentation, associated, ads_openaccess, author_openaccess, eprint_openaccess, pub_openaccess, article, nonarticle, library_catalog, ocr_abstract",
+        "Include NL variations: 'preprints' -> property:eprint, 'non-peer-reviewed' -> property:notrefereed",
+        "Include negation patterns: 'not refereed' -> property:notrefereed",
+        "Output to data/datasets/generated/property_examples.json",
+        "Run: mise run lint - passes"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-007",
+      "title": "Generate doctype training examples for underrepresented values",
+      "description": "As a data curator, I need training examples for doctype values beyond article/software/catalog.",
+      "acceptanceCriteria": [
+        "Create scripts/generate_doctype_examples.py",
+        "Generate 5+ examples for each underrepresented doctype (13 values): abstract, bookreview, circular, editorial, erratum, inbook, mastersthesis, misc, newsletter, obituary, pressrelease, talk, proceedings",
+        "Include NL variations: 'conference talks' -> doctype:talk, 'press releases' -> doctype:pressrelease, 'book chapters' -> doctype:inbook",
+        "Output to data/datasets/generated/doctype_examples.json",
+        "Run: mise run lint - passes"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-008",
+      "title": "Generate bibgroup training examples for all telescopes",
+      "description": "As a data curator, I need training examples covering all 53 bibgroups.",
+      "acceptanceCriteria": [
+        "Create scripts/generate_bibgroup_examples.py",
+        "Load bibgroup_synonyms.json for common name mappings",
+        "Generate 3+ examples for each of 53 bibgroups using synonyms where applicable",
+        "Include variations: 'Hubble observations' -> bibgroup:HST, 'JWST data' -> bibgroup:JWST",
+        "Include combined queries: 'refereed ALMA papers', 'papers citing JWST observations'",
+        "Output to data/datasets/generated/bibgroup_examples.json",
+        "Run: mise run lint - passes"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-009",
+      "title": "Generate operator variation training examples",
+      "description": "As a data curator, I need training examples with diverse operator trigger phrases.",
+      "acceptanceCriteria": [
+        "Create scripts/generate_operator_examples.py",
+        "For each of 7 operators, generate 15+ examples with varied trigger phrases",
+        "citations(): use all new patterns from US-004",
+        "references(): 'what does X cite', 'bibliography of X', 'sources cited by X'",
+        "trending(): 'hot papers', 'popular research', 'what's trending in X'",
+        "similar(): 'papers like X', 'related to X', 'work similar to X'",
+        "useful(): 'helpful papers on X', 'foundational work on X'",
+        "reviews(): 'review articles on X', 'survey of X'",
+        "topn(): 'top 10 papers on X', 'most cited papers about X'",
+        "Output to data/datasets/generated/operator_examples.json",
+        "Run: mise run lint - passes"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-010",
+      "title": "Curate generated examples with LLM judge",
+      "description": "As a data curator, I need to validate all generated examples through the LLM judge.",
+      "acceptanceCriteria": [
+        "Create scripts/curate_generated_examples.py that processes all generated/*.json files",
+        "Run each example through llm_judge.py for quality validation",
+        "Run each example through syntax_validator.py for ADS syntax validation",
+        "Quarantine examples with score < 3 or syntax errors",
+        "Output curated examples to data/datasets/generated/curated_*.json",
+        "Output quarantine report with failure reasons",
+        "Run: mise run lint - passes"
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-011",
+      "title": "Merge curated examples into gold_examples.json",
+      "description": "As a data curator, I need to merge all curated generated examples into the main training dataset.",
+      "acceptanceCriteria": [
+        "Create scripts/merge_examples.py",
+        "Load all curated_*.json files from data/datasets/generated/",
+        "Deduplicate against existing gold_examples.json (by NL text)",
+        "Assign appropriate category to each example (collection, property, doctype, bibgroup, operator)",
+        "Merge into gold_examples.json preserving existing examples",
+        "Output merge report: examples added per category, duplicates skipped, new total count",
+        "Target: 6000+ total examples (currently 4002)",
+        "Run: mise run lint - passes"
+      ],
+      "priority": 11,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-012",
+      "title": "Create benchmark evaluation set",
+      "description": "As a QA engineer, I need a benchmark evaluation set covering all data model elements.",
+      "acceptanceCriteria": [
+        "Create data/datasets/benchmark/ directory",
+        "Create scripts/create_benchmark.py that generates benchmark_queries.json",
+        "Include 10+ examples for each: field type, operator, property value subset, doctype subset, bibgroup subset",
+        "Include edge cases: ambiguous operator words, complex boolean logic, nested operators",
+        "Include regression tests: all known malformed patterns that must be rejected",
+        "Target: 300+ test cases total",
+        "Run: mise run lint - passes"
+      ],
+      "priority": 12,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-013",
+      "title": "Automated benchmark evaluation script",
+      "description": "As a QA engineer, I need automated evaluation against the benchmark set.",
+      "acceptanceCriteria": [
+        "Create scripts/evaluate_benchmark.py",
+        "Run model against benchmark_queries.json",
+        "Calculate metrics: exact match rate, field assignment accuracy, operator accuracy, syntax validity",
+        "Breakdown results by category: author, operator, property, collection, etc.",
+        "Output evaluation report to data/datasets/evaluations/benchmark_results.json",
+        "Add mise task: mise run eval:benchmark",
+        "Run: mise run lint - passes"
+      ],
+      "priority": 13,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-014",
+      "title": "Run updated coverage audit post-generation",
+      "description": "As a data engineer, I need to verify coverage improved after generating new examples.",
+      "acceptanceCriteria": [
+        "Run scripts/audit_training_coverage.py on updated gold_examples.json",
+        "Compare to baseline audit from US-002",
+        "Verify: all 4 databases have examples (was 0)",
+        "Verify: >90% of properties have examples (was 5/21)",
+        "Verify: >90% of doctypes have examples (was 9/22)",
+        "Verify: all operators have >30 examples each",
+        "Output comparison report: before vs after coverage",
+        "Run: mise run lint - passes"
+      ],
+      "priority": 14,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-015",
+      "title": "Retrain model with enhanced data",
+      "description": "As a system owner, I need the model retrained on data model-enhanced training set.",
+      "acceptanceCriteria": [
+        "Run curation pipeline: mise run curate on enhanced gold_examples.json",
+        "Verify curated examples increased (target: 2000+ curated, was 644)",
+        "Train new model: scix-finetune train",
+        "Deploy to Modal endpoint",
+        "Run benchmark evaluation: mise run eval:benchmark",
+        "Document training results (job ID, metrics, model ID) in progress.txt",
+        "Run: mise run lint - passes"
+      ],
+      "priority": 15,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-016",
+      "title": "Regression testing and browser verification",
+      "description": "As a QA engineer, I need to verify no regressions after data model enhancement.",
+      "acceptanceCriteria": [
+        "Run all existing tests: mise run test",
+        "Run integration tests: mise run test:integration",
+        "Compare benchmark results to pre-enhancement (US-013 baseline)",
+        "No category should regress >5% from baseline",
+        "All malformed pattern tests must pass (0 citationsabs: etc.)",
+        "Verify in browser: test diverse query types work correctly",
+        "Document any regressions and fixes in progress.txt"
+      ],
+      "priority": 16,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}

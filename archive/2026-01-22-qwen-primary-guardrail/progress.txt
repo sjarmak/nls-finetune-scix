@@ -1,0 +1,32 @@
+# Ralph Progress Log
+Started: Wed Jan 22 17:30:00 EST 2026
+
+## Codebase Patterns
+
+- **ValidationResult dataclass**: Use `dataclass_field` alias when looping over `field` variable to avoid shadowing
+- **Guardrail module location**: `packages/finetune/src/finetune/domains/scix/guardrail/`
+- **FIELD_ENUMS import**: Use `from ..field_constraints import FIELD_ENUMS, suggest_correction`
+- **Generated data location**: `data/datasets/generated/` for new training examples
+- **Gold examples**: `data/datasets/raw/gold_examples.json` (4002 examples as of start)
+
+---
+
+## Project: Data Model Coverage Enhancement
+
+### Current State (Pre-Enhancement)
+- **Total examples**: 4002
+- **Database/collection examples**: 0 (gap!)
+- **Property values covered**: 5/21 (refereed, openaccess, data, notrefereed, software)
+- **Doctype values covered**: 9/22 (article, software, catalog, phdthesis, techreport, proposal, proceedings, eprint, inproceedings)
+- **Bibgroup examples**: 126 across ~10 groups
+- **Operator examples**: citations(40), trending(30), similar(22), reviews(22), references(20), useful(19), topn(17)
+
+### Target (Post-Enhancement)
+- **Total examples**: 6000+
+- **Database coverage**: 4/4 (add earthscience to constraints)
+- **Property coverage**: >90% (19+/21)
+- **Doctype coverage**: >90% (20+/22)
+- **Bibgroup coverage**: All 53 with 3+ examples each
+- **Operator examples**: 30+ each with diverse trigger phrases
+
+---

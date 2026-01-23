@@ -1,0 +1,269 @@
+{
+  "generated_at": "2026-01-23T09:12:12.331021",
+  "model_used": "gpt-5.2",
+  "summary": {
+    "total_reviewed": 4721,
+    "with_issues": 9,
+    "issue_rate": "0.2%",
+    "by_action": {
+      "keep": 4712,
+      "remove": 3,
+      "fix": 6
+    },
+    "by_issue_type": {
+      "author_initials": 3,
+      "syntax": 6
+    }
+  },
+  "issues_by_type": {
+    "author_initials": [
+      {
+        "index": 1256,
+        "nl": "papers by Tinaut-Ruano F",
+        "query": "author:\"^Tinaut-Ruano+, F.\" doctype:article",
+        "category": "first_author",
+        "issue": {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Author 'Tinaut' in NL got initials '^Tinaut-Ruano+, F.' without user providing them",
+          "suggested_fix": "author:\"Tinaut\""
+        }
+      },
+      {
+        "index": 1371,
+        "nl": "papers by Fors or Fors Aldrich on stellar photometry",
+        "query": "author:\"Fors\" or author:\"Fors Aldrich,O.\" doctype:article",
+        "category": "author",
+        "issue": {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Author 'Fors' in NL got initials 'Fors Aldrich,O.' without user providing them",
+          "suggested_fix": "author:\"Fors\""
+        }
+      },
+      {
+        "index": 2145,
+        "nl": "papers by Sainz Dalda on solar magnetic fields",
+        "query": "author:\"Sainz Dalda, A.\" OR =author:\"Dalda, A. Sainz\" OR =author:\"Dalda, A. S.\" OR =author:\"Dalda, Alberto Sainz\" doctype:article",
+        "category": "author",
+        "issue": {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Author 'Sainz' in NL got initials 'Sainz Dalda, A.' without user providing them",
+          "suggested_fix": "author:\"Sainz\""
+        }
+      }
+    ],
+    "syntax": [
+      {
+        "index": 2604,
+        "nl": "papers within 10 arcmin of 05h23m34.6s -69d45m22s",
+        "query": "object:\"05h23m34.6s -69d45m22s:0.1667\" doctype:article",
+        "category": "object",
+        "issue": {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: s",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 2605,
+        "nl": "cone search 05h23m34.6s -69d45m22s radius 10'",
+        "query": "object:\"05h23m34.6s -69d45m22s:0.1667\"",
+        "category": "object",
+        "issue": {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: s",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 2606,
+        "nl": "literature near ra 05:23:34.6 dec -69:45:22 within 10 arcmin",
+        "query": "object:\"05h23m34.6s -69d45m22s:0.1667\"",
+        "category": "object",
+        "issue": {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: s",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 2607,
+        "nl": "find papers around 80.894167 -69.756111 10 arcmin",
+        "query": "object:\"05h23m34.6s -69d45m22s:0.1667\" doctype:article",
+        "category": "object",
+        "issue": {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: s",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 2608,
+        "nl": "object search at 80.894167 -69.756111 r=0.1667deg",
+        "query": "object:\"05h23m34.6s -69d45m22s:0.1667\"",
+        "category": "object",
+        "issue": {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: s",
+          "suggested_fix": null
+        }
+      },
+      {
+        "index": 2609,
+        "nl": "cone 80.894167 -69.756111 0 10",
+        "query": "object:\"05h23m34.6s -69d45m22s:0.1667\"",
+        "category": "object",
+        "issue": {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: s",
+          "suggested_fix": null
+        }
+      }
+    ]
+  },
+  "flagged_examples": [
+    {
+      "index": 1256,
+      "nl": "papers by Tinaut-Ruano F",
+      "query": "author:\"^Tinaut-Ruano+, F.\" doctype:article",
+      "category": "first_author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Author 'Tinaut' in NL got initials '^Tinaut-Ruano+, F.' without user providing them",
+          "suggested_fix": "author:\"Tinaut\""
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 1371,
+      "nl": "papers by Fors or Fors Aldrich on stellar photometry",
+      "query": "author:\"Fors\" or author:\"Fors Aldrich,O.\" doctype:article",
+      "category": "author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Author 'Fors' in NL got initials 'Fors Aldrich,O.' without user providing them",
+          "suggested_fix": "author:\"Fors\""
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 2145,
+      "nl": "papers by Sainz Dalda on solar magnetic fields",
+      "query": "author:\"Sainz Dalda, A.\" OR =author:\"Dalda, A. Sainz\" OR =author:\"Dalda, A. S.\" OR =author:\"Dalda, Alberto Sainz\" doctype:article",
+      "category": "author",
+      "issues": [
+        {
+          "type": "author_initials",
+          "severity": "critical",
+          "description": "Author 'Sainz' in NL got initials 'Sainz Dalda, A.' without user providing them",
+          "suggested_fix": "author:\"Sainz\""
+        }
+      ],
+      "recommended_action": "remove"
+    },
+    {
+      "index": 2604,
+      "nl": "papers within 10 arcmin of 05h23m34.6s -69d45m22s",
+      "query": "object:\"05h23m34.6s -69d45m22s:0.1667\" doctype:article",
+      "category": "object",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: s",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "fix"
+    },
+    {
+      "index": 2605,
+      "nl": "cone search 05h23m34.6s -69d45m22s radius 10'",
+      "query": "object:\"05h23m34.6s -69d45m22s:0.1667\"",
+      "category": "object",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: s",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "fix"
+    },
+    {
+      "index": 2606,
+      "nl": "literature near ra 05:23:34.6 dec -69:45:22 within 10 arcmin",
+      "query": "object:\"05h23m34.6s -69d45m22s:0.1667\"",
+      "category": "object",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: s",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "fix"
+    },
+    {
+      "index": 2607,
+      "nl": "find papers around 80.894167 -69.756111 10 arcmin",
+      "query": "object:\"05h23m34.6s -69d45m22s:0.1667\" doctype:article",
+      "category": "object",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: s",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "fix"
+    },
+    {
+      "index": 2608,
+      "nl": "object search at 80.894167 -69.756111 r=0.1667deg",
+      "query": "object:\"05h23m34.6s -69d45m22s:0.1667\"",
+      "category": "object",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: s",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "fix"
+    },
+    {
+      "index": 2609,
+      "nl": "cone 80.894167 -69.756111 0 10",
+      "query": "object:\"05h23m34.6s -69d45m22s:0.1667\"",
+      "category": "object",
+      "issues": [
+        {
+          "type": "syntax",
+          "severity": "high",
+          "description": "Unknown field prefix: s",
+          "suggested_fix": null
+        }
+      ],
+      "recommended_action": "fix"
+    }
+  ]
+}

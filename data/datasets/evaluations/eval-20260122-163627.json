@@ -1,0 +1,901 @@
+{
+  "timestamp": "2026-01-22T16:36:27.478533",
+  "endpoint": "https://sjarmak--nls-finetune-serve-vllm-serve.modal.run",
+  "sample_size": 50,
+  "curated": true,
+  "summary": {
+    "total": 50,
+    "syntax_valid": 50,
+    "syntax_valid_rate": 1.0,
+    "entity_valid": 39,
+    "entity_valid_rate": 0.78,
+    "operator_valid": 50,
+    "operator_valid_rate": 1.0,
+    "malformed_count": 0,
+    "malformed_rate": 0.0,
+    "avg_latency_ms": 310.8,
+    "p75_latency_ms": 322.1,
+    "p90_latency_ms": 351.5,
+    "cold_start_latency_ms": 325.2
+  },
+  "results": [
+    {
+      "id": "val-14",
+      "input": "title contains solar wind",
+      "expected": "title:\"solar wind\"",
+      "generated": "Query: title:\"solar wind\"",
+      "latency_ms": 325.2,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-3",
+      "input": "proceedings in physics database",
+      "expected": "doctype:proceedings database:physics",
+      "generated": "Query: \"proceedings in physics\" database: physics.DOI 10.1063/1.4986996",
+      "latency_ms": 348.9,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-35",
+      "input": "\u0410\u0440\u0430\u043c \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d \u044d\u0441\u043a\u0438\u0437 \u0445\u0430\u0440\u0430\u043a\u0442\u0435\u0440\u0438\u0441\u0442\u0438\u043a\u0438\" OR \"Aram Khachaturian sketches characteristics",
+      "expected": "title:\"\u0410\u0440\u0430\u043c \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d. \u042d\u0441\u043a\u0438\u0437 \u0445\u0430\u0440\u0430\u043a\u0442\u0435\u0440\u0438\u0441\u0442\u0438\u043a\u0438 [Aram Khachaturian. Sketches of characteristics]\"",
+      "generated": "Query: \"Aram Khachaturian\" title:\"sketches characteristics\"",
+      "latency_ms": 308.8,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-31",
+      "input": "top cited supernovae",
+      "expected": "abs:\"supernovae\" citation_count:[50 TO *]",
+      "generated": "Query: abs:supernova citation_count:[1000 TO *]",
+      "latency_ms": 338.5,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for abs: should be quoted', position=7, suggestion='abs:\"supernova citation_count\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='abs:supernova citation_count', corrected='abs:\"supernova citation_count\"', position=7)"
+      ],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-28",
+      "input": "papers by Gim\u00e9nez-Arteaga 2023",
+      "expected": "author:\"Gim\u00e9nez-Arteaga\", year:2023",
+      "generated": "Query: author:\\\"^Gim\u00e9nez-Arteaga\\\" year:2023",
+      "latency_ms": 345.6,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for author: should be quoted', position=7, suggestion='author:\"\\\\\"^Gim\u00e9nez-Arteaga\\\\\" year\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='author:\\\\\"^Gim\u00e9nez-Arteaga\\\\\" year', corrected='author:\"\\\\\"^Gim\u00e9nez-Arteaga\\\\\" year\"', position=7)"
+      ],
+      "entity_valid": false,
+      "entity_mismatches": [
+        "EntityMismatch(entity='Arteaga', expected_field='author', found_in_field=None, issue_type='missing', message=\"Author 'Arteaga' not found in query\")"
+      ],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-17",
+      "input": "papers by Ensslin as first author",
+      "expected": "author:\"Ensslin\"",
+      "generated": "Query: author:(\\\"^Ensslin\\\")",
+      "latency_ms": 282.6,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": false,
+      "entity_mismatches": [
+        "EntityMismatch(entity='Ensslin', expected_field='author', found_in_field=None, issue_type='missing', message=\"Author 'Ensslin' not found in query\")"
+      ],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-13",
+      "input": "nustar hot gas mass measurements in galaxy clusters",
+      "expected": "abs:(nustar hot gas mass)",
+      "generated": "Query: \"nustar hot gas mass\" AND \"galaxy clusters\"",
+      "latency_ms": 319.2,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-11",
+      "input": "European Southern Observatory research",
+      "expected": "aff:\"ESO\" OR aff:\"European Southern Observatory\"",
+      "generated": "Query: abs:\"ESO research\"",
+      "latency_ms": 267.0,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-37",
+      "input": "papers by hsieh as first author",
+      "expected": "author:\"hsieh\"",
+      "generated": "Query: author:(\\\"hsieh\\\")",
+      "latency_ms": 280.7,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-27",
+      "input": "papers by Hauschildt 1999",
+      "expected": "author:\"hauschildt, P H\" year:1999",
+      "generated": "Query: author:\\\"Hauschildt, P. H.\\\" year:1999",
+      "latency_ms": 314.0,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for author: should be quoted', position=7, suggestion='author:\"\\\\\"Hauschildt, P. H.\\\\\" year\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='author:\\\\\"Hauschildt, P. H.\\\\\" year', corrected='author:\"\\\\\"Hauschildt, P. H.\\\\\" year\"', position=7)"
+      ],
+      "entity_valid": false,
+      "entity_mismatches": [
+        "EntityMismatch(entity='Hauschildt', expected_field='author', found_in_field=None, issue_type='missing', message=\"Author 'Hauschildt' not found in query\")"
+      ],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-2",
+      "input": "papers by zank gary 2022",
+      "expected": "pubdate:[2022-01 TO 2022-12] author:\"(\"zank,\" gary\")",
+      "generated": "Query: author:\\\"^zank, gary\\\" year:2022",
+      "latency_ms": 305.1,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for author: should be quoted', position=7, suggestion='author:\"\\\\\"^zank, gary\\\\\" year\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='author:\\\\\"^zank, gary\\\\\" year', corrected='author:\"\\\\\"^zank, gary\\\\\" year\"', position=7)"
+      ],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-1",
+      "input": "papers about machine learning",
+      "expected": "abs:\"machine learning\"",
+      "generated": "Query: \"machine learning\"",
+      "latency_ms": 252.7,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-5",
+      "input": "body contains planetary atmospheres",
+      "expected": "body:\"planetary atmospheres\"",
+      "generated": "Query: \"abs:\\\"planetary atmospheres\\\"",
+      "latency_ms": 274.8,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for abs: should be quoted', position=8, suggestion='abs:\"\\\\\"planetary atmospheres\\\\\"\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='abs:\\\\\"planetary atmospheres\\\\\"', corrected='abs:\"\\\\\"planetary atmospheres\\\\\"\"', position=8)"
+      ],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-64",
+      "input": "ApJ coronal mass ejections data",
+      "expected": "bibstem:\"ApJ\" property:data abs:\"coronal mass ejections\"",
+      "generated": "Query: \"Coronal Mass Ejection\" AND \"ApJ\" AND \"abs:\"",
+      "latency_ms": 307.5,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-70",
+      "input": "papers by Hoffmeister 1929 1930",
+      "expected": "author:\"Hoffmeister\" pubdate:[1929-01 TO 1930-01]",
+      "generated": "Query: author:(\\\"Hoffmeister\\\") AND year:1929-1930",
+      "latency_ms": 300.2,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": false,
+      "entity_mismatches": [
+        "EntityMismatch(entity='Hoffmeister', expected_field='author', found_in_field=None, issue_type='missing', message=\"Author 'Hoffmeister' not found in query\")"
+      ],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-32",
+      "input": "tanaka first author 2012",
+      "expected": "author:\"tanaka\" 2012",
+      "generated": "Query: author:\\\"^tanaka\\\" year:2012",
+      "latency_ms": 315.7,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for author: should be quoted', position=7, suggestion='author:\"\\\\\"^tanaka\\\\\" year\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='author:\\\\\"^tanaka\\\\\" year', corrected='author:\"\\\\\"^tanaka\\\\\" year\"', position=7)"
+      ],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-38",
+      "input": "nmf papers 2023 2024",
+      "expected": "((nmf) AND year:2023-2024)",
+      "generated": "Query: nmf year:2023-2024",
+      "latency_ms": 323.1,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-59",
+      "input": "Croton 2006 MNRAS volume 365 page 11",
+      "expected": "abs:(Croton+06, MNRAS, 365, 11)",
+      "generated": "Query: \"Croton 2006 MNRAS 365 11\"",
+      "latency_ms": 320.0,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-68",
+      "input": "Gaia astrometry 2017",
+      "expected": "abs:\"Gaia astrometry\" pubdate:2017",
+      "generated": "Query: abs:\"Gaia astrometry\" pubdate:2017",
+      "latency_ms": 292.7,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-12",
+      "input": "rigby 2016 fellwalker algorithm",
+      "expected": "author:\"rigby\" year:2016 keyword:\"fellwalker\"",
+      "generated": "Query: rigby 2016 fellwalker",
+      "latency_ms": 271.1,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-45",
+      "input": "Orion Nebula star formation",
+      "expected": "object:\"Orion Nebula\" abs:\"star formation\"",
+      "generated": "Query: \"Orion Nebula\" AND \"star formation\"",
+      "latency_ms": 308.9,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-41",
+      "input": "papers by Hauschildt on phoenix stellar atmospheres",
+      "expected": "author:\"Hauschildt, P H\" abs:\"phoenix\"",
+      "generated": "Query: \"Hauschildt\" AND \"phoenix\"",
+      "latency_ms": 297.2,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": false,
+      "entity_mismatches": [
+        "EntityMismatch(entity='Hauschildt', expected_field='author', found_in_field=None, issue_type='missing', message=\"Author 'Hauschildt' not found in query\")"
+      ],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-44",
+      "input": "Gaussian process classification galaxy blending LSST deblending machine learning",
+      "expected": "abs:(Gaussian Process Classification for Galaxy Blend Identification in LSST)",
+      "generated": "Query: \"Gaussian process classification galaxy blending LSST deblending machine learning\"",
+      "latency_ms": 345.2,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-34",
+      "input": "open clusters between 2023 and 2025",
+      "expected": "abs:\"open clusters\" year:2023-2025",
+      "generated": "Query: abs:\\\"open clusters\\\" pubdate:[2023 TO 2025]",
+      "latency_ms": 296.4,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for abs: should be quoted', position=7, suggestion='abs:\"\\\\\"open clusters\\\\\" pubdate\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='abs:\\\\\"open clusters\\\\\" pubdate', corrected='abs:\"\\\\\"open clusters\\\\\" pubdate\"', position=7)"
+      ],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-26",
+      "input": "vera rubin solar wind 2018-2023",
+      "expected": "author:\"rubin, V\" abs:\"solar wind\" year:2018-2023",
+      "generated": "Query: \"vera rubin\" AND \"solar wind\" AND year:2018-2023",
+      "latency_ms": 321.1,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-56",
+      "input": "papers about NGC 1156 galaxy",
+      "expected": "pubdate:[1890-01 TO 2023-11] title:(ngc-1156)",
+      "generated": "Query: NGC 1156",
+      "latency_ms": 295.1,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-66",
+      "input": "papers by Heintz since 2015",
+      "expected": "author:\"Heintz, K E\" year:2015-",
+      "generated": "Query: author:(\\\"Heintz\\\") AND pubdate:[2015 TO *]",
+      "latency_ms": 351.5,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": false,
+      "entity_mismatches": [
+        "EntityMismatch(entity='Heintz', expected_field='author', found_in_field=None, issue_type='missing', message=\"Author 'Heintz' not found in query\")"
+      ],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-62",
+      "input": "exomoon or exoring detection papers",
+      "expected": "abs:\"exomoon\" OR abs:\"exoring\"",
+      "generated": "Query: exomoon exoring detection",
+      "latency_ms": 275.6,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-65",
+      "input": "ALMA observations of protoplanetary disks",
+      "expected": "abs:\"ALMA\" abs:\"protoplanetary disk\"",
+      "generated": "Query: ALMA protoplanetary disks",
+      "latency_ms": 283.0,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-0",
+      "input": "body contains asteroid composition",
+      "expected": "body:\"asteroid composition\"",
+      "generated": "Query: \"abs:\\\"asteroid composition\\\" full:\\\"body\\\"",
+      "latency_ms": 344.4,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for abs: should be quoted', position=8, suggestion='abs:\"\\\\\"asteroid composition\\\\\" full\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='abs:\\\\\"asteroid composition\\\\\" full', corrected='abs:\"\\\\\"asteroid composition\\\\\" full\"', position=8)"
+      ],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-10",
+      "input": "AJ solar wind data",
+      "expected": "bibstem:\"AJ\" property:data abs:\"solar wind\"",
+      "generated": "Query: AJ solar wind data",
+      "latency_ms": 266.3,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-61",
+      "input": "solar interior models papers with sun in title",
+      "expected": "database:astronomy abstract:(solar,) abstract:(interior,) abstract:(sun,) abstract:(model) title:(sun,) title:(interior,)",
+      "generated": "Query: \"sun\" title: \"solar interior models\"",
+      "latency_ms": 347.3,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-21",
+      "input": "papers by Gaensler on arXiv",
+      "expected": "author:\"Gaensler, B\" and bibstem:\"arXiv\"",
+      "generated": "Query: \"author:\\\"Gaensler, M.\\\" AND abs:\\\"arXiv\\\"",
+      "latency_ms": 359.4,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for author: should be quoted', position=8, suggestion='author:\"\\\\\"Gaensler, M.\\\\\"\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='author:\\\\\"Gaensler, M.\\\\\"', corrected='author:\"\\\\\"Gaensler, M.\\\\\"\"', position=8)"
+      ],
+      "entity_valid": false,
+      "entity_mismatches": [
+        "EntityMismatch(entity='Gaensler', expected_field='author', found_in_field=None, issue_type='missing', message=\"Author 'Gaensler' not found in query\")"
+      ],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-42",
+      "input": "papers by webbink as first author",
+      "expected": "author:\"webbink, R\"",
+      "generated": "Query: author:(\\\"^webbink\\\")",
+      "latency_ms": 297.7,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-9",
+      "input": "spectroscopy near exoplanet in abstract",
+      "expected": "abs:(spectroscopy NEAR5 exoplanet)",
+      "generated": "Query: spectroscopy near exoplanet",
+      "latency_ms": 305.4,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-57",
+      "input": "dark matter candidates 2024",
+      "expected": "abs:\"dark matter candidates\" pubdate:2024",
+      "generated": "Query: abs:\"dark matter candidates\" pubdate:2024",
+      "latency_ms": 261.3,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-54",
+      "input": "papers by Jaroszynski 1997",
+      "expected": "author:\"Jaroszynski\" year:1997",
+      "generated": "Query: author:(\\\"^jaroszynski\\\") year:1997",
+      "latency_ms": 320.4,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": false,
+      "entity_mismatches": [
+        "EntityMismatch(entity='Jaroszynski', expected_field='author', found_in_field=None, issue_type='missing', message=\"Author 'Jaroszynski' not found in query\")"
+      ],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-6",
+      "input": "radio astronomy papers from the VLA",
+      "expected": "abs:\"VLA\" database:astronomy",
+      "generated": "Query: abs:\"VLA\" bibstem:astro-ph\nQuery: abs:\"VLA\" bibstem:astro-ph\nQuery: abs:\"VLA\" bibstem:astro-ph",
+      "latency_ms": 426.6,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-58",
+      "input": "radio astronomy from 2022 to 2025",
+      "expected": "abs:\"radio astronomy\" year:2022-2025",
+      "generated": "Query: abs:radio astronomy pubdate:[2022 TO 2025]",
+      "latency_ms": 302.7,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for abs: should be quoted', position=7, suggestion='abs:\"radio astronomy pubdate\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='abs:radio astronomy pubdate', corrected='abs:\"radio astronomy pubdate\"', position=7)"
+      ],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-24",
+      "input": "papers by chen from 2020",
+      "expected": "author:\"chen\" pubdate:2020",
+      "generated": "Query: author:\\\"chen\\\" year:2020",
+      "latency_ms": 288.6,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for author: should be quoted', position=7, suggestion='author:\"\\\\\"chen\\\\\" year\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='author:\\\\\"chen\\\\\" year', corrected='author:\"\\\\\"chen\\\\\" year\"', position=7)"
+      ],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-69",
+      "input": "Einstein's work",
+      "expected": "author:\"Einstein, A\"",
+      "generated": "Query: author:\\\"Einstein, A.\\\"",
+      "latency_ms": 316.2,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for author: should be quoted', position=7, suggestion='author:\"\\\\\"Einstein, A.\\\\\"\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='author:\\\\\"Einstein, A.\\\\\"', corrected='author:\"\\\\\"Einstein, A.\\\\\"\"', position=7)"
+      ],
+      "entity_valid": false,
+      "entity_mismatches": [
+        "EntityMismatch(entity='Einstein', expected_field='author', found_in_field=None, issue_type='missing', message=\"Author 'Einstein' not found in query\")"
+      ],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-63",
+      "input": "pyrogallol effects on catfish hematology biochemistry",
+      "expected": "abs:(Exposure to pyrogallol impacts the hemato-biochemical endpoints in catfish)",
+      "generated": "Query: pyrogallol effects on catfish blood and hematology",
+      "latency_ms": 285.3,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-39",
+      "input": "papers by arevalo astronomy",
+      "expected": "author:\"arevalo, P\" database:astronomy",
+      "generated": "Query: author:\\\"arevalo, a.\\\" database:astronomy abstracts",
+      "latency_ms": 319.2,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for author: should be quoted', position=7, suggestion='author:\"\\\\\"arevalo, a.\\\\\" database\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='author:\\\\\"arevalo, a.\\\\\" database', corrected='author:\"\\\\\"arevalo, a.\\\\\" database\"', position=7)"
+      ],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-29",
+      "input": "title contains exoplanets",
+      "expected": "title:\"exoplanets\"",
+      "generated": "Query: \"exoplanets\"",
+      "latency_ms": 288.9,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-19",
+      "input": "phdthesis in physics database",
+      "expected": "doctype:phdthesis database:physics",
+      "generated": "Query: \"phdthesis in physics\"",
+      "latency_ms": 290.8,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-8",
+      "input": "proposal in physics database",
+      "expected": "doctype:proposal database:physics",
+      "generated": "Query: \"proposal physics\"",
+      "latency_ms": 304.3,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-53",
+      "input": "papers by johnson",
+      "expected": "author:\"johnson\"",
+      "generated": "Query: author:(\\\"johnson, j.\\\")",
+      "latency_ms": 322.1,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": false,
+      "entity_mismatches": [
+        "EntityMismatch(entity='johnson', expected_field='author', found_in_field=None, issue_type='missing', message=\"Author 'johnson' not found in query\")"
+      ],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-23",
+      "input": "weak lensing 2020",
+      "expected": "abs:\"weak lensing\" year:2020",
+      "generated": "Query: abs:\"weak lensing\" pubdate:2020",
+      "latency_ms": 311.2,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-50",
+      "input": "papers by Chabrier 2005",
+      "expected": "author:\"chabrier\", year:2005",
+      "generated": "Query: author:\\\"^Chabrier\\\" year:2005",
+      "latency_ms": 358.7,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [
+        "ValidationIssue(severity=<Severity.WARNING: 'warning'>, code='UNQUOTED_MULTIWORD', message='Multi-word value for author: should be quoted', position=7, suggestion='author:\"\\\\\"^Chabrier\\\\\" year\"')"
+      ],
+      "syntax_corrections": [
+        "Correction(code='ADD_QUOTES', original='author:\\\\\"^Chabrier\\\\\" year', corrected='author:\"\\\\\"^Chabrier\\\\\" year\"', position=7)"
+      ],
+      "entity_valid": false,
+      "entity_mismatches": [
+        "EntityMismatch(entity='Chabrier', expected_field='author', found_in_field=None, issue_type='missing', message=\"Author 'Chabrier' not found in query\")"
+      ],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    },
+    {
+      "id": "val-43",
+      "input": "A&A weak lensing openaccess",
+      "expected": "bibstem:\"A&A\" property:openaccess abs:\"weak lensing\"",
+      "generated": "Query: abs:\\\"A\\&A\\\" AND abs:\\\"weak lensing\\\" AND property:openaccess",
+      "latency_ms": 370.8,
+      "syntax_valid": true,
+      "syntax_errors": [],
+      "syntax_warnings": [],
+      "syntax_corrections": [],
+      "entity_valid": true,
+      "entity_mismatches": [],
+      "operator_valid": true,
+      "operator_suspicious": [],
+      "malformed_patterns": []
+    }
+  ]
+}
