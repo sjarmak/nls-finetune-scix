@@ -1,0 +1,76 @@
+{
+  "generated_at": "2026-01-23T13:15:05.240913",
+  "model_used": "gpt-5.2",
+  "summary": {
+    "total_reviewed": 4557,
+    "with_issues": 2,
+    "issue_rate": "0.0%",
+    "by_action": {
+      "keep": 4555,
+      "review": 2
+    },
+    "by_issue_type": {
+      "missing_doctype": 2
+    }
+  },
+  "issues_by_type": {
+    "missing_doctype": [
+      {
+        "index": 529,
+        "nl": "paper with identifier 1993ap&ss.202..215d",
+        "query": "identifier:\"1993ap&ss.202..215d\"",
+        "category": "compound",
+        "issue": {
+          "type": "missing_doctype",
+          "severity": "medium",
+          "description": "NL mentions 'papers' but query missing doctype:article",
+          "suggested_fix": "Add doctype:article"
+        }
+      },
+      {
+        "index": 4485,
+        "nl": "reviews publications with table of contents",
+        "query": "property:toc reviews(*)",
+        "category": "property",
+        "issue": {
+          "type": "missing_doctype",
+          "severity": "medium",
+          "description": "NL mentions 'papers' but query missing doctype:article",
+          "suggested_fix": "Add doctype:article"
+        }
+      }
+    ]
+  },
+  "flagged_examples": [
+    {
+      "index": 529,
+      "nl": "paper with identifier 1993ap&ss.202..215d",
+      "query": "identifier:\"1993ap&ss.202..215d\"",
+      "category": "compound",
+      "issues": [
+        {
+          "type": "missing_doctype",
+          "severity": "medium",
+          "description": "NL mentions 'papers' but query missing doctype:article",
+          "suggested_fix": "Add doctype:article"
+        }
+      ],
+      "recommended_action": "review"
+    },
+    {
+      "index": 4485,
+      "nl": "reviews publications with table of contents",
+      "query": "property:toc reviews(*)",
+      "category": "property",
+      "issues": [
+        {
+          "type": "missing_doctype",
+          "severity": "medium",
+          "description": "NL mentions 'papers' but query missing doctype:article",
+          "suggested_fix": "Add doctype:article"
+        }
+      ],
+      "recommended_action": "review"
+    }
+  ]
+}

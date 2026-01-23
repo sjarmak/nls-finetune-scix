@@ -5111,7 +5111,7 @@
   },
   {
     "natural_language": "stellar evolution from 2017 to 2020",
-    "ads_query": "abs:\"stellar evolution\" year:2017-2020",
+    "ads_query": "abs:(stellar AND evolution) year:2017-2020",
     "category": "publication"
   },
   {
@@ -6101,7 +6101,7 @@
   },
   {
     "natural_language": "foundational papers for radial velocity measurements",
-    "ads_query": "useful(abs:\"radial velocity\") doctype:article",
+    "ads_query": "useful(abs:(radial AND velocity)) doctype:article",
     "category": "operator"
   },
   {
@@ -7176,7 +7176,7 @@
   },
   {
     "natural_language": "magnetar X-ray observations",
-    "ads_query": "abs:\"magnetar\" abs:\"X-ray\"",
+    "ads_query": "abs:magnetar abs:\"X-ray\"",
     "category": "compound"
   },
   {
@@ -7471,7 +7471,7 @@
   },
   {
     "natural_language": "galaxy formation studies",
-    "ads_query": "abs:\"galaxy formation\" doctype:article",
+    "ads_query": "abs:(galaxy AND formation) doctype:article",
     "category": "topic"
   },
   {
@@ -11786,7 +11786,7 @@
   },
   {
     "natural_language": "Chandra X-ray in Science",
-    "ads_query": "abs:\"Chandra X-ray\" bibstem:\"Science\"",
+    "ads_query": "abs:(Chandra AND \"X-ray\") bibstem:Science",
     "category": "publication"
   },
   {
@@ -14766,7 +14766,7 @@
   },
   {
     "natural_language": "papers on infrared astronomy from 2020",
-    "ads_query": "abs:\"infrared astronomy\" year:2020 doctype:article",
+    "ads_query": "(abs:infrared OR keyword:\"infrared astronomy\") collection:astronomy year:2020 doctype:article",
     "category": "publication"
   },
   {
@@ -14866,7 +14866,7 @@
   },
   {
     "natural_language": "papers on exoplanets from 2022 to 2025",
-    "ads_query": "abs:\"exoplanets\" year:2022-2025 doctype:article",
+    "ads_query": "abs:exoplanets year:2022-2025 doctype:article",
     "category": "publication"
   },
   {
@@ -15166,7 +15166,7 @@
   },
   {
     "natural_language": "infrared astronomy papers by huchra john",
-    "ads_query": "author:\"huchra, john\" abs:\"infrared astronomy\" doctype:article",
+    "ads_query": "author:\"huchra, john\" (abs:infrared OR keyword:\"infrared astronomy\") collection:astronomy doctype:article",
     "category": "author"
   },
   {
@@ -15366,7 +15366,7 @@
   },
   {
     "natural_language": "murray stephen infrared astronomy",
-    "ads_query": "author:\"murray, stephen\" abs:\"infrared astronomy\"",
+    "ads_query": "author:\"murray, stephen\" (abs:infrared OR keyword:\"infrared astronomy\") collection:astronomy",
     "category": "author"
   },
   {
@@ -18941,7 +18941,7 @@
   },
   {
     "natural_language": "Spitzer infrared spectroscopy papers",
-    "ads_query": "bibgroup:Spitzer abs:\"infrared spectroscopy\" doctype:article",
+    "ads_query": "bibgroup:Spitzer (abs:infrared OR keyword:\"infrared spectroscopy\") doctype:article",
     "category": "bibgroup"
   },
   {
@@ -19841,7 +19841,7 @@
   },
   {
     "natural_language": "Kitt Peak National Observatory observations of photometry",
-    "ads_query": "bibgroup:KPNO abs:\"photometry\"",
+    "ads_query": "bibgroup:KPNO abs:photometry",
     "category": "bibgroup"
   },
   {
@@ -20441,7 +20441,7 @@
   },
   {
     "natural_language": "LIGO observations of detector sensitivity",
-    "ads_query": "bibgroup:LIGO abs:\"detector sensitivity\"",
+    "ads_query": "bibgroup:LIGO abs:(detector AND sensitivity)",
     "category": "bibgroup"
   },
   {
@@ -20736,7 +20736,7 @@
   },
   {
     "natural_language": "refereed physical sciences papers about string theory",
-    "ads_query": "collection:physics abs:\"string theory\" property:refereed doctype:article",
+    "ads_query": "collection:physics (abs:string OR keyword:\"string theory\") property:refereed doctype:article",
     "category": "collection"
   },
   {
@@ -21136,7 +21136,7 @@
   },
   {
     "natural_language": "handbook chapters on radiative transfer",
-    "ads_query": "doctype:inbook abs:\"radiative transfer\"",
+    "ads_query": "doctype:inbook abs:(radiative AND transfer)",
     "category": "doctype"
   },
   {
@@ -21636,7 +21636,7 @@
   },
   {
     "natural_language": "recently popular in galactic dynamics",
-    "ads_query": "trending(abs:\"galactic dynamics\")",
+    "ads_query": "trending(abs:galactic OR keyword:\"galactic dynamics\") collection:astronomy",
     "category": "operator"
   },
   {
@@ -21836,7 +21836,7 @@
   },
   {
     "natural_language": "important papers on galaxy clusters",
-    "ads_query": "useful(abs:\"galaxy clusters\") doctype:article",
+    "ads_query": "useful(abs:(galaxy AND cluster*)) doctype:article",
     "category": "operator"
   },
   {
@@ -21936,7 +21936,7 @@
   },
   {
     "natural_language": "tutorial papers on redshift surveys",
-    "ads_query": "reviews(abs:\"redshift surveys\") doctype:article",
+    "ads_query": "reviews(abs:redshift) doctype:article",
     "category": "operator"
   },
   {
