@@ -1,0 +1,62 @@
+[
+  {
+    "index": 467,
+    "nl": "Seybold Seminars Boston 1996 worlds collide February March",
+    "query": "title:(Seybold OR Seminars OR Boston OR '96 OR [February)",
+    "reason": "Unbalanced brackets/parentheses"
+  },
+  {
+    "index": 503,
+    "nl": "papers by N Andersson neutron stars astrophysical journal 1998",
+    "query": "abs:(Andersson, AND Astroph. AND 502) 708) doctype:article",
+    "reason": "Unbalanced brackets/parentheses"
+  },
+  {
+    "index": 1330,
+    "nl": "\"Bear Flag\" J William Russell reminiscences Napa County Reporter 1861",
+    "query": "title:(Reminiscences OR Old OR Times OR 'Bear OR Flag')Napa County Reporter\", June 2, 1861)\"",
+    "reason": "Unbalanced brackets/parentheses"
+  },
+  {
+    "index": 1376,
+    "nl": "Aram Khachaturian piano works music composition",
+    "query": "title:(\u0424\u043e\u0440\u0442\u0435\u043f\u0438\u0430\u043d\u043d\u043e\u0435 OR \u0442\u0432\u043e\u0440\u0447\u0435\u0441\u0442\u0432\u043e OR \u0410\u0440\u0430\u043c\u0430 OR \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d\u0430 OR [Aram)",
+    "reason": "Unbalanced brackets/parentheses"
+  },
+  {
+    "index": 1654,
+    "nl": "online harassment response strategies computer mediated communication",
+    "query": "title:(How OR Respond OR Flames OR (without OR Getting)",
+    "reason": "Unbalanced brackets/parentheses"
+  },
+  {
+    "index": 1690,
+    "nl": "television series psychological horror atmospheric effects 2017",
+    "query": "title:(Mist OR (TV OR Series OR 2017\u2013)",
+    "reason": "Unbalanced brackets/parentheses"
+  },
+  {
+    "index": 1733,
+    "nl": "\u0410\u0440\u0430\u043c \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d \u044d\u0441\u043a\u0438\u0437 \u0445\u0430\u0440\u0430\u043a\u0442\u0435\u0440\u0438\u0441\u0442\u0438\u043a\u0438\" OR \"Aram Khachaturian sketches characteristics",
+    "query": "title:(\u0410\u0440\u0430\u043c OR \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d. OR \u042d\u0441\u043a\u0438\u0437 OR \u0445\u0430\u0440\u0430\u043a\u0442\u0435\u0440\u0438\u0441\u0442\u0438\u043a\u0438 OR [Aram)",
+    "reason": "Unbalanced brackets/parentheses"
+  },
+  {
+    "index": 2012,
+    "nl": "papers on Khachaturian symphonic works",
+    "query": "title:(\u0421\u0438\u043c\u0444\u043e\u043d\u0438\u0447\u0435\u0441\u043a\u043e\u0435 OR \u0442\u0432\u043e\u0440\u0447\u0435\u0441\u0442\u0432\u043e OR \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d\u0430 OR [Symphonic OR Oeuvre) doctype:article",
+    "reason": "Unbalanced brackets/parentheses"
+  },
+  {
+    "index": 2273,
+    "nl": "Mineo Gilfanov X-ray binaries star forming galaxies",
+    "query": "abs:(Mineo AND Gilfanov AND Sunyaev AND X-ray). 1105.4610.)",
+    "reason": "Unbalanced brackets/parentheses"
+  },
+  {
+    "index": 2560,
+    "nl": "papers by Aram Khachaturian on musical composition",
+    "query": "title:(\u0410\u0440\u0430\u043c OR \u0418\u043b\u044c\u0438\u0447 OR \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d OR [Aram OR Il\u02b9ich) doctype:article",
+    "reason": "Unbalanced brackets/parentheses"
+  }
+]

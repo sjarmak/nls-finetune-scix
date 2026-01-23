@@ -6,7 +6,7 @@
   },
   {
     "natural_language": "terahertz josephson echo spectroscopy cuprate superconductors inhomogeneity",
-    "ads_query": "abs:(Probing OR Inhomogeneous OR Cuprate OR Superconductivity OR Terahertz)",
+    "ads_query": "abs:(Probing AND Inhomogeneous AND Cuprate)",
     "category": "topic"
   },
   {
@@ -31,7 +31,7 @@
   },
   {
     "natural_language": "supermassive black hole formation theories",
-    "ads_query": "abs:(supermassive OR black OR hole) abs:\"formation\"",
+    "ads_query": "abs:(black AND hole AND supermassive) abs:\"formation\"",
     "category": "compound"
   },
   {
@@ -41,7 +41,7 @@
   },
   {
     "natural_language": "H2 molecular hydrogen spatial distribution nearby galaxies Spitzer infrared spectrograph",
-    "ads_query": "abs:(Mapping OR Spatial OR Distribution OR H_2 OR Nearby)",
+    "ads_query": "abs:(H_2 AND Mapping AND Spatial)",
     "category": "topic"
   },
   {
@@ -361,12 +361,12 @@
   },
   {
     "natural_language": "Luna-19 radio transparency circumlunar space",
-    "ads_query": "abs:(Radio OR transparency OR circumlunar OR space OR using)",
+    "ads_query": "abs:(Radio AND transparency AND circumlunar)",
     "category": "topic"
   },
   {
     "natural_language": "find similar work to Event Horizon Telescope",
-    "ads_query": "similar(abs:(Event OR Horizon OR Telescope))",
+    "ads_query": "similar(abs:(Event AND Horizon AND Telescope))",
     "category": "operator"
   },
   {
@@ -531,7 +531,7 @@
   },
   {
     "natural_language": "gamma ray astronomy 2022",
-    "ads_query": "abs:(gamma OR ray OR astronomy) pubdate:2022",
+    "ads_query": "abs:(gamma AND astronomy) pubdate:2022",
     "category": "publication"
   },
   {
@@ -546,7 +546,7 @@
   },
   {
     "natural_language": "European Southern Observatory Hubble Space Telescope research",
-    "ads_query": "aff:\"ESO\" abs:(Hubble OR Space OR Telescope)",
+    "ads_query": "aff:\"ESO\" abs:(Hubble AND Space AND Telescope)",
     "category": "affiliation"
   },
   {
@@ -556,7 +556,7 @@
   },
   {
     "natural_language": "hot papers about gamma ray bursts",
-    "ads_query": "trending(abs:(gamma OR ray OR burst)) doctype:article",
+    "ads_query": "trending(abs:(gamma AND burst)) doctype:article",
     "category": "operator"
   },
   {
@@ -616,7 +616,7 @@
   },
   {
     "natural_language": "top cited gamma ray astronomy",
-    "ads_query": "abs:(gamma OR ray OR astronomy) citation_count:[100 TO *]",
+    "ads_query": "abs:(gamma AND astronomy) citation_count:[100 TO *]",
     "category": "metrics"
   },
   {
@@ -696,7 +696,7 @@
   },
   {
     "natural_language": "numerical modeling scour bridge abutment simulation",
-    "ads_query": "abs:(Numerical OR Model OR Simulation OR Scour OR Around)",
+    "ads_query": "abs:(Numerical AND Model AND Simulation)",
     "category": "topic"
   },
   {
@@ -846,12 +846,12 @@
   },
   {
     "natural_language": "electronic payment security solata digital transactions",
-    "ads_query": "abs:(Security OR Electronic OR Payment OR Systems OR Solata)",
+    "ads_query": "abs:(Security AND Electronic AND Payment)",
     "category": "topic"
   },
   {
     "natural_language": "convolutional neural networks in astronomy",
-    "ads_query": "abs:(convolutional OR neural OR network) collection:astronomy",
+    "ads_query": "abs:(convolutional AND network AND neural) collection:astronomy",
     "category": "content"
   },
   {
@@ -906,7 +906,7 @@
   },
   {
     "natural_language": "Apollo light scattering lunar exosphere dust reanalysis",
-    "ads_query": "abs:(A reanalysis of the Apollo light scattering observations, and implications for lunar exospheric dust)",
+    "ads_query": "abs:(Apollo AND scattering AND exospheric AND light)",
     "category": "topic"
   },
   {
@@ -1026,7 +1026,7 @@
   },
   {
     "natural_language": "trending research on supermassive black holes",
-    "ads_query": "trending(abs:(supermassive OR black OR hole))",
+    "ads_query": "trending(abs:(black AND hole AND supermassive))",
     "category": "operator"
   },
   {
@@ -1166,7 +1166,7 @@
   },
   {
     "natural_language": "cloudy 2017 release photoionization code",
-    "ads_query": "abs:(2017 OR release OR cloudy)",
+    "ads_query": "abs:(cloudy AND release AND 2017)",
     "category": "topic"
   },
   {
@@ -1241,7 +1241,7 @@
   },
   {
     "natural_language": "fast radio burst localized massive galaxy host",
-    "ads_query": "abs:(fast OR radio OR burst OR localized OR massive)",
+    "ads_query": "abs:(radio AND localized AND fast)",
     "category": "topic"
   },
   {
@@ -1261,7 +1261,7 @@
   },
   {
     "natural_language": "galactic system AM 2229-735 polar ring formation simulations",
-    "ads_query": "abs:(Simulating the galactic system in interaction AM 2229-735 and the formation of its polar structure)",
+    "ads_query": "abs:(galactic AND interaction AND 2229-735 AND structure)",
     "category": "topic"
   },
   {
@@ -1526,7 +1526,7 @@
   },
   {
     "natural_language": "Sloan Lens ACS Survey papers",
-    "ads_query": "abs:(Sloan OR Lens OR ACS OR Survey) doctype:article",
+    "ads_query": "abs:(Sloan AND Lens AND Survey) doctype:article",
     "category": "topic"
   },
   {
@@ -1536,7 +1536,7 @@
   },
   {
     "natural_language": "active galactic nuclei",
-    "ads_query": "abs:(active OR galactic OR nuclei)",
+    "ads_query": "abs:(galactic AND active AND nuclei)",
     "category": "topic"
   },
   {
@@ -1666,7 +1666,7 @@
   },
   {
     "natural_language": "most read cosmic microwave background articles",
-    "ads_query": "abs:(cosmic OR microwave OR background) read_count:[1000 TO *] doctype:article",
+    "ads_query": "abs:(cosmic AND microwave AND background) read_count:[1000 TO *] doctype:article",
     "category": "metrics"
   },
   {
@@ -1821,7 +1821,7 @@
   },
   {
     "natural_language": "gamma ray bursts in the 2020s",
-    "ads_query": "abs:(gamma OR ray OR bursts) year:2020-2029",
+    "ads_query": "abs:(gamma AND bursts) year:2020-2029",
     "category": "publication"
   },
   {
@@ -1841,7 +1841,7 @@
   },
   {
     "natural_language": "Gaussian process classification galaxy blending LSST deblending machine learning",
-    "ads_query": "abs:(Gaussian OR Process OR Classification OR Galaxy OR Blend)",
+    "ads_query": "abs:(Galaxy AND Gaussian AND Process)",
     "category": "topic"
   },
   {
@@ -2011,12 +2011,12 @@
   },
   {
     "natural_language": "supermassive black hole ejection galaxy merger recoiling SMBH gravitational waves",
-    "ads_query": "abs:(Possible OR evidence OR ejection OR supermassive OR black)",
+    "ads_query": "abs:(black AND Possible AND ejection)",
     "category": "topic"
   },
   {
     "natural_language": "gamma ray astronomy reviews",
-    "ads_query": "abs:(gamma OR ray OR astronomy) doctype:article property:refereed",
+    "ads_query": "abs:(gamma AND astronomy) doctype:article property:refereed",
     "category": "property"
   },
   {
@@ -2335,11 +2335,6 @@
     "category": "content"
   },
   {
-    "natural_language": "Seybold Seminars Boston 1996 worlds collide February March",
-    "ads_query": "title:(Seybold OR Seminars OR Boston OR '96 OR [February)",
-    "category": "content"
-  },
-  {
     "natural_language": "2018A&A...620A.161K",
     "ads_query": "identifier:\"2018A&A\u2026620A.161K\"",
     "category": "compound"
@@ -2512,11 +2507,6 @@
   {
     "natural_language": "papers about pulsar J0312-0921",
     "ads_query": "abs:(J0312-0921) doctype:article",
-    "category": "topic"
-  },
-  {
-    "natural_language": "papers by N Andersson neutron stars astrophysical journal 1998",
-    "ads_query": "abs:(Andersson, OR Astroph. OR 502 OR (1998) 708) doctype:article",
     "category": "topic"
   },
   {
@@ -2701,7 +2691,7 @@
   },
   {
     "natural_language": "refereed James Webb telescope articles",
-    "ads_query": "abs:(James OR Webb OR telescope) property:refereed doctype:article",
+    "ads_query": "abs:(James AND Webb) property:refereed doctype:article",
     "category": "conversational"
   },
   {
@@ -2726,7 +2716,7 @@
   },
   {
     "natural_language": "papers by Haehnelt, Rees, and Davies on cosmological reionization",
-    "ads_query": "author:\"Haehnelt\" abs:(,martin','rees, OR martin','davies, OR melvin') doctype:article",
+    "ads_query": "author:\"Haehnelt\" abs:(,martin','rees, AND martin','davies, AND melvin') doctype:article",
     "category": "topic"
   },
   {
@@ -3116,7 +3106,7 @@
   },
   {
     "natural_language": "galactic distribution 511 keV positron electron annihilation radiation",
-    "ads_query": "abs:(Galactic OR distribution OR 511 OR keV OR e+/e\u2212)",
+    "ads_query": "abs:(Galactic AND 511 AND keV)",
     "category": "topic"
   },
   {
@@ -3241,7 +3231,7 @@
   },
   {
     "natural_language": "new main sequence stars papers",
-    "ads_query": "abs:(main OR sequence OR stars) year:2024-2025 doctype:article",
+    "ads_query": "abs:(sequence AND main AND stars) year:2024-2025 doctype:article",
     "category": "temporal"
   },
   {
@@ -3386,7 +3376,7 @@
   },
   {
     "natural_language": "trending papers on fast radio bursts",
-    "ads_query": "trending(abs:(fast OR radio OR burst)) doctype:article",
+    "ads_query": "trending(abs:(radio AND fast AND burst)) doctype:article",
     "category": "operator"
   },
   {
@@ -3421,7 +3411,7 @@
   },
   {
     "natural_language": "XENONnT dark matter nuclear recoils first results",
-    "ads_query": "abs:(First OR Dark OR Matter OR Search OR Nuclear)",
+    "ads_query": "abs:(First AND Dark AND Matter)",
     "category": "topic"
   },
   {
@@ -3431,7 +3421,7 @@
   },
   {
     "natural_language": "star formation N-body cosmological simulations",
-    "ads_query": "abs:(Star OR Formation OR Cosmological OR N-body OR Simulations)",
+    "ads_query": "abs:(Star AND Formation AND Cosmological)",
     "category": "topic"
   },
   {
@@ -3471,7 +3461,7 @@
   },
   {
     "natural_language": "useful references for CMB analysis",
-    "ads_query": "useful(abs:(cosmic OR microwave OR background))",
+    "ads_query": "useful(abs:(cosmic AND microwave AND background))",
     "category": "operator"
   },
   {
@@ -3546,7 +3536,7 @@
   },
   {
     "natural_language": "Hubble Space Telescope in Astronomy & Astrophysics",
-    "ads_query": "abs:(Hubble OR Space OR Telescope) bibstem:\"A&A\"",
+    "ads_query": "abs:(Hubble AND Space AND Telescope) bibstem:\"A&A\"",
     "category": "publication"
   },
   {
@@ -3596,7 +3586,7 @@
   },
   {
     "natural_language": "pulsar timing array gravitational wave searches",
-    "ads_query": "abs:(pulsar OR timing OR array) abs:\"gravitational wave\"",
+    "ads_query": "abs:(pulsar AND timing AND array) abs:\"gravitational wave\"",
     "category": "compound"
   },
   {
@@ -3691,7 +3681,7 @@
   },
   {
     "natural_language": "dark matter candidates",
-    "ads_query": "abs:(dark OR matter OR candidates)",
+    "ads_query": "abs:(candidates AND dark AND matter)",
     "category": "topic"
   },
   {
@@ -3806,7 +3796,7 @@
   },
   {
     "natural_language": "microlensing optical depth galactic bulge difference image analysis 2000",
-    "ads_query": "abs:(\"Microlensing Optical Depth toward the Galactic Bulge from Microlensing Observations in Astrophysics Group Observations during 2000 with Difference Image Analysis\")",
+    "ads_query": "abs:(Microlensing AND Optical AND Depth AND Galactic)",
     "category": "topic"
   },
   {
@@ -3836,7 +3826,7 @@
   },
   {
     "natural_language": "Harvard Fermi gamma ray research",
-    "ads_query": "aff:\"Harvard\" abs:(Fermi OR gamma OR ray)",
+    "ads_query": "aff:\"Harvard\" abs:(gamma AND Fermi)",
     "category": "affiliation"
   },
   {
@@ -4016,7 +4006,7 @@
   },
   {
     "natural_language": "active galactic nuclei variability studies",
-    "ads_query": "abs:(active OR galactic OR nuclei) abs:\"variability\" doctype:article",
+    "ads_query": "abs:(galactic AND active AND nuclei) abs:\"variability\" doctype:article",
     "category": "compound"
   },
   {
@@ -4341,7 +4331,7 @@
   },
   {
     "natural_language": "coastal erosion human displacement vulnerability Bangladesh",
-    "ads_query": "abs:(Shifting Coastlines, Human Displacement, and Erosion Risk Vulnerabilities in Bangladesh)",
+    "ads_query": "abs:(Coastlines AND Human AND Displacement AND Erosion)",
     "category": "topic"
   },
   {
@@ -4371,7 +4361,7 @@
   },
   {
     "natural_language": "cosmic microwave background papers from 2017",
-    "ads_query": "abs:(cosmic OR microwave OR background) pubdate:2017 doctype:article",
+    "ads_query": "abs:(cosmic AND microwave AND background) pubdate:2017 doctype:article",
     "category": "publication"
   },
   {
@@ -4421,7 +4411,7 @@
   },
   {
     "natural_language": "plasma parameters statistical analysis JET tokamak quasi-stationary discharge",
-    "ads_query": "abs:(Statistical OR analysis OR similarity OR plasma OR parameters)",
+    "ads_query": "abs:(Statistical AND similarity AND parameters)",
     "category": "topic"
   },
   {
@@ -4456,7 +4446,7 @@
   },
   {
     "natural_language": "Hubble Space Telescope papers",
-    "ads_query": "abs:(Hubble OR Space OR Telescope) doctype:article",
+    "ads_query": "abs:(Hubble AND Space AND Telescope) doctype:article",
     "category": "topic"
   },
   {
@@ -4536,7 +4526,7 @@
   },
   {
     "natural_language": "Stephen Hawking on gamma ray bursts",
-    "ads_query": "author:\"Hawking, S.\" abs:(gamma OR ray OR bursts)",
+    "ads_query": "author:\"Hawking, S.\" abs:(gamma AND bursts)",
     "category": "author"
   },
   {
@@ -4566,12 +4556,12 @@
   },
   {
     "natural_language": "recent main sequence stars",
-    "ads_query": "abs:(main OR sequence OR stars) year:2023-2025",
+    "ads_query": "abs:(sequence AND main AND stars) year:2023-2025",
     "category": "temporal"
   },
   {
     "natural_language": "papers similar to Hawking's work on black hole radiation",
-    "ads_query": "similar(author:\"Hawking, S\" AND abs:(black OR hole OR radiation)) doctype:article",
+    "ads_query": "similar(author:\"Hawking, S\" AND abs:(black AND hole AND radiation)) doctype:article",
     "category": "operator"
   },
   {
@@ -4581,12 +4571,12 @@
   },
   {
     "natural_language": "open access Hubble Space Telescope papers",
-    "ads_query": "abs:(Hubble OR Space OR Telescope) property:openaccess doctype:article",
+    "ads_query": "abs:(Hubble AND Space AND Telescope) property:openaccess doctype:article",
     "category": "conversational"
   },
   {
     "natural_language": "interstellar objects passing through solar system",
-    "ads_query": "abs:(search OR interstellar OR objects OR solar OR system)",
+    "ads_query": "abs:(solar AND interstellar AND objects)",
     "category": "topic"
   },
   {
@@ -4631,7 +4621,7 @@
   },
   {
     "natural_language": "highly cited Hubble Space Telescope papers",
-    "ads_query": "abs:(Hubble OR Space OR Telescope) citation_count:[50 TO *] doctype:article",
+    "ads_query": "abs:(Hubble AND Space AND Telescope) citation_count:[50 TO *] doctype:article",
     "category": "metrics"
   },
   {
@@ -4681,7 +4671,7 @@
   },
   {
     "natural_language": "gamma ray astronomy between 2019 and 2021",
-    "ads_query": "abs:(gamma OR ray OR astronomy) year:2019-2021",
+    "ads_query": "abs:(gamma AND astronomy) year:2019-2021",
     "category": "publication"
   },
   {
@@ -4711,7 +4701,7 @@
   },
   {
     "natural_language": "CERN main sequence stars research",
-    "ads_query": "aff:\"CERN\" abs:(main OR sequence OR stars)",
+    "ads_query": "aff:\"CERN\" abs:(sequence AND main AND stars)",
     "category": "affiliation"
   },
   {
@@ -4731,7 +4721,7 @@
   },
   {
     "natural_language": "kinematic Sunyaev-Zel'dovich galaxy redshift surveys cosmology",
-    "ads_query": "abs:(Will OR Kinematic OR Sunyaev-Zel'dovich OR Measurements OR Enhance)",
+    "ads_query": "abs:(Will AND Kinematic AND Sunyaev-Zel'dovich)",
     "category": "topic"
   },
   {
@@ -4966,7 +4956,7 @@
   },
   {
     "natural_language": "highly cited James Webb telescope papers",
-    "ads_query": "abs:(James OR Webb OR telescope) citation_count:[1000 TO *] doctype:article",
+    "ads_query": "abs:(James AND Webb) citation_count:[1000 TO *] doctype:article",
     "category": "metrics"
   },
   {
@@ -5001,12 +4991,12 @@
   },
   {
     "natural_language": "natural language processing papers",
-    "ads_query": "abs:(natural OR language OR processing) doctype:article",
+    "ads_query": "abs:(natural AND language AND processing) doctype:article",
     "category": "content"
   },
   {
     "natural_language": "neutron star merger gravitational wave papers",
-    "ads_query": "abs:(neutron OR star OR merger) abs:\"gravitational wave\" doctype:article",
+    "ads_query": "abs:(neutron AND star AND merger) abs:\"gravitational wave\" doctype:article",
     "category": "compound"
   },
   {
@@ -5341,7 +5331,7 @@
   },
   {
     "natural_language": "performance profiles benchmarking optimization software",
-    "ads_query": "abs:(Benchmarking Optimization Software with PerformanceProfiles)",
+    "ads_query": "abs:(Optimization AND Software AND PerformanceProfiles)",
     "category": "topic"
   },
   {
@@ -5406,7 +5396,7 @@
   },
   {
     "natural_language": "physics economic growth development national policy",
-    "ads_query": "abs:(Explain Role of Physics In National Economic Growth and Development ha TopicRole of Physics In National Economic Growth and Development)",
+    "ads_query": "abs:(Explain AND Role AND Physics AND National)",
     "category": "topic"
   },
   {
@@ -5636,7 +5626,7 @@
   },
   {
     "natural_language": "gravitational wave detection papers",
-    "ads_query": "abs:(gravitational OR wave OR detection) doctype:article",
+    "ads_query": "abs:(gravitational AND wave) doctype:article",
     "category": "content"
   },
   {
@@ -5811,7 +5801,7 @@
   },
   {
     "natural_language": "tactical HF field expedient antenna performance volume 1",
-    "ads_query": "abs:(Tactical OR field OR expedient OR antenna OR performance,)",
+    "ads_query": "abs:(Tactical AND expedient AND antenna)",
     "category": "topic"
   },
   {
@@ -5901,7 +5891,7 @@
   },
   {
     "natural_language": "10 lacertae stellar atmosphere models",
-    "ads_query": "abs:(atmosphere OR lacertae)",
+    "ads_query": "abs:(atmosphere AND lacertae)",
     "category": "topic"
   },
   {
@@ -5941,7 +5931,7 @@
   },
   {
     "natural_language": "papers by Sunyaev on X-ray emission from star-forming galaxies",
-    "ads_query": "author:\"Sunyaev\" abs:(X-ray OR emission OR star-forming OR galaxies) doctype:article",
+    "ads_query": "author:\"Sunyaev\" abs:(X-ray AND galaxies AND emission) doctype:article",
     "category": "topic"
   },
   {
@@ -5976,7 +5966,7 @@
   },
   {
     "natural_language": "Einstein general relativity 1916 annalen der physik",
-    "ads_query": "abs:(Einstein, OR A., OR 1916, OR Ann. OR der)",
+    "ads_query": "abs:(Einstein, AND Ann. AND A.,)",
     "category": "topic"
   },
   {
@@ -6011,7 +6001,7 @@
   },
   {
     "natural_language": "pyrogallol effects on catfish hematology biochemistry",
-    "ads_query": "abs:(Exposure OR pyrogallol OR impacts OR hemato-biochemical OR endpoints)",
+    "ads_query": "abs:(Exposure AND pyrogallol AND impacts)",
     "category": "topic"
   },
   {
@@ -6201,12 +6191,12 @@
   },
   {
     "natural_language": "interested in LIGO gravitational waves research",
-    "ads_query": "abs:(LIGO OR gravitational OR waves)",
+    "ads_query": "abs:(gravitational AND LIGO AND waves)",
     "category": "conversational"
   },
   {
     "natural_language": "magnetar giant flare high energy emission gamma rays",
-    "ads_query": "abs:(High-energy OR emission OR magnetar OR giant OR flare)",
+    "ads_query": "abs:(magnetar AND High-energy AND emission)",
     "category": "topic"
   },
   {
@@ -6291,7 +6281,7 @@
   },
   {
     "natural_language": "papers by Tinaut-Ruano F",
-    "ads_query": "author:\"^Tinaut-Ruano+, F.\" doctype:article",
+    "ads_query": "author:\"^Tinaut-Ruano, F\" doctype:article",
     "category": "first_author"
   },
   {
@@ -6361,7 +6351,7 @@
   },
   {
     "natural_language": "what are the latest cosmic microwave background discoveries?",
-    "ads_query": "abs:(cosmic OR microwave OR background) year:2024-2025",
+    "ads_query": "abs:(cosmic AND microwave AND background) year:2024-2025",
     "category": "conversational"
   },
   {
@@ -6371,7 +6361,7 @@
   },
   {
     "natural_language": "papers by Costamante on blazars and gamma ray astronomy",
-    "ads_query": "author:\"Costamante\" abs:(L., OR al., OR 2001, OR Astronomy OR Astrophysics,) doctype:article",
+    "ads_query": "author:\"Costamante\" abs:(Astronomy AND Astrophysics, AND L.,) doctype:article",
     "category": "topic"
   },
   {
@@ -6401,7 +6391,7 @@
   },
   {
     "natural_language": "massive binary star systems stellar rotation rates",
-    "ads_query": "abs:(massive OR binary OR systems) full:\"rotation\"",
+    "ads_query": "abs:(binary AND massive AND systems) full:\"rotation\"",
     "category": "content"
   },
   {
@@ -6461,7 +6451,7 @@
   },
   {
     "natural_language": "IllustrisTNG hot counter-rotating star-forming disk galaxies",
-    "ads_query": "abs:(Hot and counter-rotating star-forming disk galaxies in IllustrisTNG)",
+    "ads_query": "abs:(Hot AND IllustrisTNG AND counter-rotating AND star-forming)",
     "category": "topic"
   },
   {
@@ -6536,7 +6526,7 @@
   },
   {
     "natural_language": "Planck collaboration CMB results",
-    "ads_query": "author:\"Planck Collaboration\" abs:(cosmic OR microwave OR background)",
+    "ads_query": "author:\"Planck Collaboration\" abs:(cosmic AND microwave AND background)",
     "category": "compound"
   },
   {
@@ -6601,7 +6591,7 @@
   },
   {
     "natural_language": "Chandrasekhar on gamma ray bursts",
-    "ads_query": "author:\"Chandrasekhar, S.\" abs:(gamma OR ray OR bursts)",
+    "ads_query": "author:\"Chandrasekhar, S.\" abs:(gamma AND bursts)",
     "category": "author"
   },
   {
@@ -6648,11 +6638,6 @@
     "natural_language": "papers by amiri and hill",
     "ads_query": "author:\"amiri\" author:\"hill\" doctype:article",
     "category": "author"
-  },
-  {
-    "natural_language": "\"Bear Flag\" J William Russell reminiscences Napa County Reporter 1861",
-    "ads_query": "title:(Reminiscences OR Old OR Times OR 'Bear OR Flag')Napa County Reporter\", June 2, 1861)\"",
-    "category": "content"
   },
   {
     "natural_language": "papers by Pilyugin first author 2016",
@@ -6871,18 +6856,13 @@
   },
   {
     "natural_language": "papers by Fors or Fors Aldrich on stellar photometry",
-    "ads_query": "author:\"Fors\" or author:\"Fors Aldrich,O.\" doctype:article",
+    "ads_query": "author:\"Fors\" OR author:\"Fors Aldrich\" abs:(stellar AND photometry) doctype:article",
     "category": "author"
   },
   {
     "natural_language": "key methodology papers for photometry",
     "ads_query": "useful(abs:\"photometry\") doctype:article",
     "category": "operator"
-  },
-  {
-    "natural_language": "Aram Khachaturian piano works music composition",
-    "ads_query": "title:(\u0424\u043e\u0440\u0442\u0435\u043f\u0438\u0430\u043d\u043d\u043e\u0435 OR \u0442\u0432\u043e\u0440\u0447\u0435\u0441\u0442\u0432\u043e OR \u0410\u0440\u0430\u043c\u0430 OR \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d\u0430 OR [Aram)",
-    "category": "content"
   },
   {
     "natural_language": "papers by schlegel and finkbeiner from 1998",
@@ -6931,12 +6911,12 @@
   },
   {
     "natural_language": "cosmic microwave background review",
-    "ads_query": "abs:(cosmic OR microwave OR background) doctype:article property:refereed",
+    "ads_query": "abs:(cosmic AND microwave AND background) doctype:article property:refereed",
     "category": "property"
   },
   {
     "natural_language": "polar ring galaxies SDSS spatial environment",
-    "ads_query": "abs:(Spatial OR Environment OR Polar-Ring OR Galaxies OR SDSS)",
+    "ads_query": "abs:(Galaxies AND Spatial AND Environment)",
     "category": "topic"
   },
   {
@@ -6976,7 +6956,7 @@
   },
   {
     "natural_language": "cosmic microwave background anisotropies",
-    "ads_query": "abs:(cosmic OR microwave OR background) abs:\"anisotropy\"",
+    "ads_query": "abs:(cosmic AND microwave AND background) abs:\"anisotropy\"",
     "category": "content"
   },
   {
@@ -7081,7 +7061,7 @@
   },
   {
     "natural_language": "TCP J20315286+2740166 WZ Sge dwarf nova spectroscopic classification",
-    "ads_query": "abs:(Spectroscopic OR Classification OR TCP OR J20315286+2740166 OR Sge)",
+    "ads_query": "abs:(Spectroscopic AND Classification AND TCP)",
     "category": "topic"
   },
   {
@@ -7101,7 +7081,7 @@
   },
   {
     "natural_language": "gamma ray bursts 2019",
-    "ads_query": "abs:(gamma OR ray OR bursts) pubdate:2019",
+    "ads_query": "abs:(gamma AND bursts) pubdate:2019",
     "category": "publication"
   },
   {
@@ -7376,7 +7356,7 @@
   },
   {
     "natural_language": "James Webb telescope studies",
-    "ads_query": "abs:(James OR Webb OR telescope) doctype:article",
+    "ads_query": "abs:(James AND Webb) doctype:article",
     "category": "topic"
   },
   {
@@ -7431,12 +7411,12 @@
   },
   {
     "natural_language": "template bank gravitational wave burst detection PyGRB medium latency",
-    "ads_query": "abs:(Generating OR Template OR Bank OR use OR Medium)",
+    "ads_query": "abs:(Generating AND Template AND Bank)",
     "category": "topic"
   },
   {
     "natural_language": "Hubble Space Telescope this decade",
-    "ads_query": "abs:(Hubble OR Space OR Telescope) year:2020-2029",
+    "ads_query": "abs:(Hubble AND Space AND Telescope) year:2020-2029",
     "category": "publication"
   },
   {
@@ -7521,12 +7501,12 @@
   },
   {
     "natural_language": "popular papers on black hole mergers right now",
-    "ads_query": "trending(abs:(black OR hole OR merger)) doctype:article",
+    "ads_query": "trending(abs:(black AND hole AND merger)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "general relativity effects on habitable zones with planetary perturbers around sun-like stars",
-    "ads_query": "abs:(Effects OR general OR relativity OR habitable OR zone)",
+    "ads_query": "abs:(Effects AND general AND relativity)",
     "category": "topic"
   },
   {
@@ -7676,7 +7656,7 @@
   },
   {
     "natural_language": "MIT gamma ray astronomy research",
-    "ads_query": "aff:\"MIT\" abs:(gamma OR ray OR astronomy)",
+    "ads_query": "aff:\"MIT\" abs:(gamma AND astronomy)",
     "category": "affiliation"
   },
   {
@@ -7726,7 +7706,7 @@
   },
   {
     "natural_language": "dark matter candidates 2024",
-    "ads_query": "abs:(dark OR matter OR candidates) pubdate:2024",
+    "ads_query": "abs:(candidates AND dark AND matter) pubdate:2024",
     "category": "publication"
   },
   {
@@ -7751,7 +7731,7 @@
   },
   {
     "natural_language": "cosmic microwave background studies",
-    "ads_query": "abs:(cosmic OR microwave OR background) doctype:article",
+    "ads_query": "abs:(cosmic AND microwave AND background) doctype:article",
     "category": "topic"
   },
   {
@@ -7846,7 +7826,7 @@
   },
   {
     "natural_language": "C III 5696 angstrom emission line variability Wolf-Rayet stars",
-    "ads_query": "abs:(Variations OR III OR 5696 OR emission OR line)",
+    "ads_query": "abs:(Variations AND III AND emission)",
     "category": "topic"
   },
   {
@@ -7956,7 +7936,7 @@
   },
   {
     "natural_language": "non-negative matrix factorization algorithms noisy data negative values",
-    "ads_query": "abs:(Algorithms OR Non-Negative OR Matrix OR Factorization OR Noisy)",
+    "ads_query": "abs:(Algorithms AND Non-Negative AND Matrix)",
     "category": "topic"
   },
   {
@@ -7976,7 +7956,7 @@
   },
   {
     "natural_language": "Queloz's cosmic microwave background papers",
-    "ads_query": "author:\"Queloz, D.\" abs:(cosmic OR microwave OR background) doctype:article",
+    "ads_query": "author:\"Queloz, D.\" abs:(cosmic AND microwave AND background) doctype:article",
     "category": "author"
   },
   {
@@ -8046,7 +8026,7 @@
   },
   {
     "natural_language": "what's new in LIGO gravitational waves?",
-    "ads_query": "abs:(LIGO OR gravitational OR waves) year:2024-2025",
+    "ads_query": "abs:(gravitational AND LIGO AND waves) year:2024-2025",
     "category": "conversational"
   },
   {
@@ -8101,7 +8081,7 @@
   },
   {
     "natural_language": "active galactic nuclei 2021",
-    "ads_query": "abs:(active OR galactic OR nuclei) pubdate:2021",
+    "ads_query": "abs:(galactic AND active AND nuclei) pubdate:2021",
     "category": "publication"
   },
   {
@@ -8196,7 +8176,7 @@
   },
   {
     "natural_language": "Fermi gamma ray papers",
-    "ads_query": "abs:(Fermi OR gamma OR ray) doctype:article",
+    "ads_query": "abs:(gamma AND Fermi) doctype:article",
     "category": "topic"
   },
   {
@@ -8236,7 +8216,7 @@
   },
   {
     "natural_language": "A0136-0801 polar ring galaxy surface photometry metallicity",
-    "ads_query": "abs:(Surface photometry and metallicity of the polar ring galaxy A0136-0801)",
+    "ads_query": "abs:(Surface AND A0136-0801 AND photometry AND metallicity)",
     "category": "topic"
   },
   {
@@ -8246,7 +8226,7 @@
   },
   {
     "natural_language": "electronic payment security Solat digital transaction systems",
-    "ads_query": "abs:(Security OR Electronic OR Payment OR Systems OR Solat)",
+    "ads_query": "abs:(Security AND Electronic AND Payment)",
     "category": "topic"
   },
   {
@@ -8268,11 +8248,6 @@
     "natural_language": "camelid single domain antibodies VHH nanobodies",
     "ads_query": "abs:(camel antibody)",
     "category": "topic"
-  },
-  {
-    "natural_language": "online harassment response strategies computer mediated communication",
-    "ads_query": "title:(How OR Respond OR Flames OR (without OR Getting)",
-    "category": "content"
   },
   {
     "natural_language": "MNRAS papers on WIMPs",
@@ -8301,7 +8276,7 @@
   },
   {
     "natural_language": "open access gamma ray astronomy papers",
-    "ads_query": "abs:(gamma OR ray OR astronomy) property:openaccess doctype:article",
+    "ads_query": "abs:(gamma AND astronomy) property:openaccess doctype:article",
     "category": "conversational"
   },
   {
@@ -8316,7 +8291,7 @@
   },
   {
     "natural_language": "Fermi GBM magnetar burst catalog five year",
-    "ads_query": "abs:(Five OR Year OR Fermi/GBM OR Magnetar OR Burst)",
+    "ads_query": "abs:(Magnetar AND Five AND Year)",
     "category": "topic"
   },
   {
@@ -8381,7 +8356,7 @@
   },
   {
     "natural_language": "tidal disruption events in ApJ",
-    "ads_query": "abs:(tidal OR disruption OR event) bibstem:\"ApJ\"",
+    "ads_query": "abs:(disruption AND tidal AND event) bibstem:\"ApJ\"",
     "category": "compound"
   },
   {
@@ -8450,11 +8425,6 @@
     "category": "operator"
   },
   {
-    "natural_language": "television series psychological horror atmospheric effects 2017",
-    "ads_query": "title:(Mist OR (TV OR Series OR 2017\u2013)",
-    "category": "content"
-  },
-  {
     "natural_language": "Proxima Centauri variability",
     "ads_query": "object:\"Proxima Centauri\" abs:\"variability\"",
     "category": "astronomy"
@@ -8481,7 +8451,7 @@
   },
   {
     "natural_language": "latest active galactic nuclei research",
-    "ads_query": "abs:(active OR galactic OR nuclei) year:2024-2025",
+    "ads_query": "abs:(galactic AND active AND nuclei) year:2024-2025",
     "category": "temporal"
   },
   {
@@ -8501,7 +8471,7 @@
   },
   {
     "natural_language": "trending high energy astrophysics papers",
-    "ads_query": "trending(abs:(high OR energy OR astrophysics)) doctype:article",
+    "ads_query": "trending(abs:(astrophysics AND energy)) doctype:article",
     "category": "operator"
   },
   {
@@ -8621,7 +8591,7 @@
   },
   {
     "natural_language": "Mei Liu Chen 2023 ApJS volume 264",
-    "ads_query": "abs:(Mei, OR Y., OR Song, OR S.-M., OR Liu,)",
+    "ads_query": "abs:(Mei, AND Song, AND Liu,)",
     "category": "topic"
   },
   {
@@ -8636,7 +8606,7 @@
   },
   {
     "natural_language": "Hawking papers on black hole radiation from the 1970s",
-    "ads_query": "author:\"Hawking, S\" abs:(black OR hole OR radiation) year:1970-1979 doctype:article",
+    "ads_query": "author:\"Hawking, S\" abs:(black AND hole AND radiation) year:1970-1979 doctype:article",
     "category": "compound"
   },
   {
@@ -8663,11 +8633,6 @@
     "natural_language": "stellar limb darkening measurements",
     "ads_query": "abs:(\"limb darkening\")",
     "category": "topic"
-  },
-  {
-    "natural_language": "\u0410\u0440\u0430\u043c \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d \u044d\u0441\u043a\u0438\u0437 \u0445\u0430\u0440\u0430\u043a\u0442\u0435\u0440\u0438\u0441\u0442\u0438\u043a\u0438\" OR \"Aram Khachaturian sketches characteristics",
-    "ads_query": "title:(\u0410\u0440\u0430\u043c OR \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d. OR \u042d\u0441\u043a\u0438\u0437 OR \u0445\u0430\u0440\u0430\u043a\u0442\u0435\u0440\u0438\u0441\u0442\u0438\u043a\u0438 OR [Aram)",
-    "category": "content"
   },
   {
     "natural_language": "papers by researchers with ORCID 0000-0001-2345-6789",
@@ -8766,7 +8731,7 @@
   },
   {
     "natural_language": "gamma-ray flare magnetar NGC 253",
-    "ads_query": "abs:(bright OR gamma-ray OR flare OR interpreted OR giant)",
+    "ads_query": "abs:(gamma-ray AND interpreted AND flare)",
     "category": "topic"
   },
   {
@@ -8851,7 +8816,7 @@
   },
   {
     "natural_language": "papers on International Pulsar Timing Array Second Mock Data Challenge",
-    "ads_query": "abs:(International OR Pulsar OR Timing OR Array OR Second) doctype:article",
+    "ads_query": "abs:(Pulsar AND International AND Timing) doctype:article",
     "category": "topic"
   },
   {
@@ -9011,7 +8976,7 @@
   },
   {
     "natural_language": "papers like the Planck CMB results",
-    "ads_query": "similar(abs:\"Planck\" AND abs:(cosmic OR microwave OR background)) doctype:article",
+    "ads_query": "similar(abs:\"Planck\" AND abs:(cosmic AND microwave AND background)) doctype:article",
     "category": "operator"
   },
   {
@@ -9061,7 +9026,7 @@
   },
   {
     "natural_language": "gamma ray burst afterglow observations",
-    "ads_query": "abs:(gamma OR ray OR burst) abs:\"afterglow\"",
+    "ads_query": "abs:(gamma AND burst) abs:\"afterglow\"",
     "category": "compound"
   },
   {
@@ -9106,7 +9071,7 @@
   },
   {
     "natural_language": "Fermi gamma ray preprints",
-    "ads_query": "abs:(Fermi OR gamma OR ray) doctype:eprint",
+    "ads_query": "abs:(gamma AND Fermi) doctype:eprint",
     "category": "conversational"
   },
   {
@@ -9316,7 +9281,7 @@
   },
   {
     "natural_language": "support vector machine radiation belt modeling",
-    "ads_query": "abs:(Support OR vector OR machine) abs:\"radiation belt\"",
+    "ads_query": "abs:(Support AND machine AND vector) abs:\"radiation belt\"",
     "category": "content"
   },
   {
@@ -9356,7 +9321,7 @@
   },
   {
     "natural_language": "review papers covering AGN",
-    "ads_query": "reviews(abs:(active OR galactic OR nuclei)) doctype:article",
+    "ads_query": "reviews(abs:(galactic AND active AND nuclei)) doctype:article",
     "category": "operator"
   },
   {
@@ -9391,7 +9356,7 @@
   },
   {
     "natural_language": "performance profiles benchmarking optimization algorithms software",
-    "ads_query": "abs:(Benchmarking OR Optimization OR Software OR Performance OR Profiles)",
+    "ads_query": "abs:(Benchmarking AND Optimization AND Software)",
     "category": "topic"
   },
   {
@@ -9426,7 +9391,7 @@
   },
   {
     "natural_language": "dark matter candidates papers from 2017",
-    "ads_query": "abs:(dark OR matter OR candidates) pubdate:2017 doctype:article",
+    "ads_query": "abs:(candidates AND dark AND matter) pubdate:2017 doctype:article",
     "category": "publication"
   },
   {
@@ -9456,7 +9421,7 @@
   },
   {
     "natural_language": "gamma ray bursts reviews",
-    "ads_query": "abs:(gamma OR ray OR bursts) doctype:article property:refereed",
+    "ads_query": "abs:(gamma AND bursts) doctype:article property:refereed",
     "category": "property"
   },
   {
@@ -9466,7 +9431,7 @@
   },
   {
     "natural_language": "Astro2020 white papers L/T transition brown dwarfs",
-    "ads_query": "abs:(Astro2020 OR Science OR White OR Paper OR L/T) doctype:article",
+    "ads_query": "abs:(Astro2020 AND Science AND White) doctype:article",
     "category": "topic"
   },
   {
@@ -9606,7 +9571,7 @@
   },
   {
     "natural_language": "phase-space parameters brightest cluster galaxies halo properties",
-    "ads_query": "abs:(phase-space OR parameters OR brightest OR halo OR galaxies)",
+    "ads_query": "abs:(galaxies AND phase-space AND parameters)",
     "category": "topic"
   },
   {
@@ -9621,7 +9586,7 @@
   },
   {
     "natural_language": "Mather's active galactic nuclei papers",
-    "ads_query": "author:\"Mather, J.\" abs:(active OR galactic OR nuclei) doctype:article",
+    "ads_query": "author:\"Mather, J.\" abs:(galactic AND active AND nuclei) doctype:article",
     "category": "author"
   },
   {
@@ -9811,7 +9776,7 @@
   },
   {
     "natural_language": "papers that review gravitational wave detection",
-    "ads_query": "reviews(abs:(gravitational OR wave OR detection)) doctype:article",
+    "ads_query": "reviews(abs:(gravitational AND wave)) doctype:article",
     "category": "operator"
   },
   {
@@ -9826,7 +9791,7 @@
   },
   {
     "natural_language": "BlueWalker 3 satellite optical brightness",
-    "ads_query": "abs:(high OR optical OR brightness OR theBlueWalker OR satellite)",
+    "ads_query": "abs:(optical AND brightness AND theBlueWalker)",
     "category": "topic"
   },
   {
@@ -9896,7 +9861,7 @@
   },
   {
     "natural_language": "counter-rotating disk galaxies IllustrisTNG simulations observational counterparts",
-    "ads_query": "abs:(Hot and counter-rotating star-forming disk galaxies in IllustrisTNG and their real-world counterparts)",
+    "ads_query": "abs:(Hot AND IllustrisTNG AND counter-rotating AND star-forming)",
     "category": "topic"
   },
   {
@@ -10060,11 +10025,6 @@
     "category": "publication"
   },
   {
-    "natural_language": "papers on Khachaturian symphonic works",
-    "ads_query": "title:(\u0421\u0438\u043c\u0444\u043e\u043d\u0438\u0447\u0435\u0441\u043a\u043e\u0435 OR \u0442\u0432\u043e\u0440\u0447\u0435\u0441\u0442\u0432\u043e OR \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d\u0430 OR [Symphonic OR Oeuvre) doctype:article",
-    "category": "content"
-  },
-  {
     "natural_language": "new protoplanetary disks papers",
     "ads_query": "abs:\"protoplanetary disks\" year:2024-2025 doctype:article",
     "category": "temporal"
@@ -10201,7 +10161,7 @@
   },
   {
     "natural_language": "Hubble Space Telescope papers from 2022",
-    "ads_query": "abs:(Hubble OR Space OR Telescope) pubdate:2022 doctype:article",
+    "ads_query": "abs:(Hubble AND Space AND Telescope) pubdate:2022 doctype:article",
     "category": "publication"
   },
   {
@@ -10331,7 +10291,7 @@
   },
   {
     "natural_language": "recent fast radio burst discoveries",
-    "ads_query": "abs:(fast OR radio OR burst) year:2020-2025",
+    "ads_query": "abs:(radio AND fast AND burst) year:2020-2025",
     "category": "compound"
   },
   {
@@ -10761,12 +10721,12 @@
   },
   {
     "natural_language": "compact stellar systems polar ring galaxy NGC4650A",
-    "ads_query": "abs:(Compact OR stellar OR systems OR polar OR ring)",
+    "ads_query": "abs:(Compact AND stellar AND polar)",
     "category": "topic"
   },
   {
     "natural_language": "papers by Sainz Dalda on solar magnetic fields",
-    "ads_query": "author:\"Sainz Dalda, A.\" OR =author:\"Dalda, A. Sainz\" OR =author:\"Dalda, A. S.\" OR =author:\"Dalda, Alberto Sainz\" doctype:article",
+    "ads_query": "author:\"Sainz Dalda\" abs:(solar AND magnetic AND fields) doctype:article",
     "category": "author"
   },
   {
@@ -10811,7 +10771,7 @@
   },
   {
     "natural_language": "polar ring galaxies in COSMOS survey",
-    "ads_query": "abs:(New OR Polar OR Ring OR Galaxy OR Discovered)",
+    "ads_query": "abs:(Galaxy AND Polar AND Ring)",
     "category": "topic"
   },
   {
@@ -10871,7 +10831,7 @@
   },
   {
     "natural_language": "polar ring galaxy Subaru Deep Field",
-    "ads_query": "abs:(candidate OR polar-ring OR galaxy OR Subaru OR Deep)",
+    "ads_query": "abs:(galaxy AND Subaru AND Deep)",
     "category": "topic"
   },
   {
@@ -11086,7 +11046,7 @@
   },
   {
     "natural_language": "MiMeS survey magnetism massive stars",
-    "ads_query": "abs:(MiMeS OR survey OR magnetism OR massive OR stars)",
+    "ads_query": "abs:(MiMeS AND magnetism AND stars)",
     "category": "topic"
   },
   {
@@ -11271,7 +11231,7 @@
   },
   {
     "natural_language": "galaxy interaction simulation AM 2229-735",
-    "ads_query": "abs:(Simulating OR galactic OR system OR interaction OR 2229-735)",
+    "ads_query": "abs:(Simulating AND galactic AND interaction)",
     "category": "topic"
   },
   {
@@ -11286,7 +11246,7 @@
   },
   {
     "natural_language": "Edwin Hubble on gamma ray bursts",
-    "ads_query": "author:\"Hubble, E.\" abs:(gamma OR ray OR bursts)",
+    "ads_query": "author:\"Hubble, E.\" abs:(gamma AND bursts)",
     "category": "author"
   },
   {
@@ -11363,11 +11323,6 @@
     "natural_language": "papers by macleod from 2015",
     "ads_query": "author:\"^macleod\" year:2015 doctype:article",
     "category": "first_author"
-  },
-  {
-    "natural_language": "Mineo Gilfanov X-ray binaries star forming galaxies",
-    "ads_query": "abs:(Mineo, S., Gilfanov, M. & Sunyaev, R. X-ray emission from star-forming galaxies - I. High-mass X-ray binaries. Mon. Not. R. Astron. Soc. 419, 2095\u2013 2115 (2012). 1105.4610.)",
-    "category": "topic"
   },
   {
     "natural_language": "V1674 her variable star observations",
@@ -11626,7 +11581,7 @@
   },
   {
     "natural_language": "trending papers about Type Ia supernovae",
-    "ads_query": "trending(abs:(Type OR supernova)) doctype:article",
+    "ads_query": "trending(abs:(supernova AND Type)) doctype:article",
     "category": "operator"
   },
   {
@@ -11716,7 +11671,7 @@
   },
   {
     "natural_language": "gamma ray astronomy in the 2020s",
-    "ads_query": "abs:(gamma OR ray OR astronomy) year:2020-2029",
+    "ads_query": "abs:(gamma AND astronomy) year:2020-2029",
     "category": "publication"
   },
   {
@@ -11851,7 +11806,7 @@
   },
   {
     "natural_language": "early-type galaxy mass density slopes Jeans modeling redshift 0.3 0.5",
-    "ads_query": "abs:(Total OR mass OR density OR slopes OR early-type)",
+    "ads_query": "abs:(Total AND density AND early-type)",
     "category": "topic"
   },
   {
@@ -11991,7 +11946,7 @@
   },
   {
     "natural_language": "stellar flares filament eruptions solar-type stars",
-    "ads_query": "abs:(Probable OR detection OR eruptive OR filament OR superflare)",
+    "ads_query": "abs:(Probable AND eruptive AND filament)",
     "category": "topic"
   },
   {
@@ -12146,7 +12101,7 @@
   },
   {
     "natural_language": "Povic Marquez Masegosa galaxy classification MNRAS 2015",
-    "ads_query": "abs:(Povic, OR M., OR M\u00e1rquez, OR I., OR Masegosa,)",
+    "ads_query": "abs:(Povic, AND M\u00e1rquez, AND Masegosa,)",
     "category": "topic"
   },
   {
@@ -12241,7 +12196,7 @@
   },
   {
     "natural_language": "Riccardo Giacconi on cosmic microwave background",
-    "ads_query": "author:\"Giacconi, R.\" abs:(cosmic OR microwave OR background)",
+    "ads_query": "author:\"Giacconi, R.\" abs:(cosmic AND microwave AND background)",
     "category": "author"
   },
   {
@@ -12356,7 +12311,7 @@
   },
   {
     "natural_language": "CERN LIGO gravitational waves research",
-    "ads_query": "aff:\"CERN\" abs:(LIGO OR gravitational OR waves)",
+    "ads_query": "aff:\"CERN\" abs:(gravitational AND LIGO AND waves)",
     "category": "affiliation"
   },
   {
@@ -12391,7 +12346,7 @@
   },
   {
     "natural_language": "influential dark matter candidates research",
-    "ads_query": "abs:(dark OR matter OR candidates) citation_count:[50 TO *]",
+    "ads_query": "abs:(candidates AND dark AND matter) citation_count:[50 TO *]",
     "category": "metrics"
   },
   {
@@ -12506,7 +12461,7 @@
   },
   {
     "natural_language": "gamma ray bursts papers",
-    "ads_query": "abs:(gamma OR ray OR bursts) doctype:article",
+    "ads_query": "abs:(gamma AND bursts) doctype:article",
     "category": "topic"
   },
   {
@@ -12591,7 +12546,7 @@
   },
   {
     "natural_language": "papers on low JCO line ratios from single dish CO mapping surveys and PHANGS-ALMA",
-    "ads_query": "abs:(Low-JCOLineRatiosfromSingle-dishCOMappingSurveysandPHANGS-ALMA) doctype:article",
+    "ads_query": "abs:Low-JCOLineRatiosfromSingle-dishCOMappingSurveysandPHANGS-ALMA doctype:article",
     "category": "topic"
   },
   {
@@ -12706,7 +12661,7 @@
   },
   {
     "natural_language": "X-ray binary luminosity functions M81 spiral galaxy globular clusters",
-    "ads_query": "abs:(Calibrating X-ray binary luminosity functions via optical reconnaissance II. The high-mass XLF and globular cluster population of X-ray binaries in the low star-forming spiral M81)",
+    "ads_query": "abs:(Calibrating AND X-ray AND XLF AND X-ray)",
     "category": "topic"
   },
   {
@@ -12736,7 +12691,7 @@
   },
   {
     "natural_language": "Science papers on Fermi gamma ray",
-    "ads_query": "abs:(Fermi OR gamma OR ray) bibstem:\"Science\" doctype:article",
+    "ads_query": "abs:(gamma AND Fermi) bibstem:\"Science\" doctype:article",
     "category": "publication"
   },
   {
@@ -12771,7 +12726,7 @@
   },
   {
     "natural_language": "LIGO gravitational waves review",
-    "ads_query": "abs:(LIGO OR gravitational OR waves) doctype:article property:refereed",
+    "ads_query": "abs:(gravitational AND LIGO AND waves) doctype:article property:refereed",
     "category": "property"
   },
   {
@@ -12798,11 +12753,6 @@
     "natural_language": "papers by jahn from 2023",
     "ads_query": "author:\"^jahn\" year:2023 doctype:article",
     "category": "first_author"
-  },
-  {
-    "natural_language": "papers by Aram Khachaturian on musical composition",
-    "ads_query": "title:(\u0410\u0440\u0430\u043c OR \u0418\u043b\u044c\u0438\u0447 OR \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d OR [Aram OR Il\u02b9ich) doctype:article",
-    "category": "content"
   },
   {
     "natural_language": "papers by Greene J first author",
@@ -13021,7 +12971,7 @@
   },
   {
     "natural_language": "any good active galactic nuclei reviews?",
-    "ads_query": "abs:(active OR galactic OR nuclei) doctype:article property:refereed",
+    "ads_query": "abs:(galactic AND active AND nuclei) doctype:article property:refereed",
     "category": "conversational"
   },
   {
@@ -13396,17 +13346,17 @@
   },
   {
     "natural_language": "facility regex magell.*",
-    "ads_query": "facility:/magell.*/",
+    "ads_query": "abs:/magell.*/",
     "category": "syntax"
   },
   {
     "natural_language": "instrument/facility matching magell.*",
-    "ads_query": "facility:/magell.*/",
+    "ads_query": "abs:/magell.*/",
     "category": "syntax"
   },
   {
     "natural_language": "facility starts with magell",
-    "ads_query": "facility:/magell.*/",
+    "ads_query": "abs:/magell.*/",
     "category": "syntax"
   },
   {
@@ -14111,27 +14061,27 @@
   },
   {
     "natural_language": "papers about coronal mass ejections",
-    "ads_query": "abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "abs:(coronal AND ejections AND mass) doctype:article",
     "category": "content"
   },
   {
     "natural_language": "coronal mass ejections",
-    "ads_query": "abs:(coronal OR mass OR ejections)",
+    "ads_query": "abs:(coronal AND ejections AND mass)",
     "category": "content"
   },
   {
     "natural_language": "abs contains coronal mass ejections",
-    "ads_query": "abs:(coronal OR mass OR ejections)",
+    "ads_query": "abs:(coronal AND ejections AND mass)",
     "category": "content"
   },
   {
     "natural_language": "find coronal mass ejections in abs",
-    "ads_query": "abs:(coronal OR mass OR ejections)",
+    "ads_query": "abs:(coronal AND ejections AND mass)",
     "category": "content"
   },
   {
     "natural_language": "coronal mass ejections in abs field",
-    "ads_query": "abs:(coronal OR mass OR ejections)",
+    "ads_query": "abs:(coronal AND ejections AND mass)",
     "category": "content"
   },
   {
@@ -14511,27 +14461,27 @@
   },
   {
     "natural_language": "papers about cosmic microwave background",
-    "ads_query": "abs:(cosmic OR microwave OR background) doctype:article",
+    "ads_query": "abs:(cosmic AND microwave AND background) doctype:article",
     "category": "content"
   },
   {
     "natural_language": "cosmic microwave background",
-    "ads_query": "abs:(cosmic OR microwave OR background)",
+    "ads_query": "abs:(cosmic AND microwave AND background)",
     "category": "content"
   },
   {
     "natural_language": "abs contains cosmic microwave background",
-    "ads_query": "abs:(cosmic OR microwave OR background)",
+    "ads_query": "abs:(cosmic AND microwave AND background)",
     "category": "content"
   },
   {
     "natural_language": "find cosmic microwave background in abs",
-    "ads_query": "abs:(cosmic OR microwave OR background)",
+    "ads_query": "abs:(cosmic AND microwave AND background)",
     "category": "content"
   },
   {
     "natural_language": "cosmic microwave background in abs field",
-    "ads_query": "abs:(cosmic OR microwave OR background)",
+    "ads_query": "abs:(cosmic AND microwave AND background)",
     "category": "content"
   },
   {
@@ -15431,82 +15381,82 @@
   },
   {
     "natural_language": "coronal mass ejections 2019",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:2019",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:2019",
     "category": "publication"
   },
   {
     "natural_language": "papers on coronal mass ejections from 2019",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:2019 doctype:article",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:2019 doctype:article",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections year 2019",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:2019",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:2019",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections between 2019",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:2019",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:2019",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections 2020",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:2020",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:2020",
     "category": "publication"
   },
   {
     "natural_language": "papers on coronal mass ejections from 2020",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:2020 doctype:article",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:2020 doctype:article",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections year 2020",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:2020",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:2020",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections between 2020",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:2020",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:2020",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections 2022 to 2025",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:2022-2025",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:2022-2025",
     "category": "publication"
   },
   {
     "natural_language": "papers on coronal mass ejections from 2022 to 2025",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:2022-2025 doctype:article",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:2022-2025 doctype:article",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections year 2022 to 2025",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:2022-2025",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:2022-2025",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections between 2022 to 2025",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:2022-2025",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:2022-2025",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections 1980-1990",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:1980-1990",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:1980-1990",
     "category": "publication"
   },
   {
     "natural_language": "papers on coronal mass ejections from 1980-1990",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:1980-1990 doctype:article",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:1980-1990 doctype:article",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections year 1980-1990",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:1980-1990",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:1980-1990",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections between 1980-1990",
-    "ads_query": "abs:(coronal OR mass OR ejections) year:1980-1990",
+    "ads_query": "abs:(coronal AND ejections AND mass) year:1980-1990",
     "category": "publication"
   },
   {
@@ -15891,37 +15841,37 @@
   },
   {
     "natural_language": "huchra john coronal mass ejections",
-    "ads_query": "author:\"huchra, john\" abs:(coronal OR mass OR ejections)",
+    "ads_query": "author:\"huchra, john\" abs:(coronal AND ejections AND mass)",
     "category": "author"
   },
   {
     "natural_language": "papers by Huchra, John about coronal mass ejections",
-    "ads_query": "author:\"huchra, john\" abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "author:\"huchra, john\" abs:(coronal AND ejections AND mass) doctype:article",
     "category": "author"
   },
   {
     "natural_language": "coronal mass ejections papers by huchra john",
-    "ads_query": "author:\"huchra, john\" abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "author:\"huchra, john\" abs:(coronal AND ejections AND mass) doctype:article",
     "category": "author"
   },
   {
     "natural_language": "Huchra, John coronal mass ejections",
-    "ads_query": "author:\"huchra, john\" abs:(coronal OR mass OR ejections)",
+    "ads_query": "author:\"huchra, john\" abs:(coronal AND ejections AND mass)",
     "category": "author"
   },
   {
     "natural_language": "huchra john coronal mass ejections 2018-2023",
-    "ads_query": "author:\"huchra, john\" abs:(coronal OR mass OR ejections) year:2018-2023",
+    "ads_query": "author:\"huchra, john\" abs:(coronal AND ejections AND mass) year:2018-2023",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections by Huchra, John 2018 to 2023",
-    "ads_query": "author:\"huchra, john\" abs:(coronal OR mass OR ejections) year:2018-2023",
+    "ads_query": "author:\"huchra, john\" abs:(coronal AND ejections AND mass) year:2018-2023",
     "category": "publication"
   },
   {
     "natural_language": "papers by huchra john on coronal mass ejections since 2018",
-    "ads_query": "author:\"huchra, john\" abs:(coronal OR mass OR ejections) year:2018-2023 doctype:article",
+    "ads_query": "author:\"huchra, john\" abs:(coronal AND ejections AND mass) year:2018-2023 doctype:article",
     "category": "publication"
   },
   {
@@ -16101,37 +16051,37 @@
   },
   {
     "natural_language": "murray stephen coronal mass ejections",
-    "ads_query": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections)",
+    "ads_query": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass)",
     "category": "author"
   },
   {
     "natural_language": "papers by Murray, Stephen about coronal mass ejections",
-    "ads_query": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass) doctype:article",
     "category": "author"
   },
   {
     "natural_language": "coronal mass ejections papers by murray stephen",
-    "ads_query": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass) doctype:article",
     "category": "author"
   },
   {
     "natural_language": "Murray, Stephen coronal mass ejections",
-    "ads_query": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections)",
+    "ads_query": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass)",
     "category": "author"
   },
   {
     "natural_language": "murray stephen coronal mass ejections 2018-2023",
-    "ads_query": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections) year:2018-2023",
+    "ads_query": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass) year:2018-2023",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections by Murray, Stephen 2018 to 2023",
-    "ads_query": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections) year:2018-2023",
+    "ads_query": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass) year:2018-2023",
     "category": "publication"
   },
   {
     "natural_language": "papers by murray stephen on coronal mass ejections since 2018",
-    "ads_query": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections) year:2018-2023 doctype:article",
+    "ads_query": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass) year:2018-2023 doctype:article",
     "category": "publication"
   },
   {
@@ -16311,37 +16261,37 @@
   },
   {
     "natural_language": "smith j coronal mass ejections",
-    "ads_query": "author:\"smith, j\" abs:(coronal OR mass OR ejections)",
+    "ads_query": "author:\"smith, j\" abs:(coronal AND ejections AND mass)",
     "category": "author"
   },
   {
     "natural_language": "papers by Smith, J about coronal mass ejections",
-    "ads_query": "author:\"Smith\" abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "author:\"Smith\" abs:(coronal AND ejections AND mass) doctype:article",
     "category": "author"
   },
   {
     "natural_language": "coronal mass ejections papers by smith j",
-    "ads_query": "author:\"smith, j\" abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "author:\"smith, j\" abs:(coronal AND ejections AND mass) doctype:article",
     "category": "author"
   },
   {
     "natural_language": "Smith, J coronal mass ejections",
-    "ads_query": "author:\"smith, j\" abs:(coronal OR mass OR ejections)",
+    "ads_query": "author:\"smith, j\" abs:(coronal AND ejections AND mass)",
     "category": "author"
   },
   {
     "natural_language": "smith j coronal mass ejections 2018-2023",
-    "ads_query": "author:\"smith, j\" abs:(coronal OR mass OR ejections) year:2018-2023",
+    "ads_query": "author:\"smith, j\" abs:(coronal AND ejections AND mass) year:2018-2023",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections by Smith, J 2018 to 2023",
-    "ads_query": "author:\"Smith\" abs:(coronal OR mass OR ejections) year:2018-2023",
+    "ads_query": "author:\"Smith\" abs:(coronal AND ejections AND mass) year:2018-2023",
     "category": "publication"
   },
   {
     "natural_language": "papers by smith j on coronal mass ejections since 2018",
-    "ads_query": "author:\"smith, j\" abs:(coronal OR mass OR ejections) year:2018-2023 doctype:article",
+    "ads_query": "author:\"smith, j\" abs:(coronal AND ejections AND mass) year:2018-2023 doctype:article",
     "category": "publication"
   },
   {
@@ -16521,37 +16471,37 @@
   },
   {
     "natural_language": "vera rubin coronal mass ejections",
-    "ads_query": "author:\"rubin, v\" abs:(coronal OR mass OR ejections)",
+    "ads_query": "author:\"rubin, v\" abs:(coronal AND ejections AND mass)",
     "category": "author"
   },
   {
     "natural_language": "papers by Rubin, Vera about coronal mass ejections",
-    "ads_query": "author:\"Rubin\" abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "author:\"Rubin\" abs:(coronal AND ejections AND mass) doctype:article",
     "category": "author"
   },
   {
     "natural_language": "coronal mass ejections papers by vera rubin",
-    "ads_query": "author:\"rubin, v\" abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "author:\"rubin, v\" abs:(coronal AND ejections AND mass) doctype:article",
     "category": "author"
   },
   {
     "natural_language": "Rubin, Vera coronal mass ejections",
-    "ads_query": "author:\"rubin, v\" abs:(coronal OR mass OR ejections)",
+    "ads_query": "author:\"rubin, v\" abs:(coronal AND ejections AND mass)",
     "category": "author"
   },
   {
     "natural_language": "vera rubin coronal mass ejections 2018-2023",
-    "ads_query": "author:\"rubin, v\" abs:(coronal OR mass OR ejections) year:2018-2023",
+    "ads_query": "author:\"rubin, v\" abs:(coronal AND ejections AND mass) year:2018-2023",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections by Rubin, Vera 2018 to 2023",
-    "ads_query": "author:\"Rubin\" abs:(coronal OR mass OR ejections) year:2018-2023",
+    "ads_query": "author:\"Rubin\" abs:(coronal AND ejections AND mass) year:2018-2023",
     "category": "publication"
   },
   {
     "natural_language": "papers by vera rubin on coronal mass ejections since 2018",
-    "ads_query": "author:\"rubin, v\" abs:(coronal OR mass OR ejections) year:2018-2023 doctype:article",
+    "ads_query": "author:\"rubin, v\" abs:(coronal AND ejections AND mass) year:2018-2023 doctype:article",
     "category": "publication"
   },
   {
@@ -16731,37 +16681,37 @@
   },
   {
     "natural_language": "oort j coronal mass ejections",
-    "ads_query": "author:\"oort, j\" abs:(coronal OR mass OR ejections)",
+    "ads_query": "author:\"oort, j\" abs:(coronal AND ejections AND mass)",
     "category": "author"
   },
   {
     "natural_language": "papers by Oort, J about coronal mass ejections",
-    "ads_query": "author:\"Oort\" abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "author:\"Oort\" abs:(coronal AND ejections AND mass) doctype:article",
     "category": "author"
   },
   {
     "natural_language": "coronal mass ejections papers by oort j",
-    "ads_query": "author:\"oort, j\" abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "author:\"oort, j\" abs:(coronal AND ejections AND mass) doctype:article",
     "category": "author"
   },
   {
     "natural_language": "Oort, J coronal mass ejections",
-    "ads_query": "author:\"oort, j\" abs:(coronal OR mass OR ejections)",
+    "ads_query": "author:\"oort, j\" abs:(coronal AND ejections AND mass)",
     "category": "author"
   },
   {
     "natural_language": "oort j coronal mass ejections 2018-2023",
-    "ads_query": "author:\"oort, j\" abs:(coronal OR mass OR ejections) year:2018-2023",
+    "ads_query": "author:\"oort, j\" abs:(coronal AND ejections AND mass) year:2018-2023",
     "category": "publication"
   },
   {
     "natural_language": "coronal mass ejections by Oort, J 2018 to 2023",
-    "ads_query": "author:\"Oort\" abs:(coronal OR mass OR ejections) year:2018-2023",
+    "ads_query": "author:\"Oort\" abs:(coronal AND ejections AND mass) year:2018-2023",
     "category": "publication"
   },
   {
     "natural_language": "papers by oort j on coronal mass ejections since 2018",
-    "ads_query": "author:\"oort, j\" abs:(coronal OR mass OR ejections) year:2018-2023 doctype:article",
+    "ads_query": "author:\"oort, j\" abs:(coronal AND ejections AND mass) year:2018-2023 doctype:article",
     "category": "publication"
   },
   {
@@ -17056,22 +17006,22 @@
   },
   {
     "natural_language": "ApJ coronal mass ejections refereed",
-    "ads_query": "bibstem:\"ApJ\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in ApJ with refereed",
-    "ads_query": "bibstem:\"ApJ\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "refereed ApJ papers on coronal mass ejections",
-    "ads_query": "bibstem:\"ApJ\" property:refereed abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections ApJ refereed only",
-    "ads_query": "bibstem:\"ApJ\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"ApJ\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -17156,22 +17106,22 @@
   },
   {
     "natural_language": "ApJ coronal mass ejections openaccess",
-    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in ApJ with openaccess",
-    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "openaccess ApJ papers on coronal mass ejections",
-    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections ApJ openaccess only",
-    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"ApJ\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -17256,22 +17206,22 @@
   },
   {
     "natural_language": "ApJ coronal mass ejections data",
-    "ads_query": "bibstem:\"ApJ\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in ApJ with data",
-    "ads_query": "bibstem:\"ApJ\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "data ApJ papers on coronal mass ejections",
-    "ads_query": "bibstem:\"ApJ\" property:data abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections ApJ data only",
-    "ads_query": "bibstem:\"ApJ\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"ApJ\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -17356,22 +17306,22 @@
   },
   {
     "natural_language": "AJ coronal mass ejections refereed",
-    "ads_query": "bibstem:\"AJ\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in AJ with refereed",
-    "ads_query": "bibstem:\"AJ\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "refereed AJ papers on coronal mass ejections",
-    "ads_query": "bibstem:\"AJ\" property:refereed abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections AJ refereed only",
-    "ads_query": "bibstem:\"AJ\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"AJ\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -17456,22 +17406,22 @@
   },
   {
     "natural_language": "AJ coronal mass ejections openaccess",
-    "ads_query": "bibstem:\"AJ\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in AJ with openaccess",
-    "ads_query": "bibstem:\"AJ\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "openaccess AJ papers on coronal mass ejections",
-    "ads_query": "bibstem:\"AJ\" property:openaccess abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections AJ openaccess only",
-    "ads_query": "bibstem:\"AJ\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"AJ\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -17556,22 +17506,22 @@
   },
   {
     "natural_language": "AJ coronal mass ejections data",
-    "ads_query": "bibstem:\"AJ\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"AJ\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in AJ with data",
-    "ads_query": "bibstem:\"AJ\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"AJ\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "data AJ papers on coronal mass ejections",
-    "ads_query": "bibstem:\"AJ\" property:data abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"AJ\" property:data abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections AJ data only",
-    "ads_query": "bibstem:\"AJ\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"AJ\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -17656,22 +17606,22 @@
   },
   {
     "natural_language": "A&A coronal mass ejections refereed",
-    "ads_query": "bibstem:\"A&A\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in A&A with refereed",
-    "ads_query": "bibstem:\"A&A\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "refereed A&A papers on coronal mass ejections",
-    "ads_query": "bibstem:\"A&A\" property:refereed abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections A&A refereed only",
-    "ads_query": "bibstem:\"A&A\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"A&A\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -17756,22 +17706,22 @@
   },
   {
     "natural_language": "A&A coronal mass ejections openaccess",
-    "ads_query": "bibstem:\"A&A\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in A&A with openaccess",
-    "ads_query": "bibstem:\"A&A\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "openaccess A&A papers on coronal mass ejections",
-    "ads_query": "bibstem:\"A&A\" property:openaccess abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections A&A openaccess only",
-    "ads_query": "bibstem:\"A&A\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"A&A\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -17856,22 +17806,22 @@
   },
   {
     "natural_language": "A&A coronal mass ejections data",
-    "ads_query": "bibstem:\"A&A\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"A&A\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in A&A with data",
-    "ads_query": "bibstem:\"A&A\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"A&A\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "data A&A papers on coronal mass ejections",
-    "ads_query": "bibstem:\"A&A\" property:data abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"A&A\" property:data abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections A&A data only",
-    "ads_query": "bibstem:\"A&A\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"A&A\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -17956,22 +17906,22 @@
   },
   {
     "natural_language": "Icarus coronal mass ejections refereed",
-    "ads_query": "bibstem:\"Icarus\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Icarus with refereed",
-    "ads_query": "bibstem:\"Icarus\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "refereed Icarus papers on coronal mass ejections",
-    "ads_query": "bibstem:\"Icarus\" property:refereed abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Icarus refereed only",
-    "ads_query": "bibstem:\"Icarus\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Icarus\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -18056,22 +18006,22 @@
   },
   {
     "natural_language": "Icarus coronal mass ejections openaccess",
-    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Icarus with openaccess",
-    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Icarus papers on coronal mass ejections",
-    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Icarus openaccess only",
-    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Icarus\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -18156,22 +18106,22 @@
   },
   {
     "natural_language": "Icarus coronal mass ejections data",
-    "ads_query": "bibstem:\"Icarus\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Icarus with data",
-    "ads_query": "bibstem:\"Icarus\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "data Icarus papers on coronal mass ejections",
-    "ads_query": "bibstem:\"Icarus\" property:data abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Icarus data only",
-    "ads_query": "bibstem:\"Icarus\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Icarus\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -18256,22 +18206,22 @@
   },
   {
     "natural_language": "Nature coronal mass ejections refereed",
-    "ads_query": "bibstem:\"Nature\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Nature with refereed",
-    "ads_query": "bibstem:\"Nature\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "refereed Nature papers on coronal mass ejections",
-    "ads_query": "bibstem:\"Nature\" property:refereed abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Nature refereed only",
-    "ads_query": "bibstem:\"Nature\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Nature\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -18356,22 +18306,22 @@
   },
   {
     "natural_language": "Nature coronal mass ejections openaccess",
-    "ads_query": "bibstem:\"Nature\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Nature with openaccess",
-    "ads_query": "bibstem:\"Nature\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Nature papers on coronal mass ejections",
-    "ads_query": "bibstem:\"Nature\" property:openaccess abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Nature openaccess only",
-    "ads_query": "bibstem:\"Nature\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Nature\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -18456,22 +18406,22 @@
   },
   {
     "natural_language": "Nature coronal mass ejections data",
-    "ads_query": "bibstem:\"Nature\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Nature\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Nature with data",
-    "ads_query": "bibstem:\"Nature\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Nature\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "data Nature papers on coronal mass ejections",
-    "ads_query": "bibstem:\"Nature\" property:data abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"Nature\" property:data abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Nature data only",
-    "ads_query": "bibstem:\"Nature\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Nature\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -18556,22 +18506,22 @@
   },
   {
     "natural_language": "Science coronal mass ejections refereed",
-    "ads_query": "bibstem:\"Science\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Science with refereed",
-    "ads_query": "bibstem:\"Science\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "refereed Science papers on coronal mass ejections",
-    "ads_query": "bibstem:\"Science\" property:refereed abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Science refereed only",
-    "ads_query": "bibstem:\"Science\" property:refereed abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Science\" property:refereed abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -18656,22 +18606,22 @@
   },
   {
     "natural_language": "Science coronal mass ejections openaccess",
-    "ads_query": "bibstem:\"Science\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Science with openaccess",
-    "ads_query": "bibstem:\"Science\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "openaccess Science papers on coronal mass ejections",
-    "ads_query": "bibstem:\"Science\" property:openaccess abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Science openaccess only",
-    "ads_query": "bibstem:\"Science\" property:openaccess abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Science\" property:openaccess abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -18756,22 +18706,22 @@
   },
   {
     "natural_language": "Science coronal mass ejections data",
-    "ads_query": "bibstem:\"Science\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Science\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Science with data",
-    "ads_query": "bibstem:\"Science\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Science\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "data Science papers on coronal mass ejections",
-    "ads_query": "bibstem:\"Science\" property:data abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibstem:\"Science\" property:data abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections Science data only",
-    "ads_query": "bibstem:\"Science\" property:data abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibstem:\"Science\" property:data abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
@@ -19151,17 +19101,17 @@
   },
   {
     "natural_language": "HST bibliography coronal mass ejections",
-    "ads_query": "bibgroup:HST abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibgroup:HST abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in HST bibgroup",
-    "ads_query": "bibgroup:HST abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibgroup:HST abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "papers in HST about coronal mass ejections",
-    "ads_query": "bibgroup:HST abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibgroup:HST abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
@@ -19241,17 +19191,17 @@
   },
   {
     "natural_language": "ALMA bibliography coronal mass ejections",
-    "ads_query": "bibgroup:ALMA abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibgroup:ALMA abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in ALMA bibgroup",
-    "ads_query": "bibgroup:ALMA abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibgroup:ALMA abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "papers in ALMA about coronal mass ejections",
-    "ads_query": "bibgroup:ALMA abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibgroup:ALMA abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
@@ -19331,17 +19281,17 @@
   },
   {
     "natural_language": "ESO bibliography coronal mass ejections",
-    "ads_query": "bibgroup:ESO abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibgroup:ESO abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in ESO bibgroup",
-    "ads_query": "bibgroup:ESO abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibgroup:ESO abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "papers in ESO about coronal mass ejections",
-    "ads_query": "bibgroup:ESO abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibgroup:ESO abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
@@ -19421,17 +19371,17 @@
   },
   {
     "natural_language": "Gemini bibliography coronal mass ejections",
-    "ads_query": "bibgroup:Gemini abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibgroup:Gemini abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Gemini bibgroup",
-    "ads_query": "bibgroup:Gemini abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibgroup:Gemini abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "papers in Gemini about coronal mass ejections",
-    "ads_query": "bibgroup:Gemini abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibgroup:Gemini abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
@@ -19511,17 +19461,17 @@
   },
   {
     "natural_language": "Spitzer bibliography coronal mass ejections",
-    "ads_query": "bibgroup:Spitzer abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibgroup:Spitzer abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Spitzer bibgroup",
-    "ads_query": "bibgroup:Spitzer abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibgroup:Spitzer abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "papers in Spitzer about coronal mass ejections",
-    "ads_query": "bibgroup:Spitzer abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibgroup:Spitzer abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
@@ -19601,17 +19551,17 @@
   },
   {
     "natural_language": "Keck bibliography coronal mass ejections",
-    "ads_query": "bibgroup:Keck abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibgroup:Keck abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "coronal mass ejections in Keck bibgroup",
-    "ads_query": "bibgroup:Keck abs:(coronal OR mass OR ejections)",
+    "ads_query": "bibgroup:Keck abs:(coronal AND ejections AND mass)",
     "category": "filters"
   },
   {
     "natural_language": "papers in Keck about coronal mass ejections",
-    "ads_query": "bibgroup:Keck abs:(coronal OR mass OR ejections) doctype:article",
+    "ads_query": "bibgroup:Keck abs:(coronal AND ejections AND mass) doctype:article",
     "category": "filters"
   },
   {
@@ -19646,17 +19596,17 @@
   },
   {
     "natural_language": "qso or dark energy in abstract",
-    "ads_query": "abs:(QSO OR \"dark energy\")",
+    "ads_query": "abs:(QSO AND \"dark energy\")",
     "category": "syntax"
   },
   {
     "natural_language": "abstract qso OR dark energy",
-    "ads_query": "abs:(QSO OR \"dark energy\")",
+    "ads_query": "abs:(QSO AND \"dark energy\")",
     "category": "syntax"
   },
   {
     "natural_language": "either qso or dark energy",
-    "ads_query": "abs:(QSO OR \"dark energy\")",
+    "ads_query": "abs:(QSO AND \"dark energy\")",
     "category": "syntax"
   },
   {
@@ -19881,7 +19831,7 @@
   },
   {
     "natural_language": "GALEX UV luminosity function papers",
-    "ads_query": "bibgroup:GALEX abs:(luminosity OR function) doctype:article",
+    "ads_query": "bibgroup:GALEX abs:(luminosity AND function) doctype:article",
     "category": "bibgroup"
   },
   {
@@ -20241,12 +20191,12 @@
   },
   {
     "natural_language": "tidal disruption events research with Swift Observatory",
-    "ads_query": "bibgroup:Swift abs:(tidal OR disruption OR events)",
+    "ads_query": "bibgroup:Swift abs:(disruption AND tidal AND events)",
     "category": "bibgroup"
   },
   {
     "natural_language": "Swift Gamma-Ray Burst tidal disruption events observations",
-    "ads_query": "bibgroup:Swift abs:(tidal OR disruption OR events)",
+    "ads_query": "bibgroup:Swift abs:(disruption AND tidal AND events)",
     "category": "bibgroup"
   },
   {
@@ -20301,12 +20251,12 @@
   },
   {
     "natural_language": "NuSTAR black hole spin observations",
-    "ads_query": "bibgroup:NuSTAR abs:(black OR hole OR spin)",
+    "ads_query": "bibgroup:NuSTAR abs:(black AND hole AND spin)",
     "category": "bibgroup"
   },
   {
     "natural_language": "recent NuSTAR black hole spin research",
-    "ads_query": "bibgroup:NuSTAR abs:(black OR hole OR spin) pubdate:[2023-01 TO 2026-12]",
+    "ads_query": "bibgroup:NuSTAR abs:(black AND hole AND spin) pubdate:[2023-01 TO 2026-12]",
     "category": "bibgroup"
   },
   {
@@ -20776,12 +20726,12 @@
   },
   {
     "natural_language": "brown dwarf searches research with 2MASS",
-    "ads_query": "bibgroup:2MASS abs:(brown OR dwarf OR searches)",
+    "ads_query": "bibgroup:2MASS abs:(searches AND brown AND dwarf)",
     "category": "bibgroup"
   },
   {
     "natural_language": "point source catalog research with Two Micron All Sky Survey",
-    "ads_query": "bibgroup:2MASS abs:(point OR source OR catalog)",
+    "ads_query": "bibgroup:2MASS abs:(catalog AND point AND source)",
     "category": "bibgroup"
   },
   {
@@ -20806,7 +20756,7 @@
   },
   {
     "natural_language": "brown dwarf searches studies using UKIRT",
-    "ads_query": "bibgroup:UKIRT abs:(brown OR dwarf OR searches) doctype:article",
+    "ads_query": "bibgroup:UKIRT abs:(searches AND brown AND dwarf) doctype:article",
     "category": "bibgroup"
   },
   {
@@ -21016,7 +20966,7 @@
   },
   {
     "natural_language": "GBT observations of fast radio bursts",
-    "ads_query": "bibgroup:GBT abs:(fast OR radio OR bursts)",
+    "ads_query": "bibgroup:GBT abs:(radio AND fast AND bursts)",
     "category": "bibgroup"
   },
   {
@@ -21051,7 +21001,7 @@
   },
   {
     "natural_language": "epoch of reionization research with Low-Frequency Array",
-    "ads_query": "bibgroup:LOFAR abs:(epoch OR reionization)",
+    "ads_query": "bibgroup:LOFAR abs:(reionization AND epoch)",
     "category": "bibgroup"
   },
   {
@@ -21061,7 +21011,7 @@
   },
   {
     "natural_language": "recent Low-Frequency Array epoch of reionization research",
-    "ads_query": "bibgroup:LOFAR abs:(epoch OR reionization) pubdate:[2023-01 TO 2026-12]",
+    "ads_query": "bibgroup:LOFAR abs:(reionization AND epoch) pubdate:[2023-01 TO 2026-12]",
     "category": "bibgroup"
   },
   {
@@ -21106,7 +21056,7 @@
   },
   {
     "natural_language": "Square Kilometre Array observations of epoch of reionization",
-    "ads_query": "bibgroup:SKA abs:(epoch OR reionization)",
+    "ads_query": "bibgroup:SKA abs:(reionization AND epoch)",
     "category": "bibgroup"
   },
   {
@@ -21396,7 +21346,7 @@
   },
   {
     "natural_language": "show me astronomical research on cosmic microwave background",
-    "ads_query": "collection:astronomy abs:(cosmic OR microwave OR background)",
+    "ads_query": "collection:astronomy abs:(cosmic AND microwave AND background)",
     "category": "collection"
   },
   {
@@ -21526,7 +21476,7 @@
   },
   {
     "natural_language": "search physics research for quantum field theory",
-    "ads_query": "collection:physics abs:(quantum OR field OR theory)",
+    "ads_query": "collection:physics abs:(quantum AND field AND theory)",
     "category": "collection"
   },
   {
@@ -21551,7 +21501,7 @@
   },
   {
     "natural_language": "physics papers on high energy physics",
-    "ads_query": "collection:physics abs:(high OR energy OR physics) doctype:article",
+    "ads_query": "collection:physics abs:(physics AND energy) doctype:article",
     "category": "collection"
   },
   {
@@ -21891,7 +21841,7 @@
   },
   {
     "natural_language": "discovery circulars related to fast radio bursts",
-    "ads_query": "doctype:circular abs:(fast OR radio OR bursts)",
+    "ads_query": "doctype:circular abs:(radio AND fast AND bursts)",
     "category": "doctype"
   },
   {
@@ -22261,7 +22211,7 @@
   },
   {
     "natural_language": "papers that cite Planck 2018 results",
-    "ads_query": "citations(abs:(Planck OR 2018)) doctype:article",
+    "ads_query": "citations(abs:(Planck AND 2018)) doctype:article",
     "category": "operator"
   },
   {
@@ -22276,27 +22226,27 @@
   },
   {
     "natural_language": "studies citing the LIGO detection paper",
-    "ads_query": "citations(abs:(LIGO OR detection OR paper)) doctype:article",
+    "ads_query": "citations(abs:(LIGO AND paper)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "articles citing Gaia DR2 paper",
-    "ads_query": "citations(abs:(Gaia OR DR2 OR paper)) doctype:article",
+    "ads_query": "citations(abs:(Gaia AND DR2 AND paper)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "works that cite the original SDSS paper",
-    "ads_query": "citations(abs:(original OR SDSS OR paper)) doctype:article",
+    "ads_query": "citations(abs:(SDSS AND original AND paper)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "papers which cite Hubble deep field paper",
-    "ads_query": "citations(abs:(Hubble OR deep OR field OR paper)) doctype:article",
+    "ads_query": "citations(abs:(Hubble AND deep AND field)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "the CMB discovery paper cited by",
-    "ads_query": "citations(abs:(CMB OR discovery OR paper)) doctype:article",
+    "ads_query": "citations(abs:(CMB AND paper)) doctype:article",
     "category": "operator"
   },
   {
@@ -22316,7 +22266,7 @@
   },
   {
     "natural_language": "find citations to the 2016 gravitational wave paper",
-    "ads_query": "citations(abs:(2016 OR gravitational OR wave OR paper)) doctype:article",
+    "ads_query": "citations(abs:(gravitational AND 2016 AND wave)) doctype:article",
     "category": "operator"
   },
   {
@@ -22326,12 +22276,12 @@
   },
   {
     "natural_language": "show citations to Mayor & Queloz exoplanet paper",
-    "ads_query": "citations(abs:(Mayor OR Queloz OR exoplanet OR paper)) doctype:article",
+    "ads_query": "citations(abs:(exoplanet AND Mayor AND Queloz)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "list citations of the 2019 black hole image paper",
-    "ads_query": "citations(abs:(2019 OR black OR hole OR image OR paper)) doctype:article",
+    "ads_query": "citations(abs:(black AND hole AND 2019)) doctype:article",
     "category": "operator"
   },
   {
@@ -22351,7 +22301,7 @@
   },
   {
     "natural_language": "references from Planck 2018 results",
-    "ads_query": "references(abs:(Planck OR 2018))",
+    "ads_query": "references(abs:(Planck AND 2018))",
     "category": "operator"
   },
   {
@@ -22366,27 +22316,27 @@
   },
   {
     "natural_language": "papers cited in the LIGO detection paper",
-    "ads_query": "references(abs:(LIGO OR detection OR paper)) doctype:article",
+    "ads_query": "references(abs:(LIGO AND paper)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "sources cited by Gaia DR2 paper",
-    "ads_query": "references(abs:(Gaia OR DR2 OR paper)) doctype:article",
+    "ads_query": "references(abs:(Gaia AND DR2 AND paper)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "works cited by the original SDSS paper",
-    "ads_query": "references(abs:(original OR SDSS OR paper)) doctype:article",
+    "ads_query": "references(abs:(SDSS AND original AND paper)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "what does Hubble deep field paper cite",
-    "ads_query": "references(abs:(Hubble OR deep OR field OR paper)) doctype:article",
+    "ads_query": "references(abs:(Hubble AND deep AND field)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "what papers does the CMB discovery paper cite",
-    "ads_query": "references(abs:(CMB OR discovery OR paper)) doctype:article",
+    "ads_query": "references(abs:(CMB AND paper)) doctype:article",
     "category": "operator"
   },
   {
@@ -22406,7 +22356,7 @@
   },
   {
     "natural_language": "list references from the 2016 gravitational wave paper",
-    "ads_query": "references(abs:(2016 OR gravitational OR wave OR paper)) doctype:article",
+    "ads_query": "references(abs:(gravitational AND 2016 AND wave)) doctype:article",
     "category": "operator"
   },
   {
@@ -22416,7 +22366,7 @@
   },
   {
     "natural_language": "references used in Mayor & Queloz exoplanet paper",
-    "ads_query": "references(abs:(Mayor OR Queloz OR exoplanet OR paper)) doctype:article",
+    "ads_query": "references(abs:(exoplanet AND Mayor AND Queloz)) doctype:article",
     "category": "operator"
   },
   {
@@ -22451,7 +22401,7 @@
   },
   {
     "natural_language": "trending topics in cosmic microwave background",
-    "ads_query": "trending(abs:(cosmic OR microwave OR background))",
+    "ads_query": "trending(abs:(cosmic AND microwave AND background))",
     "category": "operator"
   },
   {
@@ -22511,7 +22461,7 @@
   },
   {
     "natural_language": "similar papers to Planck 2018 results",
-    "ads_query": "similar(abs:(Planck OR 2018)) doctype:article",
+    "ads_query": "similar(abs:(Planck AND 2018)) doctype:article",
     "category": "operator"
   },
   {
@@ -22526,27 +22476,27 @@
   },
   {
     "natural_language": "studies similar to the LIGO detection paper",
-    "ads_query": "similar(abs:(LIGO OR detection OR paper)) doctype:article",
+    "ads_query": "similar(abs:(LIGO AND paper)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "find similar to Gaia DR2 paper",
-    "ads_query": "similar(abs:(Gaia OR DR2 OR paper)) doctype:article",
+    "ads_query": "similar(abs:(Gaia AND DR2 AND paper)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "related to the original SDSS paper",
-    "ads_query": "similar(abs:(original OR SDSS OR paper)) doctype:article",
+    "ads_query": "similar(abs:(SDSS AND original AND paper)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "related papers to Hubble deep field paper",
-    "ads_query": "similar(abs:(Hubble OR deep OR field OR paper)) doctype:article",
+    "ads_query": "similar(abs:(Hubble AND deep AND field)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "research related to the CMB discovery paper",
-    "ads_query": "similar(abs:(CMB OR discovery OR paper)) doctype:article",
+    "ads_query": "similar(abs:(CMB AND paper)) doctype:article",
     "category": "operator"
   },
   {
@@ -22566,7 +22516,7 @@
   },
   {
     "natural_language": "studies like the 2016 gravitational wave paper",
-    "ads_query": "similar(abs:(2016 OR gravitational OR wave OR paper)) doctype:article",
+    "ads_query": "similar(abs:(gravitational AND 2016 AND wave)) doctype:article",
     "category": "operator"
   },
   {
@@ -22576,12 +22526,12 @@
   },
   {
     "natural_language": "studies resembling Mayor & Queloz exoplanet paper",
-    "ads_query": "similar(abs:(Mayor OR Queloz OR exoplanet OR paper)) doctype:article",
+    "ads_query": "similar(abs:(exoplanet AND Mayor AND Queloz)) doctype:article",
     "category": "operator"
   },
   {
     "natural_language": "similar work to the 2019 black hole image paper",
-    "ads_query": "similar(abs:(2019 OR black OR hole OR image OR paper)) doctype:article",
+    "ads_query": "similar(abs:(black AND hole AND 2019)) doctype:article",
     "category": "operator"
   },
   {
@@ -22636,7 +22586,7 @@
   },
   {
     "natural_language": "foundational work on cosmic microwave background",
-    "ads_query": "useful(abs:(cosmic OR microwave OR background))",
+    "ads_query": "useful(abs:(cosmic AND microwave AND background))",
     "category": "operator"
   },
   {
@@ -22721,7 +22671,7 @@
   },
   {
     "natural_language": "survey papers on cosmic microwave background",
-    "ads_query": "reviews(abs:(cosmic OR microwave OR background)) doctype:article",
+    "ads_query": "reviews(abs:(cosmic AND microwave AND background)) doctype:article",
     "category": "operator"
   },
   {
@@ -22826,7 +22776,7 @@
   },
   {
     "natural_language": "most cited papers in cosmic microwave background",
-    "ads_query": "topn(10, abs:(cosmic OR microwave OR background), citation_count) doctype:article",
+    "ads_query": "topn(10, abs:(cosmic AND microwave AND background), citation_count) doctype:article",
     "category": "operator"
   },
   {
@@ -22896,7 +22846,7 @@
   },
   {
     "natural_language": "recent papers citing the CMB discovery",
-    "ads_query": "citations(abs:(cosmic OR microwave OR background)) year:[2020 TO *] doctype:article",
+    "ads_query": "citations(abs:(cosmic AND microwave AND background)) year:[2020 TO *] doctype:article",
     "category": "operator"
   },
   {
@@ -22906,7 +22856,7 @@
   },
   {
     "natural_language": "what sources did the LIGO paper cite",
-    "ads_query": "references(abs:(LIGO OR gravitational OR wave)) doctype:article",
+    "ads_query": "references(abs:(gravitational AND LIGO AND wave)) doctype:article",
     "category": "operator"
   },
   {
@@ -22916,7 +22866,7 @@
   },
   {
     "natural_language": "currently trending in machine learning astronomy",
-    "ads_query": "trending(abs:(machine OR learning OR astronomy))",
+    "ads_query": "trending(abs:(machine AND learning AND astronomy))",
     "category": "operator"
   },
   {
@@ -23326,7 +23276,7 @@
   },
   {
     "natural_language": "data analysis methods articles with recorded talks",
-    "ads_query": "property:presentation abs:(data OR analysis OR methods) doctype:article",
+    "ads_query": "property:presentation abs:(methods AND data AND analysis) doctype:article",
     "category": "property"
   },
   {
@@ -23396,7 +23346,7 @@
   },
   {
     "natural_language": "papers from INSPIRE on high energy physics",
-    "ads_query": "property:inspire abs:(high OR energy OR physics) doctype:article",
+    "ads_query": "property:inspire abs:(physics AND energy) doctype:article",
     "category": "property"
   },
   {

@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-01-23T09:13:02.219340",
+  "model_used": "gpt-5.2",
+  "summary": {
+    "total_reviewed": 4721,
+    "with_issues": 0,
+    "issue_rate": "0.0%",
+    "by_action": {
+      "keep": 4721
+    },
+    "by_issue_type": {}
+  },
+  "issues_by_type": {},
+  "flagged_examples": []
+}

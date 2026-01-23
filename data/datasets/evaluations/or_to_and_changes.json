@@ -1,0 +1,1407 @@
+{
+  "generated_at": "2026-01-23T09:10:33.281246",
+  "total_examples": 4731,
+  "modified": 331,
+  "changes": [
+    {
+      "index": 1,
+      "nl": "terahertz josephson echo spectroscopy cuprate superconductors inhomogeneity",
+      "original": "abs:(Probing OR Inhomogeneous OR Cuprate OR Superconductivity OR Terahertz)",
+      "fixed": "abs:(Probing AND Inhomogeneous AND Cuprate)",
+      "description": "Changed OR to AND: abs:(Probing OR Inhomogeneous OR Cuprate OR Superc... -> abs:(Probing AND Inhomogeneous AND Cuprate)..."
+    },
+    {
+      "index": 6,
+      "nl": "supermassive black hole formation theories",
+      "original": "abs:(supermassive OR black OR hole) abs:\"formation\"",
+      "fixed": "abs:(black AND hole AND supermassive) abs:\"formation\"",
+      "description": "Changed OR to AND: abs:(supermassive OR black OR hole) abs:\"formation... -> abs:(black AND hole AND supermassive) abs:\"formati..."
+    },
+    {
+      "index": 8,
+      "nl": "H2 molecular hydrogen spatial distribution nearby galaxies Spitzer infrared spectrograph",
+      "original": "abs:(Mapping OR Spatial OR Distribution OR H_2 OR Nearby)",
+      "fixed": "abs:(H_2 AND Mapping AND Spatial)",
+      "description": "Changed OR to AND: abs:(Mapping OR Spatial OR Distribution OR H_2 OR ... -> abs:(H_2 AND Mapping AND Spatial)..."
+    },
+    {
+      "index": 72,
+      "nl": "Luna-19 radio transparency circumlunar space",
+      "original": "abs:(Radio OR transparency OR circumlunar OR space OR using)",
+      "fixed": "abs:(Radio AND transparency AND circumlunar)",
+      "description": "Changed OR to AND: abs:(Radio OR transparency OR circumlunar OR space... -> abs:(Radio AND transparency AND circumlunar)..."
+    },
+    {
+      "index": 73,
+      "nl": "find similar work to Event Horizon Telescope",
+      "original": "similar(abs:(Event OR Horizon OR Telescope))",
+      "fixed": "similar(abs:(Event AND Horizon AND Telescope))",
+      "description": "Changed OR to AND: similar(abs:(Event OR Horizon OR Telescope))... -> similar(abs:(Event AND Horizon AND Telescope))..."
+    },
+    {
+      "index": 106,
+      "nl": "gamma ray astronomy 2022",
+      "original": "abs:(gamma OR ray OR astronomy) pubdate:2022",
+      "fixed": "abs:(gamma AND astronomy) pubdate:2022",
+      "description": "Changed OR to AND: abs:(gamma OR ray OR astronomy) pubdate:2022... -> abs:(gamma AND astronomy) pubdate:2022..."
+    },
+    {
+      "index": 109,
+      "nl": "European Southern Observatory Hubble Space Telescope research",
+      "original": "aff:\"ESO\" abs:(Hubble OR Space OR Telescope)",
+      "fixed": "aff:\"ESO\" abs:(Hubble AND Space AND Telescope)",
+      "description": "Changed OR to AND: aff:\"ESO\" abs:(Hubble OR Space OR Telescope)... -> aff:\"ESO\" abs:(Hubble AND Space AND Telescope)..."
+    },
+    {
+      "index": 111,
+      "nl": "hot papers about gamma ray bursts",
+      "original": "trending(abs:(gamma OR ray OR burst)) doctype:article",
+      "fixed": "trending(abs:(gamma AND burst)) doctype:article",
+      "description": "Changed OR to AND: trending(abs:(gamma OR ray OR burst)) doctype:arti... -> trending(abs:(gamma AND burst)) doctype:article..."
+    },
+    {
+      "index": 123,
+      "nl": "top cited gamma ray astronomy",
+      "original": "abs:(gamma OR ray OR astronomy) citation_count:[100 TO *]",
+      "fixed": "abs:(gamma AND astronomy) citation_count:[100 TO *]",
+      "description": "Changed OR to AND: abs:(gamma OR ray OR astronomy) citation_count:[10... -> abs:(gamma AND astronomy) citation_count:[100 TO *..."
+    },
+    {
+      "index": 139,
+      "nl": "numerical modeling scour bridge abutment simulation",
+      "original": "abs:(Numerical OR Model OR Simulation OR Scour OR Around)",
+      "fixed": "abs:(Numerical AND Model AND Simulation)",
+      "description": "Changed OR to AND: abs:(Numerical OR Model OR Simulation OR Scour OR ... -> abs:(Numerical AND Model AND Simulation)..."
+    },
+    {
+      "index": 169,
+      "nl": "electronic payment security solata digital transactions",
+      "original": "abs:(Security OR Electronic OR Payment OR Systems OR Solata)",
+      "fixed": "abs:(Security AND Electronic AND Payment)",
+      "description": "Changed OR to AND: abs:(Security OR Electronic OR Payment OR Systems ... -> abs:(Security AND Electronic AND Payment)..."
+    },
+    {
+      "index": 170,
+      "nl": "convolutional neural networks in astronomy",
+      "original": "abs:(convolutional OR neural OR network) collection:astronomy",
+      "fixed": "abs:(convolutional AND network AND neural) collection:astronomy",
+      "description": "Changed OR to AND: abs:(convolutional OR neural OR network) collectio... -> abs:(convolutional AND network AND neural) collect..."
+    },
+    {
+      "index": 205,
+      "nl": "trending research on supermassive black holes",
+      "original": "trending(abs:(supermassive OR black OR hole))",
+      "fixed": "trending(abs:(black AND hole AND supermassive))",
+      "description": "Changed OR to AND: trending(abs:(supermassive OR black OR hole))... -> trending(abs:(black AND hole AND supermassive))..."
+    },
+    {
+      "index": 233,
+      "nl": "cloudy 2017 release photoionization code",
+      "original": "abs:(2017 OR release OR cloudy)",
+      "fixed": "abs:(cloudy AND release AND 2017)",
+      "description": "Changed OR to AND: abs:(2017 OR release OR cloudy)... -> abs:(cloudy AND release AND 2017)..."
+    },
+    {
+      "index": 248,
+      "nl": "fast radio burst localized massive galaxy host",
+      "original": "abs:(fast OR radio OR burst OR localized OR massive)",
+      "fixed": "abs:(radio AND localized AND fast)",
+      "description": "Changed OR to AND: abs:(fast OR radio OR burst OR localized OR massiv... -> abs:(radio AND localized AND fast)..."
+    },
+    {
+      "index": 305,
+      "nl": "Sloan Lens ACS Survey papers",
+      "original": "abs:(Sloan OR Lens OR ACS OR Survey) doctype:article",
+      "fixed": "abs:(Sloan AND Lens AND Survey) doctype:article",
+      "description": "Changed OR to AND: abs:(Sloan OR Lens OR ACS OR Survey) doctype:artic... -> abs:(Sloan AND Lens AND Survey) doctype:article..."
+    },
+    {
+      "index": 307,
+      "nl": "active galactic nuclei",
+      "original": "abs:(active OR galactic OR nuclei)",
+      "fixed": "abs:(galactic AND active AND nuclei)",
+      "description": "Changed OR to AND: abs:(active OR galactic OR nuclei)... -> abs:(galactic AND active AND nuclei)..."
+    },
+    {
+      "index": 333,
+      "nl": "most read cosmic microwave background articles",
+      "original": "abs:(cosmic OR microwave OR background) read_count:[1000 TO *] doctype:article",
+      "fixed": "abs:(cosmic AND microwave AND background) read_count:[1000 TO *] doctype:article",
+      "description": "Changed OR to AND: abs:(cosmic OR microwave OR background) read_count... -> abs:(cosmic AND microwave AND background) read_cou..."
+    },
+    {
+      "index": 364,
+      "nl": "gamma ray bursts in the 2020s",
+      "original": "abs:(gamma OR ray OR bursts) year:2020-2029",
+      "fixed": "abs:(gamma AND bursts) year:2020-2029",
+      "description": "Changed OR to AND: abs:(gamma OR ray OR bursts) year:2020-2029... -> abs:(gamma AND bursts) year:2020-2029..."
+    },
+    {
+      "index": 368,
+      "nl": "Gaussian process classification galaxy blending LSST deblending machine learning",
+      "original": "abs:(Gaussian OR Process OR Classification OR Galaxy OR Blend)",
+      "fixed": "abs:(Galaxy AND Gaussian AND Process)",
+      "description": "Changed OR to AND: abs:(Gaussian OR Process OR Classification OR Gala... -> abs:(Galaxy AND Gaussian AND Process)..."
+    },
+    {
+      "index": 402,
+      "nl": "supermassive black hole ejection galaxy merger recoiling SMBH gravitational waves",
+      "original": "abs:(Possible OR evidence OR ejection OR supermassive OR black)",
+      "fixed": "abs:(black AND Possible AND ejection)",
+      "description": "Changed OR to AND: abs:(Possible OR evidence OR ejection OR supermass... -> abs:(black AND Possible AND ejection)..."
+    },
+    {
+      "index": 403,
+      "nl": "gamma ray astronomy reviews",
+      "original": "abs:(gamma OR ray OR astronomy) doctype:article property:refereed",
+      "fixed": "abs:(gamma AND astronomy) doctype:article property:refereed",
+      "description": "Changed OR to AND: abs:(gamma OR ray OR astronomy) doctype:article pr... -> abs:(gamma AND astronomy) doctype:article property..."
+    },
+    {
+      "index": 503,
+      "nl": "papers by N Andersson neutron stars astrophysical journal 1998",
+      "original": "abs:(Andersson, OR Astroph. OR 502 OR (1998) 708) doctype:article",
+      "fixed": "abs:(Andersson, AND Astroph. AND 502) 708) doctype:article",
+      "description": "Changed OR to AND: abs:(Andersson, OR Astroph. OR 502 OR (1998) 708) ... -> abs:(Andersson, AND Astroph. AND 502) 708) doctype..."
+    },
+    {
+      "index": 540,
+      "nl": "refereed James Webb telescope articles",
+      "original": "abs:(James OR Webb OR telescope) property:refereed doctype:article",
+      "fixed": "abs:(James AND Webb) property:refereed doctype:article",
+      "description": "Changed OR to AND: abs:(James OR Webb OR telescope) property:refereed... -> abs:(James AND Webb) property:refereed doctype:art..."
+    },
+    {
+      "index": 545,
+      "nl": "papers by Haehnelt, Rees, and Davies on cosmological reionization",
+      "original": "author:\"Haehnelt\" abs:(,martin','rees, OR martin','davies, OR melvin') doctype:article",
+      "fixed": "author:\"Haehnelt\" abs:(,martin','rees, AND martin','davies, AND melvin') doctype:article",
+      "description": "Changed OR to AND: author:\"Haehnelt\" abs:(,martin','rees, OR martin',... -> author:\"Haehnelt\" abs:(,martin','rees, AND martin'..."
+    },
+    {
+      "index": 623,
+      "nl": "galactic distribution 511 keV positron electron annihilation radiation",
+      "original": "abs:(Galactic OR distribution OR 511 OR keV OR e+/e\u2212)",
+      "fixed": "abs:(Galactic AND 511 AND keV)",
+      "description": "Changed OR to AND: abs:(Galactic OR distribution OR 511 OR keV OR e+/... -> abs:(Galactic AND 511 AND keV)..."
+    },
+    {
+      "index": 648,
+      "nl": "new main sequence stars papers",
+      "original": "abs:(main OR sequence OR stars) year:2024-2025 doctype:article",
+      "fixed": "abs:(sequence AND main AND stars) year:2024-2025 doctype:article",
+      "description": "Changed OR to AND: abs:(main OR sequence OR stars) year:2024-2025 doc... -> abs:(sequence AND main AND stars) year:2024-2025 d..."
+    },
+    {
+      "index": 677,
+      "nl": "trending papers on fast radio bursts",
+      "original": "trending(abs:(fast OR radio OR burst)) doctype:article",
+      "fixed": "trending(abs:(radio AND fast AND burst)) doctype:article",
+      "description": "Changed OR to AND: trending(abs:(fast OR radio OR burst)) doctype:art... -> trending(abs:(radio AND fast AND burst)) doctype:a..."
+    },
+    {
+      "index": 684,
+      "nl": "XENONnT dark matter nuclear recoils first results",
+      "original": "abs:(First OR Dark OR Matter OR Search OR Nuclear)",
+      "fixed": "abs:(First AND Dark AND Matter)",
+      "description": "Changed OR to AND: abs:(First OR Dark OR Matter OR Search OR Nuclear)... -> abs:(First AND Dark AND Matter)..."
+    },
+    {
+      "index": 686,
+      "nl": "star formation N-body cosmological simulations",
+      "original": "abs:(Star OR Formation OR Cosmological OR N-body OR Simulations)",
+      "fixed": "abs:(Star AND Formation AND Cosmological)",
+      "description": "Changed OR to AND: abs:(Star OR Formation OR Cosmological OR N-body O... -> abs:(Star AND Formation AND Cosmological)..."
+    },
+    {
+      "index": 694,
+      "nl": "useful references for CMB analysis",
+      "original": "useful(abs:(cosmic OR microwave OR background))",
+      "fixed": "useful(abs:(cosmic AND microwave AND background))",
+      "description": "Changed OR to AND: useful(abs:(cosmic OR microwave OR background))... -> useful(abs:(cosmic AND microwave AND background))..."
+    },
+    {
+      "index": 709,
+      "nl": "Hubble Space Telescope in Astronomy & Astrophysics",
+      "original": "abs:(Hubble OR Space OR Telescope) bibstem:\"A&A\"",
+      "fixed": "abs:(Hubble AND Space AND Telescope) bibstem:\"A&A\"",
+      "description": "Changed OR to AND: abs:(Hubble OR Space OR Telescope) bibstem:\"A&A\"... -> abs:(Hubble AND Space AND Telescope) bibstem:\"A&A\"..."
+    },
+    {
+      "index": 719,
+      "nl": "pulsar timing array gravitational wave searches",
+      "original": "abs:(pulsar OR timing OR array) abs:\"gravitational wave\"",
+      "fixed": "abs:(pulsar AND timing AND array) abs:\"gravitational wave\"",
+      "description": "Changed OR to AND: abs:(pulsar OR timing OR array) abs:\"gravitational... -> abs:(pulsar AND timing AND array) abs:\"gravitation..."
+    },
+    {
+      "index": 738,
+      "nl": "dark matter candidates",
+      "original": "abs:(dark OR matter OR candidates)",
+      "fixed": "abs:(candidates AND dark AND matter)",
+      "description": "Changed OR to AND: abs:(dark OR matter OR candidates)... -> abs:(candidates AND dark AND matter)..."
+    },
+    {
+      "index": 767,
+      "nl": "Harvard Fermi gamma ray research",
+      "original": "aff:\"Harvard\" abs:(Fermi OR gamma OR ray)",
+      "fixed": "aff:\"Harvard\" abs:(gamma AND Fermi)",
+      "description": "Changed OR to AND: aff:\"Harvard\" abs:(Fermi OR gamma OR ray)... -> aff:\"Harvard\" abs:(gamma AND Fermi)..."
+    },
+    {
+      "index": 803,
+      "nl": "active galactic nuclei variability studies",
+      "original": "abs:(active OR galactic OR nuclei) abs:\"variability\" doctype:article",
+      "fixed": "abs:(galactic AND active AND nuclei) abs:\"variability\" doctype:article",
+      "description": "Changed OR to AND: abs:(active OR galactic OR nuclei) abs:\"variabilit... -> abs:(galactic AND active AND nuclei) abs:\"variabil..."
+    },
+    {
+      "index": 874,
+      "nl": "cosmic microwave background papers from 2017",
+      "original": "abs:(cosmic OR microwave OR background) pubdate:2017 doctype:article",
+      "fixed": "abs:(cosmic AND microwave AND background) pubdate:2017 doctype:article",
+      "description": "Changed OR to AND: abs:(cosmic OR microwave OR background) pubdate:20... -> abs:(cosmic AND microwave AND background) pubdate:..."
+    },
+    {
+      "index": 884,
+      "nl": "plasma parameters statistical analysis JET tokamak quasi-stationary discharge",
+      "original": "abs:(Statistical OR analysis OR similarity OR plasma OR parameters)",
+      "fixed": "abs:(Statistical AND similarity AND parameters)",
+      "description": "Changed OR to AND: abs:(Statistical OR analysis OR similarity OR plas... -> abs:(Statistical AND similarity AND parameters)..."
+    },
+    {
+      "index": 891,
+      "nl": "Hubble Space Telescope papers",
+      "original": "abs:(Hubble OR Space OR Telescope) doctype:article",
+      "fixed": "abs:(Hubble AND Space AND Telescope) doctype:article",
+      "description": "Changed OR to AND: abs:(Hubble OR Space OR Telescope) doctype:article... -> abs:(Hubble AND Space AND Telescope) doctype:artic..."
+    },
+    {
+      "index": 907,
+      "nl": "Stephen Hawking on gamma ray bursts",
+      "original": "author:\"Hawking, S.\" abs:(gamma OR ray OR bursts)",
+      "fixed": "author:\"Hawking, S.\" abs:(gamma AND bursts)",
+      "description": "Changed OR to AND: author:\"Hawking, S.\" abs:(gamma OR ray OR bursts)... -> author:\"Hawking, S.\" abs:(gamma AND bursts)..."
+    },
+    {
+      "index": 913,
+      "nl": "recent main sequence stars",
+      "original": "abs:(main OR sequence OR stars) year:2023-2025",
+      "fixed": "abs:(sequence AND main AND stars) year:2023-2025",
+      "description": "Changed OR to AND: abs:(main OR sequence OR stars) year:2023-2025... -> abs:(sequence AND main AND stars) year:2023-2025..."
+    },
+    {
+      "index": 914,
+      "nl": "papers similar to Hawking's work on black hole radiation",
+      "original": "similar(author:\"Hawking, S\" AND abs:(black OR hole OR radiation)) doctype:article",
+      "fixed": "similar(author:\"Hawking, S\" AND abs:(black AND hole AND radiation)) doctype:article",
+      "description": "Changed OR to AND: similar(author:\"Hawking, S\" AND abs:(black OR hole... -> similar(author:\"Hawking, S\" AND abs:(black AND hol..."
+    },
+    {
+      "index": 916,
+      "nl": "open access Hubble Space Telescope papers",
+      "original": "abs:(Hubble OR Space OR Telescope) property:openaccess doctype:article",
+      "fixed": "abs:(Hubble AND Space AND Telescope) property:openaccess doctype:article",
+      "description": "Changed OR to AND: abs:(Hubble OR Space OR Telescope) property:openac... -> abs:(Hubble AND Space AND Telescope) property:open..."
+    },
+    {
+      "index": 917,
+      "nl": "interstellar objects passing through solar system",
+      "original": "abs:(search OR interstellar OR objects OR solar OR system)",
+      "fixed": "abs:(solar AND interstellar AND objects)",
+      "description": "Changed OR to AND: abs:(search OR interstellar OR objects OR solar OR... -> abs:(solar AND interstellar AND objects)..."
+    },
+    {
+      "index": 926,
+      "nl": "highly cited Hubble Space Telescope papers",
+      "original": "abs:(Hubble OR Space OR Telescope) citation_count:[50 TO *] doctype:article",
+      "fixed": "abs:(Hubble AND Space AND Telescope) citation_count:[50 TO *] doctype:article",
+      "description": "Changed OR to AND: abs:(Hubble OR Space OR Telescope) citation_count:... -> abs:(Hubble AND Space AND Telescope) citation_coun..."
+    },
+    {
+      "index": 936,
+      "nl": "gamma ray astronomy between 2019 and 2021",
+      "original": "abs:(gamma OR ray OR astronomy) year:2019-2021",
+      "fixed": "abs:(gamma AND astronomy) year:2019-2021",
+      "description": "Changed OR to AND: abs:(gamma OR ray OR astronomy) year:2019-2021... -> abs:(gamma AND astronomy) year:2019-2021..."
+    },
+    {
+      "index": 942,
+      "nl": "CERN main sequence stars research",
+      "original": "aff:\"CERN\" abs:(main OR sequence OR stars)",
+      "fixed": "aff:\"CERN\" abs:(sequence AND main AND stars)",
+      "description": "Changed OR to AND: aff:\"CERN\" abs:(main OR sequence OR stars)... -> aff:\"CERN\" abs:(sequence AND main AND stars)..."
+    },
+    {
+      "index": 946,
+      "nl": "kinematic Sunyaev-Zel'dovich galaxy redshift surveys cosmology",
+      "original": "abs:(Will OR Kinematic OR Sunyaev-Zel'dovich OR Measurements OR Enhance)",
+      "fixed": "abs:(Will AND Kinematic AND Sunyaev-Zel'dovich)",
+      "description": "Changed OR to AND: abs:(Will OR Kinematic OR Sunyaev-Zel'dovich OR Me... -> abs:(Will AND Kinematic AND Sunyaev-Zel'dovich)..."
+    },
+    {
+      "index": 993,
+      "nl": "highly cited James Webb telescope papers",
+      "original": "abs:(James OR Webb OR telescope) citation_count:[1000 TO *] doctype:article",
+      "fixed": "abs:(James AND Webb) citation_count:[1000 TO *] doctype:article",
+      "description": "Changed OR to AND: abs:(James OR Webb OR telescope) citation_count:[1... -> abs:(James AND Webb) citation_count:[1000 TO *] do..."
+    },
+    {
+      "index": 1000,
+      "nl": "natural language processing papers",
+      "original": "abs:(natural OR language OR processing) doctype:article",
+      "fixed": "abs:(natural AND language AND processing) doctype:article",
+      "description": "Changed OR to AND: abs:(natural OR language OR processing) doctype:ar... -> abs:(natural AND language AND processing) doctype:..."
+    },
+    {
+      "index": 1001,
+      "nl": "neutron star merger gravitational wave papers",
+      "original": "abs:(neutron OR star OR merger) abs:\"gravitational wave\" doctype:article",
+      "fixed": "abs:(neutron AND star AND merger) abs:\"gravitational wave\" doctype:article",
+      "description": "Changed OR to AND: abs:(neutron OR star OR merger) abs:\"gravitational... -> abs:(neutron AND star AND merger) abs:\"gravitation..."
+    },
+    {
+      "index": 1127,
+      "nl": "gravitational wave detection papers",
+      "original": "abs:(gravitational OR wave OR detection) doctype:article",
+      "fixed": "abs:(gravitational AND wave) doctype:article",
+      "description": "Changed OR to AND: abs:(gravitational OR wave OR detection) doctype:a... -> abs:(gravitational AND wave) doctype:article..."
+    },
+    {
+      "index": 1162,
+      "nl": "tactical HF field expedient antenna performance volume 1",
+      "original": "abs:(Tactical OR field OR expedient OR antenna OR performance,)",
+      "fixed": "abs:(Tactical AND expedient AND antenna)",
+      "description": "Changed OR to AND: abs:(Tactical OR field OR expedient OR antenna OR ... -> abs:(Tactical AND expedient AND antenna)..."
+    },
+    {
+      "index": 1180,
+      "nl": "10 lacertae stellar atmosphere models",
+      "original": "abs:(atmosphere OR lacertae)",
+      "fixed": "abs:(atmosphere AND lacertae)",
+      "description": "Changed OR to AND: abs:(atmosphere OR lacertae)... -> abs:(atmosphere AND lacertae)..."
+    },
+    {
+      "index": 1188,
+      "nl": "papers by Sunyaev on X-ray emission from star-forming galaxies",
+      "original": "author:\"Sunyaev\" abs:(X-ray OR emission OR star-forming OR galaxies) doctype:article",
+      "fixed": "author:\"Sunyaev\" abs:(X-ray AND galaxies AND emission) doctype:article",
+      "description": "Changed OR to AND: author:\"Sunyaev\" abs:(X-ray OR emission OR star-fo... -> author:\"Sunyaev\" abs:(X-ray AND galaxies AND emiss..."
+    },
+    {
+      "index": 1195,
+      "nl": "Einstein general relativity 1916 annalen der physik",
+      "original": "abs:(Einstein, OR A., OR 1916, OR Ann. OR der)",
+      "fixed": "abs:(Einstein, AND Ann. AND A.,)",
+      "description": "Changed OR to AND: abs:(Einstein, OR A., OR 1916, OR Ann. OR der)... -> abs:(Einstein, AND Ann. AND A.,)..."
+    },
+    {
+      "index": 1202,
+      "nl": "pyrogallol effects on catfish hematology biochemistry",
+      "original": "abs:(Exposure OR pyrogallol OR impacts OR hemato-biochemical OR endpoints)",
+      "fixed": "abs:(Exposure AND pyrogallol AND impacts)",
+      "description": "Changed OR to AND: abs:(Exposure OR pyrogallol OR impacts OR hemato-b... -> abs:(Exposure AND pyrogallol AND impacts)..."
+    },
+    {
+      "index": 1240,
+      "nl": "interested in LIGO gravitational waves research",
+      "original": "abs:(LIGO OR gravitational OR waves)",
+      "fixed": "abs:(gravitational AND LIGO AND waves)",
+      "description": "Changed OR to AND: abs:(LIGO OR gravitational OR waves)... -> abs:(gravitational AND LIGO AND waves)..."
+    },
+    {
+      "index": 1241,
+      "nl": "magnetar giant flare high energy emission gamma rays",
+      "original": "abs:(High-energy OR emission OR magnetar OR giant OR flare)",
+      "fixed": "abs:(magnetar AND High-energy AND emission)",
+      "description": "Changed OR to AND: abs:(High-energy OR emission OR magnetar OR giant ... -> abs:(magnetar AND High-energy AND emission)..."
+    },
+    {
+      "index": 1272,
+      "nl": "what are the latest cosmic microwave background discoveries?",
+      "original": "abs:(cosmic OR microwave OR background) year:2024-2025",
+      "fixed": "abs:(cosmic AND microwave AND background) year:2024-2025",
+      "description": "Changed OR to AND: abs:(cosmic OR microwave OR background) year:2024-... -> abs:(cosmic AND microwave AND background) year:202..."
+    },
+    {
+      "index": 1274,
+      "nl": "papers by Costamante on blazars and gamma ray astronomy",
+      "original": "author:\"Costamante\" abs:(L., OR al., OR 2001, OR Astronomy OR Astrophysics,) doctype:article",
+      "fixed": "author:\"Costamante\" abs:(Astronomy AND Astrophysics, AND L.,) doctype:article",
+      "description": "Changed OR to AND: author:\"Costamante\" abs:(L., OR al., OR 2001, OR A... -> author:\"Costamante\" abs:(Astronomy AND Astrophysic..."
+    },
+    {
+      "index": 1280,
+      "nl": "massive binary star systems stellar rotation rates",
+      "original": "abs:(massive OR binary OR systems) full:\"rotation\"",
+      "fixed": "abs:(binary AND massive AND systems) full:\"rotation\"",
+      "description": "Changed OR to AND: abs:(massive OR binary OR systems) full:\"rotation\"... -> abs:(binary AND massive AND systems) full:\"rotatio..."
+    },
+    {
+      "index": 1307,
+      "nl": "Planck collaboration CMB results",
+      "original": "author:\"Planck Collaboration\" abs:(cosmic OR microwave OR background)",
+      "fixed": "author:\"Planck Collaboration\" abs:(cosmic AND microwave AND background)",
+      "description": "Changed OR to AND: author:\"Planck Collaboration\" abs:(cosmic OR micro... -> author:\"Planck Collaboration\" abs:(cosmic AND micr..."
+    },
+    {
+      "index": 1320,
+      "nl": "Chandrasekhar on gamma ray bursts",
+      "original": "author:\"Chandrasekhar, S.\" abs:(gamma OR ray OR bursts)",
+      "fixed": "author:\"Chandrasekhar, S.\" abs:(gamma AND bursts)",
+      "description": "Changed OR to AND: author:\"Chandrasekhar, S.\" abs:(gamma OR ray OR bu... -> author:\"Chandrasekhar, S.\" abs:(gamma AND bursts)..."
+    },
+    {
+      "index": 1386,
+      "nl": "cosmic microwave background review",
+      "original": "abs:(cosmic OR microwave OR background) doctype:article property:refereed",
+      "fixed": "abs:(cosmic AND microwave AND background) doctype:article property:refereed",
+      "description": "Changed OR to AND: abs:(cosmic OR microwave OR background) doctype:ar... -> abs:(cosmic AND microwave AND background) doctype:..."
+    },
+    {
+      "index": 1387,
+      "nl": "polar ring galaxies SDSS spatial environment",
+      "original": "abs:(Spatial OR Environment OR Polar-Ring OR Galaxies OR SDSS)",
+      "fixed": "abs:(Galaxies AND Spatial AND Environment)",
+      "description": "Changed OR to AND: abs:(Spatial OR Environment OR Polar-Ring OR Galax... -> abs:(Galaxies AND Spatial AND Environment)..."
+    },
+    {
+      "index": 1395,
+      "nl": "cosmic microwave background anisotropies",
+      "original": "abs:(cosmic OR microwave OR background) abs:\"anisotropy\"",
+      "fixed": "abs:(cosmic AND microwave AND background) abs:\"anisotropy\"",
+      "description": "Changed OR to AND: abs:(cosmic OR microwave OR background) abs:\"aniso... -> abs:(cosmic AND microwave AND background) abs:\"ani..."
+    },
+    {
+      "index": 1416,
+      "nl": "TCP J20315286+2740166 WZ Sge dwarf nova spectroscopic classification",
+      "original": "abs:(Spectroscopic OR Classification OR TCP OR J20315286+2740166 OR Sge)",
+      "fixed": "abs:(Spectroscopic AND Classification AND TCP)",
+      "description": "Changed OR to AND: abs:(Spectroscopic OR Classification OR TCP OR J20... -> abs:(Spectroscopic AND Classification AND TCP)..."
+    },
+    {
+      "index": 1420,
+      "nl": "gamma ray bursts 2019",
+      "original": "abs:(gamma OR ray OR bursts) pubdate:2019",
+      "fixed": "abs:(gamma AND bursts) pubdate:2019",
+      "description": "Changed OR to AND: abs:(gamma OR ray OR bursts) pubdate:2019... -> abs:(gamma AND bursts) pubdate:2019..."
+    },
+    {
+      "index": 1475,
+      "nl": "James Webb telescope studies",
+      "original": "abs:(James OR Webb OR telescope) doctype:article",
+      "fixed": "abs:(James AND Webb) doctype:article",
+      "description": "Changed OR to AND: abs:(James OR Webb OR telescope) doctype:article... -> abs:(James AND Webb) doctype:article..."
+    },
+    {
+      "index": 1486,
+      "nl": "template bank gravitational wave burst detection PyGRB medium latency",
+      "original": "abs:(Generating OR Template OR Bank OR use OR Medium)",
+      "fixed": "abs:(Generating AND Template AND Bank)",
+      "description": "Changed OR to AND: abs:(Generating OR Template OR Bank OR use OR Medi... -> abs:(Generating AND Template AND Bank)..."
+    },
+    {
+      "index": 1487,
+      "nl": "Hubble Space Telescope this decade",
+      "original": "abs:(Hubble OR Space OR Telescope) year:2020-2029",
+      "fixed": "abs:(Hubble AND Space AND Telescope) year:2020-2029",
+      "description": "Changed OR to AND: abs:(Hubble OR Space OR Telescope) year:2020-2029... -> abs:(Hubble AND Space AND Telescope) year:2020-202..."
+    },
+    {
+      "index": 1504,
+      "nl": "popular papers on black hole mergers right now",
+      "original": "trending(abs:(black OR hole OR merger)) doctype:article",
+      "fixed": "trending(abs:(black AND hole AND merger)) doctype:article",
+      "description": "Changed OR to AND: trending(abs:(black OR hole OR merger)) doctype:ar... -> trending(abs:(black AND hole AND merger)) doctype:..."
+    },
+    {
+      "index": 1505,
+      "nl": "general relativity effects on habitable zones with planetary perturbers around sun-like stars",
+      "original": "abs:(Effects OR general OR relativity OR habitable OR zone)",
+      "fixed": "abs:(Effects AND general AND relativity)",
+      "description": "Changed OR to AND: abs:(Effects OR general OR relativity OR habitable... -> abs:(Effects AND general AND relativity)..."
+    },
+    {
+      "index": 1535,
+      "nl": "MIT gamma ray astronomy research",
+      "original": "aff:\"MIT\" abs:(gamma OR ray OR astronomy)",
+      "fixed": "aff:\"MIT\" abs:(gamma AND astronomy)",
+      "description": "Changed OR to AND: aff:\"MIT\" abs:(gamma OR ray OR astronomy)... -> aff:\"MIT\" abs:(gamma AND astronomy)..."
+    },
+    {
+      "index": 1545,
+      "nl": "dark matter candidates 2024",
+      "original": "abs:(dark OR matter OR candidates) pubdate:2024",
+      "fixed": "abs:(candidates AND dark AND matter) pubdate:2024",
+      "description": "Changed OR to AND: abs:(dark OR matter OR candidates) pubdate:2024... -> abs:(candidates AND dark AND matter) pubdate:2024..."
+    },
+    {
+      "index": 1550,
+      "nl": "cosmic microwave background studies",
+      "original": "abs:(cosmic OR microwave OR background) doctype:article",
+      "fixed": "abs:(cosmic AND microwave AND background) doctype:article",
+      "description": "Changed OR to AND: abs:(cosmic OR microwave OR background) doctype:ar... -> abs:(cosmic AND microwave AND background) doctype:..."
+    },
+    {
+      "index": 1569,
+      "nl": "C III 5696 angstrom emission line variability Wolf-Rayet stars",
+      "original": "abs:(Variations OR III OR 5696 OR emission OR line)",
+      "fixed": "abs:(Variations AND III AND emission)",
+      "description": "Changed OR to AND: abs:(Variations OR III OR 5696 OR emission OR line... -> abs:(Variations AND III AND emission)..."
+    },
+    {
+      "index": 1591,
+      "nl": "non-negative matrix factorization algorithms noisy data negative values",
+      "original": "abs:(Algorithms OR Non-Negative OR Matrix OR Factorization OR Noisy)",
+      "fixed": "abs:(Algorithms AND Non-Negative AND Matrix)",
+      "description": "Changed OR to AND: abs:(Algorithms OR Non-Negative OR Matrix OR Facto... -> abs:(Algorithms AND Non-Negative AND Matrix)..."
+    },
+    {
+      "index": 1595,
+      "nl": "Queloz's cosmic microwave background papers",
+      "original": "author:\"Queloz, D.\" abs:(cosmic OR microwave OR background) doctype:article",
+      "fixed": "author:\"Queloz, D.\" abs:(cosmic AND microwave AND background) doctype:article",
+      "description": "Changed OR to AND: author:\"Queloz, D.\" abs:(cosmic OR microwave OR ba... -> author:\"Queloz, D.\" abs:(cosmic AND microwave AND ..."
+    },
+    {
+      "index": 1609,
+      "nl": "what's new in LIGO gravitational waves?",
+      "original": "abs:(LIGO OR gravitational OR waves) year:2024-2025",
+      "fixed": "abs:(gravitational AND LIGO AND waves) year:2024-2025",
+      "description": "Changed OR to AND: abs:(LIGO OR gravitational OR waves) year:2024-202... -> abs:(gravitational AND LIGO AND waves) year:2024-2..."
+    },
+    {
+      "index": 1620,
+      "nl": "active galactic nuclei 2021",
+      "original": "abs:(active OR galactic OR nuclei) pubdate:2021",
+      "fixed": "abs:(galactic AND active AND nuclei) pubdate:2021",
+      "description": "Changed OR to AND: abs:(active OR galactic OR nuclei) pubdate:2021... -> abs:(galactic AND active AND nuclei) pubdate:2021..."
+    },
+    {
+      "index": 1639,
+      "nl": "Fermi gamma ray papers",
+      "original": "abs:(Fermi OR gamma OR ray) doctype:article",
+      "fixed": "abs:(gamma AND Fermi) doctype:article",
+      "description": "Changed OR to AND: abs:(Fermi OR gamma OR ray) doctype:article... -> abs:(gamma AND Fermi) doctype:article..."
+    },
+    {
+      "index": 1649,
+      "nl": "electronic payment security Solat digital transaction systems",
+      "original": "abs:(Security OR Electronic OR Payment OR Systems OR Solat)",
+      "fixed": "abs:(Security AND Electronic AND Payment)",
+      "description": "Changed OR to AND: abs:(Security OR Electronic OR Payment OR Systems ... -> abs:(Security AND Electronic AND Payment)..."
+    },
+    {
+      "index": 1660,
+      "nl": "open access gamma ray astronomy papers",
+      "original": "abs:(gamma OR ray OR astronomy) property:openaccess doctype:article",
+      "fixed": "abs:(gamma AND astronomy) property:openaccess doctype:article",
+      "description": "Changed OR to AND: abs:(gamma OR ray OR astronomy) property:openacces... -> abs:(gamma AND astronomy) property:openaccess doct..."
+    },
+    {
+      "index": 1663,
+      "nl": "Fermi GBM magnetar burst catalog five year",
+      "original": "abs:(Five OR Year OR Fermi/GBM OR Magnetar OR Burst)",
+      "fixed": "abs:(Magnetar AND Five AND Year)",
+      "description": "Changed OR to AND: abs:(Five OR Year OR Fermi/GBM OR Magnetar OR Burs... -> abs:(Magnetar AND Five AND Year)..."
+    },
+    {
+      "index": 1676,
+      "nl": "tidal disruption events in ApJ",
+      "original": "abs:(tidal OR disruption OR event) bibstem:\"ApJ\"",
+      "fixed": "abs:(disruption AND tidal AND event) bibstem:\"ApJ\"",
+      "description": "Changed OR to AND: abs:(tidal OR disruption OR event) bibstem:\"ApJ\"... -> abs:(disruption AND tidal AND event) bibstem:\"ApJ\"..."
+    },
+    {
+      "index": 1696,
+      "nl": "latest active galactic nuclei research",
+      "original": "abs:(active OR galactic OR nuclei) year:2024-2025",
+      "fixed": "abs:(galactic AND active AND nuclei) year:2024-2025",
+      "description": "Changed OR to AND: abs:(active OR galactic OR nuclei) year:2024-2025... -> abs:(galactic AND active AND nuclei) year:2024-202..."
+    },
+    {
+      "index": 1700,
+      "nl": "trending high energy astrophysics papers",
+      "original": "trending(abs:(high OR energy OR astrophysics)) doctype:article",
+      "fixed": "trending(abs:(astrophysics AND energy)) doctype:article",
+      "description": "Changed OR to AND: trending(abs:(high OR energy OR astrophysics)) doc... -> trending(abs:(astrophysics AND energy)) doctype:ar..."
+    },
+    {
+      "index": 1724,
+      "nl": "Mei Liu Chen 2023 ApJS volume 264",
+      "original": "abs:(Mei, OR Y., OR Song, OR S.-M., OR Liu,)",
+      "fixed": "abs:(Mei, AND Song, AND Liu,)",
+      "description": "Changed OR to AND: abs:(Mei, OR Y., OR Song, OR S.-M., OR Liu,)... -> abs:(Mei, AND Song, AND Liu,)..."
+    },
+    {
+      "index": 1727,
+      "nl": "Hawking papers on black hole radiation from the 1970s",
+      "original": "author:\"Hawking, S\" abs:(black OR hole OR radiation) year:1970-1979 doctype:article",
+      "fixed": "author:\"Hawking, S\" abs:(black AND hole AND radiation) year:1970-1979 doctype:article",
+      "description": "Changed OR to AND: author:\"Hawking, S\" abs:(black OR hole OR radiatio... -> author:\"Hawking, S\" abs:(black AND hole AND radiat..."
+    },
+    {
+      "index": 1753,
+      "nl": "gamma-ray flare magnetar NGC 253",
+      "original": "abs:(bright OR gamma-ray OR flare OR interpreted OR giant)",
+      "fixed": "abs:(gamma-ray AND interpreted AND flare)",
+      "description": "Changed OR to AND: abs:(bright OR gamma-ray OR flare OR interpreted O... -> abs:(gamma-ray AND interpreted AND flare)..."
+    },
+    {
+      "index": 1770,
+      "nl": "papers on International Pulsar Timing Array Second Mock Data Challenge",
+      "original": "abs:(International OR Pulsar OR Timing OR Array OR Second) doctype:article",
+      "fixed": "abs:(Pulsar AND International AND Timing) doctype:article",
+      "description": "Changed OR to AND: abs:(International OR Pulsar OR Timing OR Array OR... -> abs:(Pulsar AND International AND Timing) doctype:..."
+    },
+    {
+      "index": 1802,
+      "nl": "papers like the Planck CMB results",
+      "original": "similar(abs:\"Planck\" AND abs:(cosmic OR microwave OR background)) doctype:article",
+      "fixed": "similar(abs:\"Planck\" AND abs:(cosmic AND microwave AND background)) doctype:article",
+      "description": "Changed OR to AND: similar(abs:\"Planck\" AND abs:(cosmic OR microwave ... -> similar(abs:\"Planck\" AND abs:(cosmic AND microwave..."
+    },
+    {
+      "index": 1812,
+      "nl": "gamma ray burst afterglow observations",
+      "original": "abs:(gamma OR ray OR burst) abs:\"afterglow\"",
+      "fixed": "abs:(gamma AND burst) abs:\"afterglow\"",
+      "description": "Changed OR to AND: abs:(gamma OR ray OR burst) abs:\"afterglow\"... -> abs:(gamma AND burst) abs:\"afterglow\"..."
+    },
+    {
+      "index": 1821,
+      "nl": "Fermi gamma ray preprints",
+      "original": "abs:(Fermi OR gamma OR ray) doctype:eprint",
+      "fixed": "abs:(gamma AND Fermi) doctype:eprint",
+      "description": "Changed OR to AND: abs:(Fermi OR gamma OR ray) doctype:eprint... -> abs:(gamma AND Fermi) doctype:eprint..."
+    },
+    {
+      "index": 1863,
+      "nl": "support vector machine radiation belt modeling",
+      "original": "abs:(Support OR vector OR machine) abs:\"radiation belt\"",
+      "fixed": "abs:(Support AND machine AND vector) abs:\"radiation belt\"",
+      "description": "Changed OR to AND: abs:(Support OR vector OR machine) abs:\"radiation ... -> abs:(Support AND machine AND vector) abs:\"radiatio..."
+    },
+    {
+      "index": 1871,
+      "nl": "review papers covering AGN",
+      "original": "reviews(abs:(active OR galactic OR nuclei)) doctype:article",
+      "fixed": "reviews(abs:(galactic AND active AND nuclei)) doctype:article",
+      "description": "Changed OR to AND: reviews(abs:(active OR galactic OR nuclei)) doctyp... -> reviews(abs:(galactic AND active AND nuclei)) doct..."
+    },
+    {
+      "index": 1878,
+      "nl": "performance profiles benchmarking optimization algorithms software",
+      "original": "abs:(Benchmarking OR Optimization OR Software OR Performance OR Profiles)",
+      "fixed": "abs:(Benchmarking AND Optimization AND Software)",
+      "description": "Changed OR to AND: abs:(Benchmarking OR Optimization OR Software OR P... -> abs:(Benchmarking AND Optimization AND Software)..."
+    },
+    {
+      "index": 1885,
+      "nl": "dark matter candidates papers from 2017",
+      "original": "abs:(dark OR matter OR candidates) pubdate:2017 doctype:article",
+      "fixed": "abs:(candidates AND dark AND matter) pubdate:2017 doctype:article",
+      "description": "Changed OR to AND: abs:(dark OR matter OR candidates) pubdate:2017 do... -> abs:(candidates AND dark AND matter) pubdate:2017 ..."
+    },
+    {
+      "index": 1891,
+      "nl": "gamma ray bursts reviews",
+      "original": "abs:(gamma OR ray OR bursts) doctype:article property:refereed",
+      "fixed": "abs:(gamma AND bursts) doctype:article property:refereed",
+      "description": "Changed OR to AND: abs:(gamma OR ray OR bursts) doctype:article prope... -> abs:(gamma AND bursts) doctype:article property:re..."
+    },
+    {
+      "index": 1893,
+      "nl": "Astro2020 white papers L/T transition brown dwarfs",
+      "original": "abs:(Astro2020 OR Science OR White OR Paper OR L/T) doctype:article",
+      "fixed": "abs:(Astro2020 AND Science AND White) doctype:article",
+      "description": "Changed OR to AND: abs:(Astro2020 OR Science OR White OR Paper OR L/T... -> abs:(Astro2020 AND Science AND White) doctype:arti..."
+    },
+    {
+      "index": 1921,
+      "nl": "phase-space parameters brightest cluster galaxies halo properties",
+      "original": "abs:(phase-space OR parameters OR brightest OR halo OR galaxies)",
+      "fixed": "abs:(galaxies AND phase-space AND parameters)",
+      "description": "Changed OR to AND: abs:(phase-space OR parameters OR brightest OR hal... -> abs:(galaxies AND phase-space AND parameters)..."
+    },
+    {
+      "index": 1924,
+      "nl": "Mather's active galactic nuclei papers",
+      "original": "author:\"Mather, J.\" abs:(active OR galactic OR nuclei) doctype:article",
+      "fixed": "author:\"Mather, J.\" abs:(galactic AND active AND nuclei) doctype:article",
+      "description": "Changed OR to AND: author:\"Mather, J.\" abs:(active OR galactic OR nuc... -> author:\"Mather, J.\" abs:(galactic AND active AND n..."
+    },
+    {
+      "index": 1962,
+      "nl": "papers that review gravitational wave detection",
+      "original": "reviews(abs:(gravitational OR wave OR detection)) doctype:article",
+      "fixed": "reviews(abs:(gravitational AND wave)) doctype:article",
+      "description": "Changed OR to AND: reviews(abs:(gravitational OR wave OR detection)) ... -> reviews(abs:(gravitational AND wave)) doctype:arti..."
+    },
+    {
+      "index": 1965,
+      "nl": "BlueWalker 3 satellite optical brightness",
+      "original": "abs:(high OR optical OR brightness OR theBlueWalker OR satellite)",
+      "fixed": "abs:(optical AND brightness AND theBlueWalker)",
+      "description": "Changed OR to AND: abs:(high OR optical OR brightness OR theBlueWalke... -> abs:(optical AND brightness AND theBlueWalker)..."
+    },
+    {
+      "index": 2040,
+      "nl": "Hubble Space Telescope papers from 2022",
+      "original": "abs:(Hubble OR Space OR Telescope) pubdate:2022 doctype:article",
+      "fixed": "abs:(Hubble AND Space AND Telescope) pubdate:2022 doctype:article",
+      "description": "Changed OR to AND: abs:(Hubble OR Space OR Telescope) pubdate:2022 do... -> abs:(Hubble AND Space AND Telescope) pubdate:2022 ..."
+    },
+    {
+      "index": 2066,
+      "nl": "recent fast radio burst discoveries",
+      "original": "abs:(fast OR radio OR burst) year:2020-2025",
+      "fixed": "abs:(radio AND fast AND burst) year:2020-2025",
+      "description": "Changed OR to AND: abs:(fast OR radio OR burst) year:2020-2025... -> abs:(radio AND fast AND burst) year:2020-2025..."
+    },
+    {
+      "index": 2152,
+      "nl": "compact stellar systems polar ring galaxy NGC4650A",
+      "original": "abs:(Compact OR stellar OR systems OR polar OR ring)",
+      "fixed": "abs:(Compact AND stellar AND polar)",
+      "description": "Changed OR to AND: abs:(Compact OR stellar OR systems OR polar OR rin... -> abs:(Compact AND stellar AND polar)..."
+    },
+    {
+      "index": 2162,
+      "nl": "polar ring galaxies in COSMOS survey",
+      "original": "abs:(New OR Polar OR Ring OR Galaxy OR Discovered)",
+      "fixed": "abs:(Galaxy AND Polar AND Ring)",
+      "description": "Changed OR to AND: abs:(New OR Polar OR Ring OR Galaxy OR Discovered)... -> abs:(Galaxy AND Polar AND Ring)..."
+    },
+    {
+      "index": 2174,
+      "nl": "polar ring galaxy Subaru Deep Field",
+      "original": "abs:(candidate OR polar-ring OR galaxy OR Subaru OR Deep)",
+      "fixed": "abs:(galaxy AND Subaru AND Deep)",
+      "description": "Changed OR to AND: abs:(candidate OR polar-ring OR galaxy OR Subaru O... -> abs:(galaxy AND Subaru AND Deep)..."
+    },
+    {
+      "index": 2217,
+      "nl": "MiMeS survey magnetism massive stars",
+      "original": "abs:(MiMeS OR survey OR magnetism OR massive OR stars)",
+      "fixed": "abs:(MiMeS AND magnetism AND stars)",
+      "description": "Changed OR to AND: abs:(MiMeS OR survey OR magnetism OR massive OR st... -> abs:(MiMeS AND magnetism AND stars)..."
+    },
+    {
+      "index": 2254,
+      "nl": "galaxy interaction simulation AM 2229-735",
+      "original": "abs:(Simulating OR galactic OR system OR interaction OR 2229-735)",
+      "fixed": "abs:(Simulating AND galactic AND interaction)",
+      "description": "Changed OR to AND: abs:(Simulating OR galactic OR system OR interacti... -> abs:(Simulating AND galactic AND interaction)..."
+    },
+    {
+      "index": 2257,
+      "nl": "Edwin Hubble on gamma ray bursts",
+      "original": "author:\"Hubble, E.\" abs:(gamma OR ray OR bursts)",
+      "fixed": "author:\"Hubble, E.\" abs:(gamma AND bursts)",
+      "description": "Changed OR to AND: author:\"Hubble, E.\" abs:(gamma OR ray OR bursts)... -> author:\"Hubble, E.\" abs:(gamma AND bursts)..."
+    },
+    {
+      "index": 2325,
+      "nl": "trending papers about Type Ia supernovae",
+      "original": "trending(abs:(Type OR supernova)) doctype:article",
+      "fixed": "trending(abs:(supernova AND Type)) doctype:article",
+      "description": "Changed OR to AND: trending(abs:(Type OR supernova)) doctype:article... -> trending(abs:(supernova AND Type)) doctype:article..."
+    },
+    {
+      "index": 2343,
+      "nl": "gamma ray astronomy in the 2020s",
+      "original": "abs:(gamma OR ray OR astronomy) year:2020-2029",
+      "fixed": "abs:(gamma AND astronomy) year:2020-2029",
+      "description": "Changed OR to AND: abs:(gamma OR ray OR astronomy) year:2020-2029... -> abs:(gamma AND astronomy) year:2020-2029..."
+    },
+    {
+      "index": 2370,
+      "nl": "early-type galaxy mass density slopes Jeans modeling redshift 0.3 0.5",
+      "original": "abs:(Total OR mass OR density OR slopes OR early-type)",
+      "fixed": "abs:(Total AND density AND early-type)",
+      "description": "Changed OR to AND: abs:(Total OR mass OR density OR slopes OR early-t... -> abs:(Total AND density AND early-type)..."
+    },
+    {
+      "index": 2398,
+      "nl": "stellar flares filament eruptions solar-type stars",
+      "original": "abs:(Probable OR detection OR eruptive OR filament OR superflare)",
+      "fixed": "abs:(Probable AND eruptive AND filament)",
+      "description": "Changed OR to AND: abs:(Probable OR detection OR eruptive OR filament... -> abs:(Probable AND eruptive AND filament)..."
+    },
+    {
+      "index": 2429,
+      "nl": "Povic Marquez Masegosa galaxy classification MNRAS 2015",
+      "original": "abs:(Povic, OR M., OR M\u00e1rquez, OR I., OR Masegosa,)",
+      "fixed": "abs:(Povic, AND M\u00e1rquez, AND Masegosa,)",
+      "description": "Changed OR to AND: abs:(Povic, OR M., OR M\u00e1rquez, OR I., OR Masegosa,... -> abs:(Povic, AND M\u00e1rquez, AND Masegosa,)..."
+    },
+    {
+      "index": 2448,
+      "nl": "Riccardo Giacconi on cosmic microwave background",
+      "original": "author:\"Giacconi, R.\" abs:(cosmic OR microwave OR background)",
+      "fixed": "author:\"Giacconi, R.\" abs:(cosmic AND microwave AND background)",
+      "description": "Changed OR to AND: author:\"Giacconi, R.\" abs:(cosmic OR microwave OR ... -> author:\"Giacconi, R.\" abs:(cosmic AND microwave AN..."
+    },
+    {
+      "index": 2471,
+      "nl": "CERN LIGO gravitational waves research",
+      "original": "aff:\"CERN\" abs:(LIGO OR gravitational OR waves)",
+      "fixed": "aff:\"CERN\" abs:(gravitational AND LIGO AND waves)",
+      "description": "Changed OR to AND: aff:\"CERN\" abs:(LIGO OR gravitational OR waves)... -> aff:\"CERN\" abs:(gravitational AND LIGO AND waves)..."
+    },
+    {
+      "index": 2478,
+      "nl": "influential dark matter candidates research",
+      "original": "abs:(dark OR matter OR candidates) citation_count:[50 TO *]",
+      "fixed": "abs:(candidates AND dark AND matter) citation_count:[50 TO *]",
+      "description": "Changed OR to AND: abs:(dark OR matter OR candidates) citation_count:... -> abs:(candidates AND dark AND matter) citation_coun..."
+    },
+    {
+      "index": 2501,
+      "nl": "gamma ray bursts papers",
+      "original": "abs:(gamma OR ray OR bursts) doctype:article",
+      "fixed": "abs:(gamma AND bursts) doctype:article",
+      "description": "Changed OR to AND: abs:(gamma OR ray OR bursts) doctype:article... -> abs:(gamma AND bursts) doctype:article..."
+    },
+    {
+      "index": 2547,
+      "nl": "Science papers on Fermi gamma ray",
+      "original": "abs:(Fermi OR gamma OR ray) bibstem:\"Science\" doctype:article",
+      "fixed": "abs:(gamma AND Fermi) bibstem:\"Science\" doctype:article",
+      "description": "Changed OR to AND: abs:(Fermi OR gamma OR ray) bibstem:\"Science\" doct... -> abs:(gamma AND Fermi) bibstem:\"Science\" doctype:ar..."
+    },
+    {
+      "index": 2554,
+      "nl": "LIGO gravitational waves review",
+      "original": "abs:(LIGO OR gravitational OR waves) doctype:article property:refereed",
+      "fixed": "abs:(gravitational AND LIGO AND waves) doctype:article property:refereed",
+      "description": "Changed OR to AND: abs:(LIGO OR gravitational OR waves) doctype:artic... -> abs:(gravitational AND LIGO AND waves) doctype:art..."
+    },
+    {
+      "index": 2604,
+      "nl": "any good active galactic nuclei reviews?",
+      "original": "abs:(active OR galactic OR nuclei) doctype:article property:refereed",
+      "fixed": "abs:(galactic AND active AND nuclei) doctype:article property:refereed",
+      "description": "Changed OR to AND: abs:(active OR galactic OR nuclei) doctype:article... -> abs:(galactic AND active AND nuclei) doctype:artic..."
+    },
+    {
+      "index": 2822,
+      "nl": "papers about coronal mass ejections",
+      "original": "abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) doctype:article... -> abs:(coronal AND ejections AND mass) doctype:artic..."
+    },
+    {
+      "index": 2823,
+      "nl": "coronal mass ejections",
+      "original": "abs:(coronal OR mass OR ejections)",
+      "fixed": "abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections)... -> abs:(coronal AND ejections AND mass)..."
+    },
+    {
+      "index": 2824,
+      "nl": "abs contains coronal mass ejections",
+      "original": "abs:(coronal OR mass OR ejections)",
+      "fixed": "abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections)... -> abs:(coronal AND ejections AND mass)..."
+    },
+    {
+      "index": 2825,
+      "nl": "find coronal mass ejections in abs",
+      "original": "abs:(coronal OR mass OR ejections)",
+      "fixed": "abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections)... -> abs:(coronal AND ejections AND mass)..."
+    },
+    {
+      "index": 2826,
+      "nl": "coronal mass ejections in abs field",
+      "original": "abs:(coronal OR mass OR ejections)",
+      "fixed": "abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections)... -> abs:(coronal AND ejections AND mass)..."
+    },
+    {
+      "index": 2902,
+      "nl": "papers about cosmic microwave background",
+      "original": "abs:(cosmic OR microwave OR background) doctype:article",
+      "fixed": "abs:(cosmic AND microwave AND background) doctype:article",
+      "description": "Changed OR to AND: abs:(cosmic OR microwave OR background) doctype:ar... -> abs:(cosmic AND microwave AND background) doctype:..."
+    },
+    {
+      "index": 2903,
+      "nl": "cosmic microwave background",
+      "original": "abs:(cosmic OR microwave OR background)",
+      "fixed": "abs:(cosmic AND microwave AND background)",
+      "description": "Changed OR to AND: abs:(cosmic OR microwave OR background)... -> abs:(cosmic AND microwave AND background)..."
+    },
+    {
+      "index": 2904,
+      "nl": "abs contains cosmic microwave background",
+      "original": "abs:(cosmic OR microwave OR background)",
+      "fixed": "abs:(cosmic AND microwave AND background)",
+      "description": "Changed OR to AND: abs:(cosmic OR microwave OR background)... -> abs:(cosmic AND microwave AND background)..."
+    },
+    {
+      "index": 2905,
+      "nl": "find cosmic microwave background in abs",
+      "original": "abs:(cosmic OR microwave OR background)",
+      "fixed": "abs:(cosmic AND microwave AND background)",
+      "description": "Changed OR to AND: abs:(cosmic OR microwave OR background)... -> abs:(cosmic AND microwave AND background)..."
+    },
+    {
+      "index": 2906,
+      "nl": "cosmic microwave background in abs field",
+      "original": "abs:(cosmic OR microwave OR background)",
+      "fixed": "abs:(cosmic AND microwave AND background)",
+      "description": "Changed OR to AND: abs:(cosmic OR microwave OR background)... -> abs:(cosmic AND microwave AND background)..."
+    },
+    {
+      "index": 3086,
+      "nl": "coronal mass ejections 2019",
+      "original": "abs:(coronal OR mass OR ejections) year:2019",
+      "fixed": "abs:(coronal AND ejections AND mass) year:2019",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:2019... -> abs:(coronal AND ejections AND mass) year:2019..."
+    },
+    {
+      "index": 3087,
+      "nl": "papers on coronal mass ejections from 2019",
+      "original": "abs:(coronal OR mass OR ejections) year:2019 doctype:article",
+      "fixed": "abs:(coronal AND ejections AND mass) year:2019 doctype:article",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:2019 docty... -> abs:(coronal AND ejections AND mass) year:2019 doc..."
+    },
+    {
+      "index": 3088,
+      "nl": "coronal mass ejections year 2019",
+      "original": "abs:(coronal OR mass OR ejections) year:2019",
+      "fixed": "abs:(coronal AND ejections AND mass) year:2019",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:2019... -> abs:(coronal AND ejections AND mass) year:2019..."
+    },
+    {
+      "index": 3089,
+      "nl": "coronal mass ejections between 2019",
+      "original": "abs:(coronal OR mass OR ejections) year:2019",
+      "fixed": "abs:(coronal AND ejections AND mass) year:2019",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:2019... -> abs:(coronal AND ejections AND mass) year:2019..."
+    },
+    {
+      "index": 3090,
+      "nl": "coronal mass ejections 2020",
+      "original": "abs:(coronal OR mass OR ejections) year:2020",
+      "fixed": "abs:(coronal AND ejections AND mass) year:2020",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:2020... -> abs:(coronal AND ejections AND mass) year:2020..."
+    },
+    {
+      "index": 3091,
+      "nl": "papers on coronal mass ejections from 2020",
+      "original": "abs:(coronal OR mass OR ejections) year:2020 doctype:article",
+      "fixed": "abs:(coronal AND ejections AND mass) year:2020 doctype:article",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:2020 docty... -> abs:(coronal AND ejections AND mass) year:2020 doc..."
+    },
+    {
+      "index": 3092,
+      "nl": "coronal mass ejections year 2020",
+      "original": "abs:(coronal OR mass OR ejections) year:2020",
+      "fixed": "abs:(coronal AND ejections AND mass) year:2020",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:2020... -> abs:(coronal AND ejections AND mass) year:2020..."
+    },
+    {
+      "index": 3093,
+      "nl": "coronal mass ejections between 2020",
+      "original": "abs:(coronal OR mass OR ejections) year:2020",
+      "fixed": "abs:(coronal AND ejections AND mass) year:2020",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:2020... -> abs:(coronal AND ejections AND mass) year:2020..."
+    },
+    {
+      "index": 3094,
+      "nl": "coronal mass ejections 2022 to 2025",
+      "original": "abs:(coronal OR mass OR ejections) year:2022-2025",
+      "fixed": "abs:(coronal AND ejections AND mass) year:2022-2025",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:2022-2025... -> abs:(coronal AND ejections AND mass) year:2022-202..."
+    },
+    {
+      "index": 3095,
+      "nl": "papers on coronal mass ejections from 2022 to 2025",
+      "original": "abs:(coronal OR mass OR ejections) year:2022-2025 doctype:article",
+      "fixed": "abs:(coronal AND ejections AND mass) year:2022-2025 doctype:article",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:2022-2025 ... -> abs:(coronal AND ejections AND mass) year:2022-202..."
+    },
+    {
+      "index": 3096,
+      "nl": "coronal mass ejections year 2022 to 2025",
+      "original": "abs:(coronal OR mass OR ejections) year:2022-2025",
+      "fixed": "abs:(coronal AND ejections AND mass) year:2022-2025",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:2022-2025... -> abs:(coronal AND ejections AND mass) year:2022-202..."
+    },
+    {
+      "index": 3097,
+      "nl": "coronal mass ejections between 2022 to 2025",
+      "original": "abs:(coronal OR mass OR ejections) year:2022-2025",
+      "fixed": "abs:(coronal AND ejections AND mass) year:2022-2025",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:2022-2025... -> abs:(coronal AND ejections AND mass) year:2022-202..."
+    },
+    {
+      "index": 3098,
+      "nl": "coronal mass ejections 1980-1990",
+      "original": "abs:(coronal OR mass OR ejections) year:1980-1990",
+      "fixed": "abs:(coronal AND ejections AND mass) year:1980-1990",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:1980-1990... -> abs:(coronal AND ejections AND mass) year:1980-199..."
+    },
+    {
+      "index": 3099,
+      "nl": "papers on coronal mass ejections from 1980-1990",
+      "original": "abs:(coronal OR mass OR ejections) year:1980-1990 doctype:article",
+      "fixed": "abs:(coronal AND ejections AND mass) year:1980-1990 doctype:article",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:1980-1990 ... -> abs:(coronal AND ejections AND mass) year:1980-199..."
+    },
+    {
+      "index": 3100,
+      "nl": "coronal mass ejections year 1980-1990",
+      "original": "abs:(coronal OR mass OR ejections) year:1980-1990",
+      "fixed": "abs:(coronal AND ejections AND mass) year:1980-1990",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:1980-1990... -> abs:(coronal AND ejections AND mass) year:1980-199..."
+    },
+    {
+      "index": 3101,
+      "nl": "coronal mass ejections between 1980-1990",
+      "original": "abs:(coronal OR mass OR ejections) year:1980-1990",
+      "fixed": "abs:(coronal AND ejections AND mass) year:1980-1990",
+      "description": "Changed OR to AND: abs:(coronal OR mass OR ejections) year:1980-1990... -> abs:(coronal AND ejections AND mass) year:1980-199..."
+    },
+    {
+      "index": 3178,
+      "nl": "huchra john coronal mass ejections",
+      "original": "author:\"huchra, john\" abs:(coronal OR mass OR ejections)",
+      "fixed": "author:\"huchra, john\" abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: author:\"huchra, john\" abs:(coronal OR mass OR ejec... -> author:\"huchra, john\" abs:(coronal AND ejections A..."
+    },
+    {
+      "index": 3179,
+      "nl": "papers by Huchra, John about coronal mass ejections",
+      "original": "author:\"huchra, john\" abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "author:\"huchra, john\" abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: author:\"huchra, john\" abs:(coronal OR mass OR ejec... -> author:\"huchra, john\" abs:(coronal AND ejections A..."
+    },
+    {
+      "index": 3180,
+      "nl": "coronal mass ejections papers by huchra john",
+      "original": "author:\"huchra, john\" abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "author:\"huchra, john\" abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: author:\"huchra, john\" abs:(coronal OR mass OR ejec... -> author:\"huchra, john\" abs:(coronal AND ejections A..."
+    },
+    {
+      "index": 3181,
+      "nl": "Huchra, John coronal mass ejections",
+      "original": "author:\"huchra, john\" abs:(coronal OR mass OR ejections)",
+      "fixed": "author:\"huchra, john\" abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: author:\"huchra, john\" abs:(coronal OR mass OR ejec... -> author:\"huchra, john\" abs:(coronal AND ejections A..."
+    },
+    {
+      "index": 3182,
+      "nl": "huchra john coronal mass ejections 2018-2023",
+      "original": "author:\"huchra, john\" abs:(coronal OR mass OR ejections) year:2018-2023",
+      "fixed": "author:\"huchra, john\" abs:(coronal AND ejections AND mass) year:2018-2023",
+      "description": "Changed OR to AND: author:\"huchra, john\" abs:(coronal OR mass OR ejec... -> author:\"huchra, john\" abs:(coronal AND ejections A..."
+    },
+    {
+      "index": 3183,
+      "nl": "coronal mass ejections by Huchra, John 2018 to 2023",
+      "original": "author:\"huchra, john\" abs:(coronal OR mass OR ejections) year:2018-2023",
+      "fixed": "author:\"huchra, john\" abs:(coronal AND ejections AND mass) year:2018-2023",
+      "description": "Changed OR to AND: author:\"huchra, john\" abs:(coronal OR mass OR ejec... -> author:\"huchra, john\" abs:(coronal AND ejections A..."
+    },
+    {
+      "index": 3184,
+      "nl": "papers by huchra john on coronal mass ejections since 2018",
+      "original": "author:\"huchra, john\" abs:(coronal OR mass OR ejections) year:2018-2023 doctype:article",
+      "fixed": "author:\"huchra, john\" abs:(coronal AND ejections AND mass) year:2018-2023 doctype:article",
+      "description": "Changed OR to AND: author:\"huchra, john\" abs:(coronal OR mass OR ejec... -> author:\"huchra, john\" abs:(coronal AND ejections A..."
+    },
+    {
+      "index": 3220,
+      "nl": "murray stephen coronal mass ejections",
+      "original": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections)",
+      "fixed": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: author:\"murray, stephen\" abs:(coronal OR mass OR e... -> author:\"murray, stephen\" abs:(coronal AND ejection..."
+    },
+    {
+      "index": 3221,
+      "nl": "papers by Murray, Stephen about coronal mass ejections",
+      "original": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: author:\"murray, stephen\" abs:(coronal OR mass OR e... -> author:\"murray, stephen\" abs:(coronal AND ejection..."
+    },
+    {
+      "index": 3222,
+      "nl": "coronal mass ejections papers by murray stephen",
+      "original": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: author:\"murray, stephen\" abs:(coronal OR mass OR e... -> author:\"murray, stephen\" abs:(coronal AND ejection..."
+    },
+    {
+      "index": 3223,
+      "nl": "Murray, Stephen coronal mass ejections",
+      "original": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections)",
+      "fixed": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: author:\"murray, stephen\" abs:(coronal OR mass OR e... -> author:\"murray, stephen\" abs:(coronal AND ejection..."
+    },
+    {
+      "index": 3224,
+      "nl": "murray stephen coronal mass ejections 2018-2023",
+      "original": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections) year:2018-2023",
+      "fixed": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass) year:2018-2023",
+      "description": "Changed OR to AND: author:\"murray, stephen\" abs:(coronal OR mass OR e... -> author:\"murray, stephen\" abs:(coronal AND ejection..."
+    },
+    {
+      "index": 3225,
+      "nl": "coronal mass ejections by Murray, Stephen 2018 to 2023",
+      "original": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections) year:2018-2023",
+      "fixed": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass) year:2018-2023",
+      "description": "Changed OR to AND: author:\"murray, stephen\" abs:(coronal OR mass OR e... -> author:\"murray, stephen\" abs:(coronal AND ejection..."
+    },
+    {
+      "index": 3226,
+      "nl": "papers by murray stephen on coronal mass ejections since 2018",
+      "original": "author:\"murray, stephen\" abs:(coronal OR mass OR ejections) year:2018-2023 doctype:article",
+      "fixed": "author:\"murray, stephen\" abs:(coronal AND ejections AND mass) year:2018-2023 doctype:article",
+      "description": "Changed OR to AND: author:\"murray, stephen\" abs:(coronal OR mass OR e... -> author:\"murray, stephen\" abs:(coronal AND ejection..."
+    },
+    {
+      "index": 3262,
+      "nl": "smith j coronal mass ejections",
+      "original": "author:\"smith, j\" abs:(coronal OR mass OR ejections)",
+      "fixed": "author:\"smith, j\" abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: author:\"smith, j\" abs:(coronal OR mass OR ejection... -> author:\"smith, j\" abs:(coronal AND ejections AND m..."
+    },
+    {
+      "index": 3263,
+      "nl": "papers by Smith, J about coronal mass ejections",
+      "original": "author:\"Smith\" abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "author:\"Smith\" abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: author:\"Smith\" abs:(coronal OR mass OR ejections) ... -> author:\"Smith\" abs:(coronal AND ejections AND mass..."
+    },
+    {
+      "index": 3264,
+      "nl": "coronal mass ejections papers by smith j",
+      "original": "author:\"smith, j\" abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "author:\"smith, j\" abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: author:\"smith, j\" abs:(coronal OR mass OR ejection... -> author:\"smith, j\" abs:(coronal AND ejections AND m..."
+    },
+    {
+      "index": 3265,
+      "nl": "Smith, J coronal mass ejections",
+      "original": "author:\"smith, j\" abs:(coronal OR mass OR ejections)",
+      "fixed": "author:\"smith, j\" abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: author:\"smith, j\" abs:(coronal OR mass OR ejection... -> author:\"smith, j\" abs:(coronal AND ejections AND m..."
+    },
+    {
+      "index": 3266,
+      "nl": "smith j coronal mass ejections 2018-2023",
+      "original": "author:\"smith, j\" abs:(coronal OR mass OR ejections) year:2018-2023",
+      "fixed": "author:\"smith, j\" abs:(coronal AND ejections AND mass) year:2018-2023",
+      "description": "Changed OR to AND: author:\"smith, j\" abs:(coronal OR mass OR ejection... -> author:\"smith, j\" abs:(coronal AND ejections AND m..."
+    },
+    {
+      "index": 3267,
+      "nl": "coronal mass ejections by Smith, J 2018 to 2023",
+      "original": "author:\"Smith\" abs:(coronal OR mass OR ejections) year:2018-2023",
+      "fixed": "author:\"Smith\" abs:(coronal AND ejections AND mass) year:2018-2023",
+      "description": "Changed OR to AND: author:\"Smith\" abs:(coronal OR mass OR ejections) ... -> author:\"Smith\" abs:(coronal AND ejections AND mass..."
+    },
+    {
+      "index": 3268,
+      "nl": "papers by smith j on coronal mass ejections since 2018",
+      "original": "author:\"smith, j\" abs:(coronal OR mass OR ejections) year:2018-2023 doctype:article",
+      "fixed": "author:\"smith, j\" abs:(coronal AND ejections AND mass) year:2018-2023 doctype:article",
+      "description": "Changed OR to AND: author:\"smith, j\" abs:(coronal OR mass OR ejection... -> author:\"smith, j\" abs:(coronal AND ejections AND m..."
+    },
+    {
+      "index": 3304,
+      "nl": "vera rubin coronal mass ejections",
+      "original": "author:\"rubin, v\" abs:(coronal OR mass OR ejections)",
+      "fixed": "author:\"rubin, v\" abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: author:\"rubin, v\" abs:(coronal OR mass OR ejection... -> author:\"rubin, v\" abs:(coronal AND ejections AND m..."
+    },
+    {
+      "index": 3305,
+      "nl": "papers by Rubin, Vera about coronal mass ejections",
+      "original": "author:\"Rubin\" abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "author:\"Rubin\" abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: author:\"Rubin\" abs:(coronal OR mass OR ejections) ... -> author:\"Rubin\" abs:(coronal AND ejections AND mass..."
+    },
+    {
+      "index": 3306,
+      "nl": "coronal mass ejections papers by vera rubin",
+      "original": "author:\"rubin, v\" abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "author:\"rubin, v\" abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: author:\"rubin, v\" abs:(coronal OR mass OR ejection... -> author:\"rubin, v\" abs:(coronal AND ejections AND m..."
+    },
+    {
+      "index": 3307,
+      "nl": "Rubin, Vera coronal mass ejections",
+      "original": "author:\"rubin, v\" abs:(coronal OR mass OR ejections)",
+      "fixed": "author:\"rubin, v\" abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: author:\"rubin, v\" abs:(coronal OR mass OR ejection... -> author:\"rubin, v\" abs:(coronal AND ejections AND m..."
+    },
+    {
+      "index": 3308,
+      "nl": "vera rubin coronal mass ejections 2018-2023",
+      "original": "author:\"rubin, v\" abs:(coronal OR mass OR ejections) year:2018-2023",
+      "fixed": "author:\"rubin, v\" abs:(coronal AND ejections AND mass) year:2018-2023",
+      "description": "Changed OR to AND: author:\"rubin, v\" abs:(coronal OR mass OR ejection... -> author:\"rubin, v\" abs:(coronal AND ejections AND m..."
+    },
+    {
+      "index": 3309,
+      "nl": "coronal mass ejections by Rubin, Vera 2018 to 2023",
+      "original": "author:\"Rubin\" abs:(coronal OR mass OR ejections) year:2018-2023",
+      "fixed": "author:\"Rubin\" abs:(coronal AND ejections AND mass) year:2018-2023",
+      "description": "Changed OR to AND: author:\"Rubin\" abs:(coronal OR mass OR ejections) ... -> author:\"Rubin\" abs:(coronal AND ejections AND mass..."
+    },
+    {
+      "index": 3310,
+      "nl": "papers by vera rubin on coronal mass ejections since 2018",
+      "original": "author:\"rubin, v\" abs:(coronal OR mass OR ejections) year:2018-2023 doctype:article",
+      "fixed": "author:\"rubin, v\" abs:(coronal AND ejections AND mass) year:2018-2023 doctype:article",
+      "description": "Changed OR to AND: author:\"rubin, v\" abs:(coronal OR mass OR ejection... -> author:\"rubin, v\" abs:(coronal AND ejections AND m..."
+    },
+    {
+      "index": 3346,
+      "nl": "oort j coronal mass ejections",
+      "original": "author:\"oort, j\" abs:(coronal OR mass OR ejections)",
+      "fixed": "author:\"oort, j\" abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: author:\"oort, j\" abs:(coronal OR mass OR ejections... -> author:\"oort, j\" abs:(coronal AND ejections AND ma..."
+    },
+    {
+      "index": 3347,
+      "nl": "papers by Oort, J about coronal mass ejections",
+      "original": "author:\"Oort\" abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "author:\"Oort\" abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: author:\"Oort\" abs:(coronal OR mass OR ejections) d... -> author:\"Oort\" abs:(coronal AND ejections AND mass)..."
+    },
+    {
+      "index": 3348,
+      "nl": "coronal mass ejections papers by oort j",
+      "original": "author:\"oort, j\" abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "author:\"oort, j\" abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: author:\"oort, j\" abs:(coronal OR mass OR ejections... -> author:\"oort, j\" abs:(coronal AND ejections AND ma..."
+    },
+    {
+      "index": 3349,
+      "nl": "Oort, J coronal mass ejections",
+      "original": "author:\"oort, j\" abs:(coronal OR mass OR ejections)",
+      "fixed": "author:\"oort, j\" abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: author:\"oort, j\" abs:(coronal OR mass OR ejections... -> author:\"oort, j\" abs:(coronal AND ejections AND ma..."
+    },
+    {
+      "index": 3350,
+      "nl": "oort j coronal mass ejections 2018-2023",
+      "original": "author:\"oort, j\" abs:(coronal OR mass OR ejections) year:2018-2023",
+      "fixed": "author:\"oort, j\" abs:(coronal AND ejections AND mass) year:2018-2023",
+      "description": "Changed OR to AND: author:\"oort, j\" abs:(coronal OR mass OR ejections... -> author:\"oort, j\" abs:(coronal AND ejections AND ma..."
+    },
+    {
+      "index": 3351,
+      "nl": "coronal mass ejections by Oort, J 2018 to 2023",
+      "original": "author:\"Oort\" abs:(coronal OR mass OR ejections) year:2018-2023",
+      "fixed": "author:\"Oort\" abs:(coronal AND ejections AND mass) year:2018-2023",
+      "description": "Changed OR to AND: author:\"Oort\" abs:(coronal OR mass OR ejections) y... -> author:\"Oort\" abs:(coronal AND ejections AND mass)..."
+    },
+    {
+      "index": 3352,
+      "nl": "papers by oort j on coronal mass ejections since 2018",
+      "original": "author:\"oort, j\" abs:(coronal OR mass OR ejections) year:2018-2023 doctype:article",
+      "fixed": "author:\"oort, j\" abs:(coronal AND ejections AND mass) year:2018-2023 doctype:article",
+      "description": "Changed OR to AND: author:\"oort, j\" abs:(coronal OR mass OR ejections... -> author:\"oort, j\" abs:(coronal AND ejections AND ma..."
+    },
+    {
+      "index": 3411,
+      "nl": "ApJ coronal mass ejections refereed",
+      "original": "bibstem:\"ApJ\" property:refereed abs:(coronal OR mass OR ejections)",
+      "fixed": "bibstem:\"ApJ\" property:refereed abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: bibstem:\"ApJ\" property:refereed abs:(coronal OR ma... -> bibstem:\"ApJ\" property:refereed abs:(coronal AND e..."
+    },
+    {
+      "index": 3412,
+      "nl": "coronal mass ejections in ApJ with refereed",
+      "original": "bibstem:\"ApJ\" property:refereed abs:(coronal OR mass OR ejections)",
+      "fixed": "bibstem:\"ApJ\" property:refereed abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: bibstem:\"ApJ\" property:refereed abs:(coronal OR ma... -> bibstem:\"ApJ\" property:refereed abs:(coronal AND e..."
+    },
+    {
+      "index": 3413,
+      "nl": "refereed ApJ papers on coronal mass ejections",
+      "original": "bibstem:\"ApJ\" property:refereed abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "bibstem:\"ApJ\" property:refereed abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: bibstem:\"ApJ\" property:refereed abs:(coronal OR ma... -> bibstem:\"ApJ\" property:refereed abs:(coronal AND e..."
+    },
+    {
+      "index": 3414,
+      "nl": "coronal mass ejections ApJ refereed only",
+      "original": "bibstem:\"ApJ\" property:refereed abs:(coronal OR mass OR ejections)",
+      "fixed": "bibstem:\"ApJ\" property:refereed abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: bibstem:\"ApJ\" property:refereed abs:(coronal OR ma... -> bibstem:\"ApJ\" property:refereed abs:(coronal AND e..."
+    },
+    {
+      "index": 3431,
+      "nl": "ApJ coronal mass ejections openaccess",
+      "original": "bibstem:\"ApJ\" property:openaccess abs:(coronal OR mass OR ejections)",
+      "fixed": "bibstem:\"ApJ\" property:openaccess abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: bibstem:\"ApJ\" property:openaccess abs:(coronal OR ... -> bibstem:\"ApJ\" property:openaccess abs:(coronal AND..."
+    },
+    {
+      "index": 3432,
+      "nl": "coronal mass ejections in ApJ with openaccess",
+      "original": "bibstem:\"ApJ\" property:openaccess abs:(coronal OR mass OR ejections)",
+      "fixed": "bibstem:\"ApJ\" property:openaccess abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: bibstem:\"ApJ\" property:openaccess abs:(coronal OR ... -> bibstem:\"ApJ\" property:openaccess abs:(coronal AND..."
+    },
+    {
+      "index": 3433,
+      "nl": "openaccess ApJ papers on coronal mass ejections",
+      "original": "bibstem:\"ApJ\" property:openaccess abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "bibstem:\"ApJ\" property:openaccess abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: bibstem:\"ApJ\" property:openaccess abs:(coronal OR ... -> bibstem:\"ApJ\" property:openaccess abs:(coronal AND..."
+    },
+    {
+      "index": 3434,
+      "nl": "coronal mass ejections ApJ openaccess only",
+      "original": "bibstem:\"ApJ\" property:openaccess abs:(coronal OR mass OR ejections)",
+      "fixed": "bibstem:\"ApJ\" property:openaccess abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: bibstem:\"ApJ\" property:openaccess abs:(coronal OR ... -> bibstem:\"ApJ\" property:openaccess abs:(coronal AND..."
+    },
+    {
+      "index": 3451,
+      "nl": "ApJ coronal mass ejections data",
+      "original": "bibstem:\"ApJ\" property:data abs:(coronal OR mass OR ejections)",
+      "fixed": "bibstem:\"ApJ\" property:data abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: bibstem:\"ApJ\" property:data abs:(coronal OR mass O... -> bibstem:\"ApJ\" property:data abs:(coronal AND eject..."
+    },
+    {
+      "index": 3452,
+      "nl": "coronal mass ejections in ApJ with data",
+      "original": "bibstem:\"ApJ\" property:data abs:(coronal OR mass OR ejections)",
+      "fixed": "bibstem:\"ApJ\" property:data abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: bibstem:\"ApJ\" property:data abs:(coronal OR mass O... -> bibstem:\"ApJ\" property:data abs:(coronal AND eject..."
+    },
+    {
+      "index": 3453,
+      "nl": "data ApJ papers on coronal mass ejections",
+      "original": "bibstem:\"ApJ\" property:data abs:(coronal OR mass OR ejections) doctype:article",
+      "fixed": "bibstem:\"ApJ\" property:data abs:(coronal AND ejections AND mass) doctype:article",
+      "description": "Changed OR to AND: bibstem:\"ApJ\" property:data abs:(coronal OR mass O... -> bibstem:\"ApJ\" property:data abs:(coronal AND eject..."
+    },
+    {
+      "index": 3454,
+      "nl": "coronal mass ejections ApJ data only",
+      "original": "bibstem:\"ApJ\" property:data abs:(coronal OR mass OR ejections)",
+      "fixed": "bibstem:\"ApJ\" property:data abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: bibstem:\"ApJ\" property:data abs:(coronal OR mass O... -> bibstem:\"ApJ\" property:data abs:(coronal AND eject..."
+    },
+    {
+      "index": 3471,
+      "nl": "AJ coronal mass ejections refereed",
+      "original": "bibstem:\"AJ\" property:refereed abs:(coronal OR mass OR ejections)",
+      "fixed": "bibstem:\"AJ\" property:refereed abs:(coronal AND ejections AND mass)",
+      "description": "Changed OR to AND: bibstem:\"AJ\" property:refereed abs:(coronal OR mas... -> bibstem:\"AJ\" property:refereed abs:(coronal AND ej..."
+    }
+  ]
+}

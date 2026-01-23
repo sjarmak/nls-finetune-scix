@@ -43,14 +43,14 @@ def add_doctype_article(query: str) -> str:
 
 
 def break_quoted_phrase(phrase: str, max_words: int = 2) -> str:
-    """Break a quoted phrase into OR expression if too long.
+    """Break a quoted phrase into AND expression if too long.
 
     Args:
         phrase: The phrase content (without quotes)
         max_words: Max words to keep as quoted phrase
 
     Returns:
-        Either "phrase" if short enough, or (word1 OR word2 OR ...) if long
+        Either "phrase" if short enough, or (word1 AND word2 AND ...) if long
     """
     words = phrase.split()
 
@@ -58,27 +58,55 @@ def break_quoted_phrase(phrase: str, max_words: int = 2) -> str:
     if len(words) <= max_words:
         return f'"{phrase}"'
 
-    # Filter out very common/generic words for the OR expression
+    # Extended stopwords - filter out generic/common words aggressively
     stopwords = {
+        # Articles and prepositions
         "the", "a", "an", "of", "in", "on", "at", "to", "for", "with",
         "by", "from", "and", "or", "is", "are", "was", "were", "be",
+        "its", "their", "this", "that", "these", "those", "as", "into",
+        # Generic research terms
         "observations", "studies", "research", "analysis", "data",
-        "results", "survey", "study", "using", "based"
+        "results", "survey", "study", "using", "based", "new", "recent",
+        "first", "toward", "towards", "between", "among", "within",
+        # Very common astronomy terms (too generic to be useful alone)
+        "observations", "properties", "characteristics", "nature",
+        "evidence", "detection", "discovery", "search", "finding",
+        # Adjectives that are too generic
+        "failed", "blue", "red", "large", "small", "high", "low",
+        "early", "late", "young", "old", "bright", "faint", "massive",
     }
 
-    meaningful = [w for w in words if w.lower() not in stopwords and len(w) > 2]
+    # Extract only distinctive/unique terms (longer, less common words)
+    meaningful = [
+        w for w in words
+        if w.lower() not in stopwords
+        and len(w) > 3  # Require 4+ characters for uniqueness
+        and not w.isdigit()  # Skip pure numbers
+    ]
 
-    # If we filtered too much, keep some original words
+    # If we filtered too much, be less aggressive
     if len(meaningful) < 2:
-        meaningful = [w for w in words if len(w) > 2][:4]
+        meaningful = [
+            w for w in words
+            if w.lower() not in {"the", "a", "an", "of", "in", "on", "at", "to", "for", "with", "by", "from", "and", "or"}
+            and len(w) > 2
+        ][:3]
 
-    # Limit to 4-5 terms
-    meaningful = meaningful[:5]
+    # Limit to 3 most distinctive terms (AND is restrictive, don't over-filter)
+    meaningful = meaningful[:3]
+
+    if len(meaningful) == 0:
+        # Fallback: just use first significant word
+        for w in words:
+            if len(w) > 2:
+                return w
+        return words[0] if words else ""
 
     if len(meaningful) == 1:
         return meaningful[0]
 
-    return "(" + " OR ".join(meaningful) + ")"
+    # Use AND - requires ALL terms to match (more precise)
+    return "(" + " AND ".join(meaningful) + ")"
 
 
 def fix_quoted_phrases(query: str) -> tuple[str, list[str]]:
@@ -138,17 +166,30 @@ def fix_abs_parentheses(query: str) -> tuple[str, list[str]]:
 
         if title_word_count >= 2 or len(words) > 5:
             # This looks like a title - extract key terms
+            # Extended stopwords for better filtering
             stopwords = {
                 "the", "a", "an", "of", "in", "on", "at", "to", "for", "with",
                 "by", "from", "and", "or", "is", "are", "was", "were", "be",
-                "its", "their", "this", "that", "these", "those"
+                "its", "their", "this", "that", "these", "those", "as", "into",
+                # Generic terms
+                "observations", "properties", "characteristics", "nature",
+                "evidence", "detection", "discovery", "search", "finding",
+                "new", "recent", "first", "toward", "towards",
+                # Too-generic adjectives
+                "failed", "blue", "red", "large", "small", "high", "low",
             }
-            meaningful = [w for w in words if w.lower() not in stopwords and len(w) > 2]
+            # Only keep distinctive terms (4+ chars)
+            meaningful = [
+                w for w in words
+                if w.lower() not in stopwords
+                and len(w) > 3
+                and not w.isdigit()
+            ]
 
             if len(meaningful) >= 2:
-                # Take up to 5 key terms
-                terms = meaningful[:5]
-                new_content = " OR ".join(terms)
+                # Take up to 3 most distinctive terms with AND
+                terms = meaningful[:3]
+                new_content = " AND ".join(terms)
                 fixes.append(f"Extracted terms from title-like content: {new_content}")
                 return f"abs:({new_content})"
 

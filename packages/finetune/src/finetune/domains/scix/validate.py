@@ -85,7 +85,9 @@ def lint_query(query: str) -> ValidationResult:
         errors.append("Unbalanced brackets")
 
     # Check for invalid field prefixes
-    field_pattern = r"(\^?[a-z_]+):"
+    # Use a more specific pattern that requires at least 2 characters and word boundary
+    # This avoids false positives from coordinate notation like "05h23m34.6s" where 's' is seconds
+    field_pattern = r"(?<![.\d])(\^?[a-z_]{2,}):"
     fields_used = re.findall(field_pattern, query, re.IGNORECASE)
     for field in fields_used:
         field_lower = field.lower()
