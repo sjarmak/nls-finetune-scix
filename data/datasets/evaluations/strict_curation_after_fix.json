@@ -1,0 +1,3918 @@
+{
+  "generated_at": "2026-01-23T08:44:01.860774",
+  "summary": {
+    "total": 4731,
+    "keep": 4475,
+    "fix": 17,
+    "remove": 0,
+    "review": 239,
+    "by_issue_type": {
+      "over_quoted": 30,
+      "over_inference": 129,
+      "missing_boolean_ops": 90,
+      "exact_title_in_abs": 17
+    }
+  },
+  "flagged": [
+    {
+      "index": 15,
+      "nl": "JWST observations studies",
+      "query": "abs:\"JWST observations\" doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'JWST observations' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:JWST"
+        }
+      ]
+    },
+    {
+      "index": 23,
+      "nl": "laser plasma filament energy dependence studies",
+      "query": "(laser AND plasma AND filament AND dependence AND laser AND energy) AND year:1641-2024 doctype:article",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 51,
+      "nl": "latest infrared astronomy research",
+      "query": "abs:\"infrared astronomy\" year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 62,
+      "nl": "failed novae turning blue after outburst",
+      "query": "abs:(failed novae blue)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'failed novae blue...'",
+          "suggested_fix": "Consider: abs:(failed OR novae OR blue)"
+        }
+      ]
+    },
+    {
+      "index": 70,
+      "nl": "papers by Davies on scaled sky subtraction",
+      "query": "author:(\"^davies\") abs:(scaled sky subtraction) doctype:article",
+      "category": "first_author",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'scaled sky subtraction...'",
+          "suggested_fix": "Consider: abs:(scaled OR sky OR subtraction)"
+        }
+      ]
+    },
+    {
+      "index": 75,
+      "nl": "latest spiral galaxies research",
+      "query": "abs:\"spiral galaxies\" year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 87,
+      "nl": "new ALMA observations papers",
+      "query": "abs:\"ALMA observations\" year:2024-2025 doctype:article",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'ALMA observations' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:ALMA"
+        },
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 112,
+      "nl": "hot gas mass in galaxy clusters",
+      "query": "abs:(hot gas mass)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'hot gas mass...'",
+          "suggested_fix": "Consider: abs:(hot OR gas OR mass)"
+        }
+      ]
+    },
+    {
+      "index": 115,
+      "nl": "elliptical galaxies in the 2020s",
+      "query": "abs:\"elliptical galaxies\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 128,
+      "nl": "quantum gravity in the 2020s",
+      "query": "abs:\"quantum gravity\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 147,
+      "nl": "papers using the Dark Energy Camera DECam",
+      "query": "abs:(The Dark Energy Camera (DECam)) doctype:article",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains title-like phrase pattern",
+          "suggested_fix": "Extract key topic terms only"
+        },
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'The Dark Energy Camera (DECam...'",
+          "suggested_fix": "Consider: abs:(The OR Dark OR Energy OR Camera)"
+        }
+      ]
+    },
+    {
+      "index": 150,
+      "nl": "what's new in red giants?",
+      "query": "abs:\"red giants\" year:2024-2025",
+      "category": "conversational",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 180,
+      "nl": "latest optical astronomy research",
+      "query": "abs:\"optical astronomy\" year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 181,
+      "nl": "Apollo light scattering lunar exosphere dust reanalysis",
+      "query": "abs:(A reanalysis of the Apollo light scattering observations, and implications for lunar exospheric dust)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains what looks like exact title (100 chars, no boolean ops)",
+          "suggested_fix": "Break into topic terms with OR/AND operators"
+        }
+      ]
+    },
+    {
+      "index": 207,
+      "nl": "dynamical mass measurements M35 open cluster",
+      "query": "abs:(dynamical mass+ M35)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'dynamical mass+ M35...'",
+          "suggested_fix": "Consider: abs:(dynamical OR mass+ OR M35)"
+        }
+      ]
+    },
+    {
+      "index": 242,
+      "nl": "new TESS exoplanets papers",
+      "query": "abs:\"TESS exoplanets\" year:2024-2025 doctype:article",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 246,
+      "nl": "Zimmermann Nature 1978 pain",
+      "query": "abs:(M. Zimmermann, Nature 271 (1978) 524)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'M. Zimmermann, Nature 271 (1978...'",
+          "suggested_fix": "Consider: abs:(M. OR Zimmermann, OR Nature OR 271)"
+        }
+      ]
+    },
+    {
+      "index": 252,
+      "nl": "galactic system AM 2229-735 polar ring formation simulations",
+      "query": "abs:(Simulating the galactic system in interaction AM 2229-735 and the formation of its polar structure)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains what looks like exact title (98 chars, no boolean ops)",
+          "suggested_fix": "Break into topic terms with OR/AND operators"
+        }
+      ]
+    },
+    {
+      "index": 258,
+      "nl": "recent machine learning papers from top institutions",
+      "query": "abs:\"machine learning\" year:2023-2025 (aff:\"MIT\" OR aff:\"Stanford\" OR aff:\"Berkeley\") doctype:article",
+      "category": "compound",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 270,
+      "nl": "recent spectroscopy",
+      "query": "abs:\"spectroscopy\" year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 277,
+      "nl": "recent stellar evolution",
+      "query": "abs:\"stellar evolution\" year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 290,
+      "nl": "binary stars in the 2020s",
+      "query": "abs:\"binary stars\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 295,
+      "nl": "Roman telescope this decade",
+      "query": "abs:\"Roman telescope\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 334,
+      "nl": "radio astronomy this decade",
+      "query": "abs:\"radio astronomy\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 338,
+      "nl": "recent interstellar medium",
+      "query": "abs:\"interstellar medium\" year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 346,
+      "nl": "kepler data reduction pipeline documentation",
+      "query": "abs:(kepler data processing handbook)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'kepler data processing handbook...'",
+          "suggested_fix": "Consider: abs:(kepler OR data OR processing OR handbook)"
+        }
+      ]
+    },
+    {
+      "index": 352,
+      "nl": "GRO J1655-40 iron line emission studies",
+      "query": "abs:(\"GRO J1655-40\", \"iron line\") doctype:article",
+      "category": "content",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: '\"GRO J1655-40\", \"iron line\"...'",
+          "suggested_fix": "Consider: abs:(\"GRO OR J1655-40\", OR \"iron OR line\")"
+        }
+      ]
+    },
+    {
+      "index": 359,
+      "nl": "latest interferometry research",
+      "query": "abs:\"interferometry\" year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 364,
+      "nl": "gamma ray bursts in the 2020s",
+      "query": "abs:(gamma OR ray OR bursts) year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 382,
+      "nl": "new nucleosynthesis papers",
+      "query": "abs:\"nucleosynthesis\" year:2024-2025 doctype:article",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 418,
+      "nl": "papers on skipper ccd development at fermilab",
+      "query": "abs:(fermilab skipper ccd) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'fermilab skipper ccd...'",
+          "suggested_fix": "Consider: abs:(fermilab OR skipper OR ccd)"
+        }
+      ]
+    },
+    {
+      "index": 433,
+      "nl": "nustar hot gas mass measurements in galaxy clusters",
+      "query": "abs:(nustar hot gas mass)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'nustar hot gas mass...'",
+          "suggested_fix": "Consider: abs:(nustar OR hot OR gas OR mass)"
+        }
+      ]
+    },
+    {
+      "index": 443,
+      "nl": "new dark matter papers",
+      "query": "abs:\"dark matter\" year:2024-2025 doctype:article",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 514,
+      "nl": "Swift bursts in the 2020s",
+      "query": "abs:\"Swift bursts\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 561,
+      "nl": "kepler mission instrument documentation and handbook",
+      "query": "abs:(kepler instrument handbook)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'kepler instrument handbook...'",
+          "suggested_fix": "Consider: abs:(kepler OR instrument OR handbook)"
+        }
+      ]
+    },
+    {
+      "index": 571,
+      "nl": "recent cosmic rays",
+      "query": "abs:\"cosmic rays\" year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 616,
+      "nl": "solar flare catalogs from SDO mission",
+      "query": "abs:(solar flare catalog sdo)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'solar flare catalog sdo...'",
+          "suggested_fix": "Consider: abs:(solar OR flare OR catalog OR sdo)"
+        }
+      ]
+    },
+    {
+      "index": 619,
+      "nl": "moving boundary electrophoresis methods and applications",
+      "query": "abs:(Moving boundary electrophoresis)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Moving boundary electrophoresis...'",
+          "suggested_fix": "Consider: abs:(Moving OR boundary OR electrophoresis)"
+        }
+      ]
+    },
+    {
+      "index": 621,
+      "nl": "x-ray observations of hot gas mass in galaxy clusters",
+      "query": "abs:(hot gas mass x ray)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'hot gas mass x ray...'",
+          "suggested_fix": "Consider: abs:(hot OR gas OR mass OR x)"
+        }
+      ]
+    },
+    {
+      "index": 648,
+      "nl": "new main sequence stars papers",
+      "query": "abs:(main OR sequence OR stars) year:2024-2025 doctype:article",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 669,
+      "nl": "planetary atmospheres this decade",
+      "query": "abs:\"planetary atmospheres\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 679,
+      "nl": "uncited papers from the last year",
+      "query": "citation_count:0 year:2024-2025 doctype:article",
+      "category": "metrics",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 710,
+      "nl": "latest Swift bursts research",
+      "query": "abs:\"Swift bursts\" year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 735,
+      "nl": "latest quasars research",
+      "query": "abs:\"quasars\" year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 739,
+      "nl": "Croton 2006 MNRAS volume 365 page 11",
+      "query": "abs:(Croton+06, MNRAS, 365, 11)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Croton+06, MNRAS, 365, 11...'",
+          "suggested_fix": "Consider: abs:(Croton+06, OR MNRAS, OR 365, OR 11)"
+        }
+      ]
+    },
+    {
+      "index": 750,
+      "nl": "IO UMa eclipsing binary system",
+      "query": "abs:(IO UMa binary)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'IO UMa binary...'",
+          "suggested_fix": "Consider: abs:(IO OR UMa OR binary)"
+        }
+      ]
+    },
+    {
+      "index": 756,
+      "nl": "classical novae convective overshooting models",
+      "query": "abs:(classical novae overshooting)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'classical novae overshooting...'",
+          "suggested_fix": "Consider: abs:(classical OR novae OR overshooting)"
+        }
+      ]
+    },
+    {
+      "index": 761,
+      "nl": "microlensing optical depth galactic bulge difference image analysis 2000",
+      "query": "abs:(\"Microlensing Optical Depth toward the Galactic Bulge from Microlensing Observations in Astrophysics Group Observations during 2000 with Difference Image Analysis\")",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains what looks like exact title (163 chars, no boolean ops)",
+          "suggested_fix": "Break into topic terms with OR/AND operators"
+        },
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: '\"Microlensing Optical Depth toward the Galactic Bu...'",
+          "suggested_fix": "Consider: abs:(\"Microlensing OR Optical OR Depth OR toward)"
+        }
+      ]
+    },
+    {
+      "index": 791,
+      "nl": "papers from the 1990s on quasars",
+      "query": "year:1990-1999 abs:\"quasar\" doctype:article",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'19'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 794,
+      "nl": "X-ray emission star-forming galaxies recent observations",
+      "query": "abs:(X-ray emission from star-forming galaxies)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'X-ray emission from star-forming galaxies...'",
+          "suggested_fix": "Consider: abs:(X-ray OR emission OR from OR star-forming)"
+        }
+      ]
+    },
+    {
+      "index": 802,
+      "nl": "L/T transition brown dwarfs atmospheric properties",
+      "query": "abs:(\"The L/T Transition\")",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: '\"The L/T Transition\"...'",
+          "suggested_fix": "Consider: abs:(\"The OR L/T OR Transition\")"
+        }
+      ]
+    },
+    {
+      "index": 811,
+      "nl": "new quantum gravity papers",
+      "query": "abs:\"quantum gravity\" year:2024-2025 doctype:article",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 813,
+      "nl": "spectroscopy near exoplanet in abstract",
+      "query": "abs:(spectroscopy NEAR5 exoplanet)",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'spectroscopy NEAR5 exoplanet...'",
+          "suggested_fix": "Consider: abs:(spectroscopy OR NEAR5 OR exoplanet)"
+        }
+      ]
+    },
+    {
+      "index": 868,
+      "nl": "coastal erosion human displacement vulnerability Bangladesh",
+      "query": "abs:(Shifting Coastlines, Human Displacement, and Erosion Risk Vulnerabilities in Bangladesh)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains what looks like exact title (87 chars, no boolean ops)",
+          "suggested_fix": "Break into topic terms with OR/AND operators"
+        }
+      ]
+    },
+    {
+      "index": 872,
+      "nl": "latest white dwarfs research",
+      "query": "abs:\"white dwarfs\" year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 879,
+      "nl": "Dyson sphere technosignatures SETI detection methods",
+      "query": "abs:(Dyson SPhere technosignatures)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Dyson SPhere technosignatures...'",
+          "suggested_fix": "Consider: abs:(Dyson OR SPhere OR technosignatures)"
+        }
+      ]
+    },
+    {
+      "index": 889,
+      "nl": "papers about NGC 1156 galaxy",
+      "query": "pubdate:[1890-01 TO 2023-11] title:(ngc-1156) doctype:article",
+      "category": "compound",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 892,
+      "nl": "Veil Nebula supernova remnant X-ray observations",
+      "query": "abs:(Veil Nebula radiation)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Veil Nebula radiation...'",
+          "suggested_fix": "Consider: abs:(Veil OR Nebula OR radiation)"
+        }
+      ]
+    },
+    {
+      "index": 912,
+      "nl": "papers by alan on classical mixing",
+      "query": "abs:(classical mixing alan) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'classical mixing alan...'",
+          "suggested_fix": "Consider: abs:(classical OR mixing OR alan)"
+        }
+      ]
+    },
+    {
+      "index": 913,
+      "nl": "recent main sequence stars",
+      "query": "abs:(main OR sequence OR stars) year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 933,
+      "nl": "papers using las cumbres observatory data",
+      "query": "abs:(las cumbres observatory) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'las cumbres observatory...'",
+          "suggested_fix": "Consider: abs:(las OR cumbres OR observatory)"
+        }
+      ]
+    },
+    {
+      "index": 943,
+      "nl": "Vera Rubin Observatory near earth objects",
+      "query": "abs:(Vera Rubin NEO)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Vera Rubin NEO...'",
+          "suggested_fix": "Consider: abs:(Vera OR Rubin OR NEO)"
+        }
+      ]
+    },
+    {
+      "index": 952,
+      "nl": "nonlinear limb darkening stellar atmospheres",
+      "query": "abs:(non-linear limb darkening)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'non-linear limb darkening...'",
+          "suggested_fix": "Consider: abs:(non-linear OR limb OR darkening)"
+        }
+      ]
+    },
+    {
+      "index": 990,
+      "nl": "rogue planets interstellar space brown dwarfs planetary mass objects",
+      "query": "abs:(free-floating solar system objects)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'free-floating solar system objects...'",
+          "suggested_fix": "Consider: abs:(free-floating OR solar OR system OR objects)"
+        }
+      ]
+    },
+    {
+      "index": 991,
+      "nl": "laser pulse SETI technosignatures artificial signals",
+      "query": "abs:(laser pulse technosignatures)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'laser pulse technosignatures...'",
+          "suggested_fix": "Consider: abs:(laser OR pulse OR technosignatures)"
+        }
+      ]
+    },
+    {
+      "index": 997,
+      "nl": "papers citing Hawking from the last 5 years",
+      "query": "citations(author:\"Hawking, S\") year:2020-2025 doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 998,
+      "nl": "ALMA observations research",
+      "query": "abs:\"ALMA observations\"",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'ALMA observations' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:ALMA"
+        }
+      ]
+    },
+    {
+      "index": 1002,
+      "nl": "papers by natascha forster on cosmic noon",
+      "query": "abs:(cosmic noon natascha) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'cosmic noon natascha...'",
+          "suggested_fix": "Consider: abs:(cosmic OR noon OR natascha)"
+        }
+      ]
+    },
+    {
+      "index": 1009,
+      "nl": "new Euclid survey papers",
+      "query": "abs:\"Euclid survey\" year:2024-2025 doctype:article",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1015,
+      "nl": "technosignatures around solar system objects",
+      "query": "abs:(solar objects technosignature)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'solar objects technosignature...'",
+          "suggested_fix": "Consider: abs:(solar OR objects OR technosignature)"
+        }
+      ]
+    },
+    {
+      "index": 1022,
+      "nl": "M51 molecular hydrogen observations",
+      "query": "abs:(M51 molecular hidrogen)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'M51 molecular hidrogen...'",
+          "suggested_fix": "Consider: abs:(M51 OR molecular OR hidrogen)"
+        }
+      ]
+    },
+    {
+      "index": 1023,
+      "nl": "new interstellar medium papers",
+      "query": "abs:\"interstellar medium\" year:2024-2025 doctype:article",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1027,
+      "nl": "astrophysical fluid dynamics principles magnetohydrodynamics stellar winds accretion disks",
+      "query": "abs:(Principles of Astrophysical Fluid Dynamics)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Principles of Astrophysical Fluid Dynamics...'",
+          "suggested_fix": "Consider: abs:(Principles OR of OR Astrophysical OR Fluid)"
+        }
+      ]
+    },
+    {
+      "index": 1029,
+      "nl": "VLA radio in the 2020s",
+      "query": "abs:\"VLA radio\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1030,
+      "nl": "recent globular clusters",
+      "query": "abs:\"globular clusters\" year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1033,
+      "nl": "laser plasma filament radius dependence on laser energy",
+      "query": "(laser AND plasma AND filament AND radius AND dependence AND laser AND energy) AND year:1641-2024",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1068,
+      "nl": "performance profiles benchmarking optimization software",
+      "query": "abs:(Benchmarking Optimization Software with PerformanceProfiles)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains what looks like exact title (59 chars, no boolean ops)",
+          "suggested_fix": "Break into topic terms with OR/AND operators"
+        },
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Benchmarking Optimization Software with Performanc...'",
+          "suggested_fix": "Consider: abs:(Benchmarking OR Optimization OR Software OR with)"
+        }
+      ]
+    },
+    {
+      "index": 1081,
+      "nl": "physics economic growth development national policy",
+      "query": "abs:(Explain Role of Physics In National Economic Growth and Development ha TopicRole of Physics In National Economic Growth and Development)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains what looks like exact title (135 chars, no boolean ops)",
+          "suggested_fix": "Break into topic terms with OR/AND operators"
+        }
+      ]
+    },
+    {
+      "index": 1101,
+      "nl": "boresight translation optical alignment papers",
+      "query": "abs:(traduzione di boresight) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'traduzione di boresight...'",
+          "suggested_fix": "Consider: abs:(traduzione OR di OR boresight)"
+        }
+      ]
+    },
+    {
+      "index": 1125,
+      "nl": "casanova classical nova outbursts recurrent novae",
+      "query": "abs:(classical nova casanova)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'classical nova casanova...'",
+          "suggested_fix": "Consider: abs:(classical OR nova OR casanova)"
+        }
+      ]
+    },
+    {
+      "index": 1128,
+      "nl": "galaxy clusters this decade",
+      "query": "abs:\"galaxy clusters\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1131,
+      "nl": "recent TESS exoplanets",
+      "query": "abs:\"TESS exoplanets\" year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1148,
+      "nl": "radio loud AGN variability studies",
+      "query": "abs:(variability in radio loud AGN) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'variability in radio loud AGN...'",
+          "suggested_fix": "Consider: abs:(variability OR in OR radio OR loud)"
+        }
+      ]
+    },
+    {
+      "index": 1152,
+      "nl": "JWST observations papers from 2022",
+      "query": "abs:\"JWST observations\" pubdate:2022 doctype:article",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'JWST observations' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:JWST"
+        }
+      ]
+    },
+    {
+      "index": 1174,
+      "nl": "papers by casanova on classical novae",
+      "query": "abs:(classical novae casanova) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'classical novae casanova...'",
+          "suggested_fix": "Consider: abs:(classical OR novae OR casanova)"
+        }
+      ]
+    },
+    {
+      "index": 1184,
+      "nl": "Rubin Observatory in the 2020s",
+      "query": "abs:\"Rubin Observatory\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1210,
+      "nl": "ApJS volume 264 article 38",
+      "query": "abs:(ApJS, 264, 38) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'ApJS, 264, 38...'",
+          "suggested_fix": "Consider: abs:(ApJS, OR 264, OR 38)"
+        }
+      ]
+    },
+    {
+      "index": 1235,
+      "nl": "recent nucleosynthesis",
+      "query": "abs:\"nucleosynthesis\" year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1262,
+      "nl": "papers where transit appears near detection",
+      "query": "abs:(transit NEAR3 detection) doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'transit NEAR3 detection...'",
+          "suggested_fix": "Consider: abs:(transit OR NEAR3 OR detection)"
+        }
+      ]
+    },
+    {
+      "index": 1272,
+      "nl": "what are the latest cosmic microwave background discoveries?",
+      "query": "abs:(cosmic OR microwave OR background) year:2024-2025",
+      "category": "conversational",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1274,
+      "nl": "papers by Costamante on blazars and gamma ray astronomy",
+      "query": "author:\"Costamante\" abs:(L., OR al., OR 2001, OR Astronomy OR Astrophysics,) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1284,
+      "nl": "type ia radio supernovae observations",
+      "query": "abs:(type ia radio)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'type ia radio...'",
+          "suggested_fix": "Consider: abs:(type OR ia OR radio)"
+        }
+      ]
+    },
+    {
+      "index": 1292,
+      "nl": "IllustrisTNG hot counter-rotating star-forming disk galaxies",
+      "query": "abs:(Hot and counter-rotating star-forming disk galaxies in IllustrisTNG)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains what looks like exact title (67 chars, no boolean ops)",
+          "suggested_fix": "Break into topic terms with OR/AND operators"
+        }
+      ]
+    },
+    {
+      "index": 1310,
+      "nl": "recent papers citing Einstein",
+      "query": "citations(author:\"Einstein, A\") pubdate:[2015 TO *] doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1342,
+      "nl": "solar flare catalogs from SDO observations",
+      "query": "abs:(flare catalog sdo)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'flare catalog sdo...'",
+          "suggested_fix": "Consider: abs:(flare OR catalog OR sdo)"
+        }
+      ]
+    },
+    {
+      "index": 1352,
+      "nl": "what's new in astrometry?",
+      "query": "abs:\"astrometry\" year:2024-2025",
+      "category": "conversational",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1369,
+      "nl": "recent JWST spectroscopy papers in Nature",
+      "query": "abs:\"JWST\" abs:\"spectroscopy\" bibstem:\"Nature\" year:2022-2025 doctype:article",
+      "category": "compound",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1381,
+      "nl": "new galaxy formation papers",
+      "query": "abs:\"galaxy formation\" year:2024-2025 doctype:article",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1396,
+      "nl": "Kepler mission this decade",
+      "query": "abs:\"Kepler mission\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1411,
+      "nl": "cosmic rays in the 2020s",
+      "query": "abs:\"cosmic rays\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1443,
+      "nl": "papers with dark matter near cosmology in the abstract",
+      "query": "abs:(\"dark matter\" NEAR5 cosmology) doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: '\"dark matter\" NEAR5 cosmology...'",
+          "suggested_fix": "Consider: abs:(\"dark OR matter\" OR NEAR5 OR cosmology)"
+        }
+      ]
+    },
+    {
+      "index": 1446,
+      "nl": "star formation in the 2020s",
+      "query": "abs:\"star formation\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1479,
+      "nl": "post quantum cryptography banking protocols security",
+      "query": "abs:(Post Quantum Protocols for Banking)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains title-like phrase pattern",
+          "suggested_fix": "Extract key topic terms only"
+        },
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Post Quantum Protocols for Banking...'",
+          "suggested_fix": "Consider: abs:(Post OR Quantum OR Protocols OR for)"
+        }
+      ]
+    },
+    {
+      "index": 1487,
+      "nl": "Hubble Space Telescope this decade",
+      "query": "abs:(Hubble OR Space OR Telescope) year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1489,
+      "nl": "type Ia supernovae future prospects observational capabilities",
+      "query": "abs:(Prospects Type Ia Supernovae)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains title-like phrase pattern",
+          "suggested_fix": "Extract key topic terms only"
+        },
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Prospects Type Ia Supernovae...'",
+          "suggested_fix": "Consider: abs:(Prospects OR Type OR Ia OR Supernovae)"
+        }
+      ]
+    },
+    {
+      "index": 1508,
+      "nl": "brown dwarf 250K temperature atmosphere",
+      "query": "abs:(250K brown dwarf)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: '250K brown dwarf...'",
+          "suggested_fix": "Consider: abs:(250K OR brown OR dwarf)"
+        }
+      ]
+    },
+    {
+      "index": 1526,
+      "nl": "latest elliptical galaxies research",
+      "query": "abs:\"elliptical galaxies\" year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1529,
+      "nl": "CERN JWST observations research",
+      "query": "aff:\"CERN\" abs:\"JWST observations\"",
+      "category": "affiliation",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'JWST observations' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:JWST"
+        }
+      ]
+    },
+    {
+      "index": 1568,
+      "nl": "new supernova remnants papers",
+      "query": "abs:\"supernova remnants\" year:2024-2025 doctype:article",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1571,
+      "nl": "what are the latest MOND discoveries?",
+      "query": "abs:\"MOND\" year:2024-2025",
+      "category": "conversational",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1600,
+      "nl": "unusual astrophysical phenomena SETI signals",
+      "query": "abs:(astrophysical anomolies seti)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'astrophysical anomolies seti...'",
+          "suggested_fix": "Consider: abs:(astrophysical OR anomolies OR seti)"
+        }
+      ]
+    },
+    {
+      "index": 1609,
+      "nl": "what's new in LIGO gravitational waves?",
+      "query": "abs:(LIGO OR gravitational OR waves) year:2024-2025",
+      "category": "conversational",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1610,
+      "nl": "extrasolar planet technosignatures and SETI observations",
+      "query": "abs:(extrasolar objects technosignature)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'extrasolar objects technosignature...'",
+          "suggested_fix": "Consider: abs:(extrasolar OR objects OR technosignature)"
+        }
+      ]
+    },
+    {
+      "index": 1647,
+      "nl": "A0136-0801 polar ring galaxy surface photometry metallicity",
+      "query": "abs:(Surface photometry and metallicity of the polar ring galaxy A0136-0801)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains what looks like exact title (70 chars, no boolean ops)",
+          "suggested_fix": "Break into topic terms with OR/AND operators"
+        }
+      ]
+    },
+    {
+      "index": 1683,
+      "nl": "latest Rubin Observatory research",
+      "query": "abs:\"Rubin Observatory\" year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1696,
+      "nl": "latest active galactic nuclei research",
+      "query": "abs:(active OR galactic OR nuclei) year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1727,
+      "nl": "Hawking papers on black hole radiation from the 1970s",
+      "query": "author:\"Hawking, S\" abs:(black OR hole OR radiation) year:1970-1979 doctype:article",
+      "category": "compound",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'19'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1740,
+      "nl": "ALMA observations 2022",
+      "query": "abs:\"ALMA observations\" pubdate:2022",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'ALMA observations' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:ALMA"
+        }
+      ]
+    },
+    {
+      "index": 1742,
+      "nl": "SETI machine learning algorithms signal detection",
+      "query": "abs:(SETI artificial intelligence)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'SETI artificial intelligence...'",
+          "suggested_fix": "Consider: abs:(SETI OR artificial OR intelligence)"
+        }
+      ]
+    },
+    {
+      "index": 1764,
+      "nl": "spatially resolved JWST observations and analysis",
+      "query": "abs:(Spatially Resolved JWST)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Spatially Resolved JWST...'",
+          "suggested_fix": "Consider: abs:(Spatially OR Resolved OR JWST)"
+        }
+      ]
+    },
+    {
+      "index": 1786,
+      "nl": "find papers related to recent JWST observations",
+      "query": "similar(abs:\"JWST\" AND year:2022-2025) doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1794,
+      "nl": "Gum Nebula X-ray gamma ray observations",
+      "query": "abs:(gum Nebula radiation)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'gum Nebula radiation...'",
+          "suggested_fix": "Consider: abs:(gum OR Nebula OR radiation)"
+        }
+      ]
+    },
+    {
+      "index": 1807,
+      "nl": "redshift near survey in abstract",
+      "query": "abs:(redshift NEAR5 survey)",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'redshift NEAR5 survey...'",
+          "suggested_fix": "Consider: abs:(redshift OR NEAR5 OR survey)"
+        }
+      ]
+    },
+    {
+      "index": 1814,
+      "nl": "metallicity near abundance in text",
+      "query": "abs:(metallicity NEAR3 abundance)",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'metallicity NEAR3 abundance...'",
+          "suggested_fix": "Consider: abs:(metallicity OR NEAR3 OR abundance)"
+        }
+      ]
+    },
+    {
+      "index": 1822,
+      "nl": "LSST observing strategy and cadence optimization",
+      "query": "abs:(LSST survey pattern)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'LSST survey pattern...'",
+          "suggested_fix": "Consider: abs:(LSST OR survey OR pattern)"
+        }
+      ]
+    },
+    {
+      "index": 1826,
+      "nl": "latest planetary nebulae research",
+      "query": "abs:\"planetary nebulae\" year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1834,
+      "nl": "failed novae in supermassive stars",
+      "query": "abs:(failed novae super massive stars)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'failed novae super massive stars...'",
+          "suggested_fix": "Consider: abs:(failed OR novae OR super OR massive)"
+        }
+      ]
+    },
+    {
+      "index": 1854,
+      "nl": "interferometry in the 2020s",
+      "query": "abs:\"interferometry\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1855,
+      "nl": "Aboriginal culture Maroubra indigenous heritage papers",
+      "query": "abs:(Aboriginal culture MAROUBRA) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Aboriginal culture MAROUBRA...'",
+          "suggested_fix": "Consider: abs:(Aboriginal OR culture OR MAROUBRA)"
+        }
+      ]
+    },
+    {
+      "index": 1873,
+      "nl": "jupiter mir spectroscopic observations",
+      "query": "abs:(jupiter mir spectrum)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'jupiter mir spectrum...'",
+          "suggested_fix": "Consider: abs:(jupiter OR mir OR spectrum)"
+        }
+      ]
+    },
+    {
+      "index": 1901,
+      "nl": "new galaxy evolution papers",
+      "query": "abs:\"galaxy evolution\" year:2024-2025 doctype:article",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1922,
+      "nl": "recent spiral galaxies",
+      "query": "abs:\"spiral galaxies\" year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1927,
+      "nl": "narrowband radio signals from extraterrestrial intelligence",
+      "query": "abs:(narrowband radio technosignatures)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'narrowband radio technosignatures...'",
+          "suggested_fix": "Consider: abs:(narrowband OR radio OR technosignatures)"
+        }
+      ]
+    },
+    {
+      "index": 1932,
+      "nl": "lunar water ice detection on moon surface",
+      "query": "abs:(Water moon lunar surface)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Water moon lunar surface...'",
+          "suggested_fix": "Consider: abs:(Water OR moon OR lunar OR surface)"
+        }
+      ]
+    },
+    {
+      "index": 1937,
+      "nl": "what are the latest neutron stars discoveries?",
+      "query": "abs:\"neutron stars\" year:2024-2025",
+      "category": "conversational",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 1974,
+      "nl": "dark energy survey collaboration papers",
+      "query": "abs:(the dark energy survey) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'the dark energy survey...'",
+          "suggested_fix": "Consider: abs:(the OR dark OR energy OR survey)"
+        }
+      ]
+    },
+    {
+      "index": 1979,
+      "nl": "counter-rotating disk galaxies IllustrisTNG simulations observational counterparts",
+      "query": "abs:(Hot and counter-rotating star-forming disk galaxies in IllustrisTNG and their real-world counterparts)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains what looks like exact title (101 chars, no boolean ops)",
+          "suggested_fix": "Break into topic terms with OR/AND operators"
+        }
+      ]
+    },
+    {
+      "index": 1996,
+      "nl": "neutron star oscillations asteroseismology frequency modes",
+      "query": "abs:(neutron star asteroseismology)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'neutron star asteroseismology...'",
+          "suggested_fix": "Consider: abs:(neutron OR star OR asteroseismology)"
+        }
+      ]
+    },
+    {
+      "index": 2013,
+      "nl": "new protoplanetary disks papers",
+      "query": "abs:\"protoplanetary disks\" year:2024-2025 doctype:article",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2018,
+      "nl": "papers with gravitational wave within 5 words of detection",
+      "query": "abs:(\"gravitational wave\" NEAR5 detection) doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: '\"gravitational wave\" NEAR5 detection...'",
+          "suggested_fix": "Consider: abs:(\"gravitational OR wave\" OR NEAR5 OR detection)"
+        }
+      ]
+    },
+    {
+      "index": 2042,
+      "nl": "new photometry papers",
+      "query": "abs:\"photometry\" year:2024-2025 doctype:article",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2054,
+      "nl": "M51 molecular hydrogen observations and modeling",
+      "query": "abs:(M51 molecular hydrogen)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'M51 molecular hydrogen...'",
+          "suggested_fix": "Consider: abs:(M51 OR molecular OR hydrogen)"
+        }
+      ]
+    },
+    {
+      "index": 2059,
+      "nl": "emcee MCMC Foreman-Mackey Bayesian inference astronomy",
+      "query": "abs:(Python emcee Foreman-Mackey)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Python emcee Foreman-Mackey...'",
+          "suggested_fix": "Consider: abs:(Python OR emcee OR Foreman-Mackey)"
+        }
+      ]
+    },
+    {
+      "index": 2062,
+      "nl": "L/T transition brown dwarf spectroscopy",
+      "query": "abs:(The L/T Transition)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains title-like phrase pattern",
+          "suggested_fix": "Extract key topic terms only"
+        },
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'The L/T Transition...'",
+          "suggested_fix": "Consider: abs:(The OR L/T OR Transition)"
+        }
+      ]
+    },
+    {
+      "index": 2066,
+      "nl": "recent fast radio burst discoveries",
+      "query": "abs:(fast OR radio OR burst) year:2020-2025",
+      "category": "compound",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2078,
+      "nl": "latest pulsars research",
+      "query": "abs:\"pulsars\" year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2081,
+      "nl": "TESS exoplanets in the 2020s",
+      "query": "abs:\"TESS exoplanets\" year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2090,
+      "nl": "papers by kareem el badry on stellar evolution",
+      "query": "abs:(Kareem el badry) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Kareem el badry...'",
+          "suggested_fix": "Consider: abs:(Kareem OR el OR badry)"
+        }
+      ]
+    },
+    {
+      "index": 2095,
+      "nl": "magnetar giant flares soft gamma repeaters",
+      "query": "abs:(giant magnetar flare)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'giant magnetar flare...'",
+          "suggested_fix": "Consider: abs:(giant OR magnetar OR flare)"
+        }
+      ]
+    },
+    {
+      "index": 2115,
+      "nl": "black hole fallback accretion rates after stellar disruption",
+      "query": "abs:(black holes fallback rate)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'black holes fallback rate...'",
+          "suggested_fix": "Consider: abs:(black OR holes OR fallback OR rate)"
+        }
+      ]
+    },
+    {
+      "index": 2120,
+      "nl": "papers about GRO J1655-40 disc temperature",
+      "query": "abs:(\"GRO J1655-40\", \"disc temperature\") doctype:article",
+      "category": "content",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: '\"GRO J1655-40\", \"disc temperature\"...'",
+          "suggested_fix": "Consider: abs:(\"GRO OR J1655-40\", OR \"disc OR temperature\")"
+        }
+      ]
+    },
+    {
+      "index": 2175,
+      "nl": "GRMHD simulations of Sagittarius A star",
+      "query": "abs:(GRMHD \"Sgr A*\")",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'GRMHD \"Sgr A*\"...'",
+          "suggested_fix": "Consider: abs:(GRMHD OR \"Sgr OR A*\")"
+        }
+      ]
+    },
+    {
+      "index": 2216,
+      "nl": "recent papers similar to old weak lensing work",
+      "query": "similar(abs:\"weak lensing\" AND year:1990-2010) year:2020-2025 doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'19', '20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2230,
+      "nl": "recent brown dwarfs",
+      "query": "abs:\"brown dwarfs\" year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2236,
+      "nl": "ApJS 2023 volume 264 article 38",
+      "query": "abs:(2023, ApJS, 264, 38) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: '2023, ApJS, 264, 38...'",
+          "suggested_fix": "Consider: abs:(2023, OR ApJS, OR 264, OR 38)"
+        }
+      ]
+    },
+    {
+      "index": 2273,
+      "nl": "Mineo Gilfanov X-ray binaries star forming galaxies",
+      "query": "abs:(Mineo, S., Gilfanov, M. & Sunyaev, R. X-ray emission from star-forming galaxies - I. High-mass X-ray binaries. Mon. Not. R. Astron. Soc. 419, 2095\u2013 2115 (2012). 1105.4610.)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains what looks like exact title (158 chars, no boolean ops)",
+          "suggested_fix": "Break into topic terms with OR/AND operators"
+        },
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2289,
+      "nl": "papers by Scheeres McMahon 2010",
+      "query": "abs:(scheeres McMahon 2010) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'scheeres McMahon 2010...'",
+          "suggested_fix": "Consider: abs:(scheeres OR McMahon OR 2010)"
+        }
+      ]
+    },
+    {
+      "index": 2318,
+      "nl": "papers where black hole appears near merger",
+      "query": "abs:(\"black hole\" NEAR3 merger) doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: '\"black hole\" NEAR3 merger...'",
+          "suggested_fix": "Consider: abs:(\"black OR hole\" OR NEAR3 OR merger)"
+        }
+      ]
+    },
+    {
+      "index": 2336,
+      "nl": "eruptive novae symbiotic stars binary systems",
+      "query": "abs:(Eruptive novae in symbiotic systems)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Eruptive novae in symbiotic systems...'",
+          "suggested_fix": "Consider: abs:(Eruptive OR novae OR in OR symbiotic)"
+        }
+      ]
+    },
+    {
+      "index": 2343,
+      "nl": "gamma ray astronomy in the 2020s",
+      "query": "abs:(gamma OR ray OR astronomy) year:2020-2029",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2346,
+      "nl": "pulsed laser signals from extraterrestrial civilizations",
+      "query": "abs:(pulsed laser technosignatures)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'pulsed laser technosignatures...'",
+          "suggested_fix": "Consider: abs:(pulsed OR laser OR technosignatures)"
+        }
+      ]
+    },
+    {
+      "index": 2352,
+      "nl": "papers in revista mexicana de astronomia y astrofisica about large area surveys",
+      "query": "abs:(revmex larim iaus) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'revmex larim iaus...'",
+          "suggested_fix": "Consider: abs:(revmex OR larim OR iaus)"
+        }
+      ]
+    },
+    {
+      "index": 2353,
+      "nl": "recent LSST survey",
+      "query": "abs:\"LSST survey\" year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2354,
+      "nl": "papers from this year citing exoplanet work",
+      "query": "citations(abs:\"exoplanet\") pubdate:2026 doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2355,
+      "nl": "delta scuti pulsating variables photometry",
+      "query": "abs:(delta scuti stars)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'delta scuti stars...'",
+          "suggested_fix": "Consider: abs:(delta OR scuti OR stars)"
+        }
+      ]
+    },
+    {
+      "index": 2387,
+      "nl": "M51 spatial distribution mapping studies",
+      "query": "abs:(Mapping the Spatial Distribution M51) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Mapping the Spatial Distribution M51...'",
+          "suggested_fix": "Consider: abs:(Mapping OR the OR Spatial OR Distribution)"
+        }
+      ]
+    },
+    {
+      "index": 2393,
+      "nl": "what are the latest Virgo interferometer discoveries?",
+      "query": "abs:\"Virgo interferometer\" year:2024-2025",
+      "category": "conversational",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2401,
+      "nl": "recent VLA radio",
+      "query": "abs:\"VLA radio\" year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2402,
+      "nl": "high optical brightness stellar objects",
+      "query": "abs:(The high optical brightness)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains title-like phrase pattern",
+          "suggested_fix": "Extract key topic terms only"
+        },
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'The high optical brightness...'",
+          "suggested_fix": "Consider: abs:(The OR high OR optical OR brightness)"
+        }
+      ]
+    },
+    {
+      "index": 2444,
+      "nl": "recent star formation",
+      "query": "abs:\"star formation\" year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2456,
+      "nl": "JWST observations in ApJ Letters",
+      "query": "abs:\"JWST observations\" bibstem:\"ApJL\"",
+      "category": "publication",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'JWST observations' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:JWST"
+        }
+      ]
+    },
+    {
+      "index": 2464,
+      "nl": "latest special relativity research",
+      "query": "abs:\"special relativity\" year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2474,
+      "nl": "unexplained radio signals extraterrestrial intelligence anomalous observations",
+      "query": "abs:(astrophysical anomalies SETI)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'astrophysical anomalies SETI...'",
+          "suggested_fix": "Consider: abs:(astrophysical OR anomalies OR SETI)"
+        }
+      ]
+    },
+    {
+      "index": 2495,
+      "nl": "JWST JEMS spatially resolved observations",
+      "query": "abs:(Spatially Resolved JWST JEMS)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Spatially Resolved JWST JEMS...'",
+          "suggested_fix": "Consider: abs:(Spatially OR Resolved OR JWST OR JEMS)"
+        }
+      ]
+    },
+    {
+      "index": 2504,
+      "nl": "what's new in exoplanets?",
+      "query": "abs:\"exoplanets\" year:2024-2025",
+      "category": "conversational",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2511,
+      "nl": "3D general relativistic magnetohydrodynamics simulations of Sagittarius A star",
+      "query": "abs:(3D GRMHD \"Sgr A*\")",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: '3D GRMHD \"Sgr A*\"...'",
+          "suggested_fix": "Consider: abs:(3D OR GRMHD OR \"Sgr OR A*\")"
+        }
+      ]
+    },
+    {
+      "index": 2518,
+      "nl": "papers on low JCO line ratios from single dish CO mapping surveys and PHANGS-ALMA",
+      "query": "abs:(Low-JCOLineRatiosfromSingle-dishCOMappingSurveysandPHANGS-ALMA) doctype:article",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains what looks like exact title (62 chars, no boolean ops)",
+          "suggested_fix": "Break into topic terms with OR/AND operators"
+        }
+      ]
+    },
+    {
+      "index": 2521,
+      "nl": "brown dwarf lithium depletion boundary stellar evolution",
+      "query": "abs:(lithium depletion boundary)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'lithium depletion boundary...'",
+          "suggested_fix": "Consider: abs:(lithium OR depletion OR boundary)"
+        }
+      ]
+    },
+    {
+      "index": 2524,
+      "nl": "methodology papers for spectral analysis",
+      "query": "useful(abs:\"spectral analysis\") doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'spectral analysis' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:spectral"
+        }
+      ]
+    },
+    {
+      "index": 2531,
+      "nl": "miniature black holes formation mechanisms",
+      "query": "abs:(Miniature black holes)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'Miniature black holes...'",
+          "suggested_fix": "Consider: abs:(Miniature OR black OR holes)"
+        }
+      ]
+    },
+    {
+      "index": 2541,
+      "nl": "X-ray binary luminosity functions M81 spiral galaxy globular clusters",
+      "query": "abs:(Calibrating X-ray binary luminosity functions via optical reconnaissance II. The high-mass XLF and globular cluster population of X-ray binaries in the low star-forming spiral M81)",
+      "category": "topic",
+      "action": "fix",
+      "issues": [
+        {
+          "type": "exact_title_in_abs",
+          "severity": "fix",
+          "description": "abs:() contains what looks like exact title (179 chars, no boolean ops)",
+          "suggested_fix": "Break into topic terms with OR/AND operators"
+        }
+      ]
+    },
+    {
+      "index": 2575,
+      "nl": "recent dwarf galaxies",
+      "query": "abs:\"dwarf galaxies\" year:2023-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2579,
+      "nl": "papers by alan calder on classical mixing",
+      "query": "abs:(classical mixing alan calder) doctype:article",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'classical mixing alan calder...'",
+          "suggested_fix": "Consider: abs:(classical OR mixing OR alan OR calder)"
+        }
+      ]
+    },
+    {
+      "index": 2585,
+      "nl": "latest star formation research",
+      "query": "abs:\"star formation\" year:2024-2025",
+      "category": "temporal",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 2591,
+      "nl": "M51 Spitzer observations of supernovae",
+      "query": "abs:(M51 spitzer supernovae)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'M51 spitzer supernovae...'",
+          "suggested_fix": "Consider: abs:(M51 OR spitzer OR supernovae)"
+        }
+      ]
+    },
+    {
+      "index": 2597,
+      "nl": "radio pulse technosignatures SETI detection",
+      "query": "abs:(pulses radio technosignatures)",
+      "category": "topic",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'pulses radio technosignatures...'",
+          "suggested_fix": "Consider: abs:(pulses OR radio OR technosignatures)"
+        }
+      ]
+    },
+    {
+      "index": 3926,
+      "nl": "qso and dark energy in abstract",
+      "query": "abs:(QSO \"dark energy\")",
+      "category": "syntax",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'QSO \"dark energy\"...'",
+          "suggested_fix": "Consider: abs:(QSO OR \"dark OR energy\")"
+        }
+      ]
+    },
+    {
+      "index": 3927,
+      "nl": "abstract qso dark energy",
+      "query": "abs:(QSO \"dark energy\")",
+      "category": "syntax",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'QSO \"dark energy\"...'",
+          "suggested_fix": "Consider: abs:(QSO OR \"dark OR energy\")"
+        }
+      ]
+    },
+    {
+      "index": 3928,
+      "nl": "qso + dark energy abstract",
+      "query": "abs:(QSO \"dark energy\")",
+      "category": "syntax",
+      "action": "review",
+      "issues": [
+        {
+          "type": "missing_boolean_ops",
+          "severity": "review",
+          "description": "Multi-word abs content without boolean operators: 'QSO \"dark energy\"...'",
+          "suggested_fix": "Consider: abs:(QSO OR \"dark OR energy\")"
+        }
+      ]
+    },
+    {
+      "index": 3949,
+      "nl": "recent Hubble deep field research",
+      "query": "bibgroup:HST abs:\"deep field\" pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 3967,
+      "nl": "recent Chandra X-ray emission research",
+      "query": "bibgroup:Chandra abs:\"X-ray emission\" pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4021,
+      "nl": "recent Copernicus Satellite interstellar medium research",
+      "query": "bibgroup:Copernicus abs:\"interstellar medium\" pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4061,
+      "nl": "recent NuSTAR black hole spin research",
+      "query": "bibgroup:NuSTAR abs:(black OR hole OR spin) pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4074,
+      "nl": "recent STEREO space weather research",
+      "query": "bibgroup:STEREO abs:\"space weather\" pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4079,
+      "nl": "recent SDO observations",
+      "query": "bibgroup:SDO pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4084,
+      "nl": "VLT observations studies using ESO/Telescopes",
+      "query": "bibgroup:\"ESO/Telescopes\" abs:\"VLT observations\" doctype:article",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'VLT observations' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:VLT"
+        }
+      ]
+    },
+    {
+      "index": 4096,
+      "nl": "Gemini North AO observations observations",
+      "query": "bibgroup:Gemini abs:\"AO observations\"",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'AO observations' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:AO"
+        }
+      ]
+    },
+    {
+      "index": 4116,
+      "nl": "recent Subaru observations",
+      "query": "bibgroup:Subaru pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4121,
+      "nl": "recent National Optical Astronomy Observatory observing programs research",
+      "query": "bibgroup:NOAO abs:\"observing programs\" pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4122,
+      "nl": "National Optical Astronomy Observatory survey data papers from 2023",
+      "query": "bibgroup:NOAO abs:\"survey data\" year:2023 doctype:article",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'survey data' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:survey"
+        }
+      ]
+    },
+    {
+      "index": 4125,
+      "nl": "CTIO data studies using National Optical-Infrared Astronomy Research Laboratory",
+      "query": "bibgroup:NOIRLab abs:\"CTIO data\" doctype:article",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'CTIO data' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:CTIO"
+        }
+      ]
+    },
+    {
+      "index": 4127,
+      "nl": "refereed National Optical-Infrared Astronomy Research Laboratory CTIO data studies",
+      "query": "bibgroup:NOIRLab abs:\"CTIO data\" property:refereed doctype:article",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'CTIO data' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:CTIO"
+        }
+      ]
+    },
+    {
+      "index": 4152,
+      "nl": "recent Sloan Digital Sky Survey stellar parameters research",
+      "query": "bibgroup:SDSS abs:\"stellar parameters\" pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4170,
+      "nl": "recent Atacama Large Millimeter Array high-z dust research",
+      "query": "bibgroup:ALMA abs:\"high-z dust\" pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4181,
+      "nl": "recent APEX submillimeter research",
+      "query": "bibgroup:APEX abs:\"submillimeter\" pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4187,
+      "nl": "recent Arecibo Observatory observations",
+      "query": "bibgroup:ARECIBO pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4199,
+      "nl": "recent VLBA observations",
+      "query": "bibgroup:VLBA pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4200,
+      "nl": "recent Very Long Baseline Array observations",
+      "query": "bibgroup:VLBA pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4212,
+      "nl": "recent Low-Frequency Array epoch of reionization research",
+      "query": "bibgroup:LOFAR abs:(epoch OR reionization) pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4223,
+      "nl": "recent SKA observations",
+      "query": "bibgroup:SKA pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4240,
+      "nl": "CfA observations of theoretical research",
+      "query": "bibgroup:CfA abs:\"theoretical research\"",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'theoretical research' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:theoretical"
+        }
+      ]
+    },
+    {
+      "index": 4241,
+      "nl": "recent Harvard CfA observations",
+      "query": "bibgroup:CfA pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4253,
+      "nl": "recent Laser Interferometer Space Antenna observations",
+      "query": "bibgroup:LISA pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4265,
+      "nl": "recent Search for Extraterrestrial Intelligence technosignatures research",
+      "query": "bibgroup:SETI abs:\"technosignatures\" pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4269,
+      "nl": "ESO VLT observations papers",
+      "query": "bibgroup:ESO abs:\"VLT observations\" doctype:article",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'VLT observations' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:VLT"
+        }
+      ]
+    },
+    {
+      "index": 4271,
+      "nl": "recent ESO observations",
+      "query": "bibgroup:ESO pubdate:[2023-01 TO 2026-12]",
+      "category": "bibgroup",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4287,
+      "nl": "recent astrophysics research",
+      "query": "collection:astronomy pubdate:[2023-01 TO 2026-12]",
+      "category": "collection",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4288,
+      "nl": "recent astronomy papers about star formation",
+      "query": "collection:astronomy pubdate:[2023-01 TO 2026-12] doctype:article",
+      "category": "collection",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4313,
+      "nl": "latest physics journal articles",
+      "query": "collection:physics pubdate:[2023-01 TO 2026-12] doctype:article",
+      "category": "collection",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4316,
+      "nl": "recent physics collection papers about string theory",
+      "query": "collection:physics pubdate:[2023-01 TO 2026-12] doctype:article",
+      "category": "collection",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4329,
+      "nl": "search interdisciplinary papers for data science",
+      "query": "collection:general abs:\"data science\" doctype:article",
+      "category": "collection",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'data science' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:data"
+        }
+      ]
+    },
+    {
+      "index": 4350,
+      "nl": "latest papers from the earth science database",
+      "query": "collection:earthscience pubdate:[2023-01 TO 2026-12] doctype:article",
+      "category": "collection",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4352,
+      "nl": "recent earth system science papers",
+      "query": "collection:earthscience pubdate:[2023-01 TO 2026-12] doctype:article",
+      "category": "collection",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4354,
+      "nl": "recent papers from the earth science database",
+      "query": "collection:earthscience pubdate:[2023-01 TO 2026-12] doctype:article",
+      "category": "collection",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4373,
+      "nl": "recent reviews of astronomy books",
+      "query": "doctype:bookreview pubdate:[2023-01 TO 2026-12]",
+      "category": "doctype",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4392,
+      "nl": "show me erratum to papers on data analysis",
+      "query": "doctype:erratum abs:\"data analysis\"",
+      "category": "doctype",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'data analysis' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:data"
+        }
+      ]
+    },
+    {
+      "index": 4393,
+      "nl": "recent article corrections",
+      "query": "doctype:erratum pubdate:[2023-01 TO 2026-12]",
+      "category": "doctype",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4394,
+      "nl": "erratum to papers about data analysis from 2021",
+      "query": "doctype:erratum abs:\"data analysis\" year:2021",
+      "category": "doctype",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'data analysis' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:data"
+        }
+      ]
+    },
+    {
+      "index": 4401,
+      "nl": "recent chapters from textbooks on galactic structure",
+      "query": "doctype:inbook abs:\"galactic structure\" pubdate:[2023-01 TO 2026-12]",
+      "category": "doctype",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4422,
+      "nl": "recent society newsletters",
+      "query": "doctype:newsletter pubdate:[2023-01 TO 2026-12]",
+      "category": "doctype",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4428,
+      "nl": "recent obituary notices on astrophysicists",
+      "query": "doctype:obituary abs:\"astrophysicists\" pubdate:[2023-01 TO 2026-12]",
+      "category": "doctype",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4435,
+      "nl": "recent NASA press releases on major discoveries",
+      "query": "doctype:pressrelease abs:\"major discoveries\" pubdate:[2023-01 TO 2026-12]",
+      "category": "doctype",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4441,
+      "nl": "oral presentations related to data science",
+      "query": "doctype:talk abs:\"data science\"",
+      "category": "doctype",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'data science' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:data"
+        }
+      ]
+    },
+    {
+      "index": 4443,
+      "nl": "recent research talks",
+      "query": "doctype:talk pubdate:[2023-01 TO 2026-12]",
+      "category": "doctype",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4460,
+      "nl": "who cited WMAP results",
+      "query": "citations(abs:\"WMAP results\")",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'WMAP results' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:WMAP"
+        }
+      ]
+    },
+    {
+      "index": 4478,
+      "nl": "papers WMAP results cites",
+      "query": "references(abs:\"WMAP results\") doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'WMAP results' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:WMAP"
+        }
+      ]
+    },
+    {
+      "index": 4510,
+      "nl": "papers like WMAP results",
+      "query": "similar(abs:\"WMAP results\") doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'WMAP results' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:WMAP"
+        }
+      ]
+    },
+    {
+      "index": 4579,
+      "nl": "recent papers citing the CMB discovery",
+      "query": "citations(abs:(cosmic OR microwave OR background)) year:[2020 TO *] doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4582,
+      "nl": "hot topics in exoplanets this year",
+      "query": "trending(abs:\"exoplanets\") year:2025",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4588,
+      "nl": "recent review articles on black holes",
+      "query": "reviews(abs:\"black holes\") year:[2020 TO *] doctype:article",
+      "category": "operator",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4612,
+      "nl": "recent arxiv papers on quasars",
+      "query": "property:eprint abs:\"quasars\" pubdate:[2023-01 TO 2026-12] doctype:article",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4618,
+      "nl": "recent survey catalogs",
+      "query": "property:catalog pubdate:[2023-01 TO 2026-12]",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4619,
+      "nl": "recent survey catalogs on transients",
+      "query": "property:catalog abs:\"transients\" pubdate:[2023-01 TO 2026-12]",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4633,
+      "nl": "recent conference abstracts",
+      "query": "property:nonarticle pubdate:[2023-01 TO 2026-12]",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4645,
+      "nl": "recent symposium papers on telescope design",
+      "query": "property:inproceedings abs:\"telescope design\" pubdate:[2023-01 TO 2026-12] doctype:article",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4650,
+      "nl": "articles with associated publications about multi-wavelength studies",
+      "query": "property:associated abs:\"multi-wavelength studies\" doctype:article",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'multi-wavelength studies' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:multi-wavelength"
+        }
+      ]
+    },
+    {
+      "index": 4664,
+      "nl": "publications with video presentations on survey results",
+      "query": "property:presentation abs:\"survey results\" doctype:article",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'survey results' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:survey"
+        }
+      ]
+    },
+    {
+      "index": 4666,
+      "nl": "recent articles with recorded talks",
+      "query": "property:presentation pubdate:[2023-01 TO 2026-12] doctype:article",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4667,
+      "nl": "recent papers with associated presentations on survey results",
+      "query": "property:presentation abs:\"survey results\" pubdate:[2023-01 TO 2026-12] doctype:article",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'survey results' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:survey"
+        },
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4671,
+      "nl": "articles with online access on recent research",
+      "query": "property:esource abs:\"recent research\" doctype:article",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'recent research' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:recent"
+        }
+      ]
+    },
+    {
+      "index": 4672,
+      "nl": "find papers with electronic sources about current studies",
+      "query": "property:esource abs:\"current studies\" doctype:article",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'current studies' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:current"
+        }
+      ]
+    },
+    {
+      "index": 4673,
+      "nl": "recent articles with e-sources",
+      "query": "property:esource pubdate:[2023-01 TO 2026-12] doctype:article",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4685,
+      "nl": "papers in library catalogs related to foundational research",
+      "query": "property:library_catalog abs:\"foundational research\" doctype:article",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'foundational research' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:foundational"
+        }
+      ]
+    },
+    {
+      "index": 4688,
+      "nl": "recent library catalog entries",
+      "query": "property:library_catalog pubdate:[2023-01 TO 2026-12]",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_inference",
+          "severity": "review",
+          "description": "Query contains years {'20'} not in NL",
+          "suggested_fix": "Remove inferred years"
+        }
+      ]
+    },
+    {
+      "index": 4721,
+      "nl": "show me papers with digitized abstracts on historical observations",
+      "query": "property:ocr_abstract abs:\"historical observations\" doctype:article",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'historical observations' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:historical"
+        }
+      ]
+    },
+    {
+      "index": 4727,
+      "nl": "software publications on analysis tools",
+      "query": "property:software abs:\"analysis tools\" doctype:article",
+      "category": "property",
+      "action": "review",
+      "issues": [
+        {
+          "type": "over_quoted",
+          "severity": "review",
+          "description": "Quoted phrase 'analysis tools' contains generic term",
+          "suggested_fix": "Just use the specific term: abs:analysis"
+        }
+      ]
+    }
+  ]
+}

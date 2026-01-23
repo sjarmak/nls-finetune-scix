@@ -1,0 +1,292 @@
+[
+  {
+    "natural_language": "papers by L in Astronomy and Astrophysics 2022",
+    "ads_query": "abs:(2022A&A...658L..10L)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "find work related to 2020Natur.581..391G",
+    "ads_query": "similar(bibcode:2020Natur.581..391G)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "find related papers to 2019ApJ...872L...2M",
+    "ads_query": "similar(bibcode:2019ApJ...872L...2M)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers by Riess on supernovae and cosmology 2022",
+    "ads_query": "abs:(2022A&A...664A..27R)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "2021NatCo..12..436B nature communications paper",
+    "ads_query": "identifier:\"2021NatCo..12..436B&lang=en\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "papers by Naidu on reionization 2018",
+    "ads_query": "abs:(2018ApJ...866L..24N)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Wang on Earth and Planetary Science Letters 2002",
+    "ads_query": "abs:(2002E&PSL.201..449W)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers like 2018Natur.555...67B",
+    "ads_query": "similar(bibcode:2018Natur.555...67B)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers citing the original Hubble constant paper",
+    "ads_query": "citations(bibcode:1929PNAS...15..168H)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "Li 2022 astrophysical journal stellar evolution",
+    "ads_query": "abs:(2022ApJ...929..102L)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Smith in the astrophysical journal 2022",
+    "ads_query": "abs:(2022ApJ...924...21S)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "astrophysical journal 2022 volume 926 page 3",
+    "ads_query": "abs:(2022ApJ...926....3D)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Kaib on planetary dynamics 2016",
+    "ads_query": "abs:(2016ApJ...818....3K)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Faucher-Gigu\u00e8re on galaxy formation feedback",
+    "ads_query": "abs:(2013ApJ...778..167F)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers in nature 2009 about planetary formation",
+    "ads_query": "abs:(2009Natur.462..624G)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers in nature 2005 about magnetism",
+    "ads_query": "identifier:\"2005Natur.437..975M&lang=en\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "papers by Gould on microlensing in astrophysical journal 2022",
+    "ads_query": "abs:(2022ApJ...924..122G)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Bartko on galactic center stars 2019",
+    "ads_query": "identifier:\"2019Sci...363..187B&lang=en\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "papers by Zhang 2022 astrophysical journal",
+    "ads_query": "abs:(2022ApJ...929...15Z)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Meng in astrophysical journal 2016",
+    "ads_query": "abs:(2016ApJ...818..195M)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by H in ApJ 2022 volume 929 page 39",
+    "ads_query": "abs:(2022ApJ...929...39H)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Niikura on gravitational lensing 2016",
+    "ads_query": "abs:(2016ApJ...828L..18N)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Inoue on astrophysical jets 2013",
+    "ads_query": "abs:(2013ApJ...770..128I)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Zwicky on galaxy clusters and dark matter",
+    "ads_query": "abs:(2009ARA&A..47..291Z)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Qiu in astrophysical journal 2018",
+    "ads_query": "abs:(2018ApJ...855....2Q)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Kimura 2022 astrophysical journal",
+    "ads_query": "abs:(2022ApJ...929..150K)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Predehl on X-ray astronomy 2022",
+    "ads_query": "abs:(2022ApJ...924..135P)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers about water on exoplanets in nature 2010",
+    "ads_query": "abs:(2010Natur.465..322P)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Iwamoto in nature 2021",
+    "ads_query": "abs:(2021Natur.591..220I)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers from Journal of Intelligent Systems 2000",
+    "ads_query": "identifier:\"2000JIntS...3...13M&lang=en\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "papers by R in astrophysical journal 2022",
+    "ads_query": "abs:(2022ApJ...925....7R)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Yang on stellar atmospheres astronomy astrophysics 2010",
+    "ads_query": "abs:(2010A&A...512A..70Y)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by F on stellar dynamics 2014",
+    "ads_query": "abs:(2014MNRAS.445..554F)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "Wang 2022 astrophysical journal volume 926",
+    "ads_query": "abs:(2022ApJ...926..168W)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "paper with bibcode 2019ApJ...887L...1K",
+    "ads_query": "bibcode:2019ApJ...887L...1K",
+    "category": "identifiers"
+  },
+  {
+    "natural_language": "similar papers to the Planck 2018 results",
+    "ads_query": "similar(bibcode:2020A&A...641A...1P)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "2009AIPC.1158....3M papers",
+    "ads_query": "identifier:\"2009AIPC.1158....3M&lang=en\"",
+    "category": "compound"
+  },
+  {
+    "natural_language": "papers by A from 1946 in Publications of the Kirkwood Observatory",
+    "ads_query": "abs:(1946PKirO...9....1A)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Oskinova on stellar winds and massive stars",
+    "ads_query": "abs:(2022A&A...667L...6O)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Gaia collaboration on stellar kinematics 2022",
+    "ads_query": "abs:(2022A&A...664A..54G.)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Nelson on galaxy formation simulations 2016",
+    "ads_query": "abs:(2016ApJ...826...39N)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Postman on galaxy clusters in astrophysical journal 2016",
+    "ads_query": "abs:(2016ApJ...830...13P)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Ramesh on stellar photometry 2022",
+    "ads_query": "abs:(2022A&A...658A..85R)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "Kuiper 2012 astrophysical journal volume 755",
+    "ads_query": "abs:(2012ApJ...755..161K)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "stellar mass black holes in binary systems astrophysical journal 2022",
+    "ads_query": "abs:(2022ApJ...927...71K)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "what papers does 2019ApJ...887L...1K cite",
+    "ads_query": "references(bibcode:2019ApJ...887L...1K)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers similar to the Event Horizon Telescope M87 image paper",
+    "ads_query": "similar(bibcode:2019ApJ...875L...1E)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers by R in astrophysical journal 2022 volume 927",
+    "ads_query": "abs:(2022ApJ...927..216R)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Johnson on stellar evolution 2017",
+    "ads_query": "abs:(2017ApJ...835...13J)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Prusti on Gaia data release 3 astronomy astrophysics 2022",
+    "ads_query": "abs:(2022A&A...665A...1P)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers by Galarza on stellar atmospheres 2022",
+    "ads_query": "abs:(2022A&A...664A..54G)",
+    "category": "topic"
+  },
+  {
+    "natural_language": "papers similar to 2019ApJ...887L...1K",
+    "ads_query": "similar(bibcode:2019ApJ...887L...1K)",
+    "category": "operator"
+  },
+  {
+    "natural_language": "papers citing the original jwst paper or mentioning webb/jwst",
+    "ads_query": "citations(bibcode:2006SSRv..123..485G) OR abs:(Webb OR JWST)",
+    "category": "citations"
+  },
+  {
+    "natural_language": "citations of 2006SSRv..123..485G plus webb or jwst in abstract",
+    "ads_query": "citations(bibcode:2006SSRv..123..485G) OR abs:(Webb OR JWST)",
+    "category": "citations"
+  },
+  {
+    "natural_language": "find cite jwst paper or abstract webb jwst",
+    "ads_query": "citations(bibcode:2006SSRv..123..485G) OR abs:(Webb OR JWST)",
+    "category": "citations"
+  },
+  {
+    "natural_language": "papers similar to bibcode 2000A&AS..143...41K",
+    "ads_query": "similar(bibcode:2000A&AS..143...41K)",
+    "category": "second_order"
+  },
+  {
+    "natural_language": "similar(2000A&AS..143...41K)",
+    "ads_query": "similar(bibcode:2000A&AS..143...41K)",
+    "category": "second_order"
+  },
+  {
+    "natural_language": "find similar to 2000A&AS..143...41K",
+    "ads_query": "similar(bibcode:2000A&AS..143...41K)",
+    "category": "second_order"
+  }
+]

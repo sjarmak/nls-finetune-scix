@@ -1,0 +1,1819 @@
+{
+  "generated_at": "2026-01-23T08:43:53.748400",
+  "stats": {
+    "total": 4789,
+    "kept": 4731,
+    "removed": 58,
+    "modified": 3067,
+    "doctype_added": 2725,
+    "phrases_fixed": 461,
+    "abs_fixed": 45
+  },
+  "fixes": [
+    {
+      "index": 0,
+      "nl": "papers by Finkbeiner from 2014",
+      "original_query": "pubdate:[2014-01 TO 2014-12] author:(\"Finkbeiner, D. P.\")",
+      "fixed_query": "pubdate:[2014-01 TO 2014-12] author:(\"Finkbeiner, D. P.\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 1,
+      "nl": "terahertz josephson echo spectroscopy cuprate superconductors inhomogeneity",
+      "original_query": "abs:(Probing Inhomogeneous Cuprate Superconductivity by Terahertz Josephson Echo Spectroscopy)",
+      "fixed_query": "abs:(Probing OR Inhomogeneous OR Cuprate OR Superconductivity OR Terahertz)",
+      "fixes": [
+        "Extracted terms from title-like content: Probing OR Inhomogeneous OR Cuprate OR Superconductivity OR Terahertz"
+      ]
+    },
+    {
+      "index": 2,
+      "nl": "papers by Babyk and Buote",
+      "original_query": "author:(\"Babyk\" \"Buote\")",
+      "fixed_query": "author:(\"Babyk\" \"Buote\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 4,
+      "nl": "brown dwarfs papers from 2016",
+      "original_query": "abs:\"brown dwarfs\" pubdate:2016",
+      "fixed_query": "abs:\"brown dwarfs\" pubdate:2016 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 5,
+      "nl": "papers by Drake 2003",
+      "original_query": "author:\"^Drake\" year:2003",
+      "fixed_query": "author:\"^Drake\" year:2003 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 6,
+      "nl": "supermassive black hole formation theories",
+      "original_query": "abs:\"supermassive black hole\" abs:\"formation\"",
+      "fixed_query": "abs:(supermassive OR black OR hole) abs:\"formation\"",
+      "fixes": [
+        "Broke up 'supermassive black hole...' into (supermassive OR black OR hole)"
+      ]
+    },
+    {
+      "index": 7,
+      "nl": "papers by Dorn-Wallenstein 2022",
+      "original_query": "author:\"^dorn-wallenstein\" year:2022",
+      "fixed_query": "author:\"^dorn-wallenstein\" year:2022 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 8,
+      "nl": "H2 molecular hydrogen spatial distribution nearby galaxies Spitzer infrared spectrograph",
+      "original_query": "abs:(Mapping the Spatial Distribution of H_2 in Nearby Galaxies with the Spitzer Infrared Spectrograph)",
+      "fixed_query": "abs:(Mapping OR Spatial OR Distribution OR H_2 OR Nearby)",
+      "fixes": [
+        "Extracted terms from title-like content: Mapping OR Spatial OR Distribution OR H_2 OR Nearby"
+      ]
+    },
+    {
+      "index": 9,
+      "nl": "open access Chandra X-ray papers",
+      "original_query": "abs:\"Chandra X-ray\" property:openaccess",
+      "fixed_query": "abs:\"Chandra X-ray\" property:openaccess doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 10,
+      "nl": "Einstein's black holes papers",
+      "original_query": "author:\"Einstein, A.\" abs:\"black holes\"",
+      "fixed_query": "author:\"Einstein, A.\" abs:\"black holes\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 11,
+      "nl": "papers by Bouwens 2014",
+      "original_query": "author:\"^Bouwens\" year:2014",
+      "fixed_query": "author:\"^Bouwens\" year:2014 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 12,
+      "nl": "papers about the Crab Nebula",
+      "original_query": "object:\"Crab Nebula\"",
+      "fixed_query": "object:\"Crab Nebula\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 13,
+      "nl": "\"Who's who in New York City and State\" biographical directory",
+      "original_query": "title:\"Who's who in New York City and State\"",
+      "fixed_query": "title:(Who's OR who OR New OR York OR City)",
+      "fixes": [
+        "Broke up 'Who's who in New York City and...' into (Who's OR who OR New OR York OR City)"
+      ]
+    },
+    {
+      "index": 14,
+      "nl": "\"2023 VB\" asteroid discovery papers",
+      "original_query": "abs:(2023 VB)",
+      "fixed_query": "abs:(2023 VB) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 15,
+      "nl": "JWST observations studies",
+      "original_query": "abs:\"JWST observations\"",
+      "fixed_query": "abs:\"JWST observations\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 16,
+      "nl": "IXPE papers from 2023",
+      "original_query": "full:\"IXPE\" year:2023",
+      "fixed_query": "full:\"IXPE\" year:2023 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 18,
+      "nl": "cosmological constant studies",
+      "original_query": "abs:\"cosmological constant\"",
+      "fixed_query": "abs:\"cosmological constant\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 19,
+      "nl": "papers by Fry and Fields",
+      "original_query": "author:\"^Fry\" author:\"Fields\"",
+      "fixed_query": "author:\"^Fry\" author:\"Fields\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 20,
+      "nl": "papers by Ensslin as first author",
+      "original_query": "author:\"^Ensslin\"",
+      "fixed_query": "author:\"^Ensslin\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 21,
+      "nl": "papers by Pasham on quasi-periodic oscillations",
+      "original_query": "author:\"Pasham\" title:\"quasi\"",
+      "fixed_query": "author:\"Pasham\" title:\"quasi\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 22,
+      "nl": "papers by guillermo chiape",
+      "original_query": "abs:(guillermo chiape)",
+      "fixed_query": "abs:(guillermo chiape) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 23,
+      "nl": "papers by Rayner 2022",
+      "original_query": "author:\"^Rayner\" year:2022",
+      "fixed_query": "author:\"^Rayner\" year:2022 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 24,
+      "nl": "laser plasma filament energy dependence studies",
+      "original_query": "(laser AND plasma AND filament AND dependence AND laser AND energy) AND year:1641-2024",
+      "fixed_query": "(laser AND plasma AND filament AND dependence AND laser AND energy) AND year:1641-2024 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 25,
+      "nl": "papers by Parnell from 2012",
+      "original_query": "pubdate:[2012-01 TO 2012-12] author:(\"^Parnell\")",
+      "fixed_query": "pubdate:[2012-01 TO 2012-12] author:(\"^Parnell\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 26,
+      "nl": "papers by Sazonov on tidal disruption",
+      "original_query": "author:\"Sazonov\" title:\"tidal disruption\"",
+      "fixed_query": "author:\"Sazonov\" title:\"tidal disruption\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 27,
+      "nl": "papers by Layana Susana 2014-2023",
+      "original_query": "((author:\"Layana, Susana\") AND year:2014-2023)",
+      "fixed_query": "((author:\"Layana, Susana\") AND year:2014-2023) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 28,
+      "nl": "studies of the first gravitational wave detection",
+      "original_query": "object:\"GW150914\"",
+      "fixed_query": "object:\"GW150914\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 29,
+      "nl": "useful references for papers citing cosmology",
+      "original_query": "useful(citations(abs:\"cosmology\"))",
+      "fixed_query": "useful(citations(abs:\"cosmology\")) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 30,
+      "nl": "papers by leroy as first author",
+      "original_query": "author:\"^leroy ak\"",
+      "fixed_query": "author:\"^leroy ak\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 31,
+      "nl": "papers by Simon on coagulation 2016",
+      "original_query": "author:\"^Simon\" year:2016 coagulation",
+      "fixed_query": "author:\"^Simon\" year:2016 coagulation doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 33,
+      "nl": "papers by Pasham on QPOs",
+      "original_query": "author:\"Pasham\" title:\"qpo\"",
+      "fixed_query": "author:\"Pasham\" title:\"qpo\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 34,
+      "nl": "papers by taylor",
+      "original_query": "author:\"taylor\"",
+      "fixed_query": "author:\"taylor\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 35,
+      "nl": "papers by Hanus from 2018",
+      "original_query": "author:\"^hanus\" year:2018",
+      "fixed_query": "author:\"^hanus\" year:2018 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 36,
+      "nl": "papers by Figueras from 1990",
+      "original_query": "pubdate:[1990-01 TO 1990-12] author:(\"Figueras, f.\")",
+      "fixed_query": "pubdate:[1990-01 TO 1990-12] author:(\"Figueras, f.\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 37,
+      "nl": "papers by williams on exoplanets",
+      "original_query": "author:\"williams\" abs:\"exoplanet\"",
+      "fixed_query": "author:\"williams\" abs:\"exoplanet\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 38,
+      "nl": "papers by Rubin on galaxy rotation curves",
+      "original_query": "author:\"Rubin\"",
+      "fixed_query": "author:\"Rubin\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 39,
+      "nl": "papers by Pizzella 2008",
+      "original_query": "author:\"^pizzella\" year:2008",
+      "fixed_query": "author:\"^pizzella\" year:2008 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 40,
+      "nl": "\"The Latins in the Levant\" Frankish Greece 1204-1566",
+      "original_query": "title:\"The Latins in the Levant, a History of Frankish Greece (1204\u20131566)\"",
+      "fixed_query": "title:(Latins OR Levant, OR History OR Frankish OR Greece)",
+      "fixes": [
+        "Broke up 'The Latins in the Levant, a Hi...' into (Latins OR Levant, OR History OR Frankish OR Greec"
+      ]
+    },
+    {
+      "index": 41,
+      "nl": "papers referenced by quasar research",
+      "original_query": "references(abs:\"quasar\")",
+      "fixed_query": "references(abs:\"quasar\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 42,
+      "nl": "supernova papers or nova papers",
+      "original_query": "abs:\"supernova\" OR abs:\"nova\"",
+      "fixed_query": "abs:\"supernova\" OR abs:\"nova\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 43,
+      "nl": "papers by guptke first author",
+      "original_query": "author:(\"^guptke\")",
+      "fixed_query": "author:(\"^guptke\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 44,
+      "nl": "papers by Cheung E from 2014",
+      "original_query": "pubdate:[2014-01 TO 2014-12] author:(\"Cheung, E.\")",
+      "fixed_query": "pubdate:[2014-01 TO 2014-12] author:(\"Cheung, E.\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 45,
+      "nl": "papers with the exact title \"King Me!\"",
+      "original_query": "title:\"King Me!\"",
+      "fixed_query": "title:\"King Me!\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 46,
+      "nl": "\"History and the social web; a collection of essays\" book chapters",
+      "original_query": "title:\"History and the social web; a collection of essays.\"",
+      "fixed_query": "title:(History OR social OR web; OR collection OR essays.)",
+      "fixes": [
+        "Broke up 'History and the social web; a ...' into (History OR social OR web; OR collection OR essays"
+      ]
+    },
+    {
+      "index": 48,
+      "nl": "papers by Mandel on gravitational wave detection",
+      "original_query": "author:\"^mandel\"",
+      "fixed_query": "author:\"^mandel\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 49,
+      "nl": "\"Jack London's White Fang Revisited\" literary analysis papers",
+      "original_query": "title:\"Jack London's White Fang Revisited.\"",
+      "fixed_query": "title:(Jack OR London's OR White OR Fang OR Revisited.) doctype:article",
+      "fixes": [
+        "Added doctype:article",
+        "Broke up 'Jack London's White Fang Revis...' into (Jack OR London's OR White OR Fang OR Revisited.)"
+      ]
+    },
+    {
+      "index": 50,
+      "nl": "papers by Stephen Hawking on black holes",
+      "original_query": "author:\"Hawking, S\" abs:\"black holes\"",
+      "fixed_query": "author:\"Hawking, S\" abs:\"black holes\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 51,
+      "nl": "papers by cugno 2023",
+      "original_query": "author:\"^cugno\" year:2023",
+      "fixed_query": "author:\"^cugno\" year:2023 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 53,
+      "nl": "papers by Vink 2001",
+      "original_query": "author:\"Vink\" year:2001",
+      "fixed_query": "author:\"Vink\" year:2001 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 54,
+      "nl": "ring galaxies formation mechanisms recent papers",
+      "original_query": "abs:(Ring Galaxies)",
+      "fixed_query": "abs:(Ring Galaxies) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 55,
+      "nl": "papers by Patton R first author",
+      "original_query": "author:(\"^Patton, R\")",
+      "fixed_query": "author:(\"^Patton, R\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 56,
+      "nl": "papers by charbonneau 2005",
+      "original_query": "^charbonneau year:2005",
+      "fixed_query": "^charbonneau year:2005 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 57,
+      "nl": "papers by Gosic as first author",
+      "original_query": "author:(\"^Gosic, M\")",
+      "fixed_query": "author:(\"^Gosic, M\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 58,
+      "nl": "papers by tamhane as first author from 2023",
+      "original_query": "pubdate:[2023-01 TO 2023-12] author:(\"^tamhane\")",
+      "fixed_query": "pubdate:[2023-01 TO 2023-12] author:(\"^tamhane\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 59,
+      "nl": "papers by killi first author",
+      "original_query": "author:(\"^killi, m\")",
+      "fixed_query": "author:(\"^killi, m\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 60,
+      "nl": "most read papers on black holes",
+      "original_query": "abs:\"black hole\" read_count:[1000 TO *]",
+      "fixed_query": "abs:\"black hole\" read_count:[1000 TO *] doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 61,
+      "nl": "\"Who's Who Among Black Americans\" biographical directory",
+      "original_query": "title:\"Who's Who Among Black Americans\"",
+      "fixed_query": "title:(Who's OR Who OR Among OR Black OR Americans)",
+      "fixes": [
+        "Broke up 'Who's Who Among Black American...' into (Who's OR Who OR Among OR Black OR Americans)"
+      ]
+    },
+    {
+      "index": 62,
+      "nl": "papers in nature 1981 volume 294 page 92",
+      "original_query": "identifier:\"1981Natur.294\u00e2\u20ac\u00a692C\"",
+      "fixed_query": "identifier:\"1981Natur.294\u00e2\u20ac\u00a692C\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 64,
+      "nl": "refereed white dwarfs articles",
+      "original_query": "abs:\"white dwarfs\" property:refereed",
+      "fixed_query": "abs:\"white dwarfs\" property:refereed doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 65,
+      "nl": "references in supernova papers",
+      "original_query": "references(abs:\"supernova\")",
+      "fixed_query": "references(abs:\"supernova\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 66,
+      "nl": "papers by Raimundo Vestergaard",
+      "original_query": "author:(\"^Raimundo\" \"Vestergaard\")",
+      "fixed_query": "author:(\"^Raimundo\" \"Vestergaard\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 67,
+      "nl": "papers by abraham roberto on streams and clusters",
+      "original_query": "author:\"abraham, roberto\" AND (abs:\"stream\" OR abs:\"cluster\")",
+      "fixed_query": "author:\"abraham, roberto\" AND (abs:\"stream\" OR abs:\"cluster\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 68,
+      "nl": "Hawaii authentic information Thrum's Hawaiian annual standard guide",
+      "original_query": "title:\"All about Hawaii. The recognized book of authentic information on Hawaii, combined with Thrum's Hawaiian annual and standard guide\"",
+      "fixed_query": "title:(All OR about OR Hawaii. OR recognized OR book)",
+      "fixes": [
+        "Broke up 'All about Hawaii. The recogniz...' into (All OR about OR Hawaii. OR recognized OR book)"
+      ]
+    },
+    {
+      "index": 69,
+      "nl": "papers by Ruzicka from 2011",
+      "original_query": "author:\"^Ruzicka\" year:2011",
+      "fixed_query": "author:\"^Ruzicka\" year:2011 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 70,
+      "nl": "papers by Vernazza Avrett Loeser from 1981",
+      "original_query": "pubdate:[1981-01 TO 1981-12] author:(\"Vernazza\" \"Avrett\" \"Loeser\")",
+      "fixed_query": "pubdate:[1981-01 TO 1981-12] author:(\"Vernazza\" \"Avrett\" \"Loeser\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 71,
+      "nl": "papers by Davies on scaled sky subtraction",
+      "original_query": "author:(\"^davies\") abs:(scaled sky subtraction)",
+      "fixed_query": "author:(\"^davies\") abs:(scaled sky subtraction) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 72,
+      "nl": "papers by Pacucci on black holes",
+      "original_query": "author:(\"^Pacucci, fabio\")",
+      "fixed_query": "author:(\"^Pacucci, fabio\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 73,
+      "nl": "Luna-19 radio transparency circumlunar space",
+      "original_query": "abs:(Radio transparency of circumlunar space using the Luna-19 station)",
+      "fixed_query": "abs:(Radio OR transparency OR circumlunar OR space OR using)",
+      "fixes": [
+        "Extracted terms from title-like content: Radio OR transparency OR circumlunar OR space OR using"
+      ]
+    },
+    {
+      "index": 74,
+      "nl": "find similar work to Event Horizon Telescope",
+      "original_query": "similar(abs:\"Event Horizon Telescope\")",
+      "fixed_query": "similar(abs:(Event OR Horizon OR Telescope))",
+      "fixes": [
+        "Broke up 'Event Horizon Telescope...' into (Event OR Horizon OR Telescope)"
+      ]
+    },
+    {
+      "index": 75,
+      "nl": "papers by Riffel on active galactic nuclei integral field spectroscopy",
+      "original_query": "author:\"^riffel\" agnnifs",
+      "fixed_query": "author:\"^riffel\" agnnifs doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 77,
+      "nl": "papers by Mainzer A",
+      "original_query": "author:\"^Mainzer\"",
+      "fixed_query": "author:\"^Mainzer\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 78,
+      "nl": "Virgo interferometer papers from 2019",
+      "original_query": "abs:\"Virgo interferometer\" pubdate:2019",
+      "fixed_query": "abs:\"Virgo interferometer\" pubdate:2019 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 79,
+      "nl": "papers by galaviz as first author",
+      "original_query": "author:(\"^galaviz\")",
+      "fixed_query": "author:(\"^galaviz\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 80,
+      "nl": "papers by Lyman from 2017",
+      "original_query": "author:\"^lyman\" year:2017",
+      "fixed_query": "author:\"^lyman\" year:2017 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 81,
+      "nl": "papers by D'Alessandro Giuseppe 2012 to 2023",
+      "original_query": "(( author:\"D'alessandro,Giuseppe\") AND year:2012-2023)",
+      "fixed_query": "(( author:\"D'alessandro,Giuseppe\") AND year:2012-2023) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 83,
+      "nl": "papers by Samovar on tidal effects",
+      "original_query": "author:\"Samovar\" title:\"tidal\"",
+      "fixed_query": "author:\"Samovar\" title:\"tidal\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 84,
+      "nl": "papers by Agol on exoplanet transits",
+      "original_query": "author:\"^agol\"",
+      "fixed_query": "author:\"^agol\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 85,
+      "nl": "papers by Piskunov from 2016",
+      "original_query": "pubdate:[2016-01 TO 2016-12] author:(\"Piskunov, a. e.\")",
+      "fixed_query": "pubdate:[2016-01 TO 2016-12] author:(\"Piskunov, a. e.\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 86,
+      "nl": "Chandrasekhar's gravitational waves papers",
+      "original_query": "author:\"Chandrasekhar, S.\" abs:\"gravitational waves\"",
+      "fixed_query": "author:\"Chandrasekhar, S.\" abs:\"gravitational waves\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 87,
+      "nl": "what do magnetar papers cite",
+      "original_query": "references(abs:\"magnetar\")",
+      "fixed_query": "references(abs:\"magnetar\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 88,
+      "nl": "new ALMA observations papers",
+      "original_query": "abs:\"ALMA observations\" year:2024-2025",
+      "fixed_query": "abs:\"ALMA observations\" year:2024-2025 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 89,
+      "nl": "papers by Evans, F",
+      "original_query": "author:(\"^Evans, F\")",
+      "fixed_query": "author:(\"^Evans, F\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 91,
+      "nl": "papers by Owen on x-ray super-Earth observations",
+      "original_query": "author:\"^owen\" abs:\"x-ray\" abs:\"super-Earth\"",
+      "fixed_query": "author:\"^owen\" abs:\"x-ray\" abs:\"super-Earth\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 93,
+      "nl": "papers by W Lyra published in 2023",
+      "original_query": "pubdate:[2023-01 TO 2023-12] author:(\"^Lyra, W\")",
+      "fixed_query": "pubdate:[2023-01 TO 2023-12] author:(\"^Lyra, W\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 94,
+      "nl": "papers citing work on gravitational waves",
+      "original_query": "citations(abs:\"gravitational wave\")",
+      "fixed_query": "citations(abs:\"gravitational wave\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 95,
+      "nl": "papers by Burke on NGC 4395",
+      "original_query": "author:(\"^burke\") title:(ngc 4395)",
+      "fixed_query": "author:(\"^burke\") title:(ngc 4395) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 96,
+      "nl": "papers by Guolo first author",
+      "original_query": "author:\"^Guolo\"",
+      "fixed_query": "author:\"^Guolo\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 97,
+      "nl": "papers by Tristram M 2022",
+      "original_query": "pubdate:[2022-01 TO 2022-12] author:(\"Tristram, M.\")",
+      "fixed_query": "pubdate:[2022-01 TO 2022-12] author:(\"Tristram, M.\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 98,
+      "nl": "Evans papers in astrophysical journal supplement 2009",
+      "original_query": "pubdate:[2009-01 TO 2009-12] author:(\"Evans\") bibstem:(ApJS)",
+      "fixed_query": "pubdate:[2009-01 TO 2009-12] author:(\"Evans\") bibstem:(ApJS) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 99,
+      "nl": "Hawaiian legislature rosters 1841-1918",
+      "original_query": "title:\"Roster Legislatures of Hawaii, 1841\u20131918\"",
+      "fixed_query": "title:(Roster OR Legislatures OR Hawaii, OR 1841\u20131918)",
+      "fixes": [
+        "Broke up 'Roster Legislatures of Hawaii,...' into (Roster OR Legislatures OR Hawaii, OR 1841\u20131918)"
+      ]
+    },
+    {
+      "index": 100,
+      "nl": "popular neutron stars papers",
+      "original_query": "abs:\"neutron stars\" read_count:[1000 TO *]",
+      "fixed_query": "abs:\"neutron stars\" read_count:[1000 TO *] doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 101,
+      "nl": "papers by Bergner 2023",
+      "original_query": "pubdate:[2023-01 TO 2023-12] author:(\"Bergner\")",
+      "fixed_query": "pubdate:[2023-01 TO 2023-12] author:(\"Bergner\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 102,
+      "nl": "papers by Skrutskie from 2006",
+      "original_query": "pubdate:[2006-01 TO 2006-12] author:(\"Skrutskie, m. f.\")",
+      "fixed_query": "pubdate:[2006-01 TO 2006-12] author:(\"Skrutskie, m. f.\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 103,
+      "nl": "papers by Huang and Yu",
+      "original_query": "author:(\"Huang,\" \"Yu\")",
+      "fixed_query": "author:(\"Huang,\" \"Yu\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 104,
+      "nl": "papers by Scheeres and McMahon from 2010",
+      "original_query": "author:\"scheeres\" author:\"^McMahon\" year:2010",
+      "fixed_query": "author:\"scheeres\" author:\"^McMahon\" year:2010 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 105,
+      "nl": "papers by Marquardt 2015",
+      "original_query": "author:\"^Marquardt\" year:2015",
+      "fixed_query": "author:\"^Marquardt\" year:2015 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 106,
+      "nl": "papers by Ribas 2023",
+      "original_query": "author:\"^ribas\" year:2023",
+      "fixed_query": "author:\"^ribas\" year:2023 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 107,
+      "nl": "gamma ray astronomy 2022",
+      "original_query": "abs:\"gamma ray astronomy\" pubdate:2022",
+      "fixed_query": "abs:(gamma OR ray OR astronomy) pubdate:2022",
+      "fixes": [
+        "Broke up 'gamma ray astronomy...' into (gamma OR ray OR astronomy)"
+      ]
+    },
+    {
+      "index": 109,
+      "nl": "papers by witstok since 2021",
+      "original_query": "author:\"witstok\" year:2021-",
+      "fixed_query": "author:\"witstok\" year:2021- doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 110,
+      "nl": "European Southern Observatory Hubble Space Telescope research",
+      "original_query": "aff:\"ESO\" abs:\"Hubble Space Telescope\"",
+      "fixed_query": "aff:\"ESO\" abs:(Hubble OR Space OR Telescope)",
+      "fixes": [
+        "Broke up 'Hubble Space Telescope...' into (Hubble OR Space OR Telescope)"
+      ]
+    },
+    {
+      "index": 112,
+      "nl": "hot papers about gamma ray bursts",
+      "original_query": "trending(abs:\"gamma ray burst\")",
+      "fixed_query": "trending(abs:(gamma OR ray OR burst)) doctype:article",
+      "fixes": [
+        "Added doctype:article",
+        "Broke up 'gamma ray burst...' into (gamma OR ray OR burst)"
+      ]
+    },
+    {
+      "index": 114,
+      "nl": "open access MOND papers",
+      "original_query": "abs:\"MOND\" property:openaccess",
+      "fixed_query": "abs:\"MOND\" property:openaccess doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 115,
+      "nl": "papers about machine learning applications in stellar classification",
+      "original_query": "abs:(docs(ee0441a31e5b598d10c8d7fe0854a2a9))",
+      "fixed_query": "abs:(docs(ee0441a31e5b598d10c8d7fe0854a2a9)) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 117,
+      "nl": "papers by Poggianti Bianca M as first author",
+      "original_query": "author:\"^Poggianti, Bianca M.\"",
+      "fixed_query": "author:\"^Poggianti, Bianca M.\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 118,
+      "nl": "papers by Narayan from 1995",
+      "original_query": "author:\"^Narayan\" year:1995",
+      "fixed_query": "author:\"^Narayan\" year:1995 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 120,
+      "nl": "papers by Somovar on tidal effects",
+      "original_query": "author:\"Somovar\" title:\"tidal\"",
+      "fixed_query": "author:\"Somovar\" title:\"tidal\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 121,
+      "nl": "\"Bean's History and Directory of Nevada County\" historical documentation",
+      "original_query": "title:\"Bean's History and Directory of Nevada County\"",
+      "fixed_query": "title:(Bean's OR History OR Directory OR Nevada OR County)",
+      "fixes": [
+        "Broke up 'Bean's History and Directory o...' into (Bean's OR History OR Directory OR Nevada OR Count"
+      ]
+    },
+    {
+      "index": 122,
+      "nl": "papers by Sazanov on tidal disruption",
+      "original_query": "author:\"Sazanov\" title:\"tidal disruption\"",
+      "fixed_query": "author:\"Sazanov\" title:\"tidal disruption\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 124,
+      "nl": "top cited gamma ray astronomy",
+      "original_query": "abs:\"gamma ray astronomy\" citation_count:[100 TO *]",
+      "fixed_query": "abs:(gamma OR ray OR astronomy) citation_count:[100 TO *]",
+      "fixes": [
+        "Broke up 'gamma ray astronomy...' into (gamma OR ray OR astronomy)"
+      ]
+    },
+    {
+      "index": 125,
+      "nl": "papers by piro on stellar explosions",
+      "original_query": "author:(\"^piro\")",
+      "fixed_query": "author:(\"^piro\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 130,
+      "nl": "SETI papers on rogue planets and free-floating planetary objects",
+      "original_query": "bibgroup:\"SETI\" free-floating solar system objects",
+      "fixed_query": "bibgroup:\"SETI\" free-floating solar system objects doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 131,
+      "nl": "papers by de la Reza 2023",
+      "original_query": "pubdate:[2023-01 TO 2023-12] author:(\"de la Reza, R.\")",
+      "fixed_query": "pubdate:[2023-01 TO 2023-12] author:(\"de la Reza, R.\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 132,
+      "nl": "papers by Hauschildt 1999",
+      "original_query": "author:\"^Hauschildt\" year:1999",
+      "fixed_query": "author:\"^Hauschildt\" year:1999 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 133,
+      "nl": "papers by De on tidal effects",
+      "original_query": "author:\"De\" title:\"tidal\"",
+      "fixed_query": "author:\"De\" title:\"tidal\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 134,
+      "nl": "papers by Andreoni 2019 arxiv",
+      "original_query": "abs:(2019arXiv190711125A)",
+      "fixed_query": "abs:(2019arXiv190711125A) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 135,
+      "nl": "\u0411\u0430\u0431\u043a\u0438\u043d\u0430 grandmother sixty news Crimea sobytiya.com.ua",
+      "original_query": "title:\"\u0411\u0430\u0431\u043a\u0438\u043d\u0430 \u0432 \u0448\u0435\u0441\u0442\u044c\u0434\u0435\u0441\u044f\u0442 \u0441\u0442\u0430\u043d\u0435\u0442 \u0431\u0430\u0431\u0443\u0448\u043a\u043e\u0439 \u2013 \u041d\u043e\u0432\u043e\u0441\u0442\u0438 \u2013 \u0415\u0436\u0435\u043d\u0435\u0434\u0435\u043b\u044c\u043d\u0438\u043a \u0421\u043e\u0431\u044b\u0442\u0438\u044f, \u041f\u043e\u0441\u043b\u0435\u0434\u043d\u0438\u0435 \u043d\u043e\u0432\u043e\u0441\u0442\u0438 \u043a\u0440\u044b\u043c\u0430 \u00bb sobytiya.com.ua\"",
+      "fixed_query": "title:(\u0411\u0430\u0431\u043a\u0438\u043d\u0430 OR \u0448\u0435\u0441\u0442\u044c\u0434\u0435\u0441\u044f\u0442 OR \u0441\u0442\u0430\u043d\u0435\u0442 OR \u0431\u0430\u0431\u0443\u0448\u043a\u043e\u0439 OR \u041d\u043e\u0432\u043e\u0441\u0442\u0438)",
+      "fixes": [
+        "Broke up '\u0411\u0430\u0431\u043a\u0438\u043d\u0430 \u0432 \u0448\u0435\u0441\u0442\u044c\u0434\u0435\u0441\u044f\u0442 \u0441\u0442\u0430\u043d\u0435\u0442 \u0431\u0430...' into (\u0411\u0430\u0431\u043a\u0438\u043d\u0430 OR \u0448\u0435\u0441\u0442\u044c\u0434\u0435\u0441\u044f\u0442 OR \u0441\u0442\u0430\u043d\u0435\u0442 OR \u0431\u0430\u0431\u0443\u0448\u043a\u043e\u0439 OR \u041d\u043e"
+      ]
+    },
+    {
+      "index": 136,
+      "nl": "black holes papers from 2016",
+      "original_query": "abs:\"black holes\" pubdate:2016",
+      "fixed_query": "abs:\"black holes\" pubdate:2016 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 137,
+      "nl": "popular supernovae papers",
+      "original_query": "abs:\"supernovae\" read_count:[1000 TO *]",
+      "fixed_query": "abs:\"supernovae\" read_count:[1000 TO *] doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 138,
+      "nl": "papers by stuchlik on black holes",
+      "original_query": "abs:(stuchlik,z)",
+      "fixed_query": "abs:(stuchlik,z) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 139,
+      "nl": "papers by Di Teodoro first author 2014 2015",
+      "original_query": "pubdate:[2014-01 TO 2015-12] author:(\"^Di Teodoro\")",
+      "fixed_query": "pubdate:[2014-01 TO 2015-12] author:(\"^Di Teodoro\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 140,
+      "nl": "numerical modeling scour bridge abutment simulation",
+      "original_query": "abs:(Numerical Model For Simulation Of Scour Around Bridge Abutment)",
+      "fixed_query": "abs:(Numerical OR Model OR Simulation OR Scour OR Around)",
+      "fixes": [
+        "Extracted terms from title-like content: Numerical OR Model OR Simulation OR Scour OR Around"
+      ]
+    },
+    {
+      "index": 141,
+      "nl": "mimes survey papers",
+      "original_query": "abs:(mimes survey)",
+      "fixed_query": "abs:(mimes survey) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 142,
+      "nl": "papers by Kasper on observatory 2016",
+      "original_query": "author:\"^kasper\" abs:\"observatory\" year:2016",
+      "fixed_query": "author:\"^kasper\" abs:\"observatory\" year:2016 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 143,
+      "nl": "papers by webbink as first author",
+      "original_query": "author:\"^webbink, r\"",
+      "fixed_query": "author:\"^webbink, r\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 144,
+      "nl": "papers published in Collier's Weekly",
+      "original_query": "title:\"Collier's Weekly\"",
+      "fixed_query": "title:\"Collier's Weekly\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 146,
+      "nl": "papers by sacco from 2012",
+      "original_query": "author:\"^sacco\" year:2012",
+      "fixed_query": "author:\"^sacco\" year:2012 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 147,
+      "nl": "papers by Kewley from 2006",
+      "original_query": "author:\"^kewley\"2006",
+      "fixed_query": "author:\"^kewley\"2006 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 148,
+      "nl": "papers using the Dark Energy Camera DECam",
+      "original_query": "abs:(The Dark Energy Camera (DECam))",
+      "fixed_query": "abs:(The Dark Energy Camera (DECam)) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 149,
+      "nl": "papers by Strickland from 1969 on electron impact cross sections",
+      "original_query": "author:\"^strickland\" year:1969 full:\"Electron Impact Cross Sections for\"",
+      "fixed_query": "author:\"^strickland\" year:1969 full:\"Electron Impact Cross Sections for\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 150,
+      "nl": "papers by Jacobson and Scheeres from 2011",
+      "original_query": "author:\"^Jacobson\" author:\"^Scheeres\" year:2011",
+      "fixed_query": "author:\"^Jacobson\" author:\"^Scheeres\" year:2011 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 153,
+      "nl": "papers by Margutti and Chornock from 2021",
+      "original_query": "author:\"^Margutti\" year:2021 author:\"Chornock\"",
+      "fixed_query": "author:\"^Margutti\" year:2021 author:\"Chornock\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 154,
+      "nl": "papers by Howell S",
+      "original_query": "author:(\"Howell\", \"S.\")",
+      "fixed_query": "author:(\"Howell\", \"S.\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 156,
+      "nl": "papers by navarrete as first author",
+      "original_query": "author:\"^navarrete\"",
+      "fixed_query": "author:\"^navarrete\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 158,
+      "nl": "papers by Ravi on tidal forces",
+      "original_query": "author:\"Ravi\" title:\"tidal\"",
+      "fixed_query": "author:\"Ravi\" title:\"tidal\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 159,
+      "nl": "papers by walker",
+      "original_query": "author:\"walker\"",
+      "fixed_query": "author:\"walker\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 160,
+      "nl": "papers by Kumar and Goodman",
+      "original_query": "author:\"^kumar\" author:\"goodman\"",
+      "fixed_query": "author:\"^kumar\" author:\"goodman\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 161,
+      "nl": "papers where Vera Rubin is first author",
+      "original_query": "author:\"^Rubin, V\"",
+      "fixed_query": "author:\"^Rubin, V\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 162,
+      "nl": "papers by lainey first author",
+      "original_query": "author:\"^lainey\"",
+      "fixed_query": "author:\"^lainey\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 163,
+      "nl": "papers by guijarro a",
+      "original_query": "abs:(guijarro, a.)",
+      "fixed_query": "abs:(guijarro, a.) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 164,
+      "nl": "papers by Massana P",
+      "original_query": "author:\"^Massana\"",
+      "fixed_query": "author:\"^Massana\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 166,
+      "nl": "MIT astrophysics publications",
+      "original_query": "aff:\"MIT\" collection:astronomy",
+      "fixed_query": "aff:\"MIT\" collection:astronomy doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 167,
+      "nl": "papers by Bierman from 1978",
+      "original_query": "author:\"^Bierman\" year:1978",
+      "fixed_query": "author:\"^Bierman\" year:1978 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 168,
+      "nl": "papers by Bus from 2002",
+      "original_query": "author:\"^Bus\", year:2002",
+      "fixed_query": "author:\"^Bus\", year:2002 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 169,
+      "nl": "papers by arras and yagi on stellar dynamics",
+      "original_query": "author:(\"arras\" \"yagi\")",
+      "fixed_query": "author:(\"arras\" \"yagi\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 170,
+      "nl": "electronic payment security solata digital transactions",
+      "original_query": "abs:(Security of Electronic Payment Systems Solata)",
+      "fixed_query": "abs:(Security OR Electronic OR Payment OR Systems OR Solata)",
+      "fixes": [
+        "Extracted terms from title-like content: Security OR Electronic OR Payment OR Systems OR Solata"
+      ]
+    },
+    {
+      "index": 171,
+      "nl": "convolutional neural networks in astronomy",
+      "original_query": "abs:\"convolutional neural network\" collection:astronomy",
+      "fixed_query": "abs:(convolutional OR neural OR network) collection:astronomy",
+      "fixes": [
+        "Broke up 'convolutional neural network...' into (convolutional OR neural OR network)"
+      ]
+    },
+    {
+      "index": 172,
+      "nl": "papers by andre montmerle",
+      "original_query": "author:\"andre\" and author:\"montmerle\"",
+      "fixed_query": "author:\"andre\" and author:\"montmerle\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 173,
+      "nl": "highly cited gravitational wave papers",
+      "original_query": "abs:\"gravitational waves\" citation_count:[100 TO *]",
+      "fixed_query": "abs:\"gravitational waves\" citation_count:[100 TO *] doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 174,
+      "nl": "papers by Arteaga 2023",
+      "original_query": "author:\"^Arteaga\", year:2023",
+      "fixed_query": "author:\"^Arteaga\", year:2023 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 175,
+      "nl": "38th IEEE Symposium on Foundations of Computer Science FOCS 1997",
+      "original_query": "title:\"38th IEEE Symposium on Foundations of Computer Science (FOCS '97)\"",
+      "fixed_query": "title:(38th OR IEEE OR Symposium OR Foundations OR Computer)",
+      "fixes": [
+        "Broke up '38th IEEE Symposium on Foundat...' into (38th OR IEEE OR Symposium OR Foundations OR Compu"
+      ]
+    },
+    {
+      "index": 176,
+      "nl": "papers by bradford glenn",
+      "original_query": "author:\"^bradford\" author:\"glenn\"",
+      "fixed_query": "author:\"^bradford\" author:\"glenn\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 177,
+      "nl": "papers by miceli from 2012",
+      "original_query": "author:\"^miceli\" year:2012",
+      "fixed_query": "author:\"^miceli\" year:2012 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 178,
+      "nl": "papers by Hut 1985",
+      "original_query": "author:\"Hut\" abs:\"1985\"",
+      "fixed_query": "author:\"Hut\" abs:\"1985\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 179,
+      "nl": "papers by abazajian on dark matter",
+      "original_query": "author:\"^abazaijan\"",
+      "fixed_query": "author:\"^abazaijan\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 180,
+      "nl": "papers by Newberg from 2002",
+      "original_query": "author:\"^Newberg\" year:2002",
+      "fixed_query": "author:\"^Newberg\" year:2002 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 183,
+      "nl": "papers on Baden-Powell's early scouting publications",
+      "original_query": "title:\"Baden-Powell's First Scouting Books\"",
+      "fixed_query": "title:(Baden-Powell's OR First OR Scouting OR Books) doctype:article",
+      "fixes": [
+        "Added doctype:article",
+        "Broke up 'Baden-Powell's First Scouting ...' into (Baden-Powell's OR First OR Scouting OR Books)"
+      ]
+    },
+    {
+      "index": 184,
+      "nl": "papers by finkelstein first author",
+      "original_query": "author:(\"^finkelstein\")",
+      "fixed_query": "author:(\"^finkelstein\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 185,
+      "nl": "papers by Murmu and Greve",
+      "original_query": "author:(\"^Murmu\" \"Greve\")",
+      "fixed_query": "author:(\"^Murmu\" \"Greve\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 187,
+      "nl": "papers by Runnoe from 2015",
+      "original_query": "author:\"^runnoe\" year:2015",
+      "fixed_query": "author:\"^runnoe\" year:2015 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 188,
+      "nl": "papers by Luminet from 1979",
+      "original_query": "author:\"^Luminet\" year:1979",
+      "fixed_query": "author:\"^Luminet\" year:1979 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 189,
+      "nl": "papers by Troya on 140903A",
+      "original_query": "140903A author:\"^Troya\"",
+      "fixed_query": "140903A author:\"^Troya\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 190,
+      "nl": "papers by levesque first author",
+      "original_query": "author:\"^levesque\"",
+      "fixed_query": "author:\"^levesque\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 191,
+      "nl": "papers by J Greene from 2023",
+      "original_query": "author:\"^greene,j\" year:2023",
+      "fixed_query": "author:\"^greene,j\" year:2023 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 193,
+      "nl": "papers by lovell on galaxy formation",
+      "original_query": "author:\"^lovell\"",
+      "fixed_query": "author:\"^lovell\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 194,
+      "nl": "The Clipper Ship Era epitome famous American British clipper ships owners builders commanders crews 1843-1869",
+      "original_query": "title:\"The Clipper Ship Era; An Epitome of Famous American and British Clipper Ships, Their Owners, Builders, Commanders, and Crews, 1843-1869\"",
+      "fixed_query": "title:(Clipper OR Ship OR Era; OR Epitome OR Famous)",
+      "fixes": [
+        "Broke up 'The Clipper Ship Era; An Epito...' into (Clipper OR Ship OR Era; OR Epitome OR Famous)"
+      ]
+    },
+    {
+      "index": 195,
+      "nl": "papers by Liodakis 2023",
+      "original_query": "author:\"^Liodakis, Ioannis\"year:2023",
+      "fixed_query": "author:\"^Liodakis, Ioannis\"year:2023 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 196,
+      "nl": "papers by Brout D as first author",
+      "original_query": "author:\"^brout,D.;\"",
+      "fixed_query": "author:\"^brout,D.;\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 198,
+      "nl": "papers by van der Bogert on lunar targets",
+      "original_query": "author:\"^van der Bogert\" abs:\"target\" abs:\"moon\"",
+      "fixed_query": "author:\"^van der Bogert\" abs:\"target\" abs:\"moon\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 199,
+      "nl": "papers by olejak",
+      "original_query": "abs:(olejak, a)",
+      "fixed_query": "abs:(olejak, a) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 200,
+      "nl": "PRL papers on white dwarfs",
+      "original_query": "abs:\"white dwarfs\" bibstem:\"PhRvL\"",
+      "fixed_query": "abs:\"white dwarfs\" bibstem:\"PhRvL\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 201,
+      "nl": "papers by George Smoot",
+      "original_query": "author:\"Smoot, G.\"",
+      "fixed_query": "author:\"Smoot, G.\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 202,
+      "nl": "papers by boeshaar and hodge",
+      "original_query": "author:(\"boeshaar\" \"hodge\")",
+      "fixed_query": "author:(\"boeshaar\" \"hodge\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 203,
+      "nl": "papers by Turchetta and Linares",
+      "original_query": "author:\"^turchetta\" author:\"Linares\"",
+      "fixed_query": "author:\"^turchetta\" author:\"Linares\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 204,
+      "nl": "Saturn radio emission coronal mass ejection effects",
+      "original_query": "title:\"Effect of an Interplanetary Coronal Mass Ejection on Saturn's Radio Emission\"",
+      "fixed_query": "title:(Effect OR Interplanetary OR Coronal OR Mass OR Ejection)",
+      "fixes": [
+        "Broke up 'Effect of an Interplanetary Co...' into (Effect OR Interplanetary OR Coronal OR Mass OR Ej"
+      ]
+    },
+    {
+      "index": 205,
+      "nl": "papers by massan first author",
+      "original_query": "author:\"^massan, p.\"",
+      "fixed_query": "author:\"^massan, p.\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 206,
+      "nl": "trending research on supermassive black holes",
+      "original_query": "trending(abs:\"supermassive black hole\")",
+      "fixed_query": "trending(abs:(supermassive OR black OR hole))",
+      "fixes": [
+        "Broke up 'supermassive black hole...' into (supermassive OR black OR hole)"
+      ]
+    },
+    {
+      "index": 207,
+      "nl": "papers by L on arXiv from 2022",
+      "original_query": "abs:(2022arXiv220605745L)",
+      "fixed_query": "abs:(2022arXiv220605745L) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 210,
+      "nl": "cosmology papers not about inflation",
+      "original_query": "abs:\"cosmology\" NOT abs:\"inflation\"",
+      "fixed_query": "abs:\"cosmology\" NOT abs:\"inflation\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 212,
+      "nl": "papers by Brandt W N as first author",
+      "original_query": "author:(\"^brandt, w n\")",
+      "fixed_query": "author:(\"^brandt, w n\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 214,
+      "nl": "papers by Metcalfe Travis S as first author",
+      "original_query": "author:(\"^Metcalfe, Travis S.\")",
+      "fixed_query": "author:(\"^Metcalfe, Travis S.\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 216,
+      "nl": "papers by venn 2004",
+      "original_query": "author:\"^venn\" year:2004",
+      "fixed_query": "author:\"^venn\" year:2004 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 217,
+      "nl": "papers about Call of Wild Run Is Extended",
+      "original_query": "title:\"'Call of Wild' Run Is Extended\"",
+      "fixed_query": "title:('Call OR Wild' OR Run OR Extended) doctype:article",
+      "fixes": [
+        "Added doctype:article",
+        "Broke up ''Call of Wild' Run Is Extended...' into ('Call OR Wild' OR Run OR Extended)"
+      ]
+    },
+    {
+      "index": 218,
+      "nl": "papers by Lyu on AGN",
+      "original_query": "author:\"^lyu\" abs:\"AGN\"",
+      "fixed_query": "author:\"^lyu\" abs:\"AGN\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 219,
+      "nl": "papers by Martinez-Galarza as first author",
+      "original_query": "author:\"^Martinez-Galarza\"",
+      "fixed_query": "author:\"^Martinez-Galarza\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 220,
+      "nl": "papers by allen and barbuy on stellar abundances",
+      "original_query": "author:(\"^allen\" \"barbuy\")",
+      "fixed_query": "author:(\"^allen\" \"barbuy\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 221,
+      "nl": "papers by Bao, Zhenan on organic electronics",
+      "original_query": "author:\"Bao\" abs:\"author\", Zhenan\"\"",
+      "fixed_query": "author:\"Bao\" abs:\"author\", Zhenan\"\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 222,
+      "nl": "top 20 most read dark matter papers",
+      "original_query": "topn(20, abs:\"dark matter\", read_count desc)",
+      "fixed_query": "topn(20, abs:\"dark matter\", read_count desc) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 224,
+      "nl": "papers citing cosmology research",
+      "original_query": "citations(abs:\"cosmology\")",
+      "fixed_query": "citations(abs:\"cosmology\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 225,
+      "nl": "NASAP-70 user manual programmer documentation",
+      "original_query": "title:\"NASAP-70 User's and Programmer's manual\"",
+      "fixed_query": "title:(NASAP-70 OR User's OR Programmer's OR manual)",
+      "fixes": [
+        "Broke up 'NASAP-70 User's and Programmer...' into (NASAP-70 OR User's OR Programmer's OR manual)"
+      ]
+    },
+    {
+      "index": 227,
+      "nl": "papers about Betelgeuse",
+      "original_query": "object:\"Betelgeuse\"",
+      "fixed_query": "object:\"Betelgeuse\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 228,
+      "nl": "papers by napolitano nicola",
+      "original_query": "abs:(napolitano, nicola)",
+      "fixed_query": "abs:(napolitano, nicola) doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 229,
+      "nl": "papers by kaur first author",
+      "original_query": "author:\"^kaur\"",
+      "fixed_query": "author:\"^kaur\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 230,
+      "nl": "papers by Greisen 2003",
+      "original_query": "author:\"^greisen\" year:2003",
+      "fixed_query": "author:\"^greisen\" year:2003 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 233,
+      "nl": "papers by J Merc first author",
+      "original_query": "author:\"^merc, j\"",
+      "fixed_query": "author:\"^merc, j\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 235,
+      "nl": "cloudy 2017 release photoionization code",
+      "original_query": "abs:(the 2017 release of cloudy)",
+      "fixed_query": "abs:(2017 OR release OR cloudy)",
+      "fixes": [
+        "Extracted terms from title-like content: 2017 OR release OR cloudy"
+      ]
+    },
+    {
+      "index": 236,
+      "nl": "MIT papers",
+      "original_query": "aff:\"MIT\"",
+      "fixed_query": "aff:\"MIT\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 237,
+      "nl": "physics papers on string theory",
+      "original_query": "collection:physics abs:\"string theory\"",
+      "fixed_query": "collection:physics abs:\"string theory\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 238,
+      "nl": "papers by Skillman as first author",
+      "original_query": "author:\"^Skillman\"",
+      "fixed_query": "author:\"^Skillman\" doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 240,
+      "nl": "papers on mass tracks from 2015",
+      "original_query": "\"mass tracks\" OR year:2015",
+      "fixed_query": "\"mass tracks\" OR year:2015 doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    },
+    {
+      "index": 241,
+      "nl": "papers by Kreider from 2022",
+      "original_query": "pubdate:[2022-01 TO 2022-12] author:(\"Kreider\")",
+      "fixed_query": "pubdate:[2022-01 TO 2022-12] author:(\"Kreider\") doctype:article",
+      "fixes": [
+        "Added doctype:article"
+      ]
+    }
+  ],
+  "removed_count": 58
+}
