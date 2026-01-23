@@ -429,3 +429,32 @@ Started: Thu Jan 22 17:48:07 EST 2026
   - The citations() operator properly wraps queries without malformed concatenation
   - Integration tests directory exists but is empty - could be added in future
 ---
+
+## 2026-01-23 - Model Training and Local Deployment
+- **Implemented**: Retrained Qwen3-1.7B model with curated dataset on Google Colab
+- **Training details**:
+  - 3,592 curated training examples (down from 4,721 after 4 curation rounds)
+  - 400 validation examples
+  - Trained on Colab T4 GPU with Unsloth (2x speedup)
+  - LoRA fine-tuning: 17.4M trainable params (1% of model)
+  - 3 epochs, batch size 8, learning rate 2e-4
+- **Model uploaded**: `adsabs/scix-nls-translator` on HuggingFace
+- **Files created**:
+  - `scripts/serve_local.py` - Local vLLM server without Modal
+  - `scripts/infer_local.py` - Direct inference for quick testing
+  - `scripts/evaluate_model.py` - Model evaluation without vLLM server
+- **Colab notebook fixes** for T4 GPU compatibility:
+  - Changed `dtype=torch.bfloat16` to `torch.float16` (T4 doesn't support bf16)
+  - Changed `bf16=True` to `fp16=True` in training args
+  - Added `tokenizer=tokenizer` to UnslothTrainer
+  - Fixed test cell to use direct generation instead of pipeline
+- **Benchmark evaluation results** (rule-based pipeline):
+  - Pass rate: 98.7% (297/301)
+  - Syntax valid: 98.0%
+  - Constraint valid: 100%
+- **Learnings**:
+  - T4 GPUs (Colab free tier) don't support bf16, must use fp16
+  - Unsloth requires tokenizer passed explicitly to trainer
+  - vLLM pipeline has compatibility issues with merged Qwen3, use direct generation
+  - Modal hit $50 budget limit, Colab is free alternative for training
+---
