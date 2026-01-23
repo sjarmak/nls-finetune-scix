@@ -1,0 +1,10 @@
+# NLS Server Dependencies
+torch>=2.0.0
+transformers>=4.40.0
+accelerate>=0.25.0
+fastapi>=0.109.0
+uvicorn>=0.27.0
+pydantic>=2.0.0
+
+# For pipeline mode
+numpy>=1.24.0

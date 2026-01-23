@@ -1,0 +1,68 @@
+# NLS Fine-tune SciX - Docker Compose for local development
+#
+# Usage:
+#   # Start the NLS server (GPU):
+#   docker-compose up nls-server
+#
+#   # Start the NLS server (CPU - slower but works everywhere):
+#   docker-compose up nls-server-cpu
+#
+#   # Build and start:
+#   docker-compose up --build
+#
+# Then configure nectar .env.local:
+#   NL_SEARCH_PIPELINE_ENDPOINT=http://localhost:8000
+#   NL_SEARCH_VLLM_ENDPOINT=http://localhost:8000/v1/chat/completions
+
+version: '3.8'
+
+services:
+  # GPU version (requires NVIDIA Docker runtime)
+  nls-server:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: nls-server:latest
+    container_name: nls-server
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_NAME=adsabs/scix-nls-translator
+      - DEVICE=cuda
+      - PORT=8000
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+
+  # CPU version (slower but works without GPU)
+  nls-server-cpu:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: nls-server:latest
+    container_name: nls-server-cpu
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_NAME=adsabs/scix-nls-translator
+      - DEVICE=cpu
+      - PORT=8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 180s
+
+  # MPS version (for Apple Silicon Macs - run outside Docker)
+  # Note: MPS doesn't work in Docker, use the run_local.sh script instead

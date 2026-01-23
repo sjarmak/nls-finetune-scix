@@ -1,0 +1,520 @@
+{
+  "id": "eval-20260123-165532",
+  "timestamp": "2026-01-23T16:55:32.517377",
+  "model": "adsabs/scix-nls-translator",
+  "device": "mps",
+  "summary": {
+    "total": 50,
+    "syntax_valid": 50,
+    "semantic_match": 36,
+    "exact_match": 19,
+    "avg_latency_ms": 513.3,
+    "p75_latency_ms": 554.2,
+    "p90_latency_ms": 660.8,
+    "min_latency_ms": 321.0,
+    "max_latency_ms": 1073.9,
+    "cold_start_latency_ms": 489.8
+  },
+  "results": [
+    {
+      "id": "val_0",
+      "input": "smith j dark energy",
+      "expected": "author:\"smith, j\" abs:\"dark energy\"",
+      "output": "author:\"smith, j\" abs:\"dark energy\"",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 489.8
+    },
+    {
+      "id": "val_1",
+      "input": "Gaia satellite stellar parallax measurements",
+      "expected": "abs:\"Gaia\" abs:\"parallax\"",
+      "output": "abs:(Gaia AND parallax AND stellar)",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 465.4
+    },
+    {
+      "id": "val_2",
+      "input": "helioseismology research with SOHO",
+      "expected": "bibgroup:SOHO abs:\"helioseismology\"",
+      "output": "bibgroup:SOHO abs:\"helioseismology\"",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 551.2
+    },
+    {
+      "id": "val_3",
+      "input": "Science gravitational waves data",
+      "expected": "bibstem:\"Science\" property:data abs:\"gravitational waves\"",
+      "output": "bibstem:\"Science\" property:data abs:\"gravitational waves\"",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 483.0
+    },
+    {
+      "id": "val_4",
+      "input": "refereed AJ papers on dark energy",
+      "expected": "bibstem:\"AJ\" property:refereed abs:\"dark energy\" doctype:article",
+      "output": "bibstem:\"AJ\" property:refereed abs:\"dark energy\" doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 611.5
+    },
+    {
+      "id": "val_5",
+      "input": "reviews by first author Hawking",
+      "expected": "reviews(author:\"^Hawking, S\")",
+      "output": "author:\"^Hawking\" reviews doctype:article",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 490.4
+    },
+    {
+      "id": "val_6",
+      "input": "2020A&A...633A.130Q",
+      "expected": "identifier:\"2020A&amp;A...633A.130Q\"",
+      "output": "identifier:\"2020A&amp;A...633A.130Q\"",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 703.8
+    },
+    {
+      "id": "val_7",
+      "input": "counter-rotating disk galaxies IllustrisTNG simulations observational counterparts",
+      "expected": "abs:(\"counter-rotating\" AND disk AND galaxies AND IllustrisTNG AND (observational OR observations OR counterpart*))",
+      "output": "abs:(counter-rotating AND disk AND galaxies)",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 471.2
+    },
+    {
+      "id": "val_8",
+      "input": "studies using SDO data",
+      "expected": "bibgroup:SDO doctype:article",
+      "output": "bibgroup:SDO",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 344.0
+    },
+    {
+      "id": "val_9",
+      "input": "Solar TErrestrial RElations Observatory observations of solar stereoscopy",
+      "expected": "bibgroup:STEREO abs:\"solar stereoscopy\"",
+      "output": "bibgroup:STEREO abs:\"solar stereoscopy\"",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 464.7
+    },
+    {
+      "id": "val_10",
+      "input": "JWST observations papers from 2022",
+      "expected": "abs:\"JWST observations\" pubdate:2022 doctype:article",
+      "output": "bibgroup:JWST abs:\"observations\" year:2022 doctype:article",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 660.8
+    },
+    {
+      "id": "val_11",
+      "input": "references in Hawking's black hole papers",
+      "expected": "references(author:\"Hawking, S\" AND abs:\"black hole\") doctype:article",
+      "output": "references(author:\"Hawking, S\")",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 412.6
+    },
+    {
+      "id": "val_12",
+      "input": "open access Chandra X-ray papers",
+      "expected": "abs:\"Chandra X-ray\" property:openaccess doctype:article",
+      "output": "bibgroup:Chandra property:openaccess abs:\"X-ray\" doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 583.0
+    },
+    {
+      "id": "val_13",
+      "input": "papers by Fabrice Martins 2005",
+      "expected": "author:\"Fabrice Martins\" year:2005 doctype:article",
+      "output": "author:\"^Fabrice Martins\" year:2005 doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 559.9
+    },
+    {
+      "id": "val_14",
+      "input": "papers by mcdonald 2014",
+      "expected": "author:\"^mcdonald\" year:2014 doctype:article",
+      "output": "author:\"^mcdonald\" year:2014 doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 550.7
+    },
+    {
+      "id": "val_15",
+      "input": "papers published between 2015 and 2020",
+      "expected": "year:2015-2020 doctype:article",
+      "output": "pubdate:[2015-01 TO 2020-12] doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 738.3
+    },
+    {
+      "id": "val_16",
+      "input": "trending research on JWST observations",
+      "expected": "trending(abs:\"JWST\")",
+      "output": "trending(abs:(JWST AND observations))",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 428.0
+    },
+    {
+      "id": "val_17",
+      "input": "list references from the 2016 gravitational wave paper",
+      "expected": "references(abs:(gravitational AND 2016 AND wave)) doctype:article",
+      "output": "references(abs:(2016 and gravitational and wave)) doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 520.6
+    },
+    {
+      "id": "val_18",
+      "input": "papers by long, k. on stellar evolution",
+      "expected": "author:\"^long,\" k. doctype:article",
+      "output": "author:\"^long, k\" doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 417.4
+    },
+    {
+      "id": "val_19",
+      "input": "papers by koester detlev first author",
+      "expected": "author:(\"^koester, detlev\") doctype:article",
+      "output": "author:\"^koester, detlev\" doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 488.9
+    },
+    {
+      "id": "val_20",
+      "input": "papers by kashino first author",
+      "expected": "author:\"^kashino\" doctype:article",
+      "output": "author:\"^kashino\" doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 440.2
+    },
+    {
+      "id": "val_21",
+      "input": "papers on International Pulsar Timing Array Second Mock Data Challenge",
+      "expected": "abs:(Pulsar AND International AND Timing) doctype:article",
+      "output": "title:(International OR Pulsar OR Timing OR Array OR Second)",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 472.6
+    },
+    {
+      "id": "val_22",
+      "input": "references in Rubin's papers",
+      "expected": "references(author:\"Rubin, V\") doctype:article",
+      "output": "references(author:\"Rubin, V.\")",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 390.5
+    },
+    {
+      "id": "val_23",
+      "input": "astrophysical fluid dynamics principles magnetohydrodynamics stellar winds accretion disks",
+      "expected": "abs:(Principles of Astrophysical Fluid Dynamics)",
+      "output": "abs:(astrophysical fluid dynamics principles magnetohydrodynamics stellar winds accretion disks)",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 582.9
+    },
+    {
+      "id": "val_24",
+      "input": "handbook chapters related to interstellar medium",
+      "expected": "doctype:inbook abs:\"interstellar medium\"",
+      "output": "doctype:inbook abs:(interstellar AND medium)",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 430.6
+    },
+    {
+      "id": "val_25",
+      "input": "Keck bibliography dark energy",
+      "expected": "bibgroup:Keck abs:\"dark energy\"",
+      "output": "bibgroup:Keck abs:\"dark energy\"",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 409.4
+    },
+    {
+      "id": "val_26",
+      "input": "doi 10.1016/S0020-0190(03)00253-9",
+      "expected": "identifier:\"10.1016/S0020-0190(03)00253-9\"",
+      "output": "identifier:\"10.1016/S0020-0190(03)00253-9\"",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 1073.9
+    },
+    {
+      "id": "val_27",
+      "input": "papers by Raimundo Vestergaard",
+      "expected": "author:(\"^Raimundo\" \"Vestergaard\") doctype:article",
+      "output": "author:\"Raimundo Vestergaard\" doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 479.2
+    },
+    {
+      "id": "val_28",
+      "input": "papers from the general database related to scientific instruments",
+      "expected": "collection:general abs:\"scientific instruments\" doctype:article",
+      "output": "database:general abs:\"scientific instruments\" doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 429.0
+    },
+    {
+      "id": "val_29",
+      "input": "James Addison Reavis Peralta grant Arizona barony",
+      "expected": "title:(Peralta OR grant; OR James OR Addison OR Reavis)",
+      "output": "title:(James OR Addison OR Reavis OR Peralta)",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 493.0
+    },
+    {
+      "id": "val_30",
+      "input": "huchra john coronal mass ejections",
+      "expected": "author:\"huchra, john\" abs:(coronal AND ejections AND mass)",
+      "output": "author:\"huchra, john\" abs:(coronal AND ejections AND mass)",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 546.3
+    },
+    {
+      "id": "val_31",
+      "input": "top 20 most read dark matter papers",
+      "expected": "topn(20, abs:\"dark matter\", read_count desc) doctype:article",
+      "output": "topn(20, abs:\"dark matter\", read_count desc) doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 554.2
+    },
+    {
+      "id": "val_32",
+      "input": "mist alpha stellar formation regions",
+      "expected": "abs:(mist alpha)",
+      "output": "abs:(mist alpha)",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 321.0
+    },
+    {
+      "id": "val_33",
+      "input": "papers about Aram Khachaturian composer",
+      "expected": "title:(\u0410\u0440\u0430\u043c OR \u0425\u0430\u0447\u0430\u0442\u0443\u0440\u044f\u043d OR [Aram OR Khachaturian]) doctype:article",
+      "output": "title:(Aram OR Khachaturian) doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 470.4
+    },
+    {
+      "id": "val_34",
+      "input": "oral presentations related to data science",
+      "expected": "doctype:talk abs:\"data science\"",
+      "output": "doctype:talk abs:\"data science\"",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 373.5
+    },
+    {
+      "id": "val_35",
+      "input": "list citations of the 2019 black hole image paper",
+      "expected": "citations(abs:(black AND hole AND 2019)) doctype:article",
+      "output": "citations(abs:(2019MNRAS.486.1693P))",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 623.8
+    },
+    {
+      "id": "val_36",
+      "input": "papers using Arecibo Observatory",
+      "expected": "bibgroup:ARECIBO doctype:article",
+      "output": "bibgroup:Arecibo doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 386.7
+    },
+    {
+      "id": "val_37",
+      "input": "phd thesis by joshi reetika",
+      "expected": "author:\"^joshi,reetika\" bibstem:\"phdt\"",
+      "output": "doctype:phdthesis author:\"joshi, reetika\"",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 511.6
+    },
+    {
+      "id": "val_38",
+      "input": "papers titled CentOS-7 from 2009",
+      "expected": "title:\"CentOS-7 (2009)\" doctype:article",
+      "output": "title:(CentOS-7) year:2009 doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 566.6
+    },
+    {
+      "id": "val_39",
+      "input": "helpful research on galaxy formation",
+      "expected": "useful(abs:\"galaxy formation\")",
+      "output": "useful(abs:\"galaxy formation\")",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 389.1
+    },
+    {
+      "id": "val_40",
+      "input": "papers by power ozyurt",
+      "expected": "author:\"^power ozyurt\" doctype:article",
+      "output": "author:\"^power\" author:\"ozyurt\" doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 497.4
+    },
+    {
+      "id": "val_41",
+      "input": "Nome permanent mining field French Seward Land of Gold chapter VII",
+      "expected": "title:(Nome's OR Advent OR Permanent OR Mining OR Field.)",
+      "output": "title:(Permanent OR Mining OR Field OR French OR Seward's OR Land OR Gold)",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 620.6
+    },
+    {
+      "id": "val_42",
+      "input": "papers with associated articles",
+      "expected": "property:associated doctype:article",
+      "output": "property:associated doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 402.5
+    },
+    {
+      "id": "val_43",
+      "input": "papers on \"Planning a Computer System Project Stretch\"",
+      "expected": "title:(Planning OR Computer OR System OR Project OR Stretch) doctype:article",
+      "output": "title:(Planning OR Computer OR System OR Project OR Stretch) doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 500.4
+    },
+    {
+      "id": "val_44",
+      "input": "papers by osmanov 2020",
+      "expected": "pubdate:[2020-01 TO 2020-12] author:(\"osmanov,z\")",
+      "output": "author:\"^osmanov\" year:2020 doctype:article",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 521.0
+    },
+    {
+      "id": "val_45",
+      "input": "papers by Benedetta Vulcani on galaxy evolution",
+      "expected": "author:\"^Vulcani, Benedetta\" doctype:article",
+      "output": "author:\"Benedetta Vulcani\" doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 418.7
+    },
+    {
+      "id": "val_46",
+      "input": "galaxy papers mentioning SIFS and SOAR",
+      "expected": "full:\"SIFS\" AND full:\"SOAR\" AND abs:\"galaxy\" doctype:article",
+      "output": "abs:(galaxy AND (SIFS OR SOAR)) doctype:article",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 495.8
+    },
+    {
+      "id": "val_47",
+      "input": "FuiuGq7X0QQ.jpg 1280\u00d7784 image analysis",
+      "expected": "title:\"FuiuGq7X0QQ.jpg (1280\u00d7784)\"",
+      "output": "title:(FuiuGq7X0QQ.jpg OR 1280\u00d7784 OR image OR analysis)",
+      "syntax_valid": true,
+      "semantic_match": false,
+      "exact_match": false,
+      "latency_ms": 852.2
+    },
+    {
+      "id": "val_48",
+      "input": "traditional articles from 2021",
+      "expected": "property:article year:2021 doctype:article",
+      "output": "property:article year:2021 doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": true,
+      "latency_ms": 449.8
+    },
+    {
+      "id": "val_49",
+      "input": "papers by Krumholz and Ting",
+      "expected": "author:\"Krumholz\" abs:\"and ting\" doctype:article",
+      "output": "author:\"Krumholz\" author:\"Ting\" doctype:article",
+      "syntax_valid": true,
+      "semantic_match": true,
+      "exact_match": false,
+      "latency_ms": 505.1
+    }
+  ]
+}
