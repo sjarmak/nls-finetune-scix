@@ -510,7 +510,7 @@ def review_with_llm(example: dict, client: openai.OpenAI, documentation: str) ->
     try:
         response = client.chat.completions.create(
             model="gpt-5.2",
-            max_tokens=1024,
+            max_completion_tokens=1024,
             temperature=0.1,  # Low temperature for consistent reviews
             messages=[
                 {"role": "system", "content": "You are a strict data quality reviewer. Respond ONLY with valid JSON, no explanations."},
