@@ -159,7 +159,7 @@
         "Typecheck passes"
       ],
       "priority": 9,
-      "passes": false,
+      "passes": true,
       "notes": "This ties NER + linking together into a usable inference tool. Does not require GPU if model is loaded on CPU (slower but works)."
     },
     {

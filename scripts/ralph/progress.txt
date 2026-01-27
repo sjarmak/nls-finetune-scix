@@ -265,3 +265,29 @@ Started: Mon Jan 27 2026
   - The cascade function accepts optional `embedding_index` (None = skip embedding stage) for backwards compatibility
   - For the full catalogs (~148K entries, ~286K surface forms), building the embedding index will be slow but only needs to happen once
 ---
+
+## 2026-01-27 — US-009
+- **Implemented**: End-to-end NER + entity linking inference script
+- **Approach**: Created `scripts/run_enrichment_pipeline.py` that:
+  1. Loads trained SciBERT NER model via HuggingFace AutoModelForTokenClassification
+  2. Loads pre-built entity linking index (exact+fuzzy JSON) and optional embedding index
+  3. Reads input JSONL records with `{id, text}` fields
+  4. Runs NER inference to extract typed spans (topic, entity, author, date_range)
+  5. Runs three-stage entity linking cascade (exact → fuzzy → embedding) on each span
+  6. Outputs EnrichmentRecord JSONL with schema: `{id, text, spans: [{surface, start, end, type, canonical_id, source_vocabulary, confidence}]}`
+  7. Reports linking statistics (% exact, fuzzy, embedding, unlinked) and saves stats JSON
+- **Testing**: Ran on 100 records from enrichment_test.jsonl with real catalogs (265K exact-match entries, 288K surface forms)
+  - 123 NER spans extracted, 100% exact match (expected for synthetic test data from same catalogs)
+  - Output format validated against required schema
+  - Statistics JSON written alongside output
+- **CLI arguments**: `--model-dir`, `--linking-index`, `--embedding-index` (optional), `--input-file`, `--output-file`, `--max-seq-length`, `--max-records`
+- **Files changed**:
+  - `scripts/run_enrichment_pipeline.py` — New end-to-end inference script
+  - `scripts/ralph/prd.json` — Marked US-009 as passing
+- **Learnings for future iterations**:
+  - The linking index must be pre-built from catalogs before running the pipeline — use `build_linking_index()` + `save_linking_index()` from entity_linker.py
+  - On synthetic test data, 100% exact match is expected since entities were drawn from the same catalogs; real ADS abstracts (US-011) will show fuzzy/embedding/unlinked usage
+  - The pipeline processes ~100 records in a few seconds on CPU — no GPU needed for batch inference at this scale
+  - BIO_TO_SPAN_TYPE mapping (institution→entity) is critical — reused from evaluate_enrichment_model.py to maintain consistency
+  - The script writes a `.stats.json` file alongside the output for easy programmatic access to linking statistics
+---
