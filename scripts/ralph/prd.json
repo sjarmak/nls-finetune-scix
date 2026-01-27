@@ -107,7 +107,7 @@
         "Typecheck passes"
       ],
       "priority": 6,
-      "passes": false,
+      "passes": true,
       "notes": "Depends on model trained in US-004 and baseline from US-005. The model checkpoint must be downloaded locally for evaluation."
     },
     {

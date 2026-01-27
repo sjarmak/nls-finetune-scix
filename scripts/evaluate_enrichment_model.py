@@ -40,6 +40,12 @@ LABEL2ID: dict[str, int] = {label: i for i, label in enumerate(BIO_LABELS)}
 ID2LABEL: dict[int, str] = {i: label for i, label in enumerate(BIO_LABELS)}
 NUM_LABELS = len(BIO_LABELS)
 
+# Map BIO entity types back to enrichment dataset span types.
+# The BIO labels use "institution" but the enrichment dataset uses "entity".
+BIO_TO_SPAN_TYPE: dict[str, str] = {
+    "institution": "entity",
+}
+
 VOCAB_TO_DOMAIN: dict[str, str] = {
     "uat": "astronomy",
     "sweet": "earthscience",
@@ -205,11 +211,12 @@ def predict_spans_for_text(
                         span_type=current_type,
                     )
                 )
-            current_type = tag[2:]
+            raw_type = tag[2:]
+            current_type = BIO_TO_SPAN_TYPE.get(raw_type, raw_type)
             current_start = char_start
             current_end = char_end
 
-        elif tag.startswith("I-") and current_type == tag[2:]:
+        elif tag.startswith("I-") and current_type == BIO_TO_SPAN_TYPE.get(tag[2:], tag[2:]):
             # Continue the current span
             current_end = char_end
 

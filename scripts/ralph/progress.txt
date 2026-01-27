@@ -36,7 +36,10 @@ Started: Mon Jan 27 2026
 - Enrichment dataset uses `"topic"` and `"entity"` as span types (NOT `"institution"`)
 - When loading entity catalogs for matching, always use `entry_type="entity"`
 - The BIO labels use "institution" (B-institution, I-institution) but the span type annotation uses "entity"
+- CRITICAL: Training script `_char_labels` must map "entity" → "institution" via SPAN_TYPE_TO_BIO; evaluation script must reverse-map via BIO_TO_SPAN_TYPE
 - Keyword baseline floor: overall F1=0.41 (P=0.26, R=1.00) — NER model target is F1 >= 0.70
+- NER model result: overall F1=0.9993 (P=0.9993, R=0.9993) — GO recommendation
+- Training on MPS (Apple Silicon) works without issues; early stopping triggers after ~1.5 epochs
 
 ### Dependencies Added in Previous Phase
 - rdflib >= 7.0.0 (SWEET parsing)
@@ -178,4 +181,31 @@ Started: Mon Jan 27 2026
   - Keyword baseline is heavily recall-biased: with 286K surface forms, almost every gold span is found, but precision suffers from massive false positive counts
   - SWEET ontology terms are the biggest source of false positives (2,651 FPs for 438 TPs) — many Earth science terms are common English words
   - The baseline gives a clear F1 floor of ~0.41 that the trained NER model should beat (target: F1 >= 0.70)
+---
+
+## 2026-01-27 — US-006
+- **Implemented**: Trained SciBERT NER model locally and evaluated on real test data
+- **Bug Fix**: Training script `_char_labels` silently skipped all "entity" spans because `ENTITY_TYPES` only contained "institution". Added `SPAN_TYPE_TO_BIO` mapping (`"entity"` → `"institution"`) in training script and `BIO_TO_SPAN_TYPE` reverse mapping in evaluation script.
+- **Training**: SciBERT (allenai/scibert_scivocab_uncased) fine-tuned on 8,552 training records, 1,069 validation records. Early stopping triggered after ~1.5 epochs. Trained on MPS (Apple Silicon) in ~9 minutes.
+- **Results**:
+  - **Overall**: P=0.9993, R=0.9993, F1=0.9993 (1,365 TP, 1 FP, 1 FN out of 1,366 gold spans)
+  - **Macro F1 (by type)**: 0.9995
+  - **By type**: topic F1=0.9991 | entity F1=1.0000
+  - **By vocabulary**: UAT F1=1.0000, GCMD F1=1.0000, ROR F1=1.0000, Planetary F1=1.0000, SWEET F1=0.9989
+  - **By domain**: astronomy F1=1.0000, earthscience F1=0.9991, multidisciplinary F1=1.0000, planetary F1=1.0000
+  - **Baseline comparison**: NER model F1=0.9993 vs keyword baseline F1=0.4069 — precision improved from 0.2556 to 0.9993 (+0.7437)
+  - **Go/No-Go**: **GO** — far exceeds the F1 >= 0.70 threshold
+  - Only 1 error: single-character topic "a" at wrong offset (ambiguous single-letter entity)
+- **Note**: The near-perfect F1 on synthetic test data is expected — both train and test come from the same template-based generator. Real-world performance on ADS abstracts (US-011) will be the true test.
+- **Files changed**:
+  - `scripts/train_enrichment_model.py` — Added SPAN_TYPE_TO_BIO mapping for entity→institution in _char_labels
+  - `scripts/evaluate_enrichment_model.py` — Added BIO_TO_SPAN_TYPE mapping for institution→entity in predict_spans_for_text
+  - `reports/enrichment_model_eval.json` — Real evaluation metrics (not synthetic)
+  - `reports/enrichment_model_eval.md` — Full narrative report with baseline comparison, breakdowns, examples, and go/no-go
+- **Learnings for future iterations**:
+  - The entity/institution type mismatch is the most critical gotcha in this pipeline — always verify that span types in the dataset match the BIO label schema
+  - SciBERT fine-tuning on synthetic enrichment data converges very fast (1-2 epochs) because the templates are relatively repetitive
+  - MPS (Apple Silicon) training works without issues for SciBERT-sized models; no fp16/bf16 needed
+  - Near-perfect synthetic metrics are expected; the real-world gap (US-011) will be significant
+  - The single error case (single-letter "a" as a SWEET topic) highlights that very short entity names are problematic
 ---

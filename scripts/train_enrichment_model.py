@@ -34,6 +34,12 @@ from typing import Any
 
 ENTITY_TYPES = ("topic", "institution", "author", "date_range")
 
+# Map enrichment dataset span types to BIO entity types.
+# The enrichment dataset uses "entity" but BIO labels use "institution".
+SPAN_TYPE_TO_BIO: dict[str, str] = {
+    "entity": "institution",
+}
+
 BIO_LABELS: list[str] = ["O"]
 for _etype in ENTITY_TYPES:
     BIO_LABELS.append(f"B-{_etype}")
@@ -112,6 +118,7 @@ def _char_labels(text: str, spans: list[dict[str, Any]]) -> list[str]:
         start = span.get("start", 0)
         end = span.get("end", 0)
         entity_type = span.get("type", "")
+        entity_type = SPAN_TYPE_TO_BIO.get(entity_type, entity_type)
         if entity_type not in ENTITY_TYPES:
             continue
         if start >= end or start >= len(text):

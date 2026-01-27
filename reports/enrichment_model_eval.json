@@ -1,0 +1,540 @@
+{
+  "overall": {
+    "tp": 1365,
+    "fp": 1,
+    "fn": 1,
+    "precision": 0.9993,
+    "recall": 0.9993,
+    "f1": 0.9993
+  },
+  "macro_f1": 0.9995,
+  "by_type": {
+    "entity": {
+      "tp": 293,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "topic": {
+      "tp": 1072,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.9991,
+      "recall": 0.9991,
+      "f1": 0.9991
+    }
+  },
+  "by_domain": {
+    "astronomy": {
+      "tp": 525,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "earthscience": {
+      "tp": 547,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.9982,
+      "f1": 0.9991
+    },
+    "multidisciplinary": {
+      "tp": 145,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "planetary": {
+      "tp": 148,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "unknown": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "by_vocabulary": {
+    "gcmd": {
+      "tp": 105,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "planetary": {
+      "tp": 148,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "predicted_fp": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "ror": {
+      "tp": 145,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "sweet": {
+      "tp": 442,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.9977,
+      "f1": 0.9989
+    },
+    "uat": {
+      "tp": 525,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  },
+  "total_records": 1070,
+  "total_gold_spans": 1366,
+  "total_predicted_spans": 1366,
+  "examples_correct": [
+    {
+      "id": "enr_snp_f43abb82dd",
+      "text": "Mineralogical mapping around Jet Process Corporation (United States) from spectral data",
+      "gold_spans": [
+        {
+          "surface": "Jet Process Corporation (United States)",
+          "start": 29,
+          "end": 68,
+          "type": "entity"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "Jet Process Corporation (United States)",
+          "start": 29,
+          "end": 68,
+          "type": "entity"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_a5a01f6bcb",
+      "text": "Topographic analysis of Israel Science Foundation using altimetry data",
+      "gold_spans": [
+        {
+          "surface": "Israel Science Foundation",
+          "start": 24,
+          "end": 49,
+          "type": "entity"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "Israel Science Foundation",
+          "start": 24,
+          "end": 49,
+          "type": "entity"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_7eae4ce3ec",
+      "text": "We present new observations of droplet obtained from ground-based telescopes. Our analysis reveals significant variability in {topic} across different epochs. These findings have implications for models of FLOODING and related processes.",
+      "gold_spans": [
+        {
+          "surface": "droplet",
+          "start": 31,
+          "end": 38,
+          "type": "topic"
+        },
+        {
+          "surface": "FLOODING",
+          "start": 206,
+          "end": 214,
+          "type": "topic"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "droplet",
+          "start": 31,
+          "end": 38,
+          "type": "topic"
+        },
+        {
+          "surface": "FLOODING",
+          "start": 206,
+          "end": 214,
+          "type": "topic"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_98b7660733",
+      "text": "Characterization of Tertiary stars in protoplanetary disks",
+      "gold_spans": [
+        {
+          "surface": "Tertiary stars",
+          "start": 20,
+          "end": 34,
+          "type": "topic"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "Tertiary stars",
+          "start": 20,
+          "end": 34,
+          "type": "topic"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_f0c45f26f8",
+      "text": "A survey of BORA WINDS across stellar populations",
+      "gold_spans": [
+        {
+          "surface": "BORA WINDS",
+          "start": 12,
+          "end": 22,
+          "type": "topic"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "BORA WINDS",
+          "start": 12,
+          "end": 22,
+          "type": "topic"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_8d86d53ef1",
+      "text": "On the relationship between SEVERE CYCLONIC STORMS (N. INDIAN) and stellar mass",
+      "gold_spans": [
+        {
+          "surface": "SEVERE CYCLONIC STORMS (N. INDIAN)",
+          "start": 28,
+          "end": 62,
+          "type": "topic"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "SEVERE CYCLONIC STORMS (N. INDIAN)",
+          "start": 28,
+          "end": 62,
+          "type": "topic"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_6b8d6a82f4",
+      "text": "We present new observations of CHELICERATES obtained from ground-based telescopes. Our analysis reveals significant variability in {topic} across different epochs. These findings have implications for models of light freeze and related processes.",
+      "gold_spans": [
+        {
+          "surface": "CHELICERATES",
+          "start": 31,
+          "end": 43,
+          "type": "topic"
+        },
+        {
+          "surface": "light freeze",
+          "start": 211,
+          "end": 223,
+          "type": "topic"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "CHELICERATES",
+          "start": 31,
+          "end": 43,
+          "type": "topic"
+        },
+        {
+          "surface": "light freeze",
+          "start": 211,
+          "end": 223,
+          "type": "topic"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_20dd7b34b1",
+      "text": "Topographic analysis of Porter using altimetry data",
+      "gold_spans": [
+        {
+          "surface": "Porter",
+          "start": 24,
+          "end": 30,
+          "type": "entity"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "Porter",
+          "start": 24,
+          "end": 30,
+          "type": "entity"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_a9dd61c4ae",
+      "text": "Research output from Galois F in the past decade",
+      "gold_spans": [
+        {
+          "surface": "Galois F",
+          "start": 21,
+          "end": 29,
+          "type": "entity"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "Galois F",
+          "start": 21,
+          "end": 29,
+          "type": "entity"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_b1845b8ac2",
+      "text": "Mapping Visual observation using multi-wavelength imaging",
+      "gold_spans": [
+        {
+          "surface": "Visual observation",
+          "start": 8,
+          "end": 26,
+          "type": "topic"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "Visual observation",
+          "start": 8,
+          "end": 26,
+          "type": "topic"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_1473ef5660",
+      "text": "Interaction between permeability and cyclotron frequency in planetary science",
+      "gold_spans": [
+        {
+          "surface": "permeability",
+          "start": 20,
+          "end": 32,
+          "type": "topic"
+        },
+        {
+          "surface": "cyclotron frequency",
+          "start": 37,
+          "end": 56,
+          "type": "topic"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "permeability",
+          "start": 20,
+          "end": 32,
+          "type": "topic"
+        },
+        {
+          "surface": "cyclotron frequency",
+          "start": 37,
+          "end": 56,
+          "type": "topic"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_e1998fe1de",
+      "text": "Collaborative studies involving Podor and partner institutions",
+      "gold_spans": [
+        {
+          "surface": "Podor",
+          "start": 32,
+          "end": 37,
+          "type": "entity"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "Podor",
+          "start": 32,
+          "end": 37,
+          "type": "entity"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_a2c5d89961",
+      "text": "Topographic analysis of Belden (Germany) using altimetry data",
+      "gold_spans": [
+        {
+          "surface": "Belden (Germany)",
+          "start": 24,
+          "end": 40,
+          "type": "entity"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "Belden (Germany)",
+          "start": 24,
+          "end": 40,
+          "type": "entity"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_1aa2c10179",
+      "text": "Linking Plages and Keplerian orbit in stellar environments",
+      "gold_spans": [
+        {
+          "surface": "Plages",
+          "start": 8,
+          "end": 14,
+          "type": "topic"
+        },
+        {
+          "surface": "Keplerian orbit",
+          "start": 19,
+          "end": 34,
+          "type": "topic"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "Plages",
+          "start": 8,
+          "end": 14,
+          "type": "topic"
+        },
+        {
+          "surface": "Keplerian orbit",
+          "start": 19,
+          "end": 34,
+          "type": "topic"
+        }
+      ],
+      "verdict": "all_correct"
+    },
+    {
+      "id": "enr_snp_3a54b9e614",
+      "text": "A survey of Ellestadite across stellar populations",
+      "gold_spans": [
+        {
+          "surface": "Ellestadite",
+          "start": 12,
+          "end": 23,
+          "type": "topic"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "Ellestadite",
+          "start": 12,
+          "end": 23,
+          "type": "topic"
+        }
+      ],
+      "verdict": "all_correct"
+    }
+  ],
+  "examples_error": [
+    {
+      "id": "enr_snp_2cf7795415",
+      "text": "We present new observations of a obtained from ground-based telescopes. Our analysis reveals significant variability in {topic} across different epochs. These findings have implications for models of Silver and related processes.",
+      "gold_spans": [
+        {
+          "surface": "a",
+          "start": 21,
+          "end": 22,
+          "type": "topic"
+        },
+        {
+          "surface": "Silver",
+          "start": 200,
+          "end": 206,
+          "type": "topic"
+        }
+      ],
+      "predicted_spans": [
+        {
+          "surface": "a",
+          "start": 31,
+          "end": 32,
+          "type": "topic"
+        },
+        {
+          "surface": "Silver",
+          "start": 200,
+          "end": 206,
+          "type": "topic"
+        }
+      ],
+      "missed": [
+        {
+          "surface": "a",
+          "start": 21,
+          "end": 22,
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "a",
+          "start": 31,
+          "end": 32,
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    }
+  ]
+}
