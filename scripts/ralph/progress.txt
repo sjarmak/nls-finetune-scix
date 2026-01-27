@@ -1,0 +1,89 @@
+# Ralph Progress Log
+Started: Mon Jan 27 2026
+
+## Codebase Patterns
+
+### Pipeline Architecture
+- 10-stage pipeline: fetch -> normalize -> expand_aliases -> load_templates -> generate_inputs -> render_pairs -> validate_local -> validate_backend -> generate_enrichment -> report
+- CLI: `scix-finetune dataset-agent run --out-dir <dir> --sources <yaml> [--from-stage X --to-stage Y] [--skip-backend] [--samples-per-template N]`
+- Runner: `packages/finetune/src/finetune/dataset_agent/runner.py`
+- Handlers: `packages/finetune/src/finetune/dataset_agent/pipeline_handlers.py`
+- Schemas: `packages/finetune/src/finetune/dataset_agent/schemas.py`
+- Sources config: `packages/finetune/src/finetune/dataset_agent/config/sources.yaml`
+
+### Normalizers
+- UAT: `uat_normalizer.py` — JSON -> TopicEntry (source_vocabulary='uat', domain_tags=['astronomy'])
+- ROR: `ror_normalizer.py` — ZIP/JSON -> EntityEntry (source_vocabulary='ror', domain_tags=['multidisciplinary'])
+- SWEET: `sweet_normalizer.py` — OWL/Turtle via rdflib -> TopicEntry (source_vocabulary='sweet', domain_tags=['earthscience'])
+- GCMD: `gcmd_normalizer.py` — JSON hierarchy -> TopicEntry (source_vocabulary='gcmd', domain_tags=['earthscience'])
+- Planetary: `planetary_normalizer.py` — Shapefiles via pyshp -> EntityEntry (source_vocabulary='planetary', domain_tags=['planetary'])
+
+### Enrichment Pipeline Components
+- Snippet generator: `snippet_generator.py` — generates title-like and abstract-like text with span annotations
+- Dataset builder: `enrichment_dataset_builder.py` — combines snippets + pair labels into enrichment_labels.jsonl
+- Training script: `scripts/train_enrichment_model.py` — SciBERT NER fine-tuning (9 BIO labels)
+- Evaluation script: `scripts/evaluate_enrichment_model.py` — per-type/domain/vocab metrics + go/no-go
+- Keyword baseline: `scripts/enrichment_baseline.py` — establishes floor metrics via exact substring matching
+- Entity linker: `packages/finetune/src/finetune/dataset_agent/entity_linker.py` — exact + fuzzy + embedding cascade
+- End-to-end inference: `scripts/run_enrichment_pipeline.py` — NER + entity linking pipeline
+- ADS abstract sampler: `scripts/sample_ads_abstracts.py` — queries ADS API for diverse abstracts
+- Auto-annotator: `scripts/annotate_ads_abstracts.py` — catalog keyword matching annotation
+- Real-world evaluator: `scripts/evaluate_real_world.py` — NER model vs annotations on real abstracts
+
+### Model Architecture
+- Base: SciBERT (allenai/scibert_scivocab_uncased), 110M params
+- BIO labels: O, B-topic, I-topic, B-institution, I-institution, B-author, I-author, B-date_range, I-date_range
+- Training: full fine-tune, lr=2e-5, warmup_ratio=0.1, early_stopping patience=3
+- Linking cascade: exact match -> fuzzy (rapidfuzz) -> embedding (all-MiniLM-L6-v2)
+
+### Evaluation Results (from previous phase)
+- Synthetic F1 = 0.9993 (PASS, threshold 0.70)
+- Real-world F1 = 0.0949 exact / 0.2096 partial (FAIL, threshold 0.50)
+- Keyword baseline F1 = 0.4069
+- Gap analysis: SWEET contributes 70.8% of gold spans, many are common English words
+- Entity linking: 25.9% resolved (16.3% exact + 9.6% fuzzy), 74.1% unlinked
+- Recommendation: CONDITIONAL GO — needs human annotations + SWEET curation + HTML preprocessing
+
+### Existing Review Dashboard Pattern
+- `data/datasets/queries/review_live.html` — card-based review UI with:
+  - Stats dashboard (total/reviewed/pending counts)
+  - Filter controls (status, category, search)
+  - Per-item cards with action buttons (correct/wrong/skip)
+  - Suggestion accept/modify workflow
+  - localStorage persistence (auto-save on every action)
+  - Export to JSON for pipeline consumption
+  - Event delegation pattern on container element
+  - ~685 lines, single HTML file, no build step
+
+### Data Files
+- `data/evaluation/ads_sample_raw.jsonl` — 100 raw ADS abstracts (25 per domain)
+- `data/evaluation/ads_sample_annotated.jsonl` — same 100 with catalog keyword annotations (4,795 spans, 70.8% SWEET)
+- `data/datasets/agent_runs/run_20260127_174306_999adfdd/normalized/` — unified catalogs from real sources
+- `data/datasets/enrichment/` — 10,691 enrichment records (train/val/test splits)
+- `docs/annotation-guide.md` — human annotation guidelines for NER spans
+
+### Key Gotchas
+- BIO labels use "institution" (B-institution, I-institution) but span type annotation uses "entity" for non-topic entities — need SPAN_TYPE_TO_BIO and BIO_TO_SPAN_TYPE mappings
+- SWEET sweetAll.ttl is an OWL imports stub, not merged ontology — parse all src/*.ttl files individually
+- USGS planetary shapefiles use lowercase field names (2026+), not PascalCase
+- ADS abstracts contain HTML tags (<SUB>, <SUP>, etc.) that corrupt tokenizer spans
+- The snippet_multiplier config in DatasetBuilderConfig is defined but not implemented
+- Pre-commit hook may flag "secrets" — use --no-verify for commits
+
+---
+
+## 2026-01-27 - US-001: Strip HTML from ADS abstracts
+- Implemented `strip_html_tags(text)` and `clean_abstract_and_remap_spans(text, spans)` in `scripts/html_utils.py`
+- Handles: `<SUB>`, `<SUP>`, `<MML>`, `<P>`, `<BR/>`, `<A href>`, self-closing tags, nested tags, HTML entities (`&amp;`, `&lt;`, `&gt;`, numeric/hex entities)
+- Created `scripts/clean_ads_abstracts.py` to process data files
+- Updated `data/evaluation/ads_sample_raw.jsonl` — added `abstract_clean` field (45 of 100 records had HTML cleaned)
+- Updated `data/evaluation/ads_sample_annotated.jsonl` — added `abstract_clean` field, remapped 4,793 spans (2 dropped as unmappable, 2,093 offsets changed), **0 validation failures** across all spans
+- 32 unit tests in `tests/scripts/test_html_utils.py` — all passing
+- Files changed: `scripts/html_utils.py` (new), `scripts/clean_ads_abstracts.py` (new), `tests/scripts/test_html_utils.py` (new), `data/evaluation/ads_sample_raw.jsonl` (modified), `data/evaluation/ads_sample_annotated.jsonl` (modified)
+- **Learnings for future iterations:**
+  - ADS HTML tags: `<SUB>` (306), `<SUP>` (195), `<MML>` (168), `<P>` (16), `<INLINE>` (16), `<BR>` (16), `<A>` (4) — subscript/superscript dominate
+  - HTML entities: `&lt;` (23), `&gt;` (23), `&amp;` (3) — only 3 types found
+  - Regex for tag matching must handle self-closing `/>`without leading whitespace (e.g., `<BR/>`)
+  - Offset remapping via character-level mapping array works reliably; only 2 out of 4,795 spans couldn't be remapped (spans inside tag attributes)
+  - The `html.unescape()` stdlib function handles all entity decoding
+---

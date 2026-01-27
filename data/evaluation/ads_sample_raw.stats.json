@@ -1,0 +1,12 @@
+{
+  "total_fetched": 100,
+  "per_domain": {
+    "astronomy": 25,
+    "earth_science": 25,
+    "multidisciplinary": 25,
+    "planetary_science": 25
+  },
+  "duplicates_removed": 8,
+  "no_abstract_skipped": 9,
+  "short_abstract_skipped": 0
+}

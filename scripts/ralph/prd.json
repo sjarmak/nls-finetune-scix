@@ -1,0 +1,189 @@
+{
+  "project": "SciX Enrichment — Annotation Dashboard, SWEET Curation & Retraining",
+  "branchName": "ralph/annotation-retraining",
+  "description": "Build an NER annotation dashboard for human review of ADS abstracts, curate SWEET vocabulary to remove noise, preprocess HTML from abstracts, and prepare mixed-data retraining pipeline. Closes the synthetic-to-real gap identified in the evaluation report.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Strip HTML from ADS abstracts",
+      "description": "As a developer, I want to strip HTML tags from ADS abstract text so that the NER model and annotation dashboard work with clean plain text.",
+      "acceptanceCriteria": [
+        "Function strip_html_tags(text: str) -> str in a reusable module",
+        "Handles nested tags, self-closing tags, HTML entities (&amp;, &lt;, etc.)",
+        "Preserves whitespace and text content",
+        "Updates data/evaluation/ads_sample_raw.jsonl with abstract_clean field",
+        "Updates data/evaluation/ads_sample_annotated.jsonl with abstract_clean field and recalculated span offsets",
+        "Unit tests for edge cases (nested tags, entities, empty tags, malformed HTML)",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "ADS abstracts contain <SUB>, <SUP>, <I>, <B>, <A> tags. These corrupt NER tokenizer span offsets. This is prerequisite for all downstream work."
+    },
+    {
+      "id": "US-002",
+      "title": "Curate SWEET vocabulary — automated filtering",
+      "description": "As a developer, I want to filter SWEET's 12,986 entries to remove common English words so that auto-annotation produces meaningful spans instead of noise.",
+      "acceptanceCriteria": [
+        "Load topic_catalog_sweet.jsonl from the pipeline run normalized directory",
+        "Remove entries where canonical label is: fewer than 4 characters, in English stopword list (500+ words), in high-frequency English word list (top 5,000), or a single common English word",
+        "Produce data/vocabularies/sweet_curated.jsonl with surviving entries",
+        "Produce data/vocabularies/sweet_removed.jsonl with removed entries + removal reason",
+        "Produce data/vocabularies/sweet_curation_report.json with stats",
+        "Log borderline cases (4-6 char scientific terms) to data/vocabularies/sweet_borderline.jsonl",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": "SWEET contributes 70.8% of gold spans in current auto-annotations. Many are common English words like 'present', 'from', 'based on', 'full'. Filtering should reduce SWEET from ~13K to ~3-5K entries."
+    },
+    {
+      "id": "US-003",
+      "title": "Re-annotate abstracts with curated vocabulary + HTML preprocessing",
+      "description": "As a developer, I want to re-run auto-annotation on cleaned abstracts with curated SWEET so the dashboard starts from better annotations.",
+      "acceptanceCriteria": [
+        "Use abstract_clean (HTML-stripped) text from US-001",
+        "Use curated SWEET vocabulary from US-002",
+        "Keep UAT, GCMD, ROR, planetary catalogs unchanged",
+        "Re-annotate all 100 abstracts",
+        "Produce data/evaluation/ads_sample_reannotated.jsonl",
+        "Produce comparison stats showing span count before vs after curation (expect 50-70% reduction in SWEET spans)",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "Depends on US-001 and US-002. The re-annotated file is used as input to the annotation dashboard."
+    },
+    {
+      "id": "US-004",
+      "title": "Run NER model predictions on cleaned abstracts",
+      "description": "As a developer, I want model predictions alongside auto-annotations so the dashboard can show agreement and disagreement.",
+      "acceptanceCriteria": [
+        "Load trained SciBERT NER model (find the model directory from previous Ralph run)",
+        "Run inference on all 100 cleaned abstracts (using abstract_clean field)",
+        "Produce data/evaluation/ads_sample_predictions.jsonl with model-predicted spans",
+        "Each record has: bibcode, spans with surface, start, end, type, confidence",
+        "Confidence is the max softmax probability of the B- tag for each span",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "Depends on US-001. If the trained model directory doesn't exist, run training first using scripts/train_enrichment_model.py on synthetic data."
+    },
+    {
+      "id": "US-005",
+      "title": "Build NER annotation dashboard HTML template",
+      "description": "As a developer, I want a single-file HTML annotation tool that displays abstracts with highlighted spans and lets a reviewer accept, reject, edit, or add spans.",
+      "acceptanceCriteria": [
+        "Single HTML file template at scripts/annotation_dashboard_template.html",
+        "Placeholder DATA_PLACEHOLDER for inline JSON injection by generation script",
+        "For each abstract shows: bibcode, title, domain, citation count in header",
+        "Abstract text with color-coded span highlights: blue (auto-annotation), green (model prediction), purple (agreement), gold (user-added)",
+        "Span list panel with accept/reject toggles per span",
+        "Text selection (mouse drag) creates new span with type dropdown (topic/entity/institution/author/date_range)",
+        "Click highlighted span toggles accept/reject status",
+        "Notes field per abstract",
+        "Stats dashboard: total abstracts, reviewed count, pending count, span counts by type and source",
+        "Filter controls: domain category, review status (pending/reviewed/skipped), has-disagreements filter",
+        "localStorage persistence with key nls-ner-annotations-v1",
+        "Export button downloads JSONL with accepted spans matching enrichment_labels.jsonl schema",
+        "Save/load progress buttons",
+        "Keyboard shortcuts: arrow keys for next/prev abstract, 1-5 for span type assignment",
+        "Follows same visual style as data/datasets/queries/review_live.html (light theme, card layout)",
+        "Typecheck passes (for generation script)"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "This is the main user-facing deliverable. Must be a single HTML file with no build step. Adapt the review_live.html card layout and event delegation pattern. Add window.getSelection() for text selection span creation."
+    },
+    {
+      "id": "US-006",
+      "title": "Generate annotation dashboard with embedded data",
+      "description": "As a developer, I want a script that injects real data into the dashboard template so I can open it in a browser and start annotating.",
+      "acceptanceCriteria": [
+        "Script at scripts/generate_annotation_dashboard.py",
+        "Reads: ads_sample_reannotated.jsonl, ads_sample_predictions.jsonl",
+        "Merges auto-annotations and model predictions per abstract",
+        "Embeds merged data as inline JSON in the HTML template",
+        "Produces data/evaluation/review_ner_annotations.html",
+        "Runnable: python scripts/generate_annotation_dashboard.py",
+        "Generated HTML opens in browser and is fully functional",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "Depends on US-003, US-004, US-005. This is the script the user runs to generate the dashboard before opening it in their browser."
+    },
+    {
+      "id": "US-007",
+      "title": "Sample additional ADS abstracts (200 more)",
+      "description": "As a developer, I want 300 total abstracts for better annotation coverage across all domains.",
+      "acceptanceCriteria": [
+        "Extend scripts/sample_ads_abstracts.py to support --count and --exclude flags",
+        "Sample 200 new abstracts (50 per domain) excluding existing 100 bibcodes",
+        "Apply HTML cleaning from US-001",
+        "Auto-annotate with curated vocabulary from US-002",
+        "Run model predictions from US-004 approach",
+        "Produce data/evaluation/ads_sample_batch2_raw.jsonl and ads_sample_batch2_reannotated.jsonl and ads_sample_batch2_predictions.jsonl",
+        "Regenerate dashboard HTML with all 300 abstracts",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "Depends on US-001, US-002, US-004, US-006. Requires ADS API access (ADS_DEV_KEY env var). If API is unavailable, generate synthetic abstracts as placeholder."
+    },
+    {
+      "id": "US-008",
+      "title": "Export human annotations to training format",
+      "description": "As a developer, I want a script that converts dashboard-exported annotations into training data for mixed retraining.",
+      "acceptanceCriteria": [
+        "Script at scripts/export_annotations_to_training.py",
+        "Reads exported JSON from dashboard (the format produced by the Export button)",
+        "Converts to EnrichmentRecord format with spans, domain_tags, provenance",
+        "Validates byte offsets (text[start:end] == surface) for all spans, reports failures",
+        "Produces data/datasets/enrichment/human_annotated_train.jsonl and human_annotated_val.jsonl (90/10 split)",
+        "Reports: total records, spans by type, spans by vocabulary, validation failures",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "This bridges the dashboard export to the training pipeline. The user annotates in the browser, exports JSON, then runs this script to prepare training data."
+    },
+    {
+      "id": "US-009",
+      "title": "Mixed-data curriculum retraining script",
+      "description": "As a developer, I want to retrain SciBERT using curriculum learning: synthetic pre-training then human-annotation fine-tuning.",
+      "acceptanceCriteria": [
+        "Extend scripts/train_enrichment_model.py with --curriculum flag",
+        "When --curriculum: phase 1 trains on synthetic data for N epochs (default 3), phase 2 fine-tunes on human data for M epochs (default 5)",
+        "Phase 2 uses lower learning rate (default 5e-6 vs 2e-5)",
+        "Support --human-train and --human-val paths for human annotation files",
+        "Log phase transitions and per-epoch metrics for both phases",
+        "Save best model checkpoint by val F1 from phase 2",
+        "Save to models/enrichment_ner_v2/ by default",
+        "Falls back to synthetic-only training if human annotation files don't exist yet",
+        "Typecheck passes"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": "This can be built before human annotations exist. It should gracefully handle missing human data by falling back to synthetic-only training. The user will run this on Colab Pro after completing annotations."
+    },
+    {
+      "id": "US-010",
+      "title": "Re-evaluate with mixed-trained model",
+      "description": "As a developer, I want to run the full evaluation pipeline with the mixed-trained model to measure the synthetic-to-real gap improvement.",
+      "acceptanceCriteria": [
+        "Run evaluation on: synthetic test set and real-world test set (from dashboard export or existing annotated data)",
+        "Compare to: keyword baseline, synthetic-only model results from previous phase",
+        "Produce reports/enrichment_eval_v2.json and reports/enrichment_eval_v2.md",
+        "Include: synthetic-to-real gap delta (should shrink), per-vocabulary breakdown, per-domain breakdown",
+        "Go/no-go assessment with thresholds (synthetic F1 >= 0.70, real-world F1 >= 0.50)",
+        "If human annotations don't exist yet, run on synthetic data only and note real-world eval is pending",
+        "Typecheck passes"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": "Depends on US-009. Can run with synthetic-only model as baseline comparison even before human annotations. The key metric is whether the synthetic-to-real gap shrinks from -0.90 F1."
+    }
+  ]
+}

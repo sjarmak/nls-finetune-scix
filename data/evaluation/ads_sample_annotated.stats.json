@@ -1,0 +1,18 @@
+{
+  "total_abstracts": 100,
+  "annotated_abstracts": 100,
+  "abstracts_no_spans": 0,
+  "total_spans": 4795,
+  "avg_spans_per_abstract": 48.0,
+  "spans_by_type": {
+    "entity": 542,
+    "topic": 4253
+  },
+  "spans_by_vocabulary": {
+    "gcmd": 129,
+    "planetary": 100,
+    "ror": 442,
+    "sweet": 3394,
+    "uat": 730
+  }
+}
