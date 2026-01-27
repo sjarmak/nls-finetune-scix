@@ -1,0 +1,933 @@
+{
+  "overall": {
+    "tp": 353,
+    "fp": 2295,
+    "fn": 4442,
+    "precision": 0.1333,
+    "recall": 0.0736,
+    "f1": 0.0949
+  },
+  "macro_f1": 0.0576,
+  "by_type": {
+    "entity": {
+      "tp": 4,
+      "fp": 64,
+      "fn": 538,
+      "precision": 0.0588,
+      "recall": 0.0074,
+      "f1": 0.0131
+    },
+    "topic": {
+      "tp": 349,
+      "fp": 2231,
+      "fn": 3904,
+      "precision": 0.1353,
+      "recall": 0.0821,
+      "f1": 0.1022
+    }
+  },
+  "by_domain": {
+    "astronomy": {
+      "tp": 159,
+      "fp": 0,
+      "fn": 571,
+      "precision": 1.0,
+      "recall": 0.2178,
+      "f1": 0.3577
+    },
+    "earthscience": {
+      "tp": 190,
+      "fp": 0,
+      "fn": 3333,
+      "precision": 1.0,
+      "recall": 0.0539,
+      "f1": 0.1023
+    },
+    "multidisciplinary": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 438,
+      "precision": 1.0,
+      "recall": 0.009,
+      "f1": 0.0179
+    },
+    "planetary": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 100,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "unknown": {
+      "tp": 0,
+      "fp": 2295,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "by_vocabulary": {
+    "gcmd": {
+      "tp": 15,
+      "fp": 0,
+      "fn": 114,
+      "precision": 1.0,
+      "recall": 0.1163,
+      "f1": 0.2083
+    },
+    "planetary": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 100,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "predicted_fp": {
+      "tp": 0,
+      "fp": 2295,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "ror": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 438,
+      "precision": 1.0,
+      "recall": 0.009,
+      "f1": 0.0179
+    },
+    "sweet": {
+      "tp": 175,
+      "fp": 0,
+      "fn": 3219,
+      "precision": 1.0,
+      "recall": 0.0516,
+      "f1": 0.0981
+    },
+    "uat": {
+      "tp": 159,
+      "fp": 0,
+      "fn": 571,
+      "precision": 1.0,
+      "recall": 0.2178,
+      "f1": 0.3577
+    }
+  },
+  "total_records": 100,
+  "total_gold_spans": 4795,
+  "total_predicted_spans": 2648,
+  "examples_correct": [],
+  "examples_error": [
+    {
+      "bibcode": "2020A&A...641A...6P",
+      "text_snippet": "We present cosmological parameter results from the final full-mission Planck measurements of the cosmic microwave background (CMB) anisotropies, combining information from the temperature and polariza",
+      "gold_count": 103,
+      "pred_count": 46,
+      "tp": 4,
+      "fp": 42,
+      "fn": 99,
+      "missed": [
+        {
+          "surface": "present",
+          "type": "topic"
+        },
+        {
+          "surface": "from",
+          "type": "topic"
+        },
+        {
+          "surface": "Planck",
+          "type": "entity"
+        },
+        {
+          "surface": "cosmic microwave background",
+          "type": "topic"
+        },
+        {
+          "surface": "from",
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "cosmological parameter",
+          "type": "topic"
+        },
+        {
+          "surface": "the cosmic microwave background (CMB) anisotropies",
+          "type": "topic"
+        },
+        {
+          "surface": "the",
+          "type": "topic"
+        },
+        {
+          "surface": "temperature",
+          "type": "topic"
+        },
+        {
+          "surface": "polarization maps",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "1998AJ....116.1009R",
+      "text_snippet": "We present spectral and photometric observations of 10 Type Ia supernovae (SNe Ia) in the redshift range 0.16 &lt;= z &lt;= 0.62. The luminosity distances of these objects are determined by methods th",
+      "gold_count": 106,
+      "pred_count": 62,
+      "tp": 6,
+      "fp": 56,
+      "fn": 100,
+      "missed": [
+        {
+          "surface": "present",
+          "type": "topic"
+        },
+        {
+          "surface": "spectral",
+          "type": "topic"
+        },
+        {
+          "surface": "Type Ia supernovae",
+          "type": "topic"
+        },
+        {
+          "surface": "redshift",
+          "type": "topic"
+        },
+        {
+          "surface": "range",
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "photometric",
+          "type": "topic"
+        },
+        {
+          "surface": "10 Type Ia supernovae (SNe Ia)",
+          "type": "topic"
+        },
+        {
+          "surface": "luminosity distances",
+          "type": "topic"
+        },
+        {
+          "surface": "SN Ia luminosity",
+          "type": "topic"
+        },
+        {
+          "surface": "light curve shape",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "1999ApJ...517..565P",
+      "text_snippet": "We report measurements of the mass density, Ω<SUB>M</SUB>, and cosmological-constant energy density, Ω<SUB>Λ</SUB>, of the universe based on the analysis of 42 type Ia supernovae discovered by the Sup",
+      "gold_count": 54,
+      "pred_count": 32,
+      "tp": 5,
+      "fp": 27,
+      "fn": 49,
+      "missed": [
+        {
+          "surface": "constant",
+          "type": "topic"
+        },
+        {
+          "surface": "energy density",
+          "type": "topic"
+        },
+        {
+          "surface": "based on",
+          "type": "topic"
+        },
+        {
+          "surface": "type Ia supernovae",
+          "type": "topic"
+        },
+        {
+          "surface": "Cosmology",
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "the mass density,",
+          "type": "topic"
+        },
+        {
+          "surface": "Ω<SUB>M</SUB>,",
+          "type": "topic"
+        },
+        {
+          "surface": "cosmological-constant energy density,",
+          "type": "topic"
+        },
+        {
+          "surface": "Ω<SUB>Λ</SUB>,",
+          "type": "topic"
+        },
+        {
+          "surface": "the universe",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "2020NatMe..17..261V",
+      "text_snippet": "SciPy is an open source scientific computing library for the Python programming language. SciPy 1.0 was released in late 2017, about 16 years after the original version 0.1 release. SciPy has become a",
+      "gold_count": 37,
+      "pred_count": 25,
+      "tp": 4,
+      "fp": 21,
+      "fn": 33,
+      "missed": [
+        {
+          "surface": "open",
+          "type": "topic"
+        },
+        {
+          "surface": "release",
+          "type": "topic"
+        },
+        {
+          "surface": "standard",
+          "type": "topic"
+        },
+        {
+          "surface": "algorithms",
+          "type": "topic"
+        },
+        {
+          "surface": "unique",
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "SciPy",
+          "type": "topic"
+        },
+        {
+          "surface": "scientific computing",
+          "type": "topic"
+        },
+        {
+          "surface": "SciPy",
+          "type": "topic"
+        },
+        {
+          "surface": "SciPy",
+          "type": "topic"
+        },
+        {
+          "surface": "scientific algorithms",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "1998ApJ...500..525S",
+      "text_snippet": "We present a full-sky 100 μm map that is a reprocessed composite of the COBE/DIRBE and IRAS/ISSA maps, with the zodiacal foreground and confirmed point sources removed. Before using the ISSA maps, we ",
+      "gold_count": 79,
+      "pred_count": 58,
+      "tp": 4,
+      "fp": 54,
+      "fn": 75,
+      "missed": [
+        {
+          "surface": "present",
+          "type": "topic"
+        },
+        {
+          "surface": "full",
+          "type": "topic"
+        },
+        {
+          "surface": "composite",
+          "type": "topic"
+        },
+        {
+          "surface": "ISSA",
+          "type": "entity"
+        },
+        {
+          "surface": "ISSA",
+          "type": "entity"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "full-sky",
+          "type": "topic"
+        },
+        {
+          "surface": "100 μm",
+          "type": "topic"
+        },
+        {
+          "surface": "COBE",
+          "type": "topic"
+        },
+        {
+          "surface": "DIRBE",
+          "type": "topic"
+        },
+        {
+          "surface": "zodiacal foreground",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "2016A&A...594A..13P",
+      "text_snippet": "This paper presents cosmological results based on full-mission Planck observations of temperature and polarization anisotropies of the cosmic microwave background (CMB) radiation. Our results are in v",
+      "gold_count": 132,
+      "pred_count": 54,
+      "tp": 7,
+      "fp": 47,
+      "fn": 125,
+      "missed": [
+        {
+          "surface": "based on",
+          "type": "topic"
+        },
+        {
+          "surface": "Planck",
+          "type": "entity"
+        },
+        {
+          "surface": "polarization",
+          "type": "topic"
+        },
+        {
+          "surface": "cosmic microwave background",
+          "type": "topic"
+        },
+        {
+          "surface": "radiation",
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "Planck",
+          "type": "topic"
+        },
+        {
+          "surface": "temperature",
+          "type": "topic"
+        },
+        {
+          "surface": "polarization anisotropies of",
+          "type": "topic"
+        },
+        {
+          "surface": "the cosmic microwave background (CMB) radiation",
+          "type": "topic"
+        },
+        {
+          "surface": "Planck nominal-mission",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "1973A&A....24..337S",
+      "text_snippet": "The outward transfer of the angular momentum of the accreting matter leads to the formation of a disk around the black hole. The structure and radiation spectrum of the disk depend, mainly on the rate",
+      "gold_count": 68,
+      "pred_count": 76,
+      "tp": 9,
+      "fp": 67,
+      "fn": 59,
+      "missed": [
+        {
+          "surface": "outward",
+          "type": "topic"
+        },
+        {
+          "surface": "angular momentum",
+          "type": "topic"
+        },
+        {
+          "surface": "leads",
+          "type": "topic"
+        },
+        {
+          "surface": "black",
+          "type": "entity"
+        },
+        {
+          "surface": "radiation",
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "outward transfer",
+          "type": "topic"
+        },
+        {
+          "surface": "the angular momentum of the accreting matter",
+          "type": "topic"
+        },
+        {
+          "surface": "disk",
+          "type": "topic"
+        },
+        {
+          "surface": "structure",
+          "type": "topic"
+        },
+        {
+          "surface": "radiation spectrum",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "2016PhRvL.116f1102A",
+      "text_snippet": "On September 14, 2015 at 09:50:45 UTC the two detectors of the Laser Interferometer Gravitational-Wave Observatory simultaneously observed a transient gravitational-wave signal. The signal sweeps upwa",
+      "gold_count": 35,
+      "pred_count": 12,
+      "tp": 3,
+      "fp": 9,
+      "fn": 32,
+      "missed": [
+        {
+          "surface": "Laser Interferometer Gravitational-Wave Observatory",
+          "type": "topic"
+        },
+        {
+          "surface": "observed",
+          "type": "topic"
+        },
+        {
+          "surface": "signal",
+          "type": "topic"
+        },
+        {
+          "surface": "signal",
+          "type": "topic"
+        },
+        {
+          "surface": "frequency",
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "ringdown of",
+          "type": "topic"
+        },
+        {
+          "surface": "matched-filter",
+          "type": "topic"
+        },
+        {
+          "surface": "luminosity distance",
+          "type": "topic"
+        },
+        {
+          "surface": "41 0<SUB>-180</SUB><SUP>+160</SUP> Mpc",
+          "type": "topic"
+        },
+        {
+          "surface": "source",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "1975CMaPh..43..199H",
+      "text_snippet": "In the classical theory black holes can only absorb and not emit particles. However it is shown that quantum mechanical effects cause black holes to create and emit particles as if they were hot bodie",
+      "gold_count": 35,
+      "pred_count": 32,
+      "tp": 10,
+      "fp": 22,
+      "fn": 25,
+      "missed": [
+        {
+          "surface": "theory",
+          "type": "topic"
+        },
+        {
+          "surface": "quantum",
+          "type": "entity"
+        },
+        {
+          "surface": "create",
+          "type": "entity"
+        },
+        {
+          "surface": "left",
+          "type": "topic"
+        },
+        {
+          "surface": "odot",
+          "type": "entity"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "particles",
+          "type": "topic"
+        },
+        {
+          "surface": "hot bodies",
+          "type": "topic"
+        },
+        {
+          "surface": "hkappa }/{2π k",
+          "type": "topic"
+        },
+        {
+          "surface": "10^{ - 6} left(",
+          "type": "topic"
+        },
+        {
+          "surface": "M_ odot }/M} right){}^ circ K",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "2003ApJS..148..175S",
+      "text_snippet": "WMAP precision data enable accurate testing of cosmological models. We find that the emerging standard model of cosmology, a flat Λ-dominated universe seeded by a nearly scale-invariant adiabatic Gaus",
+      "gold_count": 59,
+      "pred_count": 33,
+      "tp": 5,
+      "fp": 28,
+      "fn": 54,
+      "missed": [
+        {
+          "surface": "precision",
+          "type": "topic"
+        },
+        {
+          "surface": "accurate",
+          "type": "topic"
+        },
+        {
+          "surface": "cosmological models",
+          "type": "topic"
+        },
+        {
+          "surface": "find",
+          "type": "entity"
+        },
+        {
+          "surface": "emerging",
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "cosmological",
+          "type": "topic"
+        },
+        {
+          "surface": "emerging standard model",
+          "type": "topic"
+        },
+        {
+          "surface": "flat Λ-dominated universe seeded by",
+          "type": "topic"
+        },
+        {
+          "surface": "nearly scale-invariant",
+          "type": "topic"
+        },
+        {
+          "surface": "adiabatic Gaussian fluctuations",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "1996A&AS..117..393B",
+      "text_snippet": "We present the automated techniques we have developed for new software that optimally detects, de-blends, measures and classifies sources from astronomical images: SExtractor (Source Extractor). We sh",
+      "gold_count": 24,
+      "pred_count": 4,
+      "tp": 0,
+      "fp": 4,
+      "fn": 24,
+      "missed": [
+        {
+          "surface": "present",
+          "type": "topic"
+        },
+        {
+          "surface": "techniques",
+          "type": "topic"
+        },
+        {
+          "surface": "measures",
+          "type": "topic"
+        },
+        {
+          "surface": "from",
+          "type": "topic"
+        },
+        {
+          "surface": "astronomical",
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "sources",
+          "type": "topic"
+        },
+        {
+          "surface": "Source",
+          "type": "topic"
+        },
+        {
+          "surface": "star/galaxy separation",
+          "type": "topic"
+        },
+        {
+          "surface": "SExtractor",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "1997ApJ...490..493N",
+      "text_snippet": "We use high-resolution N-body simulations to study the equilibrium density profiles of dark matter halos in hierarchically clustering universes. We find that all such profiles have the same shape, ind",
+      "gold_count": 30,
+      "pred_count": 25,
+      "tp": 3,
+      "fp": 22,
+      "fn": 27,
+      "missed": [
+        {
+          "surface": "high",
+          "type": "topic"
+        },
+        {
+          "surface": "resolution",
+          "type": "topic"
+        },
+        {
+          "surface": "N-body simulations",
+          "type": "topic"
+        },
+        {
+          "surface": "equilibrium",
+          "type": "topic"
+        },
+        {
+          "surface": "clustering",
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "equilibrium density",
+          "type": "topic"
+        },
+        {
+          "surface": "halo",
+          "type": "topic"
+        },
+        {
+          "surface": "initial density fluctuation spectrum",
+          "type": "topic"
+        },
+        {
+          "surface": "Spherically averaged",
+          "type": "topic"
+        },
+        {
+          "surface": "equilibrium profiles",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "2000AJ....120.1579Y",
+      "text_snippet": "The Sloan Digital Sky Survey (SDSS) will provide the data to support detailed investigations of the distribution of luminous and nonluminous matter in the universe: a photometrically and astrometrical",
+      "gold_count": 12,
+      "pred_count": 5,
+      "tp": 0,
+      "fp": 5,
+      "fn": 12,
+      "missed": [
+        {
+          "surface": "luminous",
+          "type": "topic"
+        },
+        {
+          "surface": "calibrated",
+          "type": "topic"
+        },
+        {
+          "surface": "imaging",
+          "type": "topic"
+        },
+        {
+          "surface": "above",
+          "type": "topic"
+        },
+        {
+          "surface": "Galactic latitude",
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "luminous and nonluminous matter",
+          "type": "topic"
+        },
+        {
+          "surface": "π sr above",
+          "type": "topic"
+        },
+        {
+          "surface": "10<SUP>6</SUP> brightest galaxies",
+          "type": "topic"
+        },
+        {
+          "surface": "10<SUP>5</SUP> brightest quasars",
+          "type": "topic"
+        },
+        {
+          "surface": "photometric object",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "2003MNRAS.344.1000B",
+      "text_snippet": "We present a new model for computing the spectral evolution of stellar populations at ages between 1 × 10<SUP>5</SUP> and 2 × 10<SUP>10</SUP> yr at a resolution of 3 Å across the whole wavelength rang",
+      "gold_count": 66,
+      "pred_count": 30,
+      "tp": 2,
+      "fp": 28,
+      "fn": 64,
+      "missed": [
+        {
+          "surface": "present",
+          "type": "topic"
+        },
+        {
+          "surface": "spectral",
+          "type": "topic"
+        },
+        {
+          "surface": "stellar populations",
+          "type": "topic"
+        },
+        {
+          "surface": "ages",
+          "type": "entity"
+        },
+        {
+          "surface": "resolution",
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "spectral evolution",
+          "type": "topic"
+        },
+        {
+          "surface": "stellar populations at ages between 1 × 10<SUP>5</SUP> and 2 × 10<SUP>10</SUP> yr",
+          "type": "topic"
+        },
+        {
+          "surface": "3200",
+          "type": "topic"
+        },
+        {
+          "surface": "9500 Å",
+          "type": "topic"
+        },
+        {
+          "surface": "stellar spectra",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    },
+    {
+      "bibcode": "2017PhRvL.119p1101A",
+      "text_snippet": "On August 17, 2017 at 12∶41:04 UTC the Advanced LIGO and Advanced Virgo gravitational-wave detectors made their first observation of a binary neutron star inspiral. The signal, GW170817, was detected ",
+      "gold_count": 45,
+      "pred_count": 23,
+      "tp": 2,
+      "fp": 21,
+      "fn": 43,
+      "missed": [
+        {
+          "surface": "LIGO",
+          "type": "topic"
+        },
+        {
+          "surface": "Virgo",
+          "type": "entity"
+        },
+        {
+          "surface": "made",
+          "type": "entity"
+        },
+        {
+          "surface": "first",
+          "type": "entity"
+        },
+        {
+          "surface": "binary",
+          "type": "topic"
+        }
+      ],
+      "spurious": [
+        {
+          "surface": "Advanced LIGO",
+          "type": "topic"
+        },
+        {
+          "surface": "Advanced Virgo gravitational-wave detectors",
+          "type": "topic"
+        },
+        {
+          "surface": "binary neutron star inspiral.",
+          "type": "topic"
+        },
+        {
+          "surface": "GW170817,",
+          "type": "topic"
+        },
+        {
+          "surface": "false-alarm-rate",
+          "type": "topic"
+        }
+      ],
+      "verdict": "error"
+    }
+  ]
+}

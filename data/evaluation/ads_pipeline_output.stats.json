@@ -1,0 +1,14 @@
+{
+  "records_processed": 100,
+  "linking": {
+    "total_spans": 2648,
+    "exact_matches": 431,
+    "fuzzy_matches": 255,
+    "embedding_matches": 0,
+    "unlinked": 1962,
+    "pct_exact": 16.28,
+    "pct_fuzzy": 9.63,
+    "pct_embedding": 0.0,
+    "pct_unlinked": 74.09
+  }
+}

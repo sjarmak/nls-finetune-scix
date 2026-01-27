@@ -38,7 +38,12 @@ Started: Mon Jan 27 2026
 - The BIO labels use "institution" (B-institution, I-institution) but the span type annotation uses "entity"
 - CRITICAL: Training script `_char_labels` must map "entity" → "institution" via SPAN_TYPE_TO_BIO; evaluation script must reverse-map via BIO_TO_SPAN_TYPE
 - Keyword baseline floor: overall F1=0.41 (P=0.26, R=1.00) — NER model target is F1 >= 0.70
-- NER model result: overall F1=0.9993 (P=0.9993, R=0.9993) — GO recommendation
+- NER model result: overall F1=0.9993 (P=0.9993, R=0.9993) — GO recommendation on synthetic data
+- Real-world result on 100 ADS abstracts: F1=0.0949 (exact match), F1=0.2096 (partial match IoU>=0.5)
+- Synthetic-to-real gap: -0.9044 F1 — model needs real annotated data for production
+- SWEET ontology contributes most noise in catalog-based annotation — many common English words
+- Real abstracts contain HTML markup (SUB, SUP tags) that confuse tokenizer
+- UAT vocabulary has best real-world performance (F1=0.3577) due to distinctive domain terms
 - Training on MPS (Apple Silicon) works without issues; early stopping triggers after ~1.5 epochs
 
 ### Dependencies Added in Previous Phase
@@ -290,4 +295,91 @@ Started: Mon Jan 27 2026
   - The pipeline processes ~100 records in a few seconds on CPU — no GPU needed for batch inference at this scale
   - BIO_TO_SPAN_TYPE mapping (institution→entity) is critical — reused from evaluate_enrichment_model.py to maintain consistency
   - The script writes a `.stats.json` file alongside the output for easy programmatic access to linking statistics
+---
+
+## 2026-01-27 — US-010
+- **Implemented**: ADS abstract sampling script and annotation guide
+- **Approach**: Created `scripts/sample_ads_abstracts.py` that:
+  1. Queries the ADS API for 100 diverse abstracts across 4 domains (25 each)
+  2. Uses httpx for HTTP requests with Bearer token auth
+  3. Filters out records without abstracts or with abstracts < 100 chars
+  4. Deduplicates by bibcode across domains
+  5. Outputs JSONL records with all required fields
+  6. Writes sampling statistics alongside output
+- **Domain queries**:
+  - Astronomy: dark matter, galaxy, stellar, supernova, black hole, etc.
+  - Earth science: climate, ocean, atmospheric, precipitation, aerosol, etc.
+  - Planetary science: Mars, lunar, planetary, asteroid, comet, crater, etc.
+  - Multidisciplinary: interdisciplinary, multi-wavelength, astrochemistry, etc.
+- **Annotation guide** (`docs/annotation-guide.md`) covers:
+  - Four span types (topic, institution, author, date_range) with examples
+  - Five span boundary rules (maximal span, no whitespace, no punctuation, byte-exact, non-overlapping)
+  - Five ambiguous case categories with resolution guidance
+  - Output format specification
+  - Quality checklist
+- **Results**:
+  - 100 abstracts sampled: 25 astronomy + 25 earth_science + 25 planetary_science + 25 multidisciplinary
+  - 100 unique bibcodes, all with required fields (bibcode, title, abstract, database, keywords)
+  - Abstract lengths: min=103, max=4,395, avg=1,530 characters
+  - 8 cross-domain duplicates removed, 9 no-abstract records skipped
+  - Output: `data/evaluation/ads_sample_raw.jsonl` + `data/evaluation/ads_sample_raw.stats.json`
+- **Files changed**:
+  - `scripts/sample_ads_abstracts.py` — New ADS sampling script
+  - `docs/annotation-guide.md` — New annotation guide for NER span labeling
+  - `data/evaluation/ads_sample_raw.jsonl` — 100 sampled abstracts
+  - `data/evaluation/ads_sample_raw.stats.json` — Sampling statistics
+  - `scripts/ralph/prd.json` — Marked US-010 as passing
+- **Learnings for future iterations**:
+  - ADS API uses Bearer token auth: `Authorization: Bearer <key>`, stored in `.env.local` as `ADS_API_KEY`
+  - ADS returns `title` as a list (always use `title[0]`), `abstract` as a string, `keyword` as a list
+  - Over-fetching (3x target) is needed because some records lack abstracts or are cross-domain duplicates
+  - Sorting by `citation_count desc` gives high-quality, well-cited papers that are likely to contain rich scientific vocabulary
+  - The `database:earthscience` filter works for ADS earth science collection
+  - Planetary science papers often overlap with astronomy — dedup by bibcode is essential
+  - The ADS API rate limit is generous (5,000 requests/day) but adding 0.5s sleep between requests is polite
+---
+
+## 2026-01-27 — US-011
+- **Implemented**: Annotated 100 real ADS abstracts and evaluated NER model real-world performance
+- **Approach**: Two-script pipeline:
+  1. `scripts/annotate_ads_abstracts.py` — annotates raw abstracts using catalog keyword matching (same approach as enrichment baseline, with stopword filtering and min-length=4 to reduce noise)
+  2. `scripts/evaluate_real_world.py` — runs trained NER model on annotated abstracts, compares predictions to annotations via exact and partial span matching, computes P/R/F1 with synthetic-to-real gap analysis
+- **Annotation results**:
+  - 100 abstracts annotated (all had at least 1 span)
+  - 4,795 total spans (4,253 topic, 542 entity)
+  - By vocabulary: SWEET (3,394), UAT (730), ROR (442), GCMD (129), Planetary (100)
+  - Avg 48.0 spans per abstract
+- **NER model real-world results** (exact boundary matching):
+  - **Overall**: P=0.1333, R=0.0736, F1=0.0949
+  - **By type**: topic F1=0.1022 | entity F1=0.0131
+  - **By vocabulary**: UAT F1=0.3577, GCMD F1=0.2083, SWEET F1=0.0981, ROR F1=0.0179, Planetary F1=0.0000
+  - **Partial matching** (IoU >= 0.5): P=0.2946, R=0.1627, F1=0.2096
+- **Synthetic-to-real gap**:
+  - Synthetic F1: 0.9993 → Real F1: 0.0949 (delta: -0.9044)
+  - This massive gap is expected: model trained on template-generated snippets, evaluated on natural scientific text
+  - The model extracts reasonable scientific phrases but boundaries don't match catalog entries
+  - Many gold "spans" are actually noisy (short generic words from SWEET ontology like "present", "from")
+- **NER + Linking pipeline on real data**:
+  - 2,648 NER spans extracted from 100 abstracts
+  - 16.28% exact match, 9.63% fuzzy match, 74.09% unlinked
+  - High unlinked rate because model extracts natural-language phrases not in catalogs
+- **Files changed**:
+  - `scripts/annotate_ads_abstracts.py` — New annotation script using catalog keyword matching
+  - `scripts/evaluate_real_world.py` — New real-world evaluation script with gap analysis
+  - `data/evaluation/ads_sample_annotated.jsonl` — 100 annotated abstracts
+  - `data/evaluation/ads_sample_annotated.stats.json` — Annotation statistics
+  - `data/evaluation/ads_pipeline_input.jsonl` — Pipeline input format
+  - `data/evaluation/ads_pipeline_output.jsonl` — Full pipeline output
+  - `data/evaluation/ads_pipeline_output.stats.json` — Linking statistics
+  - `reports/enrichment_real_world_eval.json` — Real-world evaluation metrics
+  - `reports/enrichment_real_world_eval.md` — Narrative report with gap analysis
+  - `scripts/ralph/prd.json` — Marked US-011 as passing
+- **Learnings for future iterations**:
+  - The SWEET ontology contributes the most noise in real-world annotation — many SWEET terms are common English words (present, from, based on, leads, etc.)
+  - A min_label_length of 4 + stopword filtering helps but doesn't eliminate all false positives
+  - The NER model trained on synthetic data extracts compositional phrases (e.g., "the cosmic microwave background (CMB) anisotropies") rather than individual catalog terms — this is actually better behavior for real text but doesn't match catalog annotations
+  - Real abstracts contain HTML markup (SUB, SUP tags) that confuse the tokenizer and produce malformed spans
+  - The 74% unlinked rate in the linking pipeline reflects the vocabulary gap between model-extracted spans and catalog entries
+  - UAT vocabulary has the best real-world performance (F1=0.3577) because UAT terms are more distinctive and less ambiguous
+  - For production, the model needs: (a) training on real annotated text, (b) longer max_seq_length for abstracts, (c) HTML preprocessing to strip markup
 ---
