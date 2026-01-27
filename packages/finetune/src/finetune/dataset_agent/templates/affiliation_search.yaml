@@ -1,0 +1,88 @@
+# Affiliation/Institution search templates
+# Generate NL→ADS query pairs for searching by institutional affiliation
+
+- id: affiliation_search_basic
+  intent: affiliation_search
+  nl_templates:
+    - "papers from {institution}"
+    - "research from {institution}"
+    - "{institution} publications"
+    - "articles by authors at {institution}"
+    - "work from {institution}"
+  ads_query_template: 'aff:"{institution}"'
+  slots:
+    institution:
+      name: institution
+      type: entity
+      required: true
+      constraints:
+        catalog: entity_catalog_institutions
+        entity_type: institution
+  constraints:
+    min_results: 1
+
+- id: affiliation_search_topic
+  intent: affiliation_search
+  nl_templates:
+    - "{topic} papers from {institution}"
+    - "{institution} research on {topic}"
+    - "papers about {topic} from {institution}"
+  ads_query_template: 'aff:"{institution}" abs:"{topic}"'
+  slots:
+    institution:
+      name: institution
+      type: entity
+      required: true
+      constraints:
+        catalog: entity_catalog_institutions
+        entity_type: institution
+    topic:
+      name: topic
+      type: topic
+      required: true
+      constraints:
+        catalog: topic_catalog
+  constraints:
+    min_results: 1
+
+- id: affiliation_search_refereed
+  intent: affiliation_search
+  nl_templates:
+    - "peer-reviewed papers from {institution}"
+    - "refereed publications from {institution}"
+    - "{institution} refereed articles"
+  ads_query_template: 'aff:"{institution}" property:refereed'
+  slots:
+    institution:
+      name: institution
+      type: entity
+      required: true
+      constraints:
+        catalog: entity_catalog_institutions
+        entity_type: institution
+  constraints:
+    min_results: 1
+
+- id: affiliation_search_author
+  intent: affiliation_search
+  nl_templates:
+    - "papers by {author} at {institution}"
+    - "{author}'s work from {institution}"
+    - "{author} papers when at {institution}"
+  ads_query_template: 'author:"{author}" aff:"{institution}"'
+  slots:
+    author:
+      name: author
+      type: author
+      required: true
+      constraints:
+        format: '"Last, First" or "Last"'
+    institution:
+      name: institution
+      type: entity
+      required: true
+      constraints:
+        catalog: entity_catalog_institutions
+        entity_type: institution
+  constraints:
+    min_results: 1

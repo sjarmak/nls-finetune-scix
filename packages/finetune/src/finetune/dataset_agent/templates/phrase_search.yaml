@@ -1,0 +1,99 @@
+# Phrase search templates
+# Generate NL→ADS query pairs for exact phrase matching in abstracts/titles
+
+- id: phrase_search_abstract
+  intent: phrase_search
+  nl_templates:
+    - 'papers containing "{phrase}"'
+    - 'articles with the phrase "{phrase}"'
+    - 'search for "{phrase}"'
+    - 'find papers mentioning "{phrase}"'
+  ads_query_template: 'abs:"{phrase}"'
+  slots:
+    phrase:
+      name: phrase
+      type: literal
+      required: true
+      constraints:
+        min_length: 2
+        max_length: 100
+  constraints:
+    min_results: 1
+
+- id: phrase_search_title
+  intent: phrase_search
+  nl_templates:
+    - 'papers with "{phrase}" in the title'
+    - 'articles titled "{phrase}"'
+    - 'find papers with title containing "{phrase}"'
+  ads_query_template: 'title:"{phrase}"'
+  slots:
+    phrase:
+      name: phrase
+      type: literal
+      required: true
+      constraints:
+        min_length: 2
+        max_length: 100
+  constraints:
+    min_results: 1
+
+- id: phrase_search_full
+  intent: phrase_search
+  nl_templates:
+    - 'papers with "{phrase}" anywhere in the text'
+    - 'full-text search for "{phrase}"'
+    - 'find "{phrase}" in full text'
+  ads_query_template: 'full:"{phrase}"'
+  slots:
+    phrase:
+      name: phrase
+      type: literal
+      required: true
+      constraints:
+        min_length: 2
+        max_length: 100
+  constraints:
+    min_results: 1
+
+- id: phrase_search_refereed
+  intent: phrase_search
+  nl_templates:
+    - 'refereed papers containing "{phrase}"'
+    - 'peer-reviewed articles with "{phrase}"'
+    - 'published papers mentioning "{phrase}"'
+  ads_query_template: 'abs:"{phrase}" property:refereed'
+  slots:
+    phrase:
+      name: phrase
+      type: literal
+      required: true
+      constraints:
+        min_length: 2
+        max_length: 100
+  constraints:
+    min_results: 1
+
+- id: phrase_search_author
+  intent: phrase_search
+  nl_templates:
+    - 'papers by {author} containing "{phrase}"'
+    - '{author} papers with "{phrase}"'
+    - '{author} articles mentioning "{phrase}"'
+  ads_query_template: 'author:"{author}" abs:"{phrase}"'
+  slots:
+    author:
+      name: author
+      type: author
+      required: true
+      constraints:
+        format: '"Last, First" or "Last"'
+    phrase:
+      name: phrase
+      type: literal
+      required: true
+      constraints:
+        min_length: 2
+        max_length: 100
+  constraints:
+    min_results: 1

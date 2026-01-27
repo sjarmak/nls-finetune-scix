@@ -1,0 +1,107 @@
+{
+  "overall": {
+    "true_positives": 1361,
+    "false_positives": 3963,
+    "false_negatives": 5,
+    "precision": 0.2556,
+    "recall": 0.9963,
+    "f1": 0.4069
+  },
+  "by_type": {
+    "entity": {
+      "true_positives": 293,
+      "false_positives": 560,
+      "false_negatives": 0,
+      "precision": 0.3435,
+      "recall": 1.0,
+      "f1": 0.5113
+    },
+    "topic": {
+      "true_positives": 1068,
+      "false_positives": 3403,
+      "false_negatives": 5,
+      "precision": 0.2389,
+      "recall": 0.9953,
+      "f1": 0.3853
+    }
+  },
+  "by_vocabulary": {
+    "gcmd": {
+      "true_positives": 105,
+      "false_positives": 167,
+      "false_negatives": 0,
+      "precision": 0.386,
+      "recall": 1.0,
+      "f1": 0.557
+    },
+    "planetary": {
+      "true_positives": 148,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "ror": {
+      "true_positives": 145,
+      "false_positives": 560,
+      "false_negatives": 0,
+      "precision": 0.2057,
+      "recall": 1.0,
+      "f1": 0.3412
+    },
+    "sweet": {
+      "true_positives": 438,
+      "false_positives": 2651,
+      "false_negatives": 5,
+      "precision": 0.1418,
+      "recall": 0.9887,
+      "f1": 0.248
+    },
+    "uat": {
+      "true_positives": 525,
+      "false_positives": 585,
+      "false_negatives": 0,
+      "precision": 0.473,
+      "recall": 1.0,
+      "f1": 0.6422
+    }
+  },
+  "by_domain": {
+    "astronomy": {
+      "true_positives": 525,
+      "false_positives": 585,
+      "false_negatives": 0,
+      "precision": 0.473,
+      "recall": 1.0,
+      "f1": 0.6422
+    },
+    "earthscience": {
+      "true_positives": 543,
+      "false_positives": 2818,
+      "false_negatives": 5,
+      "precision": 0.1616,
+      "recall": 0.9909,
+      "f1": 0.2778
+    },
+    "multidisciplinary": {
+      "true_positives": 145,
+      "false_positives": 560,
+      "false_negatives": 0,
+      "precision": 0.2057,
+      "recall": 1.0,
+      "f1": 0.3412
+    },
+    "planetary": {
+      "true_positives": 148,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  },
+  "total_records": 1070,
+  "total_gold_spans": 1366,
+  "total_predicted_spans": 5324
+}

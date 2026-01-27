@@ -1,0 +1,80 @@
+# Author search templates
+# Generate NL→ADS query pairs for searching by author name
+
+- id: author_search_basic
+  intent: author_search
+  nl_templates:
+    - "papers by {author}"
+    - "{author}'s papers"
+    - "articles written by {author}"
+    - "publications from {author}"
+    - "work by {author}"
+  ads_query_template: 'author:"{author}"'
+  slots:
+    author:
+      name: author
+      type: author
+      required: true
+      constraints:
+        format: '"Last, First" or "Last"'
+  constraints:
+    min_results: 1
+
+- id: author_search_first_author
+  intent: author_search
+  nl_templates:
+    - "papers where {author} is first author"
+    - "{author} as first author"
+    - "first-author papers by {author}"
+    - "papers led by {author}"
+  ads_query_template: 'first_author:"{author}"'
+  slots:
+    author:
+      name: author
+      type: author
+      required: true
+      constraints:
+        format: '"Last, First" or "Last"'
+  constraints:
+    min_results: 1
+
+- id: author_search_topic
+  intent: author_search
+  nl_templates:
+    - "papers by {author} about {topic}"
+    - "{author}'s work on {topic}"
+    - "{author}'s {topic} papers"
+    - "research by {author} on {topic}"
+  ads_query_template: 'author:"{author}" abs:"{topic}"'
+  slots:
+    author:
+      name: author
+      type: author
+      required: true
+      constraints:
+        format: '"Last, First" or "Last"'
+    topic:
+      name: topic
+      type: topic
+      required: true
+      constraints:
+        catalog: topic_catalog
+  constraints:
+    min_results: 1
+
+- id: author_search_refereed
+  intent: author_search
+  nl_templates:
+    - "peer-reviewed papers by {author}"
+    - "refereed publications by {author}"
+    - "{author}'s refereed articles"
+  ads_query_template: 'author:"{author}" property:refereed'
+  slots:
+    author:
+      name: author
+      type: author
+      required: true
+      constraints:
+        format: '"Last, First" or "Last"'
+  constraints:
+    min_results: 1

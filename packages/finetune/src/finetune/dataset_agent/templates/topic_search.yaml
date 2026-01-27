@@ -1,0 +1,55 @@
+# Topic search templates
+# Generate NL→ADS query pairs for searching by astronomical topic
+
+- id: topic_search_basic
+  intent: topic_search
+  nl_templates:
+    - "papers about {topic}"
+    - "research on {topic}"
+    - "{topic} papers"
+    - "find articles on {topic}"
+    - "studies of {topic}"
+  ads_query_template: 'abs:"{topic}"'
+  slots:
+    topic:
+      name: topic
+      type: topic
+      required: true
+      constraints:
+        catalog: topic_catalog
+  constraints:
+    min_results: 1
+
+- id: topic_search_refereed
+  intent: topic_search
+  nl_templates:
+    - "peer-reviewed papers about {topic}"
+    - "refereed articles on {topic}"
+    - "published research on {topic}"
+  ads_query_template: 'abs:"{topic}" property:refereed'
+  slots:
+    topic:
+      name: topic
+      type: topic
+      required: true
+      constraints:
+        catalog: topic_catalog
+  constraints:
+    min_results: 1
+
+- id: topic_search_recent
+  intent: topic_search
+  nl_templates:
+    - "recent papers about {topic}"
+    - "latest research on {topic}"
+    - "new papers on {topic}"
+  ads_query_template: 'abs:"{topic}" pubdate:[2020 TO *]'
+  slots:
+    topic:
+      name: topic
+      type: topic
+      required: true
+      constraints:
+        catalog: topic_catalog
+  constraints:
+    min_results: 1

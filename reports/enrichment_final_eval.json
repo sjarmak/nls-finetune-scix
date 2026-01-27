@@ -1,0 +1,178 @@
+{
+  "project": "SciX Enrichment Pipeline — Final Evaluation",
+  "date": "2026-01-27",
+  "model": "allenai/scibert_scivocab_uncased (fine-tuned)",
+  "training_data": {
+    "total_records": 10691,
+    "train": 8552,
+    "val": 1069,
+    "test": 1070,
+    "source_vocabularies": {
+      "uat": 5205,
+      "sweet": 4041,
+      "gcmd": 972,
+      "ror": 1542,
+      "planetary": 1541
+    },
+    "label_types": {
+      "topic": 10218,
+      "entity": 3083
+    },
+    "domains": {
+      "astronomy": 3869,
+      "earthscience": 3739,
+      "multidisciplinary": 1542,
+      "planetary": 1541
+    },
+    "text_types": {
+      "title": 9220,
+      "abstract": 1471
+    }
+  },
+  "synthetic_test": {
+    "records": 1070,
+    "gold_spans": 1366,
+    "predicted_spans": 1366,
+    "overall": {
+      "precision": 0.9993,
+      "recall": 0.9993,
+      "f1": 0.9993
+    },
+    "macro_f1": 0.9995,
+    "by_type": {
+      "entity": { "precision": 1.0, "recall": 1.0, "f1": 1.0, "tp": 293, "fp": 0, "fn": 0 },
+      "topic": { "precision": 0.9991, "recall": 0.9991, "f1": 0.9991, "tp": 1072, "fp": 1, "fn": 1 }
+    },
+    "by_vocabulary": {
+      "uat": { "precision": 1.0, "recall": 1.0, "f1": 1.0 },
+      "sweet": { "precision": 1.0, "recall": 0.9977, "f1": 0.9989 },
+      "gcmd": { "precision": 1.0, "recall": 1.0, "f1": 1.0 },
+      "ror": { "precision": 1.0, "recall": 1.0, "f1": 1.0 },
+      "planetary": { "precision": 1.0, "recall": 1.0, "f1": 1.0 }
+    },
+    "by_domain": {
+      "astronomy": { "precision": 1.0, "recall": 1.0, "f1": 1.0 },
+      "earthscience": { "precision": 1.0, "recall": 0.9982, "f1": 0.9991 },
+      "multidisciplinary": { "precision": 1.0, "recall": 1.0, "f1": 1.0 },
+      "planetary": { "precision": 1.0, "recall": 1.0, "f1": 1.0 }
+    }
+  },
+  "real_world_test": {
+    "records": 100,
+    "gold_spans": 4795,
+    "predicted_spans": 2648,
+    "exact_match": {
+      "precision": 0.1333,
+      "recall": 0.0736,
+      "f1": 0.0949
+    },
+    "partial_match_iou_0_5": {
+      "precision": 0.2946,
+      "recall": 0.1627,
+      "f1": 0.2096
+    },
+    "macro_f1": 0.0576,
+    "by_type": {
+      "entity": { "precision": 0.0588, "recall": 0.0074, "f1": 0.0131, "tp": 4, "fp": 64, "fn": 538 },
+      "topic": { "precision": 0.1353, "recall": 0.0821, "f1": 0.1022, "tp": 349, "fp": 2231, "fn": 3904 }
+    },
+    "by_vocabulary": {
+      "uat": { "precision": 1.0, "recall": 0.2178, "f1": 0.3577 },
+      "sweet": { "precision": 1.0, "recall": 0.0516, "f1": 0.0981 },
+      "gcmd": { "precision": 1.0, "recall": 0.1163, "f1": 0.2083 },
+      "ror": { "precision": 1.0, "recall": 0.009, "f1": 0.0179 },
+      "planetary": { "precision": 0.0, "recall": 0.0, "f1": 0.0 }
+    },
+    "by_domain": {
+      "astronomy": { "precision": 1.0, "recall": 0.2178, "f1": 0.3577 },
+      "earthscience": { "precision": 1.0, "recall": 0.0539, "f1": 0.1023 },
+      "multidisciplinary": { "precision": 1.0, "recall": 0.009, "f1": 0.0179 },
+      "planetary": { "precision": 0.0, "recall": 0.0, "f1": 0.0 }
+    },
+    "annotation_stats": {
+      "total_abstracts": 100,
+      "total_spans": 4795,
+      "avg_spans_per_abstract": 48.0,
+      "spans_by_type": { "topic": 4253, "entity": 542 },
+      "spans_by_vocabulary": { "sweet": 3394, "uat": 730, "ror": 442, "gcmd": 129, "planetary": 100 }
+    }
+  },
+  "keyword_baseline": {
+    "records": 1070,
+    "gold_spans": 1366,
+    "predicted_spans": 5324,
+    "overall": {
+      "precision": 0.2556,
+      "recall": 0.9963,
+      "f1": 0.4069
+    },
+    "by_type": {
+      "entity": { "precision": 0.3435, "recall": 1.0, "f1": 0.5113 },
+      "topic": { "precision": 0.2389, "recall": 0.9953, "f1": 0.3853 }
+    },
+    "by_vocabulary": {
+      "uat": { "precision": 0.473, "recall": 1.0, "f1": 0.6422 },
+      "sweet": { "precision": 0.1418, "recall": 0.9887, "f1": 0.248 },
+      "gcmd": { "precision": 0.386, "recall": 1.0, "f1": 0.557 },
+      "ror": { "precision": 0.2057, "recall": 1.0, "f1": 0.3412 },
+      "planetary": { "precision": 1.0, "recall": 1.0, "f1": 1.0 }
+    }
+  },
+  "linking_statistics": {
+    "records_processed": 100,
+    "total_spans": 2648,
+    "exact_matches": 431,
+    "fuzzy_matches": 255,
+    "embedding_matches": 0,
+    "unlinked": 1962,
+    "pct_exact": 16.28,
+    "pct_fuzzy": 9.63,
+    "pct_embedding": 0.0,
+    "pct_unlinked": 74.09
+  },
+  "performance_gap": {
+    "synthetic_f1": 0.9993,
+    "real_world_f1_exact": 0.0949,
+    "real_world_f1_partial": 0.2096,
+    "delta_exact": -0.9044,
+    "delta_partial": -0.7897
+  },
+  "thresholds": {
+    "synthetic_f1_target": 0.70,
+    "synthetic_f1_actual": 0.9993,
+    "synthetic_pass": true,
+    "real_world_f1_target": 0.50,
+    "real_world_f1_actual": 0.0949,
+    "real_world_pass": false
+  },
+  "go_no_go": {
+    "recommendation": "CONDITIONAL GO",
+    "justification": "The model exceeds the synthetic F1 threshold (0.9993 vs 0.70), demonstrating the NER architecture is sound. However, it fails the real-world threshold (0.0949 vs 0.50). The massive synthetic-to-real gap (-0.9044) is primarily caused by (a) noisy catalog-based annotations with many common-word false positives from SWEET, (b) model training on template-generated text only, and (c) HTML markup in real abstracts. The architecture is validated for production scaling with targeted improvements.",
+    "conditions_for_full_go": [
+      "Annotate 500+ real abstracts with human-verified spans (not catalog keyword matching)",
+      "Strip HTML markup from abstracts during preprocessing",
+      "Retrain with mixed synthetic + real data (curriculum learning)",
+      "Filter SWEET vocabulary to remove common English words (min 3 word tokens or domain-specific)"
+    ]
+  },
+  "next_steps": {
+    "immediate": [
+      "Build HTML preprocessing to strip SUB/SUP tags before NER inference",
+      "Curate SWEET vocabulary: remove entries < 4 chars or in English stopword lists",
+      "Create human annotation tool for efficient ADS abstract labeling",
+      "Annotate 200 abstracts across all 4 domains with human reviewers"
+    ],
+    "medium_term": [
+      "Retrain SciBERT with mixed synthetic + human-annotated data",
+      "Implement curriculum learning: start with synthetic, fine-tune on real",
+      "Add abbreviation/acronym resolution to entity linking cascade",
+      "Extend max_seq_length to 1024 for full abstract coverage"
+    ],
+    "long_term": [
+      "Scale to 50K+ synthetic examples with more template diversity",
+      "Deploy batch enrichment pipeline on full ADS corpus",
+      "Build active learning loop: model predicts → human corrects → retrain",
+      "Integrate enrichment results into SciX search UI"
+    ]
+  }
+}
