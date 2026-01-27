@@ -100,3 +100,32 @@ Started: Mon Jan 27 2026
   - The enrichment_dataset_builder deduplicates by text hash, so round overlap is handled automatically
   - 10 pairs quarantined for `unknown_field` — likely template references to fields not in the validation allowlist
 ---
+
+## 2026-01-27 13:15 — US-003
+- **Implemented**: Full-scale enrichment dataset generation (10K+ examples)
+- **Approach**: Created `scripts/run_us003_fullscale.py` that:
+  1. Reuses normalized catalogs from US-001 run directory
+  2. Runs multi-round snippet generation (8 rounds of 3000 titles + 3000 abstracts)
+  3. Early-stops when both total count and per-vocabulary minimums are met
+  4. Builds unified enrichment dataset with train/val/test splits
+  5. Copies to `data/datasets/enrichment/` for Colab upload
+  6. Validates all acceptance criteria including 20-sample span spot-check
+- **Results**:
+  - Total: 10,691 enrichment records (8,552 train / 1,069 val / 1,070 test)
+  - Vocabulary coverage: UAT (10,410 spans), SWEET (8,082), GCMD (1,944), ROR (1,542), Planetary (1,541)
+  - All 5 vocabularies >= 500 examples
+  - Domain coverage: astronomy (3,869), earthscience (3,739), multidisciplinary (1,542), planetary (1,541)
+  - Label types: 10,218 topic spans, 3,083 entity spans
+  - Text types: 9,220 titles, 1,471 abstracts
+  - Span accuracy: 20/20 spot-checked samples passed byte-exact validation
+  - 8 rounds sufficient (early exit at round 8 of 15 max)
+- **Files changed**:
+  - `scripts/run_us003_fullscale.py` — New full-scale generation script
+  - `data/datasets/enrichment/` — Output directory with train/val/test splits + coverage report
+- **Learnings for future iterations**:
+  - 3000 titles + 3000 abstracts per round yields ~1,300-1,400 unique snippets per round (higher per-round counts compensate for dedup losses)
+  - 8 rounds with 3000+3000 is enough to exceed 10K (vs. 8 rounds with 2500+2500 yielded only ~8.9K)
+  - Early exit logic saves unnecessary rounds when coverage targets are already met
+  - The vocabulary coverage counts in the coverage report are SPAN-level (not record-level), so counts can exceed total records (multiple spans per record referencing different vocabs)
+  - GCMD has the lowest coverage because it has fewer unique concepts (3,155) vs. UAT (2,411 but more templates match) and SWEET (12,986)
+---

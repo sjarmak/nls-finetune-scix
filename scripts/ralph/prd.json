@@ -57,7 +57,7 @@
         "Typecheck passes"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "This produces the actual training data. Use the real catalogs from US-001/US-002. May need to increase snippet generation diversity or count to hit 10K with balanced coverage."
     },
     {
