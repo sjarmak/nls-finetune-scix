@@ -136,7 +136,7 @@ def load_catalog_entries(path: Path, entry_type: str) -> list[CatalogEntry]:
 
     Args:
         path: Path to topic_catalog.jsonl or entity_catalog.jsonl
-        entry_type: "topic" for topic catalogs, "institution" for entity catalogs
+        entry_type: "topic" for topic catalogs, "entity" for entity catalogs
 
     Returns:
         List of CatalogEntry objects with labels and aliases for matching.
@@ -491,7 +491,7 @@ def generate_synthetic_test_data() -> tuple[list[dict[str, Any]], list[CatalogEn
             entry_id="planetary:Mars/1001",
             label="Gale Crater",
             aliases=["Gale"],
-            entry_type="institution",
+            entry_type="entity",
             source_vocabulary="planetary",
             domain_tags=["planetary"],
         ),
@@ -499,7 +499,7 @@ def generate_synthetic_test_data() -> tuple[list[dict[str, Any]], list[CatalogEn
             entry_id="ror:abc123",
             label="Harvard University",
             aliases=["Harvard"],
-            entry_type="institution",
+            entry_type="entity",
             source_vocabulary="ror",
             domain_tags=["multidisciplinary"],
         ),
@@ -542,7 +542,7 @@ def generate_synthetic_test_data() -> tuple[list[dict[str, Any]], list[CatalogEn
                     "surface": "Gale Crater",
                     "start": 60,
                     "end": 71,
-                    "type": "institution",
+                    "type": "entity",
                     "canonical_id": "planetary:Mars/1001",
                     "source_vocabulary": "planetary",
                     "confidence": 1.0,
@@ -587,7 +587,7 @@ def generate_synthetic_test_data() -> tuple[list[dict[str, Any]], list[CatalogEn
                     "surface": "Harvard University",
                     "start": 15,
                     "end": 33,
-                    "type": "institution",
+                    "type": "entity",
                     "canonical_id": "ror:abc123",
                     "source_vocabulary": "ror",
                     "confidence": 1.0,
@@ -690,7 +690,7 @@ def main() -> None:
             catalog_entries.extend(topics)
 
         if args.entity_catalog and args.entity_catalog.exists():
-            entities = load_catalog_entries(args.entity_catalog, "institution")
+            entities = load_catalog_entries(args.entity_catalog, "entity")
             print(f"  Loaded {len(entities)} entity catalog entries")
             catalog_entries.extend(entities)
 

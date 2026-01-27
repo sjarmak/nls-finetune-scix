@@ -90,7 +90,7 @@
         "Typecheck passes"
       ],
       "priority": 5,
-      "passes": false,
+      "passes": true,
       "notes": "This establishes the floor metrics. Run before model evaluation so the comparison is ready."
     },
     {

@@ -32,6 +32,12 @@ Started: Mon Jan 27 2026
 - Training: full fine-tune, lr=2e-5, warmup_ratio=0.1, early_stopping patience=3
 - Linking cascade: exact match → fuzzy (rapidfuzz) → embedding (all-MiniLM-L6-v2)
 
+### Span Type Convention
+- Enrichment dataset uses `"topic"` and `"entity"` as span types (NOT `"institution"`)
+- When loading entity catalogs for matching, always use `entry_type="entity"`
+- The BIO labels use "institution" (B-institution, I-institution) but the span type annotation uses "entity"
+- Keyword baseline floor: overall F1=0.41 (P=0.26, R=1.00) — NER model target is F1 >= 0.70
+
 ### Dependencies Added in Previous Phase
 - rdflib >= 7.0.0 (SWEET parsing)
 - pyshp >= 2.3.0 (planetary shapefiles)
@@ -149,4 +155,27 @@ Started: Mon Jan 27 2026
   - GPU precision detection: T4/V100/P100 use fp16; A100/H100/L4/L40 use bf16
   - The training script is inlined verbatim from `scripts/train_enrichment_model.py` to ensure consistency
   - Google Drive path convention: `/content/drive/MyDrive/scix-enrichment/` for data and model outputs
+---
+
+## 2026-01-27 — US-005
+- **Implemented**: Keyword baseline evaluation on real enrichment test data
+- **Approach**: Ran `scripts/enrichment_baseline.py` with real test file (1,070 records) and unified catalogs (18,552 topics + 129,621 entities = 286,733 keyword surface forms)
+- **Bug Fix**: Entity catalog entries were loaded with `entry_type="institution"` but the enrichment dataset uses `"entity"` as the span type — fixed to use `"entity"` for consistency with the snippet generator
+- **Results**:
+  - **Overall**: P=0.2556 R=0.9963 F1=0.4069 (1,361 TP, 3,963 FP, 5 FN)
+  - **By type**: topic P=0.2389 R=0.9953 F1=0.3853 | entity P=0.3435 R=1.0000 F1=0.5113
+  - **By vocabulary**: UAT F1=0.6422, GCMD F1=0.5570, ROR F1=0.3412, SWEET F1=0.2480, Planetary F1=1.0000
+  - **By domain**: astronomy F1=0.6422, earthscience F1=0.2778, multidisciplinary F1=0.3412, planetary F1=1.0000
+  - The keyword baseline has near-perfect recall (~99.6%) but poor precision (~25.6%) — produces ~4x as many predictions as gold spans
+  - SWEET has the worst precision (0.1418) because many SWEET concepts are short common words that match everywhere
+  - Planetary has perfect F1 because feature names (craters, mons) are unique and don't match spuriously
+  - This establishes the floor: a trained NER model should significantly improve precision while maintaining high recall
+- **Files changed**:
+  - `scripts/enrichment_baseline.py` — Fixed entity type label from "institution" to "entity" (matching snippet generator convention)
+  - `reports/enrichment_baseline.json` — Real baseline metrics output
+- **Learnings for future iterations**:
+  - The enrichment dataset uses `"entity"` (not `"institution"`) as the span type for entities — all entity catalog loading must use `"entity"` type to match
+  - Keyword baseline is heavily recall-biased: with 286K surface forms, almost every gold span is found, but precision suffers from massive false positive counts
+  - SWEET ontology terms are the biggest source of false positives (2,651 FPs for 438 TPs) — many Earth science terms are common English words
+  - The baseline gives a clear F1 floor of ~0.41 that the trained NER model should beat (target: F1 >= 0.70)
 ---
