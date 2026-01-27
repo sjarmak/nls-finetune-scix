@@ -24,6 +24,14 @@ app.add_typer(data_app, name="data", help="Data management commands")
 app.add_typer(training_app, name="training", help="Training commands")
 app.add_typer(eval_app, name="eval", help="Evaluate model quality")
 
+# Lazy import for dataset-agent to avoid heavy dependency loading
+try:
+    from finetune.cli.dataset_agent import dataset_agent_app
+
+    app.add_typer(dataset_agent_app, name="dataset-agent", help="Dataset generation agent")
+except ImportError:
+    pass
+
 
 @app.command()
 def upload_data(

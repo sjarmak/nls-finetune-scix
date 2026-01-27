@@ -1,0 +1,107 @@
+# Dataset Agent Source Configuration
+#
+# This file declares external data sources used by the dataset generation pipeline.
+# Each source is identified by a unique ID and can be either HTTP(S) or Git-based.
+#
+# Source Types:
+#   - http: Direct download from HTTP(S) URL
+#   - git: Clone Git repository and extract files
+#
+# Fields:
+#   - id: Unique identifier (used for filenames in raw/)
+#   - type: "http" or "git"
+#   - url: Source URL
+#   - license: License identifier (optional but recommended)
+#   - notes: Human-readable description (optional)
+#   - pinned_revision: Git commit/tag for reproducibility (required for git sources)
+#   - files: List of specific files to extract (optional, for git sources)
+
+sources:
+  # Unified Astronomy Thesaurus (UAT)
+  # https://github.com/astrothesaurus/UAT
+  - id: uat
+    type: git
+    url: https://github.com/astrothesaurus/UAT.git
+    pinned_revision: master
+    license: CC-BY-SA-3.0
+    normalizer: uat
+    notes: |
+      Unified Astronomy Thesaurus - hierarchical vocabulary of astronomical concepts.
+      Used for topic normalization and alias generation.
+    files:
+      - UAT_list.json
+
+  # Research Organization Registry (ROR)
+  # https://ror.org/
+  # ROR data is available via Zenodo downloads.
+  # See: https://ror.readme.io/docs/data-dump
+  - id: ror
+    type: http
+    url: https://zenodo.org/records/18260365/files/v2.1-2026-01-15-ror-data.zip?download=1
+    license: CC0-1.0
+    normalizer: ror
+    notes: |
+      Research Organization Registry v2.1 (2026-01-15) - global registry of research organizations.
+      Contains 120,866 institutions in JSON/CSV format with schema v1 and v2.
+      Used for institution entity normalization.
+
+  # SWEET (Semantic Web for Earth and Environmental Terminology) Ontology
+  # https://github.com/ESIPFed/sweet
+  - id: sweet
+    type: git
+    url: https://github.com/ESIPFed/sweet.git
+    pinned_revision: master
+    license: CC0-1.0
+    normalizer: sweet
+    notes: |
+      SWEET ontology - ~6,000 Earth science concepts across ~224 Turtle files.
+      Provides hierarchical vocabulary for Earth and environmental science topics.
+      Used for topic normalization and enrichment labeling.
+    files:
+      - src/*.ttl
+
+  # NASA GCMD (Global Change Master Directory) Science Keywords
+  # https://github.com/adiwg/gcmd-keywords
+  - id: gcmd
+    type: git
+    url: https://github.com/adiwg/gcmd-keywords.git
+    pinned_revision: master
+    license: CC0
+    normalizer: gcmd
+    notes: |
+      NASA GCMD Science Keywords - hierarchical Earth science vocabulary.
+      5 levels: Category > Topic > Term > Variable > Detailed Variable.
+      JSON format from the adiwg/gcmd-keywords GitHub mirror.
+    files:
+      - resources/json/sciencekeywords.json
+
+  # USGS/IAU Planetary Nomenclature — Mars
+  # https://planetarynames.wr.usgs.gov/GIS_Downloads
+  - id: planetary_mars
+    type: http
+    url: https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip
+    license: public-domain-usgs
+    normalizer: planetary
+    notes: |
+      USGS/IAU Planetary Gazetteer — Mars named surface features (~2000).
+      Shapefiles contain feature names, types (crater, mons, vallis, etc.),
+      coordinates, diameter, and approval status. Generated nightly.
+
+  # USGS/IAU Planetary Nomenclature — Moon
+  # https://planetarynames.wr.usgs.gov/GIS_Downloads
+  - id: planetary_moon
+    type: http
+    url: https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MOON_nomenclature_center_pts.zip
+    license: public-domain-usgs
+    normalizer: planetary
+    notes: |
+      USGS/IAU Planetary Gazetteer — Moon named surface features (~9000).
+      Shapefiles contain feature names, types (crater, mons, vallis, etc.),
+      coordinates, diameter, and approval status. Generated nightly.
+
+  # NASA ADS Bibgroup Definitions (example placeholder)
+  # - id: bibgroups
+  #   type: http
+  #   url: https://example.com/bibgroups.json
+  #   license: CC-BY-4.0
+  #   notes: Telescope and survey bibgroup definitions

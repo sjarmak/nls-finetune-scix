@@ -1,0 +1,77 @@
+# Bibcode search templates
+# Generate NL→ADS query pairs for searching by ADS bibcode identifier
+
+- id: bibcode_search_exact
+  intent: bibcode_search
+  nl_templates:
+    - "paper with bibcode {bibcode}"
+    - "find {bibcode}"
+    - "get the paper {bibcode}"
+    - "look up {bibcode}"
+  ads_query_template: "bibcode:{bibcode}"
+  slots:
+    bibcode:
+      name: bibcode
+      type: bibcode
+      required: true
+      constraints:
+        format: "YYYYJJJJJVVVVMPPPPA"
+        example: "2020ApJ...900..123S"
+  constraints:
+    min_results: 1
+
+- id: bibcode_search_citations
+  intent: bibcode_search
+  nl_templates:
+    - "papers citing {bibcode}"
+    - "citations to {bibcode}"
+    - "what cites {bibcode}"
+    - "papers that cite {bibcode}"
+  ads_query_template: "citations(bibcode:{bibcode})"
+  slots:
+    bibcode:
+      name: bibcode
+      type: bibcode
+      required: true
+      constraints:
+        format: "YYYYJJJJJVVVVMPPPPA"
+        example: "2020ApJ...900..123S"
+  constraints:
+    min_results: 0
+
+- id: bibcode_search_references
+  intent: bibcode_search
+  nl_templates:
+    - "references from {bibcode}"
+    - "papers cited by {bibcode}"
+    - "bibliography of {bibcode}"
+    - "what does {bibcode} cite"
+  ads_query_template: "references(bibcode:{bibcode})"
+  slots:
+    bibcode:
+      name: bibcode
+      type: bibcode
+      required: true
+      constraints:
+        format: "YYYYJJJJJVVVVMPPPPA"
+        example: "2020ApJ...900..123S"
+  constraints:
+    min_results: 0
+
+- id: bibcode_search_similar
+  intent: bibcode_search
+  nl_templates:
+    - "papers similar to {bibcode}"
+    - "related papers to {bibcode}"
+    - "articles like {bibcode}"
+  ads_query_template: "similar(bibcode:{bibcode})"
+  slots:
+    bibcode:
+      name: bibcode
+      type: bibcode
+      required: true
+      constraints:
+        format: "YYYYJJJJJVVVVMPPPPA"
+        example: "2020ApJ...900..123S"
+  constraints:
+    min_results: 0

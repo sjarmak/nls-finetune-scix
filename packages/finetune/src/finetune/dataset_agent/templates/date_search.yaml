@@ -1,0 +1,128 @@
+# Date range search templates
+# Generate NL→ADS query pairs for filtering by publication date
+
+- id: date_search_year
+  intent: date_search
+  nl_templates:
+    - "papers from {year}"
+    - "articles published in {year}"
+    - "{year} publications"
+    - "research from {year}"
+  ads_query_template: "pubdate:{year}"
+  slots:
+    year:
+      name: year
+      type: date
+      required: true
+      constraints:
+        format: "YYYY"
+        min_year: 1800
+        max_year: 2026
+  constraints:
+    min_results: 1
+
+- id: date_search_range
+  intent: date_search
+  nl_templates:
+    - "papers from {start_year} to {end_year}"
+    - "articles published between {start_year} and {end_year}"
+    - "publications from {start_year}-{end_year}"
+    - "research between {start_year} and {end_year}"
+  ads_query_template: "pubdate:[{start_year} TO {end_year}]"
+  slots:
+    start_year:
+      name: start_year
+      type: date
+      required: true
+      constraints:
+        format: "YYYY"
+        min_year: 1800
+        max_year: 2026
+    end_year:
+      name: end_year
+      type: date
+      required: true
+      constraints:
+        format: "YYYY"
+        min_year: 1800
+        max_year: 2026
+  constraints:
+    min_results: 1
+
+- id: date_search_topic_year
+  intent: date_search
+  nl_templates:
+    - "{topic} papers from {year}"
+    - "papers about {topic} published in {year}"
+    - "{year} research on {topic}"
+  ads_query_template: 'abs:"{topic}" pubdate:{year}'
+  slots:
+    topic:
+      name: topic
+      type: topic
+      required: true
+      constraints:
+        catalog: topic_catalog
+    year:
+      name: year
+      type: date
+      required: true
+      constraints:
+        format: "YYYY"
+        min_year: 1800
+        max_year: 2026
+  constraints:
+    min_results: 1
+
+- id: date_search_author_range
+  intent: date_search
+  nl_templates:
+    - "papers by {author} from {start_year} to {end_year}"
+    - "{author}'s publications between {start_year} and {end_year}"
+    - "{author}'s work from {start_year}-{end_year}"
+  ads_query_template: 'author:"{author}" pubdate:[{start_year} TO {end_year}]'
+  slots:
+    author:
+      name: author
+      type: author
+      required: true
+      constraints:
+        format: '"Last, First" or "Last"'
+    start_year:
+      name: start_year
+      type: date
+      required: true
+      constraints:
+        format: "YYYY"
+        min_year: 1800
+        max_year: 2026
+    end_year:
+      name: end_year
+      type: date
+      required: true
+      constraints:
+        format: "YYYY"
+        min_year: 1800
+        max_year: 2026
+  constraints:
+    min_results: 1
+
+- id: date_search_since
+  intent: date_search
+  nl_templates:
+    - "papers since {year}"
+    - "articles from {year} onwards"
+    - "publications after {year}"
+    - "research since {year}"
+  ads_query_template: "pubdate:[{year} TO *]"
+  slots:
+    year:
+      name: year
+      type: date
+      required: true
+      constraints:
+        format: "YYYY"
+        min_year: 1800
+        max_year: 2026
+  constraints:
+    min_results: 1

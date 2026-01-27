@@ -1,0 +1,77 @@
+# Ralph Progress Log
+Started: Mon Jan 27 2026
+
+## Codebase Patterns
+
+### Pipeline Architecture
+- 10-stage pipeline: fetch -> normalize -> expand_aliases -> load_templates -> generate_inputs -> render_pairs -> validate_local -> validate_backend -> generate_enrichment -> report
+- CLI: `scix-finetune dataset-agent run --out-dir <dir> --sources <yaml> [--from-stage X --to-stage Y] [--skip-backend] [--samples-per-template N]`
+- Runner: `packages/finetune/src/finetune/dataset_agent/runner.py`
+- Handlers: `packages/finetune/src/finetune/dataset_agent/pipeline_handlers.py`
+- Schemas: `packages/finetune/src/finetune/dataset_agent/schemas.py`
+- Sources config: `packages/finetune/src/finetune/dataset_agent/config/sources.yaml`
+
+### Normalizers
+- UAT: `uat_normalizer.py` — JSON → TopicEntry (source_vocabulary='uat', domain_tags=['astronomy'])
+- ROR: `ror_normalizer.py` — ZIP/JSON → EntityEntry (source_vocabulary='ror', domain_tags=['multidisciplinary'])
+- SWEET: `sweet_normalizer.py` — OWL/Turtle via rdflib → TopicEntry (source_vocabulary='sweet', domain_tags=['earthscience'])
+- GCMD: `gcmd_normalizer.py` — JSON hierarchy → TopicEntry (source_vocabulary='gcmd', domain_tags=['earthscience'])
+- Planetary: `planetary_normalizer.py` — Shapefiles via pyshp → EntityEntry (source_vocabulary='planetary', domain_tags=['planetary'])
+
+### Enrichment Pipeline Components
+- Snippet generator: `snippet_generator.py` — generates title-like and abstract-like text with span annotations
+- Dataset builder: `enrichment_dataset_builder.py` — combines snippets + pair labels into enrichment_labels.jsonl
+- Training script: `scripts/train_enrichment_model.py` — SciBERT NER fine-tuning (9 BIO labels)
+- Evaluation script: `scripts/evaluate_enrichment_model.py` — per-type/domain/vocab metrics + go/no-go
+- Keyword baseline: `scripts/enrichment_baseline.py` — establishes floor metrics via exact substring matching
+
+### Model Architecture (from docs/enrichment-model-selection.md)
+- Task: Joint NER + Entity Linking
+- NER model: SciBERT (allenai/scibert_scivocab_uncased), 110M params
+- BIO labels: O, B-topic, I-topic, B-institution, I-institution, B-author, I-author, B-date_range, I-date_range
+- Training: full fine-tune, lr=2e-5, warmup_ratio=0.1, early_stopping patience=3
+- Linking cascade: exact match → fuzzy (rapidfuzz) → embedding (all-MiniLM-L6-v2)
+
+### Dependencies Added in Previous Phase
+- rdflib >= 7.0.0 (SWEET parsing)
+- pyshp >= 2.3.0 (planetary shapefiles)
+- New this phase: rapidfuzz (fuzzy matching), sentence-transformers (embedding linking)
+
+### Test Coverage
+- 998 unit tests passing across 22 test files
+- All tests use mocked/synthetic data — this phase tests with real data
+
+### Real Data Findings (US-001)
+- SWEET sweetAll.ttl is an OWL imports stub, NOT a merged ontology — must parse all src/*.ttl files individually
+- USGS planetary shapefiles (2026+) use lowercase field names: `name`, `clean_name`, `type`, `approval`, `diameter`, `center_lat`, `center_lon` — not PascalCase `Feature_Name` etc.
+- USGS ALL_NOMENCLATURE.zip no longer exists — download per-body files from S3: `MARS_nomenclature_center_pts.zip`, `MOON_nomenclature_center_pts.zip`
+- Per-body shapefiles lack `Feature_ID` and `Target` fields — extract feature ID from `link` URL, infer target from source_id
+- `uv pip install typer` may be needed separately if editable install breaks typer resolution
+
+---
+
+## 2026-01-27 17:45 — US-001
+- **Implemented**: Run pipeline fetch + normalize with all 5 real sources
+- **Results**:
+  - UAT: 2,411 concepts (astronomy)
+  - ROR: 118,492 institutions (multidisciplinary)
+  - SWEET: 12,986 Earth science concepts (from 226 .ttl files)
+  - GCMD: 3,155 keywords (Earth science hierarchy)
+  - Planetary Mars: 2,045 features (craters, mons, vallis, etc.)
+  - Planetary Moon: 9,084 features
+  - Merged topic_catalog.jsonl: 18,552 entries
+  - Merged entity_catalog.jsonl: 129,621 entries
+  - Source manifest: 6 sources with checksums, licenses, provenance
+- **Files changed**:
+  - `packages/finetune/pyproject.toml` — Added rdflib, pyshp dependencies
+  - `packages/finetune/src/finetune/cli/main.py` — Registered dataset-agent CLI subcommand
+  - `packages/finetune/src/finetune/dataset_agent/config/sources.yaml` — Fixed SWEET files glob, split planetary into Mars+Moon with corrected S3 URLs
+  - `packages/finetune/src/finetune/dataset_agent/planetary_normalizer.py` — Added lowercase field aliases, feature ID extraction from link URL, target inference from source_id
+  - `packages/finetune/src/finetune/dataset_agent/sweet_normalizer.py` — Parse all .ttl files instead of prioritizing sweetAll.ttl imports stub
+- **Learnings for future iterations**:
+  - USGS data format changed since pipeline was built — always verify real data field names
+  - SWEET ontology is distributed across 226 files, not one merged file
+  - The git downloader correctly handles `files: [src/*.ttl]` glob patterns
+  - Per-body planetary sources work well — can add Mercury, Venus etc. by just adding sources.yaml entries
+  - Pipeline completes fetch+normalize in ~90 seconds (including downloads)
+---

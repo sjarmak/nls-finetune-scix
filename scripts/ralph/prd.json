@@ -1,0 +1,214 @@
+{
+  "project": "SciX Enrichment Pipeline — Integration Validation & Model Training",
+  "branchName": "ralph/enrichment-integration-validation",
+  "description": "Validate the enrichment pipeline against real data (SWEET/GCMD/planetary/UAT/ROR), train SciBERT NER model on Colab, implement entity linking, annotate real ADS abstracts, and produce go/no-go evaluation.",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Run pipeline fetch + normalize with real sources",
+      "description": "As a developer, I want to run the pipeline with all 5 real sources to verify normalizers handle actual SWEET Turtle, GCMD JSON, and USGS Shapefiles.",
+      "acceptanceCriteria": [
+        "Run: scix-finetune dataset-agent run --out-dir data/datasets/agent_runs --sources packages/finetune/src/finetune/dataset_agent/config/sources.yaml --from-stage fetch --to-stage normalize --skip-backend",
+        "Pipeline completes without errors for all 5 sources (UAT, ROR, SWEET, GCMD, planetary)",
+        "Source manifest records all 5 sources with checksums and license metadata",
+        "topic_catalog_uat.jsonl contains ~2,400 concepts",
+        "topic_catalog_sweet.jsonl contains 1,000+ Earth science concepts",
+        "topic_catalog_gcmd.jsonl contains the full GCMD keyword hierarchy",
+        "entity_catalog_ror.jsonl contains 100,000+ institutions",
+        "entity_catalog_planetary.jsonl contains features from Mars and Moon",
+        "Unified topic_catalog.jsonl and entity_catalog.jsonl merge all sources with correct domain_tags and source_vocabulary",
+        "Document any parsing issues or data format surprises in progress.txt",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Highest risk story — exercises real data formats for the first time. Internet access required to fetch sources. If SWEET import resolution fails, try loading individual .ttl files."
+    },
+    {
+      "id": "US-002",
+      "title": "Run full pipeline with small sample to generate enrichment dataset",
+      "description": "As a developer, I want to run the complete 10-stage pipeline with real catalogs and produce an enrichment dataset.",
+      "acceptanceCriteria": [
+        "Run: scix-finetune dataset-agent run --out-dir data/datasets/agent_runs --sources packages/finetune/src/finetune/dataset_agent/config/sources.yaml --samples-per-template 10 --skip-backend",
+        "All 10 pipeline stages complete without errors",
+        "NL-to-query pairs are generated using real catalog entries",
+        "Run the snippet generator on the real unified catalogs to produce synthetic snippets",
+        "Run the enrichment dataset builder to produce enrichment_labels.jsonl with train/val/test splits",
+        "Enrichment dataset contains at least 5,000 labeled examples",
+        "Coverage report shows representation from all 5 source vocabularies",
+        "summary.json shows entry counts per source and per domain",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "Uses --samples-per-template 10 for speed. Depends on US-001 completing successfully. If the pipeline run from US-001 already produced normalized catalogs in the same out-dir, skip fetch+normalize and use --from-stage expand_aliases."
+    },
+    {
+      "id": "US-003",
+      "title": "Generate full-scale enrichment dataset (10K+ examples)",
+      "description": "As an ML engineer, I want a production-scale enrichment dataset for training the SciBERT NER model.",
+      "acceptanceCriteria": [
+        "Run snippet generator with higher sample count to produce 10,000+ enrichment records",
+        "Each source vocabulary (UAT, SWEET, GCMD, planetary, ROR) has at least 500 examples",
+        "Train/val/test split files: enrichment_train.jsonl (80%), enrichment_val.jsonl (10%), enrichment_test.jsonl (10%)",
+        "Coverage report (enrichment_coverage.json) shows counts by label type, source vocabulary, domain, and text_type",
+        "Spot-check 20 random examples: span offsets are byte-exact (surface matches text[start:end])",
+        "Dataset files saved to data/datasets/enrichment/ for Colab upload",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "This produces the actual training data. Use the real catalogs from US-001/US-002. May need to increase snippet generation diversity or count to hit 10K with balanced coverage."
+    },
+    {
+      "id": "US-004",
+      "title": "Create Colab notebook for SciBERT NER training",
+      "description": "As an ML engineer, I want a Colab notebook that trains SciBERT on the enrichment dataset using Colab Pro GPU.",
+      "acceptanceCriteria": [
+        "Create notebooks/train_enrichment_model.ipynb with cells for: install deps, upload/download data, run training, evaluate, save model",
+        "Notebook installs: transformers, datasets, torch, accelerate",
+        "Notebook uploads enrichment_train.jsonl and enrichment_val.jsonl (from Google Drive or direct upload)",
+        "Notebook invokes scripts/train_enrichment_model.py with: --model-name allenai/scibert_scivocab_uncased --train-file enrichment_train.jsonl --val-file enrichment_val.jsonl --output-dir output/enrichment_model --num-epochs 10 --fp16 (for T4) or --bf16 (for A100)",
+        "Notebook includes a cell to save the checkpoint to Google Drive",
+        "Notebook includes a cell to push model to HuggingFace Hub (optional, gated on HF_TOKEN)",
+        "Notebook renders cleanly in Colab (markdown headings, clear instructions)",
+        "Typecheck passes"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": "Colab Pro gives T4 or A100. SciBERT training on 10K examples should take ~30 min on T4. Use --fp16 for T4 (no bf16 support). Previous Qwen3 training used similar Colab workflow."
+    },
+    {
+      "id": "US-005",
+      "title": "Run keyword baseline on real test data",
+      "description": "As an ML engineer, I want keyword baseline metrics on the real enrichment test set to compare against the NER model.",
+      "acceptanceCriteria": [
+        "Run: python scripts/enrichment_baseline.py --test-file data/datasets/enrichment/enrichment_test.jsonl --topic-catalog <path-to-unified-topic-catalog> --entity-catalog <path-to-unified-entity-catalog> --output-file reports/enrichment_baseline.json",
+        "Baseline completes without errors on the real test data",
+        "reports/enrichment_baseline.json contains overall P/R/F1, per-type, per-vocabulary, per-domain metrics",
+        "Document baseline results in progress.txt",
+        "Typecheck passes"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": "This establishes the floor metrics. Run before model evaluation so the comparison is ready."
+    },
+    {
+      "id": "US-006",
+      "title": "Evaluate trained model and produce go/no-go report",
+      "description": "As a project owner, I want real evaluation metrics from the trained model to decide whether to scale up.",
+      "acceptanceCriteria": [
+        "Download trained model checkpoint from Colab (Google Drive or HuggingFace Hub)",
+        "Run: python scripts/evaluate_enrichment_model.py --model-dir output/enrichment_model --test-file data/datasets/enrichment/enrichment_test.jsonl --baseline-file reports/enrichment_baseline.json --output-dir reports",
+        "reports/enrichment_model_eval.json contains real metrics (not synthetic demo)",
+        "reports/enrichment_model_eval.md includes: per-type, per-domain, per-vocabulary breakdowns, baseline comparison table, 10+ correct examples, 10+ error examples, go/no-go recommendation",
+        "Go/no-go threshold: span-level F1 >= 0.70 on synthetic test set",
+        "Document model evaluation results in progress.txt",
+        "Typecheck passes"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": "Depends on model trained in US-004 and baseline from US-005. The model checkpoint must be downloaded locally for evaluation."
+    },
+    {
+      "id": "US-007",
+      "title": "Implement entity linker (exact + fuzzy match)",
+      "description": "As a developer, I want to map NER-extracted spans to catalog canonical IDs using exact and fuzzy string matching.",
+      "acceptanceCriteria": [
+        "Implement packages/finetune/src/finetune/dataset_agent/entity_linker.py with: build_linking_index(topic_catalog_path, entity_catalog_path) and link_span(surface, span_type, index)",
+        "Exact match: case-insensitive lookup against labels and aliases, confidence=1.0",
+        "Fuzzy match: Levenshtein distance with normalized similarity >= 0.85, confidence=0.8 (use rapidfuzz library)",
+        "Add rapidfuzz to project dependencies",
+        "Index is serializable to disk (JSON or pickle) for reuse",
+        "link_span returns: {canonical_id, source_vocabulary, confidence, match_type} or None if no match",
+        "Unit tests cover: exact match, fuzzy match, no match, case insensitivity, alias resolution, type filtering (topics match topic catalog only, entities match entity catalog only)",
+        "Typecheck passes"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": "This is the first stage of the entity linking cascade. Fuzzy matching uses rapidfuzz for speed. Index should be built from the real unified catalogs."
+    },
+    {
+      "id": "US-008",
+      "title": "Implement embedding-based entity linking fallback",
+      "description": "As a developer, I want an embedding similarity fallback for spans that don't match via exact or fuzzy matching.",
+      "acceptanceCriteria": [
+        "Extend entity_linker.py with: build_embedding_index(catalog_entries, model_name) and link_span_embedding(surface, span_type, embedding_index, threshold)",
+        "Use a lightweight sentence transformer (all-MiniLM-L6-v2, 22M params) for embeddings",
+        "Add sentence-transformers to project dependencies",
+        "Confidence = cosine similarity, threshold >= 0.75 for a match",
+        "Embedding index can be built once and saved to disk (numpy .npy + metadata JSON)",
+        "Unit tests cover: embedding match above threshold, below threshold (no match), index persistence to disk and reload",
+        "Integration test: run full cascade (exact -> fuzzy -> embedding) on 100 test spans and verify cascade behavior (exact tried first, then fuzzy, then embedding)",
+        "Typecheck passes"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": "all-MiniLM-L6-v2 is 22M params, ~80MB download. For the integration test, use spans from the enrichment_test.jsonl file."
+    },
+    {
+      "id": "US-009",
+      "title": "Build end-to-end NER + linking inference script",
+      "description": "As a developer, I want to run NER inference followed by entity linking on a batch of texts.",
+      "acceptanceCriteria": [
+        "Implement scripts/run_enrichment_pipeline.py that: loads trained NER model, loads entity linking index, reads input JSONL ({id, text} records), runs NER to extract typed spans, runs entity linking cascade on each span, outputs EnrichmentRecord JSONL",
+        "Output schema matches: {id, text, spans: [{surface, start, end, type, canonical_id, source_vocabulary, confidence}]}",
+        "Run on 100 synthetic test texts from enrichment_test.jsonl and verify output format",
+        "Report linking statistics: % exact matches, % fuzzy, % embedding, % unlinked",
+        "Script supports --model-dir, --linking-index, --input-file, --output-file CLI arguments",
+        "Typecheck passes"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": "This ties NER + linking together into a usable inference tool. Does not require GPU if model is loaded on CPU (slower but works)."
+    },
+    {
+      "id": "US-010",
+      "title": "Sample and fetch real ADS abstracts for annotation",
+      "description": "As an ML engineer, I want a diverse sample of real ADS abstracts for human annotation.",
+      "acceptanceCriteria": [
+        "Implement scripts/sample_ads_abstracts.py that queries the ADS API for 100 diverse abstracts",
+        "Sample covers: 25 astronomy, 25 earth science, 25 planetary science, 25 multidisciplinary",
+        "Each record: {bibcode, title, abstract, database, keywords}",
+        "Output to data/evaluation/ads_sample_raw.jsonl",
+        "Requires ADS_API_KEY environment variable (error message if missing)",
+        "Create docs/annotation-guide.md documenting: what counts as topic/institution/author/date_range, span boundary rules, ambiguous case examples",
+        "Typecheck passes"
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": "ADS API: https://api.adsabs.harvard.edu/v1/search/query. Rate limit: 5,000 requests/day. Needs ADS_API_KEY. Annotation guide is critical for consistency."
+    },
+    {
+      "id": "US-011",
+      "title": "Annotate ADS abstracts and evaluate real-world performance",
+      "description": "As a project owner, I want to measure model performance on real scientific text.",
+      "acceptanceCriteria": [
+        "Annotate at least 50 abstracts from ads_sample_raw.jsonl following the annotation guide",
+        "Save to data/evaluation/ads_sample_annotated.jsonl with span annotations: {surface, start, end, type, canonical_id}",
+        "Run the NER + linking pipeline (US-009) on the annotated abstracts",
+        "Compare model predictions to human annotations: compute P/R/F1",
+        "Document the synthetic-to-real performance gap",
+        "Typecheck passes"
+      ],
+      "priority": 11,
+      "passes": false,
+      "notes": "Manual annotation is the bottleneck. Focus on titles + first 2 sentences of abstracts. One annotator is sufficient for 50-abstract pilot."
+    },
+    {
+      "id": "US-012",
+      "title": "Produce final evaluation report with real-world metrics",
+      "description": "As a project owner, I want a comprehensive report combining synthetic and real-world results with a clear recommendation.",
+      "acceptanceCriteria": [
+        "Produce reports/enrichment_final_eval.md with: synthetic test metrics, real-world test metrics, keyword baseline comparison on both, per-type/domain/vocabulary breakdown, linking statistics, 10+ real-world correct and error examples, performance gap analysis, concrete next steps",
+        "Produce reports/enrichment_final_eval.json with all metrics structured",
+        "Clear go/no-go for production deployment with justification",
+        "Success thresholds: synthetic F1 >= 0.70, real-world F1 >= 0.50",
+        "Typecheck passes"
+      ],
+      "priority": 12,
+      "passes": false,
+      "notes": "Final deliverable. Summarizes all results and provides actionable next steps regardless of go/no-go outcome."
+    }
+  ]
+}
