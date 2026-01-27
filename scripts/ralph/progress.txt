@@ -234,3 +234,34 @@ Started: Mon Jan 27 2026
   - Type filtering is applied in both exact and fuzzy paths — a topic surface will never match as entity and vice versa
   - US-008 will extend this module with embedding-based fallback (sentence-transformers)
 ---
+
+## 2026-01-27 — US-008
+- **Implemented**: Embedding-based entity linking fallback and full three-stage cascade
+- **Approach**: Extended `entity_linker.py` with:
+  1. `build_embedding_index(catalog_entries, model_name)` — encodes all surface forms (label + aliases) using a sentence transformer, stores L2-normalized embeddings + metadata
+  2. `build_embedding_index_from_catalogs(topic_path, entity_path, model_name)` — convenience wrapper to build from JSONL catalog files
+  3. `link_span_embedding(surface, span_type, embedding_index, threshold)` — cosine similarity matching with type filtering, confidence = cosine_sim
+  4. `save_embedding_index(index, directory)` / `load_embedding_index(directory)` — persistence as numpy .npy + JSON metadata
+  5. `link_span_cascade(surface, span_type, linking_index, embedding_index)` — full cascade: exact → fuzzy → embedding
+  6. `CatalogEntry` and `EmbeddingIndex` dataclasses for the embedding subsystem
+- **Dependencies**: Added `sentence-transformers>=2.2.0` to pyproject.toml
+- **Test coverage**: 25 new tests (61 total for entity_linker):
+  - `TestBuildEmbeddingIndex` (5 tests): building, empty catalog, model name storage, metadata fields, L2 normalization
+  - `TestLinkSpanEmbedding` (6 tests): match above threshold, no match below threshold, type filtering, empty surface, empty index, confidence is cosine similarity
+  - `TestEmbeddingPersistence` (7 tests): roundtrip save/load, file existence, JSON validity, loaded index works, nonexistent raises, parent dir creation, shape preservation
+  - `TestCascade` (6 tests): exact first, fuzzy second, embedding fallback, no match, without embedding index, without embedding no match
+  - `TestCascadeIntegration` (1 test): 100 synthetic spans (25 exact, 25 fuzzy, 50 embedding/nomatch), verifies cascade ordering
+- **Files changed**:
+  - `packages/finetune/src/finetune/dataset_agent/entity_linker.py` — Extended with embedding linking, cascade, persistence
+  - `packages/finetune/tests/test_entity_linker.py` — 25 new tests (61 total)
+  - `packages/finetune/pyproject.toml` — Added sentence-transformers dependency
+  - `scripts/ralph/prd.json` — Marked US-008 as passing
+- **Learnings for future iterations**:
+  - The `_load_sentence_transformer` function uses lazy import so the module works without sentence-transformers installed (for exact/fuzzy-only usage)
+  - Embedding index stores L2-normalized vectors so cosine similarity = dot product (efficient for batch lookup)
+  - Tests use a mock SentenceTransformer with deterministic random embeddings (seeded RandomState) — avoids downloading the real model in CI
+  - The embedding index is persisted as two files: `embedding_vectors.npy` (numpy) + `embedding_metadata.json` (JSON) — kept separate for efficiency
+  - Type filtering in embedding is done post-similarity by masking non-matching types to -1.0 before argmax
+  - The cascade function accepts optional `embedding_index` (None = skip embedding stage) for backwards compatibility
+  - For the full catalogs (~148K entries, ~286K surface forms), building the embedding index will be slow but only needs to happen once
+---

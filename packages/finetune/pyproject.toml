@@ -17,6 +17,7 @@ dependencies = [
     "rdflib>=7.0.0",
     "pyshp>=2.3.0",
     "rapidfuzz>=3.0.0",
+    "sentence-transformers>=2.2.0",
 ]
 
 [project.scripts]

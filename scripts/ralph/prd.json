@@ -143,7 +143,7 @@
         "Typecheck passes"
       ],
       "priority": 8,
-      "passes": false,
+      "passes": true,
       "notes": "all-MiniLM-L6-v2 is 22M params, ~80MB download. For the integration test, use spans from the enrichment_test.jsonl file."
     },
     {
