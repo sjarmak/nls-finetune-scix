@@ -129,3 +129,24 @@ Started: Mon Jan 27 2026
   - The vocabulary coverage counts in the coverage report are SPAN-level (not record-level), so counts can exceed total records (multiple spans per record referencing different vocabs)
   - GCMD has the lowest coverage because it has fewer unique concepts (3,155) vs. UAT (2,411 but more templates match) and SWEET (12,986)
 ---
+
+## 2026-01-27 — US-004
+- **Implemented**: Colab notebook for SciBERT NER training
+- **Approach**: Created self-contained `notebooks/train_enrichment_model.ipynb` that:
+  1. Installs deps (transformers, datasets, torch, accelerate, numpy)
+  2. Offers Google Drive mount or direct upload for data files
+  3. Validates data files exist and shows record counts
+  4. Writes the full training script inline via `%%writefile` (self-contained — no repo clone needed)
+  5. Auto-detects GPU type and selects `--fp16` (T4) or `--bf16` (A100/H100)
+  6. Runs training with all standard hyperparameters (lr=2e-5, epochs=10, batch=16, warmup=0.1, early_stopping=3)
+  7. Displays training results from training_log.json
+  8. Saves checkpoint to Google Drive
+  9. Optionally pushes to HuggingFace Hub (gated on HF_TOKEN)
+- **Files changed**:
+  - `notebooks/train_enrichment_model.ipynb` — New Colab notebook (21 cells)
+- **Learnings for future iterations**:
+  - The notebook uses `%%writefile` to create the training script locally in Colab so it's fully self-contained without needing to clone the repo
+  - GPU precision detection: T4/V100/P100 use fp16; A100/H100/L4/L40 use bf16
+  - The training script is inlined verbatim from `scripts/train_enrichment_model.py` to ensure consistency
+  - Google Drive path convention: `/content/drive/MyDrive/scix-enrichment/` for data and model outputs
+---

@@ -75,7 +75,7 @@
         "Typecheck passes"
       ],
       "priority": 4,
-      "passes": false,
+      "passes": true,
       "notes": "Colab Pro gives T4 or A100. SciBERT training on 10K examples should take ~30 min on T4. Use --fp16 for T4 (no bf16 support). Previous Qwen3 training used similar Colab workflow."
     },
     {
