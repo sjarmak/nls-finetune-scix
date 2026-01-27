@@ -1,5 +1,5 @@
 {
-  "project": "SciX Enrichment Pipeline — Integration Validation & Model Training",
+  "project": "SciX Enrichment Pipeline \u2014 Integration Validation & Model Training",
   "branchName": "ralph/enrichment-integration-validation",
   "description": "Validate the enrichment pipeline against real data (SWEET/GCMD/planetary/UAT/ROR), train SciBERT NER model on Colab, implement entity linking, annotate real ADS abstracts, and produce go/no-go evaluation.",
   "userStories": [
@@ -22,7 +22,7 @@
       ],
       "priority": 1,
       "passes": true,
-      "notes": "Highest risk story — exercises real data formats for the first time. Internet access required to fetch sources. If SWEET import resolution fails, try loading individual .ttl files."
+      "notes": "Highest risk story \u2014 exercises real data formats for the first time. Internet access required to fetch sources. If SWEET import resolution fails, try loading individual .ttl files."
     },
     {
       "id": "US-002",
@@ -40,7 +40,7 @@
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Uses --samples-per-template 10 for speed. Depends on US-001 completing successfully. If the pipeline run from US-001 already produced normalized catalogs in the same out-dir, skip fetch+normalize and use --from-stage expand_aliases."
     },
     {

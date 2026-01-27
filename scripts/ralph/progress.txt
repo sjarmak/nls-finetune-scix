@@ -75,3 +75,28 @@ Started: Mon Jan 27 2026
   - Per-body planetary sources work well — can add Mercury, Venus etc. by just adding sources.yaml entries
   - Pipeline completes fetch+normalize in ~90 seconds (including downloads)
 ---
+
+## 2026-01-27 13:05 — US-002
+- **Implemented**: Run full pipeline with small sample + snippet generation + enrichment dataset build
+- **Approach**: Wrote `scripts/run_us002_pipeline.py` that:
+  1. Continues pipeline stages 3-10 (expand_aliases through report) using existing US-001 run dir
+  2. Generates snippets from real unified catalogs using multi-round generation (8 rounds, different seeds)
+  3. Builds unified enrichment dataset with train/val/test splits
+- **Results**:
+  - Pipeline stages: 25 templates loaded, 250 inputs generated, 240 valid pairs (10 quarantined for unknown_field), 130 pair-based enrichment labels
+  - Snippets: 8,936 unique snippets (7,700 titles + 1,236 abstracts) with 11,127 spans
+  - Enrichment dataset: 8,936 total records (7,148 train / 893 val / 895 test)
+  - All 5 source vocabularies represented: uat (4,356), sweet (3,412), ror (1,278), planetary (1,267), gcmd (814)
+  - All 4 domains covered: astronomy (3,245), earthscience (3,146), multidisciplinary (1,278), planetary (1,267)
+  - Span types: 8,582 topic spans, 2,545 entity spans
+- **Files changed**:
+  - `scripts/run_us002_pipeline.py` — New continuation script for US-002
+  - `packages/finetune/src/finetune/domains/scix/keyword_constraints.py` — Fixed import ordering (pre-existing lint issue)
+- **Learnings for future iterations**:
+  - The pipeline CLI always creates a new run directory — to continue from a previous run, use a custom script that loads state from the existing dir
+  - Snippet generator produces ~1,100-1,200 unique snippets per round (23 title + 8 abstract templates with random catalog sampling)
+  - Multi-round generation with different seeds is the way to scale up snippet diversity — 8 rounds yielded ~8.9K unique snippets
+  - The `snippet_multiplier` config in DatasetBuilderConfig is defined but not implemented — multi-round generation at the caller level is the workaround
+  - The enrichment_dataset_builder deduplicates by text hash, so round overlap is handled automatically
+  - 10 pairs quarantined for `unknown_field` — likely template references to fields not in the validation allowlist
+---

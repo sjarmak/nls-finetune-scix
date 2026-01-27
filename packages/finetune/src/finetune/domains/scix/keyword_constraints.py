@@ -12,12 +12,16 @@ References:
 
 import json
 import re
-from pathlib import Path
 from functools import lru_cache
-
+from pathlib import Path
 
 # Path to UAT vocabulary file (relative to package root)
-UAT_VOCAB_PATH = Path(__file__).parent.parent.parent.parent.parent.parent.parent / "data" / "vocabularies" / "uat_keywords.json"
+UAT_VOCAB_PATH = (
+    Path(__file__).parent.parent.parent.parent.parent.parent.parent
+    / "data"
+    / "vocabularies"
+    / "uat_keywords.json"
+)
 
 
 @lru_cache(maxsize=1)
@@ -248,18 +252,12 @@ def fix_query_keywords(query: str) -> tuple[str, list[dict]]:
                 for old in old_patterns:
                     if old in fixed_query:
                         fixed_query = fixed_query.replace(old, new_value)
-                        changes.append({
-                            "old": kw,
-                            "new": correction,
-                            "reason": "corrected to valid UAT term"
-                        })
+                        changes.append(
+                            {"old": kw, "new": correction, "reason": "corrected to valid UAT term"}
+                        )
                         break
             else:
                 # No valid correction - flag for removal
-                changes.append({
-                    "old": kw,
-                    "new": None,
-                    "reason": "no valid UAT equivalent"
-                })
+                changes.append({"old": kw, "new": None, "reason": "no valid UAT equivalent"})
 
     return fixed_query, changes
