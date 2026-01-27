@@ -383,3 +383,26 @@ Started: Mon Jan 27 2026
   - UAT vocabulary has the best real-world performance (F1=0.3577) because UAT terms are more distinctive and less ambiguous
   - For production, the model needs: (a) training on real annotated text, (b) longer max_seq_length for abstracts, (c) HTML preprocessing to strip markup
 ---
+
+## 2026-01-27 — US-012
+- **Implemented**: Comprehensive final evaluation report combining all pipeline results
+- **Approach**: Synthesized data from all prior stories into two deliverables:
+  1. `reports/enrichment_final_eval.json` — Structured metrics covering training data, synthetic test, real-world test, keyword baseline, linking statistics, performance gap, thresholds, go/no-go assessment, and next steps
+  2. `reports/enrichment_final_eval.md` — 10-section narrative report with executive summary, all metric breakdowns, correct/error examples from real ADS abstracts, gap analysis, and concrete next steps (immediate/medium/long-term)
+- **Key conclusions**:
+  - Synthetic F1 = 0.9993 (PASS, threshold 0.70) — architecture validated
+  - Real-world F1 = 0.0949 exact / 0.2096 partial (FAIL, threshold 0.50) — data problem, not architecture problem
+  - Recommendation: CONDITIONAL GO — pipeline works, but needs human-annotated training data, HTML preprocessing, and SWEET vocabulary curation
+  - Keyword baseline F1 = 0.4069 (floor) — NER model dominates on synthetic (+0.59 F1) but both struggle on real data due to annotation noise
+  - Entity linking: 25.9% of real-world spans resolved (16.3% exact + 9.6% fuzzy), 74.1% unlinked
+- **Files changed**:
+  - `reports/enrichment_final_eval.json` — New structured metrics report
+  - `reports/enrichment_final_eval.md` — New narrative evaluation report
+  - `scripts/ralph/prd.json` — Marked US-012 as passing (ALL STORIES NOW COMPLETE)
+- **Learnings for future iterations**:
+  - The synthetic-to-real gap is primarily a data quality issue: catalog-based annotation is too noisy (SWEET contributes 70.8% of gold spans, many are common English words)
+  - Partial matching (IoU >= 0.5) recovers F1 from 0.09 to 0.21 — the model's boundary predictions overlap with correct spans more than exact-match suggests
+  - The model's "errors" on real text often represent better behavior than gold annotations (extracting compositional phrases vs individual common words)
+  - Human annotation is the critical bottleneck for production — 200+ verified abstracts would likely close most of the gap
+  - HTML preprocessing is a simple fix that would eliminate an entire error category
+---
