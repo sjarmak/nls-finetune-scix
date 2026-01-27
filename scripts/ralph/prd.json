@@ -125,7 +125,7 @@
         "Typecheck passes"
       ],
       "priority": 7,
-      "passes": false,
+      "passes": true,
       "notes": "This is the first stage of the entity linking cascade. Fuzzy matching uses rapidfuzz for speed. Index should be built from the real unified catalogs."
     },
     {

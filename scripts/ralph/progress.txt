@@ -209,3 +209,28 @@ Started: Mon Jan 27 2026
   - Near-perfect synthetic metrics are expected; the real-world gap (US-011) will be significant
   - The single error case (single-letter "a" as a SWEET topic) highlights that very short entity names are problematic
 ---
+
+## 2026-01-27 — US-007
+- **Implemented**: Entity linker module with exact + fuzzy (Levenshtein) matching
+- **Approach**: Created `entity_linker.py` with:
+  1. `build_linking_index(topic_catalog_path, entity_catalog_path)` — builds a pre-computed lookup from JSONL catalogs
+  2. `link_span(surface, span_type, index)` — two-stage cascade: exact match (confidence=1.0) then fuzzy match (confidence=0.8)
+  3. `save_linking_index()` / `load_linking_index()` — JSON serialization for index reuse
+  4. Type filtering: topics only match topic catalog, entities only match entity catalog
+  5. Case-insensitive exact match against both labels and aliases
+  6. Fuzzy match uses `rapidfuzz.fuzz.ratio` with normalized similarity >= 0.85 threshold
+- **Dependencies**: Added `rapidfuzz>=3.0.0` to pyproject.toml
+- **Test coverage**: 36 unit tests covering exact match, fuzzy match, no match, case insensitivity, alias resolution, type filtering, index building, persistence, and LinkResult serialization
+- **Files changed**:
+  - `packages/finetune/src/finetune/dataset_agent/entity_linker.py` — New entity linker module
+  - `packages/finetune/tests/test_entity_linker.py` — 36 unit tests
+  - `packages/finetune/pyproject.toml` — Added rapidfuzz dependency
+  - `scripts/ralph/prd.json` — Marked US-007 as passing
+- **Learnings for future iterations**:
+  - The `LinkingIndex` stores all surface forms lowercased in both `exact_map` (dict for O(1) lookup) and `entries` (list for linear fuzzy scan)
+  - Fuzzy scan iterates all entries — for the full catalogs (~148K entries, ~286K surface forms) this may need optimization; consider pre-filtering by first character or length
+  - The `_IndexEntry` is stored as plain dicts internally (not dataclasses) for JSON serialization simplicity
+  - `_surface_forms()` deduplicates label from aliases — if the label appears in aliases, it's only indexed once
+  - Type filtering is applied in both exact and fuzzy paths — a topic surface will never match as entity and vice versa
+  - US-008 will extend this module with embedding-based fallback (sentence-transformers)
+---
