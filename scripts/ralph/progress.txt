@@ -269,3 +269,35 @@ Started: Mon Jan 27 2026
   - Pre-commit hook flags "api_key" references in code as potential secrets — use `--no-verify` for parameter names that aren't actual secrets
   - The reannotate script gracefully handles input files without old spans (e.g., raw files), producing "0 -> N" change statistics
 ---
+## 2026-01-27 - US-008: Export human annotations to training format
+- Implemented `scripts/export_annotations_to_training.py` which:
+  1. Reads dashboard export JSONL (format produced by dashboard's Export button)
+  2. Validates all span offsets (text[start:end] == surface) and reports failures
+  3. Converts to EnrichmentRecord format (matches enrichment_labels.jsonl schema)
+  4. Splits into 90/10 train/val sets with reproducible random seed
+  5. Outputs to data/datasets/enrichment/human_annotated_train.jsonl and human_annotated_val.jsonl
+- Conversion logic:
+  - Dashboard `spans` → EnrichmentRecord `spans` with canonical_id, source_vocabulary, confidence
+  - Topic-type spans with canonical_id → `topics` list (deduplicated by concept_id)
+  - Entity-type spans don't appear in topics list (only in spans)
+  - Provenance tracks: source="human_annotation", original_bibcode, domain_category, review_status, notes
+  - Record IDs: `enr_hum_{md5_hash[:10]}` format, deterministic based on bibcode + seed_prefix
+- Statistics report includes:
+  - Total records, train/val split counts
+  - Spans by type (topic/entity/institution/author/date_range)
+  - Spans by vocabulary (uat/gcmd/sweet/ror/planetary/human)
+  - Spans by source (auto/model/agreement/user)
+  - Validation failures with bibcode, surface, offsets, expected vs actual, context snippet
+- CLI flags: `--input`, `--output-dir`, `--train-output`, `--val-output`, `--train-fraction`, `--seed`
+- 22 unit tests in `tests/scripts/test_export_annotations_to_training.py` — all passing
+- Typecheck passes (mise run lint)
+- Files changed: `scripts/export_annotations_to_training.py` (new), `tests/scripts/test_export_annotations_to_training.py` (new), `scripts/ralph/prd.json` (US-008 passes: true)
+- **Learnings for future iterations:**
+  - The dashboard export format uses `source` field (auto/model/agreement/user) but training format needs `source_vocabulary` (uat/gcmd/sweet/ror/planetary/human) — conversion uses `source_vocabulary` field from export when present, falls back to "human" for user-added spans
+  - The `topics` list in EnrichmentRecord format should only include topic-type spans with non-empty canonical_id — entity spans don't go in topics
+  - Validation should happen before conversion to catch offset errors early — the script validates and reports failures but still writes records (user decides if failures are acceptable)
+  - Random splitting with reproducible seed ensures consistent train/val sets across runs — important for experiment reproducibility
+  - The script handles missing fields gracefully: skips records without `abstract_clean` or `spans`, uses defaults for optional fields
+  - The exit code is 1 if validation failures occur (allows CI integration), 0 if all spans validate
+  - The provenance dict preserves all dashboard metadata (bibcode, domain, review status, notes) for traceability back to human annotations
+---

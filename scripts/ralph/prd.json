@@ -146,7 +146,7 @@
         "Typecheck passes"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "This bridges the dashboard export to the training pipeline. The user annotates in the browser, exports JSON, then runs this script to prepare training data."
     },
     {
