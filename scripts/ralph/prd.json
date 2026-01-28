@@ -111,7 +111,7 @@
         "Typecheck passes"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "Depends on US-003, US-004, US-005. This is the script the user runs to generate the dashboard before opening it in their browser."
     },
     {

@@ -31,6 +31,7 @@ Started: Mon Jan 27 2026
 - Re-annotator: `scripts/reannotate_ads_abstracts.py` — curated SWEET + HTML-clean re-annotation with comparison stats
 - Real-world evaluator: `scripts/evaluate_real_world.py` — NER model vs annotations on real abstracts
 - Prediction runner: `scripts/predict_ads_abstracts.py` — NER model inference on cleaned ADS abstracts with confidence scores
+- Dashboard generator: `scripts/generate_annotation_dashboard.py` — merges reannotated + predictions into HTML dashboard
 
 ### Model Architecture
 - Base: SciBERT (allenai/scibert_scivocab_uncased), 110M params
@@ -79,6 +80,7 @@ Started: Mon Jan 27 2026
 - `data/vocabularies/sweet_borderline.jsonl` — 475 borderline 4-6 char scientific terms
 - `data/evaluation/ads_sample_predictions.jsonl` — 100 abstracts with NER model predictions (2,753 spans, 97.5% topic, avg confidence 0.71)
 - `data/evaluation/ads_sample_predictions.stats.json` — prediction summary stats
+- `data/evaluation/review_ner_annotations.html` — generated annotation dashboard (100 abstracts, 2,262 auto + 2,753 model spans)
 - `docs/annotation-guide.md` — human annotation guidelines for NER spans
 
 ### Key Gotchas
@@ -214,4 +216,29 @@ Started: Mon Jan 27 2026
   - `window.getSelection().toString()` returns the raw text; to find the character offset, we search for the selected text in `abstract_clean` — this uses `indexOf` which returns the first occurrence (may be ambiguous for repeated phrases)
   - The export format is JSONL (one JSON object per line) with only accepted spans — this is the input for US-008's training data export
   - localStorage state has two top-level keys: `annotations` (per-bibcode span decisions + user spans + notes) and `abstractStatus` (per-bibcode review status)
+---
+
+## 2026-01-27 - US-006: Generate annotation dashboard with embedded data
+- Implemented `scripts/generate_annotation_dashboard.py` which:
+  1. Loads reannotated abstracts (100 records, 2,262 auto-annotation spans)
+  2. Loads model predictions (100 records, 2,753 predicted spans)
+  3. Merges by bibcode: reannotated `spans` → `auto_spans`, prediction `spans` → `model_spans`
+  4. Injects merged JSON into HTML template via `/*DATA_PLACEHOLDER*/[]` replacement
+  5. Produces `data/evaluation/review_ner_annotations.html` (782 KB)
+- Dashboard generation stats:
+  - 100 abstracts across 4 domains (astronomy, earth_science, multidisciplinary, planetary_science)
+  - 2,262 auto spans (22.6 per abstract): 1,403 topic + 859 entity
+  - 2,753 model spans (27.5 per abstract): 2,685 topic + 68 entity
+  - Browser verified: 877 agreement spans detected (auto + model overlap)
+- CLI flags: `--reannotated`, `--predictions`, `--template`, `--output` (all with sensible defaults)
+- 27 unit tests in `tests/scripts/test_generate_annotation_dashboard.py` — all passing
+- Browser-tested: opened generated HTML, verified stats rendering, span highlighting, accept/reject buttons, filter controls, navigation all functional
+- Files changed: `scripts/generate_annotation_dashboard.py` (new), `tests/scripts/test_generate_annotation_dashboard.py` (new), `data/evaluation/review_ner_annotations.html` (new)
+- **Learnings for future iterations:**
+  - The template's `/*DATA_PLACEHOLDER*/[]` marker must be replaced exactly (including the surrounding `[]`) — `str.replace(placeholder, json_data, 1)` handles this cleanly
+  - Reannotated file has `spans` field (auto-annotations), predictions file has `spans` field (model predictions) — the merge renames them to `auto_spans` and `model_spans` respectively
+  - The raw `abstract` field (with HTML) is deliberately excluded from the merged output to keep file size down — only `abstract_clean` is needed
+  - JSON embedded in HTML can contain semicolons within string values — don't use simple semicolon search to find the end of the JSON; use `json.JSONDecoder().raw_decode()` instead
+  - Agreement detection happens client-side in the template JavaScript, not in the generation script — the generation script just provides the two separate span arrays
+  - Generated HTML is ~782 KB for 100 abstracts; for US-007's 300 abstracts expect ~2.3 MB which is still reasonable for a single HTML file
 ---
