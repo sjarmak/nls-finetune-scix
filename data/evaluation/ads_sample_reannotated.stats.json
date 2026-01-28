@@ -1,0 +1,761 @@
+{
+  "summary": {
+    "total_abstracts": 100,
+    "old_total_spans": 4793,
+    "new_total_spans": 2262,
+    "reduction": 2531,
+    "reduction_pct": 52.8
+  },
+  "by_vocabulary": [
+    {
+      "vocabulary": "gcmd",
+      "old_count": 129,
+      "new_count": 268,
+      "reduction": -139,
+      "reduction_pct": -107.8
+    },
+    {
+      "vocabulary": "planetary",
+      "old_count": 100,
+      "new_count": 158,
+      "reduction": -58,
+      "reduction_pct": -58.0
+    },
+    {
+      "vocabulary": "ror",
+      "old_count": 442,
+      "new_count": 701,
+      "reduction": -259,
+      "reduction_pct": -58.6
+    },
+    {
+      "vocabulary": "sweet",
+      "old_count": 3393,
+      "new_count": 407,
+      "reduction": 2986,
+      "reduction_pct": 88.0
+    },
+    {
+      "vocabulary": "uat",
+      "old_count": 729,
+      "new_count": 728,
+      "reduction": 1,
+      "reduction_pct": 0.1
+    }
+  ],
+  "old_by_type": {
+    "entity": 542,
+    "topic": 4251
+  },
+  "new_by_type": {
+    "entity": 859,
+    "topic": 1403
+  },
+  "per_abstract_summary": {
+    "max_reduction": 66,
+    "min_reduction": 1,
+    "avg_reduction": 25.3
+  },
+  "per_abstract": [
+    {
+      "bibcode": "2020A&A...641A...6P",
+      "old_spans": 103,
+      "new_spans": 44,
+      "reduction": 59,
+      "reduction_pct": 57.3
+    },
+    {
+      "bibcode": "1998AJ....116.1009R",
+      "old_spans": 106,
+      "new_spans": 68,
+      "reduction": 38,
+      "reduction_pct": 35.8
+    },
+    {
+      "bibcode": "1999ApJ...517..565P",
+      "old_spans": 54,
+      "new_spans": 33,
+      "reduction": 21,
+      "reduction_pct": 38.9
+    },
+    {
+      "bibcode": "2020NatMe..17..261V",
+      "old_spans": 37,
+      "new_spans": 11,
+      "reduction": 26,
+      "reduction_pct": 70.3
+    },
+    {
+      "bibcode": "1998ApJ...500..525S",
+      "old_spans": 79,
+      "new_spans": 35,
+      "reduction": 44,
+      "reduction_pct": 55.7
+    },
+    {
+      "bibcode": "2016A&A...594A..13P",
+      "old_spans": 132,
+      "new_spans": 66,
+      "reduction": 66,
+      "reduction_pct": 50.0
+    },
+    {
+      "bibcode": "1973A&A....24..337S",
+      "old_spans": 68,
+      "new_spans": 31,
+      "reduction": 37,
+      "reduction_pct": 54.4
+    },
+    {
+      "bibcode": "2016PhRvL.116f1102A",
+      "old_spans": 35,
+      "new_spans": 20,
+      "reduction": 15,
+      "reduction_pct": 42.9
+    },
+    {
+      "bibcode": "1975CMaPh..43..199H",
+      "old_spans": 35,
+      "new_spans": 22,
+      "reduction": 13,
+      "reduction_pct": 37.1
+    },
+    {
+      "bibcode": "2003ApJS..148..175S",
+      "old_spans": 59,
+      "new_spans": 35,
+      "reduction": 24,
+      "reduction_pct": 40.7
+    },
+    {
+      "bibcode": "1996A&AS..117..393B",
+      "old_spans": 24,
+      "new_spans": 14,
+      "reduction": 10,
+      "reduction_pct": 41.7
+    },
+    {
+      "bibcode": "1997ApJ...490..493N",
+      "old_spans": 30,
+      "new_spans": 12,
+      "reduction": 18,
+      "reduction_pct": 60.0
+    },
+    {
+      "bibcode": "2000AJ....120.1579Y",
+      "old_spans": 12,
+      "new_spans": 3,
+      "reduction": 9,
+      "reduction_pct": 75.0
+    },
+    {
+      "bibcode": "2003MNRAS.344.1000B",
+      "old_spans": 66,
+      "new_spans": 32,
+      "reduction": 34,
+      "reduction_pct": 51.5
+    },
+    {
+      "bibcode": "2017PhRvL.119p1101A",
+      "old_spans": 45,
+      "new_spans": 23,
+      "reduction": 22,
+      "reduction_pct": 48.9
+    },
+    {
+      "bibcode": "2003PASP..115..763C",
+      "old_spans": 124,
+      "new_spans": 72,
+      "reduction": 52,
+      "reduction_pct": 41.9
+    },
+    {
+      "bibcode": "1955ApJ...121..161S",
+      "old_spans": 28,
+      "new_spans": 17,
+      "reduction": 11,
+      "reduction_pct": 39.3
+    },
+    {
+      "bibcode": "2009ARA&A..47..481A",
+      "old_spans": 39,
+      "new_spans": 15,
+      "reduction": 24,
+      "reduction_pct": 61.5
+    },
+    {
+      "bibcode": "2014A&A...571A..16P",
+      "old_spans": 116,
+      "new_spans": 62,
+      "reduction": 54,
+      "reduction_pct": 46.6
+    },
+    {
+      "bibcode": "2011ApJS..192...18K",
+      "old_spans": 109,
+      "new_spans": 44,
+      "reduction": 65,
+      "reduction_pct": 59.6
+    },
+    {
+      "bibcode": "1985Natur.318..162K",
+      "old_spans": 23,
+      "new_spans": 12,
+      "reduction": 11,
+      "reduction_pct": 47.8
+    },
+    {
+      "bibcode": "1996ApJ...462..563N",
+      "old_spans": 63,
+      "new_spans": 31,
+      "reduction": 32,
+      "reduction_pct": 50.8
+    },
+    {
+      "bibcode": "2018A&A...616A...1G",
+      "old_spans": 84,
+      "new_spans": 56,
+      "reduction": 28,
+      "reduction_pct": 33.3
+    },
+    {
+      "bibcode": "2007ApJS..170..377S",
+      "old_spans": 87,
+      "new_spans": 40,
+      "reduction": 47,
+      "reduction_pct": 54.0
+    },
+    {
+      "bibcode": "2011ApJ...737..103S",
+      "old_spans": 22,
+      "new_spans": 9,
+      "reduction": 13,
+      "reduction_pct": 59.1
+    },
+    {
+      "bibcode": "1996BAMS...77..437K",
+      "old_spans": 84,
+      "new_spans": 29,
+      "reduction": 55,
+      "reduction_pct": 65.5
+    },
+    {
+      "bibcode": "2011QJRMS.137..553D",
+      "old_spans": 26,
+      "new_spans": 10,
+      "reduction": 16,
+      "reduction_pct": 61.5
+    },
+    {
+      "bibcode": "2020QJRMS.146.1999H",
+      "old_spans": 65,
+      "new_spans": 20,
+      "reduction": 45,
+      "reduction_pct": 69.2
+    },
+    {
+      "bibcode": "1989GSLSP..42..313S",
+      "old_spans": 73,
+      "new_spans": 34,
+      "reduction": 39,
+      "reduction_pct": 53.4
+    },
+    {
+      "bibcode": "1995ChGeo.120..223M",
+      "old_spans": 138,
+      "new_spans": 85,
+      "reduction": 53,
+      "reduction_pct": 38.4
+    },
+    {
+      "bibcode": "2005IJCli..25.1965H",
+      "old_spans": 82,
+      "new_spans": 17,
+      "reduction": 65,
+      "reduction_pct": 79.3
+    },
+    {
+      "bibcode": "2003JGRD..108.4407R",
+      "old_spans": 59,
+      "new_spans": 26,
+      "reduction": 33,
+      "reduction_pct": 55.9
+    },
+    {
+      "bibcode": "2017IJCli..37.4302F",
+      "old_spans": 71,
+      "new_spans": 25,
+      "reduction": 46,
+      "reduction_pct": 64.8
+    },
+    {
+      "bibcode": "2017RSEnv.202...18G",
+      "old_spans": 22,
+      "new_spans": 9,
+      "reduction": 13,
+      "reduction_pct": 59.1
+    },
+    {
+      "bibcode": "2016GMD.....9.1937E",
+      "old_spans": 53,
+      "new_spans": 23,
+      "reduction": 30,
+      "reduction_pct": 56.6
+    },
+    {
+      "bibcode": "2007HESS...11.1633P",
+      "old_spans": 50,
+      "new_spans": 24,
+      "reduction": 26,
+      "reduction_pct": 52.0
+    },
+    {
+      "bibcode": "1997JGR...10216663M",
+      "old_spans": 75,
+      "new_spans": 32,
+      "reduction": 43,
+      "reduction_pct": 57.3
+    },
+    {
+      "bibcode": "2001JGR...106.7183T",
+      "old_spans": 24,
+      "new_spans": 5,
+      "reduction": 19,
+      "reduction_pct": 79.2
+    },
+    {
+      "bibcode": "2005QJRMS.131.2961U",
+      "old_spans": 73,
+      "new_spans": 27,
+      "reduction": 46,
+      "reduction_pct": 63.0
+    },
+    {
+      "bibcode": "1998RSEnv..66....1H",
+      "old_spans": 72,
+      "new_spans": 20,
+      "reduction": 52,
+      "reduction_pct": 72.2
+    },
+    {
+      "bibcode": "2011ClCh..109....5V",
+      "old_spans": 61,
+      "new_spans": 28,
+      "reduction": 33,
+      "reduction_pct": 54.1
+    },
+    {
+      "bibcode": "1997BAMS...78.1069M",
+      "old_spans": 36,
+      "new_spans": 13,
+      "reduction": 23,
+      "reduction_pct": 63.9
+    },
+    {
+      "bibcode": "1978SSASJ..42..421L",
+      "old_spans": 38,
+      "new_spans": 18,
+      "reduction": 20,
+      "reduction_pct": 52.6
+    },
+    {
+      "bibcode": "2000AREPS..28..211Y",
+      "old_spans": 50,
+      "new_spans": 30,
+      "reduction": 20,
+      "reduction_pct": 40.0
+    },
+    {
+      "bibcode": "1998JAWRA..34...73A",
+      "old_spans": 29,
+      "new_spans": 11,
+      "reduction": 18,
+      "reduction_pct": 62.1
+    },
+    {
+      "bibcode": "2007RvGeo..45.2004F",
+      "old_spans": 20,
+      "new_spans": 8,
+      "reduction": 12,
+      "reduction_pct": 60.0
+    },
+    {
+      "bibcode": "1982RvGSP..20..851M",
+      "old_spans": 14,
+      "new_spans": 2,
+      "reduction": 12,
+      "reduction_pct": 85.7
+    },
+    {
+      "bibcode": "2002BAMS...83.1631K",
+      "old_spans": 47,
+      "new_spans": 25,
+      "reduction": 22,
+      "reduction_pct": 46.8
+    },
+    {
+      "bibcode": "2003TrGeo...3....1R",
+      "old_spans": 76,
+      "new_spans": 38,
+      "reduction": 38,
+      "reduction_pct": 50.0
+    },
+    {
+      "bibcode": "2014IJCli..34..623H",
+      "old_spans": 63,
+      "new_spans": 27,
+      "reduction": 36,
+      "reduction_pct": 57.1
+    },
+    {
+      "bibcode": "1997Natur.387..253C",
+      "old_spans": 30,
+      "new_spans": 10,
+      "reduction": 20,
+      "reduction_pct": 66.7
+    },
+    {
+      "bibcode": "2005Sci...309..570F",
+      "old_spans": 31,
+      "new_spans": 11,
+      "reduction": 20,
+      "reduction_pct": 64.5
+    },
+    {
+      "bibcode": "2016A&A...595A...1G",
+      "old_spans": 39,
+      "new_spans": 18,
+      "reduction": 21,
+      "reduction_pct": 53.8
+    },
+    {
+      "bibcode": "1981PASP...93....5B",
+      "old_spans": 14,
+      "new_spans": 5,
+      "reduction": 9,
+      "reduction_pct": 64.3
+    },
+    {
+      "bibcode": "2011ApJS..192....3P",
+      "old_spans": 76,
+      "new_spans": 43,
+      "reduction": 33,
+      "reduction_pct": 43.4
+    },
+    {
+      "bibcode": "2023A&A...674A...1G",
+      "old_spans": 107,
+      "new_spans": 61,
+      "reduction": 46,
+      "reduction_pct": 43.0
+    },
+    {
+      "bibcode": "2015JATIS...1a4003R",
+      "old_spans": 62,
+      "new_spans": 38,
+      "reduction": 24,
+      "reduction_pct": 38.7
+    },
+    {
+      "bibcode": "2008Sci...320.1444B",
+      "old_spans": 47,
+      "new_spans": 27,
+      "reduction": 20,
+      "reduction_pct": 42.6
+    },
+    {
+      "bibcode": "2010Sci...327..977B",
+      "old_spans": 30,
+      "new_spans": 22,
+      "reduction": 8,
+      "reduction_pct": 26.7
+    },
+    {
+      "bibcode": "1995Natur.378..355M",
+      "old_spans": 16,
+      "new_spans": 8,
+      "reduction": 8,
+      "reduction_pct": 50.0
+    },
+    {
+      "bibcode": "2002Sci...295.2418W",
+      "old_spans": 12,
+      "new_spans": 4,
+      "reduction": 8,
+      "reduction_pct": 66.7
+    },
+    {
+      "bibcode": "2013Sci...340..448A",
+      "old_spans": 27,
+      "new_spans": 11,
+      "reduction": 16,
+      "reduction_pct": 59.3
+    },
+    {
+      "bibcode": "2013ApJS..208....4P",
+      "old_spans": 68,
+      "new_spans": 38,
+      "reduction": 30,
+      "reduction_pct": 44.1
+    },
+    {
+      "bibcode": "1995RvGeo..33..241T",
+      "old_spans": 104,
+      "new_spans": 42,
+      "reduction": 62,
+      "reduction_pct": 59.6
+    },
+    {
+      "bibcode": "2001ApJ...553...47F",
+      "old_spans": 61,
+      "new_spans": 33,
+      "reduction": 28,
+      "reduction_pct": 45.9
+    },
+    {
+      "bibcode": "2004A&A...428..261L",
+      "old_spans": 62,
+      "new_spans": 26,
+      "reduction": 36,
+      "reduction_pct": 58.1
+    },
+    {
+      "bibcode": "1992ARA&A..30..543M",
+      "old_spans": 22,
+      "new_spans": 11,
+      "reduction": 11,
+      "reduction_pct": 50.0
+    },
+    {
+      "bibcode": "2003ARA&A..41...57L",
+      "old_spans": 56,
+      "new_spans": 29,
+      "reduction": 27,
+      "reduction_pct": 48.2
+    },
+    {
+      "bibcode": "1996Icar..124...62P",
+      "old_spans": 106,
+      "new_spans": 56,
+      "reduction": 50,
+      "reduction_pct": 47.2
+    },
+    {
+      "bibcode": "1974MNRAS.168..603L",
+      "old_spans": 36,
+      "new_spans": 26,
+      "reduction": 10,
+      "reduction_pct": 27.8
+    },
+    {
+      "bibcode": "2014LRR....17....4W",
+      "old_spans": 42,
+      "new_spans": 18,
+      "reduction": 24,
+      "reduction_pct": 57.1
+    },
+    {
+      "bibcode": "1987ARA&A..25...23S",
+      "old_spans": 16,
+      "new_spans": 9,
+      "reduction": 7,
+      "reduction_pct": 43.8
+    },
+    {
+      "bibcode": "1992Sci...255..423C",
+      "old_spans": 59,
+      "new_spans": 28,
+      "reduction": 31,
+      "reduction_pct": 52.5
+    },
+    {
+      "bibcode": "2001ApJ...556..121K",
+      "old_spans": 72,
+      "new_spans": 47,
+      "reduction": 25,
+      "reduction_pct": 34.7
+    },
+    {
+      "bibcode": "2008E&PSL.273...48B",
+      "old_spans": 45,
+      "new_spans": 20,
+      "reduction": 25,
+      "reduction_pct": 55.6
+    },
+    {
+      "bibcode": "1965PhRv..140.1133K",
+      "old_spans": 29,
+      "new_spans": 13,
+      "reduction": 16,
+      "reduction_pct": 55.2
+    },
+    {
+      "bibcode": "2009RvMP...81..109C",
+      "old_spans": 25,
+      "new_spans": 11,
+      "reduction": 14,
+      "reduction_pct": 56.0
+    },
+    {
+      "bibcode": "1972Natur.238...37F",
+      "old_spans": 9,
+      "new_spans": 2,
+      "reduction": 7,
+      "reduction_pct": 77.8
+    },
+    {
+      "bibcode": "2020Natur.585..357H",
+      "old_spans": 38,
+      "new_spans": 11,
+      "reduction": 27,
+      "reduction_pct": 71.1
+    },
+    {
+      "bibcode": "1998Natur.393..440W",
+      "old_spans": 41,
+      "new_spans": 14,
+      "reduction": 27,
+      "reduction_pct": 65.9
+    },
+    {
+      "bibcode": "1989ApJ...345..245C",
+      "old_spans": 22,
+      "new_spans": 10,
+      "reduction": 12,
+      "reduction_pct": 54.5
+    },
+    {
+      "bibcode": "2010PhRvL.105m6805M",
+      "old_spans": 21,
+      "new_spans": 9,
+      "reduction": 12,
+      "reduction_pct": 57.1
+    },
+    {
+      "bibcode": "1999JChPh.110.6158A",
+      "old_spans": 15,
+      "new_spans": 6,
+      "reduction": 9,
+      "reduction_pct": 60.0
+    },
+    {
+      "bibcode": "1964AnaCh..36.1627S",
+      "old_spans": 13,
+      "new_spans": 6,
+      "reduction": 7,
+      "reduction_pct": 53.8
+    },
+    {
+      "bibcode": "1998PhRvB..57.1505D",
+      "old_spans": 12,
+      "new_spans": 3,
+      "reduction": 9,
+      "reduction_pct": 75.0
+    },
+    {
+      "bibcode": "2021Natur.596..583J",
+      "old_spans": 38,
+      "new_spans": 10,
+      "reduction": 28,
+      "reduction_pct": 73.7
+    },
+    {
+      "bibcode": "2014Bioin..30.1312S",
+      "old_spans": 29,
+      "new_spans": 10,
+      "reduction": 19,
+      "reduction_pct": 65.5
+    },
+    {
+      "bibcode": "2000PhRvL..85.3966P",
+      "old_spans": 23,
+      "new_spans": 8,
+      "reduction": 15,
+      "reduction_pct": 65.2
+    },
+    {
+      "bibcode": "2010AJ....140.1868W",
+      "old_spans": 31,
+      "new_spans": 15,
+      "reduction": 16,
+      "reduction_pct": 51.6
+    },
+    {
+      "bibcode": "2003Natur.424..824B",
+      "old_spans": 12,
+      "new_spans": 2,
+      "reduction": 10,
+      "reduction_pct": 83.3
+    },
+    {
+      "bibcode": "2005JSynR..12..537R",
+      "old_spans": 4,
+      "new_spans": 3,
+      "reduction": 1,
+      "reduction_pct": 25.0
+    },
+    {
+      "bibcode": "2005PNAS..10215545S",
+      "old_spans": 26,
+      "new_spans": 11,
+      "reduction": 15,
+      "reduction_pct": 57.7
+    },
+    {
+      "bibcode": "2001RvMP...73..515B",
+      "old_spans": 14,
+      "new_spans": 8,
+      "reduction": 6,
+      "reduction_pct": 42.9
+    },
+    {
+      "bibcode": "2003Natur.421...37P",
+      "old_spans": 46,
+      "new_spans": 21,
+      "reduction": 25,
+      "reduction_pct": 54.3
+    },
+    {
+      "bibcode": "2003SIAMR..45..167N",
+      "old_spans": 18,
+      "new_spans": 7,
+      "reduction": 11,
+      "reduction_pct": 61.1
+    },
+    {
+      "bibcode": "1993AusEc..18..117C",
+      "old_spans": 36,
+      "new_spans": 21,
+      "reduction": 15,
+      "reduction_pct": 41.7
+    },
+    {
+      "bibcode": "2001Bioin..17..754H",
+      "old_spans": 5,
+      "new_spans": 2,
+      "reduction": 3,
+      "reduction_pct": 60.0
+    },
+    {
+      "bibcode": "2012PhRvD..86a0001B",
+      "old_spans": 35,
+      "new_spans": 16,
+      "reduction": 19,
+      "reduction_pct": 54.3
+    },
+    {
+      "bibcode": "2011Sci...334..333Y",
+      "old_spans": 24,
+      "new_spans": 7,
+      "reduction": 17,
+      "reduction_pct": 70.8
+    },
+    {
+      "bibcode": "2007JApCr..40..658M",
+      "old_spans": 6,
+      "new_spans": 2,
+      "reduction": 4,
+      "reduction_pct": 66.7
+    }
+  ]
+}

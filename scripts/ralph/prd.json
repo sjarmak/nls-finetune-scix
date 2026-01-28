@@ -51,7 +51,7 @@
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Depends on US-001 and US-002. The re-annotated file is used as input to the annotation dashboard."
     },
     {

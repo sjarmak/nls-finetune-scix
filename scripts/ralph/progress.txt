@@ -28,6 +28,7 @@ Started: Mon Jan 27 2026
 - End-to-end inference: `scripts/run_enrichment_pipeline.py` — NER + entity linking pipeline
 - ADS abstract sampler: `scripts/sample_ads_abstracts.py` — queries ADS API for diverse abstracts
 - Auto-annotator: `scripts/annotate_ads_abstracts.py` — catalog keyword matching annotation
+- Re-annotator: `scripts/reannotate_ads_abstracts.py` — curated SWEET + HTML-clean re-annotation with comparison stats
 - Real-world evaluator: `scripts/evaluate_real_world.py` — NER model vs annotations on real abstracts
 
 ### Model Architecture
@@ -57,7 +58,9 @@ Started: Mon Jan 27 2026
 
 ### Data Files
 - `data/evaluation/ads_sample_raw.jsonl` — 100 raw ADS abstracts (25 per domain)
-- `data/evaluation/ads_sample_annotated.jsonl` — same 100 with catalog keyword annotations (4,795 spans, 70.8% SWEET)
+- `data/evaluation/ads_sample_annotated.jsonl` — same 100 with catalog keyword annotations (4,793 spans, 70.8% SWEET)
+- `data/evaluation/ads_sample_reannotated.jsonl` — 100 abstracts re-annotated with curated SWEET + HTML-clean text (2,262 spans, 52.8% reduction)
+- `data/evaluation/ads_sample_reannotated.stats.json` — before-vs-after comparison stats
 - `data/datasets/agent_runs/run_20260127_174306_999adfdd/normalized/` — unified catalogs from real sources
 - `data/datasets/enrichment/` — 10,691 enrichment records (train/val/test splits)
 - `data/vocabularies/sweet_curated.jsonl` — 10,617 curated SWEET entries (common English words removed)
@@ -113,4 +116,31 @@ Started: Mon Jan 27 2026
   - The `scripts/` directory is not a Python package; tests import via `sys.path.insert(0, scripts_dir)` pattern (matching test_html_utils.py)
   - Curated vocabulary path for downstream use: `data/vocabularies/sweet_curated.jsonl` — US-003 will need this
   - Pre-existing test_ner.py import error (DATABASE_SYNONYMS) is unrelated to this work
+---
+
+## 2026-01-27 - US-003: Re-annotate abstracts with curated vocabulary + HTML preprocessing
+- Implemented `scripts/reannotate_ads_abstracts.py` which:
+  1. Loads curated SWEET vocabulary (10,617 entries) instead of full SWEET (12,986)
+  2. Loads UAT, GCMD, ROR, planetary catalogs unchanged from normalized directory
+  3. Re-annotates all 100 abstracts using `abstract_clean` (HTML-stripped) text
+  4. Produces comparison stats (before vs after curation)
+- Re-annotation results:
+  - **SWEET spans: 3,393 → 407 (88.0% reduction)** — exceeds expected 50-70%
+  - **Total spans: 4,793 → 2,262 (52.8% reduction)**
+  - UAT: 729 → 728 (essentially unchanged)
+  - GCMD: 129 → 268 (increased — freed positions from removed SWEET matches)
+  - ROR: 442 → 701 (increased — same reason)
+  - Planetary: 100 → 158 (increased — same reason)
+- All 2,262 spans validate with zero offset failures on `abstract_clean` text
+- Output files:
+  - `data/evaluation/ads_sample_reannotated.jsonl` — 100 re-annotated abstracts
+  - `data/evaluation/ads_sample_reannotated.stats.json` — detailed comparison stats
+- 17 unit tests in `tests/scripts/test_reannotate_ads_abstracts.py` — all passing
+- Files changed: `scripts/reannotate_ads_abstracts.py` (new), `tests/scripts/test_reannotate_ads_abstracts.py` (new), `data/evaluation/ads_sample_reannotated.jsonl` (new), `data/evaluation/ads_sample_reannotated.stats.json` (new)
+- **Learnings for future iterations:**
+  - The `annotate_ads_abstracts.py` module is directly importable: `from annotate_ads_abstracts import CatalogEntry, build_keyword_index, find_annotation_spans, load_catalog_entries`
+  - Non-SWEET vocab span counts increase after SWEET curation because the greedy longest-match-first algorithm's `occupied` set has fewer positions blocked by removed SWEET matches, freeing space for GCMD/ROR/planetary matches
+  - Curated SWEET JSONL uses the same schema as topic_catalog entries (id, label, aliases, source_vocabulary, domain_tags) — can use `load_catalog_entries()` or a thin wrapper
+  - The 88% SWEET reduction (vs expected 50-70%) is because the annotator also has its own `STOPWORD_SURFACES` filter (177 words) that removes common English words at match time, compounding with the curated vocabulary's curation
+  - Re-annotated file includes both `abstract` (raw HTML) and `abstract_clean` fields — downstream US-005/US-006 should use `abstract_clean` for display and `spans` are offset-aligned to it
 ---
