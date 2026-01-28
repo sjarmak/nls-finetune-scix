@@ -301,3 +301,29 @@ Started: Mon Jan 27 2026
   - The exit code is 1 if validation failures occur (allows CI integration), 0 if all spans validate
   - The provenance dict preserves all dashboard metadata (bibcode, domain, review status, notes) for traceability back to human annotations
 ---
+## 2026-01-27 - US-009: Mixed-data curriculum retraining script
+- Extended `scripts/train_enrichment_model.py` with curriculum learning support
+- Added `train_curriculum()` function implementing 2-phase training:
+  - Phase 1: Pre-trains on synthetic data (default 3 epochs, lr=2e-5)
+  - Phase 2: Fine-tunes on human annotations (default 5 epochs, lr=5e-6)
+- Added CLI flags: `--curriculum`, `--human-train`, `--human-val`, `--phase1-epochs`, `--phase2-epochs`, `--phase2-learning-rate`
+- Phase 2 uses lower learning rate (5e-6 vs 2e-5) to avoid catastrophic forgetting
+- Graceful fallback: If human annotation files don't exist, falls back to regular `train()` with synthetic-only training
+- Logging: Phase transitions printed to stdout, full training log saved as JSON with `curriculum_learning: true` flag
+- Training log includes separate `phase1` and `phase2` sections with epochs, learning rates, record counts, and metrics
+- Model checkpoints: Phase 1 saved to `{output_dir}/phase1_synthetic/`, Phase 2 to `{output_dir}/phase2_human/`, final best model saved to `{output_dir}/`
+- 9 unit tests in `tests/scripts/test_train_enrichment_model.py` — all passing
+- Typecheck passes (mise run lint)
+- Files changed: `scripts/train_enrichment_model.py` (extended), `tests/scripts/test_train_enrichment_model.py` (new), `scripts/ralph/prd.json` (US-009 passes: true)
+- **Learnings for future iterations:**
+  - The `TrainConfig` dataclass is frozen=True, so all new curriculum learning parameters must be added to the dataclass definition
+  - The `train()` function signature stays the same; `train_curriculum()` is a new parallel function that wraps two training phases
+  - The `main()` function checks `config.curriculum` flag and routes to either `train_curriculum()` or `train()`
+  - Phase 1 and Phase 2 use separate Trainer instances but share the same model instance (Phase 2 continues from Phase 1's final state)
+  - TrainingArguments for Phase 2 must use `load_best_model_at_end=True` and `metric_for_best_model="f1"` to select the best checkpoint
+  - The fallback logic checks `Path(human_train_file).exists()` and `Path(human_val_file).exists()` before proceeding with curriculum learning
+  - Training log format for curriculum learning: separate `phase1` and `phase2` dicts with `epochs`, `learning_rate`, `train_records`, `val_records`, `metrics`
+  - Testing curriculum learning requires mocking transformers internals (AutoTokenizer, AutoModelForTokenClassification, Trainer); simplified tests focus on configuration and fallback logic instead of deep mocking
+  - The script can be built and tested before human annotation data exists (it gracefully falls back to synthetic-only training)
+  - CLI example: `python scripts/train_enrichment_model.py --curriculum --train-file data/enrichment_train.jsonl --val-file data/enrichment_val.jsonl --human-train data/datasets/enrichment/human_annotated_train.jsonl --human-val data/datasets/enrichment/human_annotated_val.jsonl --output-dir models/enrichment_ner_v2`
+---

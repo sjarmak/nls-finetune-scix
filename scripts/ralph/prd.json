@@ -165,7 +165,7 @@
         "Typecheck passes"
       ],
       "priority": 4,
-      "passes": false,
+      "passes": true,
       "notes": "This can be built before human annotations exist. It should gracefully handle missing human data by falling back to synthetic-only training. The user will run this on Colab Pro after completing annotations."
     },
     {
