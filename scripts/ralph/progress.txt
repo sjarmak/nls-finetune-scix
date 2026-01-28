@@ -57,6 +57,16 @@ Started: Mon Jan 27 2026
   - Event delegation pattern on container element
   - ~685 lines, single HTML file, no build step
 
+### NER Annotation Dashboard Pattern
+- `scripts/annotation_dashboard_template.html` — NER span annotation UI with:
+  - Data injection via `/*DATA_PLACEHOLDER*/[]` marker — generation script replaces with inline JSON
+  - Expected data schema: `{bibcode, title, abstract_clean, domain_category, citation_count, auto_spans[], model_spans[]}`
+  - Span sources: auto (blue), model (green), agreement (purple, auto+model overlap), user-added (gold)
+  - localStorage key: `nls-ner-annotations-v1`, state: `{annotations: {bibcode: {decisions, userSpans, notes}}, abstractStatus: {bibcode: status}}`
+  - Export format: JSONL with accepted spans per abstract
+  - Keyboard shortcuts: arrows (nav), 1-5 (span type), R (reviewed), S (skip)
+  - ~1,240 lines, single HTML file, no build step
+
 ### Data Files
 - `data/evaluation/ads_sample_raw.jsonl` — 100 raw ADS abstracts (25 per domain)
 - `data/evaluation/ads_sample_annotated.jsonl` — same 100 with catalog keyword annotations (4,793 spans, 70.8% SWEET)
@@ -173,4 +183,35 @@ Started: Mon Jan 27 2026
   - The model's average confidence of 0.71 suggests moderate certainty — many spans have high confidence (>0.9) but some borderline ones bring the average down
   - Output schema includes: `bibcode, title, abstract_clean, domain_category, spans[{surface, start, end, type, confidence}]` — the `confidence` field is what differentiates predictions from auto-annotations
   - Mock-based tests for NER inference work well: mock the tokenizer to return controlled offset_mapping and the model to return specific logits, then verify span decoding
+---
+
+## 2026-01-27 - US-005: Build NER annotation dashboard HTML template
+- Created `scripts/annotation_dashboard_template.html` — 1,240 lines, single HTML file, no build step
+- Dashboard features:
+  - **Stats bar**: Total abstracts, reviewed/pending counts, span counts by source (auto/model/agreement/user), accepted/rejected counts
+  - **Filter controls**: Domain category dropdown (auto-populated), review status (pending/reviewed/skipped/has-disagreements), text search
+  - **Abstract card**: Bibcode, title, domain tag, citation count in header; abstract text with color-coded span highlights
+  - **Span highlighting**: Blue (auto-annotation), green (model prediction), purple (agreement), gold (user-added); rejected spans shown with strikethrough + opacity
+  - **Span list panel**: All spans listed with surface text, type badge, source badge, confidence %, character offsets, accept/reject toggle buttons
+  - **Text selection**: `window.getSelection()` captures mouse-selected text in abstract, popup offers type selection (topic/entity/institution/author/date_range)
+  - **Click to toggle**: Clicking a highlighted span in abstract text toggles its accept/reject status
+  - **Notes field**: Per-abstract textarea with auto-save
+  - **localStorage**: Persists under key `nls-ner-annotations-v1` with `{annotations: {bibcode: {decisions, userSpans, notes}}, abstractStatus: {bibcode: status}}`
+  - **Export**: Downloads JSONL with accepted spans per abstract (bibcode, title, abstract_clean, domain_category, spans, review_status, notes)
+  - **Save/Load**: Save progress to JSON file, load from file to restore state
+  - **Keyboard shortcuts**: Arrow keys for prev/next abstract, 1-5 for span type assignment (when popup open), R for reviewed, S for skip, Escape closes popup
+  - **Navigation**: Single abstract view with prev/next buttons and position indicator
+- Uses `/*DATA_PLACEHOLDER*/[]` marker for inline JSON injection by generation script (US-006)
+- Data schema expects: `{bibcode, title, abstract_clean, domain_category, citation_count, auto_spans: [{surface, start, end, type, canonical_id?, source_vocabulary?}], model_spans: [{surface, start, end, type, confidence}]}`
+- Agreement detection: Auto + model spans with same type and overlapping character ranges are merged as "agreement" source
+- Follows review_live.html visual style: light theme (#f5f5f5 background), card layout, Apple system font stack, event delegation pattern
+- Browser-tested with 3 real abstracts (87 auto spans, 105 model spans, 58 agreements detected) — all rendering, stats, and accept interactions working correctly
+- Files changed: `scripts/annotation_dashboard_template.html` (new)
+- **Learnings for future iterations:**
+  - The template expects `auto_spans` and `model_spans` as separate arrays per record — the generation script (US-006) must merge reannotated spans as `auto_spans` and prediction spans as `model_spans`
+  - Agreement detection uses overlap + same type heuristic: for each auto span, if any model span overlaps and has the same `type`, both are merged into a single "agreement" span (auto span gets source='agreement', model span is hidden)
+  - Non-overlapping span flattening is used for text highlighting to avoid nested HTML; the first span wins when spans overlap in the display
+  - `window.getSelection().toString()` returns the raw text; to find the character offset, we search for the selected text in `abstract_clean` — this uses `indexOf` which returns the first occurrence (may be ambiguous for repeated phrases)
+  - The export format is JSONL (one JSON object per line) with only accepted spans — this is the input for US-008's training data export
+  - localStorage state has two top-level keys: `annotations` (per-bibcode span decisions + user spans + notes) and `abstractStatus` (per-bibcode review status)
 ---

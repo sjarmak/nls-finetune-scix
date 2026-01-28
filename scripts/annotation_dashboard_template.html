@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NER Annotation Dashboard</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        h1 { color: #333; margin-bottom: 10px; }
+        .subtitle { color: #666; font-size: 14px; margin-bottom: 20px; }
+
+        /* Stats Dashboard */
+        .stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            min-width: 110px;
+        }
+        .stat-card h3 { margin: 0 0 5px 0; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-card .value { font-size: 22px; font-weight: bold; color: #333; }
+        .stat-card .value.blue { color: #3b82f6; }
+        .stat-card .value.green { color: #22c55e; }
+        .stat-card .value.purple { color: #8b5cf6; }
+        .stat-card .value.gold { color: #d97706; }
+        .stat-card .value.red { color: #ef4444; }
+
+        /* Controls */
+        .controls {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .controls select, .controls input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        .controls label { font-size: 13px; color: #666; margin-right: 4px; }
+        .control-group { display: flex; align-items: center; gap: 4px; }
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: opacity 0.15s;
+        }
+        .btn:hover { opacity: 0.85; }
+        .btn-export { background: #3b82f6; color: white; }
+        .btn-save { background: #22c55e; color: white; }
+        .btn-load { background: #8b5cf6; color: white; }
+        .btn-small { padding: 4px 10px; font-size: 12px; }
+        .btn-actions { margin-left: auto; display: flex; gap: 8px; }
+
+        /* Navigation */
+        .nav-bar {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .nav-bar .nav-label { font-size: 13px; color: #666; }
+        .nav-bar .nav-current { font-size: 16px; font-weight: bold; }
+        .btn-nav {
+            padding: 6px 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-nav:hover { background: #f0f0f0; }
+        .btn-nav:disabled { opacity: 0.4; cursor: default; }
+
+        /* Abstract Card */
+        .abstract-card {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .abstract-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 15px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            gap: 15px;
+        }
+        .abstract-meta { flex: 1; }
+        .abstract-bibcode { font-family: 'Monaco', 'Menlo', monospace; font-size: 12px; color: #666; }
+        .abstract-title { font-size: 15px; font-weight: 600; margin-top: 4px; line-height: 1.4; }
+        .abstract-tags { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .tag-domain { background: #dbeafe; color: #1e40af; }
+        .tag-citations { background: #fef3c7; color: #92400e; }
+        .abstract-status { display: flex; gap: 6px; align-items: center; }
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-reviewed { background: #d1fae5; color: #065f46; }
+        .status-skipped { background: #e5e7eb; color: #374151; }
+
+        /* Abstract Text Area */
+        .abstract-body { padding: 15px; }
+        .abstract-text-container {
+            font-size: 14px;
+            line-height: 1.8;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            position: relative;
+            cursor: text;
+            user-select: text;
+            -webkit-user-select: text;
+        }
+        .abstract-text-container::after {
+            content: 'Select text to add a span';
+            position: absolute;
+            bottom: 4px;
+            right: 8px;
+            font-size: 10px;
+            color: #9ca3af;
+            pointer-events: none;
+        }
+
+        /* Span Highlights */
+        .span-highlight {
+            padding: 1px 2px;
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            transition: box-shadow 0.15s;
+        }
+        .span-highlight:hover {
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.2);
+        }
+        .span-highlight.rejected {
+            opacity: 0.35;
+            text-decoration: line-through;
+        }
+        .span-auto { background: rgba(59, 130, 246, 0.2); border-bottom: 2px solid #3b82f6; }
+        .span-model { background: rgba(34, 197, 94, 0.2); border-bottom: 2px solid #22c55e; }
+        .span-agreement { background: rgba(139, 92, 246, 0.2); border-bottom: 2px solid #8b5cf6; }
+        .span-user { background: rgba(217, 119, 6, 0.2); border-bottom: 2px solid #d97706; }
+
+        /* Span tooltip */
+        .span-tooltip {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 4px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2937;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            white-space: nowrap;
+            z-index: 100;
+            pointer-events: none;
+        }
+        .span-highlight:hover .span-tooltip { display: block; }
+
+        /* Span Legend */
+        .span-legend {
+            display: flex;
+            gap: 16px;
+            padding: 10px 15px;
+            border-top: 1px solid #eee;
+            font-size: 12px;
+            color: #666;
+            flex-wrap: wrap;
+        }
+        .legend-item { display: flex; align-items: center; gap: 4px; }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        .swatch-auto { background: rgba(59, 130, 246, 0.3); border-bottom: 2px solid #3b82f6; }
+        .swatch-model { background: rgba(34, 197, 94, 0.3); border-bottom: 2px solid #22c55e; }
+        .swatch-agreement { background: rgba(139, 92, 246, 0.3); border-bottom: 2px solid #8b5cf6; }
+        .swatch-user { background: rgba(217, 119, 6, 0.3); border-bottom: 2px solid #d97706; }
+
+        /* Span List Panel */
+        .span-panel {
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+        .span-panel h3 {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .span-list { list-style: none; }
+        .span-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+            font-size: 13px;
+            transition: background 0.15s;
+        }
+        .span-item:hover { background: #f3f4f6; }
+        .span-item.rejected { opacity: 0.5; }
+        .span-surface {
+            font-weight: 600;
+            min-width: 120px;
+            max-width: 250px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .span-type-badge {
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .type-topic { background: #dbeafe; color: #1e40af; }
+        .type-entity { background: #d1fae5; color: #065f46; }
+        .type-institution { background: #fce7f3; color: #9d174d; }
+        .type-author { background: #fef3c7; color: #92400e; }
+        .type-date_range { background: #e0e7ff; color: #3730a3; }
+        .span-source-badge {
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        .source-auto { background: rgba(59, 130, 246, 0.15); color: #2563eb; }
+        .source-model { background: rgba(34, 197, 94, 0.15); color: #16a34a; }
+        .source-agreement { background: rgba(139, 92, 246, 0.15); color: #7c3aed; }
+        .source-user { background: rgba(217, 119, 6, 0.15); color: #d97706; }
+        .span-confidence {
+            font-size: 11px;
+            color: #9ca3af;
+            min-width: 36px;
+        }
+        .span-offsets {
+            font-size: 11px;
+            color: #9ca3af;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+        .span-toggle {
+            margin-left: auto;
+            display: flex;
+            gap: 4px;
+        }
+        .btn-accept, .btn-reject {
+            padding: 3px 8px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+            background: white;
+            transition: all 0.15s;
+        }
+        .btn-accept:hover { background: #d1fae5; border-color: #22c55e; }
+        .btn-reject:hover { background: #fee2e2; border-color: #ef4444; }
+        .btn-accept.active { background: #22c55e; color: white; border-color: #22c55e; }
+        .btn-reject.active { background: #ef4444; color: white; border-color: #ef4444; }
+        .btn-delete {
+            padding: 3px 6px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+            background: white;
+            color: #ef4444;
+        }
+        .btn-delete:hover { background: #fee2e2; border-color: #ef4444; }
+
+        /* Notes */
+        .notes-section {
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+        .notes-section textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 50px;
+        }
+        .notes-section textarea:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59,130,246,0.2); }
+        .notes-label { font-size: 12px; color: #666; margin-bottom: 4px; }
+
+        /* Review Actions */
+        .review-actions {
+            display: flex;
+            gap: 8px;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+        .btn-reviewed { background: #22c55e; color: white; }
+        .btn-skip { background: #6b7280; color: white; }
+
+        /* New span popup */
+        .new-span-popup {
+            display: none;
+            position: fixed;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            padding: 12px;
+            z-index: 1000;
+            min-width: 220px;
+        }
+        .new-span-popup.visible { display: block; }
+        .new-span-popup h4 { font-size: 13px; margin-bottom: 8px; color: #333; }
+        .new-span-popup .selected-text {
+            font-size: 12px;
+            color: #666;
+            background: #f3f4f6;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .type-buttons { display: flex; flex-direction: column; gap: 4px; }
+        .type-buttons button {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            font-size: 12px;
+            text-align: left;
+            transition: background 0.1s;
+        }
+        .type-buttons button:hover { background: #f3f4f6; }
+        .type-buttons button .shortcut {
+            float: right;
+            color: #9ca3af;
+            font-size: 11px;
+        }
+
+        /* Keyboard shortcut help */
+        .shortcuts-help {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 12px;
+            color: #666;
+        }
+        .shortcuts-help kbd {
+            display: inline-block;
+            padding: 1px 5px;
+            border: 1px solid #d1d5db;
+            border-radius: 3px;
+            background: #f9fafb;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 11px;
+        }
+        .shortcuts-list { display: flex; gap: 20px; flex-wrap: wrap; }
+
+        .hidden { display: none; }
+        #results-info { color: #666; font-size: 13px; }
+
+        /* File input hidden */
+        #load-file-input { display: none; }
+    </style>
+</head>
+<body>
+    <h1>NER Annotation Dashboard</h1>
+    <p class="subtitle">Review and annotate named entity spans in ADS abstracts</p>
+
+    <!-- Stats Dashboard -->
+    <div class="stats" id="stats-bar">
+        <div class="stat-card"><h3>Total</h3><div class="value" id="stat-total">0</div></div>
+        <div class="stat-card"><h3>Reviewed</h3><div class="value green" id="stat-reviewed">0</div></div>
+        <div class="stat-card"><h3>Pending</h3><div class="value" id="stat-pending">0</div></div>
+        <div class="stat-card"><h3>Auto Spans</h3><div class="value blue" id="stat-auto">0</div></div>
+        <div class="stat-card"><h3>Model Spans</h3><div class="value green" id="stat-model">0</div></div>
+        <div class="stat-card"><h3>Agreement</h3><div class="value purple" id="stat-agreement">0</div></div>
+        <div class="stat-card"><h3>User Added</h3><div class="value gold" id="stat-user">0</div></div>
+        <div class="stat-card"><h3>Accepted</h3><div class="value green" id="stat-accepted">0</div></div>
+        <div class="stat-card"><h3>Rejected</h3><div class="value red" id="stat-rejected">0</div></div>
+    </div>
+
+    <!-- Filter Controls -->
+    <div class="controls">
+        <div class="control-group">
+            <label>Domain:</label>
+            <select id="filter-domain">
+                <option value="all">All domains</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label>Status:</label>
+            <select id="filter-status">
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="reviewed">Reviewed</option>
+                <option value="skipped">Skipped</option>
+                <option value="has-disagreements">Has disagreements</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label>Search:</label>
+            <input type="text" id="filter-search" placeholder="Search bibcode or title...">
+        </div>
+        <div id="results-info"></div>
+        <div class="btn-actions">
+            <button class="btn btn-export" id="btn-export">Export JSONL</button>
+            <button class="btn btn-save" id="btn-save">Save Progress</button>
+            <button class="btn btn-load" id="btn-load">Load Progress</button>
+            <input type="file" id="load-file-input" accept=".json">
+        </div>
+    </div>
+
+    <!-- Keyboard Shortcuts -->
+    <div class="shortcuts-help">
+        <div class="shortcuts-list">
+            <span><kbd>&larr;</kbd> / <kbd>&rarr;</kbd> Prev/Next abstract</span>
+            <span><kbd>1</kbd>-<kbd>5</kbd> Assign type to selected span</span>
+            <span><kbd>R</kbd> Mark reviewed</span>
+            <span><kbd>S</kbd> Skip</span>
+            <span>Select text to add new span</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-bar">
+        <button class="btn-nav" id="btn-prev" title="Previous abstract (Left arrow)">&larr; Prev</button>
+        <span class="nav-label">Abstract</span>
+        <span class="nav-current" id="nav-current">0 / 0</span>
+        <button class="btn-nav" id="btn-next" title="Next abstract (Right arrow)">Next &rarr;</button>
+    </div>
+
+    <!-- Abstract Card (single at a time) -->
+    <div id="abstract-container"></div>
+
+    <!-- New Span Popup -->
+    <div class="new-span-popup" id="new-span-popup">
+        <h4>Add Span</h4>
+        <div class="selected-text" id="popup-selected-text"></div>
+        <div class="type-buttons">
+            <button data-type="topic">Topic <span class="shortcut">1</span></button>
+            <button data-type="entity">Entity <span class="shortcut">2</span></button>
+            <button data-type="institution">Institution <span class="shortcut">3</span></button>
+            <button data-type="author">Author <span class="shortcut">4</span></button>
+            <button data-type="date_range">Date Range <span class="shortcut">5</span></button>
+        </div>
+    </div>
+
+    <script>
+    // =========================================================================
+    // DATA & STATE
+    // =========================================================================
+    const STORAGE_KEY = 'nls-ner-annotations-v1';
+    const SPAN_TYPES = ['topic', 'entity', 'institution', 'author', 'date_range'];
+
+    // Injected by generation script
+    const DATA = /*DATA_PLACEHOLDER*/[];
+
+    // State loaded from localStorage
+    let state = loadState();
+    let currentIndex = 0;
+    let filteredIndices = [];
+    let pendingSelection = null; // {text, start, end} for new span creation
+
+    function loadState() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) return JSON.parse(raw);
+        } catch (_) { /* ignore parse errors */ }
+        return { annotations: {}, abstractStatus: {} };
+    }
+
+    function saveState() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    // =========================================================================
+    // SPAN HELPERS
+    // =========================================================================
+
+    // Get the merged span list for a given abstract, combining auto, model, and user spans
+    function getMergedSpans(record) {
+        const bibcode = record.bibcode;
+        const userAnnotation = state.annotations[bibcode] || {};
+        const decisions = userAnnotation.decisions || {};
+        const userSpans = userAnnotation.userSpans || [];
+
+        const spans = [];
+
+        // Auto-annotation spans
+        if (record.auto_spans) {
+            for (const s of record.auto_spans) {
+                const key = `auto:${s.start}:${s.end}`;
+                spans.push({
+                    ...s,
+                    source: 'auto',
+                    key,
+                    status: decisions[key] || 'pending'
+                });
+            }
+        }
+
+        // Model prediction spans
+        if (record.model_spans) {
+            for (const s of record.model_spans) {
+                const key = `model:${s.start}:${s.end}`;
+                spans.push({
+                    ...s,
+                    source: 'model',
+                    key,
+                    status: decisions[key] || 'pending'
+                });
+            }
+        }
+
+        // User-added spans
+        for (const s of userSpans) {
+            const key = `user:${s.start}:${s.end}`;
+            spans.push({
+                ...s,
+                source: 'user',
+                key,
+                status: decisions[key] || 'accepted'
+            });
+        }
+
+        // Mark agreements (auto + model overlapping spans)
+        markAgreements(spans);
+
+        return spans;
+    }
+
+    function markAgreements(spans) {
+        const autoSpans = spans.filter(s => s.source === 'auto');
+        const modelSpans = spans.filter(s => s.source === 'model');
+
+        for (const a of autoSpans) {
+            for (const m of modelSpans) {
+                // Agreement = overlapping ranges with same type
+                if (a.type === m.type && a.start < m.end && a.end > m.start) {
+                    a.source = 'agreement';
+                    m._hidden = true; // Hide duplicate model span
+                }
+            }
+        }
+    }
+
+    function getVisibleSpans(spans) {
+        return spans.filter(s => !s._hidden);
+    }
+
+    // =========================================================================
+    // RENDERING
+    // =========================================================================
+
+    function renderAbstract(index) {
+        if (index < 0 || index >= filteredIndices.length) return;
+
+        currentIndex = index;
+        const dataIdx = filteredIndices[index];
+        const record = DATA[dataIdx];
+        const spans = getMergedSpans(record);
+        const visibleSpans = getVisibleSpans(spans);
+        const abstractStatus = state.abstractStatus[record.bibcode] || 'pending';
+
+        const container = document.getElementById('abstract-container');
+        container.innerHTML = buildAbstractCard(record, visibleSpans, abstractStatus);
+
+        // Update navigation
+        document.getElementById('nav-current').textContent = `${index + 1} / ${filteredIndices.length}`;
+        document.getElementById('btn-prev').disabled = index <= 0;
+        document.getElementById('btn-next').disabled = index >= filteredIndices.length - 1;
+
+        updateStats();
+        closePopup();
+    }
+
+    function buildAbstractCard(record, spans, abstractStatus) {
+        const statusClass = abstractStatus === 'reviewed' ? 'status-reviewed'
+            : abstractStatus === 'skipped' ? 'status-skipped'
+            : 'status-pending';
+        const statusLabel = abstractStatus.charAt(0).toUpperCase() + abstractStatus.slice(1);
+
+        const highlightedText = buildHighlightedText(record.abstract_clean, spans);
+
+        return `
+            <div class="abstract-card">
+                <div class="abstract-header">
+                    <div class="abstract-meta">
+                        <div class="abstract-bibcode">${escapeHtml(record.bibcode)}</div>
+                        <div class="abstract-title">${escapeHtml(record.title)}</div>
+                        <div class="abstract-tags">
+                            <span class="tag tag-domain">${escapeHtml(record.domain_category || '')}</span>
+                            ${record.citation_count != null ? `<span class="tag tag-citations">${record.citation_count.toLocaleString()} citations</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="abstract-status">
+                        <span class="status-badge ${statusClass}">${statusLabel}</span>
+                    </div>
+                </div>
+                <div class="abstract-body">
+                    <div class="abstract-text-container" id="abstract-text">${highlightedText}</div>
+                </div>
+                <div class="span-legend">
+                    <div class="legend-item"><span class="legend-swatch swatch-auto"></span> Auto-annotation</div>
+                    <div class="legend-item"><span class="legend-swatch swatch-model"></span> Model prediction</div>
+                    <div class="legend-item"><span class="legend-swatch swatch-agreement"></span> Agreement</div>
+                    <div class="legend-item"><span class="legend-swatch swatch-user"></span> User-added</div>
+                </div>
+                <div class="span-panel">
+                    <h3>Spans (${spans.length})</h3>
+                    <ul class="span-list" id="span-list">
+                        ${spans.map((s, i) => buildSpanItem(s, i)).join('')}
+                    </ul>
+                </div>
+                <div class="notes-section">
+                    <div class="notes-label">Notes</div>
+                    <textarea id="abstract-notes" placeholder="Add review notes...">${escapeHtml((state.annotations[record.bibcode] || {}).notes || '')}</textarea>
+                </div>
+                <div class="review-actions">
+                    <button class="btn btn-reviewed" id="btn-mark-reviewed">Mark Reviewed</button>
+                    <button class="btn btn-skip" id="btn-mark-skip">Skip</button>
+                </div>
+            </div>
+        `;
+    }
+
+    function buildHighlightedText(text, spans) {
+        if (!text) return '';
+
+        // Sort spans by start position, then by length (longer first) for nesting
+        const sorted = [...spans]
+            .filter(s => s.start != null && s.end != null)
+            .sort((a, b) => a.start - b.start || (b.end - b.start) - (a.end - a.start));
+
+        // Build character-level markup
+        // Track open/close events for each character position
+        const events = [];
+        for (const span of sorted) {
+            events.push({ pos: span.start, type: 'open', span });
+            events.push({ pos: span.end, type: 'close', span });
+        }
+        events.sort((a, b) => a.pos - b.pos || (a.type === 'close' ? -1 : 1));
+
+        let result = '';
+        let lastPos = 0;
+
+        // Simple non-overlapping approach: flatten to top-level spans only
+        const flatSpans = [];
+        const occupied = new Set();
+        for (const span of sorted) {
+            let overlaps = false;
+            for (let i = span.start; i < span.end; i++) {
+                if (occupied.has(i)) { overlaps = true; break; }
+            }
+            if (!overlaps) {
+                flatSpans.push(span);
+                for (let i = span.start; i < span.end; i++) occupied.add(i);
+            }
+        }
+
+        flatSpans.sort((a, b) => a.start - b.start);
+
+        for (const span of flatSpans) {
+            // Text before this span
+            if (span.start > lastPos) {
+                result += escapeHtml(text.slice(lastPos, span.start));
+            }
+            const sourceClass = `span-${span.source}`;
+            const rejectedClass = span.status === 'rejected' ? ' rejected' : '';
+            const tooltip = `${span.type} (${span.source})${span.confidence ? ` conf: ${span.confidence.toFixed(2)}` : ''}`;
+            result += `<span class="span-highlight ${sourceClass}${rejectedClass}" data-key="${escapeAttr(span.key)}" title="${escapeAttr(tooltip)}"><span class="span-tooltip">${escapeHtml(tooltip)}</span>${escapeHtml(text.slice(span.start, span.end))}</span>`;
+            lastPos = span.end;
+        }
+
+        // Remaining text
+        if (lastPos < text.length) {
+            result += escapeHtml(text.slice(lastPos));
+        }
+
+        return result;
+    }
+
+    function buildSpanItem(span, index) {
+        if (span._hidden) return '';
+
+        const rejectedClass = span.status === 'rejected' ? ' rejected' : '';
+        const sourceClass = `source-${span.source}`;
+        const typeClass = `type-${span.type}`;
+
+        const acceptActive = span.status === 'accepted' ? ' active' : '';
+        const rejectActive = span.status === 'rejected' ? ' active' : '';
+
+        const confidenceStr = span.confidence != null ? `${(span.confidence * 100).toFixed(0)}%` : '';
+
+        const deleteBtn = span.source === 'user'
+            ? `<button class="btn-delete" data-action="delete-span" data-key="${escapeAttr(span.key)}">&#x2715;</button>`
+            : '';
+
+        return `
+            <li class="span-item${rejectedClass}" data-key="${escapeAttr(span.key)}">
+                <span class="span-surface" title="${escapeAttr(span.surface)}">${escapeHtml(span.surface)}</span>
+                <span class="span-type-badge ${typeClass}">${span.type}</span>
+                <span class="span-source-badge ${sourceClass}">${span.source}</span>
+                <span class="span-confidence">${confidenceStr}</span>
+                <span class="span-offsets">${span.start}-${span.end}</span>
+                <div class="span-toggle">
+                    <button class="btn-accept${acceptActive}" data-action="accept" data-key="${escapeAttr(span.key)}">&#x2713;</button>
+                    <button class="btn-reject${rejectActive}" data-action="reject" data-key="${escapeAttr(span.key)}">&#x2717;</button>
+                    ${deleteBtn}
+                </div>
+            </li>
+        `;
+    }
+
+    // =========================================================================
+    // STATS
+    // =========================================================================
+
+    function updateStats() {
+        let total = DATA.length;
+        let reviewed = 0, pending = 0;
+        let autoCount = 0, modelCount = 0, agreementCount = 0, userCount = 0;
+        let acceptedCount = 0, rejectedCount = 0;
+
+        for (let i = 0; i < DATA.length; i++) {
+            const record = DATA[i];
+            const status = state.abstractStatus[record.bibcode] || 'pending';
+            if (status === 'reviewed') reviewed++;
+            else pending++;
+
+            const spans = getMergedSpans(record);
+            for (const s of spans) {
+                if (s._hidden) continue;
+                if (s.source === 'auto') autoCount++;
+                else if (s.source === 'model') modelCount++;
+                else if (s.source === 'agreement') agreementCount++;
+                else if (s.source === 'user') userCount++;
+
+                if (s.status === 'accepted') acceptedCount++;
+                else if (s.status === 'rejected') rejectedCount++;
+            }
+        }
+
+        document.getElementById('stat-total').textContent = total;
+        document.getElementById('stat-reviewed').textContent = reviewed;
+        document.getElementById('stat-pending').textContent = pending;
+        document.getElementById('stat-auto').textContent = autoCount;
+        document.getElementById('stat-model').textContent = modelCount;
+        document.getElementById('stat-agreement').textContent = agreementCount;
+        document.getElementById('stat-user').textContent = userCount;
+        document.getElementById('stat-accepted').textContent = acceptedCount;
+        document.getElementById('stat-rejected').textContent = rejectedCount;
+    }
+
+    // =========================================================================
+    // FILTERING
+    // =========================================================================
+
+    function applyFilters() {
+        const domainFilter = document.getElementById('filter-domain').value;
+        const statusFilter = document.getElementById('filter-status').value;
+        const searchFilter = document.getElementById('filter-search').value.toLowerCase();
+
+        filteredIndices = [];
+
+        for (let i = 0; i < DATA.length; i++) {
+            const record = DATA[i];
+            const abstractStatus = state.abstractStatus[record.bibcode] || 'pending';
+
+            // Domain filter
+            if (domainFilter !== 'all' && record.domain_category !== domainFilter) continue;
+
+            // Status filter
+            if (statusFilter === 'pending' && abstractStatus !== 'pending') continue;
+            if (statusFilter === 'reviewed' && abstractStatus !== 'reviewed') continue;
+            if (statusFilter === 'skipped' && abstractStatus !== 'skipped') continue;
+            if (statusFilter === 'has-disagreements') {
+                const spans = getMergedSpans(record);
+                const hasDisagreement = spans.some(s => s.source === 'auto' && !s._hidden) &&
+                    spans.some(s => s.source === 'model' && !s._hidden);
+                if (!hasDisagreement) continue;
+            }
+
+            // Search filter
+            if (searchFilter) {
+                const matchesBibcode = record.bibcode.toLowerCase().includes(searchFilter);
+                const matchesTitle = (record.title || '').toLowerCase().includes(searchFilter);
+                if (!matchesBibcode && !matchesTitle) continue;
+            }
+
+            filteredIndices.push(i);
+        }
+
+        document.getElementById('results-info').textContent =
+            `Showing ${filteredIndices.length} of ${DATA.length} abstracts`;
+
+        // Reset to first result or keep current if still valid
+        if (filteredIndices.length > 0) {
+            const curDataIdx = filteredIndices[currentIndex];
+            const newIdx = filteredIndices.indexOf(curDataIdx);
+            currentIndex = newIdx >= 0 ? newIdx : 0;
+            renderAbstract(currentIndex);
+        } else {
+            document.getElementById('abstract-container').innerHTML =
+                '<div style="padding:40px;text-align:center;color:#666">No abstracts match your filters</div>';
+            document.getElementById('nav-current').textContent = '0 / 0';
+        }
+    }
+
+    function populateDomainFilter() {
+        const domains = new Set();
+        for (const record of DATA) {
+            if (record.domain_category) domains.add(record.domain_category);
+        }
+        const select = document.getElementById('filter-domain');
+        for (const d of [...domains].sort()) {
+            const opt = document.createElement('option');
+            opt.value = d;
+            opt.textContent = d;
+            select.appendChild(opt);
+        }
+    }
+
+    // =========================================================================
+    // SPAN DECISIONS
+    // =========================================================================
+
+    function setSpanDecision(bibcode, key, decision) {
+        if (!state.annotations[bibcode]) {
+            state.annotations[bibcode] = { decisions: {}, userSpans: [], notes: '' };
+        }
+        state.annotations[bibcode].decisions[key] = decision;
+        saveState();
+    }
+
+    function deleteUserSpan(bibcode, key) {
+        const ann = state.annotations[bibcode];
+        if (!ann) return;
+
+        // Remove from userSpans
+        const parts = key.split(':');
+        const start = parseInt(parts[1], 10);
+        const end = parseInt(parts[2], 10);
+        ann.userSpans = ann.userSpans.filter(s => !(s.start === start && s.end === end));
+
+        // Remove decision
+        delete ann.decisions[key];
+        saveState();
+    }
+
+    function addUserSpan(bibcode, surface, start, end, type) {
+        if (!state.annotations[bibcode]) {
+            state.annotations[bibcode] = { decisions: {}, userSpans: [], notes: '' };
+        }
+        const span = { surface, start, end, type, source: 'user' };
+        state.annotations[bibcode].userSpans.push(span);
+        const key = `user:${start}:${end}`;
+        state.annotations[bibcode].decisions[key] = 'accepted';
+        saveState();
+    }
+
+    function setAbstractStatus(bibcode, status) {
+        state.abstractStatus[bibcode] = status;
+        saveState();
+    }
+
+    // =========================================================================
+    // TEXT SELECTION FOR NEW SPANS
+    // =========================================================================
+
+    function handleTextSelection() {
+        const sel = window.getSelection();
+        if (!sel || sel.isCollapsed || sel.rangeCount === 0) return;
+
+        const textContainer = document.getElementById('abstract-text');
+        if (!textContainer) return;
+
+        const range = sel.getRangeAt(0);
+        if (!textContainer.contains(range.startContainer) || !textContainer.contains(range.endContainer)) return;
+
+        const selectedText = sel.toString().trim();
+        if (!selectedText || selectedText.length < 2) return;
+
+        // Calculate character offset within the abstract_clean text
+        const dataIdx = filteredIndices[currentIndex];
+        const record = DATA[dataIdx];
+        const abstractText = record.abstract_clean;
+
+        // Find the selected text in the abstract
+        const searchStart = abstractText.indexOf(selectedText);
+        if (searchStart === -1) return;
+
+        pendingSelection = {
+            text: selectedText,
+            start: searchStart,
+            end: searchStart + selectedText.length
+        };
+
+        // Position popup near the selection
+        const rect = range.getBoundingClientRect();
+        const popup = document.getElementById('new-span-popup');
+        document.getElementById('popup-selected-text').textContent = selectedText;
+
+        popup.style.left = `${Math.min(rect.left, window.innerWidth - 240)}px`;
+        popup.style.top = `${rect.bottom + 8}px`;
+        popup.classList.add('visible');
+    }
+
+    function closePopup() {
+        document.getElementById('new-span-popup').classList.remove('visible');
+        pendingSelection = null;
+    }
+
+    function addSpanFromSelection(type) {
+        if (!pendingSelection) return;
+
+        const dataIdx = filteredIndices[currentIndex];
+        const record = DATA[dataIdx];
+        addUserSpan(record.bibcode, pendingSelection.text, pendingSelection.start, pendingSelection.end, type);
+
+        closePopup();
+        window.getSelection().removeAllRanges();
+        renderAbstract(currentIndex);
+    }
+
+    // =========================================================================
+    // EXPORT
+    // =========================================================================
+
+    function exportAnnotations() {
+        const lines = [];
+        for (const record of DATA) {
+            const spans = getMergedSpans(record);
+            const accepted = getVisibleSpans(spans).filter(s => s.status === 'accepted');
+
+            if (accepted.length === 0) continue;
+
+            const exportRecord = {
+                bibcode: record.bibcode,
+                title: record.title,
+                abstract_clean: record.abstract_clean,
+                domain_category: record.domain_category,
+                spans: accepted.map(s => ({
+                    surface: s.surface,
+                    start: s.start,
+                    end: s.end,
+                    type: s.type,
+                    source: s.source,
+                    ...(s.canonical_id ? { canonical_id: s.canonical_id } : {}),
+                    ...(s.source_vocabulary ? { source_vocabulary: s.source_vocabulary } : {}),
+                    ...(s.confidence != null ? { confidence: s.confidence } : {})
+                })),
+                review_status: state.abstractStatus[record.bibcode] || 'pending',
+                notes: (state.annotations[record.bibcode] || {}).notes || ''
+            };
+            lines.push(JSON.stringify(exportRecord));
+        }
+
+        const blob = new Blob([lines.join('\n') + '\n'], { type: 'application/jsonl' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'ner_annotations_export.jsonl';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function saveProgress() {
+        const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'ner_annotation_progress.json';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function loadProgress(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const loaded = JSON.parse(e.target.result);
+                if (loaded.annotations && loaded.abstractStatus) {
+                    state = loaded;
+                    saveState();
+                    renderAbstract(currentIndex);
+                    updateStats();
+                    alert('Progress loaded successfully.');
+                } else {
+                    alert('Invalid progress file format.');
+                }
+            } catch (err) {
+                alert('Error reading file: ' + err.message);
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    // =========================================================================
+    // EVENT HANDLERS
+    // =========================================================================
+
+    // Navigation
+    document.getElementById('btn-prev').addEventListener('click', function() {
+        if (currentIndex > 0) renderAbstract(currentIndex - 1);
+    });
+    document.getElementById('btn-next').addEventListener('click', function() {
+        if (currentIndex < filteredIndices.length - 1) renderAbstract(currentIndex + 1);
+    });
+
+    // Filters
+    document.getElementById('filter-domain').addEventListener('change', applyFilters);
+    document.getElementById('filter-status').addEventListener('change', applyFilters);
+    document.getElementById('filter-search').addEventListener('input', applyFilters);
+
+    // Export / Save / Load
+    document.getElementById('btn-export').addEventListener('click', exportAnnotations);
+    document.getElementById('btn-save').addEventListener('click', saveProgress);
+    document.getElementById('btn-load').addEventListener('click', function() {
+        document.getElementById('load-file-input').click();
+    });
+    document.getElementById('load-file-input').addEventListener('change', function(e) {
+        if (e.target.files.length > 0) loadProgress(e.target.files[0]);
+    });
+
+    // New span popup type buttons
+    document.getElementById('new-span-popup').addEventListener('click', function(e) {
+        const btn = e.target.closest('button[data-type]');
+        if (btn) addSpanFromSelection(btn.dataset.type);
+    });
+
+    // Close popup on outside click
+    document.addEventListener('click', function(e) {
+        const popup = document.getElementById('new-span-popup');
+        if (popup.classList.contains('visible') && !popup.contains(e.target)) {
+            closePopup();
+        }
+    });
+
+    // Text selection on mouseup in abstract text
+    document.addEventListener('mouseup', function(e) {
+        // Small delay to let selection finalize
+        setTimeout(function() {
+            const popup = document.getElementById('new-span-popup');
+            if (popup.contains(e.target)) return;
+            handleTextSelection();
+        }, 10);
+    });
+
+    // Event delegation for span actions & review buttons in the abstract card
+    document.getElementById('abstract-container').addEventListener('click', function(e) {
+        const dataIdx = filteredIndices[currentIndex];
+        if (dataIdx == null) return;
+        const record = DATA[dataIdx];
+
+        // Span accept/reject buttons
+        const actionBtn = e.target.closest('button[data-action]');
+        if (actionBtn) {
+            const action = actionBtn.dataset.action;
+            const key = actionBtn.dataset.key;
+
+            if (action === 'accept') {
+                setSpanDecision(record.bibcode, key, 'accepted');
+                renderAbstract(currentIndex);
+            } else if (action === 'reject') {
+                setSpanDecision(record.bibcode, key, 'rejected');
+                renderAbstract(currentIndex);
+            } else if (action === 'delete-span') {
+                deleteUserSpan(record.bibcode, key);
+                renderAbstract(currentIndex);
+            }
+            return;
+        }
+
+        // Click on span highlight to toggle accept/reject
+        const spanEl = e.target.closest('.span-highlight');
+        if (spanEl) {
+            const key = spanEl.dataset.key;
+            const ann = state.annotations[record.bibcode] || { decisions: {}, userSpans: [], notes: '' };
+            const currentStatus = ann.decisions[key] || 'pending';
+            const newStatus = currentStatus === 'rejected' ? 'pending' : 'rejected';
+            setSpanDecision(record.bibcode, key, newStatus);
+            renderAbstract(currentIndex);
+            return;
+        }
+
+        // Mark reviewed / skip buttons
+        if (e.target.id === 'btn-mark-reviewed') {
+            setAbstractStatus(record.bibcode, 'reviewed');
+            renderAbstract(currentIndex);
+        } else if (e.target.id === 'btn-mark-skip') {
+            setAbstractStatus(record.bibcode, 'skipped');
+            renderAbstract(currentIndex);
+        }
+    });
+
+    // Notes auto-save
+    document.getElementById('abstract-container').addEventListener('input', function(e) {
+        if (e.target.id === 'abstract-notes') {
+            const dataIdx = filteredIndices[currentIndex];
+            if (dataIdx == null) return;
+            const record = DATA[dataIdx];
+            if (!state.annotations[record.bibcode]) {
+                state.annotations[record.bibcode] = { decisions: {}, userSpans: [], notes: '' };
+            }
+            state.annotations[record.bibcode].notes = e.target.value;
+            saveState();
+        }
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        // Don't handle shortcuts when typing in inputs/textareas
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+
+        const popup = document.getElementById('new-span-popup');
+
+        // Arrow keys for navigation
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            if (currentIndex > 0) renderAbstract(currentIndex - 1);
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            if (currentIndex < filteredIndices.length - 1) renderAbstract(currentIndex + 1);
+        }
+        // Number keys 1-5 for span type assignment (when popup is open)
+        else if (e.key >= '1' && e.key <= '5' && popup.classList.contains('visible')) {
+            e.preventDefault();
+            const typeIndex = parseInt(e.key, 10) - 1;
+            if (typeIndex < SPAN_TYPES.length) {
+                addSpanFromSelection(SPAN_TYPES[typeIndex]);
+            }
+        }
+        // R for reviewed
+        else if (e.key === 'r' || e.key === 'R') {
+            const dataIdx = filteredIndices[currentIndex];
+            if (dataIdx != null) {
+                setAbstractStatus(DATA[dataIdx].bibcode, 'reviewed');
+                renderAbstract(currentIndex);
+            }
+        }
+        // S for skip
+        else if (e.key === 's' || e.key === 'S') {
+            const dataIdx = filteredIndices[currentIndex];
+            if (dataIdx != null) {
+                setAbstractStatus(DATA[dataIdx].bibcode, 'skipped');
+                renderAbstract(currentIndex);
+            }
+        }
+        // Escape closes popup
+        else if (e.key === 'Escape') {
+            closePopup();
+        }
+    });
+
+    // =========================================================================
+    // UTILITY
+    // =========================================================================
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function escapeAttr(str) {
+        if (!str) return '';
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    // =========================================================================
+    // INIT
+    // =========================================================================
+
+    function init() {
+        populateDomainFilter();
+        applyFilters();
+        updateStats();
+    }
+
+    init();
+    </script>
+</body>
+</html>

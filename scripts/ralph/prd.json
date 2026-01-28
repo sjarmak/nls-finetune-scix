@@ -93,7 +93,7 @@
         "Typecheck passes (for generation script)"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "This is the main user-facing deliverable. Must be a single HTML file with no build step. Adapt the review_live.html card layout and event delegation pattern. Add window.getSelection() for text selection span creation."
     },
     {
