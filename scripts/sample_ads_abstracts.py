@@ -306,21 +306,25 @@ def sample_domain(
 def sample_all_domains(
     api_key: str,
     per_domain: int = 25,
+    exclude_bibcodes: set[str] | None = None,
 ) -> tuple[list[ADSRecord], SamplingStats]:
     """Sample abstracts from all domains.
 
     Args:
         api_key: ADS API bearer token.
         per_domain: Number of abstracts per domain.
+        exclude_bibcodes: Set of bibcodes to exclude (e.g., from previous batches).
 
     Returns:
         (records, stats) tuple.
     """
     stats = SamplingStats()
     all_records: list[ADSRecord] = []
-    seen_bibcodes: set[str] = set()
+    seen_bibcodes: set[str] = exclude_bibcodes.copy() if exclude_bibcodes else set()
 
     print(f"Sampling {per_domain} abstracts per domain ({len(DOMAIN_QUERIES)} domains)...")
+    if exclude_bibcodes:
+        print(f"Excluding {len(exclude_bibcodes)} bibcodes from previous batches")
 
     for domain, config in DOMAIN_QUERIES.items():
         domain_records = sample_domain(
@@ -339,6 +343,29 @@ def sample_all_domains(
 # ---------------------------------------------------------------------------
 # I/O
 # ---------------------------------------------------------------------------
+
+
+def load_existing_bibcodes(file_paths: list[Path]) -> set[str]:
+    """Load bibcodes from existing JSONL files to exclude them from sampling.
+
+    Args:
+        file_paths: Paths to JSONL files with bibcode fields.
+
+    Returns:
+        Set of bibcodes found in the files.
+    """
+    bibcodes: set[str] = set()
+    for path in file_paths:
+        if not path.exists():
+            print(f"Warning: exclude file not found: {path}")
+            continue
+        with open(path, encoding="utf-8") as fh:
+            for line in fh:
+                if line.strip():
+                    record = json.loads(line)
+                    if "bibcode" in record:
+                        bibcodes.add(record["bibcode"])
+    return bibcodes
 
 
 def write_records(records: list[ADSRecord], path: Path) -> None:
@@ -374,6 +401,11 @@ def build_parser() -> argparse.ArgumentParser:
                 --output-file data/evaluation/ads_sample_raw.jsonl \\
                 --per-domain 30
 
+              python scripts/sample_ads_abstracts.py \\
+                --output-file data/evaluation/ads_sample_batch2_raw.jsonl \\
+                --count 200 \\
+                --exclude data/evaluation/ads_sample_raw.jsonl
+
               python scripts/sample_ads_abstracts.py --dry-run
         """),
     )
@@ -386,8 +418,20 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--per-domain",
         type=int,
-        default=25,
-        help="Number of abstracts per domain (default: 25, 4 domains = 100 total)",
+        help="Number of abstracts per domain (overrides --count)",
+    )
+    parser.add_argument(
+        "--count",
+        type=int,
+        default=100,
+        help="Total number of abstracts to sample, distributed evenly across domains (default: 100)",
+    )
+    parser.add_argument(
+        "--exclude",
+        type=Path,
+        action="append",
+        dest="exclude_files",
+        help="JSONL file(s) with bibcodes to exclude (can be specified multiple times)",
     )
     parser.add_argument(
         "--dry-run",
@@ -401,19 +445,43 @@ def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
 
+    # Calculate per-domain count
+    if args.per_domain:
+        per_domain = args.per_domain
+        total_target = per_domain * len(DOMAIN_QUERIES)
+    else:
+        total_target = args.count
+        per_domain = total_target // len(DOMAIN_QUERIES)
+        # Handle case where count isn't evenly divisible
+        if total_target % len(DOMAIN_QUERIES) != 0:
+            print(f"Warning: --count {total_target} isn't evenly divisible by {len(DOMAIN_QUERIES)} domains")
+            print(f"Using {per_domain} per domain for {per_domain * len(DOMAIN_QUERIES)} total")
+
     if args.dry_run:
         print("DRY RUN — Queries that would be executed:\n")
         for domain, config in DOMAIN_QUERIES.items():
             print(f"  [{domain}] {config['description']}")
             print(f"    {config['query']}")
             print()
-        print(f"Target: {args.per_domain} abstracts per domain, "
-              f"{args.per_domain * len(DOMAIN_QUERIES)} total")
+        print(f"Target: {per_domain} abstracts per domain, "
+              f"{per_domain * len(DOMAIN_QUERIES)} total")
+        if args.exclude_files:
+            print(f"Exclude files: {', '.join(str(f) for f in args.exclude_files)}")
         return 0
 
     api_key = _get_api_key()
 
-    records, stats = sample_all_domains(api_key, per_domain=args.per_domain)
+    # Load exclusion list
+    exclude_bibcodes: set[str] | None = None
+    if args.exclude_files:
+        exclude_bibcodes = load_existing_bibcodes(args.exclude_files)
+        print(f"Loaded {len(exclude_bibcodes)} bibcodes to exclude\n")
+
+    records, stats = sample_all_domains(
+        api_key,
+        per_domain=per_domain,
+        exclude_bibcodes=exclude_bibcodes,
+    )
 
     # Summary
     print(f"\n{'=' * 60}")
