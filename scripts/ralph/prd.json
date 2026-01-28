@@ -67,7 +67,7 @@
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Depends on US-001. If the trained model directory doesn't exist, run training first using scripts/train_enrichment_model.py on synthetic data."
     },
     {

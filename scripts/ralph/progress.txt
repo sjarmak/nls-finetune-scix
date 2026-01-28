@@ -30,6 +30,7 @@ Started: Mon Jan 27 2026
 - Auto-annotator: `scripts/annotate_ads_abstracts.py` — catalog keyword matching annotation
 - Re-annotator: `scripts/reannotate_ads_abstracts.py` — curated SWEET + HTML-clean re-annotation with comparison stats
 - Real-world evaluator: `scripts/evaluate_real_world.py` — NER model vs annotations on real abstracts
+- Prediction runner: `scripts/predict_ads_abstracts.py` — NER model inference on cleaned ADS abstracts with confidence scores
 
 ### Model Architecture
 - Base: SciBERT (allenai/scibert_scivocab_uncased), 110M params
@@ -66,6 +67,8 @@ Started: Mon Jan 27 2026
 - `data/vocabularies/sweet_curated.jsonl` — 10,617 curated SWEET entries (common English words removed)
 - `data/vocabularies/sweet_removed.jsonl` — 2,369 removed SWEET entries with reasons
 - `data/vocabularies/sweet_borderline.jsonl` — 475 borderline 4-6 char scientific terms
+- `data/evaluation/ads_sample_predictions.jsonl` — 100 abstracts with NER model predictions (2,753 spans, 97.5% topic, avg confidence 0.71)
+- `data/evaluation/ads_sample_predictions.stats.json` — prediction summary stats
 - `docs/annotation-guide.md` — human annotation guidelines for NER spans
 
 ### Key Gotchas
@@ -143,4 +146,31 @@ Started: Mon Jan 27 2026
   - Curated SWEET JSONL uses the same schema as topic_catalog entries (id, label, aliases, source_vocabulary, domain_tags) — can use `load_catalog_entries()` or a thin wrapper
   - The 88% SWEET reduction (vs expected 50-70%) is because the annotator also has its own `STOPWORD_SURFACES` filter (177 words) that removes common English words at match time, compounding with the curated vocabulary's curation
   - Re-annotated file includes both `abstract` (raw HTML) and `abstract_clean` fields — downstream US-005/US-006 should use `abstract_clean` for display and `spans` are offset-aligned to it
+---
+
+## 2026-01-27 - US-004: Run NER model predictions on cleaned abstracts
+- Implemented `scripts/predict_ads_abstracts.py` which:
+  1. Loads trained SciBERT NER model from `output/enrichment_model/`
+  2. Runs inference on all 100 cleaned abstracts using `abstract_clean` field
+  3. Decodes BIO tags into character-level spans with confidence scores
+  4. Confidence = max softmax probability of the B- tag that initiated each span
+- Prediction results:
+  - **2,753 total spans** across 100 abstracts (27.5 per abstract)
+  - **2,685 topic spans (97.5%)**, 68 entity spans (2.5%)
+  - **Average confidence: 0.7115**
+  - All 100 abstracts have at least one predicted span
+  - All 2,753 span offsets validate against `abstract_clean` text (zero failures)
+- Used `max_seq_length=512` (vs training default of 256) to capture more of each abstract
+- Output files:
+  - `data/evaluation/ads_sample_predictions.jsonl` — 100 records with model-predicted spans
+  - `data/evaluation/ads_sample_predictions.stats.json` — summary statistics
+- 24 unit tests in `tests/scripts/test_predict_ads_abstracts.py` — all passing
+- Files changed: `scripts/predict_ads_abstracts.py` (new), `tests/scripts/test_predict_ads_abstracts.py` (new), `data/evaluation/ads_sample_predictions.jsonl` (new), `data/evaluation/ads_sample_predictions.stats.json` (new)
+- **Learnings for future iterations:**
+  - The `predict_spans_for_text` function from `evaluate_enrichment_model.py` can be reused but lacks confidence scores — US-004 extends it with softmax-based confidence
+  - The model heavily favors topic predictions (97.5%) over entity (2.5%) — likely because synthetic training data has proportionally more topic spans
+  - Using `max_seq_length=512` for inference on full abstracts captures more text than the 256 used during training; the model still works because SciBERT supports up to 512 positions
+  - The model's average confidence of 0.71 suggests moderate certainty — many spans have high confidence (>0.9) but some borderline ones bring the average down
+  - Output schema includes: `bibcode, title, abstract_clean, domain_category, spans[{surface, start, end, type, confidence}]` — the `confidence` field is what differentiates predictions from auto-annotations
+  - Mock-based tests for NER inference work well: mock the tokenizer to return controlled offset_mapping and the model to return specific logits, then verify span decoding
 ---

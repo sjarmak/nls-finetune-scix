@@ -1,0 +1,13 @@
+{
+  "total_abstracts": 100,
+  "records_with_spans": 100,
+  "total_spans": 2753,
+  "spans_per_abstract": 27.53,
+  "spans_by_type": {
+    "entity": 68,
+    "topic": 2685
+  },
+  "average_confidence": 0.7115,
+  "model_dir": "output/enrichment_model",
+  "max_seq_length": 512
+}
