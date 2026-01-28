@@ -129,8 +129,8 @@
         "Typecheck passes"
       ],
       "priority": 3,
-      "passes": false,
-      "notes": "Depends on US-001, US-002, US-004, US-006. Requires ADS API access (ADS_DEV_KEY env var). If API is unavailable, generate synthetic abstracts as placeholder."
+      "passes": true,
+      "notes": "Depends on US-001, US-002, US-004, US-006. Requires ADS API access (ADS_API_KEY env var, loaded from .env.local). If API is unavailable, generate synthetic abstracts as placeholder."
     },
     {
       "id": "US-008",
