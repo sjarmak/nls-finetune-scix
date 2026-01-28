@@ -60,6 +60,9 @@ Started: Mon Jan 27 2026
 - `data/evaluation/ads_sample_annotated.jsonl` — same 100 with catalog keyword annotations (4,795 spans, 70.8% SWEET)
 - `data/datasets/agent_runs/run_20260127_174306_999adfdd/normalized/` — unified catalogs from real sources
 - `data/datasets/enrichment/` — 10,691 enrichment records (train/val/test splits)
+- `data/vocabularies/sweet_curated.jsonl` — 10,617 curated SWEET entries (common English words removed)
+- `data/vocabularies/sweet_removed.jsonl` — 2,369 removed SWEET entries with reasons
+- `data/vocabularies/sweet_borderline.jsonl` — 475 borderline 4-6 char scientific terms
 - `docs/annotation-guide.md` — human annotation guidelines for NER spans
 
 ### Key Gotchas
@@ -86,4 +89,28 @@ Started: Mon Jan 27 2026
   - Regex for tag matching must handle self-closing `/>`without leading whitespace (e.g., `<BR/>`)
   - Offset remapping via character-level mapping array works reliably; only 2 out of 4,795 spans couldn't be remapped (spans inside tag attributes)
   - The `html.unescape()` stdlib function handles all entity decoding
+---
+
+## 2026-01-27 - US-002: Curate SWEET vocabulary — automated filtering
+- Implemented `scripts/curate_sweet_vocabulary.py` with 4-tier filtering:
+  1. Remove labels < 4 characters (344 removed)
+  2. Remove labels in extended stopword list (823 words) → 210 removed
+  3. Remove labels in top 5,000 high-frequency English words (wordfreq) → 615 removed
+  4. Remove single common English words (word_frequency > 1e-6) → 1,200 removed
+- Total: 12,986 input → 10,617 curated (81.8% retained), 2,369 removed
+- 475 borderline cases logged (4-6 char scientific terms that survived filtering)
+- Output files produced in `data/vocabularies/`:
+  - `sweet_curated.jsonl` — 10,617 surviving entries
+  - `sweet_removed.jsonl` — 2,369 removed entries with `removal_reason` field
+  - `sweet_curation_report.json` — statistics and config
+  - `sweet_borderline.jsonl` — 475 borderline 4-6 char scientific terms
+- 29 unit tests in `tests/scripts/test_curate_sweet_vocabulary.py` — all passing
+- Files changed: `scripts/curate_sweet_vocabulary.py` (new), `tests/scripts/test_curate_sweet_vocabulary.py` (new), `data/vocabularies/sweet_curated.jsonl` (new), `data/vocabularies/sweet_removed.jsonl` (new), `data/vocabularies/sweet_borderline.jsonl` (new), `data/vocabularies/sweet_curation_report.json` (new)
+- **Learnings for future iterations:**
+  - wordfreq library (`pip install wordfreq`) provides `top_n_list('en', N)` and `word_frequency(word, 'en')` — used for both high-freq list and per-word frequency checks
+  - NLTK stopwords only has 198 words; extended to 823 by adding common function/glue words
+  - SWEET has 9,209 single-word labels and 3,777 multi-word labels; multi-word labels are rarely common English
+  - The `scripts/` directory is not a Python package; tests import via `sys.path.insert(0, scripts_dir)` pattern (matching test_html_utils.py)
+  - Curated vocabulary path for downstream use: `data/vocabularies/sweet_curated.jsonl` — US-003 will need this
+  - Pre-existing test_ner.py import error (DATABASE_SYNONYMS) is unrelated to this work
 ---

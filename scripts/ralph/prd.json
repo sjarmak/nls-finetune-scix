@@ -34,7 +34,7 @@
         "Typecheck passes"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": "SWEET contributes 70.8% of gold spans in current auto-annotations. Many are common English words like 'present', 'from', 'based on', 'full'. Filtering should reduce SWEET from ~13K to ~3-5K entries."
     },
     {

@@ -1,0 +1,29 @@
+{
+  "summary": {
+    "total_input_entries": 12986,
+    "curated_entries": 10617,
+    "removed_entries": 2369,
+    "borderline_entries": 475,
+    "retention_rate": 0.8176,
+    "removal_rate": 0.1824
+  },
+  "removal_reasons": {
+    "single_common_english_word": 1200,
+    "fewer_than_4_characters": 344,
+    "in_high_frequency_english_top_5000": 615,
+    "in_stopword_list": 210
+  },
+  "category_breakdown": {
+    "common_english": 1200,
+    "kept": 10617,
+    "short": 344,
+    "high_frequency": 615,
+    "stopword": 210
+  },
+  "filtering_config": {
+    "min_label_length": 4,
+    "stopword_list_size": 823,
+    "high_frequency_list_size": 5000,
+    "common_word_frequency_threshold": 1e-06
+  }
+}
