@@ -182,7 +182,7 @@
         "Typecheck passes"
       ],
       "priority": 4,
-      "passes": false,
+      "passes": true,
       "notes": "Depends on US-009. Can run with synthetic-only model as baseline comparison even before human annotations. The key metric is whether the synthetic-to-real gap shrinks from -0.90 F1."
     }
   ]

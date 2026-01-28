@@ -327,3 +327,34 @@ Started: Mon Jan 27 2026
   - The script can be built and tested before human annotation data exists (it gracefully falls back to synthetic-only training)
   - CLI example: `python scripts/train_enrichment_model.py --curriculum --train-file data/enrichment_train.jsonl --val-file data/enrichment_val.jsonl --human-train data/datasets/enrichment/human_annotated_train.jsonl --human-val data/datasets/enrichment/human_annotated_val.jsonl --output-dir models/enrichment_ner_v2`
 ---
+## 2026-01-27 - US-010: Re-evaluate with mixed-trained model
+- Created `scripts/evaluate_curriculum_model.py` — comprehensive evaluation script for curriculum-trained model
+- Script runs two evaluations:
+  1. Synthetic test set evaluation (via `evaluate_enrichment_model.py` subprocess)
+  2. Real-world test set evaluation (via `evaluate_real_world.py` subprocess, optional)
+- Comparison features:
+  - Loads baseline results from previous synthetic-only model evaluation
+  - Calculates synthetic-to-real gap delta (V1 gap vs V2 gap)
+  - Reports gap improvement percentage
+  - Compares synthetic F1 delta and real-world F1 delta
+- Go/no-go assessment logic:
+  - Synthetic F1 >= 0.70 threshold
+  - Real-world F1 >= 0.50 threshold (if available)
+  - Decision: GO (both pass) / CONDITIONAL GO (synthetic passes) / NO GO (synthetic fails)
+- Output files:
+  - `reports/enrichment_eval_v2.json` — structured metrics with gap analysis
+  - `reports/enrichment_eval_v2.md` — narrative report with comparison
+- Graceful fallback: If real-world test file doesn't exist, runs synthetic-only evaluation and marks real-world eval as "PENDING"
+- CLI flags: `--model-dir`, `--synthetic-test`, `--real-world-test`, `--baseline-results`, `--output-dir`, `--synthetic-f1-threshold`, `--real-world-f1-threshold`
+- Typecheck passes (mise run lint)
+- Files changed: `scripts/evaluate_curriculum_model.py` (new), `scripts/ralph/prd.json` (US-010 passes: true)
+- **Learnings for future iterations:**
+  - The existing evaluation scripts (`evaluate_enrichment_model.py`, `evaluate_real_world.py`) don't have `--output-prefix` flag; use temp directories and read their default output files instead
+  - Gap analysis formula: `gap = synthetic_f1 - real_world_f1`; improvement = `v1_gap - v2_gap` (positive means gap shrank)
+  - The baseline real-world F1 (0.0949) is hardcoded from progress.txt evaluation results since it's not in the baseline JSON
+  - subprocess.run with `capture_output=False` streams output to stdout in real-time (useful for long-running evaluations)
+  - Go/no-go decision logic: CONDITIONAL GO when synthetic passes but real-world is pending (allows deployment with monitoring)
+  - The script can be run before human annotations exist (graceful fallback to synthetic-only evaluation)
+  - CLI example: `python scripts/evaluate_curriculum_model.py --model-dir models/enrichment_ner_v2 --synthetic-test data/datasets/enrichment/enrichment_test.jsonl --real-world-test data/evaluation/ads_sample_all_reannotated.jsonl --baseline-results reports/enrichment_model_eval.json`
+  - For per-vocabulary and per-domain breakdowns, the individual evaluation scripts already provide these in their JSON output; the v2 report includes them via the nested evaluation results
+---
