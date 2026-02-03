@@ -2,7 +2,6 @@
 
 import logging
 
-import pytest
 
 from finetune.domains.scix.constrain import constrain_query_output
 

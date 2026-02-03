@@ -10,10 +10,8 @@ Tests 5 constraint edge cases:
 """
 
 import asyncio
-import json
 import logging
 import sys
-import time
 from dataclasses import dataclass
 from datetime import datetime
 
@@ -30,10 +28,6 @@ logger = logging.getLogger(__name__)
 sys.path.insert(0, "packages/finetune/src")
 from finetune.domains.scix.constrain import constrain_query_output  # noqa: E402
 from finetune.domains.scix.field_constraints import (  # noqa: E402
-    BIBGROUPS,
-    DATABASES,
-    DOCTYPES,
-    PROPERTIES,
     suggest_correction,
 )
 

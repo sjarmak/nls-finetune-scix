@@ -6,8 +6,6 @@ These should be broken into distinctive topic terms with AND operators.
 
 import json
 import re
-from pathlib import Path
-from datetime import datetime
 from copy import deepcopy
 
 

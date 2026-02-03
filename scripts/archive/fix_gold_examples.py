@@ -18,7 +18,6 @@ from datetime import datetime
 # Add the package to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "packages" / "finetune" / "src"))
 
-from finetune.domains.scix.validate import lint_query, validate_field_constraints
 
 
 def fix_author_initials(example: dict) -> tuple[dict, list[str]]:

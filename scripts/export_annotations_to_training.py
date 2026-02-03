@@ -85,7 +85,6 @@ import hashlib
 import json
 import random
 import sys
-from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any

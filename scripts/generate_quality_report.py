@@ -12,7 +12,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "packages" / "finetune" / "src"))
 
 from finetune.domains.scix.validate import lint_query, validate_field_constraints
-from finetune.domains.scix.field_constraints import FIELD_ENUMS
 
 
 def find_bare_fields(query: str) -> dict[str, list[str]]:

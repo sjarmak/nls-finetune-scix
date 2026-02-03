@@ -533,7 +533,7 @@ def train_curriculum(config: TrainConfig) -> int:
     print(f"  Train examples: {len(train_dataset)}")
     print(f"  Val examples:   {len(val_dataset)}")
 
-    train_result_phase1 = trainer_phase1.train()
+    trainer_phase1.train()
 
     print("\nPhase 1 evaluation:")
     eval_metrics_phase1 = trainer_phase1.evaluate()
@@ -616,7 +616,7 @@ def train_curriculum(config: TrainConfig) -> int:
     print(f"  Train examples: {len(human_train_dataset)}")
     print(f"  Val examples:   {len(human_val_dataset)}")
 
-    train_result_phase2 = trainer_phase2.train()
+    trainer_phase2.train()
 
     print("\nPhase 2 evaluation:")
     eval_metrics_phase2 = trainer_phase2.evaluate()

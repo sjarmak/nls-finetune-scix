@@ -227,8 +227,6 @@ def audit_coverage(
 
     # Build field coverage report
     inventory_fields = set(inventory.get("fields", {}).keys())
-    field_groups = inventory.get("field_groups", {})
-
     field_coverage = {}
     for field in sorted(inventory_fields):
         field_info = inventory["fields"].get(field, {})

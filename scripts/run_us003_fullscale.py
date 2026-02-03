@@ -417,7 +417,7 @@ def main() -> None:
     logger.info("\n" + "=" * 60)
     logger.info("STEP 1: Snippet generation (multi-round)")
     logger.info("=" * 60)
-    vocab_counts = run_snippet_generation(
+    run_snippet_generation(
         topic_catalog=topic_catalog,
         entity_catalog=entity_catalog,
         output_path=snippets_path,

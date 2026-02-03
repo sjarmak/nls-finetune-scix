@@ -13,11 +13,9 @@ Identifies and flags examples that violate training data quality criteria:
 
 import json
 import re
-import sys
 from pathlib import Path
 from dataclasses import dataclass, field
 from datetime import datetime
-from copy import deepcopy
 
 @dataclass
 class CurationIssue:

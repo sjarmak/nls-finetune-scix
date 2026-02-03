@@ -32,7 +32,7 @@ except ImportError:
 sys.path.insert(0, str(Path(__file__).parent.parent / "packages" / "finetune" / "src"))
 
 from finetune.domains.scix.field_constraints import (
-    FIELD_ENUMS, DOCTYPES, PROPERTIES, COLLECTIONS, BIBGROUPS
+    DOCTYPES, PROPERTIES, COLLECTIONS, BIBGROUPS
 )
 from finetune.domains.scix.validate import lint_query, validate_field_constraints
 
@@ -440,7 +440,6 @@ def quick_lint(example: dict) -> list[dict]:
     abs_match = re.search(r'abs:\s*\(([^)]+)\)', query)
     if abs_match:
         abs_content = abs_match.group(1)
-        words = abs_content.split()
         if len(abs_content) > 50 and not re.search(r'\b(OR|AND)\b', abs_content):
             issues.append({
                 "type": "exact_title",

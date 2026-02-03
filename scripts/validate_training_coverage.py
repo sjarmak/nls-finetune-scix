@@ -5,8 +5,6 @@ Checks if gold_examples.json captures the full ADS syntax space.
 """
 
 import json
-import sys
-from pathlib import Path
 from collections import Counter
 
 import anthropic

@@ -13,7 +13,6 @@ Categories:
 """
 
 import json
-import re
 from pathlib import Path
 
 # Indices by category from review file

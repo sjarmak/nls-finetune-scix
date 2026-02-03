@@ -20,7 +20,6 @@ Requirements:
 
 import argparse
 import json
-import sys
 from datetime import datetime
 
 

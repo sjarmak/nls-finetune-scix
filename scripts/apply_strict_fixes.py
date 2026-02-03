@@ -10,7 +10,6 @@ Fixes:
 
 import json
 import re
-import sys
 from pathlib import Path
 from copy import deepcopy
 from datetime import datetime

@@ -10,7 +10,6 @@ Tests that the 5 specific issues from US-004 and US-008 are resolved:
 """
 
 import asyncio
-import json
 import logging
 import os
 import re

@@ -1,9 +1,7 @@
 """Tests for validate_field_constraints function."""
 
-import pytest
 
 from finetune.domains.scix.validate import (
-    ConstraintValidationResult,
     FieldConstraintError,
     validate_field_constraints,
 )

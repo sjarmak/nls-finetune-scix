@@ -9,8 +9,6 @@ Issues to fix:
 
 import json
 import re
-from pathlib import Path
-from datetime import datetime
 
 
 def has_unbalanced_brackets(query: str) -> bool:
