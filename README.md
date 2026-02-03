@@ -149,38 +149,87 @@ The model learns to generate queries using [ADS Search Syntax](https://ui.adsabs
 | `features.json` | Feature tracking - find failing features to work on |
 | `.env.example` | Environment variables template |
 
-## Architecture Overview
+## How the System Works
 
-The project uses a **hybrid NER + template assembly pipeline** to convert natural language to ADS queries. This approach eliminates malformed operator syntax that end-to-end models produce.
+The project uses a **hybrid NER + template assembly pipeline** to convert natural language to ADS queries. This replaces end-to-end generation, which produced malformed operator syntax.
 
 ```
 User NL → [NER Extraction] → IntentSpec → [Retrieval] → [Assembler] → Valid Query
+                                               ↑
+                                     gold_examples.json (4,557 examples)
 ```
 
-**Key stages:**
+### Pipeline Stages
 
-1. **NER Extraction** (`ner.py`): Extracts structured intent from natural language with strict operator gating
-2. **Few-shot Retrieval** (`retrieval.py`): Finds similar gold examples for pattern guidance  
-3. **Template Assembly** (`assembler.py`): Deterministically builds queries from validated building blocks
-4. **Optional LLM Resolution** (`resolver.py`): Resolves ambiguous paper references (rarely triggered)
+1. **NER Extraction** (`ner.py`) — Rules-based extraction using regex patterns and synonym maps. Extracts authors, years, topics, constrained fields (doctype, property, bibgroup), and operators (citations, references, trending, etc.) into a structured `IntentSpec`. No ML model — pure pattern matching with strict operator gating.
 
-**Why not end-to-end generation?** Fine-tuned models conflate natural language words with ADS operators, producing malformed syntax like `citations(abs:referencesabs:...)`.
+2. **Few-shot Retrieval** (`retrieval.py`) — BM25-style token overlap scoring against `data/datasets/raw/gold_examples.json` (4,557 curated examples). Boosts matches on operators, doctypes, and bibgroups. Returns top-5 similar examples for assembly guidance. Runs in <20ms.
 
-See [docs/HYBRID_PIPELINE.md](docs/HYBRID_PIPELINE.md) for detailed architecture documentation.
+3. **Template Assembly** (`assembler.py`) — Deterministically builds ADS queries from validated `IntentSpec` fields. All enum values validated against `field_constraints.py`. Wraps with operators if detected. Runs constraint filter as final safety net.
+
+4. **Optional LLM Resolution** (`resolver.py`) — Only triggered for ambiguous paper references with operators (e.g., "papers citing the famous black hole paper"). Searches ADS first, falls back to GPT-4o-mini if needed. Most queries skip this entirely.
+
+### Data Requirements
+
+| File | Purpose | Size |
+|------|---------|------|
+| `data/datasets/raw/gold_examples.json` | Retrieval index for few-shot guidance | 4,557 examples |
+| `data/datasets/processed/train.jsonl` | Training data for fine-tuned model | 50-80k pairs |
+| `packages/finetune/src/finetune/domains/scix/field_constraints.py` | Valid ADS field enum values | In code |
+
+### Models
+
+| Component | Model | Source | Required at Runtime |
+|-----------|-------|--------|-------------------|
+| NER extraction | Rules-based (no model) | — | No model needed |
+| Retrieval scoring | BM25-style (no model) | — | No model needed |
+| Enrichment NER | SciBERT (`allenai/scibert_scivocab_uncased`) | Trained via `notebooks/train_enrichment_model.ipynb` | Optional |
+| LLM translator | Qwen3-1.7B fine-tuned | Trained via `scripts/train_colab.ipynb`, hosted on HuggingFace | For model-based fallback |
+| LLM resolver | GPT-4o-mini | OpenAI API | Only for ambiguous references |
+
+### Serving
+
+The pipeline is served via `docker/server.py` (Docker/GPU) or `scripts/serve_local_pipeline.py` (local development):
+
+```bash
+# Pipeline-only (no GPU needed, <50ms latency)
+uv run python scripts/serve_local_pipeline.py
+
+# Full server with model fallback (GPU)
+docker run --gpus all -p 8000:8000 nls-server
+```
+
+Endpoints: `POST /v1/chat/completions` (OpenAI-compatible), `POST /pipeline` (raw pipeline), `GET /health`
+
+See [docker/README.md](docker/README.md) for deployment options and [docs/HYBRID_PIPELINE.md](docs/HYBRID_PIPELINE.md) for detailed architecture.
+
+### Training
+
+Two models can be trained, both via Google Colab notebooks:
+
+| Model | Notebook | GPU | Data |
+|-------|----------|-----|------|
+| **NL Query Translator** (Qwen3-1.7B + LoRA) | `scripts/train_colab.ipynb` | A100 (~90 min) | `train.jsonl` (50-80k pairs) |
+| **Enrichment NER** (SciBERT token classification) | `notebooks/train_enrichment_model.ipynb` | T4 or A100 | `enrichment_train.jsonl` |
+
+See [docs/fine-tuning-cli.md](docs/fine-tuning-cli.md) for training details and deployment options.
 
 ## Tech Stack
 
 - **Frontend**: React 19, TypeScript, Vite, Tailwind CSS, shadcn/ui, TanStack Query
 - **Backend**: FastAPI, Pydantic, Python 3.12
 - **NL Pipeline**: Rules-based NER, BM25 retrieval, deterministic assembly
-- **Training**: Google Colab (T4 GPU), Unsloth, TRL, LoRA, Qwen3-1.7B (for LLM fallback only)
+- **Training**: Google Colab (A100 GPU), Unsloth, TRL, LoRA, Qwen3-1.7B
+- **Enrichment NER**: SciBERT fine-tuned for BIO token classification
 - **Validation**: ADS Search API
+- **Serving**: Docker, vLLM, FastAPI
 - **Tools**: mise (runtimes), uv (Python), Bun (Node)
 
 ## Documentation
 
 - [Development Guide](DEVELOPMENT.md) - Architecture, workflows
 - [Hybrid Pipeline Architecture](docs/HYBRID_PIPELINE.md) - NER + retrieval + assembly pipeline
-- [Fine-Tuning CLI](docs/fine-tuning-cli.md) - Training pipeline documentation
+- [Fine-Tuning & Training Guide](docs/fine-tuning-cli.md) - Model training and deployment
+- [Docker Deployment](docker/README.md) - Local and beta deployment
 - [Latency Benchmarks](docs/LATENCY_BENCHMARKS.md) - Pipeline performance metrics
 - [ADS Search Syntax](https://ui.adsabs.harvard.edu/help/search/search-syntax) - Official ADS docs

@@ -52,18 +52,22 @@ FastAPI server providing:
 
 **Tech**: FastAPI, Pydantic, Python 3.12, uv
 
-### Fine-tuning (`packages/finetune/`)
+### Fine-tuning & Pipeline (`packages/finetune/`)
 
-Training pipeline and CLI (uses src layout):
+NL-to-query pipeline and CLI (uses src layout):
 
 | Directory | Purpose |
 |-----------|---------|
 | `src/finetune/cli/` | `scix-finetune` command implementations |
 | `src/finetune/eval/` | Evaluation runner and syntax validation |
-| `src/finetune/domains/scix/` | ADS/SciX-specific pipeline logic |
+| `src/finetune/domains/scix/` | Hybrid NER pipeline (ner, retrieval, assembly, constraints) |
 | `src/finetune/dataset_agent/` | Dataset generation agent |
 
-**Training**: Google Colab notebook (`scripts/train_colab.ipynb`) with Unsloth, TRL, LoRA, Qwen3-1.7B
+**Pipeline**: Rules-based NER + BM25 retrieval + deterministic assembly (<50ms, no GPU)
+
+**Training**: Two Colab notebooks:
+- `scripts/train_colab.ipynb` — Qwen3-1.7B translator (A100, ~90 min)
+- `notebooks/train_enrichment_model.ipynb` — SciBERT NER (T4 or A100)
 
 ## Development Workflow
 
