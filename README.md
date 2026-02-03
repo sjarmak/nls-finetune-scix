@@ -47,7 +47,6 @@ Configure in `.env`. Not all keys are required depending on what you're doing:
 | Key | Required For | Where to Get |
 |-----|-------------|--------------|
 | `ADS_API_KEY` | Query validation, evaluation | [ADS User Settings](https://ui.adsabs.harvard.edu/user/settings/token) |
-| `OPENAI_API_KEY` | GPT-4o-mini comparison | [platform.openai.com](https://platform.openai.com/api-keys) |
 | `ANTHROPIC_API_KEY` | Dataset generation | [console.anthropic.com](https://console.anthropic.com/) |
 
 ## Commands
