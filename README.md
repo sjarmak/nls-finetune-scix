@@ -161,7 +161,7 @@ The translator is a **Qwen3-1.7B** base model fine-tuned with **LoRA** (r=16, al
 
 **Dataset**: [adsabs/nls-query-training-data](https://huggingface.co/datasets/adsabs/nls-query-training-data) on HuggingFace
 
-The training data (~4,800 pairs, 90/10 train/val split) is assembled from three sources:
+The training data (61,652 pairs — 55.4k train / 6.2k val) is assembled from three sources:
 
 | Source | Count | Description |
 |--------|-------|-------------|
