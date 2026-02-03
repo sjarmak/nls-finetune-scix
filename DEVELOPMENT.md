@@ -90,7 +90,7 @@ mise run format
 Training is done via the Colab notebook:
 
 1. Open `scripts/train_colab.ipynb` in Google Colab
-2. Select a GPU runtime (T4 is sufficient, ~30 min training)
+2. Select an A100 GPU runtime (Colab Pro, ~90 min for 50-80k pairs)
 3. Upload `data/datasets/processed/train.jsonl`
 4. Run all cells — trains, merges LoRA, uploads to HuggingFace
 

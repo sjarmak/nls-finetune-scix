@@ -10,8 +10,8 @@ The recommended way to train the model is using the provided Colab notebook:
 
 ### Requirements
 
-- Google Colab with GPU runtime (T4 is sufficient)
-- ~30 minutes for training
+- Google Colab with A100 GPU runtime (Colab Pro)
+- ~90 minutes for training (50-80k pairs)
 - HuggingFace account for model upload
 
 ### Steps
@@ -34,7 +34,7 @@ The recommended way to train the model is using the provided Colab notebook:
 | Base model | Qwen/Qwen3-1.7B |
 | Adapter | LoRA (r=16, alpha=32) |
 | Target modules | q, k, v, o, gate, up, down projections |
-| Precision | fp16 (T4 compatible) |
+| Precision | bf16 (A100) |
 | Epochs | 3 |
 | Batch size | 8, gradient accumulation 2 |
 | Learning rate | 2e-4 |
@@ -127,8 +127,8 @@ scix-finetune eval report
 
 | Choice | Rationale |
 |--------|-----------|
-| Unsloth + LoRA | 2x faster training, 70% less VRAM on free Colab T4 |
-| fp16 precision | T4 GPU compatible (bf16 requires Ampere+) |
+| Unsloth + LoRA | 2x faster training, 70% less VRAM |
+| bf16 precision | Native A100 support, no precision loss |
 | r=16, alpha=32 | Standard LoRA config, good quality/efficiency balance |
 | HuggingFace hosting | Model accessible for any deployment target |
 | vLLM serving | High-throughput OpenAI-compatible inference |

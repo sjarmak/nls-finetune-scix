@@ -13,11 +13,11 @@ This document summarizes the current state of the NLS Query fine-tuning project 
 | Base Model | Qwen/Qwen3-1.7B |
 | Adapter | LoRA (r=16, alpha=32) |
 | Training Run | e2e-test-20251217-131656 |
-| Training Data | 969 train / 108 val examples |
+| Training Data | 50-80k training pairs |
 | Final Loss | 0.77 |
-| Training Time | ~30 minutes (Colab T4) |
-| Training Cost | Free (Colab T4 GPU) |
-| GPU | Google Colab T4 (fp16) |
+| Training Time | ~90 minutes (50-80k pairs) |
+| Training Cost | Colab Pro (A100 GPU) |
+| GPU | NVIDIA A100 (bf16) |
 
 ## Model Hosting
 
@@ -93,7 +93,7 @@ See [docs/fine-tuning-cli.md](fine-tuning-cli.md) for other deployment options (
 
 | Operation | Cost |
 |-----------|------|
-| Training (Colab T4, ~30min) | Free |
+| Training (Colab A100, ~90min) | Colab Pro subscription |
 | Inference cost | Depends on hosting (vLLM, SageMaker, etc.) |
 | GPT-4o-mini (1M queries) | ~$150 |
 

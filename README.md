@@ -11,7 +11,7 @@ Fine-tuning infrastructure for converting natural language to ADS/SciX scientifi
 - **macOS** (Apple Silicon recommended) - Linux/Windows not currently supported
 - **[mise](https://mise.jdx.dev/)** - Runtime manager for Python and Bun
 - **ADS API Key** - For query validation and evaluation
-- **Google Colab** (optional) - For model training (free T4 GPU is sufficient)
+- **Google Colab** (optional) - For model training (A100 GPU via Colab Pro)
 
 ```bash
 brew install mise
@@ -86,9 +86,9 @@ mise run test         # Run tests
 Training is done via the provided Colab notebook:
 
 1. Open `scripts/train_colab.ipynb` in Google Colab
-2. Select a GPU runtime (T4 is sufficient)
+2. Select an A100 GPU runtime (Colab Pro)
 3. Upload `data/datasets/processed/train.jsonl`
-4. Run all cells (~30 minutes on T4)
+4. Run all cells (~90 minutes for 50-80k pairs)
 5. Model is uploaded to HuggingFace (`adsabs/scix-nls-translator`)
 
 See [docs/fine-tuning-cli.md](docs/fine-tuning-cli.md) for detailed training and deployment documentation.
