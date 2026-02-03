@@ -180,18 +180,6 @@ description = "Validate pairs and create train/val split"
 run = "cd packages/api && uv run python ../../scripts/validate_dataset.py"
 
 # ===========================================
-# MODAL (Fine-tuning & Inference)
-# ===========================================
-
-[tasks.modal-deploy]
-description = "Deploy inference endpoint to Modal"
-run = "cd packages/finetune/src/finetune/modal && modal deploy serve_vllm.py"
-
-[tasks.modal-train]
-description = "Run training job on Modal"
-run = "cd packages/finetune/src/finetune/modal && modal run train.py"
-
-# ===========================================
 # CLEANUP
 # ===========================================
 

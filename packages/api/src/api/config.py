@@ -11,14 +11,6 @@ class Settings(BaseSettings):
     api_port: int = 8000
     cors_origins: str = "http://localhost:5173"
 
-    # Modal
-    modal_token_id: str = ""
-    modal_token_secret: str = ""
-    # Default to deployed endpoint for Playground functionality
-    modal_inference_endpoint: str = (
-        "https://sourcegraph--nls-finetune-serve-nlsquerymodel-query.modal.run"
-    )
-
     # OpenAI
     openai_api_key: str = ""
 

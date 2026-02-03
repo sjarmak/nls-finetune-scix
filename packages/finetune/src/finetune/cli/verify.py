@@ -1,7 +1,6 @@
 """Verification commands for NLS Query fine-tuning CLI."""
 
 import json
-import subprocess
 import sys
 from pathlib import Path
 
@@ -27,83 +26,6 @@ def print_section(title: str) -> None:
     """Print a section header."""
     print(f"\n{title}")
     print("-" * len(title))
-
-
-@verify_app.command("env")
-def verify_env() -> None:
-    """Check Modal setup and dependencies."""
-    print_section("Verifying environment")
-
-    all_passed = True
-
-    # Check Modal CLI
-    try:
-        result = subprocess.run(
-            ["modal", "--version"],
-            capture_output=True,
-            text=True,
-            timeout=10,
-        )
-        modal_version = result.stdout.strip() if result.returncode == 0 else None
-        all_passed &= print_check(
-            "Modal CLI", modal_version is not None, modal_version or "not found"
-        )
-    except (subprocess.TimeoutExpired, FileNotFoundError):
-        all_passed &= print_check("Modal CLI", False, "not installed")
-
-    # Check Modal profile/workspace
-    try:
-        result = subprocess.run(
-            ["modal", "profile", "current"],
-            capture_output=True,
-            text=True,
-            timeout=10,
-        )
-        if result.returncode == 0:
-            workspace = result.stdout.strip()
-            all_passed &= print_check("Modal workspace", True, workspace)
-        else:
-            all_passed &= print_check("Modal workspace", False, "not configured")
-    except (subprocess.TimeoutExpired, FileNotFoundError):
-        all_passed &= print_check("Modal workspace", False, "modal command failed")
-
-    # Check HuggingFace secret
-    try:
-        result = subprocess.run(
-            ["modal", "secret", "list"],
-            capture_output=True,
-            text=True,
-            timeout=10,
-        )
-        has_hf = "huggingface" in result.stdout.lower() if result.returncode == 0 else False
-        all_passed &= print_check(
-            "Secret 'huggingface-secret'", has_hf, "found" if has_hf else "not found"
-        )
-    except (subprocess.TimeoutExpired, FileNotFoundError):
-        all_passed &= print_check("Secret 'huggingface-secret'", False, "could not check")
-
-    # Check W&B secret (optional)
-    try:
-        result = subprocess.run(
-            ["modal", "secret", "list"],
-            capture_output=True,
-            text=True,
-            timeout=10,
-        )
-        has_wandb = "wandb" in result.stdout.lower() if result.returncode == 0 else False
-        print_check(
-            "Secret 'wandb-secret'", has_wandb, "found" if has_wandb else "not found (optional)"
-        )
-    except (subprocess.TimeoutExpired, FileNotFoundError):
-        print_check("Secret 'wandb-secret'", False, "could not check (optional)")
-
-    # Summary
-    print()
-    if all_passed:
-        print("All environment checks passed")
-    else:
-        print("Some environment checks failed")
-        sys.exit(1)
 
 
 @verify_app.command("data")
@@ -205,122 +127,13 @@ def verify_data(
         sys.exit(1)
 
 
-@verify_app.command("config")
-def verify_config(
-    show: bool = typer.Option(False, "--show", help="Show training configuration details"),
-) -> None:
-    """Verify Modal training scripts are valid."""
-    print_section("Verifying training configuration")
-
-    all_passed = True
-    modal_dir = PROJECT_ROOT / "finetune" / "modal"
-
-    # Check core Modal training scripts
-    training_scripts = [
-        "train.py",
-        "train_unsloth.py",
-        "merge.py",
-    ]
-
-    for script in training_scripts:
-        script_path = modal_dir / script
-        if not script_path.exists():
-            print_check(f"{script}", False, "not found")
-            continue
-
-        # Syntax check
-        try:
-            result = subprocess.run(
-                ["python3", "-m", "py_compile", str(script_path)],
-                capture_output=True,
-                text=True,
-                timeout=10,
-            )
-            all_passed &= print_check(f"{script}", result.returncode == 0, "valid syntax")
-        except Exception as e:
-            all_passed &= print_check(f"{script}", False, str(e))
-
-    if show:
-        print("\n--- Training Configuration (TRL SFTTrainer) ---")
-        print("  Framework: TRL SFTTrainer with PEFT/LoRA")
-        print("  Base model: Qwen/Qwen3-1.7B")
-        print("  LoRA config: r=16, alpha=32, target=all-linear")
-        print("  Training: 3 epochs, batch_size=4, gradient_accum=2")
-        print("  Precision: BF16, single H100 GPU")
-
-    # Summary
-    print()
-    if all_passed:
-        print("All config checks passed")
-    else:
-        print("Some config checks failed")
-        sys.exit(1)
-
-
-@verify_app.command("volumes")
-def verify_volumes() -> None:
-    """Check Modal volume access."""
-    print_section("Verifying Modal volumes")
-
-    all_passed = True
-    volumes = ["nls-query-runs", "nls-query-data"]
-
-    for volume_name in volumes:
-        try:
-            result = subprocess.run(
-                ["modal", "volume", "list"],
-                capture_output=True,
-                text=True,
-                timeout=30,
-            )
-
-            if result.returncode == 0:
-                exists = volume_name in result.stdout
-                if exists:
-                    all_passed &= print_check(f"Volume '{volume_name}'", True, "accessible")
-                else:
-                    # Volume doesn't exist yet, but can be created
-                    print_check(f"Volume '{volume_name}'", True, "will be created on first use")
-            else:
-                all_passed &= print_check(
-                    f"Volume '{volume_name}'", False, "could not list volumes"
-                )
-        except subprocess.TimeoutExpired:
-            all_passed &= print_check(f"Volume '{volume_name}'", False, "timeout")
-        except FileNotFoundError:
-            all_passed &= print_check(f"Volume '{volume_name}'", False, "modal CLI not found")
-
-    # Summary
-    print()
-    if all_passed:
-        print("All volume checks passed")
-    else:
-        print("Some volume checks failed")
-        sys.exit(1)
-
-
 @verify_app.command("all")
 def verify_all() -> None:
     """Run all verification checks."""
     print("Running all verification checks...\n")
 
     try:
-        verify_env()
-    except SystemExit:
-        pass
-
-    try:
         verify_data()
-    except SystemExit:
-        pass
-
-    try:
-        verify_config()
-    except SystemExit:
-        pass
-
-    try:
-        verify_volumes()
     except SystemExit:
         pass
 

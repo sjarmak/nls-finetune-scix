@@ -19,7 +19,7 @@ from .pipeline import GoldExample
 
 
 # Default path to gold examples file
-# In Modal deployment, this is overridden by GOLD_EXAMPLES_PATH env var
+# Can be overridden by GOLD_EXAMPLES_PATH env var
 def _get_gold_examples_path() -> Path:
     """Get path to gold_examples.json, checking env var first."""
     env_path = os.environ.get("GOLD_EXAMPLES_PATH")

@@ -51,14 +51,16 @@ This project fine-tunes models to convert natural language to **ADS/SciX scienti
 - No unused variables/imports
 - Use `@/` path alias
 
-## Fine-Tuning CLI
+## Fine-Tuning
+
+Training is done via the Colab notebook (`scripts/train_colab.ipynb`). The CLI provides data verification and evaluation:
 
 ```bash
 scix-finetune --help           # Show all commands
-scix-finetune verify env       # Check Modal setup
 scix-finetune verify data      # Validate training data
-scix-finetune dry-run train    # Test pipeline (3 steps)
-scix-finetune train            # Run full training
+scix-finetune eval baseline    # Generate GPT-4o-mini baseline
+scix-finetune eval run         # Evaluate fine-tuned model
+scix-finetune eval report      # Print comparison report
 ```
 
 See `docs/fine-tuning-cli.md` for full documentation.

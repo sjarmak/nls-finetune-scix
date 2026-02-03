@@ -4,7 +4,6 @@
 
 - **macOS** (Apple Silicon recommended)
 - **[mise](https://mise.jdx.dev/)** - Runtime manager
-- **Modal account** - For fine-tuning and inference ([modal.com](https://modal.com))
 - **API keys** - See README.md for which keys you need
 
 ## Setup
@@ -46,7 +45,7 @@ FastAPI server providing:
 
 | Endpoint | Purpose |
 |----------|---------|
-| `/api/inference/*` | Query generation (routes to Modal or OpenAI) |
+| `/api/inference/*` | Query generation (routes to OpenAI or local endpoint) |
 | `/api/datasets/*` | Dataset browsing and stats |
 | `/api/models/*` | Model configuration |
 | `/api/evaluation/*` | Evaluation results |
@@ -59,11 +58,12 @@ Training pipeline and CLI (uses src layout):
 
 | Directory | Purpose |
 |-----------|---------|
-| `src/finetune/cli/` | `nls-finetune` command implementations |
-| `src/finetune/modal/` | Modal training, inference, and deployment code |
+| `src/finetune/cli/` | `scix-finetune` command implementations |
 | `src/finetune/eval/` | Evaluation runner and syntax validation |
+| `src/finetune/domains/scix/` | ADS/SciX-specific pipeline logic |
+| `src/finetune/dataset_agent/` | Dataset generation agent |
 
-**Tech**: Modal (H100 GPUs), TRL, LoRA, Qwen3-1.7B
+**Training**: Google Colab notebook (`scripts/train_colab.ipynb`) with Unsloth, TRL, LoRA, Qwen3-1.7B
 
 ## Development Workflow
 
@@ -87,27 +87,14 @@ mise run format
 
 ### Fine-tuning a Model
 
-Use the `nls-finetune` CLI:
+Training is done via the Colab notebook:
 
-```bash
-# Install CLI (via uv workspace - included in mise run install)
-mise run install
+1. Open `scripts/train_colab.ipynb` in Google Colab
+2. Select a GPU runtime (T4 is sufficient, ~30 min training)
+3. Upload `data/datasets/processed/train.jsonl`
+4. Run all cells — trains, merges LoRA, uploads to HuggingFace
 
-# Verify setup
-nls-finetune verify env
-
-# Test pipeline (3 steps, quick)
-nls-finetune dry-run train
-
-# Full training (~12 min, ~$1.50)
-nls-finetune train --run-name "my-run"
-
-# Merge LoRA adapter
-nls-finetune merge --run-name "my-run"
-
-# Deploy inference endpoint
-nls-finetune deploy --run-name "my-run"
-```
+The trained model is hosted on HuggingFace at `adsabs/scix-nls-translator` and can be served with vLLM or any compatible inference server.
 
 See [docs/fine-tuning-cli.md](docs/fine-tuning-cli.md) for complete documentation.
 
@@ -115,13 +102,13 @@ See [docs/fine-tuning-cli.md](docs/fine-tuning-cli.md) for complete documentatio
 
 ```bash
 # Generate baseline (GPT-4o-mini)
-nls-finetune eval baseline --sample 50
+scix-finetune eval baseline --sample 50
 
 # Evaluate fine-tuned model
-nls-finetune eval run --sample 50
+scix-finetune eval run --endpoint <your-endpoint-url> --sample 50
 
 # Compare results
-nls-finetune eval report
+scix-finetune eval report
 ```
 
 Or use the web UI: http://localhost:5173 → Evaluation page
@@ -140,9 +127,7 @@ lint             Run linters (Python + TypeScript)
 format           Format Python code
 test             Run all tests
 generate-data    Full data pipeline: extract → generate NL → validate
-validate-data    Validate pairs and create train/val split
-modal-deploy     Deploy inference endpoint to Modal
-modal-train      Run training job on Modal
+validate-data    Validate pairs and create train/val JSONL
 clean            Remove build artifacts and dependencies
 ```
 
@@ -160,13 +145,6 @@ kill -9 <PID>  # Kill it
 ```bash
 cd packages/api && uv sync  # Reinstall Python deps
 cd packages/web && bun install  # Reinstall Node deps
-```
-
-### Modal authentication
-
-```bash
-modal token set  # Re-authenticate
-nls-finetune verify env  # Check setup
 ```
 
 ## Chrome DevTools MCP

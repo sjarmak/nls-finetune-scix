@@ -47,16 +47,7 @@ check "Gold examples JSON" python3 -c "import json; json.load(open('data/dataset
 check "Model configs JSON" python3 -c "import json; json.load(open('data/models/model_configs.json'))"
 check "Features JSON" python3 -c "import json; json.load(open('features.json'))"
 
-# 4. Modal scripts syntax (packages/finetune/src/finetune/modal/)
-echo ""
-echo "--- Modal Scripts ---"
-MODAL_DIR="packages/finetune/src/finetune/modal"
-check "modal/train.py syntax" python3 -m py_compile "$MODAL_DIR/train.py"
-check "modal/dry_run.py syntax" python3 -m py_compile "$MODAL_DIR/dry_run.py"
-check "modal/serve_vllm.py syntax" python3 -m py_compile "$MODAL_DIR/serve_vllm.py"
-check "modal/merge.py syntax" python3 -m py_compile "$MODAL_DIR/merge.py"
-
-# 5. Build check (optional, slower)
+# 4. Build check (optional, slower)
 if [ "$1" = "--full" ]; then
 	echo ""
 	echo "--- Build Checks (--full mode) ---"

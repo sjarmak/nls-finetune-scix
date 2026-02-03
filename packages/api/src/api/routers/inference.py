@@ -10,7 +10,6 @@ from api.models.inference import (
     InferenceRequest,
     InferenceResponse,
 )
-from api.services.modal_client import modal_inference
 from api.services.openai_client import openai_inference
 
 router = APIRouter(prefix="/inference", tags=["inference"])
@@ -24,7 +23,11 @@ async def generate_query(request: InferenceRequest) -> InferenceResponse:
     if request.model_id == "gpt-4o-mini":
         return await openai_inference(request.query, date)
     else:
-        return await modal_inference(request.query, date, request.model_id)
+        return InferenceResponse(
+            sourcegraph_query=f"[PLACEHOLDER] {request.query}",
+            model_id=request.model_id,
+            latency_ms=0,
+        )
 
 
 @router.post("/compare", response_model=CompareResponse)
@@ -37,7 +40,11 @@ async def compare_models(request: CompareRequest) -> CompareResponse:
         if model_id == "gpt-4o-mini":
             result = await openai_inference(request.query, date)
         else:
-            result = await modal_inference(request.query, date, model_id)
+            result = InferenceResponse(
+                sourcegraph_query=f"[PLACEHOLDER] {request.query}",
+                model_id=model_id,
+                latency_ms=0,
+            )
         results.append(result)
 
     return CompareResponse(results=results)

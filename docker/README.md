@@ -1,6 +1,6 @@
 # NLS Server - Local Development & Beta Deployment
 
-Run the NLS (Natural Language Search) model locally without Modal infrastructure.
+Run the NLS (Natural Language Search) model locally.
 
 ## Quick Start
 

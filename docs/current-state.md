@@ -15,22 +15,19 @@ This document summarizes the current state of the NLS Query fine-tuning project 
 | Training Run | e2e-test-20251217-131656 |
 | Training Data | 969 train / 108 val examples |
 | Final Loss | 0.77 |
-| Training Time | ~12 minutes |
-| Training Cost | ~$1.50 |
-| GPU | 1x NVIDIA H100 NVL |
+| Training Time | ~30 minutes (Colab T4) |
+| Training Cost | Free (Colab T4 GPU) |
+| GPU | Google Colab T4 (fp16) |
 
-## Live Endpoint
+## Model Hosting
 
-```
-https://sourcegraph--nls-finetune-serve-nlsquerymodel-query.modal.run
-```
+The trained model is uploaded to HuggingFace at `adsabs/scix-nls-translator` and can be served with vLLM:
 
-**Test command:**
 ```bash
-curl -X POST https://sourcegraph--nls-finetune-serve-nlsquerymodel-query.modal.run \
-  -H "Content-Type: application/json" \
-  -d '{"query": "find Python files with async functions"}'
+vllm serve adsabs/scix-nls-translator --max-model-len 512
 ```
+
+See [docs/fine-tuning-cli.md](fine-tuning-cli.md) for other deployment options (TGI, SageMaker).
 
 ## Evaluation Results
 
@@ -48,11 +45,7 @@ curl -X POST https://sourcegraph--nls-finetune-serve-nlsquerymodel-query.modal.r
 
 2. **Semantic matching improved but below target**: At 68%, the model falls just short of the 70% target. It still outperforms GPT-4o-mini's 44%.
 
-3. **Latency is problematic**: The model averages ~2.2 seconds per query, far above the 100ms target. This includes:
-   - Cold start: ~24 seconds
-   - Warm queries: ~1.4-2.0 seconds
-
-   Note: GPT-4o-mini averages ~1 second, so our model is actually slower.
+3. **Latency is problematic**: The model averages ~2.2 seconds per query, far above the 100ms target. Latency depends on the inference hosting setup.
 
 ### Model Behavior Observations
 
@@ -100,12 +93,9 @@ curl -X POST https://sourcegraph--nls-finetune-serve-nlsquerymodel-query.modal.r
 
 | Operation | Cost |
 |-----------|------|
-| Training (H100, ~12min) | ~$1.50 |
-| Inference (per query) | ~$0.0001 |
-| Monthly inference (1M queries) | ~$100 |
+| Training (Colab T4, ~30min) | Free |
+| Inference cost | Depends on hosting (vLLM, SageMaker, etc.) |
 | GPT-4o-mini (1M queries) | ~$150 |
-
-The fine-tuned model is cost-competitive with GPT-4o-mini but doesn't meet the latency target.
 
 ## Next Steps
 

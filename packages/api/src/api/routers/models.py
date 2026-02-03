@@ -11,7 +11,7 @@ class ModelConfig(BaseModel):
 
     id: str
     name: str
-    provider: str  # "modal", "openai", "anthropic"
+    provider: str  # "local", "openai", "anthropic"
     description: str
     is_available: bool = True
 
@@ -21,7 +21,7 @@ AVAILABLE_MODELS = [
     ModelConfig(
         id="fine-tuned",
         name="Fine-tuned Qwen3-1.7B",
-        provider="modal",
+        provider="local",
         description="Fine-tuned model for Sourcegraph queries",
     ),
     ModelConfig(
@@ -33,7 +33,7 @@ AVAILABLE_MODELS = [
     ModelConfig(
         id="base-qwen",
         name="Base Qwen3-1.7B",
-        provider="modal",
+        provider="local",
         description="Base model without fine-tuning (for comparison)",
     ),
 ]

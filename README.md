@@ -11,6 +11,7 @@ Fine-tuning infrastructure for converting natural language to ADS/SciX scientifi
 - **macOS** (Apple Silicon recommended) - Linux/Windows not currently supported
 - **[mise](https://mise.jdx.dev/)** - Runtime manager for Python and Bun
 - **ADS API Key** - For query validation and evaluation
+- **Google Colab** (optional) - For model training (free T4 GPU is sufficient)
 
 ```bash
 brew install mise
@@ -46,19 +47,16 @@ Configure in `.env`. Not all keys are required depending on what you're doing:
 | Key | Required For | Where to Get |
 |-----|-------------|--------------|
 | `ADS_API_KEY` | Query validation, evaluation | [ADS User Settings](https://ui.adsabs.harvard.edu/user/settings/token) |
-| `MODAL_TOKEN_ID` | Training, deployment | [modal.com/settings](https://modal.com/settings) |
-| `MODAL_TOKEN_SECRET` | Training, deployment | [modal.com/settings](https://modal.com/settings) |
 | `OPENAI_API_KEY` | GPT-4o-mini comparison | [platform.openai.com](https://platform.openai.com/api-keys) |
 | `ANTHROPIC_API_KEY` | Dataset generation | [console.anthropic.com](https://console.anthropic.com/) |
-| `MODAL_INFERENCE_ENDPOINT` | Using deployed model | Output from `scix-finetune deploy` |
 
 ### Setup by Role
 
 | I want to... | Keys needed |
 |--------------|-------------|
 | **Develop the web UI** | None (uses mock data) |
-| **Run the full stack locally** | `ADS_API_KEY` + `MODAL_INFERENCE_ENDPOINT` |
-| **Train a new model** | Modal + ADS keys |
+| **Run the full stack locally** | `ADS_API_KEY` |
+| **Train a new model** | Google Colab + HuggingFace account |
 | **Generate new training data** | Anthropic + ADS keys |
 
 ## Commands
@@ -83,19 +81,17 @@ mise run format       # Auto-format Python code
 mise run test         # Run tests
 ```
 
-### Fine-Tuning (requires Modal keys)
+### Fine-Tuning (via Google Colab)
 
-For full training workflow, use the `scix-finetune` CLI:
+Training is done via the provided Colab notebook:
 
-```bash
-mise run install              # Install CLI (via uv workspace)
-scix-finetune --help          # Show all commands
-scix-finetune verify env      # Check Modal setup
-scix-finetune dry-run train   # Test pipeline (3 steps, ~$0.10)
-scix-finetune train           # Full training (~12 min, ~$1.50)
-```
+1. Open `scripts/train_colab.ipynb` in Google Colab
+2. Select a GPU runtime (T4 is sufficient)
+3. Upload `data/datasets/processed/train.jsonl`
+4. Run all cells (~30 minutes on T4)
+5. Model is uploaded to HuggingFace (`adsabs/scix-nls-translator`)
 
-See [docs/fine-tuning-cli.md](docs/fine-tuning-cli.md) for detailed training documentation.
+See [docs/fine-tuning-cli.md](docs/fine-tuning-cli.md) for detailed training and deployment documentation.
 
 ### Dataset Management
 
@@ -113,7 +109,6 @@ mise run validate-data   # Validate and create train/val JSONL
 │   └── finetune/       # Fine-tuning package (src layout)
 │       └── src/finetune/
 │           ├── cli/    # scix-finetune CLI commands
-│           ├── modal/  # Modal training & inference code
 │           ├── eval/   # Evaluation modules
 │           └── domains/
 │               └── scix/  # ADS/SciX-specific logic
@@ -178,7 +173,7 @@ See [docs/HYBRID_PIPELINE.md](docs/HYBRID_PIPELINE.md) for detailed architecture
 - **Frontend**: React 19, TypeScript, Vite, Tailwind CSS, shadcn/ui, TanStack Query
 - **Backend**: FastAPI, Pydantic, Python 3.12
 - **NL Pipeline**: Rules-based NER, BM25 retrieval, deterministic assembly
-- **Training**: Modal (H100 GPUs), TRL, LoRA, Qwen3-1.7B (for LLM fallback only)
+- **Training**: Google Colab (T4 GPU), Unsloth, TRL, LoRA, Qwen3-1.7B (for LLM fallback only)
 - **Validation**: ADS Search API
 - **Tools**: mise (runtimes), uv (Python), Bun (Node)
 

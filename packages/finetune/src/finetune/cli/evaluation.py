@@ -19,7 +19,7 @@ eval_app = typer.Typer(
 
 # Default paths
 EVAL_DIR = Path("data/datasets/evaluations")
-DEFAULT_ENDPOINT = "https://sourcegraph--nls-finetune-serve-vllm-serve.modal.run"
+DEFAULT_ENDPOINT = ""
 
 
 @eval_app.command()
@@ -489,9 +489,8 @@ def _measure_latency_breakdown(endpoint: str, samples: int = 5) -> dict:
 
     Returns:
         Dict with latency breakdown components:
-        - network_rtt_ms: Health endpoint latency with connection reuse (network + Modal routing)
+        - network_rtt_ms: Health endpoint latency with connection reuse
         - connection_overhead_ms: Extra time for fresh connection (TCP+SSL handshake)
-        - modal_overhead_ms: Estimated Modal infrastructure overhead
     """
     import time
 
@@ -542,15 +541,9 @@ def _measure_latency_breakdown(endpoint: str, samples: int = 5) -> dict:
     # Connection overhead = cold - warm (TCP+SSL handshake time)
     connection_overhead = max(0, cold_median - warm_median)
 
-    # Modal overhead estimate: warm health latency minus typical network RTT
-    # Typical network RTT is roughly half of TCP connect time (one way)
-    # We estimate it as warm_median * 0.75 to account for Modal routing
-    modal_overhead = warm_median * 0.2  # ~20% of warm health is Modal routing
-
     return {
         "network_rtt_ms": round(warm_median, 1),
         "connection_overhead_ms": round(connection_overhead, 1),
-        "modal_overhead_ms": round(modal_overhead, 1),
     }
 
 
@@ -1260,7 +1253,7 @@ def show_results(
 @eval_app.command("load")
 def load_test(
     endpoint: str = typer.Option(
-        "https://sourcegraph--nls-finetune-serve-vllm-serve.modal.run",
+        "",
         "--endpoint",
         help="Model endpoint URL",
     ),
