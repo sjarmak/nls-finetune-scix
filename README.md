@@ -171,7 +171,7 @@ The training data (61,652 pairs — 55.4k train / 6.2k val) is assembled from th
 
 The combined dataset is validated, deduplicated by both NL text and query text, and split 90/10 into train/val sets with a fixed seed for reproducibility.
 
-Each example uses OpenAI chat completion format:
+Each example uses standard chat completion format (system/user/assistant messages):
 
 ```jsonl
 {"messages": [
