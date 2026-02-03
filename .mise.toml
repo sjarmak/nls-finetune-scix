@@ -46,6 +46,21 @@ depends = ["dev-api", "dev-web"]
 description = "Start API server only (port 8000)"
 run = "cd packages/api && uv run uvicorn api.main:app --reload --host 127.0.0.1 --port 8000"
 
+[tasks.dev-model]
+description = "Start fine-tuned model server (port 8001)"
+run = """
+#!/usr/bin/env bash
+set -e
+export MODEL_NAME="${MODEL_NAME:-adsabs/scix-nls-translator}"
+export PORT=8001
+export PYTHONPATH="$PWD/packages/finetune/src:$PYTHONPATH"
+
+echo "Starting model server on http://localhost:8001"
+echo "Model: $MODEL_NAME"
+echo "Device: auto-detect (MPS/CUDA/CPU)"
+python docker/server.py
+"""
+
 [tasks.dev-web]
 description = "Start web dev server only (port 5173)"
 run = "cd packages/web && bun run dev"

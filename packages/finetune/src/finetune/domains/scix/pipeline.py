@@ -81,6 +81,7 @@ class PipelineResult:
     retrieved_examples: list[GoldExample]
     final_query: str
     debug_info: DebugInfo
+    confidence: float = 1.0
     success: bool = True
     error: str | None = None
 
@@ -91,6 +92,7 @@ class PipelineResult:
             "retrieved_examples": [ex.to_dict() for ex in self.retrieved_examples],
             "final_query": self.final_query,
             "debug_info": self.debug_info.to_dict(),
+            "confidence": self.confidence,
             "success": self.success,
             "error": self.error,
         }
@@ -98,6 +100,40 @@ class PipelineResult:
     def to_json(self) -> str:
         """Serialize to JSON string."""
         return json.dumps(self.to_dict(), indent=2)
+
+
+def compute_pipeline_confidence(intent: IntentSpec) -> tuple[float, str | None]:
+    """Compute a confidence score for the pipeline's extraction quality.
+
+    Returns:
+        Tuple of (confidence float 0-1, fallback_reason or None)
+
+    High confidence (0.9): authors, operators, or year ranges extracted
+    Medium (0.7): multi-word topics with some structure
+    Low (0.3): short query, nothing structured — likely ambiguous input
+    """
+    has_authors = bool(intent.authors)
+    has_operator = intent.operator is not None
+    has_years = intent.year_from is not None or intent.year_to is not None
+    has_constraints = intent.has_constraints()
+
+    # High confidence: structured fields were extracted
+    if has_authors or has_operator or has_years:
+        return (0.9, None)
+
+    # Medium confidence: multi-word topics or constraints
+    total_topic_words = sum(len(t.split()) for t in intent.free_text_terms) + sum(
+        len(t.split()) for t in intent.or_terms
+    )
+
+    if has_constraints or total_topic_words >= 3:
+        return (0.7, None)
+
+    if total_topic_words >= 2:
+        return (0.5, None)
+
+    # Low confidence: short/ambiguous input
+    return (0.3, "short query with no structured fields extracted")
 
 
 def process_query(nl_text: str) -> PipelineResult:
@@ -149,6 +185,11 @@ def process_query(nl_text: str) -> PipelineResult:
     final_query = assemble_query(intent, retrieved_examples)
     debug_info.assembly_time_ms = (time.perf_counter() - assembly_start) * 1000
 
+    # Confidence heuristic
+    confidence, fallback_reason = compute_pipeline_confidence(intent)
+    if fallback_reason:
+        debug_info.fallback_reason = fallback_reason
+
     # Total timing
     debug_info.total_time_ms = (time.perf_counter() - start_time) * 1000
 
@@ -157,6 +198,7 @@ def process_query(nl_text: str) -> PipelineResult:
         retrieved_examples=retrieved_examples,
         final_query=final_query,
         debug_info=debug_info,
+        confidence=confidence,
         success=True,
     )
 

@@ -22,7 +22,7 @@ AVAILABLE_MODELS = [
         id="fine-tuned",
         name="Fine-tuned Qwen3-1.7B",
         provider="local",
-        description="Fine-tuned model for Sourcegraph queries",
+        description="LoRA fine-tuned Qwen3-1.7B (adsabs/scix-nls-translator)",
     ),
     ModelConfig(
         id="gpt-4o-mini",

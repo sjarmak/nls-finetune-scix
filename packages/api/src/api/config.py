@@ -17,6 +17,9 @@ class Settings(BaseSettings):
     # Anthropic
     anthropic_api_key: str = ""
 
+    # Model server endpoint (docker/server.py or vLLM)
+    model_endpoint: str = "http://localhost:8001"
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"

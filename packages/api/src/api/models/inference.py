@@ -17,6 +17,7 @@ class InferenceResponse(BaseModel):
     sourcegraph_query: str
     model_id: str
     latency_ms: float
+    debug_info: dict | None = None
 
 
 class CompareRequest(BaseModel):

@@ -189,19 +189,29 @@ User NL → [NER Extraction] → IntentSpec → [Retrieval] → [Assembler] → 
 
 ### Serving
 
-The pipeline is served via `docker/server.py` (Docker/GPU) or `scripts/serve_local_pipeline.py` (local development):
+The fine-tuned model is served via `docker/server.py`, which provides an OpenAI-compatible `/v1/chat/completions` endpoint. The API server proxies requests to it.
 
 ```bash
-# Pipeline-only (no GPU needed, <50ms latency)
-uv run python scripts/serve_local_pipeline.py
+# Start the model server (port 8001, auto-detects MPS/CUDA/CPU)
+mise run dev-model
 
-# Full server with model fallback (GPU)
-docker run --gpus all -p 8000:8000 nls-server
+# In another terminal, start the API + web UI
+mise run dev
 ```
 
-Endpoints: `POST /v1/chat/completions` (OpenAI-compatible), `POST /pipeline` (raw pipeline), `GET /health`
+The model server loads `adsabs/scix-nls-translator` from HuggingFace on startup (~30s first time, cached after). Set `MODEL_ENDPOINT` in `.env` if running on a different host/port.
 
-See [docker/README.md](docker/README.md) for deployment options and [docs/HYBRID_PIPELINE.md](docs/HYBRID_PIPELINE.md) for detailed architecture.
+```bash
+# Or run directly
+MODEL_NAME=adsabs/scix-nls-translator PORT=8001 python docker/server.py
+
+# Or with Docker (GPU)
+docker run --gpus all -p 8001:8000 nls-server
+```
+
+**Architecture:** Web UI (`:5173`) → API (`:8000`) → Model Server (`:8001`)
+
+See [docker/README.md](docker/README.md) for deployment options and [docs/HYBRID_PIPELINE.md](docs/HYBRID_PIPELINE.md) for pipeline architecture.
 
 ### Training
 
