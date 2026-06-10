@@ -3,16 +3,17 @@
 Tests for US-001: Define IntentSpec dataclass and pipeline skeleton.
 """
 
-import pytest
 import json
 
-from finetune.domains.scix.intent_spec import IntentSpec, OPERATORS
+import pytest
+
+from finetune.domains.scix.intent_spec import OPERATORS, IntentSpec
 from finetune.domains.scix.pipeline import (
-    process_query,
-    PipelineResult,
-    GoldExample,
     DebugInfo,
+    GoldExample,
+    PipelineResult,
     is_ads_query,
+    process_query,
 )
 
 
@@ -130,7 +131,7 @@ class TestIntentSpec:
             "year_to": None,
             "doctype": ["eprint"],
             "property": ["refereed"],
-            "database": [],
+            "collection": [],
             "bibgroup": [],
             "esources": [],
             "data": [],
@@ -147,7 +148,7 @@ class TestIntentSpec:
     
     def test_deserialize_from_json(self):
         """IntentSpec deserializes from JSON correctly."""
-        json_str = '{"free_text_terms": ["pulsars"], "authors": [], "affiliations": [], "objects": [], "year_from": null, "year_to": null, "doctype": [], "property": [], "database": [], "bibgroup": [], "esources": [], "data": [], "operator": null, "operator_target": null, "raw_user_text": "", "confidence": {}}'
+        json_str = '{"free_text_terms": ["pulsars"], "authors": [], "affiliations": [], "objects": [], "year_from": null, "year_to": null, "doctype": [], "property": [], "collection": [], "bibgroup": [], "esources": [], "data": [], "operator": null, "operator_target": null, "raw_user_text": "", "confidence": {}}'
         spec = IntentSpec.from_json(json_str)
         
         assert spec.free_text_terms == ["pulsars"]

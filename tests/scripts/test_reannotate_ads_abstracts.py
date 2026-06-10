@@ -4,18 +4,15 @@ from __future__ import annotations
 
 import json
 import sys
-import tempfile
 from pathlib import Path
 from typing import Any
 
-import pytest
 
 # Make the scripts directory importable
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
 
 from annotate_ads_abstracts import (
     CatalogEntry,
-    SpanAnnotation,
     build_keyword_index,
     find_annotation_spans,
 )

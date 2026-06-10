@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import sys
-import tempfile
 from pathlib import Path
 
 import pytest
@@ -483,7 +482,7 @@ def test_process_annotations_creates_directories(sample_dashboard_record, tmp_pa
         f.write(json.dumps(sample_dashboard_record) + "\n")
 
     # Process (should create nested/dir/)
-    stats = process_annotations(input_file, train_file, val_file)
+    process_annotations(input_file, train_file, val_file)
 
     assert train_file.exists()
     assert val_file.exists()
@@ -503,13 +502,13 @@ def test_process_annotations_reproducible_splitting(sample_dashboard_record, tmp
     # Process twice with same seed
     train_file1 = tmp_path / "train1.jsonl"
     val_file1 = tmp_path / "val1.jsonl"
-    stats1 = process_annotations(
+    process_annotations(
         input_file, train_file1, val_file1, train_fraction=0.7, seed=42
     )
 
     train_file2 = tmp_path / "train2.jsonl"
     val_file2 = tmp_path / "val2.jsonl"
-    stats2 = process_annotations(
+    process_annotations(
         input_file, train_file2, val_file2, train_fraction=0.7, seed=42
     )
 

@@ -9,14 +9,11 @@ These tests verify:
 6. Fallback behavior
 """
 
-import time
 from unittest.mock import MagicMock, patch
 
 import pytest
 
 from finetune.domains.scix.resolver import (
-    AMBIGUOUS_REFERENCE_PATTERNS,
-    OPERATORS_REQUIRING_TARGET,
     ResolverResult,
     extract_paper_hint,
     needs_resolution,

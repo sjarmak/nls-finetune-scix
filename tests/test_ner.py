@@ -6,23 +6,16 @@ CRITICAL: Operator gating tests verify that words like 'citing', 'references'
 as TOPICS do NOT trigger operators - only explicit patterns do.
 """
 
-import pytest
 from datetime import datetime
 
+from finetune.domains.scix.field_constraints import (
+    BIBGROUPS,
+    DOCTYPES,
+    PROPERTIES,
+)
+from finetune.domains.scix.intent_spec import IntentSpec
 from finetune.domains.scix.ner import (
     extract_intent,
-    PROPERTY_SYNONYMS,
-    DOCTYPE_SYNONYMS,
-    BIBGROUP_SYNONYMS,
-    DATABASE_SYNONYMS,
-    OPERATOR_PATTERNS,
-)
-from finetune.domains.scix.intent_spec import IntentSpec, OPERATORS
-from finetune.domains.scix.field_constraints import (
-    PROPERTIES,
-    DOCTYPES,
-    BIBGROUPS,
-    DATABASES,
 )
 
 
@@ -280,23 +273,23 @@ class TestBibgroupSynonyms:
             assert bg in BIBGROUPS, f"Invalid bibgroup: {bg}"
 
 
-class TestDatabaseSynonyms:
-    """Tests for database synonym mapping."""
+class TestCollectionSynonyms:
+    """Tests for collection synonym mapping."""
 
     def test_astronomy_synonym(self):
-        """'astronomy' maps to database:astronomy."""
+        """'astronomy' maps to collection:astronomy."""
         intent = extract_intent("astronomy papers on stellar nucleosynthesis")
-        assert "astronomy" in intent.database
+        assert "astronomy" in intent.collection
 
     def test_astrophysics_synonym(self):
-        """'astrophysics' maps to database:astronomy."""
+        """'astrophysics' maps to collection:astronomy."""
         intent = extract_intent("astrophysics research on dark energy")
-        assert "astronomy" in intent.database
+        assert "astronomy" in intent.collection
 
     def test_physics_synonym(self):
-        """'physics' maps to database:physics."""
+        """'physics' maps to collection:physics."""
         intent = extract_intent("physics papers on quantum mechanics")
-        assert "physics" in intent.database
+        assert "physics" in intent.collection
 
 
 class TestYearExtraction:
@@ -1103,7 +1096,7 @@ class TestOperatorNegativeCases:
 
     def test_no_operator_related_field(self):
         """'related field' alone should not trigger operator."""
-        intent = extract_intent("a related field of study")
+        extract_intent("a related field of study")
         # Note: 'related field' could be ambiguous, test current behavior
         # If it triggers, we may need to tighten the pattern
         pass  # Document actual behavior
@@ -1115,7 +1108,7 @@ class TestOperatorNegativeCases:
 
     def test_no_operator_survey_mission(self):
         """'survey' as mission type should not trigger reviews."""
-        intent = extract_intent("TESS survey mission observations")
+        extract_intent("TESS survey mission observations")
         # This is ambiguous - 'survey' could trigger reviews()
         # Document actual behavior for awareness
         pass

@@ -9,7 +9,6 @@ Tests cover:
 """
 
 import time
-from pathlib import Path
 
 import pytest
 
@@ -18,7 +17,6 @@ from finetune.domains.scix.pipeline import GoldExample
 from finetune.domains.scix.retrieval import (
     DEFAULT_GOLD_EXAMPLES_PATH,
     GoldExampleIndex,
-    IndexedExample,
     extract_features_from_ads_query,
     get_index,
     reset_index,

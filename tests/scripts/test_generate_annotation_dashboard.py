@@ -307,7 +307,7 @@ class TestGenerateDashboard:
         self._write_jsonl(pred_path, SAMPLE_PREDICTIONS)
         template_path.write_text(MINIMAL_TEMPLATE)
 
-        stats = generate_dashboard(reann_path, pred_path, template_path, output_path)
+        generate_dashboard(reann_path, pred_path, template_path, output_path)
 
         assert output_path.exists()
         content = output_path.read_text()

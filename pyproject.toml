@@ -11,13 +11,16 @@ dependencies = [
 dev = [
     "ruff>=0.8.0",
     "pytest>=8.3.0",
+    "nltk>=3.8",
+    "wordfreq>=3.0",
 ]
 
-# uv workspace configuration
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "ruff>=0.8.0",
     "pytest>=8.3.0",
+    "nltk>=3.8",
+    "wordfreq>=3.0",
 ]
 
 [tool.uv.workspace]
@@ -41,4 +44,4 @@ select = ["E", "F", "I", "UP"]
 "packages/finetune/src/finetune/cli/main.py" = ["E402"]
 
 [tool.pytest.ini_options]
-testpaths = ["packages/*/tests"]
+testpaths = ["tests", "packages/*/tests"]

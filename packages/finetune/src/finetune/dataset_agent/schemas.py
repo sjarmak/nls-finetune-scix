@@ -15,20 +15,20 @@ Artifact types:
 """
 
 from dataclasses import asdict, dataclass, field
-from enum import Enum
+from enum import StrEnum
 from json import dumps as json_dumps
 from json import loads as json_loads
 from typing import Any
 
 
-class SourceType(str, Enum):
+class SourceType(StrEnum):
     """Type of external data source."""
 
     HTTP = "http"
     GIT = "git"
 
 
-class Stage(str, Enum):
+class Stage(StrEnum):
     """Pipeline stages for tracking completion."""
 
     FETCH = "fetch"
@@ -43,7 +43,7 @@ class Stage(str, Enum):
     REPORT = "report"
 
 
-class LabelType(str, Enum):
+class LabelType(StrEnum):
     """Types of enrichment labels."""
 
     TOPIC = "topic"

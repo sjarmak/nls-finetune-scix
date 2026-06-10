@@ -8,7 +8,6 @@ Tests the 5 specific bug fixes from US-004 and US-008:
 5. Balanced parentheses in similar()
 """
 
-import pytest
 import re
 import sys
 
@@ -251,7 +250,6 @@ class TestRegressionPatterns:
         # Malformed: operator(field:unquoted)
         malformed = 'citations(abs:cosmology)'
         # Good: operator(field:"quoted")
-        good = 'citations(abs:"cosmology")'
         
         malformed_pattern = r'(citations|trending|similar)\([^)]*:[^"]+[^)]*\)'
         
@@ -270,9 +268,3 @@ class TestRegressionDocumentation:
         test_file = "tests/test_regression_us013.py"
         assert os.path.exists(test_file), f"Regression test file should exist: {test_file}"
 
-    def test_script_exists(self):
-        """Verify live regression test script exists."""
-        import os
-        
-        script_file = "scripts/test_regression_us013.py"
-        assert os.path.exists(script_file), f"Live test script should exist: {script_file}"

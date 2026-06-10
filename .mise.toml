@@ -20,6 +20,9 @@ mise install
 echo "Installing Python dependencies (workspace)..."
 uv sync
 
+echo "Downloading NLTK stopwords corpus..."
+uv run python -m nltk.downloader -q stopwords
+
 echo "Installing Python dependencies (api package)..."
 (cd packages/api && uv sync)
 
@@ -115,8 +118,8 @@ description = "Run all tests"
 run = """
 #!/usr/bin/env bash
 set -e
-echo "Running finetune tests..."
-uv run pytest packages/finetune/tests/ -v
+echo "Running Python tests (tests/ + packages/*/tests)..."
+uv run pytest
 echo "Running web lint..."
 (cd packages/web && bun run lint)
 """
@@ -166,6 +169,14 @@ uv run python scripts/evaluate_benchmark.py --verbose
 [tasks."eval:benchmark:ci"]
 description = "Run benchmark evaluation with CI check (fails if pass rate < 80%)"
 run = "uv run python scripts/evaluate_benchmark.py --ci"
+
+[tasks."eval:semantic"]
+description = "Semantic eval via ADS result-set overlap (requires ADS_API_KEY)"
+run = "uv run python scripts/evaluate_semantic_overlap.py --mode pipeline"
+
+[tasks."eval:semantic:server"]
+description = "Semantic eval against a running NLS server (hybrid/model routing)"
+run = "uv run python scripts/evaluate_semantic_overlap.py --mode server --endpoint http://localhost:8001"
 
 # ===========================================
 # DATASET MANAGEMENT
