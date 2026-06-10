@@ -100,38 +100,43 @@ Features are tracked in `features.json` with this schema:
 - [x] Training data output to `data/datasets/processed/` (2,447 unique pairs)
 
 ### Phase 3: Train + Inference with Validation Retry (CLOSED)
-- [x] Modal `train.py` syntax valid
-- [x] Training JSONL with 2,447 examples (exceeds 500 target)
+
+> **SUPERSEDED (2026):** The Modal training/serving path below was replaced by
+> Google Colab training (`scripts/train_colab.ipynb`, Unsloth + TRL on A100)
+> and local/Docker serving (`docker/server.py`). The Modal endpoint is no
+> longer maintained. Serving now routes through the **hybrid NER pipeline**
+> first, with the fine-tuned model as a low-confidence fallback — see
+> [docs/HYBRID_PIPELINE.md](docs/HYBRID_PIPELINE.md) and
+> [docs/current-state.md](docs/current-state.md).
+
+- [x] Modal `train.py` syntax valid *(superseded by Colab)*
+- [x] Training JSONL with 2,447 examples (exceeds 500 target; now ~62k pairs)
 - [x] LoRA training on Qwen3-1.7B (~12.5 min on H100, 93% token accuracy)
-- [x] Inference endpoint deployed: https://sjarmak--nls-finetune-serve-vllm-serve.modal.run
-- [x] vLLM serving with OpenAI-compatible API (model name: "llm")
+- [x] ~~Inference endpoint deployed: https://sjarmak--nls-finetune-serve-vllm-serve.modal.run~~ *(decommissioned)*
+- [x] OpenAI-compatible serving (now `docker/server.py`, model name: "llm")
 
-**Results:**
-- Training time: ~12.5 minutes on H100 ✓
-- Training cost: ~$1.50 ✓
-- Inference latency: <500ms warm ✓
-
-**Volume Configuration:**
-- Data: `scix-finetune-data`
-- Runs: `scix-finetune-runs`
-
-### Phase 4: Evaluation Harness for ADS Queries (OPEN)
+### Phase 4: Evaluation Harness for ADS Queries (CLOSED)
 **Bead:** `nls-finetune-scix-ybr`
 
 | Feature ID | Description | Status |
 |------------|-------------|--------|
-| `eval-001` | Compute result-set overlap (Jaccard, Precision@N) | failing |
-| `eval-002` | Syntactic validity rate metric | failing |
-| `eval-003` | Feature-sliced reporting (author, pubdate, bibstem, object) | failing |
-| `eval-004` | JSON artifacts to `data/datasets/evaluations/` | failing |
-| `eval-005` | Comparison vs GPT-4o-mini baseline | failing |
+| `eval-001` | Compute result-set overlap (Jaccard, Precision@N) | passing (`finetune/domains/scix/eval.py`) |
+| `eval-002` | Syntactic validity rate metric | passing |
+| `eval-003` | Feature-sliced reporting (author, pubdate, bibstem, object) | passing |
+| `eval-004` | JSON artifacts to `data/datasets/evaluations/` | passing (`scripts/evaluate_semantic_overlap.py`) |
+| `eval-005` | Comparison vs GPT-4o-mini baseline | available via `scix-finetune eval baseline` |
+
+**Run it:** `mise run eval:benchmark` (offline metrics) and
+`mise run eval:semantic` (ADS result-set overlap; requires `ADS_API_KEY`).
+Use `eval:semantic:server` against servers with different `ROUTING_MODE`
+settings to compare pipeline-only / model-only / hybrid routing.
 
 **Acceptance Criteria:**
 - Evaluation runs against ADS API
 - Outputs structured JSON reports
-- Semantic match rate ≥70%
+- Semantic match rate ≥70% *(pending: publish results in docs/current-state.md)*
 
-### Phase 5: SciX Local Playground Integration (OPEN)
+### Phase 5: SciX Local Playground Integration (CLOSED)
 **Bead:** `nls-finetune-scix-f2w`
 **Blocked by:** Phase 3 ✓
 
@@ -145,12 +150,14 @@ Integration with local SciX development environment at `~/ads-dev`.
 
 | Feature ID | Description | Status |
 |------------|-------------|--------|
-| `integ-001` | NL search component added to nectar UI | failing |
-| `integ-002` | Modal endpoint proxy in nectar API routes | failing |
-| `integ-003` | Query suggestion display with copy/apply buttons | failing |
-| `integ-004` | Preview result count via ADS API | failing |
-| `integ-005` | Feature flag for NL search toggle | failing |
-| `integ-006` | Playwright e2e test for NL search flow | failing |
+| `integ-001` | NL search component added to nectar UI | passing |
+| `integ-002` | Model endpoint proxy in nectar API routes | passing |
+| `integ-003` | Query suggestion display with copy/apply buttons | passing |
+| `integ-004` | Preview result count via ADS API | passing |
+| `integ-005` | Feature flag for NL search toggle | passing |
+| `integ-006` | Playwright e2e test for NL search flow | passing |
+
+*(Statuses mirror `features.json`, which is the source of truth.)*
 
 **Playwright Testing:**
 - Config: `~/ads-dev/nectar/e2e/playwright.config.ts`
@@ -168,7 +175,7 @@ Integration with local SciX development environment at `~/ads-dev`.
 | Feature ID | Description | Status |
 |------------|-------------|--------|
 | `prod-001` | Feature flag in production config | future |
-| `prod-002` | Monitoring and alerting for Modal endpoint | future |
+| `prod-002` | Monitoring and alerting for the model server | future |
 | `prod-003` | A/B testing framework integration | future |
 | `prod-004` | Web UI deployed to scixplorer.org | future |
 
@@ -209,10 +216,15 @@ Before ending ANY session:
 
 ## Inference Endpoint Reference
 
-### Deployed Endpoint
+> **SUPERSEDED (2026):** The Modal endpoint is decommissioned. The server is
+> now `docker/server.py` (local or Docker, default port 8001 in dev), which
+> routes through the hybrid pipeline first and falls back to the fine-tuned
+> model on low confidence. The request/response format below is unchanged.
+
+### Endpoint
 
 ```
-URL: https://sjarmak--nls-finetune-serve-vllm-serve.modal.run
+URL: http://localhost:8001 (mise run dev-model)
 Model: llm
 Format: OpenAI-compatible chat completions
 ```
@@ -220,7 +232,7 @@ Format: OpenAI-compatible chat completions
 ### Request Format
 
 ```bash
-curl -X POST https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/chat/completions \
+curl -X POST http://localhost:8001/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
     "model": "llm",
@@ -261,7 +273,7 @@ curl -X POST https://sjarmak--nls-finetune-serve-vllm-serve.modal.run/v1/chat/co
 mise run verify              # All checks (lint, types, JSON)
 mise run verify-full         # All checks + frontend build
 mise run test                # Unit tests
-scix-finetune verify env     # Modal environment check
+scix-finetune verify env     # Environment check
 scix-finetune verify data    # Training data validation
 ```
 
@@ -343,7 +355,7 @@ pnpm test:e2e:headed
 |-------|------------|
 | **Frontend** | React 19, TypeScript, Vite, Tailwind, shadcn/ui |
 | **Backend** | FastAPI, Pydantic, Python 3.12 |
-| **Training** | Modal (H100), TRL, LoRA, Qwen3-1.7B |
+| **Training** | Google Colab (A100), Unsloth, TRL, LoRA, Qwen3-1.7B |
 | **Validation** | ADS Search API |
 | **Tools** | mise (runtimes), uv (Python), Bun (Node), beads (tasks) |
 
@@ -354,8 +366,6 @@ pnpm test:e2e:headed
 | Key | Required For | Source |
 |-----|-------------|--------|
 | `ADS_API_KEY` | Query validation, evaluation | [ADS Settings](https://ui.adsabs.harvard.edu/user/settings/token) |
-| `MODAL_TOKEN_ID` | Training, deployment | [modal.com](https://modal.com/settings) |
-| `MODAL_TOKEN_SECRET` | Training, deployment | [modal.com](https://modal.com/settings) |
 | `ANTHROPIC_API_KEY` | Dataset generation | [console.anthropic.com](https://console.anthropic.com/) |
 | `OPENAI_API_KEY` | GPT-4o-mini comparison | [platform.openai.com](https://platform.openai.com/api-keys) |
 
@@ -366,4 +376,3 @@ pnpm test:e2e:headed
 - [ADS Search Syntax](https://ui.adsabs.harvard.edu/help/search/search-syntax)
 - [Effective Harnesses for Long-Running Agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 - [SciXplorer.org](https://scixplorer.org/)
-- [Modal Documentation](https://modal.com/docs)

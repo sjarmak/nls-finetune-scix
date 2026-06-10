@@ -120,7 +120,7 @@ Called ONLY when:
 | `year_from`, `year_to` | `int \| None` | Year range for `pubdate:` |
 | `doctype` | `set[str]` | Document types (must be in DOCTYPES) |
 | `property` | `set[str]` | Properties (must be in PROPERTIES) |
-| `database` | `set[str]` | Database collections |
+| `collection` | `set[str]` | Collection/discipline filter |
 | `bibgroup` | `set[str]` | Bibliographic groups |
 | `esources` | `set[str]` | Electronic source types |
 | `data` | `set[str]` | Data archive sources |
@@ -223,7 +223,7 @@ The NER uses synonym maps to convert user-friendly terms to valid enum values.
    - `PROPERTY_SYNONYMS`
    - `DOCTYPE_SYNONYMS`
    - `BIBGROUP_SYNONYMS`
-   - `DATABASE_SYNONYMS`
+   - `COLLECTION_SYNONYMS`
 2. Use word boundary matching (patterns already do this)
 3. Add unit test in `tests/test_ner.py`
 

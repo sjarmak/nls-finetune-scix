@@ -1,10 +1,27 @@
-# NLS Query Fine-tuning: Current State
+# NLS Query Translation: Current State
 
-*Last updated: 2025-12-17*
+*Last updated: 2026-06-09*
 
 ## Overview
 
-This document summarizes the current state of the NLS Query fine-tuning project after a complete end-to-end test.
+The system translates natural language into ADS/SciX search queries using a
+**hybrid architecture**: a deterministic NER + retrieval + template-assembly
+pipeline serves queries first; a fine-tuned model handles the low-confidence
+tail. See [HYBRID_PIPELINE.md](HYBRID_PIPELINE.md) for the design rationale
+(the earlier end-to-end model conflated NL words like "citing" with ADS
+operator syntax).
+
+## Serving Architecture
+
+`docker/server.py` exposes an OpenAI-compatible endpoint consumed by nectar.
+Requests route through the hybrid pipeline first; the fine-tuned model is the
+fallback when pipeline confidence falls below the threshold.
+
+| Setting | Default | Meaning |
+|---------|---------|---------|
+| `ROUTING_MODE` | `hybrid` | `hybrid` / `pipeline` / `model` |
+| `PIPELINE_CONFIDENCE_THRESHOLD` | `0.5` | Below this, fall back to model |
+| `TELEMETRY_LOG` | unset | JSONL log of routing decisions per request |
 
 ## Model Details
 
@@ -12,94 +29,60 @@ This document summarizes the current state of the NLS Query fine-tuning project 
 |----------|-------|
 | Base Model | Qwen/Qwen3-1.7B |
 | Adapter | LoRA (r=16, alpha=32) |
-| Training Run | e2e-test-20251217-131656 |
-| Training Data | 50-80k training pairs |
-| Final Loss | 0.77 |
-| Training Time | ~90 minutes (50-80k pairs) |
-| Training Cost | Colab Pro (A100 GPU) |
-| GPU | NVIDIA A100 (bf16) |
+| Training | Unsloth + TRL on Google Colab (A100, ~90 min) |
+| Training Data | ~62k pairs ([adsabs/nls-query-training-data](https://huggingface.co/datasets/adsabs/nls-query-training-data)) |
+| Hosting | [adsabs/scix-nls-translator](https://huggingface.co/adsabs/scix-nls-translator) on HuggingFace |
 
-## Model Hosting
+The previous Modal-based training/serving path (H100 + vLLM endpoint) is
+superseded — see the notes in
+[PRD-scix-finetune-query.md](../PRD-scix-finetune-query.md).
 
-The trained model is uploaded to HuggingFace at `adsabs/scix-nls-translator` and can be served with vLLM:
+## Pipeline Performance
 
-```bash
-vllm serve adsabs/scix-nls-translator --max-model-len 512
-```
+From [LATENCY_BENCHMARKS.md](LATENCY_BENCHMARKS.md) (100 queries, 2026-01-21):
 
-See [docs/fine-tuning-cli.md](fine-tuning-cli.md) for other deployment options (TGI, SageMaker).
+| Component | p50 | p95 | Target | Status |
+|-----------|-----|-----|--------|--------|
+| NER Extraction | 0.08ms | 0.10ms | <10ms | PASS |
+| Retrieval (k=5) | 3.90ms | 6.10ms | <20ms | PASS |
+| Assembly | 0.03ms | 0.04ms | <5ms | PASS |
+| Full Pipeline (no LLM) | 3.87ms | 5.47ms | <50ms | PASS |
 
-## Evaluation Results
+Model fallback latency depends on hosting: ~50ms (GPU), ~500ms (Apple MPS),
+~2s (CPU).
 
-### Summary (50 samples)
+## Evaluation
 
-| Metric | Fine-tuned | GPT-4o-mini | Target | Status |
-|--------|------------|-------------|--------|--------|
-| Syntax Valid | 98% (49/50) | 82% (41/50) | ≥95% | **PASS** |
-| Semantic Match | 68% (34/50) | 44% (22/50) | ≥70% | **FAIL** (close) |
-| Avg Latency | 2167ms | 999ms | ≤100ms | **FAIL** |
+Two evaluation harnesses exist:
 
-### Key Findings
+1. **Benchmark evaluation** (`mise run eval:benchmark`) — exact match, field
+   assignment, operator accuracy, and syntax validity against
+   `data/datasets/benchmark/benchmark_queries.json`, sliced by category.
+2. **Semantic overlap evaluation** (`mise run eval:semantic`) — result-set
+   overlap (Jaccard, Precision@N, Recall@N) via the ADS API; this is the
+   metric the PRD targets are defined on (semantic match ≥70%, syntax
+   validity ≥95%). Use `--mode server` with different `ROUTING_MODE` servers
+   to compare pipeline-only vs model-only vs hybrid routing.
 
-1. **Syntax validity is excellent**: The fine-tuned model produces valid Sourcegraph queries 98% of the time, significantly better than GPT-4o-mini (82%).
+Evaluation artifacts are written to `data/datasets/evaluations/`. Enrichment
+model evaluations live in `reports/`.
 
-2. **Semantic matching improved but below target**: At 68%, the model falls just short of the 70% target. It still outperforms GPT-4o-mini's 44%.
+**Status:** semantic-overlap numbers for the current hybrid routing have not
+been published yet — run `mise run eval:semantic` (needs `ADS_API_KEY`) and
+record the results here.
 
-3. **Latency is problematic**: The model averages ~2.2 seconds per query, far above the 100ms target. Latency depends on the inference hosting setup.
+## Known Weaknesses / Next Steps
 
-### Model Behavior Observations
-
-**Strengths:**
-- Produces syntactically valid queries consistently
-- Good understanding of `lang:`, `file:`, `type:` filters
-- Handles commit/diff search patterns well
-
-**Weaknesses:**
-- Often adds unnecessary repo filters (defaults to `repo:github.com/sourcegraph/sourcegraph`)
-- Doesn't reliably use provided candidate repositories
-- Sometimes hallucinates non-existent filters (e.g., `async:yes`, `name:`)
-- Uses escaped quotes in strings which may not be intended
-
-### Sample Query Analysis
-
-| Input | Expected | Fine-tuned Output | Correct? |
-|-------|----------|-------------------|----------|
-| "find Python files with async functions" | `lang:python async` | `repo:github.com/sourcegraph/ file:(test\|spec) lang:python type:symbol async:yes` | Partial |
-| "commits by erik in sourcegraph last week" | `repo:^github.com/sourcegraph/sourcegraph$ type:commit after:DATE author:erik` | `repo:sourcegraph lang:javascript type:commit author:erik after:\"1 week ago\"` | Partial |
-| "find config files" | `file:config*` | `file:config* case:yes` | Close |
-
-## Recommendations
-
-### Short-term Fixes
-
-1. **Optimize inference**: Investigate why latency is 2x worse than GPT-4o-mini
-   - Check if there's unnecessary processing
-   - Consider model quantization (INT8/INT4)
-   - Investigate vLLM or other fast inference backends
-
-2. **Improve repo inference**: Training data should include examples where repo is inferred from query context
-
-3. **Data quality**: Fix the escaped dots issue in data regeneration pipeline
-
-### Medium-term Improvements
-
-1. **More training data**: Current 969 examples may be insufficient. Target 2000+ diverse examples.
-
-2. **Better evaluation set**: The semantic matching criteria may need refinement.
-
-3. **Hyperparameter tuning**: Experiment with LoRA rank, learning rate, and epochs.
-
-## Cost Analysis
-
-| Operation | Cost |
-|-----------|------|
-| Training (Colab A100, ~90min) | Colab Pro subscription |
-| Inference cost | Depends on hosting (vLLM, SageMaker, etc.) |
-| GPT-4o-mini (1M queries) | ~$150 |
-
-## Next Steps
-
-1. Investigate latency issues (blocking)
-2. Fix data regeneration pipeline (escaped dots)
-3. Expand training dataset
-4. A/B test against production GPT-4o-mini
+1. **Publish semantic-overlap results** for pipeline vs model vs hybrid to
+   validate the routing threshold (currently 0.5).
+2. **Constrained decoding** for the model fallback (JSON-schema / grammar
+   constrained generation) would eliminate malformed model output
+   structurally instead of post-hoc filtering in `constrain.py`.
+3. **Serving economics**: serve the fallback model with vLLM on GPU, or a
+   GGUF int4 quantization via llama.cpp for CPU deployments.
+4. **Data flywheel**: enable `TELEMETRY_LOG` in deployments; fallback-path
+   and user-edited queries are the highest-value additions to training data
+   and to the NER pattern set.
+5. **Retrieval**: the few-shot retriever uses token overlap with hand-tuned
+   boosts; evaluate an embedding index against it once semantic-overlap
+   metrics are in place.
