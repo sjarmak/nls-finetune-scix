@@ -1,13 +1,19 @@
-"""Query evaluation using the nls_query_eval CLI.
+"""ADS query evaluation.
 
-Shells out to the Sourcegraph query evaluator for proper syntax validation
-and semantic comparison.
+Validates generated queries with the offline linter and measures semantic
+agreement as ADS result-set overlap (Jaccard over the top-N bibcodes returned
+by the ADS search API for each query).
 """
 
-import json
-import subprocess
+import os
 from dataclasses import dataclass
-from pathlib import Path
+
+from finetune.domains.scix.eval import compute_overlap_metrics, fetch_bibcodes
+from finetune.domains.scix.validate import lint_query
+
+# Two queries are a semantic match when their top-N result sets overlap at
+# least this much (Jaccard). Calibrated mechanical threshold, not a judgment.
+SEMANTIC_MATCH_THRESHOLD = 0.5
 
 
 @dataclass
@@ -19,67 +25,58 @@ class QueryEvalResult:
     overlap: float
 
 
-def find_eval_binary() -> Path:
-    """Find the nls_query_eval binary.
-
-    Searches in order:
-    1. Repository root (development)
-    2. PATH (installed)
-    """
-    repo_root = Path(__file__).parents[5]
-    local_binary = repo_root / "nls_query_eval"
-    if local_binary.exists():
-        return local_binary
-
-    import shutil
-
-    path_binary = shutil.which("nls_query_eval")
-    if path_binary:
-        return Path(path_binary)
-
-    raise FileNotFoundError(
-        "nls_query_eval binary not found. Expected at repository root or in PATH."
-    )
+def _normalize(query: str) -> str:
+    """Whitespace- and case-normalize a query for mechanical equality."""
+    return " ".join(query.split()).lower()
 
 
-def evaluate_query(expected: str, actual: str) -> QueryEvalResult:
-    """Evaluate a generated query against the expected query.
+def evaluate_query(
+    expected: str,
+    actual: str,
+    n: int = 50,
+    api_key: str | None = None,
+) -> QueryEvalResult:
+    """Evaluate a generated ADS query against the expected query.
 
-    Uses the nls_query_eval CLI which provides:
-    - Syntax validation using Sourcegraph's actual parser
-    - Semantic comparison with proper operator value matching
+    Checks:
+    - Syntax validity via the offline linter (no API call)
+    - Semantic match via ADS result-set overlap: fetch the top-N bibcodes for
+      both queries and compute Jaccard overlap. Identical (normalized) queries
+      short-circuit to a perfect match without API calls.
 
     Args:
-        expected: The ground truth query
-        actual: The generated query to evaluate
+        expected: The ground truth ADS query
+        actual: The generated ADS query to evaluate
+        n: Number of results per query to compare
+        api_key: ADS API key (defaults to ADS_API_KEY env var)
 
     Returns:
         QueryEvalResult with valid, match, and overlap fields
 
     Raises:
-        RuntimeError: If the CLI fails to execute
+        RuntimeError: If semantic comparison is needed but no ADS API key
+            is configured.
     """
-    binary = find_eval_binary()
+    if not lint_query(actual).valid:
+        return QueryEvalResult(valid=False, match=False, overlap=0.0)
 
-    try:
-        result = subprocess.run(
-            [str(binary), "--expected", expected, "--actual", actual],
-            capture_output=True,
-            text=True,
-            timeout=5,
+    if _normalize(expected) == _normalize(actual):
+        return QueryEvalResult(valid=True, match=True, overlap=1.0)
+
+    api_key = api_key or os.environ.get("ADS_API_KEY")
+    if not api_key:
+        raise RuntimeError(
+            "ADS_API_KEY is required for semantic evaluation: queries differ "
+            "and result-set overlap must be computed via the ADS search API."
         )
 
-        if result.returncode != 0:
-            raise RuntimeError(f"nls_query_eval failed: {result.stderr}")
+    expected_bibcodes = fetch_bibcodes(expected, n=n, api_key=api_key)
+    actual_bibcodes = fetch_bibcodes(actual, n=n, api_key=api_key)
 
-        data = json.loads(result.stdout)
-        return QueryEvalResult(
-            valid=data["valid"],
-            match=data["match"],
-            overlap=data["overlap"],
-        )
+    jaccard, _precision, _recall = compute_overlap_metrics(expected_bibcodes, actual_bibcodes)
 
-    except subprocess.TimeoutExpired:
-        raise RuntimeError("nls_query_eval timed out")
-    except json.JSONDecodeError as e:
-        raise RuntimeError(f"Failed to parse nls_query_eval output: {e}")
+    return QueryEvalResult(
+        valid=True,
+        match=jaccard >= SEMANTIC_MATCH_THRESHOLD,
+        overlap=jaccard,
+    )

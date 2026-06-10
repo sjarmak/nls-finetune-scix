@@ -63,7 +63,7 @@ def baseline(
 
             # Build prompt for GPT-4o-mini
             system_prompt = (
-                "Convert natural language to Sourcegraph search query. "
+                "Convert natural language to ADS search query. "
                 "Output only the query, no explanation."
             )
             user_prompt = f"Query: {example.input}"
@@ -96,7 +96,7 @@ def baseline(
             latency_ms = (time.time() - start_time) * 1000
             latencies.append(latency_ms)
 
-            # Evaluate using Sourcegraph's query parser
+            # Evaluate syntax (offline linter) and semantic overlap (ADS API)
             eval_result = evaluate_query(example.expected, output_query)
 
             results.append(
@@ -219,7 +219,7 @@ def _call_baseline_model(example, model: str = "gpt-4o-mini", api_key: str | Non
 
     # Build prompt
     system_prompt = (
-        "Convert natural language to Sourcegraph search query. "
+        "Convert natural language to ADS search query. "
         "Output only the query, no explanation."
     )
     user_prompt = f"Query: {example.input}"
@@ -251,7 +251,7 @@ def _call_baseline_model(example, model: str = "gpt-4o-mini", api_key: str | Non
 
     latency_ms = (time.time() - start_time) * 1000
 
-    # Evaluate using Sourcegraph's query parser
+    # Evaluate syntax (offline linter) and semantic overlap (ADS API)
     eval_result = evaluate_query(example.expected, output_query)
 
     return {
@@ -1295,8 +1295,8 @@ def load_test(
     payload = {
         "model": "llm",
         "messages": [
-            {"role": "system", "content": "You are a Sourcegraph query generator."},
-            {"role": "user", "content": "Query: find python async functions"},
+            {"role": "system", "content": "Convert natural language to ADS search query. Output JSON: {\"query\": \"...\"}"},
+            {"role": "user", "content": "Query: papers about exoplanets"},
         ],
         "max_tokens": 64,
         "temperature": 0,

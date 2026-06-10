@@ -22,7 +22,7 @@ class EvalExample:
 
     id: str
     input: str  # Natural language query
-    expected: str  # Expected Sourcegraph query
+    expected: str  # Expected ADS query
     raw_messages: list[dict] = field(default_factory=list)
 
 
@@ -164,9 +164,7 @@ class EvalRunner:
                     else:
                         url = f"{url}/v1/chat/completions"
                 system_prompt = (
-                    "You are a Sourcegraph query generator. Convert natural language "
-                    "search requests into Sourcegraph query syntax. Return ONLY the "
-                    "Sourcegraph query, no explanation."
+                    'Convert natural language to ADS search query. Output JSON: {"query": "..."}'
                 )
                 user_content = f"Query: {example.input}"
 
@@ -190,6 +188,14 @@ class EvalRunner:
                 # Strip Qwen3 <think> tags if present
                 output = re.sub(r"<think>.*?</think>\s*", "", output, flags=re.DOTALL)
                 output = output.strip()
+                # Extract the query when the endpoint returns the raw
+                # {"query": "..."} JSON instead of a bare query string
+                try:
+                    parsed = json.loads(output)
+                    if isinstance(parsed, dict) and "query" in parsed:
+                        output = parsed["query"]
+                except json.JSONDecodeError:
+                    pass
                 # Capture server-side token usage
                 usage = result.get("usage", {})
                 prompt_tokens = usage.get("prompt_tokens")
@@ -204,13 +210,13 @@ class EvalRunner:
                 )
                 response.raise_for_status()
                 result = response.json()
-                output = result.get("sourcegraph_query", "")
+                output = result.get("query", "")
         except Exception as e:
             output = f"ERROR: {e}"
 
         latency_ms = (time.time() - start_time) * 1000
 
-        # Evaluate using Sourcegraph's query parser
+        # Evaluate syntax (offline linter) and semantic overlap (ADS API)
         eval_result = evaluate_query(example.expected, output)
 
         return EvalResult(
