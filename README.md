@@ -141,11 +141,21 @@ The model learns to generate queries using [ADS Search Syntax](https://ui.adsabs
 
 ## How the System Works
 
-A **fine-tuned Qwen3-1.7B model** ([adsabs/scix-nls-translator](https://huggingface.co/adsabs/scix-nls-translator)) converts natural language to ADS queries end-to-end. The model is served locally via an OpenAI-compatible endpoint and integrated into the [nectar](https://github.com/adsabs/nectar) frontend.
+Translation is **hybrid**: a deterministic NER + retrieval + template-assembly pipeline (see [docs/HYBRID_PIPELINE.md](docs/HYBRID_PIPELINE.md)) handles queries first (~5ms, fully auditable, guaranteed-valid syntax). A **fine-tuned Qwen3-1.7B model** ([adsabs/scix-nls-translator](https://huggingface.co/adsabs/scix-nls-translator)) is the fallback for queries the pipeline extracts with low confidence. The server exposes both behind an OpenAI-compatible endpoint integrated into the [nectar](https://github.com/adsabs/nectar) frontend.
 
 ```
-User NL query → Nectar (:8000) → Model Server (:8001) → ADS query
+User NL query → Nectar (:8000) → NLS Server (:8001)
+                                   ├─ hybrid pipeline (default, ~5ms)
+                                   └─ fine-tuned model (low-confidence fallback)
 ```
+
+Routing is configured on the server via environment variables:
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `ROUTING_MODE` | `hybrid` | `hybrid` (pipeline + model fallback), `pipeline` (deterministic only), `model` (model only) |
+| `PIPELINE_CONFIDENCE_THRESHOLD` | `0.5` | Below this pipeline confidence, fall back to the model |
+| `TELEMETRY_LOG` | unset | Path to a JSONL log of per-request routing decisions (feeds retraining data) |
 
 ### Model
 

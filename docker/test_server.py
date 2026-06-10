@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Test the NLS server endpoints."""
 
-import subprocess
 import sys
-import time
+
 import requests
+
 
 def main():
     print("Testing NLS server...")
@@ -13,7 +13,12 @@ def main():
     try:
         r = requests.get("http://localhost:8000/health", timeout=5)
         print(f"\n/health: {r.status_code}")
-        print(r.json())
+        health = r.json()
+        print(health)
+        for key in ("routing_mode", "confidence_threshold", "pipeline_available"):
+            if key not in health:
+                print(f"Missing health field: {key}")
+                return 1
     except Exception as e:
         print(f"Health check failed: {e}")
         return 1
