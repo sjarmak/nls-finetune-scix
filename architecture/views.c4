@@ -1,0 +1,189 @@
+// Views over the NLS Fine-tune model. Planned (#planned) and research
+// (#research) elements/relationships are dimmed + dashed so the "what exists vs
+// what is proposed" split is readable at a glance.
+
+views {
+
+  // Landscape — the whole system in context.
+  view index {
+    title 'NLS Fine-tune (SciX) — system landscape'
+    include *
+
+    style * {
+      opacity 25%
+    }
+    style element.tag == #built, element.tag == #evolving {
+      opacity 100%
+    }
+    style element.tag == #planned {
+      color muted
+      border dashed
+    }
+    style element.tag == #research {
+      color indigo
+      border dashed
+    }
+  }
+
+  // The NLS system, decomposed into its containers.
+  view nlsSystem of nls {
+    title 'NLS Fine-tune — containers (built vs planned)'
+    include *
+
+    style element.tag == #planned {
+      color muted
+      border dashed
+    }
+    style element.tag == #research {
+      color indigo
+      border dashed
+    }
+  }
+
+  // Serving surface — the runtime translation server.
+  view serverContainer of nls.server {
+    title 'NLS inference server — routing & runtime'
+    include *
+  }
+
+  // The hybrid pipeline internals — the heart of the system.
+  view pipelineContainer of nls.pipeline {
+    title 'Hybrid NER pipeline — components'
+    include *
+  }
+
+  // Data-prep pipeline internals.
+  view dataPrepContainer of nls.dataPrep {
+    title 'Dataset generation agent — 10-stage pipeline'
+    include *
+
+    style element.tag == #research {
+      color indigo
+      border dashed
+    }
+  }
+
+  // Evaluation harness internals.
+  view evalContainer of nls.eval {
+    title 'Evaluation harness — benchmark & semantic-overlap'
+    include *
+  }
+
+  // Review API internals.
+  view apiContainer of nls.api {
+    title 'Review API — services & routers'
+    include *
+  }
+
+  // Risks & open questions — the elements that carry a #risk flag, with the
+  // open question stated in each box's description. The things a reviewer
+  // should probe, surfaced rather than discovered mid-meeting.
+  view risks {
+    title 'Risks & open questions'
+    include
+      nls,
+      element.tag == #risk,
+      nls.server,
+      nls.pipeline,
+      nls.eval,
+      nls.api
+
+    style * {
+      opacity 30%
+    }
+    style element.tag == #risk {
+      opacity 100%
+      color red
+    }
+  }
+
+  // ───────────────────────────────────────────────────────────────────────
+  // Walkthrough flows (dynamic views) — the narrative spine of the review.
+  // ───────────────────────────────────────────────────────────────────────
+
+  // Flow 1 — a translation request at runtime.
+  dynamic view translateFlow {
+    title 'Walkthrough — translate a query at runtime'
+    description 'Nectar calls the OpenAI-compatible endpoint. The pipeline runs first (~5ms, guaranteed-valid syntax); the model is reached only when pipeline confidence falls below PIPELINE_CONFIDENCE_THRESHOLD. Routing is logged for the flywheel.'
+
+    user -> nectar 'natural-language search'
+    nectar -> nls.server.router 'POST /v1/chat/completions'
+    nls.server.router -> nls.pipeline.orchestrator 'process_query (pipeline first)'
+    nls.pipeline.orchestrator -> nls.pipeline.ner 'extract IntentSpec'
+    nls.pipeline.orchestrator -> nls.pipeline.retrieval 'few-shot examples'
+    nls.pipeline.orchestrator -> nls.pipeline.assembler 'assemble + constrain'
+    nls.server.router -> nls.server.modelRuntime 'low-confidence fallback'
+    nls.server.router -> nls.server.telemetryLog 'log path / confidence / latency'
+    nls.server.router -> nectar 'bare ADS query string'
+  }
+
+  // Flow 2 — building the training dataset.
+  dynamic view buildDataset {
+    title 'Walkthrough — build the training dataset'
+    description 'Three sources merge into the training set: synthetic pairs from vocabulary catalogs, real query-log pairs with Claude-generated NL, and the hand-curated gold seed. Every candidate passes local-syntax and ADS-API validation before the 90/10 split.'
+
+    nls.dataPrep.runner -> nls.dataPrep.sourceFetch 'fetch + normalize catalogs'
+    nls.dataPrep.sourceFetch -> vocabSources 'UAT / SWEET / GCMD / ROR'
+    nls.dataPrep.runner -> nls.dataPrep.synthGen 'render synthetic pairs'
+    nls.dataPrep.logPairs -> ads 'pull query logs'
+    nls.dataPrep.logPairs -> anthropic 'generate NL descriptions'
+    nls.dataPrep.runner -> nls.dataPrep.backendValidate 'tiered validation'
+    nls.dataPrep.backendValidate -> ads 'parse-check queries'
+    nls.dataPrep.synthGen -> nls.dataPrep.datasetBuild 'synthetic pairs'
+    nls.dataPrep.logPairs -> nls.dataPrep.datasetBuild 'log pairs'
+    nls.pipeline.goldExamples -> nls.dataPrep.datasetBuild 'gold seed'
+    nls.dataPrep.datasetBuild -> nls.dataPrep.trainingData 'merge + dedup + 90/10 split'
+  }
+
+  // Flow 3 — fine-tune and publish the model.
+  dynamic view trainFlow {
+    title 'Walkthrough — fine-tune & publish the model'
+    description 'Training runs off-machine on Colab. The train split is uploaded, a LoRA adapter is fit on Qwen3-1.7B (~90 min on A100), and the adapter is pushed to HuggingFace where the inference server loads it on first start.'
+
+    nls.dataPrep.trainingData -> nls.training.trainNotebook 'upload train.jsonl'
+    nls.training.trainNotebook -> colab 'LoRA fine-tune (Unsloth + TRL)'
+    nls.training.trainNotebook -> huggingface 'push adsabs/scix-nls-translator'
+    huggingface -> nls.server.modelRuntime 'server loads adapter on first start'
+  }
+
+  // Flow 4 — evaluating translation quality.
+  dynamic view evalFlow {
+    title 'Walkthrough — evaluate translation quality'
+    description 'Two lenses. Benchmark scores exact-match / field / operator / syntax offline. Semantic-overlap runs each query against the live ADS API and compares result-set bibcodes (Jaccard / P@N / R@N) — the PRD target metric. Curators read the runs in the UI.'
+
+    nls.eval.evalRunner -> nls.server 'translate val split'
+    nls.eval.benchmarkEval -> nls.pipeline.orchestrator 'exact-match / field / operator / syntax'
+    nls.eval.semanticEval -> nls.server 'hybrid vs pipeline vs model'
+    nls.eval.semanticEval -> ads 'result-set overlap (bibcodes)'
+    nls.eval.evalRunner -> nls.eval.evalResults 'write eval-*.json'
+    nls.api.evaluationService -> nls.eval.evalResults 'load runs'
+    curator -> nls.web.evalViewer 'review pass/fail per case'
+  }
+
+  // Planned + research lens: what is proposed, with built dependencies dimmed.
+  view planned {
+    title 'Planned & research work'
+    include
+      nls,
+      nls.constrainedDecoding,
+      nls.server.modelRuntime,
+      nls.dataPrep.enrichment,
+      nls.annotation,
+      nls.dataPrep.datasetBuild,
+      nls.server.telemetryLog
+
+    style * {
+      opacity 30%
+    }
+    style element.tag == #planned {
+      opacity 100%
+      color muted
+      border dashed
+    }
+    style element.tag == #research {
+      opacity 100%
+      color indigo
+      border dashed
+    }
+  }
+}

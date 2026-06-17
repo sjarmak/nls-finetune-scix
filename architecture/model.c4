@@ -1,0 +1,416 @@
+// NLS Fine-tune (SciX) — natural language → ADS/SciX search query.
+//
+// The system translates a user's natural-language search into valid ADS query
+// syntax. Translation is HYBRID: a deterministic NER + retrieval + template-
+// assembly pipeline serves queries first (~5ms, guaranteed-valid syntax), and a
+// fine-tuned Qwen3-1.7B model is the fallback for the low-confidence tail. The
+// repo also contains the data-prep, training, and evaluation machinery that
+// produces the model and the gold/benchmark datasets it is measured against.
+//
+// Delivery state is tagged so planned / research work renders distinctly from
+// what is already built (see spec.c4 for the legend). Every element links to
+// its source path (relative to architecture/) and, where helpful, to the doc
+// that explains the rationale.
+
+model {
+
+  user = actor 'Search user' {
+    description 'Enters a natural-language literature search; expects a valid ADS/SciX query in return'
+  }
+
+  curator = actor 'Dataset curator' {
+    description 'Curates gold examples, reviews generated pairs and NER annotations, inspects eval runs'
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // External systems — the search frontend, data sources, and inference/training
+  // substrates this project depends on but does not own.
+  // ─────────────────────────────────────────────────────────────────────────
+
+  nectar = externalSystem 'Nectar / SciXplorer frontend' {
+    description 'The adsabs/nectar search UI; calls the NLS server through an OpenAI-compatible endpoint (NL_SEARCH_VLLM_ENDPOINT)'
+  }
+
+  ads = externalSystem 'ADS / SciX Search API' {
+    description 'NASA ADS search API — validates query syntax, fetches result-set bibcodes, and supplies query logs (needs ADS_API_KEY)'
+  }
+
+  anthropic = externalSystem 'Anthropic API (Claude)' {
+    description 'Claude Sonnet generates natural-language descriptions for logged ADS queries during data prep (needs ANTHROPIC_API_KEY)'
+  }
+
+  openai = externalSystem 'OpenAI API (GPT-4o-mini)' {
+    description 'LLM used for ambiguous paper-reference resolution and as a comparison baseline in the playground (needs OPENAI_API_KEY)'
+  }
+
+  huggingface = externalSystem 'HuggingFace Hub' {
+    description 'Hosts the base Qwen3-1.7B model, the published adsabs/scix-nls-translator adapter, and the adsabs/nls-query-training-data dataset'
+  }
+
+  colab = externalSystem 'Google Colab (A100/T4 GPU)' {
+    description 'Runs LoRA fine-tuning (Unsloth + TRL, ~90 min on A100) and optional T4 serving for the translator model'
+  }
+
+  vocabSources = externalSystem 'Vocabulary & registry sources' {
+    description 'UAT, SWEET, GCMD, ROR and planetary thesauri (via HTTP / Git) — the seed catalogs for synthetic-pair generation'
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // The NLS Fine-tune system.
+  // ─────────────────────────────────────────────────────────────────────────
+
+  nls = system 'NLS Fine-tune (SciX)' {
+    description 'Translates natural language to ADS search queries (hybrid pipeline + fine-tuned model) and the data/training/eval machinery behind it'
+    link ../README.md 'Project README'
+    link ../docs/current-state.md 'Current-state overview'
+
+    // ── Serving: the runtime translation surface ────────────────────────────
+    server = container 'NLS inference server' {
+      description 'docker/server.py — OpenAI-compatible /v1/chat/completions consumed by nectar; routes pipeline-first, model-fallback'
+      technology 'Python / FastAPI / Uvicorn'
+      link ../docker/server.py 'docker/server.py'
+      link ../docs/current-state.md 'serving architecture'
+
+      router = component 'Routing layer' {
+        #built
+        description 'route_query(): pipeline first; falls back to model on low confidence per ROUTING_MODE (hybrid | pipeline | model)'
+        link ../docker/server.py 'route_query()'
+      }
+      modelRuntime = component 'Fine-tuned model runtime' {
+        #evolving
+        #risk
+        description 'Loads adsabs/scix-nls-translator from HuggingFace, generates on MPS/CUDA/CPU. RISK: the end-to-end model historically conflated NL words with operator syntax — it is intentionally demoted to the low-confidence fallback only'
+        link ../docker/server.py 'generate_query() / load_model()'
+        link ../docs/HYBRID_PIPELINE.md 'why the model is fallback-only'
+      }
+      telemetryLog = datastore 'Routing telemetry (JSONL)' {
+        #evolving
+        description 'Optional TELEMETRY_LOG: one record per request (path, confidence, latency, queries) — the seed of the retraining data flywheel'
+        link ../docker/server.py 'write_telemetry()'
+      }
+    }
+
+    // ── The hybrid translation pipeline (the heart of the system) ───────────
+    pipeline = container 'Hybrid NER pipeline' {
+      description 'domains/scix — deterministic NER → few-shot retrieval → template assembly → constraint; guaranteed-valid ADS syntax in ~5ms'
+      technology 'Python'
+      link ../packages/finetune/src/finetune/domains/scix 'domains/scix/'
+      link ../docs/HYBRID_PIPELINE.md 'pipeline design'
+
+      orchestrator = component 'pipeline.process_query' {
+        #built
+        description 'Orchestrates NER → retrieval → assembly → constrain, times each stage, and computes the routing confidence + fallback reason'
+        link ../packages/finetune/src/finetune/domains/scix/pipeline.py 'pipeline.py'
+      }
+      ner = component 'Rules-based NER' {
+        #built
+        description 'extract_intent(): NL → IntentSpec via synonym maps and STRICT operator gating (so "citing practices" never triggers the citations operator)'
+        link ../packages/finetune/src/finetune/domains/scix/ner.py 'ner.py'
+        link ../docs/HYBRID_PIPELINE.md 'operator gating rules'
+      }
+      intentSpec = component 'IntentSpec contract' {
+        #built
+        description 'Structured-intent dataclass (free-text, authors, years, doctype/property/collection/bibgroup enums, operator, per-field confidence) passed between stages'
+        link ../packages/finetune/src/finetune/domains/scix/intent_spec.py 'intent_spec.py'
+      }
+      retrieval = component 'Few-shot retrieval' {
+        #built
+        description 'retrieve_similar(): BM25-like token overlap + feature boosts (operator/author/year) over the gold examples to guide assembly'
+        link ../packages/finetune/src/finetune/domains/scix/retrieval.py 'retrieval.py'
+      }
+      assembler = component 'Deterministic assembler' {
+        #built
+        description 'assemble_query(): builds the ADS query clause-by-clause from validated building blocks; wraps at most one operator'
+        link ../packages/finetune/src/finetune/domains/scix/assembler.py 'assembler.py'
+      }
+      constrain = component 'Constraint / safety filter' {
+        #built
+        description 'constrain_query_output(): drops invalid enum values, repairs malformed operators, balances parentheses — the last syntax guard'
+        link ../packages/finetune/src/finetune/domains/scix/constrain.py 'constrain.py'
+      }
+      fieldConstraints = datastore 'FIELD_ENUMS' {
+        #built
+        description 'Frozen sets of valid ADS enum values (doctypes, properties, collections, bibgroups, esources) every stage validates against'
+        link ../packages/finetune/src/finetune/domains/scix/field_constraints.py 'field_constraints.py'
+      }
+      resolver = component 'LLM paper-reference resolver' {
+        #evolving
+        description 'Optional: resolves "this paper" / "famous paper about X" for citations/references/similar operators — ADS search first, then an LLM guess'
+        link ../packages/finetune/src/finetune/domains/scix/resolver.py 'resolver.py'
+      }
+      goldExamples = datastore 'gold_examples.json' {
+        #evolving
+        description 'Hand-curated NL→query pairs; doubles as the few-shot retrieval corpus and the gold seed for the training set'
+        link ../data/datasets/raw/gold_examples.json 'gold_examples.json'
+      }
+    }
+
+    // ── Data-prep: builds the training & evaluation datasets ────────────────
+    dataPrep = container 'Dataset generation agent' {
+      description 'dataset_agent — a resumable 10-stage pipeline that turns vocabulary sources + templates into validated NL→query training pairs'
+      technology 'Python'
+      link ../packages/finetune/src/finetune/dataset_agent 'dataset_agent/'
+      link ../docs/dotcom-search-query-data-sources.md 'data sources'
+
+      runner = component 'Staged runner' {
+        #built
+        description 'runner.py + stage_runner.py: drives the 10 stages (fetch → normalize → expand → templates → inputs → render → validate → enrich → report) with per-stage checkpoints'
+        link ../packages/finetune/src/finetune/dataset_agent/runner.py 'runner.py'
+        link ../packages/finetune/src/finetune/dataset_agent/pipeline_handlers.py 'pipeline_handlers.py'
+      }
+      sourceFetch = component 'Source fetch + normalize' {
+        #built
+        description 'Downloads UAT/SWEET/GCMD/ROR/planetary catalogs (HTTP/Git, checksummed) and normalizes each into a unified topic/entity catalog'
+        link ../packages/finetune/src/finetune/dataset_agent/sources.py 'sources.py'
+      }
+      synthGen = component 'Template input + pair render' {
+        #built
+        description 'Fills NL/query templates with catalog values and alias variants, then renders the paired ADS query for each input'
+        link ../scripts/generate_synthetic.py 'generate_synthetic.py'
+      }
+      logPairs = component 'Query-log NL generation' {
+        #evolving
+        description 'Extracts real ADS queries from search logs and pairs each with a Claude-generated NL description (validated so query syntax never leaks into the NL)'
+        link ../scripts/process_query_logs.py 'process_query_logs.py'
+        link ../scripts/generate_nl.py 'generate_nl.py'
+      }
+      curate = component 'Curation + LLM judge' {
+        #evolving
+        description 'Scores generated pairs (LLM semantic-quality judge + syntax check) and quarantines bad examples before they enter training'
+        link ../scripts/curate_generated_examples.py 'curate_generated_examples.py'
+      }
+      backendValidate = component 'Backend (ADS) validation' {
+        #built
+        description 'Tiered validation: local syntax lint, then ADS-API parse check (cached, rate-limited, offline-capable) before a pair is admitted'
+        link ../packages/finetune/src/finetune/dataset_agent/backend_validator.py 'backend_validator.py'
+      }
+      datasetBuild = component 'Build + split' {
+        #built
+        description 'build_dataset.py + validate_dataset.py: merge gold + synthetic + log pairs, dedup by NL and query, split 90/10 with a fixed seed'
+        link ../scripts/build_dataset.py 'build_dataset.py'
+        link ../scripts/validate_dataset.py 'validate_dataset.py'
+      }
+      enrichment = component 'Enrichment label track' {
+        #research
+        description 'Derives token-classification (NER) labels from validated pairs to fine-tune a SciBERT entity tagger — a separate, exploratory model track'
+        link ../packages/finetune/src/finetune/dataset_agent/enrichment_generator.py 'enrichment_generator.py'
+        link ../scripts/train_enrichment_model.py 'train_enrichment_model.py'
+      }
+      trainingData = datastore 'train.jsonl / val.jsonl' {
+        #built
+        description '~62k chat-format NL→query pairs (55.4k train / 6.2k val); also published as adsabs/nls-query-training-data'
+        link ../data/datasets/processed 'data/datasets/processed/'
+      }
+    }
+
+    // ── Training: produces the fine-tuned adapter ───────────────────────────
+    training = container 'Fine-tuning (Colab)' {
+      #evolving
+      description 'LoRA fine-tune of Qwen3-1.7B via Unsloth + TRL on Colab (A100, ~90 min); adapter pushed to HuggingFace'
+      technology 'Python / Unsloth / TRL'
+      link ../scripts/train_colab.ipynb 'train_colab.ipynb'
+      link ../docs/fine-tuning-cli.md 'training guide'
+
+      trainNotebook = component 'Colab training notebook' {
+        #evolving
+        description 'Loads train.jsonl, runs LoRA (r=16, alpha=32) fine-tuning, and uploads adsabs/scix-nls-translator to HuggingFace'
+        link ../scripts/train_colab.ipynb 'train_colab.ipynb'
+      }
+      trainStandalone = component 'Standalone trainer' {
+        #evolving
+        description 'train_standalone.py — local/cloud LoRA fine-tune path (alternative to the Colab notebook)'
+        link ../scripts/train_standalone.py 'train_standalone.py'
+      }
+    }
+
+    // ── Evaluation: measures translation quality ────────────────────────────
+    eval = container 'Evaluation harness' {
+      description 'Two harnesses: benchmark (exact-match / field / operator / syntax) and semantic-overlap (ADS result-set Jaccard / P@N / R@N)'
+      technology 'Python'
+      link ../packages/finetune/src/finetune/eval 'eval/'
+      link ../docs/current-state.md 'evaluation section'
+
+      benchmarkEval = component 'Benchmark evaluation' {
+        #built
+        description 'evaluate_benchmark.py: exact match, field assignment, operator accuracy, and syntax validity over the curated benchmark set, sliced by category'
+        link ../scripts/evaluate_benchmark.py 'evaluate_benchmark.py'
+        link ../data/datasets/benchmark/benchmark_queries.json 'benchmark_queries.json'
+      }
+      semanticEval = component 'Semantic-overlap evaluation' {
+        #evolving
+        #risk
+        description 'evaluate_semantic_overlap.py: result-set Jaccard / P@N / R@N via the ADS API — the PRD target metric (semantic ≥70%, syntax ≥95%). RISK: numbers for the current hybrid routing are not yet published (see current-state)'
+        link ../scripts/evaluate_semantic_overlap.py 'evaluate_semantic_overlap.py'
+        link ../packages/finetune/src/finetune/domains/scix/eval.py 'scix/eval.py'
+      }
+      evalRunner = component 'Eval runner + CLI' {
+        #built
+        description 'eval/runner.py + scix-finetune CLI: runs inference over the val split, scores syntax then result-set overlap, aggregates per category, writes eval-*.json'
+        link ../packages/finetune/src/finetune/eval/runner.py 'eval/runner.py'
+        link ../packages/finetune/src/finetune/cli/evaluation.py 'cli/evaluation.py'
+      }
+      latencyBench = component 'Latency benchmark' {
+        #built
+        description 'benchmark_pipeline.py: measures per-stage and full-pipeline latency (p50/p95) against the <50ms target'
+        link ../scripts/benchmark_pipeline.py 'benchmark_pipeline.py'
+      }
+      evalResults = datastore 'Evaluation results (JSON)' {
+        #built
+        description 'Per-run eval artifacts (metrics, per-case pass/fail, verdicts) read back by the review UI'
+        link ../data/datasets/evaluations 'data/datasets/evaluations/'
+      }
+    }
+
+    // ── Review UI: curator-facing app ───────────────────────────────────────
+    api = container 'Review API' {
+      #evolving
+      #risk
+      description 'FastAPI backend for the playground / dataset browser / evaluation viewer. RISK: prompts and labels still say "Sourcegraph" in places — leftover from the pre-ADS origin and not fully re-skinned for ADS'
+      technology 'Python / FastAPI'
+      link ../packages/api/src/api/main.py 'api/main.py'
+
+      inferenceRouter = component 'Inference router' {
+        #evolving
+        description 'POST /api/inference/{generate,compare}: dispatches a query to the local model server or the GPT-4o-mini baseline for side-by-side comparison'
+        link ../packages/api/src/api/routers/inference.py 'inference.py'
+      }
+      pipelineClient = component 'Model-server client' {
+        #built
+        description 'Calls the local NLS server (:8001) over the OpenAI-compatible endpoint; strips <think> tags and parses the JSON query'
+        link ../packages/api/src/api/services/pipeline_client.py 'pipeline_client.py'
+      }
+      openaiClient = component 'OpenAI baseline client' {
+        #evolving
+        description 'Calls GPT-4o-mini for the comparison baseline; degrades gracefully when the key is unset'
+        link ../packages/api/src/api/services/openai_client.py 'openai_client.py'
+      }
+      datasetService = component 'Dataset service' {
+        #evolving
+        #risk
+        description 'Reads gold + generated examples from disk for the browser. RISK: update/delete are stubs (return unchanged / always-true) — example editing is not actually persisted'
+        link ../packages/api/src/api/services/dataset_service.py 'dataset_service.py'
+      }
+      evaluationService = component 'Evaluation service' {
+        #built
+        description 'Reads CLI-generated eval-*.json and computes pass/fail against the syntax/semantic/latency targets for the UI'
+        link ../packages/api/src/api/services/evaluation_service.py 'evaluation_service.py'
+      }
+    }
+
+    web = container 'Review web UI' {
+      #evolving
+      description 'React playground, dataset browser, and evaluation viewer for curators'
+      technology 'TypeScript / React 19 / Vite'
+      link ../packages/web 'packages/web/'
+
+      playground = component 'Playground' {
+        #evolving
+        description 'Interactive NL→query translation; compares fine-tuned / base / GPT-4o-mini outputs side by side with latency'
+        link ../packages/web/src/pages/Playground.tsx 'Playground.tsx'
+      }
+      datasetBrowser = component 'Dataset browser' {
+        #built
+        description 'Browses training examples by source/category with stats; read-only view of gold vs generated splits'
+        link ../packages/web/src/pages/DatasetBrowser.tsx 'DatasetBrowser.tsx'
+      }
+      evalViewer = component 'Evaluation viewer' {
+        #built
+        description 'Lists eval runs and drills into per-case pass/fail and verdicts against the targets'
+        link ../packages/web/src/pages/Evaluation.tsx 'Evaluation.tsx'
+      }
+    }
+
+    // ── Annotation track (research / data flywheel) ─────────────────────────
+    annotation = container 'NER annotation review' {
+      #research
+      description 'Standalone HTML dashboard to review/curate named-entity annotations on ADS abstracts and export them to enrichment training data'
+      link ../scripts/generate_annotation_dashboard.py 'generate_annotation_dashboard.py'
+      link ../scripts/annotate_ads_abstracts.py 'annotate_ads_abstracts.py'
+      link ../scripts/export_annotations_to_training.py 'export_annotations_to_training.py'
+    }
+
+    // ── Planned: structurally guaranteed model output ───────────────────────
+    constrainedDecoding = container 'Constrained decoding (model fallback)' {
+      #planned
+      description 'PLANNED: JSON-schema / grammar-constrained generation on the model path to make malformed output structurally impossible instead of post-hoc filtered'
+      link ../docs/current-state.md 'next steps §2'
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Relationships.
+  // ─────────────────────────────────────────────────────────────────────────
+
+  // Runtime translation path
+  user -> nectar 'natural-language search'
+  nectar -> nls.server 'POST /v1/chat/completions (NL + date)'
+  nls.server.router -> nls.pipeline.orchestrator 'translate (pipeline first)'
+  nls.server.router -> nls.server.modelRuntime 'fallback on low confidence'
+  nls.server.modelRuntime -> huggingface 'loads adapter on first start'
+  nls.server.router -> nls.server.telemetryLog 'append routing decision'
+
+  // Pipeline internals
+  nls.pipeline.orchestrator -> nls.pipeline.ner 'extract intent'
+  nls.pipeline.ner -> nls.pipeline.intentSpec 'produces'
+  nls.pipeline.orchestrator -> nls.pipeline.retrieval 'retrieve few-shot examples'
+  nls.pipeline.retrieval -> nls.pipeline.goldExamples 'BM25 over gold corpus'
+  nls.pipeline.orchestrator -> nls.pipeline.assembler 'assemble query'
+  nls.pipeline.assembler -> nls.pipeline.fieldConstraints 'validate enum values'
+  nls.pipeline.orchestrator -> nls.pipeline.constrain 'final syntax guard'
+  nls.pipeline.resolver -> ads 'resolve paper by citation count'
+  nls.pipeline.resolver -> openai 'LLM reference guess (fallback)'
+  nls.pipeline.orchestrator -> nls.pipeline.resolver 'ambiguous operator target'
+
+  // Data-prep pipeline
+  nls.dataPrep.runner -> nls.dataPrep.sourceFetch 'stage: fetch + normalize'
+  nls.dataPrep.sourceFetch -> vocabSources 'download catalogs (HTTP/Git)'
+  nls.dataPrep.runner -> nls.dataPrep.synthGen 'stage: inputs + render'
+  nls.dataPrep.logPairs -> ads 'pull query logs'
+  nls.dataPrep.logPairs -> anthropic 'generate NL descriptions'
+  nls.dataPrep.runner -> nls.dataPrep.curate 'quality gate'
+  nls.dataPrep.curate -> openai 'LLM semantic-quality judge'
+  nls.dataPrep.runner -> nls.dataPrep.backendValidate 'stage: ADS validation'
+  nls.dataPrep.backendValidate -> ads 'parse-check candidate queries'
+  nls.dataPrep.synthGen -> nls.dataPrep.datasetBuild 'synthetic pairs'
+  nls.dataPrep.logPairs -> nls.dataPrep.datasetBuild 'log pairs'
+  nls.pipeline.goldExamples -> nls.dataPrep.datasetBuild 'gold seed'
+  nls.dataPrep.datasetBuild -> nls.dataPrep.trainingData 'merge + dedup + split'
+  nls.dataPrep.runner -> nls.dataPrep.enrichment 'stage: enrichment labels'
+
+  // Training
+  nls.dataPrep.trainingData -> nls.training.trainNotebook 'train split'
+  nls.training.trainNotebook -> colab 'runs LoRA fine-tune'
+  nls.training.trainNotebook -> huggingface 'push adapter + dataset'
+  nls.training.trainStandalone -> nls.dataPrep.trainingData 'train split'
+
+  // Evaluation
+  nls.eval.evalRunner -> nls.server 'inference over val split'
+  nls.eval.benchmarkEval -> nls.pipeline.orchestrator 'translate benchmark queries'
+  nls.eval.semanticEval -> ads 'result-set overlap (bibcodes)'
+  nls.eval.semanticEval -> nls.server 'compare hybrid/pipeline/model routing'
+  nls.eval.latencyBench -> nls.pipeline.orchestrator 'per-stage timing'
+  nls.eval.evalRunner -> nls.eval.evalResults 'write eval-*.json'
+
+  // Review UI
+  curator -> nls.web 'playground / browse / review'
+  nls.web.playground -> nls.api.inferenceRouter 'compare models'
+  nls.web.datasetBrowser -> nls.api.datasetService 'list examples + stats'
+  nls.web.evalViewer -> nls.api.evaluationService 'list eval runs'
+  nls.api.inferenceRouter -> nls.api.pipelineClient 'fine-tuned / base'
+  nls.api.inferenceRouter -> nls.api.openaiClient 'GPT-4o-mini baseline'
+  nls.api.pipelineClient -> nls.server 'OpenAI-compatible call'
+  nls.api.openaiClient -> openai 'baseline completion'
+  nls.api.datasetService -> nls.dataPrep.trainingData 'read examples'
+  nls.api.evaluationService -> nls.eval.evalResults 'read eval runs'
+
+  // Annotation + flywheel
+  curator -> nls.annotation 'review NER annotations'
+  nls.annotation -> ads 'sample + annotate abstracts'
+  nls.annotation -> nls.dataPrep.enrichment 'export labels to training'
+  nls.server.telemetryLog -> nls.dataPrep.datasetBuild 'flywheel: fallback/edited queries feed retraining'
+
+  // Planned wiring
+  nls.constrainedDecoding -> nls.server.modelRuntime 'grammar-constrained generation' {
+    #planned
+  }
+}
