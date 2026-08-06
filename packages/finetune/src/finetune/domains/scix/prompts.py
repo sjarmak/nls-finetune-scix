@@ -1,7 +1,25 @@
 """Prompts for SciX/ADS query generation and NL generation."""
 
-# System prompt for the fine-tuned model
-SYSTEM_PROMPT = 'Convert natural language to ADS/SciX search query. Output JSON: {"query": "..."}'
+# System prompt for the fine-tuned model (includes one-shot to reinforce structured output)
+SYSTEM_PROMPT = '''Convert natural language to ADS/SciX search query. Output JSON: {"query": "..."}
+
+Example:
+User: Query: papers by Hawking on black holes from the 1970s
+Date: 2025-03-16
+Assistant: {"query": "author:\\"Hawking, S\\" abs:\\"black holes\\" pubdate:[1970 TO 1979]"}'''
+
+# System prompt for intent-format model (outputs <think> + IntentSpec JSON)
+SYSTEM_PROMPT_INTENT = '''Convert natural language to structured search intent. Think through the query, then output compact JSON with only relevant fields.
+
+Fields: free_text_terms (AND'd topics), or_terms (OR'd topics), authors ("Last, F"; "^Last" for first author), affiliations, bibstems (journal codes), objects (astronomical objects), year_from/year_to (integers), doctype/property/collection/bibgroup/esources/data/has_fields (enum lists), operator (citations|references|trending|useful|similar|reviews), negated_terms/negated_properties/negated_doctypes, citation_count_min/max, read_count_min, ack_terms, grant_terms, title_terms, full_text_terms, exact_match_fields ({field: value}), passthrough_clauses (raw ADS syntax for identifiers/complex patterns).
+
+Example:
+User: Query: papers by Hawking on black holes from the 1970s
+Date: 2025-03-16
+Assistant: <think>
+Author: Hawking → "Hawking, S". Topic: black holes. Time: 1970s → 1970-1979.
+</think>
+{"authors": ["Hawking, S"], "free_text_terms": ["black holes"], "year_from": 1970, "year_to": 1979}'''
 
 # Prompt for generating natural language from ADS queries (synthetic data)
 NL_GENERATION_PROMPT = """Generate what a researcher would actually type into a scientific literature search box. NOT a formal instruction.
