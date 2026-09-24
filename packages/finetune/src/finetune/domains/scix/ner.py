@@ -38,23 +38,32 @@ PROPERTY_SYNONYMS: dict[str, str] = {
     "eprint": "eprint",
 }
 
+# Only named kinds of document map to a doctype. Generic words for scholarly
+# output ("papers", "articles", "publications", "studies", "research", "work")
+# deliberately map to nothing: ADS doctype:article means a journal article and
+# drops eprints, proceedings, theses and the rest, which a user asking for
+# "papers" still wants. The benchmark, val and human-reviewed held-out labels
+# leave doctype empty for those words; they are STOPWORDS so they stay out of
+# the topic terms. Extraction matches longest synonym first, so "book reviews"
+# wins over "book" and "conference talks" over "conference". Phrasings that the
+# held-out paraphrase set uses as out-of-map probes ("dissertations", "press
+# releases", "proposals") stay out: adding them would make those items in-map
+# (scripts/check_heldout_paraphrases.py enforces this).
 DOCTYPE_SYNONYMS: dict[str, str] = {
-    "article": "article",
-    "articles": "article",
+    # Journal articles, only when the journal is named
     "journal article": "article",
     "journal articles": "article",
-    "paper": "article",
-    "papers": "article",
-    "publication": "article",
-    "publications": "article",
     # Thesis types
     "thesis": "phdthesis",
     "phd": "phdthesis",
     "phd thesis": "phdthesis",
+    "phd theses": "phdthesis",
     "dissertation": "phdthesis",
     "masters thesis": "mastersthesis",
+    "masters theses": "mastersthesis",
     "masters": "mastersthesis",
     "master's thesis": "mastersthesis",
+    "master's theses": "mastersthesis",
     # Preprints
     "preprint": "eprint",
     "preprints": "eprint",
@@ -64,6 +73,8 @@ DOCTYPE_SYNONYMS: dict[str, str] = {
     "conference paper": "inproceedings",
     "conference papers": "inproceedings",
     "proceedings": "inproceedings",
+    "conference talk": "talk",
+    "conference talks": "talk",
     # Software
     "software": "software",
     "code": "software",
@@ -71,10 +82,29 @@ DOCTYPE_SYNONYMS: dict[str, str] = {
     "book": "book",
     "books": "book",
     "monograph": "book",
-    # Reviews
-    "review": "article",  # NOT reviews operator - just article type
+    "book chapter": "inbook",
+    "book chapters": "inbook",
+    "chapters in books": "inbook",
+    "book review": "bookreview",
+    "book reviews": "bookreview",
+    "textbook review": "bookreview",
+    "textbook reviews": "bookreview",
+    # Reviews: a journal article, NOT the reviews() operator
+    "review": "article",
     "review article": "article",
     "review articles": "article",
+    # Other named document kinds
+    "technical report": "techreport",
+    "technical reports": "techreport",
+    "editorial": "editorial",
+    "editorials": "editorial",
+    "editorial articles": "editorial",
+    "erratum": "erratum",
+    "errata": "erratum",
+    "astronomer's telegram": "circular",
+    "astronomer's telegrams": "circular",
+    "newsletter": "newsletter",
+    "newsletters": "newsletter",
 }
 
 BIBGROUP_SYNONYMS: dict[str, str] = {

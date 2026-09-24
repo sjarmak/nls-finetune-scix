@@ -195,10 +195,14 @@ The NER uses synonym maps to convert user-friendly terms to valid enum values.
 ### Doctype Synonyms
 | User Input | Maps To |
 |------------|---------|
-| "paper", "article" | `article` |
-| "thesis", "dissertation" | `phdthesis` |
+| "journal article(s)", "review article(s)" | `article` |
+| "thesis", "PhD theses", "dissertation" | `phdthesis` |
 | "conference", "proceedings" | `inproceedings` |
 | "software", "code" | `software` |
+| "paper(s)", "article(s)", "publication(s)", "studies", "research", "work" | no doctype |
+
+Generic words for scholarly output set no doctype: ADS `doctype:article` means a
+journal article and would drop eprints, proceedings and theses the user still wants.
 
 ### Bibgroup Synonyms
 | User Input | Maps To |

@@ -8,6 +8,8 @@ as TOPICS do NOT trigger operators - only explicit patterns do.
 
 from datetime import datetime
 
+import pytest
+
 from finetune.domains.scix.field_constraints import (
     BIBGROUPS,
     DOCTYPES,
@@ -21,7 +23,7 @@ from finetune.domains.scix.ner import (
 
 class TestOperatorGating:
     """Tests for strict operator gating.
-    
+
     CRITICAL: These tests verify the core fix for operator conflation.
     Operators should ONLY be set for explicit patterns, not generic words.
     """
@@ -231,6 +233,77 @@ class TestDoctypeSynonyms:
         intent = extract_intent("article thesis conference software")
         for dt in intent.doctype:
             assert dt in DOCTYPES, f"Invalid doctype: {dt}"
+
+
+class TestGenericDocumentWords:
+    """Generic words for scholarly output do not restrict the ADS doctype.
+
+    ADS doctype:article means a journal article; it drops eprints, proceedings,
+    theses and the rest. Someone asking for "papers" wants all of those, and the
+    benchmark, val and human-reviewed held-out labels all leave doctype empty
+    for such phrasings.
+    """
+
+    @pytest.mark.parametrize(
+        "text",
+        [
+            "papers about dark matter halos",
+            "papers by Chandrasekhar",
+            "a paper on accretion disks",
+            "articles with gravitational waves in the title",
+            "an article on pulsar timing",
+            "recent publications on exoplanet atmospheres",
+            "a publication about solar flares",
+            "studies of galaxy clusters",
+            "research on fast radio bursts",
+            "work on cosmic rays",
+        ],
+    )
+    def test_generic_word_sets_no_doctype(self, text):
+        intent = extract_intent(text)
+        assert intent.doctype == set()
+
+    def test_generic_word_stays_out_of_topics(self):
+        intent = extract_intent("papers about dark matter halos")
+        assert intent.free_text_terms == ["dark matter halos"]
+
+    def test_refereed_papers_keep_property_without_doctype(self):
+        intent = extract_intent("refereed papers on exoplanets")
+        assert intent.property == {"refereed"}
+        assert intent.doctype == set()
+
+    def test_negated_proceedings_does_not_add_article(self):
+        intent = extract_intent("refereed papers excluding conference proceedings")
+        assert intent.doctype == {"inproceedings"}
+
+
+class TestExplicitDoctypeRequests:
+    """A named kind of document still sets its doctype (phrasings from benchmark and val)."""
+
+    @pytest.mark.parametrize(
+        ("text", "doctype"),
+        [
+            ("journal articles on cosmology", "article"),
+            ("a journal article about black holes", "article"),
+            ("PhD theses on exoplanets", "phdthesis"),
+            ("master's theses on galaxy morphology", "mastersthesis"),
+            ("variable stars masters theses", "mastersthesis"),
+            ("conference proceedings on gravitational waves", "inproceedings"),
+            ("conference talks about AGN", "talk"),
+            ("technical reports on instrumentation", "techreport"),
+            ("book chapters on stellar evolution", "inbook"),
+            ("get chapters in books", "inbook"),
+            ("book reviews from 2020", "bookreview"),
+            ("textbook reviews from 2020", "bookreview"),
+            ("editorial articles in astronomy journals", "editorial"),
+            ("erratum corrections in astrophysics", "erratum"),
+            ("astronomer's telegrams about transients", "circular"),
+            ("newsletters on funding news", "newsletter"),
+        ],
+    )
+    def test_named_document_kind_sets_doctype(self, text, doctype):
+        intent = extract_intent(text)
+        assert intent.doctype == {doctype}
 
 
 class TestBibgroupSynonyms:

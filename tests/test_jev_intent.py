@@ -236,13 +236,13 @@ class TestExtractIntentJev:
     def test_composes_regex_extractors_with_jev_gating(self, tmp_path):
         calls: list[dict] = []
         client = _mock_client(tmp_path, [_payload("citations")], calls)
-        text = "papers that build on dark energy work by Smith since 2019"
+        text = "journal articles that build on dark energy work by Smith since 2019"
         intent = extract_intent_jev(text, client)
         assert intent.operator == "citations"
         assert intent.year_from == 2019
         assert intent.authors == ["Smith"]
         assert "dark energy" in " ".join(intent.free_text_terms)
-        assert intent.doctype == set(), "Jev's 'none' overrides the regex 'papers'->article map"
+        assert intent.doctype == set(), "Jev's 'none' overrides the regex 'journal articles' map"
         assert intent.raw_user_text == text
         assert calls[0]["state"] == {"query": text}
 
