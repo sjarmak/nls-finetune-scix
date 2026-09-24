@@ -22,7 +22,9 @@ Configuration (environment variables):
                      model: fine-tuned model only (pre-hybrid behavior)
     PIPELINE_CONFIDENCE_THRESHOLD
                      Fall back to the model when pipeline confidence is below
-                     this value (default: 0.5)
+                     this value (default: 0.5). When Jev answered, pipeline
+                     confidence is min(structural confidence, Jev operator
+                     confidence); otherwise it is the structural confidence.
     TELEMETRY_LOG    Optional path to a JSONL file; one record is appended per
                      request (path taken, confidence, latency, queries) to feed
                      the retraining data flywheel.
@@ -187,6 +189,8 @@ class PipelineDebugInfo(BaseModel):
     intent_backend: str = "regex"
     classifier_called: bool = False
     classifier_error: str | None = None
+    structural_confidence: float | None = None
+    classifier_operator_confidence: float | None = None
 
 
 class PipelineResult(BaseModel):
@@ -352,6 +356,8 @@ def run_pipeline(nl_query: str) -> tuple[RoutedResult | None, str | None]:
         intent_backend=result.debug_info.intent_backend,
         classifier_called=result.debug_info.classifier_called,
         classifier_error=result.debug_info.classifier_error,
+        structural_confidence=result.debug_info.structural_confidence,
+        classifier_operator_confidence=result.debug_info.classifier_operator_confidence,
     )
 
     pipeline_result = PipelineResult(
@@ -420,10 +426,8 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
             if not low_confidence or not can_fall_back:
                 if low_confidence:
                     routed.fallback_reason = (
-                        routed.pipeline_result.debug_info.fallback_reason
-                        if routed.pipeline_result
-                        else None
-                    ) or "low confidence served without model fallback"
+                        f"{_low_confidence_reason(routed)}; served without model fallback"
+                    )
                     logger.warning(
                         "Serving low-confidence pipeline result (%.2f < %.2f): %s",
                         routed.confidence,
@@ -434,11 +438,7 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
                 return routed
 
             pipeline_debug = routed.pipeline_debug
-            fallback_reason = (
-                routed.pipeline_result.debug_info.fallback_reason
-                if routed.pipeline_result
-                else None
-            ) or (f"confidence {routed.confidence:.2f} below threshold {CONFIDENCE_THRESHOLD:.2f}")
+            fallback_reason = _low_confidence_reason(routed)
         else:
             fallback_reason = error_reason
             if ROUTING_MODE == "pipeline" or model is None:
@@ -449,6 +449,20 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
     routed.pipeline_debug = pipeline_debug
     _log_routing(nl_query, routed)
     return routed
+
+
+def _low_confidence_reason(routed: RoutedResult) -> str:
+    """Why a pipeline result fell below the threshold, most specific first."""
+    debug = routed.pipeline_debug
+    if debug is not None and debug.fallback_reason:
+        return debug.fallback_reason
+    classifier = debug.classifier_operator_confidence if debug is not None else None
+    if classifier is not None and classifier < CONFIDENCE_THRESHOLD:
+        return (
+            f"classifier operator confidence {classifier:.2f} "
+            f"below threshold {CONFIDENCE_THRESHOLD:.2f}"
+        )
+    return f"confidence {routed.confidence:.2f} below threshold {CONFIDENCE_THRESHOLD:.2f}"
 
 
 def _log_routing(nl_query: str, routed: RoutedResult) -> None:
@@ -476,6 +490,10 @@ def _log_routing(nl_query: str, routed: RoutedResult) -> None:
             "intent_backend": INTENT_BACKEND,
             "classifier_called": debug.classifier_called if debug else False,
             "classifier_error": debug.classifier_error if debug else None,
+            "structural_confidence": debug.structural_confidence if debug else None,
+            "classifier_operator_confidence": (
+                debug.classifier_operator_confidence if debug else None
+            ),
         }
     )
 

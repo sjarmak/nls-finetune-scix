@@ -65,6 +65,9 @@ class DebugInfo:
             that failed
         classifier_error: Why the Jev call failed, when it did; the regex
             intent was used instead
+        structural_confidence: compute_pipeline_confidence on the final intent
+        classifier_operator_confidence: Jev's operator confidence, when Jev
+            answered; routing_confidence combines it with the structural one
     """
 
     ner_time_ms: float = 0.0
@@ -77,6 +80,8 @@ class DebugInfo:
     intent_backend: str = "regex"
     classifier_called: bool = False
     classifier_error: str | None = None
+    structural_confidence: float | None = None
+    classifier_operator_confidence: float | None = None
 
     def to_dict(self) -> dict:
         """Convert to dictionary for JSON serialization."""
@@ -173,6 +178,23 @@ class IntentExtraction:
     def classifier_succeeded(self) -> bool:
         """True when Jev answered and its fields are in ``intent``."""
         return self.classifier_called and self.classifier_error is None
+
+
+def routing_confidence(structural: float, classifier_operator: float | None) -> float:
+    """The confidence the server routes on.
+
+    Without a Jev answer this is the structural heuristic. With one it is the
+    minimum of the two, because they catch different failures and either one
+    alone sinks the assembled query: the structural score says whether the
+    regex found enough names, years and topics to build a specific query
+    (Jev does not touch those), and Jev's operator confidence says whether
+    the operator decision can be trusted (the structural score gives any
+    operator a flat 0.9). Taking the minimum serves from the pipeline only
+    when both clear the threshold.
+    """
+    if classifier_operator is None:
+        return structural
+    return min(structural, classifier_operator)
 
 
 def extract_intent_with_backend(
@@ -280,10 +302,14 @@ def process_query(
     final_query = assemble_query(intent, retrieved_examples)
     debug_info.assembly_time_ms = (time.perf_counter() - assembly_start) * 1000
 
-    # Confidence heuristic
-    confidence, fallback_reason = compute_pipeline_confidence(intent)
+    # Confidence: structural heuristic, capped by Jev's operator confidence
+    structural, fallback_reason = compute_pipeline_confidence(intent)
     if fallback_reason:
         debug_info.fallback_reason = fallback_reason
+    debug_info.structural_confidence = structural
+    if extraction.classifier_succeeded:
+        debug_info.classifier_operator_confidence = intent.confidence["operator"]
+    confidence = routing_confidence(structural, debug_info.classifier_operator_confidence)
 
     # Total timing
     debug_info.total_time_ms = (time.perf_counter() - start_time) * 1000
