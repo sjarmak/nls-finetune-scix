@@ -27,7 +27,9 @@ Configuration (environment variables):
                      confidence); otherwise it is the structural confidence.
     TELEMETRY_LOG    Optional path to a JSONL file; one record is appended per
                      request (path taken, confidence, latency, queries) to feed
-                     the retraining data flywheel.
+                     the retraining data flywheel. Request rows carry
+                     record_type "request"; shadow rows carry
+                     record_type "intent_shadow" and share the request_id.
     INTENT_BACKEND   regex | jev | jev_gated (default: regex). The Jev backends
                      classify operator and enum fields with TypeSafe System One
                      and need TYPESAFE_API_KEY; jev_gated calls it only when the
@@ -41,6 +43,19 @@ Configuration (environment variables):
     JEV_TIMEOUT_S    Per-call System One timeout in seconds (default: 2.0;
                      measured p95 is about 223 ms). A timeout falls back to
                      the regex intent.
+    SHADOW_INTENT_BACKEND
+                     Unset (default) | jev | jev_gated. Shadow mode: the served
+                     response still uses the regex intent (requires
+                     INTENT_BACKEND=regex and TELEMETRY_LOG), and every pipeline
+                     request also queues a run of this backend on a background
+                     thread pool, off the request path, so it adds no latency to
+                     the response. Each run appends an "intent_shadow" row with
+                     both IntentSpecs, the disagreeing fields (operator, doctype,
+                     bibgroup, collection, property), Jev's operator confidence
+                     and the shadow latency. At most 32 runs may be pending;
+                     beyond that runs are skipped and logged. Shadow failures
+                     are logged, never raised. Needs TYPESAFE_API_KEY.
+                     Summarize with scripts/summarize_intent_shadow.py.
 
 Usage:
     # With Docker (GPU):
@@ -57,7 +72,10 @@ import json
 import logging
 import os
 import sys
+import threading
 import time
+import uuid
+from concurrent.futures import Future, ThreadPoolExecutor
 from dataclasses import dataclass
 from datetime import UTC, datetime
 
@@ -84,6 +102,12 @@ TELEMETRY_LOG = os.environ.get("TELEMETRY_LOG", "")
 INTENT_BACKEND = os.environ.get("INTENT_BACKEND", "regex")
 JEV_CACHE_PATH = os.environ.get("JEV_CACHE_PATH", "data/cache/jev_systemone.jsonl")
 JEV_TIMEOUT_S = float(os.environ.get("JEV_TIMEOUT_S", "2.0"))
+SHADOW_INTENT_BACKEND = os.environ.get("SHADOW_INTENT_BACKEND", "")
+# Shadow runs are fire-and-forget on a small pool; at most this many may be
+# queued or running, further ones are skipped (logged) so a slow Jev cannot
+# grow memory without bound.
+SHADOW_WORKERS = 2
+SHADOW_MAX_PENDING = 32
 
 if ROUTING_MODE not in ("hybrid", "pipeline", "model"):
     raise ValueError(f"ROUTING_MODE must be hybrid, pipeline, or model; got {ROUTING_MODE!r}")
@@ -91,6 +115,21 @@ if INTENT_BACKEND not in ("regex", "jev", "jev_gated"):
     raise ValueError(f"INTENT_BACKEND must be regex, jev, or jev_gated; got {INTENT_BACKEND!r}")
 if JEV_TIMEOUT_S <= 0:
     raise ValueError(f"JEV_TIMEOUT_S must be positive; got {JEV_TIMEOUT_S}")
+if SHADOW_INTENT_BACKEND:
+    if SHADOW_INTENT_BACKEND not in ("jev", "jev_gated"):
+        raise ValueError(
+            f"SHADOW_INTENT_BACKEND must be jev or jev_gated; got {SHADOW_INTENT_BACKEND!r}"
+        )
+    if INTENT_BACKEND != "regex":
+        raise ValueError(
+            "SHADOW_INTENT_BACKEND shadows the served regex intent; set INTENT_BACKEND=regex"
+        )
+    if ROUTING_MODE == "model":
+        raise ValueError(
+            "SHADOW_INTENT_BACKEND needs the pipeline; ROUTING_MODE=model never runs it"
+        )
+    if not TELEMETRY_LOG:
+        raise ValueError("SHADOW_INTENT_BACKEND writes only to TELEMETRY_LOG; set TELEMETRY_LOG")
 
 # Try to import pipeline components (optional, for full pipeline mode)
 try:
@@ -106,9 +145,9 @@ if ROUTING_MODE == "pipeline" and not PIPELINE_AVAILABLE:
     raise RuntimeError("ROUTING_MODE=pipeline but pipeline modules are not importable")
 
 jev_client = None
-if INTENT_BACKEND != "regex":
+if INTENT_BACKEND != "regex" or SHADOW_INTENT_BACKEND:
     if not PIPELINE_AVAILABLE:
-        raise RuntimeError(f"INTENT_BACKEND={INTENT_BACKEND} needs the pipeline modules")
+        raise RuntimeError("the Jev intent backends need the pipeline modules")
     from pathlib import Path
 
     from finetune.domains.scix.jev_intent import JevClient
@@ -118,6 +157,17 @@ if INTENT_BACKEND != "regex":
         cache_path=Path(JEV_CACHE_PATH),
         timeout_s=JEV_TIMEOUT_S,
     )
+
+shadow_executor: ThreadPoolExecutor | None = None
+_shadow_slots = threading.BoundedSemaphore(SHADOW_MAX_PENDING)
+if SHADOW_INTENT_BACKEND:
+    from finetune.domains.scix.intent_shadow import shadow_record
+
+    shadow_executor = ThreadPoolExecutor(
+        max_workers=SHADOW_WORKERS, thread_name_prefix="intent-shadow"
+    )
+
+_telemetry_lock = threading.Lock()
 
 app = FastAPI(
     title="NLS Inference Server",
@@ -318,9 +368,10 @@ def write_telemetry(record: dict) -> None:
     """Append a telemetry record to the JSONL flywheel log, if configured."""
     if not TELEMETRY_LOG:
         return
+    line = json.dumps(record) + "\n"
     try:
-        with open(TELEMETRY_LOG, "a") as f:
-            f.write(json.dumps(record) + "\n")
+        with _telemetry_lock, open(TELEMETRY_LOG, "a") as f:
+            f.write(line)
     except OSError as e:
         logger.warning("Failed to write telemetry to %s: %s", TELEMETRY_LOG, e)
 
@@ -383,6 +434,42 @@ def run_pipeline(nl_query: str) -> tuple[RoutedResult | None, str | None]:
     )
 
 
+def schedule_shadow(request_id: str, nl_query: str, served_intent: dict) -> Future | None:
+    """Queue a shadow intent run off the request path; never blocks or raises.
+
+    Returns the Future, or None when shadow mode is off or the pending limit
+    is reached (the run is skipped and logged).
+    """
+    if shadow_executor is None:
+        return None
+    if not _shadow_slots.acquire(blocking=False):
+        logger.warning("Shadow intent queue full (%d); skipped %r", SHADOW_MAX_PENDING, nl_query)
+        return None
+    try:
+        future = shadow_executor.submit(_run_shadow, request_id, nl_query, served_intent)
+    except RuntimeError:
+        _shadow_slots.release()
+        logger.warning("Shadow intent executor is shut down; skipped %r", nl_query)
+        return None
+    future.add_done_callback(lambda _: _shadow_slots.release())
+    return future
+
+
+def _run_shadow(request_id: str, nl_query: str, served_intent: dict) -> None:
+    """Background task: compare the served intent with the shadow backend's.
+
+    It runs outside any request, so it catches everything: a failure here is
+    logged and must never reach a client.
+    """
+    try:
+        record = shadow_record(nl_query, served_intent, SHADOW_INTENT_BACKEND, jev_client)
+        write_telemetry(
+            {"timestamp": datetime.now(UTC).isoformat(), "request_id": request_id, **record}
+        )
+    except Exception:
+        logger.exception("Shadow intent run failed for %r", nl_query)
+
+
 def run_model(messages: list[ChatMessage], max_tokens: int) -> RoutedResult:
     """Run the fine-tuned model."""
     if model is None:
@@ -413,6 +500,7 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
         model    - model only (pre-hybrid behavior)
     """
     nl_query = extract_nl_query(messages)
+    request_id = uuid.uuid4().hex
     fallback_reason: str | None = None
     pipeline_debug: PipelineDebugInfo | None = None
 
@@ -420,6 +508,7 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
         routed, error_reason = run_pipeline(nl_query)
 
         if routed is not None:
+            schedule_shadow(request_id, nl_query, routed.pipeline_result.intent)
             low_confidence = routed.confidence < CONFIDENCE_THRESHOLD
             can_fall_back = ROUTING_MODE == "hybrid" and model is not None
 
@@ -434,7 +523,7 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
                         CONFIDENCE_THRESHOLD,
                         routed.fallback_reason,
                     )
-                _log_routing(nl_query, routed)
+                _log_routing(request_id, nl_query, routed)
                 return routed
 
             pipeline_debug = routed.pipeline_debug
@@ -447,7 +536,7 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
     routed = run_model(messages, max_tokens)
     routed.fallback_reason = fallback_reason
     routed.pipeline_debug = pipeline_debug
-    _log_routing(nl_query, routed)
+    _log_routing(request_id, nl_query, routed)
     return routed
 
 
@@ -465,7 +554,7 @@ def _low_confidence_reason(routed: RoutedResult) -> str:
     return f"confidence {routed.confidence:.2f} below threshold {CONFIDENCE_THRESHOLD:.2f}"
 
 
-def _log_routing(nl_query: str, routed: RoutedResult) -> None:
+def _log_routing(request_id: str, nl_query: str, routed: RoutedResult) -> None:
     """Emit one structured log line + telemetry record per request."""
     debug = routed.pipeline_debug
     logger.info(
@@ -479,7 +568,9 @@ def _log_routing(nl_query: str, routed: RoutedResult) -> None:
     )
     write_telemetry(
         {
+            "record_type": "request",
             "timestamp": datetime.now(UTC).isoformat(),
+            "request_id": request_id,
             "nl_query": nl_query,
             "generated_query": routed.query,
             "path": routed.path,
@@ -512,6 +603,14 @@ async def startup():
         logger.exception("Model failed to load; continuing in pipeline-only degraded mode")
 
 
+@app.on_event("shutdown")
+async def shutdown():
+    """Let running shadow comparisons finish (each is bounded by JEV_TIMEOUT_S
+    per Jev call) and drop queued ones."""
+    if shadow_executor is not None:
+        shadow_executor.shutdown(wait=True, cancel_futures=True)
+
+
 @app.get("/health")
 async def health():
     """Health check endpoint."""
@@ -525,6 +624,7 @@ async def health():
         "confidence_threshold": CONFIDENCE_THRESHOLD,
         "intent_backend": INTENT_BACKEND,
         "jev_timeout_s": JEV_TIMEOUT_S,
+        "shadow_intent_backend": SHADOW_INTENT_BACKEND or None,
     }
 
 
