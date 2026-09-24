@@ -31,8 +31,14 @@ Configuration (environment variables):
                      and need TYPESAFE_API_KEY; jev_gated calls it only when the
                      regex extractor finds no operator or scores below the
                      confidence threshold.
+                     A failed Jev call (HTTP error, timeout, network error or
+                     malformed response) falls back to the regex intent; the
+                     reason is in debug_info.classifier_error and telemetry.
     JEV_CACHE_PATH   JSONL cache for System One responses (default:
                      data/cache/jev_systemone.jsonl)
+    JEV_TIMEOUT_S    Per-call System One timeout in seconds (default: 2.0;
+                     measured p95 is about 223 ms). A timeout falls back to
+                     the regex intent.
 
 Usage:
     # With Docker (GPU):
@@ -75,11 +81,14 @@ CONFIDENCE_THRESHOLD = float(os.environ.get("PIPELINE_CONFIDENCE_THRESHOLD", "0.
 TELEMETRY_LOG = os.environ.get("TELEMETRY_LOG", "")
 INTENT_BACKEND = os.environ.get("INTENT_BACKEND", "regex")
 JEV_CACHE_PATH = os.environ.get("JEV_CACHE_PATH", "data/cache/jev_systemone.jsonl")
+JEV_TIMEOUT_S = float(os.environ.get("JEV_TIMEOUT_S", "2.0"))
 
 if ROUTING_MODE not in ("hybrid", "pipeline", "model"):
     raise ValueError(f"ROUTING_MODE must be hybrid, pipeline, or model; got {ROUTING_MODE!r}")
 if INTENT_BACKEND not in ("regex", "jev", "jev_gated"):
     raise ValueError(f"INTENT_BACKEND must be regex, jev, or jev_gated; got {INTENT_BACKEND!r}")
+if JEV_TIMEOUT_S <= 0:
+    raise ValueError(f"JEV_TIMEOUT_S must be positive; got {JEV_TIMEOUT_S}")
 
 # Try to import pipeline components (optional, for full pipeline mode)
 try:
@@ -103,7 +112,9 @@ if INTENT_BACKEND != "regex":
     from finetune.domains.scix.jev_intent import JevClient
 
     jev_client = JevClient(
-        api_key=os.environ.get("TYPESAFE_API_KEY", ""), cache_path=Path(JEV_CACHE_PATH)
+        api_key=os.environ.get("TYPESAFE_API_KEY", ""),
+        cache_path=Path(JEV_CACHE_PATH),
+        timeout_s=JEV_TIMEOUT_S,
     )
 
 app = FastAPI(
@@ -175,6 +186,7 @@ class PipelineDebugInfo(BaseModel):
     raw_extracted: dict | None = None
     intent_backend: str = "regex"
     classifier_called: bool = False
+    classifier_error: str | None = None
 
 
 class PipelineResult(BaseModel):
@@ -205,6 +217,7 @@ class RoutedResult:
     fallback_reason: str | None
     latency_ms: float
     pipeline_result: PipelineResult | None = None
+    pipeline_debug: PipelineDebugInfo | None = None  # set whenever the pipeline ran
     prompt_tokens: int = 0
     completion_tokens: int = 0
 
@@ -338,6 +351,7 @@ def run_pipeline(nl_query: str) -> tuple[RoutedResult | None, str | None]:
         fallback_reason=result.debug_info.fallback_reason,
         intent_backend=result.debug_info.intent_backend,
         classifier_called=result.debug_info.classifier_called,
+        classifier_error=result.debug_info.classifier_error,
     )
 
     pipeline_result = PipelineResult(
@@ -357,6 +371,7 @@ def run_pipeline(nl_query: str) -> tuple[RoutedResult | None, str | None]:
             fallback_reason=None,
             latency_ms=elapsed_ms,
             pipeline_result=pipeline_result,
+            pipeline_debug=debug_info,
         ),
         None,
     )
@@ -393,6 +408,7 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
     """
     nl_query = extract_nl_query(messages)
     fallback_reason: str | None = None
+    pipeline_debug: PipelineDebugInfo | None = None
 
     if ROUTING_MODE != "model" and PIPELINE_AVAILABLE:
         routed, error_reason = run_pipeline(nl_query)
@@ -417,6 +433,7 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
                 _log_routing(nl_query, routed)
                 return routed
 
+            pipeline_debug = routed.pipeline_debug
             fallback_reason = (
                 routed.pipeline_result.debug_info.fallback_reason
                 if routed.pipeline_result
@@ -429,12 +446,14 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
 
     routed = run_model(messages, max_tokens)
     routed.fallback_reason = fallback_reason
+    routed.pipeline_debug = pipeline_debug
     _log_routing(nl_query, routed)
     return routed
 
 
 def _log_routing(nl_query: str, routed: RoutedResult) -> None:
     """Emit one structured log line + telemetry record per request."""
+    debug = routed.pipeline_debug
     logger.info(
         "path=%s confidence=%.2f latency_ms=%.0f fallback_reason=%r nl=%r query=%r",
         routed.path,
@@ -455,6 +474,8 @@ def _log_routing(nl_query: str, routed: RoutedResult) -> None:
             "latency_ms": round(routed.latency_ms, 1),
             "routing_mode": ROUTING_MODE,
             "intent_backend": INTENT_BACKEND,
+            "classifier_called": debug.classifier_called if debug else False,
+            "classifier_error": debug.classifier_error if debug else None,
         }
     )
 
@@ -485,6 +506,7 @@ async def health():
         "routing_mode": ROUTING_MODE,
         "confidence_threshold": CONFIDENCE_THRESHOLD,
         "intent_backend": INTENT_BACKEND,
+        "jev_timeout_s": JEV_TIMEOUT_S,
     }
 
 
@@ -533,6 +555,15 @@ async def chat_completions(request: ChatRequest):
     )
 
 
+def _model_path_debug(routed: RoutedResult) -> PipelineDebugInfo:
+    """Debug info for a model-served request, keeping the intent-stage fields
+    of the pipeline run that preceded the fallback, if there was one."""
+    update = {"total_time_ms": routed.latency_ms, "fallback_reason": routed.fallback_reason}
+    if routed.pipeline_debug is None:
+        return PipelineDebugInfo(**update)
+    return routed.pipeline_debug.model_copy(update=update)
+
+
 @app.post("/pipeline", response_model=PipelineResponse)
 @app.post("/", response_model=PipelineResponse)
 async def pipeline_endpoint(request: PipelineRequest):
@@ -551,10 +582,7 @@ async def pipeline_endpoint(request: PipelineRequest):
 
     pipeline_result = routed.pipeline_result or PipelineResult(
         query=routed.query,
-        debug_info=PipelineDebugInfo(
-            total_time_ms=routed.latency_ms,
-            fallback_reason=routed.fallback_reason,
-        ),
+        debug_info=_model_path_debug(routed),
         confidence=routed.confidence,
     )
 

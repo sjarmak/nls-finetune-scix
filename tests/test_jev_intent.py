@@ -6,10 +6,10 @@ against jev-1.13.0.
 """
 
 import json
-from pathlib import Path
 
 import httpx
 import pytest
+from jev_fixtures import choice_answer, jev_payload, mock_jev_client, noul_answer
 
 from finetune.domains.scix.field_constraints import BIBGROUPS, COLLECTIONS, DOCTYPES
 from finetune.domains.scix.intent_spec import OPERATORS, IntentSpec
@@ -27,50 +27,6 @@ from finetune.domains.scix.jev_intent import (
     parse_response,
     request_fingerprint,
 )
-
-
-def _choice(choice: str, probabilities: dict[str, float]) -> dict:
-    return {
-        "type": "choice",
-        "choice": choice,
-        "confidence": probabilities[choice],
-        "probabilities": probabilities,
-    }
-
-
-def _noul(p: float) -> dict:
-    return {"type": "noul", "noul": p}
-
-
-def _payload(operator: str = "none", **overrides) -> dict:
-    """A complete System One response for the standard question set."""
-    ops = {o: 0.01 for o in ["none", *sorted(OPERATORS)]}
-    ops[operator] = 1.0 - 0.01 * (len(ops) - 1)
-    answers = {
-        "operator": _choice(operator, ops),
-        "search_kind": _choice(
-            "topic",
-            {
-                "topic": 0.9,
-                "author": 0.02,
-                "object": 0.02,
-                "paper_reference": 0.02,
-                "identifier": 0.02,
-                "mixed": 0.02,
-            },
-        ),
-        "refereed": _noul(0.1),
-        "openaccess": _noul(0.05),
-        "eprint": _noul(0.02),
-        "doctype": _choice("none", {"none": 0.97, "article": 0.03}),
-        "bibgroup": _choice("none", {"none": 0.99, "HST": 0.01}),
-        "collection": _choice("none", {"none": 0.8, "astronomy": 0.2}),
-        "needs_clarification": _noul(0.1),
-        "refers_to_specific_paper": _noul(0.2),
-    }
-    answers.update(overrides)
-    usage = {"input_tokens": 500, "output_tokens": 0}
-    return {"model": JEV_MODEL, "answers": answers, "usage": usage}
 
 
 class TestQuestionSet:
@@ -118,7 +74,7 @@ class TestRequest:
 
 class TestParseResponse:
     def test_parses_all_fields(self):
-        answers = parse_response(_payload("citations"), latency_ms=123.0, cached=False)
+        answers = parse_response(jev_payload("citations"), latency_ms=123.0, cached=False)
         assert answers.model == JEV_MODEL
         assert answers.choices["operator"].choice == "citations"
         assert answers.choices["operator"].probabilities["none"] == pytest.approx(0.01)
@@ -140,7 +96,7 @@ class TestParseResponse:
         ],
     )
     def test_rejects_malformed_payloads(self, mutation):
-        payload = _payload()
+        payload = jev_payload()
         mutation(payload)
         with pytest.raises(JevResponseError):
             parse_response(payload, latency_ms=1.0, cached=False)
@@ -148,7 +104,7 @@ class TestParseResponse:
 
 class TestApplyAnswers:
     def _answers(self, **overrides) -> JevAnswers:
-        return parse_response(_payload(**overrides), latency_ms=1.0, cached=False)
+        return parse_response(jev_payload(**overrides), latency_ms=1.0, cached=False)
 
     def test_none_operator_leaves_operator_unset(self):
         base = IntentSpec(raw_user_text="t", free_text_terms=["citation analysis"])
@@ -160,12 +116,12 @@ class TestApplyAnswers:
         base = IntentSpec(raw_user_text="t", authors=["Smith, J"], year_from=2020)
         answers = self._answers(
             operator="references",
-            doctype=_choice("phdthesis", {"none": 0.1, "phdthesis": 0.9}),
-            bibgroup=_choice("JWST", {"none": 0.2, "JWST": 0.8}),
-            collection=_choice("physics", {"none": 0.3, "physics": 0.7}),
-            refereed=_noul(0.95),
-            openaccess=_noul(0.51),
-            eprint=_noul(0.49),
+            doctype=choice_answer("phdthesis", {"none": 0.1, "phdthesis": 0.9}),
+            bibgroup=choice_answer("JWST", {"none": 0.2, "JWST": 0.8}),
+            collection=choice_answer("physics", {"none": 0.3, "physics": 0.7}),
+            refereed=noul_answer(0.95),
+            openaccess=noul_answer(0.51),
+            eprint=noul_answer(0.49),
         )
         out = apply_answers(base, answers)
         assert out.operator == "references"
@@ -185,23 +141,10 @@ class TestApplyAnswers:
         assert base.operator is None and base.property == {"refereed"}
 
 
-def _mock_client(tmp_path: Path, payloads: list[dict], calls: list[dict]) -> JevClient:
-    def handler(request: httpx.Request) -> httpx.Response:
-        assert request.headers["authorization"] == "Bearer test-key"
-        calls.append(json.loads(request.content))
-        return httpx.Response(200, json=payloads[len(calls) - 1])
-
-    return JevClient(
-        api_key="test-key",
-        cache_path=tmp_path / "cache.jsonl",
-        transport=httpx.MockTransport(handler),
-    )
-
-
 class TestClientCache:
     def test_second_identical_request_is_served_from_cache(self, tmp_path):
         calls: list[dict] = []
-        client = _mock_client(tmp_path, [_payload("trending")], calls)
+        client = mock_jev_client(tmp_path, [jev_payload("trending")], calls)
         first = client.classify("what's hot in exoplanets")
         second = client.classify("what's hot in exoplanets")
         assert len(calls) == 1
@@ -212,7 +155,7 @@ class TestClientCache:
 
     def test_cache_can_be_bypassed_for_stability_repeats(self, tmp_path):
         calls: list[dict] = []
-        client = _mock_client(tmp_path, [_payload("useful"), _payload("useful")], calls)
+        client = mock_jev_client(tmp_path, [jev_payload("useful"), jev_payload("useful")], calls)
         client.classify("q")
         client.classify("q", use_cache=False)
         assert len(calls) == 2
@@ -235,7 +178,7 @@ class TestClientCache:
 class TestExtractIntentJev:
     def test_composes_regex_extractors_with_jev_gating(self, tmp_path):
         calls: list[dict] = []
-        client = _mock_client(tmp_path, [_payload("citations")], calls)
+        client = mock_jev_client(tmp_path, [jev_payload("citations")], calls)
         text = "papers that build on dark energy work by Smith since 2019"
         intent = extract_intent_jev(text, client)
         assert intent.operator == "citations"
@@ -248,13 +191,13 @@ class TestExtractIntentJev:
 
     def test_regex_intent_can_be_sent_as_context(self, tmp_path):
         calls: list[dict] = []
-        client = _mock_client(tmp_path, [_payload()], calls)
+        client = mock_jev_client(tmp_path, [jev_payload()], calls)
         extract_intent_jev("dark energy since 2019", client, include_regex_state=True)
         assert calls[0]["state"]["regex_intent"]["year_from"] == 2019
 
     def test_ads_syntax_passes_through_without_calling_jev(self, tmp_path):
         calls: list[dict] = []
-        client = _mock_client(tmp_path, [], calls)
+        client = mock_jev_client(tmp_path, [], calls)
         intent = extract_intent_jev('author:"Smith, J" year:2020', client)
         assert intent.confidence == {"ads_passthrough": 1.0}
         assert calls == []
@@ -267,7 +210,7 @@ class TestPipelineBackends:
         from finetune.domains.scix.pipeline import process_query
 
         calls: list[dict] = []
-        client = _mock_client(tmp_path, [], calls)
+        client = mock_jev_client(tmp_path, [], calls)
         result = process_query("papers citing dark energy surveys", "regex", client)
         assert calls == []
         assert result.debug_info.intent_backend == "regex"
@@ -278,7 +221,7 @@ class TestPipelineBackends:
         from finetune.domains.scix.pipeline import process_query
 
         calls: list[dict] = []
-        client = _mock_client(tmp_path, [_payload("none")], calls)
+        client = mock_jev_client(tmp_path, [jev_payload("none")], calls)
         result = process_query("papers citing dark energy surveys", "jev", client)
         assert len(calls) == 1
         assert result.debug_info.classifier_called is True
@@ -289,7 +232,7 @@ class TestPipelineBackends:
         from finetune.domains.scix.pipeline import process_query
 
         calls: list[dict] = []
-        client = _mock_client(tmp_path, [], calls)
+        client = mock_jev_client(tmp_path, [], calls)
         result = process_query("papers citing dark energy surveys", "jev_gated", client)
         assert calls == []
         assert result.debug_info.classifier_called is False
@@ -298,7 +241,7 @@ class TestPipelineBackends:
         from finetune.domains.scix.pipeline import process_query
 
         calls: list[dict] = []
-        client = _mock_client(tmp_path, [_payload("similar")], calls)
+        client = mock_jev_client(tmp_path, [jev_payload("similar")], calls)
         result = process_query("work along the lines of the Planck results", "jev_gated", client)
         assert len(calls) == 1
         assert result.debug_info.classifier_called is True
