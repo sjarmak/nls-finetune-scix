@@ -1,4 +1,7 @@
 {
-  "database": "beads.db",
-  "jsonl_export": "issues.jsonl"
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "nls_finetune_scix",
+  "project_id": "da0c5be8-a169-433c-8c17-ee9ddd28bf52"
 }

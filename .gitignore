@@ -35,3 +35,10 @@ bun.lockb
 
 # Eval binary from Sourcegraph
 nls_query_eval
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+.beads/proxieddb/
+*.gate.lock*
