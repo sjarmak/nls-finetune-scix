@@ -35,9 +35,12 @@ Configuration (environment variables):
                      record_type "intent_shadow" and share the request_id.
     INTENT_BACKEND   regex | jev | jev_gated (default: regex). The Jev backends
                      classify operator and enum fields with TypeSafe System One
-                     and need TYPESAFE_API_KEY; jev_gated calls it only when the
-                     regex extractor finds no operator or scores below the
-                     confidence threshold.
+                     and also pick recency, highly cited, first author and the
+                     topic span; they need TYPESAFE_API_KEY. jev_gated calls
+                     it only when the regex extractor finds no operator or
+                     scores below the confidence threshold. Relative years
+                     end at the prompt's "Date: YYYY-MM-DD" line (400 when
+                     malformed, the current year when absent).
                      A failed Jev call (HTTP error, timeout, network error or
                      malformed response) falls back to the regex intent; the
                      reason is in debug_info.classifier_error and telemetry.
@@ -56,10 +59,11 @@ Configuration (environment variables):
                      request also queues a run of this backend on a background
                      thread pool, off the request path, so it adds no latency to
                      the response. Each run appends an "intent_shadow" row with
-                     both IntentSpecs, the disagreeing fields (operator, doctype,
-                     bibgroup, collection, property), Jev's operator confidence
-                     and the shadow latency. At most 32 runs may be pending;
-                     beyond that runs are skipped and logged. Shadow failures
+                     both IntentSpecs, the disagreeing fields (operator, enum
+                     fields, years, topic terms, first author, citation
+                     floor), Jev's operator confidence and the shadow latency.
+                     At most 32 runs may be pending; beyond that runs are
+                     skipped and logged. Shadow failures
                      are logged, never raised. Needs TYPESAFE_API_KEY.
                      Summarize with scripts/summarize_intent_shadow.py.
 
@@ -77,6 +81,7 @@ Usage:
 import json
 import logging
 import os
+import re
 import sys
 import threading
 import time
@@ -85,7 +90,7 @@ from collections.abc import AsyncIterator
 from concurrent.futures import Future, ThreadPoolExecutor
 from contextlib import asynccontextmanager
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -424,6 +429,24 @@ def extract_nl_query(messages: list[ChatMessage]) -> str:
     return user_message
 
 
+def extract_reference_year(messages: list[ChatMessage]) -> int | None:
+    """Year of the "Date: YYYY-MM-DD" line in the user message, or None without one.
+
+    Relative dates in the query ("recent", "last 5 years") end at this year.
+    A malformed date is a client error (HTTP 400).
+    """
+    user_message = next((m.content for m in messages if m.role == "user"), "")
+    match = re.search(r"^Date:(.*)$", user_message, re.MULTILINE)
+    if match is None:
+        return None
+    try:
+        return date.fromisoformat(match.group(1).strip()).year
+    except ValueError as error:
+        raise HTTPException(
+            status_code=400, detail=f"Date line is not YYYY-MM-DD: {match.group(1).strip()!r}"
+        ) from error
+
+
 def write_telemetry(record: dict) -> None:
     """Append a telemetry record to the JSONL flywheel log, if configured."""
     if not TELEMETRY_LOG:
@@ -436,7 +459,9 @@ def write_telemetry(record: dict) -> None:
         logger.warning("Failed to write telemetry to %s: %s", TELEMETRY_LOG, e)
 
 
-def run_pipeline(nl_query: str) -> tuple[RoutedResult | None, str | None]:
+def run_pipeline(
+    nl_query: str, reference_year: int | None = None
+) -> tuple[RoutedResult | None, str | None]:
     """Run the deterministic pipeline.
 
     Returns:
@@ -447,7 +472,7 @@ def run_pipeline(nl_query: str) -> tuple[RoutedResult | None, str | None]:
     """
     start_time = time.perf_counter()
     try:
-        result = process_query(nl_query, INTENT_BACKEND, jev_client)
+        result = process_query(nl_query, INTENT_BACKEND, jev_client, reference_year)
     except Exception as e:
         logger.exception("Pipeline raised for query %r", nl_query)
         return None, f"pipeline error: {e}"
@@ -496,7 +521,11 @@ def run_pipeline(nl_query: str) -> tuple[RoutedResult | None, str | None]:
 
 
 def schedule_shadow(
-    request_id: str, nl_query: str, served_intent: dict, served_path: str
+    request_id: str,
+    nl_query: str,
+    served_intent: dict,
+    served_path: str,
+    reference_year: int | None = None,
 ) -> Future | None:
     """Queue a shadow intent run off the request path; never blocks or raises.
 
@@ -513,7 +542,7 @@ def schedule_shadow(
         return None
     try:
         future = shadow_executor.submit(
-            _run_shadow, request_id, nl_query, served_intent, served_path
+            _run_shadow, request_id, nl_query, served_intent, served_path, reference_year
         )
     except RuntimeError:
         _shadow_slots.release()
@@ -523,7 +552,13 @@ def schedule_shadow(
     return future
 
 
-def _run_shadow(request_id: str, nl_query: str, served_intent: dict, served_path: str) -> None:
+def _run_shadow(
+    request_id: str,
+    nl_query: str,
+    served_intent: dict,
+    served_path: str,
+    reference_year: int | None,
+) -> None:
     """Background task: compare the served intent with the shadow backend's.
 
     It runs outside any request, so it catches everything: a failure here is
@@ -531,7 +566,12 @@ def _run_shadow(request_id: str, nl_query: str, served_intent: dict, served_path
     """
     try:
         record = shadow_record(
-            nl_query, served_intent, SHADOW_INTENT_BACKEND, jev_client, served_path
+            nl_query,
+            served_intent,
+            SHADOW_INTENT_BACKEND,
+            jev_client,
+            served_path,
+            reference_year,
         )
         write_telemetry(
             {"timestamp": datetime.now(UTC).isoformat(), "request_id": request_id, **record}
@@ -570,13 +610,14 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
         model    - model only (pre-hybrid behavior)
     """
     nl_query = extract_nl_query(messages)
+    reference_year = extract_reference_year(messages)
     request_id = uuid.uuid4().hex
     fallback_reason: str | None = None
     pipeline_debug: PipelineDebugInfo | None = None
     pipeline_confidence: float | None = None
 
     if ROUTING_MODE != "model" and PIPELINE_AVAILABLE:
-        routed, error_reason = run_pipeline(nl_query)
+        routed, error_reason = run_pipeline(nl_query, reference_year)
 
         if routed is not None:
             regex_intent = routed.pipeline_result.intent
@@ -594,11 +635,11 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
                         CONFIDENCE_THRESHOLD,
                         routed.fallback_reason,
                     )
-                schedule_shadow(request_id, nl_query, regex_intent, "pipeline")
+                schedule_shadow(request_id, nl_query, regex_intent, "pipeline", reference_year)
                 _log_routing(request_id, nl_query, routed)
                 return routed
 
-            schedule_shadow(request_id, nl_query, regex_intent, "model")
+            schedule_shadow(request_id, nl_query, regex_intent, "model", reference_year)
             pipeline_debug = routed.pipeline_debug
             pipeline_confidence = routed.confidence
             fallback_reason = _low_confidence_reason(routed)

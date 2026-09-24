@@ -393,17 +393,20 @@ def apply_llm_answers(intent: IntentSpec, answers: LlmAnswers) -> IntentSpec:
 
 
 def classify_and_extract_llm(
-    text: str, client: LlmClient, use_cache: bool = True
+    text: str, client: LlmClient, use_cache: bool = True, reference_year: int | None = None
 ) -> tuple[IntentSpec, LlmAnswers | None]:
-    """Arm C: LLM gating composed with regex names, years and topics."""
+    """Arm C: LLM gating composed with regex names, years and topics.
+
+    ``reference_year`` anchors relative year phrases, as in ``extract_intent``.
+    """
     from .ner import extract_intent, extract_intent_with_operator
 
-    regex_intent = extract_intent(text)
+    regex_intent = extract_intent(text, reference_year)
     if regex_intent.confidence.get("ads_passthrough"):
         return regex_intent, None
     answers = client.classify(text, use_cache=use_cache)
     operator = answers.values["operator"]
     base = extract_intent_with_operator(
-        text, None if operator in (NONE_OPTION, UNKNOWN) else operator
+        text, None if operator in (NONE_OPTION, UNKNOWN) else operator, reference_year
     )
     return apply_llm_answers(base, answers), answers

@@ -40,7 +40,7 @@ def operator_probabilities(operator: str, confidence: float | None = None) -> di
 def jev_payload(
     operator: str = "none", operator_confidence: float | None = None, **overrides
 ) -> dict:
-    """A complete System One response for the standard question set."""
+    """A complete System One response for the question set without a topic question."""
     answers = {
         "operator": choice_answer(operator, operator_probabilities(operator, operator_confidence)),
         "search_kind": choice_answer(
@@ -62,6 +62,9 @@ def jev_payload(
         "collection": choice_answer("none", {"none": 0.8, "astronomy": 0.2}),
         "needs_clarification": noul_answer(0.1),
         "refers_to_specific_paper": noul_answer(0.2),
+        "recency": choice_answer("none", {"none": 0.95, "last_3_years": 0.05}),
+        "first_author": noul_answer(0.1),
+        "highly_cited": noul_answer(0.05),
     }
     answers.update(overrides)
     usage = {"input_tokens": 500, "output_tokens": 0}
@@ -82,16 +85,49 @@ def handler_client(
     )
 
 
+def with_topic_answer(payload: dict, request: dict) -> dict:
+    """``payload`` plus, when a topic was asked and not answered, the longest candidate.
+
+    The longest candidate is the whole regex phrase, so tests that do not set
+    a topic keep the regex topic.
+    """
+    topic = request["questions"].get("topic")
+    if topic is None or "topic" in payload["answers"]:
+        return payload
+    longest = next(option for option in topic["criteria"] if option != "none")
+    answer = choice_answer(longest, {"none": 0.05, longest: 0.95})
+    return {**payload, "answers": {**payload["answers"], "topic": answer}}
+
+
+def answering_client(
+    payload: dict, calls: list[dict] | None = None, cache_path: Path | None = None
+) -> JevClient:
+    """A JevClient that answers every request with ``payload`` (plus ``with_topic_answer``).
+
+    Each request body is appended to ``calls`` when given.
+    """
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        body = json.loads(request.content)
+        if calls is not None:
+            calls.append(body)
+        return httpx.Response(200, json=with_topic_answer(payload, body))
+
+    return handler_client(handler, cache_path=cache_path)
+
+
 def mock_jev_client(tmp_path: Path | None, payloads: list[dict], calls: list[dict]) -> JevClient:
     """A JevClient that answers the n-th request with ``payloads[n]``.
 
     Each request body is appended to ``calls``. With ``tmp_path`` the client
-    keeps a JSONL cache there; with None it runs uncached.
+    keeps a JSONL cache there; with None it runs uncached. A topic question
+    the payload leaves unanswered gets ``with_topic_answer``.
     """
 
     def handler(request: httpx.Request) -> httpx.Response:
         assert request.headers["authorization"] == f"Bearer {TEST_API_KEY}"
-        calls.append(json.loads(request.content))
-        return httpx.Response(200, json=payloads[len(calls) - 1])
+        body = json.loads(request.content)
+        calls.append(body)
+        return httpx.Response(200, json=with_topic_answer(payloads[len(calls) - 1], body))
 
     return handler_client(handler, cache_path=tmp_path / "cache.jsonl" if tmp_path else None)

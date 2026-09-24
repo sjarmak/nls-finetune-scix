@@ -683,7 +683,7 @@ STOPWORDS: set[str] = {
 # =============================================================================
 
 
-def extract_intent(text: str) -> IntentSpec:
+def extract_intent(text: str, reference_year: int | None = None) -> IntentSpec:
     """Extract structured intent from natural language search query.
 
     This is the main NER function that parses user input into an IntentSpec.
@@ -691,6 +691,8 @@ def extract_intent(text: str) -> IntentSpec:
 
     Args:
         text: Natural language search query from user
+        reference_year: Year that relative phrases ("last 5 years", "since 2020")
+            count back from; defaults to the current year
 
     Returns:
         IntentSpec with extracted fields and validated values
@@ -718,7 +720,7 @@ def extract_intent(text: str) -> IntentSpec:
 
     # Extract operator (FIRST - so we can remove operator phrases from text)
     operator, working_text = _extract_operator(working_text)
-    return _extract_fields(original_text, working_text, operator, book_review)
+    return _extract_fields(original_text, working_text, operator, reference_year, book_review)
 
 
 def _strip_book_review(text: str) -> tuple[str, bool]:
@@ -730,7 +732,9 @@ def _strip_book_review(text: str) -> tuple[str, bool]:
     return re.sub(r"\s+", " ", text).strip(), found
 
 
-def extract_intent_with_operator(text: str, operator: str | None) -> IntentSpec:
+def extract_intent_with_operator(
+    text: str, operator: str | None, reference_year: int | None = None
+) -> IntentSpec:
     """Run every extractor except operator gating, with the operator decided elsewhere.
 
     Used by classifier-backed intent backends: the operator comes from the
@@ -742,13 +746,14 @@ def extract_intent_with_operator(text: str, operator: str | None) -> IntentSpec:
     for removal_pattern in OPERATOR_REMOVAL_PATTERNS.get(operator or "", []):
         working_text = removal_pattern.sub(" ", working_text)
     working_text = re.sub(r"\s+", " ", working_text).strip()
-    return _extract_fields(original_text, working_text, operator)
+    return _extract_fields(original_text, working_text, operator, reference_year)
 
 
 def _extract_fields(
     original_text: str,
     working_text: str,
     operator: str | None,
+    reference_year: int | None = None,
     book_review: bool = False,
 ) -> IntentSpec:
     """Years, authors, enum fields and topics from text with the operator phrase removed.
@@ -761,7 +766,7 @@ def _extract_fields(
     intent = IntentSpec(raw_user_text=original_text, operator=operator)
 
     # Extract years
-    intent.year_from, intent.year_to, working_text = _extract_years(working_text)
+    intent.year_from, intent.year_to, working_text = _extract_years(working_text, reference_year)
 
     # Extract authors
     intent.authors, working_text = _extract_authors(working_text)
@@ -813,16 +818,19 @@ def _extract_operator(text: str) -> tuple[str | None, str]:
     return None, text
 
 
-def _extract_years(text: str) -> tuple[int | None, int | None, str]:
+def _extract_years(
+    text: str, reference_year: int | None = None
+) -> tuple[int | None, int | None, str]:
     """Extract year range from text.
 
     Args:
         text: Input text to scan
+        reference_year: Year relative phrases end at; defaults to the current year
 
     Returns:
         Tuple of (year_from, year_to, text with year phrases removed)
     """
-    current_year = datetime.now().year
+    current_year = reference_year if reference_year is not None else datetime.now().year
     year_from = None
     year_to = None
     cleaned_text = text

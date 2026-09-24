@@ -41,6 +41,7 @@ class EvalResult:
     # Server-side token usage (vLLM only)
     prompt_tokens: int | None = None
     completion_tokens: int | None = None
+    unscorable_reason: str | None = None
 
 
 class EvalRunner:
@@ -230,6 +231,7 @@ class EvalRunner:
             latency_ms=latency_ms,
             prompt_tokens=prompt_tokens,
             completion_tokens=completion_tokens,
+            unscorable_reason=eval_result.unscorable_reason,
         )
 
     def run_evaluation(
@@ -275,15 +277,16 @@ class EvalRunner:
             "id": eval_id,
             "timestamp": datetime.now().isoformat(),
             "models": {
-                "fine_tuned": model_endpoint.split("/")[-1]
-                if "/" in model_endpoint
-                else "fine-tuned",
+                "fine_tuned": (
+                    model_endpoint.split("/")[-1] if "/" in model_endpoint else "fine-tuned"
+                ),
             },
             "summary": {
                 "total": n,
                 "fine_tuned": {
                     "syntax_valid": total_syntax_valid,
                     "semantic_match": total_semantic_match,
+                    "unscorable": sum(1 for r in results if r.unscorable_reason),
                     "avg_latency_ms": round(total_latency / n, 1) if n > 0 else 0,
                 },
             },
@@ -297,6 +300,7 @@ class EvalRunner:
                         "syntax_valid": r.syntax_valid,
                         "semantic_match": r.semantic_match,
                         "overlap": r.overlap,
+                        "unscorable_reason": r.unscorable_reason,
                         "latency_ms": round(r.latency_ms, 1),
                     },
                     "verdict": self._compute_verdict(

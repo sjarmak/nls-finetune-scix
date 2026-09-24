@@ -54,6 +54,7 @@ from intent_metrics import (  # noqa: E402
     class_counts,
     cost_summary,
     expected_calibration_error,
+    extraction_metrics,
     false_positive_rate,
     latency_summary,
     operator_report,
@@ -96,6 +97,8 @@ ENUM_FIELDS = ("property", "doctype", "bibgroup", "collection")
 SCORED_PROPERTIES = frozenset(PROPERTY_BOOLEANS)
 GATE_FIELDS = ("search_kind", "needs_clarification", "refers_to_specific_paper")
 WORKERS = 4
+REFERENCE_YEAR = 2025
+"""Val prompts carry "Date: 2025-12-15" and gold recency windows end at 2025."""
 
 
 # --------------------------------------------------------------------------- items
@@ -140,15 +143,18 @@ def _intent_fields(intent: IntentSpec) -> dict:
         "bibgroup": sorted(intent.bibgroup),
         "collection": sorted(intent.collection),
         "authors": list(intent.authors),
+        "first_author": intent.first_author,
         "year_from": intent.year_from,
         "year_to": intent.year_to,
+        "min_citations": intent.min_citations,
         "free_text_terms": list(intent.free_text_terms),
+        "or_terms": list(intent.or_terms),
     }
 
 
 def run_regex(nl: str) -> dict:
     started = time.perf_counter()
-    intent = extract_intent(nl)
+    intent = extract_intent(nl, REFERENCE_YEAR)
     latency = (time.perf_counter() - started) * 1000
     return {
         **_intent_fields(intent),
@@ -169,7 +175,11 @@ def run_regex(nl: str) -> dict:
 def run_jev(nl: str, client: JevClient, include_regex_state: bool, use_cache: bool) -> dict:
     started = time.perf_counter()
     intent, answers = classify_and_extract(
-        nl, client, include_regex_state=include_regex_state, use_cache=use_cache
+        nl,
+        client,
+        include_regex_state=include_regex_state,
+        use_cache=use_cache,
+        reference_year=REFERENCE_YEAR,
     )
     local_latency = (time.perf_counter() - started) * 1000
     if answers is None:  # ADS passthrough; Jev not called
@@ -193,7 +203,9 @@ def run_jev(nl: str, client: JevClient, include_regex_state: bool, use_cache: bo
 
 def run_llm(nl: str, client: LlmClient, use_cache: bool) -> dict:
     started = time.perf_counter()
-    intent, answers = classify_and_extract_llm(nl, client, use_cache=use_cache)
+    intent, answers = classify_and_extract_llm(
+        nl, client, use_cache=use_cache, reference_year=REFERENCE_YEAR
+    )
     local_latency = (time.perf_counter() - started) * 1000
     if answers is None:
         return run_regex(nl)
@@ -221,7 +233,7 @@ def _tri(value: str) -> float | None:
 def run_gated(nl: str, client: JevClient, use_cache: bool) -> dict:
     """Arm E, mirroring pipeline.extract_intent_with_backend('jev_gated')."""
     regex_row = run_regex(nl)
-    intent = extract_intent(nl)
+    intent = extract_intent(nl, REFERENCE_YEAR)
     if intent.confidence.get("ads_passthrough"):
         return regex_row
     confidence, _ = compute_pipeline_confidence(intent)
@@ -354,6 +366,9 @@ def arm_metrics(rows: list[dict]) -> dict:
                 pred &= SCORED_PROPERTIES
             gold_pred.append((gold, pred))
         out[f"enum_{field}"] = set_f1(gold_pred)
+    extraction = extraction_metrics(first)
+    if extraction is not None:
+        out["extraction"] = extraction
     strata = {r["meta"].get("stratum") for r in first} - {None}
     if strata:
         out["by_stratum"] = {
@@ -450,6 +465,10 @@ def summary_table(metrics: dict[str, dict]) -> str:
         "doctype F1",
         "bibgroup F1",
         "coll F1",
+        "year EM",
+        "1st-auth EM",
+        "cite F1",
+        "topic F1",
         "p50 ms",
         "p95 ms",
         "$/query",
@@ -457,6 +476,7 @@ def summary_table(metrics: dict[str, dict]) -> str:
     lines = ["| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
     for arm, m in metrics.items():
         a90 = m["accuracy_at_90_coverage"]["accuracy"]
+        ex = m.get("extraction")
         lines.append(
             "| "
             + " | ".join(
@@ -469,6 +489,10 @@ def summary_table(metrics: dict[str, dict]) -> str:
                     _fmt(a90),
                     _fmt(m["calibration"]["ece"]),
                     *[_fmt(m[f"enum_{f}"]["f1"]) for f in ENUM_FIELDS],
+                    _fmt(ex["year"]["exact_match"] if ex else None),
+                    _fmt(ex["first_author"]["exact_match"] if ex else None),
+                    _fmt(ex["citation_floor"]["f1"] if ex else None),
+                    _fmt(ex["topic_tokens"]["f1"] if ex else None),
                     _fmt(m["latency_ms"]["p50"], "{:.0f}"),
                     _fmt(m["latency_ms"]["p95"], "{:.0f}"),
                     _fmt(m["cost"]["mean_usd_per_query"], "{:.6f}"),

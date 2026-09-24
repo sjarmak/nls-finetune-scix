@@ -3,6 +3,7 @@
 import pytest
 
 import finetune.eval.eval as eval_module
+from finetune.domains.scix.eval import GOLD_EMPTY, BibcodeFetchError
 from finetune.eval.eval import SEMANTIC_MATCH_THRESHOLD, evaluate_query
 
 
@@ -54,9 +55,7 @@ class TestResultSetOverlap:
                 'abs:"dark matter halos"': ["a", "b", "c"],
             },
         )
-        result = evaluate_query(
-            'abs:"dark matter"', 'abs:"dark matter halos"', api_key="test-key"
-        )
+        result = evaluate_query('abs:"dark matter"', 'abs:"dark matter halos"', api_key="test-key")
         assert result.valid
         assert result.overlap == 0.75
         assert result.match  # 0.75 >= threshold
@@ -86,3 +85,18 @@ class TestResultSetOverlap:
         result = evaluate_query('abs:"a b"', 'abs:"a c"', api_key="test-key")
         assert result.overlap == pytest.approx(2 / 6)
         assert result.match == (result.overlap >= SEMANTIC_MATCH_THRESHOLD)
+
+    def test_empty_expected_result_set_is_unscorable(self, monkeypatch):
+        self._patch_bibcodes(monkeypatch, {'abs:"a"': [], 'abs:"b"': []})
+        result = evaluate_query('abs:"a"', 'abs:"b"', api_key="test-key")
+        assert not result.match
+        assert result.unscorable_reason == GOLD_EMPTY
+
+    def test_ads_failure_is_recorded_not_raised(self, monkeypatch):
+        def failing_fetch(query, n=50, api_key=None, **kwargs):
+            raise BibcodeFetchError("ADS returned HTTP 504")
+
+        monkeypatch.setattr(eval_module, "fetch_bibcodes", failing_fetch)
+        result = evaluate_query('abs:"a"', 'abs:"b"', api_key="test-key")
+        assert not result.match
+        assert result.unscorable_reason == "ADS returned HTTP 504"

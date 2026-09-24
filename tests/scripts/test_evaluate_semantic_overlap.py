@@ -13,58 +13,20 @@ from evaluate_semantic_overlap import (  # noqa: E402
     build_jev_client,
     generate_via_pipeline,
     load_cases,
+    semantic_match_rate_of,
 )
+from jev_fixtures import jev_payload, with_topic_answer  # noqa: E402
 
 from finetune.domains.scix.jev_intent import JevClient  # noqa: E402
-
-
-def _jev_payload(operator: str) -> dict:
-    options = ["none", "citations", "references", "similar", "trending", "useful", "reviews"]
-    probs = {o: (1.0 if o == operator else 0.0) for o in options}
-    choice = lambda c, opts: {  # noqa: E731
-        "type": "choice",
-        "choice": c,
-        "confidence": 1.0,
-        "probabilities": {o: (1.0 if o == c else 0.0) for o in opts},
-    }
-    return {
-        "model": "jev-1.13.0",
-        "usage": {"input_tokens": 10},
-        "answers": {
-            "operator": {
-                "type": "choice",
-                "choice": operator,
-                "confidence": 1.0,
-                "probabilities": probs,
-            },
-            "search_kind": choice(
-                "topic", ["topic", "author", "object", "paper_reference", "identifier", "mixed"]
-            ),
-            "doctype": choice("none", ["none"]),
-            "bibgroup": choice("none", ["none"]),
-            "collection": choice(
-                "none", ["none", "astronomy", "physics", "general", "earthscience"]
-            ),
-            **{
-                b: {"type": "noul", "noul": 0.0}
-                for b in (
-                    "refereed",
-                    "openaccess",
-                    "eprint",
-                    "needs_clarification",
-                    "refers_to_specific_paper",
-                )
-            },
-        },
-    }
 
 
 def test_generate_via_pipeline_uses_jev_backend(tmp_path: Path):
     calls: list[dict] = []
 
     def handler(request: httpx.Request) -> httpx.Response:
-        calls.append(json.loads(request.content))
-        return httpx.Response(200, json=_jev_payload("citations"))
+        body = json.loads(request.content)
+        calls.append(body)
+        return httpx.Response(200, json=with_topic_answer(jev_payload("citations"), body))
 
     client = JevClient(
         api_key="k", cache_path=tmp_path / "c.jsonl", transport=httpx.MockTransport(handler)
@@ -75,6 +37,11 @@ def test_generate_via_pipeline_uses_jev_backend(tmp_path: Path):
     assert calls and calls[0]["state"]["query"] == nl
     assert "citations(" in jev_query
     assert regex_query != jev_query
+
+
+def test_generate_via_pipeline_anchors_recency_to_benchmark_year():
+    query = generate_via_pipeline("dark energy papers from the last 3 years")
+    assert "pubdate:[2022 TO 2025]" in query
 
 
 def test_build_jev_client_requires_key(monkeypatch, tmp_path: Path):
@@ -90,3 +57,14 @@ def test_load_cases_val_shape():
     test, category, _ = cases[0]
     assert category == "val"
     assert test["natural_language"] and test["expected_query"] and test["id"].startswith("val-")
+
+
+def test_semantic_match_rate_excludes_unscorable_items():
+    from finetune.domains.scix.eval import GOLD_EMPTY, EvalResult
+
+    def result(jaccard, valid=True, reason=None):
+        return EvalResult("q", "g", "x", valid, [], [], [], jaccard, 0.0, 0.0, None, reason)
+
+    results = [result(0.9), result(0.1), result(0.0, valid=False), result(0.0, reason=GOLD_EMPTY)]
+    assert semantic_match_rate_of(results) == pytest.approx(1 / 3)
+    assert semantic_match_rate_of([result(0.0, reason=GOLD_EMPTY)]) == 0.0

@@ -50,7 +50,11 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 from derive_intent_labels import load_val_items  # noqa: E402
 from evaluate_benchmark import flatten_tests, load_benchmark  # noqa: E402
 
-from finetune.domains.scix.eval import evaluate_pair, summarize_results  # noqa: E402
+from finetune.domains.scix.eval import (  # noqa: E402
+    EvalResult,
+    evaluate_pair,
+    summarize_results,
+)
 from finetune.domains.scix.pipeline import INTENT_BACKENDS  # noqa: E402
 
 DEFAULT_BENCHMARK = REPO_ROOT / "data/datasets/benchmark/benchmark_queries.json"
@@ -58,14 +62,31 @@ DEFAULT_OUTPUT_DIR = REPO_ROOT / "data/datasets/evaluations"
 SEMANTIC_MATCH_THRESHOLD = 0.5
 TARGET_SEMANTIC_MATCH_RATE = 0.70
 TARGET_SYNTAX_VALIDITY_RATE = 0.95
+REFERENCE_YEAR = 2025
+"""Recency windows end here, matching the year the benchmark gold was written against."""
 SYSTEM_PROMPT = 'Convert natural language to ADS search query. Output JSON: {"query": "..."}'
+
+
+def semantic_match_rate_of(results: list[EvalResult]) -> float:
+    """Share of scorable items whose generated query is valid and overlaps gold enough.
+
+    Items whose overlap could not be measured are left out of the denominator;
+    an invalid generated query on a scorable item counts as a miss.
+    """
+    scored = [r for r in results if r.unscorable_reason is None]
+    if not scored:
+        return 0.0
+    matches = sum(
+        1 for r in scored if r.syntactically_valid and r.jaccard_overlap >= SEMANTIC_MATCH_THRESHOLD
+    )
+    return matches / len(scored)
 
 
 def generate_via_pipeline(nl_query: str, intent_backend: str = "regex", jev_client=None) -> str:
     """Generate a query with the in-process hybrid pipeline."""
     from finetune.domains.scix.pipeline import process_query
 
-    return process_query(nl_query, intent_backend, jev_client).final_query
+    return process_query(nl_query, intent_backend, jev_client, REFERENCE_YEAR).final_query
 
 
 def build_jev_client(intent_backend: str, cache_path: Path):
@@ -214,6 +235,7 @@ def main() -> int:
         print(
             f"  [{i + 1}/{len(cases)}] {test.get('id')}: "
             f"valid={result.syntactically_valid} jaccard={result.jaccard_overlap:.2f}"
+            + (f" UNSCORED ({result.unscorable_reason})" if result.unscorable_reason else "")
         )
         time.sleep(args.sleep)
 
@@ -223,12 +245,7 @@ def main() -> int:
         jev_client.close()
 
     summary = summarize_results(results)
-    semantic_matches = sum(
-        1
-        for r in results
-        if r.syntactically_valid and r.jaccard_overlap >= SEMANTIC_MATCH_THRESHOLD
-    )
-    semantic_match_rate = semantic_matches / len(results) if results else 0.0
+    semantic_match_rate = semantic_match_rate_of(results)
 
     artifact = {
         "metadata": {
@@ -239,6 +256,7 @@ def main() -> int:
             "endpoint": args.endpoint if args.mode == "server" else None,
             "benchmark": str(args.benchmark),
             "cases_evaluated": len(results),
+            "cases_unscorable": summary.unscorable,
             "generation_errors": len(generation_errors),
             "rows": args.rows,
             "date": datetime.now(UTC).isoformat(),
@@ -276,6 +294,10 @@ def main() -> int:
         json.dump(artifact, f, indent=2)
 
     print(f"\nSyntax validity: {summary.syntactic_validity_rate:.1%} (target ≥95%)")
+    print(
+        f"Unscorable (gold returned nothing or ADS failed): "
+        f"{summary.unscorable}/{summary.total}, excluded from overlap"
+    )
     print(
         f"Semantic match (Jaccard ≥ {SEMANTIC_MATCH_THRESHOLD}): "
         f"{semantic_match_rate:.1%} (target ≥70%)"

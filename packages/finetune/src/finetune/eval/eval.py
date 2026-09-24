@@ -8,7 +8,12 @@ by the ADS search API for each query).
 import os
 from dataclasses import dataclass
 
-from finetune.domains.scix.eval import compute_overlap_metrics, fetch_bibcodes
+from finetune.domains.scix.eval import (
+    GOLD_EMPTY,
+    BibcodeFetchError,
+    compute_overlap_metrics,
+    fetch_bibcodes,
+)
 from finetune.domains.scix.validate import lint_query
 
 # Two queries are a semantic match when their top-N result sets overlap at
@@ -18,11 +23,17 @@ SEMANTIC_MATCH_THRESHOLD = 0.5
 
 @dataclass
 class QueryEvalResult:
-    """Result from evaluating a query against expected."""
+    """Result from evaluating a query against expected.
+
+    unscorable_reason is set when overlap could not be measured (the expected
+    query returned nothing, or ADS failed); match is then False and the item
+    should be reported apart from real misses.
+    """
 
     valid: bool
     match: bool
     overlap: float
+    unscorable_reason: str | None = None
 
 
 def _normalize(query: str) -> str:
@@ -70,8 +81,15 @@ def evaluate_query(
             "and result-set overlap must be computed via the ADS search API."
         )
 
-    expected_bibcodes = fetch_bibcodes(expected, n=n, api_key=api_key)
-    actual_bibcodes = fetch_bibcodes(actual, n=n, api_key=api_key)
+    try:
+        expected_bibcodes = fetch_bibcodes(expected, n=n, api_key=api_key)
+        if not expected_bibcodes:
+            return QueryEvalResult(
+                valid=True, match=False, overlap=0.0, unscorable_reason=GOLD_EMPTY
+            )
+        actual_bibcodes = fetch_bibcodes(actual, n=n, api_key=api_key)
+    except BibcodeFetchError as e:
+        return QueryEvalResult(valid=True, match=False, overlap=0.0, unscorable_reason=str(e))
 
     jaccard, _precision, _recall = compute_overlap_metrics(expected_bibcodes, actual_bibcodes)
 

@@ -7,10 +7,21 @@ Run date: 2026-09-24. Plan and pre-registered criteria:
 
 ## Decision
 
-**Go on the intent stage.** The decision was made on the round-2 numbers
-and re-checked in round 3 (section "Round 3: after the rollout fixes
-(2026-09-24)") with the code now on main. Where the rounds differ, round 3
-describes main.
+**Go on the intent stage, now including recency, topic, first author and
+highly cited.** The decision was made on the round-2 numbers and re-checked
+in round 3 (section "Round 3: after the rollout fixes (2026-09-24)"). Round
+4 (section "Round 4: Jev decides recency, topic, first author and highly
+cited (2026-09-24)") moved those four decisions from regex rules into the
+same Jev request. It is the first round where the intent stage moves the
+assembled query: once the overlap scorer stops counting empty-vs-empty as a
+match, the gated Jev backend scores 38.1% semantic match on the benchmark
+against 31.7% for the regex (37 items won, 8 lost) and 21.2% against 12.3%
+on val (106 won, 14 lost), where round 3 had it 2.6 points behind and level.
+The cost is about 700 more input tokens per call, which puts the gated
+backend at $0.000108 per benchmark query, over the $0.0001 criterion on
+every set. The round-4 criteria text was tuned on benchmark and val rows.
+The paragraphs below describe rounds 2 and 3; where they say the intent
+stage does not move end-to-end overlap, round 4 supersedes them.
 
 On the 152-item held-out paraphrase set, reviewed and approved by Stephanie
 before any model saw it, Jev scores 0.986 operator macro-F1 against 0.146
@@ -638,17 +649,197 @@ held-out" half of criterion 4: with the gated Jev backend the pipeline
 serves 139 of 152 held-out requests with 98.6% operator accuracy, against
 141 at 68.8% for the regex backend.
 
+## Round 4: Jev decides recency, topic, first author and highly cited (2026-09-24)
+
+Bead nls-finetune-scix-bh9. The regex keyword rules for four decisions were
+replaced by questions in the same Jev request, so there is still one call
+per query and no second model:
+
+- **Recency.** A choice among none, this year, and the last 2, 3, 5 or 10
+  years. It applies only when the regex found no explicit year. The window
+  ends at the reference year, which the server reads from the prompt's
+  `Date: YYYY-MM-DD` line; the harness pins it to 2025, the year the val
+  prompts carry.
+- **Highly cited.** A boolean that adds `citation_count:[100 TO *]`.
+- **First author.** A boolean that puts `^` on the first extracted name.
+- **Topic.** When the regex found one topic phrase of at most six words,
+  code lists every contiguous span of it and Jev picks the subject or none.
+  This is the fix for the reported bug: "recent papers on asteroids" was
+  `abs:"recent asteroids"` and is now `abs:asteroids pubdate:[2023 TO 2025]`.
+
+The new questions sit outside `build_questions()`, so arm C's prompt and
+cache are unchanged; arm C was not re-run. Gold labels for the new fields
+come from `derive_intent_labels.py` (year range, `^` on an author, a
+`citation_count` floor, and the words in `abs:`/`title:` clauses), which
+exist for benchmark and val only.
+
+The criteria text was revised twice after reading failures, both times on
+benchmark and val rows, so the round-4 extraction numbers are tuned on the
+sets they are reported on:
+
+1. `round4`: Jev read "trending" as recency ("trending JWST papers",
+   "trending exoplanets", 4 items). The recency criterion now says trending
+   and popular are about reads, not publication date.
+2. `round4b`: the highly-cited question fired on ranking requests ("most
+   cited papers on exoplanets", "top 10 papers by Einstein", "papers with
+   exactly 1000 citations", 14 items), which gold writes as a sort, not a
+   floor. The criterion now excludes ranking and stated counts. The pipeline
+   has no sort at all (bead nls-finetune-scix-oqo), so these queries lose
+   nothing they had before.
+
+`round4c` is the final text and the numbers below.
+
+### Extraction, gold-derived labels
+
+Exact match per item; first author is scored only on items whose gold names
+an author (25 benchmark, 179 val).
+
+| dataset | arm | year EM | first-author EM (P / R) | citation floor F1 (P / R) | topic-word F1 (P / R) |
+|---|---|---|---|---|---|
+| benchmark | A regex | 0.929 | 0.880 (0 / 0) | 0.000 | 0.640 (0.50 / 0.90) |
+| benchmark | B jev | 0.929 | 0.960 (1.00 / 0.67) | 0.667 (0.55 / 0.86) | 0.779 (0.69 / 0.89) |
+| benchmark | E jev_gated | 0.929 | 0.960 (1.00 / 0.67) | 0.857 (0.86 / 0.86) | 0.768 (0.67 / 0.89) |
+| val | A regex | 0.791 | 0.453 (0 / 0) | 0.000 | 0.483 (0.38 / 0.66) |
+| val | B jev | 0.803 | 0.642 (0.95 / 0.37) | 0.800 (1.00 / 0.67) | 0.592 (0.55 / 0.64) |
+| val | E jev_gated | 0.803 | 0.642 (0.95 / 0.37) | 0.800 (1.00 / 0.67) | 0.589 (0.54 / 0.65) |
+
+Topic words gain 13 points of F1 on the benchmark and 11 on val, all from
+precision: Jev drops "recent", "papers", "highly cited" and similar words
+the regex left in the `abs:` clause. First-author recall is low on val because the gold convention is
+inconsistent: across the gold examples, "papers by X" carries the `^` on 576
+items and not on 297. Jev asks for the caret only when the text says first
+or lead author, and is right when it does (precision 0.95).
+
+The year column moves least, and mostly because of gold conventions.
+"Recent" is `year:2023-2025` on some gold items and `pubdate:[2023-01 TO
+2026-12]` on others, and the benchmark's "papers from this year" ends in
+2026 on a set otherwise anchored at 2025. Jev's windows end at 2025. In
+round 4c Jev and the regex give different years on 11 val items: Jev
+matches gold on 6 ("new photometry papers", "latest Rubin Observatory
+research", "what's new in exoplanets?") where the regex set no year, and
+the other 5 are "recent ..." items that differ from gold only by the 2026
+end year. On the benchmark they differ on 2 items, neither matching gold:
+"papers from this year" (gold 2026) and "recent highly cited ALMA papers"
+(gold `year:2020-`).
+
+### Operator and enum fields
+
+The new questions share the request with the operator and enum questions.
+Rewording them moved unrelated answers slightly:
+
+| dataset | arm | op macro-F1, round 3 to 4c | FP on gold none | doctype F1 | input tokens per call | $/query |
+|---|---|---|---|---|---|---|
+| benchmark | B | 0.984 to 0.984 | 1 to 1 | 0.500 to 0.485 | 3,117 to 3,786 | 0.000131 to 0.000159 |
+| benchmark | E | 0.991 to 0.995 | 2 to 1 | 0.526 to 0.561 | 2,107 to 2,581 | 0.000088 to 0.000108 |
+| val | B | 0.842 to 0.810 | 11 to 11 | 0.429 to 0.429 | 3,118 to 3,807 | 0.000131 to 0.000160 |
+| val | E | 0.798 to 0.802 | 16 to 15 | 0.415 to 0.439 | 2,897 to 3,546 | 0.000122 to 0.000149 |
+| heldout | B | 0.986 to 0.986 | 1 to 1 | 0.870 to 0.870 | 3,118 to 3,914 | 0.000131 to 0.000164 |
+| heldout | E | 0.975 to 0.986 | 2 to 1 | 0.826 to 0.870 | 3,077 to 3,891 | 0.000129 to 0.000163 |
+
+Val macro-F1 for B moves 3 points on 2 or 3 items, because val operator
+classes hold 3 to 11 items each; its accuracy moved from 0.970 to 0.968.
+Across the three criteria revisions, the only operator answers that
+flipped were two low-confidence guesses (0.43 and 0.37), both below the 0.5
+routing threshold, so hybrid mode would send them to the fine-tuned model.
+Arm A also moved, from the regex book-review fix in `ed01014`, which landed
+after round 3 ran.
+
+Cost rose by about 700 input tokens per call (23%), the text of the four
+new questions. The gated arm now costs $0.000108 per benchmark query,
+missing the $0.0001 criterion there too. Shortening the bibgroup option
+list, as proposed in the Caveats, would more than pay for it.
+
+**Gate limitation.** `jev_gated` skips Jev whenever the regex finds an
+operator with confidence 0.5 or more. Since the same call now also decides
+recency, topic, first author and highly cited, those queries ("papers citing
+X from recent years") keep the regex reading for all four. Bead
+nls-finetune-scix-hgp tracks the fix.
+
+### End to end
+
+The overlap numbers in earlier rounds carry a scoring error, found in this
+round and fixed in `finetune/domains/scix/eval.py` (bead
+nls-finetune-scix-47c). The scorer counted a pair as a perfect match when
+both the gold query and the generated query returned no documents, and
+`fetch_bibcodes` returned an empty list for every ADS timeout or error
+instead of reporting the failure. A quarter of the benchmark gold queries
+return nothing (`topn()`, `aff:` and `bibstem:` forms, and timeouts), so a
+garbled query that also returns nothing scored 1.0: "top 10 papers on dark
+matter" as `abs:"top 10 dark matter"` was a match. The regex backend
+collected more of these free points than Jev, because it garbles more
+topics: in round 4 the regex run scored 31 such pairs and the gated Jev
+run 21. The scorer now marks those items unscorable, leaves them out of
+every rate and mean, and prints how many there were; an ADS failure on
+either query is recorded as unscorable, never as an empty result.
+
+The table re-scores the saved runs with the fixed rule. An item is
+scorable when its gold query returned documents in either run of the pair
+(runs before the fix skipped the gold fetch when the generated query was
+invalid), and an invalid generated query on a scorable item is a miss.
+
+| dataset | run | scorable | regex match | jev_gated match | mean Jaccard regex to jev_gated | paired wins, jev_gated to regex |
+|---|---|---|---|---|---|---|
+| benchmark | round 3 | 195 of 253 | 31.8% (raw 36.8%) | 29.2% (raw 34.0%) | 0.335 to 0.314 | 1 to 8 of 9 |
+| benchmark | round 4c | 189 of 253 | 31.7% (raw 35.6%) | 38.1% (raw 36.8%) | 0.335 to 0.436 | 37 to 8 of 45 |
+| val | round 3 | 356 of 475 | 12.4% (raw 27.8%) | 12.4% (raw 27.8%) | 0.134 to 0.135 | 11 to 3 of 14 |
+| val | round 4c | 359 of 475 | 12.3% (raw 27.6%) | 21.2% (21.4% as run, see below) | 0.134 to 0.234 | 106 to 14 of 120 |
+
+On the benchmark the gated Jev backend moves from 2.6 points behind the
+regex to 6.4 points ahead, and wins 37 of the 45 items where the two
+differ. The regex backend itself did not move (31.8% to 31.7%), so the gain
+is the new decisions, not a changed baseline. Most wins are the topic
+span: "papers discussing supermassive black hole growth" (0.00 to 0.98),
+"Gemini telescope papers on exoplanets", "physics collection on string
+theory" and "papers where dark and matter appear within 3 words" drop the
+filler words the regex left in `abs:`. The rest are the new booleans
+("highly cited papers on cosmology" 0.00 to 1.00, "first author Hawking
+papers on black holes from the 1970s" 0.00 to 1.00) and operator targets
+that are clean now that the topic is ("sources used in the black hole
+imaging paper" to `references(abs:"black hole imaging")`).
+
+Three of the eight losses are enum decisions, the round-3 pattern: "open
+access software papers" loses `doctype:software` (1.00 to 0.00), "arxiv
+open access papers on black holes" adds `doctype:eprint`, and "JWST or HST
+papers on exoplanet atmospheres" drops HST from the bibgroup. One win is
+luck: "refereed papers excluding conference proceedings" scores 1.00
+because Jev dropped the regex's garbled `abs:excluding`, but neither
+backend expresses the NOT.
+
+Val shows the same effect at larger scale. The two backends tied in round
+3 (12.4% each once re-scored) and the gated Jev backend now leads by 8.9
+points, winning 106 of the 120 items where they differ. The largest group
+is first author: 41 val items say "papers by X first author" or "as first
+author", which the regex turned into `author:"X" abs:"first author"` and
+Jev turns into `author:"^X"`. Jev wins 30 of the 38 scorable ones and loses
+none ("papers by Steidel first author", 0.00 to 1.00). Next come recency words that the
+regex kept as topic words ("new photometry papers", "latest spiral galaxies
+research", "what's new in exoplanets?", each 0.00 to 1.00) and field names
+left in `abs:` ("weak lensing in abs field", "coronal mass ejections in HST
+bibgroup"). The val gold is synthetic and many items are field-syntax
+exercises, so both backends still score low in absolute terms. The biggest
+loss is the round-3 jargon false positive: "supernova remnants review"
+routed to `reviews(...)`, 0.97 to 0.00.
+
+The val gated-Jev leg ran after the scorer fix landed and reports 21.4%
+with 118 of 478 items excluded; the regex val leg ran before it and
+reports the inflated 27.6%. The table's re-scored figures put both on the
+same rule and the same scorable items.
+
+The noise caveat from round 3 still applies. Between 58 and 64 of the
+253 benchmark gold queries are unscorable depending on the pair of runs,
+because some of the empty results were timeouts.
+
 ## Criteria table
 
-Round 3 values (the code on main); round 2 in parentheses where it differs.
+Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criteria 4 and 5.
 
 | # | criterion | result | status |
 |---|---|---|---|
 | 1 | B macro-F1 on paraphrase set ≥ A + 15 points and > C | B 0.986 (0.955) vs A 0.146, +84 points; vs C 0.922 (0.933), +6.4 points, and C makes 3 operator-negative false positives to B's 0 | met |
 | 2 | B false-positive rate on operator-negative stratum ≤ 2% | 0 of 40 (B, D and E, both rounds); on all gold-none items 1 of 106 (3 of 106), "the review" | met |
 | 3 | B selective accuracy ≥ 95% at 90% coverage | 1.000 held-out, 1.000 benchmark, 0.995 (0.988) val | met |
-| 4 | end-to-end semantic match: no drop on benchmark, rise on held-out | benchmark: jev_gated 34.0% vs regex 36.8%, -2.8 points (round 2: -1.2), inside ADS noise of about 2 points of one-sided timeouts but in the wrong direction; paired regex 6 wins to Jev 2 on 58 differing items (round 2: Jev 19 to 10). Val: 27.8% each; paired Jev 15 to 6. Held-out has no gold queries; as a proxy the jev_gated pipeline serves 139 of 152 at 0.986 operator accuracy vs 141 at 0.688 for regex | no drop not shown; rise shown on operator accuracy only, not end to end |
-| 5 | E p95 added latency ≤ 600 ms, mean cost ≤ $0.0001/query | p95 218 to 269 ms (185 to 206); $0.000088 benchmark, $0.000122 val, $0.000129 held-out ($0.000086 / $0.000119 / $0.000126) | latency met; cost met on benchmark only |
+| 4 | end-to-end semantic match: no drop on benchmark, rise on held-out | Round 4, scored with the fixed rule (empty gold excluded): benchmark jev_gated 38.1% vs regex 31.7%, +6.4 points, paired 37 wins to 8 on 45 differing items; val 21.2% vs 12.3%, paired 106 to 14. Round 3 on the same rule: benchmark -2.6 points (paired 1 to 8), val level. Held-out has no gold queries; as a proxy the jev_gated pipeline serves 139 of 152 at 0.986 operator accuracy vs 141 at 0.688 for regex | no drop met on benchmark (round 4); rise shown on val and on held-out operator accuracy, not end to end on held-out |
+| 5 | E p95 added latency ≤ 600 ms, mean cost ≤ $0.0001/query | Round 4: $0.000108 benchmark, $0.000149 val, $0.000163 held-out (round 3: $0.000088 / $0.000122 / $0.000129); p95 218 to 269 ms in round 3, not re-measured in round 4 | latency met (round 3); cost missed on every set in round 4 |
 
 ## Caveats
 
@@ -697,6 +888,14 @@ Round 3 values (the code on main); round 2 in parentheses where it differs.
 - **Jev confidence is a model output** and was measured calibrated on these
   two sets; that is a result, not a premise, and it was measured on
   `jev-1.13.0` only.
+- **Overlap scores before round 4 counted empty-vs-empty as a match.** See
+  "Round 4, End to end". The round 1 to 3 semantic-match figures in this
+  report are left as they were measured; the round 4 table re-scores round
+  3 with the fixed rule for comparison.
+- **Round 4 criteria text was tuned on benchmark and val rows.** The
+  recency and highly-cited criteria were each revised once after reading
+  failures on those sets, so the round-4 extraction and end-to-end numbers
+  are not untuned; only the held-out operator numbers are.
 - **End-to-end overlap is noisy.** ADS times out on 4% to 9% of second-order
   queries per run and returns different result sets for the same
   `similar()` query minutes apart; differences under about 3 points between
@@ -711,6 +910,7 @@ Round 3 values (the code on main); round 2 in parentheses where it differs.
 - Held-out: `data/datasets/evaluations/intent_classifiers_heldout_2026-09-24{.jsonl,_metrics.json}` (arms A, B, D, E; the arm C rows in this file are the failed API attempts) and `intent_classifiers_heldout_c_2026-09-24{.jsonl,_metrics.json}` (arm C via the CLI; `llm_transport: cli` in the metadata).
 - End to end: `data/datasets/evaluations/semantic_overlap_pipeline_{regex,jev,jev_gated}_{benchmark,val}_2026-09-24.json`.
 - Round 3 (the code on main): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_v3_2026-09-24{.jsonl,_metrics.json}` (arms A, B, D, E) and `intent_classifiers_{benchmark,val,heldout}_c_v3_2026-09-24{.jsonl,_metrics.json}` (arm C via the CLI); end to end `semantic_overlap_pipeline_{regex,jev_gated}_{benchmark,val}_v3_2026-09-24.json`.
+- Round 4 (Jev decides recency, topic, first author and highly cited): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round4c_2026-09-24{.jsonl,_metrics.json}` (final criteria text; `round4` and `round4b` are the two earlier revisions); end to end `semantic_overlap_pipeline_{regex,jev_gated}_{benchmark,val}_round4_2026-09-24.json`.
 - Request caches: `data/cache/jev_systemone.jsonl`, `data/cache/llm_intent.jsonl`.
 - Labels: `data/datasets/evaluations/intent_labels.jsonl`.
 - Held-out paraphrases (approved): `data/datasets/benchmark/heldout_paraphrases.json`; review sheet `reports/heldout-paraphrase-review-sheet.md`; approval recorded with `scripts/approve_heldout_paraphrases.py`.

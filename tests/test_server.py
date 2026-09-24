@@ -21,7 +21,8 @@ from pathlib import Path
 import httpx
 import pytest
 from fastapi.testclient import TestClient
-from jev_fixtures import handler_client, jev_payload
+from jev_fixtures import answering_client as _answering
+from jev_fixtures import choice_answer, handler_client, jev_payload
 
 SERVER_PATH = Path(__file__).resolve().parents[1] / "docker" / "server.py"
 SERVER_ENV = (
@@ -84,18 +85,10 @@ def _with_model(server) -> list[list]:
     return calls
 
 
-def _answering(payload: dict, calls: list | None = None):
-    def handler(request: httpx.Request) -> httpx.Response:
-        if calls is not None:
-            calls.append(json.loads(request.content))
-        return httpx.Response(200, json=payload)
-
-    return handler_client(handler)
-
-
 def _post_pipeline(server, nl: str) -> dict:
     response = TestClient(server.app).post(
-        "/pipeline", json={"messages": [{"role": "user", "content": f"Query: {nl}\nDate: x"}]}
+        "/pipeline",
+        json={"messages": [{"role": "user", "content": f"Query: {nl}\nDate: 2025-12-15"}]},
     )
     assert response.status_code == 200
     return response.json()
@@ -151,9 +144,7 @@ def test_empty_jev_cache_path_disables_the_cache_file(load_server, monkeypatch, 
     server = load_server(**_jev_env(JEV_CACHE_PATH=""))
     assert server.jev_client.cache_path is None
     payload = jev_payload("similar", operator_confidence=0.97)
-    server.jev_client = handler_client(
-        lambda request: httpx.Response(200, json=payload), cache_path=server.jev_client.cache_path
-    )
+    server.jev_client = _answering(payload, cache_path=server.jev_client.cache_path)
     body = _post_pipeline(server, GATED_QUERY)
     assert body["pipeline_result"]["debug_info"]["classifier_called"] is True
     assert list(tmp_path.rglob("*.jsonl")) == []
@@ -538,3 +529,38 @@ def test_no_shadow_rows_without_shadow_mode(load_server, tmp_path):
     assert server.shadow_executor is None
     _post_pipeline(server, GATED_QUERY)
     assert [r["record_type"] for r in _rows(log)] == ["request"]
+
+
+def test_request_date_anchors_the_jev_recency_window(load_server):
+    server = load_server(**_jev_env())
+    recency = choice_answer("last_3_years", {"none": 0.01, "last_3_years": 0.99})
+    topic = choice_answer("asteroids", {"none": 0.0, "recent": 0.0, "asteroids": 1.0})
+    server.jev_client = _answering(jev_payload(recency=recency, topic=topic))
+    body = _post_pipeline(server, "recent papers on asteroids")
+    intent = body["pipeline_result"]["intent"]
+    assert (intent["year_from"], intent["year_to"]) == (2023, 2025)
+    assert intent["free_text_terms"] == ["asteroids"]
+
+
+@pytest.mark.parametrize(
+    ("content", "expected"),
+    [
+        ("Query: q\nDate: 2025-12-15", 2025),
+        ("Query: q", None),
+        ("plain text", None),
+    ],
+)
+def test_reference_year_comes_from_the_date_line(load_server, content, expected):
+    server = load_server()
+    messages = [server.ChatMessage(role="user", content=content)]
+    assert server.extract_reference_year(messages) == expected
+
+
+def test_malformed_date_is_a_client_error(load_server):
+    server = load_server()
+    response = TestClient(server.app).post(
+        "/v1/chat/completions",
+        json={"messages": [{"role": "user", "content": "Query: q\nDate: yesterday"}]},
+    )
+    assert response.status_code == 400
+    assert "Date" in response.json()["detail"]

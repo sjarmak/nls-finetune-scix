@@ -207,12 +207,14 @@ def extract_intent_with_backend(
     nl_text: str,
     intent_backend: IntentBackend,
     jev_client: "JevClient | None",
+    reference_year: int | None = None,
 ) -> IntentExtraction:
     """Run the selected intent extractor.
 
     regex      - the shipped rules-based extractor.
-    jev        - Jev decides operator, enum fields and gates; regex keeps names,
-                 years and topics.
+    jev        - Jev decides operator, enum fields, gates, recency, first author,
+                 highly cited and which regex topic sub-span is the topic;
+                 regex keeps names and explicit years.
     jev_gated  - regex first; Jev only when regex finds no operator or the
                  regex intent scores below GATED_CONFIDENCE_THRESHOLD.
 
@@ -220,33 +222,41 @@ def extract_intent_with_backend(
     that breaks the contract) the regex intent is returned with the failure
     in ``classifier_error``, so a Jev outage degrades to the regex backend
     instead of failing the request. Any other exception propagates.
+
+    Relative dates end at ``reference_year`` (the request date's year),
+    default the current year.
     """
     from .ner import extract_intent
 
     if intent_backend not in INTENT_BACKENDS:
         raise ValueError(f"intent_backend must be one of {INTENT_BACKENDS}, got {intent_backend!r}")
     if intent_backend == "regex":
-        return IntentExtraction(extract_intent(nl_text))
+        return IntentExtraction(extract_intent(nl_text, reference_year))
     if jev_client is None:
         raise ValueError(f"intent_backend={intent_backend!r} requires a JevClient")
 
-    regex_intent = extract_intent(nl_text)
+    regex_intent = extract_intent(nl_text, reference_year)
     if intent_backend == "jev_gated":
         if regex_intent.confidence.get("ads_passthrough"):
             return IntentExtraction(regex_intent)
         confidence, _ = compute_pipeline_confidence(regex_intent)
         if regex_intent.operator is not None and confidence >= GATED_CONFIDENCE_THRESHOLD:
             return IntentExtraction(regex_intent)
-    return _classify_or_fall_back(nl_text, regex_intent, jev_client)
+    return _classify_or_fall_back(nl_text, regex_intent, jev_client, reference_year)
 
 
 def _classify_or_fall_back(
-    nl_text: str, regex_intent: IntentSpec, jev_client: "JevClient"
+    nl_text: str,
+    regex_intent: IntentSpec,
+    jev_client: "JevClient",
+    reference_year: int | None,
 ) -> IntentExtraction:
     from .jev_intent import JEV_FAILURES, classify_and_extract
 
     try:
-        intent, answers = classify_and_extract(nl_text, jev_client, regex_intent=regex_intent)
+        intent, answers = classify_and_extract(
+            nl_text, jev_client, regex_intent=regex_intent, reference_year=reference_year
+        )
     except JEV_FAILURES as error:
         reason = f"{type(error).__name__}: {error}"
         logger.warning("Jev classifier failed, serving the regex intent: %s", reason)
@@ -260,6 +270,7 @@ def process_query(
     nl_text: str,
     intent_backend: IntentBackend = "regex",
     jev_client: "JevClient | None" = None,
+    reference_year: int | None = None,
 ) -> PipelineResult:
     """Process a natural language query through the hybrid NER pipeline.
 
@@ -275,6 +286,8 @@ def process_query(
         nl_text: Natural language search query from user
         intent_backend: "regex" (default), "jev" or "jev_gated"
         jev_client: Required for the Jev backends
+        reference_year: Year relative dates end at (the request date's year);
+            defaults to the current year
 
     Returns:
         PipelineResult containing:
@@ -288,7 +301,7 @@ def process_query(
 
     # Stage 1: Intent extraction
     ner_start = time.perf_counter()
-    extraction = extract_intent_with_backend(nl_text, intent_backend, jev_client)
+    extraction = extract_intent_with_backend(nl_text, intent_backend, jev_client, reference_year)
     intent = extraction.intent
     debug_info.classifier_called = extraction.classifier_called
     debug_info.classifier_cached = extraction.classifier_cached

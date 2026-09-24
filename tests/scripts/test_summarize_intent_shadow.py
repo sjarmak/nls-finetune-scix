@@ -111,6 +111,11 @@ def test_summary_counts():
         "bibgroup": 0,
         "collection": 0,
         "property": 0,
+        "year_from": 0,
+        "year_to": 0,
+        "free_text_terms": 0,
+        "first_author": 0,
+        "min_citations": 0,
     }
 
 

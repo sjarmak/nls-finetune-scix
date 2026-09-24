@@ -2,7 +2,7 @@
 
 import httpx
 import pytest
-from jev_fixtures import choice_answer, handler_client, jev_payload
+from jev_fixtures import answering_client, choice_answer, handler_client, jev_payload
 
 from finetune.domains.scix.intent_shadow import (
     SHADOW_COMPARED_FIELDS,
@@ -16,11 +16,22 @@ GATED_QUERY = "work along the lines of the Planck results"
 
 
 def _answering(payload: dict):
-    return handler_client(lambda request: httpx.Response(200, json=payload))
+    return answering_client(payload)
 
 
 def test_compared_fields_are_the_ones_jev_decides():
-    assert SHADOW_COMPARED_FIELDS == ("operator", "doctype", "bibgroup", "collection", "property")
+    assert SHADOW_COMPARED_FIELDS == (
+        "operator",
+        "doctype",
+        "bibgroup",
+        "collection",
+        "property",
+        "year_from",
+        "year_to",
+        "free_text_terms",
+        "first_author",
+        "min_citations",
+    )
 
 
 def test_disagreements_list_differing_fields_in_a_fixed_order():

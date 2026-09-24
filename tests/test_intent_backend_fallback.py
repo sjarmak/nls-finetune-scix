@@ -10,7 +10,7 @@ import time
 
 import httpx
 import pytest
-from jev_fixtures import handler_client, jev_payload, mock_jev_client
+from jev_fixtures import answering_client, handler_client, jev_payload, mock_jev_client
 
 from finetune.domains.scix.jev_intent import JevResponseError
 from finetune.domains.scix.ner import extract_intent
@@ -77,7 +77,7 @@ def test_failure_is_logged_as_a_warning(caplog):
 
 
 def test_success_reports_no_error():
-    client = handler_client(lambda request: httpx.Response(200, json=jev_payload("similar")))
+    client = answering_client(jev_payload("similar"))
     extraction = extract_intent_with_backend(GATED_QUERY, "jev_gated", client)
     assert extraction.intent.operator == "similar"
     assert extraction.classifier_called is True

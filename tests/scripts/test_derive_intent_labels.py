@@ -51,6 +51,37 @@ def test_year_and_author_flags():
     assert not derive_labels('abs:"year of the comet"').has_year
 
 
+@pytest.mark.parametrize(
+    "query, years",
+    [
+        ("year:2023-2025", (2023, 2025)),
+        ("year:2019", (2019, 2019)),
+        ("pubdate:[2023-01 TO 2026-12]", (2023, 2026)),
+        ("year:[2020 TO *]", (2020, None)),
+        ("pubdate:[* TO 2010]", (None, 2010)),
+        ('abs:"year of the comet"', (None, None)),
+    ],
+)
+def test_year_range(query, years):
+    labels = derive_labels(query)
+    assert (labels.year_from, labels.year_to) == years
+
+
+def test_first_author_and_citation_floor():
+    assert derive_labels('author:"^Fry" author:"Fields"').first_author
+    assert derive_labels('author:("^Parnell")').first_author
+    assert not derive_labels('author:"Fields"').first_author
+    assert derive_labels("abs:x citation_count:[100 TO *]").min_citations == 100
+    assert derive_labels("abs:x").min_citations is None
+
+
+def test_topic_tokens_come_from_abstract_and_title_clauses():
+    labels = derive_labels(
+        'abs:(black AND hole AND merger) title:"dark energy" author:"^Smith" abs:quasars'
+    )
+    assert labels.topic_tokens == {"black", "hole", "merger", "dark", "energy", "quasars"}
+
+
 def test_benchmark_operator_field_agrees_with_derived_labels():
     items = load_benchmark_items()
     checked = 0

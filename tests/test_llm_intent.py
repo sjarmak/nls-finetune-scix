@@ -126,6 +126,14 @@ class TestClient:
         assert intent.authors == ["Smith"] and intent.year_from == 2019
         assert answers is not None and answers.values["operator"] == "similar"
 
+    def test_compose_anchors_relative_years(self, tmp_path: Path):
+        fake = FakeAnthropic([json.dumps(_values())])
+        client = LlmClient(cache_path=tmp_path / "c.jsonl", anthropic_client=fake)
+        intent, _ = classify_and_extract_llm(
+            "dark energy papers from the last 3 years", client, reference_year=2025
+        )
+        assert (intent.year_from, intent.year_to) == (2022, 2025)
+
 
 def _cli_payload(structured: dict, **overrides) -> str:
     payload = {

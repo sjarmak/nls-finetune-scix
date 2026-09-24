@@ -7,6 +7,7 @@ unit-testable without any model call.
 
 from __future__ import annotations
 
+import re
 from collections import Counter, defaultdict
 from statistics import quantiles
 
@@ -171,3 +172,65 @@ def cost_summary(rows: list[dict], rate_in_per_mtok: float, rate_out_per_mtok: f
 
 def class_counts(values: list[str]) -> dict[str, int]:
     return dict(sorted(Counter(values).items()))
+
+
+def topic_words(text: str) -> frozenset[str]:
+    """Lower-cased words without boolean keywords; used for gold and predictions alike."""
+    words = re.findall(r"[a-z0-9]+", text.lower())
+    return frozenset(w for w in words if w not in ("and", "or", "not"))
+
+
+def extraction_metrics(rows: list[dict]) -> dict | None:
+    """Year range, first-author, citation-floor and topic-word agreement with gold.
+
+    Rows need gold labels from ``derive_intent_labels`` (with ``topic_tokens``);
+    returns None when none have them (hand-labelled sets). Each field is a
+    ``set_f1`` over one-element sets, so ``exact_match`` is the accuracy.
+    First author is scored only where gold names an author.
+    """
+    rows = [r for r in rows if "topic_tokens" in r["labels"]]
+    if not rows:
+        return None
+
+    def year(d: dict) -> set[str]:
+        if d["year_from"] is None and d["year_to"] is None:
+            return set()
+        return {f"{d['year_from']}-{d['year_to']}"}
+
+    def flag(value: bool) -> set[str]:
+        return {"yes"} if value else set()
+
+    with_year = [r for r in rows if year(r["labels"])]
+    with_author = [r for r in rows if r["labels"]["has_author"]]
+    return {
+        "year": set_f1([(year(r["labels"]), year(r["prediction"])) for r in rows]),
+        "year_when_gold_has_one": set_f1(
+            [(year(r["labels"]), year(r["prediction"])) for r in with_year]
+        ),
+        "first_author": set_f1(
+            [
+                (flag(r["labels"]["first_author"]), flag(r["prediction"]["first_author"]))
+                for r in with_author
+            ]
+        ),
+        "citation_floor": set_f1(
+            [
+                (
+                    flag(r["labels"]["min_citations"] is not None),
+                    flag(r["prediction"]["min_citations"] is not None),
+                )
+                for r in rows
+            ]
+        ),
+        "topic_tokens": set_f1(
+            [
+                (
+                    set(r["labels"]["topic_tokens"]),
+                    topic_words(
+                        " ".join(r["prediction"]["free_text_terms"] + r["prediction"]["or_terms"])
+                    ),
+                )
+                for r in rows
+            ]
+        ),
+    }

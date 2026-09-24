@@ -2,8 +2,10 @@
 """Derive IntentSpec-level gold labels from gold ADS queries.
 
 The labels are read off the query string mechanically: the outermost operator
-prefix, and the values of the constrained enum fields (doctype, property,
-bibgroup, database/collection). No semantics are inferred. Operators that
+prefix, the values of the constrained enum fields (doctype, property,
+bibgroup, database/collection), the first year range, the first-author caret,
+the citation-count floor and the words in abs:/title: clauses. No semantics
+are inferred. Operators that
 IntentSpec cannot represent (topn) are labelled ``none`` and recorded in
 ``unsupported_operator`` so they can be reported separately.
 
@@ -26,6 +28,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "packages" / "finetune" / "src"))
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
 from evaluate_benchmark import flatten_tests, load_benchmark  # noqa: E402
+from intent_metrics import topic_words  # noqa: E402
 
 from finetune.domains.scix.field_constraints import FIELD_ENUMS  # noqa: E402
 from finetune.domains.scix.intent_spec import OPERATORS  # noqa: E402
@@ -47,6 +50,13 @@ _FIELD_VALUE = re.compile(
     r'\b(doctype|property|bibgroup|database|collection):(?:"([^"]+)"|\(([^)]*)\)|([^\s(),]+))'
 )
 _LIST_SEPARATOR = re.compile(r"\s+(?:OR|AND)\s+|\s+", re.IGNORECASE)
+_YEAR_RANGE = re.compile(
+    r"\b(?:year|pubdate):(?:\[\s*(\*|\d{4})[-\d]*\s+TO\s+(\*|\d{4})[-\d]*\s*\]"
+    r"|(\d{4})(?:-\d{2})?(?:-(\d{4}))?\b)"
+)
+_FIRST_AUTHOR = re.compile(r'\b(?:author:\(?"\^|author:\^|first_author:)')
+_CITATION_FLOOR = re.compile(r"\bcitation_count:\[\s*(\d+)\s+TO\s+\*\s*\]")
+_TOPIC_CLAUSE = re.compile(r'\b(?:abs|title):(?:"([^"]*)"|\(([^)]*)\)|([^\s()"]+))')
 
 
 @dataclass(frozen=True)
@@ -60,9 +70,15 @@ class IntentLabels:
     has_author: bool
     unsupported_operator: str | None
     unparsed_values: tuple[str, ...]
+    year_from: int | None = None
+    year_to: int | None = None
+    first_author: bool = False
+    min_citations: int | None = None
+    topic_tokens: frozenset[str] = frozenset()
 
     def to_dict(self) -> dict:
         d = asdict(self)
+        d["topic_tokens"] = sorted(self.topic_tokens)
         for key in ("property", "doctype", "bibgroup", "collection"):
             d[key] = sorted(d[key])
         d["unparsed_values"] = list(self.unparsed_values)
@@ -79,6 +95,17 @@ def _canonical(field: str, value: str) -> str | None:
         if candidate.lower() == lowered:
             return candidate
     return None
+
+
+def _year_range(gold_query: str) -> tuple[int | None, int | None]:
+    """First year:/pubdate: clause as (from, to); ``*`` is open. Months are dropped."""
+    match = _YEAR_RANGE.search(gold_query)
+    if match is None:
+        return None, None
+    low, high, single, single_end = match.groups()
+    if single is not None:
+        return int(single), int(single_end or single)
+    return (None if low == "*" else int(low)), (None if high == "*" else int(high))
 
 
 def derive_labels(gold_query: str) -> IntentLabels:
@@ -114,6 +141,8 @@ def derive_labels(gold_query: str) -> IntentLabels:
             else:
                 values[field].add(canonical)
 
+    year_from, year_to = _year_range(gold_query)
+    floor = _CITATION_FLOOR.search(gold_query)
     return IntentLabels(
         operator=operator,
         property=frozenset(values["property"]),
@@ -124,6 +153,11 @@ def derive_labels(gold_query: str) -> IntentLabels:
         has_author=bool(re.search(r"\b(author|first_author):", gold_query)),
         unsupported_operator=unsupported,
         unparsed_values=tuple(unparsed),
+        year_from=year_from,
+        year_to=year_to,
+        first_author=bool(_FIRST_AUTHOR.search(gold_query)),
+        min_citations=int(floor.group(1)) if floor else None,
+        topic_tokens=topic_words(" ".join("".join(m) for m in _TOPIC_CLAUSE.findall(gold_query))),
     )
 
 

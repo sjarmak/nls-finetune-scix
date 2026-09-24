@@ -19,6 +19,11 @@ SHADOW_COMPARED_FIELDS: tuple[str, ...] = (
     "bibgroup",
     "collection",
     "property",
+    "year_from",
+    "year_to",
+    "free_text_terms",
+    "first_author",
+    "min_citations",
 )
 
 
@@ -37,6 +42,7 @@ def shadow_record(
     shadow_backend: IntentBackend,
     jev_client: JevClient,
     served_path: str,
+    reference_year: int | None = None,
 ) -> dict:
     """Run ``shadow_backend`` on ``nl_query`` and compare it with the regex intent.
 
@@ -49,7 +55,7 @@ def shadow_record(
     disagreement and is counted as an error by the summary script.
     """
     started = time.perf_counter()
-    extraction = extract_intent_with_backend(nl_query, shadow_backend, jev_client)
+    extraction = extract_intent_with_backend(nl_query, shadow_backend, jev_client, reference_year)
     latency_ms = (time.perf_counter() - started) * 1000
     shadow_intent = extraction.intent.to_dict()
     disagreements = intent_disagreements(served_intent, shadow_intent)

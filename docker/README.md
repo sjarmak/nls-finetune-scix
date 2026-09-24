@@ -172,18 +172,36 @@ answer is still served.
 ## Intent backends
 
 The pipeline's first stage builds an IntentSpec (operator, enum filters,
-names, years, topics). `INTENT_BACKEND` picks who decides the operator and
-enum fields:
+names, years, topics). `INTENT_BACKEND` picks who makes the judgement calls:
 
 - `regex`: the rules in `ner.py`, as shipped. No network calls.
 - `jev`: Jev typed classifiers (TypeSafe System One, model `jev-1.13.0`)
-  decide the operator, doctype, bibgroup, collection and the refereed,
-  openaccess and eprint properties on every request. Names, years and topics
-  still come from the regex.
+  answer one request per query. They decide the operator, doctype, bibgroup,
+  collection and the refereed, openaccess and eprint properties, plus:
+  - **Recency.** "recent" or "latest" without an explicit year becomes a
+    window (this year, last 2, 3, 5 or 10 years) ending at the request's
+    reference year.
+  - **Highly cited.** Adds `citation_count:[100 TO *]`. "Popular" and
+    "trending" do not count.
+  - **First author.** When names were found, puts the `^` on the first one
+    only if the query asks for first-author papers.
+  - **Topic.** When the regex found one topic phrase of at most six words,
+    Jev picks which contiguous span of it is the subject (or none), so
+    "recent asteroids" becomes `asteroids`.
+
+  Code still finds the candidate names, years and words; Jev chooses among
+  them.
 - `jev_gated`: regex first; Jev is called only when the regex finds no
   operator or its structural confidence is below 0.5. This is the shape the
   evaluation recommends. Evidence:
   [reports/jev-intent-classifier-eval.md](../reports/jev-intent-classifier-eval.md).
+  Because the gate skips Jev whenever the regex finds an operator, recency,
+  highly cited, first author and topic choice are also skipped on those
+  queries ("papers citing X from recent years" keeps the regex reading).
+
+**Reference year.** Relative years ("recent", "last 5 years") end at the year
+on the prompt's `Date: YYYY-MM-DD` line, which Nectar sends. A malformed date
+returns 400; a prompt with no `Date:` line uses the server's current year.
 
 **Fallback.** A failed Jev call (HTTP error, timeout after `JEV_TIMEOUT_S`,
 network error, or a response that breaks the contract) never fails the
@@ -271,7 +289,7 @@ from the same request share `request_id`.
 | `served_backend`, `shadow_backend` | `regex` and the shadow backend |
 | `served_path` | `pipeline` when the regex intent was served, `model` when the request fell back to the model |
 | `served_intent`, `shadow_intent` | Both IntentSpecs as dicts |
-| `disagreements`, `disagree` | Compared fields that differ (`operator`, `doctype`, `bibgroup`, `collection`, `property`) and whether any do |
+| `disagreements`, `disagree` | Compared fields that differ (`operator`, `doctype`, `bibgroup`, `collection`, `property`, `year_from`, `year_to`, `free_text_terms`, `first_author`, `min_citations`) and whether any do |
 | `classifier_called`, `classifier_cached`, `classifier_error`, `classifier_operator_confidence` | As in request rows, for the shadow run |
 | `shadow_latency_ms` | Duration of the shadow intent run |
 

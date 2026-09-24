@@ -40,10 +40,12 @@ class IntentSpec:
         free_text_terms: Topic phrases to search in abs:/title: fields (AND'd together)
         or_terms: Topic phrases that should be OR'd together (e.g., "rocks or volcanoes")
         authors: Author names (will be formatted as "Last, F")
+        first_author: The first name in ``authors`` is asked for as first author
         affiliations: Institutional affiliations for aff: field
         objects: Astronomical objects for object: field
         year_from: Start year for pubdate range (inclusive)
         year_to: End year for pubdate range (inclusive)
+        min_citations: Citation-count floor (citation_count:[N TO *])
         doctype: Document types (must be in DOCTYPES enum)
         property: Record properties (must be in PROPERTIES enum)
         collection: Collection/discipline filter (must be in COLLECTIONS enum)
@@ -60,12 +62,16 @@ class IntentSpec:
     free_text_terms: list[str] = field(default_factory=list)
     or_terms: list[str] = field(default_factory=list)  # Topics to combine with OR
     authors: list[str] = field(default_factory=list)
+    first_author: bool = False
     affiliations: list[str] = field(default_factory=list)
     objects: list[str] = field(default_factory=list)
 
     # Year range
     year_from: int | None = None
     year_to: int | None = None
+
+    # Citation-count floor
+    min_citations: int | None = None
 
     # Constrained enum fields (must be validated against FIELD_ENUMS)
     doctype: set[str] = field(default_factory=set)

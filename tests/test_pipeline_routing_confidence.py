@@ -7,15 +7,12 @@ combined confidence sends that miss to the model.
 
 import httpx
 import pytest
+from jev_fixtures import answering_client as _answering
 from jev_fixtures import handler_client, jev_payload
 
 from finetune.domains.scix.pipeline import process_query
 
 GATED_QUERY = "work along the lines of the Planck results"
-
-
-def _answering(payload: dict):
-    return handler_client(lambda request: httpx.Response(200, json=payload))
 
 
 def test_low_jev_operator_confidence_lowers_pipeline_confidence():

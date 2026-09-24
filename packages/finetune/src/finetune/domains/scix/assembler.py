@@ -85,28 +85,23 @@ def _validate_enum_values(field: str, values: set[str]) -> set[str]:
     return valid_values
 
 
-def _build_author_clause(authors: Sequence[str]) -> str:
+def _build_author_clause(authors: Sequence[str], first_author: bool = False) -> str:
     """Build author search clause.
 
-    Formats author names for ADS syntax: author:"Last, F"
+    Formats author names for ADS syntax: author:"Last, F". With
+    ``first_author`` the first name gets the ADS first-author caret.
 
     Args:
         authors: List of author names
+        first_author: Whether the first name is asked for as first author
 
     Returns:
         Author clause string, or empty string if no authors
     """
-    if not authors:
-        return ""
-
-    clauses = []
-    for author in authors:
-        # Always quote author names
-        clauses.append(f'author:"{author}"')
-
-    if len(clauses) == 1:
-        return clauses[0]
-    return " ".join(clauses)
+    return " ".join(
+        f'author:"{"^" if first_author and i == 0 else ""}{author}"'
+        for i, author in enumerate(authors)
+    )
 
 
 def _build_abs_clause(terms: Sequence[str], use_or: bool = False) -> str:
@@ -286,7 +281,7 @@ def assemble_query(intent: IntentSpec, examples: list[GoldExample] | None = None
 
     # Build author clause
     if intent.authors:
-        author_clause = _build_author_clause(intent.authors)
+        author_clause = _build_author_clause(intent.authors, intent.first_author)
         if author_clause:
             clauses.append(author_clause)
 
@@ -307,6 +302,9 @@ def assemble_query(intent: IntentSpec, examples: list[GoldExample] | None = None
         year_clause = _build_year_clause(intent.year_from, intent.year_to)
         if year_clause:
             clauses.append(year_clause)
+
+    if intent.min_citations is not None:
+        clauses.append(f"citation_count:[{intent.min_citations} TO *]")
 
     # Build object clause
     if intent.objects:

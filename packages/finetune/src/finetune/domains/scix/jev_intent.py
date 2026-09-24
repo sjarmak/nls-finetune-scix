@@ -65,6 +65,22 @@ BOOLEAN_QUESTION_IDS: tuple[str, ...] = (
 )
 PROPERTY_BOOLEANS: tuple[str, ...] = ("refereed", "openaccess", "eprint")
 
+EXTRACTION_QUESTION_IDS: tuple[str, ...] = ("recency", "first_author", "highly_cited", "topic")
+"""Questions that replace regex keyword rules. Kept out of ``build_questions`` so
+the arm C (``llm_intent``) prompt, which mirrors the gating set, is unchanged."""
+RECENCY_WINDOWS: dict[str, int] = {
+    "this_year": 1,
+    "last_2_years": 2,
+    "last_3_years": 3,
+    "last_5_years": 5,
+    "last_10_years": 10,
+}
+"""Window length in years, ending at the request's reference year."""
+HIGHLY_CITED_MIN_CITATIONS = 100
+"""Most common floor for "highly cited" in the gold set (citation_count:[100 TO *])."""
+MAX_TOPIC_TOKENS = 6
+"""Longer topic phrases would offer too many sub-spans; the regex phrase is kept."""
+
 
 class JevResponseError(ValueError):
     """The System One response did not match the expected contract."""
@@ -183,6 +199,82 @@ def build_questions() -> dict[str, dict]:
     }
 
 
+def build_extraction_questions(topic_candidates: tuple[str, ...] = ()) -> dict[str, dict]:
+    """Questions that decide what the regex keyword rules used to.
+
+    ``topic`` is asked only when there are candidates; its options are the
+    candidate phrases plus ``none``.
+    """
+    questions = {
+        "recency": _choice(
+            "Does the user limit results to recently published work without giving explicit "
+            "years? Choose the window their wording implies. Choose 'none' when no recency is "
+            "expressed, when explicit years or a date range are given, when a word such as "
+            "'new' or 'up-to-date' is part of a name, title or topic (New Horizons, new "
+            "physics), or when the user asks for trending or popular papers, which is about "
+            "current reads, not publication date.",
+            {
+                NONE_OPTION: "No limit to recent work is expressed, including trending or "
+                "popular papers.",
+                "this_year": "Only work from the current year (this year, so far this year).",
+                "last_2_years": "The newest work: latest, newest, new, just published, "
+                "or from last year.",
+                "last_3_years": "Recent work with no stated window: recent, recently, lately, "
+                "current, nowadays.",
+                "last_5_years": "The past few or past several years.",
+                "last_10_years": "The past decade or the last ten years.",
+            },
+        ),
+        "first_author": _boolean(
+            "Does the user ask for papers where a named person is the first (lead) author, "
+            "rather than any author?",
+            "A named person is asked for as first author or lead author.",
+            "A named person may be any author, or no person is named.",
+        ),
+        "highly_cited": _boolean(
+            "Does the user restrict results to highly cited papers?",
+            "The user wants only highly cited, heavily cited, well cited, influential, "
+            "seminal or landmark papers, with no stated number.",
+            "No citation-based restriction is expressed; citations are the operator (papers "
+            "citing X) or the topic; the user asks to rank or sort (most cited, highest "
+            "cited, top 10, top N by citations), which orders results rather than filtering "
+            "them; the user states a citation count; or the user asks for popular or trending "
+            "papers, which is about reads, not citations.",
+        ),
+    }
+    if topic_candidates:
+        questions["topic"] = _choice(
+            "Which phrase, taken from the request, names the subject the user wants papers "
+            "about? Choose the phrase holding only the subject words: leave out words about "
+            "recency, document type, citation counts or popularity (recent, latest, new, "
+            "papers, highly cited). Choose 'none' when no offered phrase names the subject.",
+            {
+                NONE_OPTION: "No offered phrase names the subject.",
+                **{c: f"The subject is exactly '{c}'." for c in topic_candidates},
+            },
+        )
+    return questions
+
+
+def topic_candidates(intent: IntentSpec) -> tuple[str, ...]:
+    """Contiguous sub-spans of the regex topic phrase, longest first.
+
+    Empty (no topic question) unless the regex found exactly one topic phrase,
+    no OR'd topics, and at most ``MAX_TOPIC_TOKENS`` words.
+    """
+    if intent.or_terms or len(intent.free_text_terms) != 1:
+        return ()
+    tokens = intent.free_text_terms[0].split()
+    if len(tokens) > MAX_TOPIC_TOKENS:
+        return ()
+    spans = (
+        " ".join(tokens[start : start + length])
+        for length in range(len(tokens), 0, -1)
+        for start in range(len(tokens) - length + 1)
+    )
+    return tuple(dict.fromkeys(s for s in spans if s.lower() != NONE_OPTION))
+
+
 def _check_covers(name: str, descriptions: dict[str, str], values: frozenset[str]) -> None:
     expected = {NONE_OPTION, *values}
     if set(descriptions) != expected:
@@ -196,14 +288,20 @@ def _check_covers(name: str, descriptions: dict[str, str], values: frozenset[str
 # -----------------------------------------------------------------------------
 
 
-def build_request(text: str, context: dict | None = None, model: str = JEV_MODEL) -> dict:
+def build_request(
+    text: str,
+    context: dict | None = None,
+    model: str = JEV_MODEL,
+    topic_candidates: tuple[str, ...] = (),
+) -> dict:
     """Build the System One request body. ``context`` is merged into ``state``."""
     state: dict = {"query": text}
     if context:
         if "query" in context:
             raise ValueError("context may not override the 'query' state key")
         state.update(context)
-    return {"model": model, "state": state, "questions": build_questions()}
+    questions = {**build_questions(), **build_extraction_questions(topic_candidates)}
+    return {"model": model, "state": state, "questions": questions}
 
 
 def request_fingerprint(request: dict) -> str:
@@ -217,9 +315,16 @@ def request_fingerprint(request: dict) -> str:
 
 
 def parse_response(
-    payload: dict, latency_ms: float, cached: bool, fingerprint: str = ""
+    payload: dict,
+    latency_ms: float,
+    cached: bool,
+    fingerprint: str = "",
+    questions: dict[str, dict] | None = None,
 ) -> JevAnswers:
-    """Validate a System One response against the question set. Fails fast."""
+    """Validate a System One response against the questions asked. Fails fast.
+
+    ``questions`` defaults to the request's question set without a topic question.
+    """
     if not isinstance(payload, dict):
         raise JevResponseError("response is not an object")
     model = payload.get("model")
@@ -232,11 +337,18 @@ def parse_response(
     if not isinstance(answers, dict):
         raise JevResponseError("response lacks answers")
 
-    questions = build_questions()
+    if questions is None:
+        questions = build_request("")["questions"]
     choices = {
-        qid: _parse_choice(qid, answers.get(qid), questions[qid]) for qid in CHOICE_QUESTION_IDS
+        qid: _parse_choice(qid, answers.get(qid), question)
+        for qid, question in questions.items()
+        if question["type"] == "choice"
     }
-    booleans = {qid: _parse_noul(qid, answers.get(qid)) for qid in BOOLEAN_QUESTION_IDS}
+    booleans = {
+        qid: _parse_noul(qid, answers.get(qid))
+        for qid, question in questions.items()
+        if question["type"] == "noul"
+    }
     return JevAnswers(
         choices=choices,
         booleans=booleans,
@@ -355,16 +467,27 @@ class JevClient:
         return rows
 
     def classify(
-        self, text: str, context: dict | None = None, use_cache: bool = True
+        self,
+        text: str,
+        context: dict | None = None,
+        use_cache: bool = True,
+        topic_candidates: tuple[str, ...] = (),
     ) -> JevAnswers:
-        request = build_request(text, context=context, model=self.model)
+        request = build_request(
+            text, context=context, model=self.model, topic_candidates=topic_candidates
+        )
         fingerprint = request_fingerprint(request)
+        questions = request["questions"]
         if use_cache:
             with self._lock:
                 row = self._cache.get(fingerprint)
             if row is not None:
                 return parse_response(
-                    row["response"], row["latency_ms"], cached=True, fingerprint=fingerprint
+                    row["response"],
+                    row["latency_ms"],
+                    cached=True,
+                    fingerprint=fingerprint,
+                    questions=questions,
                 )
 
         started = time.perf_counter()
@@ -375,7 +498,9 @@ class JevClient:
             payload = response.json()
         except ValueError as error:
             raise JevResponseError("response body is not JSON") from error
-        answers = parse_response(payload, latency_ms, cached=False, fingerprint=fingerprint)
+        answers = parse_response(
+            payload, latency_ms, cached=False, fingerprint=fingerprint, questions=questions
+        )
         self._record(fingerprint, request, payload, latency_ms)
         return answers
 
@@ -422,17 +547,24 @@ def apply_answers(
     intent: IntentSpec,
     answers: JevAnswers,
     boolean_threshold: float = BOOLEAN_DECISION_THRESHOLD,
+    reference_year: int | None = None,
 ) -> IntentSpec:
-    """Return a new IntentSpec with Jev's gating fields applied.
+    """Return a new IntentSpec with Jev's answers applied.
 
-    Names, years and topics on ``intent`` are kept. Operator, doctype,
+    Names and explicit years on ``intent`` are kept. Operator, doctype,
     bibgroup, collection and the three property flags are replaced by Jev's
-    answers, and ``confidence`` holds the model's actual probabilities.
+    answers. Jev also sets the recency window (only when no explicit years
+    were found; it ends at ``reference_year``, default the current year), the
+    first-author flag (only when there are authors), the citation floor and,
+    when a topic question was asked, the topic phrase. ``confidence`` holds
+    the model's actual probabilities.
     """
     operator = answers.choices["operator"]
     doctype = answers.choices["doctype"]
     bibgroup = answers.choices["bibgroup"]
     collection = answers.choices["collection"]
+    recency = answers.choices["recency"]
+    topic = answers.choices.get("topic")
     properties = {name for name in PROPERTY_BOOLEANS if answers.booleans[name] >= boolean_threshold}
     confidence = {
         "operator": operator.confidence,
@@ -440,15 +572,27 @@ def apply_answers(
         "doctype": doctype.confidence,
         "bibgroup": bibgroup.confidence,
         "database": collection.confidence,
+        "recency": recency.confidence,
         "needs_clarification": answers.booleans["needs_clarification"],
         "refers_to_specific_paper": answers.booleans["refers_to_specific_paper"],
+        "first_author": answers.booleans["first_author"],
+        "highly_cited": answers.booleans["highly_cited"],
         **{f"property.{name}": answers.booleans[name] for name in PROPERTY_BOOLEANS},
         **{
             k: v
             for k, v in intent.confidence.items()
             if k in ("year", "authors", "topics", "or_topics")
         },
+        **({"topic": topic.confidence} if topic else {}),
     }
+    year_from, year_to = intent.year_from, intent.year_to
+    if year_from is None and year_to is None and recency.choice != NONE_OPTION:
+        year_to = reference_year if reference_year is not None else datetime.now(UTC).year
+        year_from = year_to - RECENCY_WINDOWS[recency.choice] + 1
+    free_text_terms = intent.free_text_terms
+    if topic is not None:
+        free_text_terms = [] if topic.choice == NONE_OPTION else [topic.choice]
+    highly_cited = answers.booleans["highly_cited"] >= boolean_threshold
     return replace(
         intent,
         operator=None if operator.choice == NONE_OPTION else operator.choice,
@@ -456,6 +600,11 @@ def apply_answers(
         bibgroup=set() if bibgroup.choice == NONE_OPTION else {bibgroup.choice},
         collection=set() if collection.choice == NONE_OPTION else {collection.choice},
         property=properties,
+        year_from=year_from,
+        year_to=year_to,
+        free_text_terms=free_text_terms,
+        first_author=bool(intent.authors) and answers.booleans["first_author"] >= boolean_threshold,
+        min_citations=HIGHLY_CITED_MIN_CITATIONS if highly_cited else intent.min_citations,
         confidence=confidence,
     )
 
@@ -466,25 +615,36 @@ def classify_and_extract(
     include_regex_state: bool = False,
     use_cache: bool = True,
     regex_intent: IntentSpec | None = None,
+    reference_year: int | None = None,
 ) -> tuple[IntentSpec, JevAnswers | None]:
-    """Compose Jev gating answers with the regex extractors for names, years, topics.
+    """Compose Jev's answers with the regex extractors for names and explicit years.
 
     Returns the composed IntentSpec and the raw answers (None when the text is
     ADS syntax and Jev was not called). With ``include_regex_state`` the regex
     IntentSpec is sent to Jev as extra state (experiment arm D). Pass
     ``regex_intent`` when the caller already ran ``extract_intent(text)``.
+    The regex topic phrase is only a candidate source: Jev picks one of its
+    sub-spans (see ``topic_candidates``). Relative dates end at
+    ``reference_year``, default the current year.
     """
     from .ner import extract_intent, extract_intent_with_operator
 
     if regex_intent is None:
-        regex_intent = extract_intent(text)
+        regex_intent = extract_intent(text, reference_year)
     if regex_intent.confidence.get("ads_passthrough"):
         return regex_intent, None
     context = {"regex_intent": regex_intent.to_dict()} if include_regex_state else None
-    answers = client.classify(text, context=context, use_cache=use_cache)
+    answers = client.classify(
+        text,
+        context=context,
+        use_cache=use_cache,
+        topic_candidates=topic_candidates(regex_intent),
+    )
     operator = answers.choices["operator"].choice
-    base = extract_intent_with_operator(text, None if operator == NONE_OPTION else operator)
-    return apply_answers(base, answers), answers
+    base = extract_intent_with_operator(
+        text, None if operator == NONE_OPTION else operator, reference_year
+    )
+    return apply_answers(base, answers, reference_year=reference_year), answers
 
 
 def extract_intent_jev(
@@ -492,6 +652,6 @@ def extract_intent_jev(
     client: JevClient,
     include_regex_state: bool = False,
 ) -> IntentSpec:
-    """IntentSpec from Jev gating plus regex names, years and topics."""
+    """IntentSpec from Jev's answers plus regex names and explicit years."""
     intent, _ = classify_and_extract(text, client, include_regex_state=include_regex_state)
     return intent

@@ -108,6 +108,7 @@ def baseline(
                     "syntax_valid": eval_result.valid,
                     "semantic_match": eval_result.match,
                     "overlap": eval_result.overlap,
+                    "unscorable_reason": eval_result.unscorable_reason,
                     "latency_ms": round(latency_ms, 1),
                 }
             )
@@ -124,6 +125,7 @@ def baseline(
             "total": n,
             "syntax_valid": sum(1 for r in results if r["syntax_valid"]),
             "semantic_match": sum(1 for r in results if r["semantic_match"]),
+            "unscorable": sum(1 for r in results if r["unscorable_reason"]),
             **latency_stats,  # Includes avg, p75, p90, min, max, cold_start
         },
         "results": results,
@@ -219,8 +221,7 @@ def _call_baseline_model(example, model: str = "gpt-4o-mini", api_key: str | Non
 
     # Build prompt
     system_prompt = (
-        "Convert natural language to ADS search query. "
-        "Output only the query, no explanation."
+        "Convert natural language to ADS search query. " "Output only the query, no explanation."
     )
     user_prompt = f"Query: {example.input}"
 
@@ -262,6 +263,7 @@ def _call_baseline_model(example, model: str = "gpt-4o-mini", api_key: str | Non
         "syntax_valid": eval_result.valid,
         "semantic_match": eval_result.match,
         "overlap": eval_result.overlap,
+        "unscorable_reason": eval_result.unscorable_reason,
         "latency_ms": round(latency_ms, 1),
     }
 
@@ -1295,7 +1297,10 @@ def load_test(
     payload = {
         "model": "llm",
         "messages": [
-            {"role": "system", "content": "Convert natural language to ADS search query. Output JSON: {\"query\": \"...\"}"},
+            {
+                "role": "system",
+                "content": 'Convert natural language to ADS search query. Output JSON: {"query": "..."}',
+            },
             {"role": "user", "content": "Query: papers about exoplanets"},
         ],
         "max_tokens": 64,

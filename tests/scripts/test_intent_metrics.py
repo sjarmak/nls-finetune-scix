@@ -11,6 +11,7 @@ from intent_metrics import (  # noqa: E402
     accuracy_at_coverage,
     cost_summary,
     expected_calibration_error,
+    extraction_metrics,
     false_positive_rate,
     latency_summary,
     operator_report,
@@ -108,3 +109,69 @@ def test_summary_table_tolerates_an_arm_with_no_rows():
 
     table = summary_table({"C": arm_metrics([])})
     assert "n/a" in table and "C llm_haiku_4_5" in table
+
+
+def _row(labels: dict, prediction: dict) -> dict:
+    base_labels = {
+        "year_from": None,
+        "year_to": None,
+        "first_author": False,
+        "has_author": False,
+        "min_citations": None,
+        "topic_tokens": [],
+    }
+    base_pred = {
+        "year_from": None,
+        "year_to": None,
+        "first_author": False,
+        "min_citations": None,
+        "free_text_terms": [],
+        "or_terms": [],
+    }
+    return {"labels": {**base_labels, **labels}, "prediction": {**base_pred, **prediction}}
+
+
+def test_extraction_metrics_score_each_field():
+    rows = [
+        _row(
+            {"year_from": 2023, "year_to": 2025, "topic_tokens": ["asteroids"]},
+            {"year_from": 2023, "year_to": 2025, "free_text_terms": ["asteroids"]},
+        ),
+        _row(
+            {"topic_tokens": ["dark", "matter"], "min_citations": 100},
+            {"free_text_terms": ["recent dark matter"], "min_citations": 100},
+        ),
+        _row({"has_author": True, "first_author": True}, {"first_author": False}),
+    ]
+    m = extraction_metrics(rows)
+    assert m["year"]["exact_match"] == pytest.approx(1.0)
+    assert m["year"]["n"] == 3
+    assert m["year_when_gold_has_one"]["n"] == 1
+    assert m["first_author"]["n"] == 1
+    assert m["first_author"]["exact_match"] == 0.0
+    assert m["citation_floor"]["f1"] == pytest.approx(1.0)
+    assert m["topic_tokens"]["tp"] == 3
+    assert m["topic_tokens"]["fp"] == 1
+
+
+def test_extraction_metrics_skip_rows_without_extraction_labels():
+    assert extraction_metrics([{"labels": {"operator": "none"}, "prediction": {}}]) is None
+
+
+def test_arm_metrics_report_extraction_for_derived_labels():
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
+    from evaluate_intent_classifiers import _derived, arm_metrics, run_regex, summary_table
+
+    item = _derived(
+        {
+            "id": "g-1",
+            "nl": "dark energy papers from the last 3 years",
+            "gold_query": 'abs:"dark energy" pubdate:[2022 TO 2025]',
+            "source": "gold",
+        }
+    )
+    row = {**item, "arm": "A", "repeat": 1, "error": None, "prediction": run_regex(item["nl"])}
+    metrics = arm_metrics([row])
+    assert metrics["extraction"]["year"]["exact_match"] == 1.0
+    assert metrics["extraction"]["topic_tokens"]["f1"] == 1.0
+    assert "year EM" in summary_table({"A": metrics})
