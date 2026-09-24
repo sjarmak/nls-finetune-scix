@@ -10,6 +10,7 @@ LLM calls are only made in the fallback resolver path.
 """
 
 import json
+import logging
 import time
 from dataclasses import asdict, dataclass, field
 from typing import TYPE_CHECKING, Literal
@@ -22,6 +23,8 @@ if TYPE_CHECKING:
 IntentBackend = Literal["regex", "jev", "jev_gated"]
 INTENT_BACKENDS: tuple[str, ...] = ("regex", "jev", "jev_gated")
 GATED_CONFIDENCE_THRESHOLD = 0.5
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -58,7 +61,13 @@ class DebugInfo:
         fallback_reason: Reason if fallback path was taken
         raw_extracted: Raw NER extraction before validation
         intent_backend: Which intent extractor produced the IntentSpec
-        classifier_called: Whether the Jev classifier was invoked for this query
+        classifier_called: Whether a Jev classifier call was attempted, even one
+            that failed
+        classifier_error: Why the Jev call failed, when it did; the regex
+            intent was used instead
+        structural_confidence: compute_pipeline_confidence on the final intent
+        classifier_operator_confidence: Jev's operator confidence, when Jev
+            answered; routing_confidence combines it with the structural one
     """
 
     ner_time_ms: float = 0.0
@@ -70,6 +79,9 @@ class DebugInfo:
     raw_extracted: dict | None = None
     intent_backend: str = "regex"
     classifier_called: bool = False
+    classifier_error: str | None = None
+    structural_confidence: float | None = None
+    classifier_operator_confidence: float | None = None
 
     def to_dict(self) -> dict:
         """Convert to dictionary for JSON serialization."""
@@ -148,40 +160,93 @@ def compute_pipeline_confidence(intent: IntentSpec) -> tuple[float, str | None]:
     return (0.3, "short query with no structured fields extracted")
 
 
+@dataclass(frozen=True)
+class IntentExtraction:
+    """Outcome of the intent stage.
+
+    ``classifier_called`` is True whenever a Jev call was attempted, including
+    one that failed; ``classifier_error`` is set exactly when it failed, and
+    the intent is then the regex intent. Keeping both lets telemetry count
+    attempted (billed or timed-out) calls separately from answered ones.
+    """
+
+    intent: IntentSpec
+    classifier_called: bool = False
+    classifier_error: str | None = None
+
+    @property
+    def classifier_succeeded(self) -> bool:
+        """True when Jev answered and its fields are in ``intent``."""
+        return self.classifier_called and self.classifier_error is None
+
+
+def routing_confidence(structural: float, classifier_operator: float | None) -> float:
+    """The confidence the server routes on.
+
+    Without a Jev answer this is the structural heuristic. With one it is the
+    minimum of the two, because they catch different failures and either one
+    alone sinks the assembled query: the structural score says whether the
+    regex found enough names, years and topics to build a specific query
+    (Jev does not touch those), and Jev's operator confidence says whether
+    the operator decision can be trusted (the structural score gives any
+    operator a flat 0.9). Taking the minimum serves from the pipeline only
+    when both clear the threshold.
+    """
+    if classifier_operator is None:
+        return structural
+    return min(structural, classifier_operator)
+
+
 def extract_intent_with_backend(
     nl_text: str,
     intent_backend: IntentBackend,
     jev_client: "JevClient | None",
-) -> tuple[IntentSpec, bool]:
-    """Run the selected intent extractor. Returns (intent, classifier_called).
+) -> IntentExtraction:
+    """Run the selected intent extractor.
 
     regex      - the shipped rules-based extractor.
     jev        - Jev decides operator, enum fields and gates; regex keeps names,
                  years and topics.
     jev_gated  - regex first; Jev only when regex finds no operator or the
                  regex intent scores below GATED_CONFIDENCE_THRESHOLD.
+
+    When a Jev call fails (HTTP error, timeout, network error, or a response
+    that breaks the contract) the regex intent is returned with the failure
+    in ``classifier_error``, so a Jev outage degrades to the regex backend
+    instead of failing the request. Any other exception propagates.
     """
     from .ner import extract_intent
 
     if intent_backend not in INTENT_BACKENDS:
         raise ValueError(f"intent_backend must be one of {INTENT_BACKENDS}, got {intent_backend!r}")
     if intent_backend == "regex":
-        return extract_intent(nl_text), False
+        return IntentExtraction(extract_intent(nl_text))
     if jev_client is None:
         raise ValueError(f"intent_backend={intent_backend!r} requires a JevClient")
 
-    from .jev_intent import extract_intent_jev
-
-    if intent_backend == "jev":
-        return extract_intent_jev(nl_text, jev_client), True
-
     regex_intent = extract_intent(nl_text)
-    if regex_intent.confidence.get("ads_passthrough"):
-        return regex_intent, False
-    confidence, _ = compute_pipeline_confidence(regex_intent)
-    if regex_intent.operator is not None and confidence >= GATED_CONFIDENCE_THRESHOLD:
-        return regex_intent, False
-    return extract_intent_jev(nl_text, jev_client), True
+    if intent_backend == "jev_gated":
+        if regex_intent.confidence.get("ads_passthrough"):
+            return IntentExtraction(regex_intent)
+        confidence, _ = compute_pipeline_confidence(regex_intent)
+        if regex_intent.operator is not None and confidence >= GATED_CONFIDENCE_THRESHOLD:
+            return IntentExtraction(regex_intent)
+    return _classify_or_fall_back(nl_text, regex_intent, jev_client)
+
+
+def _classify_or_fall_back(
+    nl_text: str, regex_intent: IntentSpec, jev_client: "JevClient"
+) -> IntentExtraction:
+    from .jev_intent import JEV_FAILURES, extract_intent_jev
+
+    try:
+        intent = extract_intent_jev(nl_text, jev_client)
+    except JEV_FAILURES as error:
+        reason = f"{type(error).__name__}: {error}"
+        logger.warning("Jev classifier failed, serving the regex intent: %s", reason)
+        return IntentExtraction(regex_intent, classifier_called=True, classifier_error=reason)
+    called = not regex_intent.confidence.get("ads_passthrough")
+    return IntentExtraction(intent, classifier_called=called)
 
 
 def process_query(
@@ -216,9 +281,10 @@ def process_query(
 
     # Stage 1: Intent extraction
     ner_start = time.perf_counter()
-    intent, debug_info.classifier_called = extract_intent_with_backend(
-        nl_text, intent_backend, jev_client
-    )
+    extraction = extract_intent_with_backend(nl_text, intent_backend, jev_client)
+    intent = extraction.intent
+    debug_info.classifier_called = extraction.classifier_called
+    debug_info.classifier_error = extraction.classifier_error
     debug_info.ner_time_ms = (time.perf_counter() - ner_start) * 1000
     debug_info.raw_extracted = intent.to_dict()
 
@@ -236,10 +302,14 @@ def process_query(
     final_query = assemble_query(intent, retrieved_examples)
     debug_info.assembly_time_ms = (time.perf_counter() - assembly_start) * 1000
 
-    # Confidence heuristic
-    confidence, fallback_reason = compute_pipeline_confidence(intent)
+    # Confidence: structural heuristic, capped by Jev's operator confidence
+    structural, fallback_reason = compute_pipeline_confidence(intent)
     if fallback_reason:
         debug_info.fallback_reason = fallback_reason
+    debug_info.structural_confidence = structural
+    if extraction.classifier_succeeded:
+        debug_info.classifier_operator_confidence = intent.confidence["operator"]
+    confidence = routing_confidence(structural, debug_info.classifier_operator_confidence)
 
     # Total timing
     debug_info.total_time_ms = (time.perf_counter() - start_time) * 1000

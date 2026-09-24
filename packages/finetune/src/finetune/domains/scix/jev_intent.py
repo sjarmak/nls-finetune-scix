@@ -65,6 +65,10 @@ class JevResponseError(ValueError):
     """The System One response did not match the expected contract."""
 
 
+JEV_FAILURES: tuple[type[Exception], ...] = (httpx.HTTPError, JevResponseError)
+"""Everything ``JevClient.classify`` raises when System One is unusable."""
+
+
 @dataclass(frozen=True)
 class ChoiceAnswer:
     choice: str
@@ -283,6 +287,11 @@ class JevClient:
 
     Cache rows are keyed by the SHA-256 of the canonical request body, so any
     change to the question text, model id or state produces a new row.
+
+    ``classify`` raises ``httpx.HTTPError`` (status errors, timeouts, network
+    errors) and ``JevResponseError`` (a body that is not JSON or breaks the
+    answer contract). Those are the failure classes callers may degrade on;
+    see ``JEV_FAILURES``.
     """
 
     def __init__(
@@ -298,6 +307,7 @@ class JevClient:
             raise ValueError("TYPESAFE_API_KEY is required for the Jev intent backend")
         self.model = model
         self.cache_path = cache_path
+        self.timeout_s = timeout_s
         self._http = httpx.Client(
             headers={"authorization": f"Bearer {api_key}"},
             timeout=timeout_s,
@@ -340,7 +350,10 @@ class JevClient:
         response = self._http.post(self._base_url, json=request)
         latency_ms = (time.perf_counter() - started) * 1000
         response.raise_for_status()
-        payload = response.json()
+        try:
+            payload = response.json()
+        except ValueError as error:
+            raise JevResponseError("response body is not JSON") from error
         answers = parse_response(payload, latency_ms, cached=False, fingerprint=fingerprint)
         self._record(fingerprint, request, payload, latency_ms)
         return answers

@@ -15,7 +15,14 @@ def main():
         print(f"\n/health: {r.status_code}")
         health = r.json()
         print(health)
-        for key in ("routing_mode", "confidence_threshold", "pipeline_available"):
+        for key in (
+            "routing_mode",
+            "confidence_threshold",
+            "pipeline_available",
+            "intent_backend",
+            "jev_timeout_s",
+            "shadow_intent_backend",
+        ):
             if key not in health:
                 print(f"Missing health field: {key}")
                 return 1
@@ -32,9 +39,9 @@ def main():
                 "messages": [
                     {"role": "user", "content": "Query: papers about exoplanets\nDate: 2026-01-23"}
                 ],
-                "max_tokens": 128
+                "max_tokens": 128,
             },
-            timeout=60
+            timeout=60,
         )
         print(f"\n/v1/chat/completions: {r.status_code}")
         data = r.json()
@@ -54,23 +61,33 @@ def main():
                 "model": "pipeline",
                 "messages": [
                     {"role": "system", "content": "Convert natural language to ADS query."},
-                    {"role": "user", "content": "Query: highly cited dark matter papers\nDate: 2026-01-23"}
-                ]
+                    {
+                        "role": "user",
+                        "content": "Query: highly cited dark matter papers\nDate: 2026-01-23",
+                    },
+                ],
             },
-            timeout=60
+            timeout=60,
         )
         print(f"\n/pipeline: {r.status_code}")
         data = r.json()
         if "choices" in data and len(data["choices"]) > 0:
             print(f"Generated: {data['choices'][0]['message']['content']}")
         if "pipeline_result" in data:
-            print(f"Pipeline timing: {data['pipeline_result'].get('debug_info', {}).get('total_time_ms', 0):.0f}ms")
+            debug = data["pipeline_result"].get("debug_info", {})
+            print(f"Pipeline timing: {debug.get('total_time_ms', 0):.0f}ms")
+            print(
+                f"Intent backend: {debug.get('intent_backend')} "
+                f"classifier_called={debug.get('classifier_called')} "
+                f"classifier_error={debug.get('classifier_error')}"
+            )
     except Exception as e:
         print(f"Pipeline endpoint failed: {e}")
         return 1
 
     print("\n✓ All tests passed!")
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())
