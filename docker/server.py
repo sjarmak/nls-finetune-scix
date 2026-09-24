@@ -14,7 +14,10 @@ Endpoints:
 
 Configuration (environment variables):
     MODEL_NAME       HuggingFace model id (default: adsabs/scix-nls-translator)
-    DEVICE           cuda | mps | cpu (default: auto-detect)
+    DEVICE           cuda | mps | cpu (default: auto-detect; cpu when torch is
+                     not installed). torch and transformers are imported only
+                     when the model loads, so ROUTING_MODE=pipeline runs
+                     without them.
     PORT             Server port (default: 8000)
     ROUTING_MODE     hybrid | pipeline | model (default: hybrid)
                      hybrid: pipeline first, model fallback on low confidence
@@ -75,16 +78,15 @@ import sys
 import threading
 import time
 import uuid
+from collections.abc import AsyncIterator
 from concurrent.futures import Future, ThreadPoolExecutor
+from contextlib import asynccontextmanager
 from dataclasses import dataclass
 from datetime import UTC, datetime
 
-import torch
-import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from transformers import AutoModelForCausalLM, AutoTokenizer
 
 logging.basicConfig(
     level=logging.INFO,
@@ -92,9 +94,20 @@ logging.basicConfig(
 )
 logger = logging.getLogger("nls-server")
 
+
+def _default_device() -> str:
+    """cuda when torch sees a GPU, else cpu (also when torch is not installed:
+    a pipeline-only server needs no torch, and load_model raises on its own)."""
+    try:
+        import torch
+    except ImportError:
+        return "cpu"
+    return "cuda" if torch.cuda.is_available() else "cpu"
+
+
 # Configuration
 MODEL_NAME = os.environ.get("MODEL_NAME", "adsabs/scix-nls-translator")
-DEVICE = os.environ.get("DEVICE", "cuda" if torch.cuda.is_available() else "cpu")
+DEVICE = os.environ.get("DEVICE") or _default_device()
 PORT = int(os.environ.get("PORT", 8000))
 ROUTING_MODE = os.environ.get("ROUTING_MODE", "hybrid")
 CONFIDENCE_THRESHOLD = float(os.environ.get("PIPELINE_CONFIDENCE_THRESHOLD", "0.5"))
@@ -169,10 +182,39 @@ if SHADOW_INTENT_BACKEND:
 
 _telemetry_lock = threading.Lock()
 
+
+def startup() -> None:
+    """Load model on startup (skipped in pipeline-only mode)."""
+    if ROUTING_MODE == "pipeline":
+        logger.info("ROUTING_MODE=pipeline; skipping model load")
+        return
+    try:
+        load_model()
+    except Exception:
+        if ROUTING_MODE == "model":
+            raise
+        logger.exception("Model failed to load; continuing in pipeline-only degraded mode")
+
+
+def shutdown() -> None:
+    """Let running shadow comparisons finish (each is bounded by JEV_TIMEOUT_S
+    per Jev call) and drop queued ones."""
+    if shadow_executor is not None:
+        shadow_executor.shutdown(wait=True, cancel_futures=True)
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI) -> AsyncIterator[None]:
+    startup()
+    yield
+    shutdown()
+
+
 app = FastAPI(
     title="NLS Inference Server",
     description="Natural Language to ADS Query translation",
     version="2.0.0",
+    lifespan=lifespan,
 )
 
 # CORS for local development
@@ -279,6 +321,8 @@ class RoutedResult:
 def load_model() -> None:
     """Load the fine-tuned model."""
     global model, tokenizer
+    import torch
+    from transformers import AutoModelForCausalLM, AutoTokenizer
 
     logger.info("Loading model: %s (device=%s)", MODEL_NAME, DEVICE)
 
@@ -304,6 +348,8 @@ def generate_query(messages: list[ChatMessage], max_tokens: int = 256) -> tuple[
     Returns:
         Tuple of (generated_text, prompt_tokens, completion_tokens)
     """
+    import torch
+
     # Build prompt from messages
     message_dicts = [{"role": m.role, "content": m.content} for m in messages]
     prompt = tokenizer.apply_chat_template(
@@ -589,28 +635,6 @@ def _log_routing(request_id: str, nl_query: str, routed: RoutedResult) -> None:
     )
 
 
-@app.on_event("startup")
-async def startup():
-    """Load model on startup (skipped in pipeline-only mode)."""
-    if ROUTING_MODE == "pipeline":
-        logger.info("ROUTING_MODE=pipeline; skipping model load")
-        return
-    try:
-        load_model()
-    except Exception:
-        if ROUTING_MODE == "model":
-            raise
-        logger.exception("Model failed to load; continuing in pipeline-only degraded mode")
-
-
-@app.on_event("shutdown")
-async def shutdown():
-    """Let running shadow comparisons finish (each is bounded by JEV_TIMEOUT_S
-    per Jev call) and drop queued ones."""
-    if shadow_executor is not None:
-        shadow_executor.shutdown(wait=True, cancel_futures=True)
-
-
 @app.get("/health")
 async def health():
     """Health check endpoint."""
@@ -713,4 +737,6 @@ async def pipeline_endpoint(request: PipelineRequest):
 
 
 if __name__ == "__main__":
+    import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=PORT)
