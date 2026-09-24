@@ -13,7 +13,7 @@ citations(abs:referencesabs:stellar spectra)
 
 The hybrid pipeline fixes this by separating concerns:
 
-1. **NER** extracts structured intent (no query syntax generated)
+1. **Intent extraction** builds a structured IntentSpec (no query syntax generated): regex NER, optionally with Jev typed classifiers deciding the operator and enum fields
 2. **Retrieval** finds similar gold examples for pattern guidance
 3. **Assembler** deterministically builds valid queries from validated building blocks
 4. **Resolver** (optional) uses LLM only for ambiguous paper reference resolution
@@ -26,10 +26,12 @@ flowchart TB
         NL[User Natural Language]
     end
 
-    subgraph "Stage 1: NER Extraction"
+    subgraph "Stage 1: Intent Extraction"
         NER[ner.py: extract_intent]
+        JEV[jev_intent.py: Jev classifiers]
         IS[IntentSpec]
         NL --> NER --> IS
+        NER -.->|jev / jev_gated| JEV -.-> IS
     end
 
     subgraph "Stage 2: Few-shot Retrieval"
@@ -61,9 +63,27 @@ flowchart TB
 
 ## Data Flow
 
-### Stage 1: NER Extraction (`ner.py`)
+### Stage 1: Intent Extraction (`pipeline.py: extract_intent_with_backend`)
 
-Converts natural language to a structured `IntentSpec`:
+The server's `INTENT_BACKEND` setting picks the backend:
+
+| Backend | Operator and enum fields (operator, doctype, bibgroup, collection, refereed/openaccess/eprint) | Names, years, topics |
+|---------|------|------|
+| `regex` (default) | `ner.py` rules | `ner.py` |
+| `jev` | Jev typed classifiers (TypeSafe System One), every request | `ner.py` |
+| `jev_gated` | `ner.py`; Jev only when the regex finds no operator or its structural confidence is below 0.5 | `ner.py` |
+
+Jev answers bounded questions whose options are the enum values already legal
+in `IntentSpec` (option descriptions in `jev_option_text.py`); it never emits
+ADS syntax. A failed Jev call (HTTP error, timeout after `JEV_TIMEOUT_S`,
+network error, or a contract-breaking response) returns the regex intent and
+sets `classifier_error`, so a Jev outage degrades to the regex backend rather
+than failing the request. The evaluation that chose `jev_gated` is
+[reports/jev-intent-classifier-eval.md](../reports/jev-intent-classifier-eval.md);
+deployment settings and the shadow rollout are in
+[docker/README.md](../docker/README.md).
+
+The regex extractor (`ner.py`) converts natural language to a structured `IntentSpec`:
 
 ```python
 input: "refereed papers on exoplanets by Seager since 2020"
@@ -78,7 +98,18 @@ output: IntentSpec(
 )
 ```
 
-**Key principle**: Operator is set ONLY when explicit patterns match (see Operator Gating below).
+**Key principle**: in the regex backend, the operator is set ONLY when explicit patterns match (see Operator Gating below).
+
+### Routing confidence
+
+`process_query` returns a confidence the server compares with
+`PIPELINE_CONFIDENCE_THRESHOLD` to decide whether to fall back to the model.
+The structural score (`compute_pipeline_confidence`) is 0.9 when authors, an
+operator or years were extracted, 0.7 for constraints or three or more topic
+words, 0.5 for two, and 0.3 otherwise. When Jev answered, the routing
+confidence is `min(structural, Jev operator confidence)`
+(`routing_confidence`): the structural score covers the names, years and
+topics Jev does not touch, and Jev's confidence covers the operator decision.
 
 ### Stage 2: Retrieval (`retrieval.py`)
 
@@ -238,9 +269,17 @@ journal article and would drop eprints, proceedings and theses the user still wa
 ```python
 from finetune.domains.scix.pipeline import process_query
 
-result = process_query("your query here")
+result = process_query("your query here")  # regex backend
 print(result.intent.to_json())
 print(result.debug_info)
+
+# Jev-gated backend (needs TYPESAFE_API_KEY)
+import os
+from finetune.domains.scix.jev_intent import JevClient
+
+client = JevClient(api_key=os.environ["TYPESAFE_API_KEY"])
+result = process_query("your query here", "jev_gated", client)
+print(result.debug_info.classifier_called, result.debug_info.classifier_error)
 ```
 
 ### 2. Check if operator was incorrectly triggered
@@ -291,6 +330,10 @@ mise run test tests/regression/
 
 **Fix**: Check `needs_resolution()` gating in `resolver.py`. Most queries should NOT trigger LLM.
 
+With a Jev backend, each gated query adds one System One call, bounded by
+`JEV_TIMEOUT_S` (default 2 s); a timeout serves the regex intent. Check
+`classifier_called` and `classifier_error` in `debug_info`.
+
 ## Latency Targets
 
 | Component | Target | Typical |
@@ -300,6 +343,7 @@ mise run test tests/regression/
 | Assembly | < 5ms | ~0.05ms |
 | Full Pipeline (no LLM) | < 50ms local | ~5ms |
 | Full Pipeline (Modal warm) | < 200ms | ~20ms |
+| Jev intent call (jev / jev_gated, when called) | < `JEV_TIMEOUT_S` | see the report's latency table |
 | LLM Fallback (if triggered) | < 1000ms | ~500ms |
 
 ## Key Files
@@ -308,9 +352,12 @@ mise run test tests/regression/
 |------|---------|
 | `intent_spec.py` | IntentSpec dataclass definition |
 | `ner.py` | Rules-based NER with operator gating |
+| `jev_intent.py` | Jev (System One) client, response cache, answers-to-IntentSpec mapping |
+| `jev_option_text.py` | Option descriptions sent with each Jev question |
+| `intent_shadow.py` | Shadow comparison record (served regex vs Jev intent) |
 | `retrieval.py` | Few-shot retrieval from gold_examples |
 | `assembler.py` | Deterministic query assembly |
 | `resolver.py` | Optional LLM for paper resolution |
-| `pipeline.py` | Main orchestration |
+| `pipeline.py` | Main orchestration, intent backend selection, routing confidence |
 | `field_constraints.py` | FIELD_ENUMS for validation |
 | `constrain.py` | Post-processing safety filter |

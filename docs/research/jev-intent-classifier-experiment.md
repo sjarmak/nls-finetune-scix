@@ -1,9 +1,13 @@
 # Experiment: Jev typed classifiers as the IntentSpec reasoning stage
 
-Status: run 2026-09-24 on all three datasets, arms A to E. Arm C on the
-held-out set went through the logged-in `claude` CLI (`--llm-transport cli`
-on `scripts/evaluate_intent_classifiers.py`) because the API account had no
-credit. Results and decision in `reports/jev-intent-classifier-eval.md`.
+Status: run 2026-09-24 on all three datasets, arms A to E, and re-scored
+the same day (round 3) with the rollout fixes on main: the book-review and
+sky-survey option text, the regex doctype fix, the Jev fallback and the
+min(structural, Jev) routing rule. Arm C went through the logged-in `claude`
+CLI (`--llm-transport cli` on `scripts/evaluate_intent_classifiers.py`) on
+the held-out set in round 2 and on all three sets in round 3, because the
+API account had no credit. Results and decision in
+`reports/jev-intent-classifier-eval.md`.
 
 ## Question
 

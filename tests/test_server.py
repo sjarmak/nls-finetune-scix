@@ -48,12 +48,14 @@ def load_server(monkeypatch, tmp_path):
     """Import docker/server.py with ``env`` on top of a hermetic base env."""
     loaded = []
 
-    def load(**env: str):
+    def load(**env: str | None):
+        """A value of None leaves that variable unset, overriding the base env."""
         for name in SERVER_ENV:
             monkeypatch.delenv(name, raising=False)
         base = {"DEVICE": "cpu", "JEV_CACHE_PATH": str(tmp_path / "jev_cache.jsonl")}
         for name, value in {**base, **env}.items():
-            monkeypatch.setenv(name, value)
+            if value is not None:
+                monkeypatch.setenv(name, value)
         module_name = f"nls_server_under_test_{next(_module_ids)}"
         spec = importlib.util.spec_from_file_location(module_name, SERVER_PATH)
         module = importlib.util.module_from_spec(spec)
@@ -134,6 +136,25 @@ def test_invalid_configuration_fails_at_import(load_server, env, message):
 def test_jev_timeout_reaches_the_client(load_server):
     assert load_server(**_jev_env()).jev_client.timeout_s == 2.0
     assert load_server(**_jev_env(JEV_TIMEOUT_S="0.75")).jev_client.timeout_s == 0.75
+
+
+def test_jev_cache_path_defaults_to_the_local_cache_file(load_server, monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    server = load_server(**_jev_env(JEV_CACHE_PATH=None))
+    assert server.jev_client.cache_path == Path("data/cache/jev_systemone.jsonl")
+
+
+def test_empty_jev_cache_path_disables_the_cache_file(load_server, monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    server = load_server(**_jev_env(JEV_CACHE_PATH=""))
+    assert server.jev_client.cache_path is None
+    payload = jev_payload("similar", operator_confidence=0.97)
+    server.jev_client = handler_client(
+        lambda request: httpx.Response(200, json=payload), cache_path=server.jev_client.cache_path
+    )
+    body = _post_pipeline(server, GATED_QUERY)
+    assert body["pipeline_result"]["debug_info"]["classifier_called"] is True
+    assert list(tmp_path.rglob("*.jsonl")) == []
 
 
 def test_imports_without_torch_or_transformers(load_server, monkeypatch):

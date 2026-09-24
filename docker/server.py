@@ -41,8 +41,11 @@ Configuration (environment variables):
                      A failed Jev call (HTTP error, timeout, network error or
                      malformed response) falls back to the regex intent; the
                      reason is in debug_info.classifier_error and telemetry.
-    JEV_CACHE_PATH   JSONL cache for System One responses (default:
-                     data/cache/jev_systemone.jsonl)
+    JEV_CACHE_PATH   Append-only JSONL cache for System One responses
+                     (default: data/cache/jev_systemone.jsonl, relative to the
+                     working directory). Set it empty to disable the cache;
+                     the Docker image does, because the file grows without
+                     bound and a container loses it on restart anyway.
     JEV_TIMEOUT_S    Per-call System One timeout in seconds (default: 2.0;
                      measured p95 is about 223 ms). A timeout falls back to
                      the regex intent.
@@ -113,6 +116,7 @@ ROUTING_MODE = os.environ.get("ROUTING_MODE", "hybrid")
 CONFIDENCE_THRESHOLD = float(os.environ.get("PIPELINE_CONFIDENCE_THRESHOLD", "0.5"))
 TELEMETRY_LOG = os.environ.get("TELEMETRY_LOG", "")
 INTENT_BACKEND = os.environ.get("INTENT_BACKEND", "regex")
+# An empty JEV_CACHE_PATH disables the System One response cache.
 JEV_CACHE_PATH = os.environ.get("JEV_CACHE_PATH", "data/cache/jev_systemone.jsonl")
 JEV_TIMEOUT_S = float(os.environ.get("JEV_TIMEOUT_S", "2.0"))
 SHADOW_INTENT_BACKEND = os.environ.get("SHADOW_INTENT_BACKEND", "")
@@ -167,7 +171,7 @@ if INTENT_BACKEND != "regex" or SHADOW_INTENT_BACKEND:
 
     jev_client = JevClient(
         api_key=os.environ.get("TYPESAFE_API_KEY", ""),
-        cache_path=Path(JEV_CACHE_PATH),
+        cache_path=Path(JEV_CACHE_PATH) if JEV_CACHE_PATH else None,
         timeout_s=JEV_TIMEOUT_S,
     )
 

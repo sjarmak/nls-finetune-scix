@@ -149,13 +149,26 @@ User NL query → Nectar (:8000) → NLS Server (:8001)
                                    └─ fine-tuned model (low-confidence fallback)
 ```
 
-Routing is configured on the server via environment variables:
+The pipeline's intent stage is selectable. The shipped default is the regex extractor in `ner.py`; `jev_gated` asks Jev typed classifiers (TypeSafe System One) for the operator and enum fields when the regex finds no operator or is unsure, and keeps the regex for names, years and topics. The evaluation that chose it is [reports/jev-intent-classifier-eval.md](reports/jev-intent-classifier-eval.md).
+
+The server is configured via environment variables (the `docker/server.py` module docstring is the authoritative list):
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
+| `MODEL_NAME` | `adsabs/scix-nls-translator` | HuggingFace model for the fallback |
+| `DEVICE` | auto-detect | `cuda`, `mps` or `cpu` (`cpu` when torch is not installed) |
+| `PORT` | `8000` | Server port |
 | `ROUTING_MODE` | `hybrid` | `hybrid` (pipeline + model fallback), `pipeline` (deterministic only), `model` (model only) |
-| `PIPELINE_CONFIDENCE_THRESHOLD` | `0.5` | Below this pipeline confidence, fall back to the model |
-| `TELEMETRY_LOG` | unset | Path to a JSONL log of per-request routing decisions (feeds retraining data) |
+| `PIPELINE_CONFIDENCE_THRESHOLD` | `0.5` | Below this routing confidence, fall back to the model |
+| `TELEMETRY_LOG` | unset | JSONL log: one `request` row per request and one `intent_shadow` row per shadow run (feeds retraining data) |
+| `INTENT_BACKEND` | `regex` | Intent stage: `regex`, `jev` (Jev on every request) or `jev_gated` |
+| `TYPESAFE_API_KEY` | unset | System One key; required by the Jev backends and by shadow mode |
+| `JEV_TIMEOUT_S` | `2.0` | Per-call System One timeout in seconds |
+| `JEV_CACHE_PATH` | `data/cache/jev_systemone.jsonl` (empty in Docker) | JSONL cache of System One responses; empty disables it |
+| `SHADOW_INTENT_BACKEND` | unset | `jev` or `jev_gated`: serve regex, run this backend off the request path and log both intents (needs `INTENT_BACKEND=regex` and `TELEMETRY_LOG`) |
+| `GOLD_EXAMPLES_PATH` | `data/datasets/raw/gold_examples.json` | Few-shot examples for retrieval |
+
+A failed Jev call (error or timeout) never fails a request: the regex intent is served and the reason is reported as `classifier_error`. When Jev answers, the routing confidence is the minimum of the structural confidence and Jev's operator confidence. Recommended rollout: run in shadow (`INTENT_BACKEND=regex`, `SHADOW_INTENT_BACKEND=jev_gated`, `TELEMETRY_LOG` set), review the log with `scripts/summarize_intent_shadow.py`, then serve `INTENT_BACKEND=jev_gated`. [docker/README.md](docker/README.md) has the commands and the telemetry row fields.
 
 ### Model
 
@@ -285,5 +298,5 @@ python scripts/export_annotations_to_training.py \
 - [Docker Deployment](docker/README.md) - Local and Docker deployment
 - [Fine-Tuning & Training Guide](docs/fine-tuning-cli.md) - Model training and deployment
 - [Annotation Guidelines](docs/annotation-guide.md) - How to annotate scientific abstracts
-- [Hybrid Pipeline Architecture](docs/HYBRID_PIPELINE.md) - Deterministic NER pipeline (alternative to model)
+- [Hybrid Pipeline Architecture](docs/HYBRID_PIPELINE.md) - Intent extraction, retrieval and query assembly pipeline
 - [ADS Search Syntax](https://ui.adsabs.harvard.edu/help/search/search-syntax) - Official ADS docs

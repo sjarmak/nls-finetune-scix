@@ -2,19 +2,41 @@
 #
 # Usage:
 #   # Start the NLS server (GPU):
-#   docker-compose up nls-server
+#   docker compose up nls-server
 #
 #   # Start the NLS server (CPU - slower but works everywhere):
-#   docker-compose up nls-server-cpu
+#   docker compose up nls-server-cpu
 #
 #   # Build and start:
-#   docker-compose up --build
+#   docker compose up --build
+#
+#   # Shadow the Jev intent backend (serves regex, logs both intents):
+#   TYPESAFE_API_KEY=... SHADOW_INTENT_BACKEND=jev_gated \
+#     TELEMETRY_LOG=/app/telemetry/nls.jsonl docker compose up nls-server
+#
+# Every setting below comes from the host environment when set there, with
+# the server's own default otherwise; docker/README.md describes each one.
+# TYPESAFE_API_KEY is never written here: export it in the host shell.
+# TELEMETRY_LOG is a path inside the container; put it under /app/telemetry,
+# which is the nls-telemetry volume, so the log survives the container.
 #
 # Then configure nectar .env.local:
 #   NL_SEARCH_PIPELINE_ENDPOINT=http://localhost:8000
 #   NL_SEARCH_VLLM_ENDPOINT=http://localhost:8000/v1/chat/completions
 
-version: '3.8'
+x-nls-environment: &nls-environment
+  MODEL_NAME: adsabs/scix-nls-translator
+  PORT: "8000"
+  ROUTING_MODE: ${ROUTING_MODE:-hybrid}
+  PIPELINE_CONFIDENCE_THRESHOLD: ${PIPELINE_CONFIDENCE_THRESHOLD:-0.5}
+  INTENT_BACKEND: ${INTENT_BACKEND:-regex}
+  SHADOW_INTENT_BACKEND: ${SHADOW_INTENT_BACKEND:-}
+  TYPESAFE_API_KEY: ${TYPESAFE_API_KEY:-}
+  JEV_TIMEOUT_S: ${JEV_TIMEOUT_S:-2.0}
+  # Empty disables the System One response cache file (unbounded, and lost
+  # when the container is replaced).
+  JEV_CACHE_PATH: ""
+  TELEMETRY_LOG: ${TELEMETRY_LOG:-}
 
 services:
   # GPU version (requires NVIDIA Docker runtime)
@@ -27,9 +49,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - MODEL_NAME=adsabs/scix-nls-translator
-      - DEVICE=cuda
-      - PORT=8000
+      <<: *nls-environment
+      DEVICE: cuda
+    volumes:
+      - nls-telemetry:/app/telemetry
     deploy:
       resources:
         reservations:
@@ -54,9 +77,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - MODEL_NAME=adsabs/scix-nls-translator
-      - DEVICE=cpu
-      - PORT=8000
+      <<: *nls-environment
+      DEVICE: cpu
+    volumes:
+      - nls-telemetry:/app/telemetry
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
@@ -66,3 +90,8 @@ services:
 
   # MPS version (for Apple Silicon Macs - run outside Docker)
   # Note: MPS doesn't work in Docker, use the run_local.sh script instead
+
+volumes:
+  # Telemetry JSONL (request and intent_shadow rows). Read it back with:
+  #   docker compose cp nls-server:/app/telemetry/nls.jsonl .
+  nls-telemetry:

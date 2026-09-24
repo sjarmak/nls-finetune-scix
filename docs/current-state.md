@@ -1,6 +1,6 @@
 # NLS Query Translation: Current State
 
-*Last updated: 2026-06-09*
+*Last updated: 2026-09-24*
 
 ## Overview
 
@@ -17,11 +17,38 @@ operator syntax).
 Requests route through the hybrid pipeline first; the fine-tuned model is the
 fallback when pipeline confidence falls below the threshold.
 
+The pipeline's intent stage has three backends. `regex` (the default) is the
+rules-based `ner.py`. `jev` and `jev_gated` use Jev typed classifiers
+(TypeSafe System One, `jev-1.13.0`) for the operator, doctype, bibgroup,
+collection and property fields while the regex keeps names, years and topics;
+`jev_gated` calls Jev only when the regex finds no operator or its structural
+confidence is below 0.5. The evaluation that chose `jev_gated` is
+[reports/jev-intent-classifier-eval.md](../reports/jev-intent-classifier-eval.md).
+
 | Setting | Default | Meaning |
 |---------|---------|---------|
+| `MODEL_NAME` | `adsabs/scix-nls-translator` | Fallback model |
+| `DEVICE` | auto-detect | `cuda` / `mps` / `cpu` |
+| `PORT` | `8000` | Server port |
 | `ROUTING_MODE` | `hybrid` | `hybrid` / `pipeline` / `model` |
-| `PIPELINE_CONFIDENCE_THRESHOLD` | `0.5` | Below this, fall back to model |
-| `TELEMETRY_LOG` | unset | JSONL log of routing decisions per request |
+| `PIPELINE_CONFIDENCE_THRESHOLD` | `0.5` | Below this routing confidence, fall back to model |
+| `TELEMETRY_LOG` | unset | JSONL log: `request` rows and `intent_shadow` rows |
+| `INTENT_BACKEND` | `regex` | `regex` / `jev` / `jev_gated` |
+| `TYPESAFE_API_KEY` | unset | Needed by the Jev backends and shadow mode |
+| `JEV_TIMEOUT_S` | `2.0` | Per-call System One timeout (s) |
+| `JEV_CACHE_PATH` | `data/cache/jev_systemone.jsonl`; empty in Docker | Response cache file; empty disables it |
+| `SHADOW_INTENT_BACKEND` | unset | `jev` / `jev_gated`, logged next to the served regex intent |
+| `GOLD_EXAMPLES_PATH` | repo `data/datasets/raw/gold_examples.json` | Retrieval examples |
+
+- **Fallback.** A Jev error or timeout serves the regex intent; the reason is
+  in `debug_info.classifier_error` and the telemetry `classifier_error` field.
+- **Routing confidence.** The structural score, or `min(structural, Jev
+  operator confidence)` when Jev answered.
+- **Rollout.** Shadow first (`INTENT_BACKEND=regex`,
+  `SHADOW_INTENT_BACKEND=jev_gated`, `TELEMETRY_LOG` set), review the log with
+  `scripts/summarize_intent_shadow.py`, then serve `INTENT_BACKEND=jev_gated`.
+  Commands and the telemetry row fields are in
+  [docker/README.md](../docker/README.md).
 
 ## Model Details
 

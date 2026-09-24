@@ -1,4 +1,6 @@
 # NLS Server Dependencies
+# torch/transformers/accelerate are needed only for the fine-tuned model
+# (ROUTING_MODE=hybrid or model); server.py imports them lazily.
 torch>=2.0.0
 transformers>=4.40.0
 accelerate>=0.25.0
@@ -6,5 +8,8 @@ fastapi>=0.109.0
 uvicorn>=0.27.0
 pydantic>=2.0.0
 
-# For pipeline mode
+# For pipeline mode: the finetune.domains.scix package imports httpx at module
+# level (validate.py, resolver.py, jev_intent.py). Without it the pipeline is
+# silently unavailable and every request goes to the model.
+httpx>=0.27.0
 numpy>=1.24.0

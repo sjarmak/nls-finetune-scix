@@ -5,6 +5,8 @@
 # Run:   docker run --gpus all -p 8000:8000 nls-server
 #
 # For CPU-only (slower): docker run -p 8000:8000 -e DEVICE=cpu nls-server
+# Jev intent backend:    add -e INTENT_BACKEND=jev_gated -e TYPESAFE_API_KEY
+#                        (the bare name copies the key from the host environment)
 
 FROM python:3.12-slim
 
@@ -24,11 +26,19 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY packages/finetune/src/finetune /app/finetune
 COPY docker/server.py /app/server.py
 COPY data/datasets/raw/gold_examples.json /app/data/gold_examples.json
+# Telemetry directory; docker-compose mounts the nls-telemetry volume here.
+RUN mkdir -p /app/telemetry
 
-# Environment variables
+# Environment variables (every server setting is listed in docker/README.md)
 ENV MODEL_NAME=adsabs/scix-nls-translator
 ENV DEVICE=cuda
 ENV PORT=8000
+# retrieval.py resolves the gold examples relative to the repo layout, which
+# the image does not have; point it at the copy above.
+ENV GOLD_EXAMPLES_PATH=/app/data/gold_examples.json
+# Empty disables the Jev (System One) response cache file: it grows without
+# bound and a container loses it on restart.
+ENV JEV_CACHE_PATH=
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
