@@ -42,3 +42,6 @@ nls_query_eval
 .beads-credential-key
 .beads/proxieddb/
 *.gate.lock*
+
+# Model request caches (Jev / LLM), rebuilt on demand
+data/cache/

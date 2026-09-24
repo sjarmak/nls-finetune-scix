@@ -26,6 +26,13 @@ Configuration (environment variables):
     TELEMETRY_LOG    Optional path to a JSONL file; one record is appended per
                      request (path taken, confidence, latency, queries) to feed
                      the retraining data flywheel.
+    INTENT_BACKEND   regex | jev | jev_gated (default: regex). The Jev backends
+                     classify operator and enum fields with TypeSafe System One
+                     and need TYPESAFE_API_KEY; jev_gated calls it only when the
+                     regex extractor finds no operator or scores below the
+                     confidence threshold.
+    JEV_CACHE_PATH   JSONL cache for System One responses (default:
+                     data/cache/jev_systemone.jsonl)
 
 Usage:
     # With Docker (GPU):
@@ -66,9 +73,13 @@ PORT = int(os.environ.get("PORT", 8000))
 ROUTING_MODE = os.environ.get("ROUTING_MODE", "hybrid")
 CONFIDENCE_THRESHOLD = float(os.environ.get("PIPELINE_CONFIDENCE_THRESHOLD", "0.5"))
 TELEMETRY_LOG = os.environ.get("TELEMETRY_LOG", "")
+INTENT_BACKEND = os.environ.get("INTENT_BACKEND", "regex")
+JEV_CACHE_PATH = os.environ.get("JEV_CACHE_PATH", "data/cache/jev_systemone.jsonl")
 
 if ROUTING_MODE not in ("hybrid", "pipeline", "model"):
     raise ValueError(f"ROUTING_MODE must be hybrid, pipeline, or model; got {ROUTING_MODE!r}")
+if INTENT_BACKEND not in ("regex", "jev", "jev_gated"):
+    raise ValueError(f"INTENT_BACKEND must be regex, jev, or jev_gated; got {INTENT_BACKEND!r}")
 
 # Try to import pipeline components (optional, for full pipeline mode)
 try:
@@ -82,6 +93,18 @@ except ImportError:
 
 if ROUTING_MODE == "pipeline" and not PIPELINE_AVAILABLE:
     raise RuntimeError("ROUTING_MODE=pipeline but pipeline modules are not importable")
+
+jev_client = None
+if INTENT_BACKEND != "regex":
+    if not PIPELINE_AVAILABLE:
+        raise RuntimeError(f"INTENT_BACKEND={INTENT_BACKEND} needs the pipeline modules")
+    from pathlib import Path
+
+    from finetune.domains.scix.jev_intent import JevClient
+
+    jev_client = JevClient(
+        api_key=os.environ.get("TYPESAFE_API_KEY", ""), cache_path=Path(JEV_CACHE_PATH)
+    )
 
 app = FastAPI(
     title="NLS Inference Server",
@@ -150,6 +173,8 @@ class PipelineDebugInfo(BaseModel):
     constraint_corrections: list[str] = []
     fallback_reason: str | None = None
     raw_extracted: dict | None = None
+    intent_backend: str = "regex"
+    classifier_called: bool = False
 
 
 class PipelineResult(BaseModel):
@@ -294,7 +319,7 @@ def run_pipeline(nl_query: str) -> tuple[RoutedResult | None, str | None]:
     """
     start_time = time.perf_counter()
     try:
-        result = process_query(nl_query)
+        result = process_query(nl_query, INTENT_BACKEND, jev_client)
     except Exception as e:
         logger.exception("Pipeline raised for query %r", nl_query)
         return None, f"pipeline error: {e}"
@@ -311,6 +336,8 @@ def run_pipeline(nl_query: str) -> tuple[RoutedResult | None, str | None]:
         total_time_ms=elapsed_ms,
         constraint_corrections=result.debug_info.constraint_corrections,
         fallback_reason=result.debug_info.fallback_reason,
+        intent_backend=result.debug_info.intent_backend,
+        classifier_called=result.debug_info.classifier_called,
     )
 
     pipeline_result = PipelineResult(
@@ -427,6 +454,7 @@ def _log_routing(nl_query: str, routed: RoutedResult) -> None:
             "fallback_reason": routed.fallback_reason,
             "latency_ms": round(routed.latency_ms, 1),
             "routing_mode": ROUTING_MODE,
+            "intent_backend": INTENT_BACKEND,
         }
     )
 
@@ -456,6 +484,7 @@ async def health():
         "pipeline_available": PIPELINE_AVAILABLE,
         "routing_mode": ROUTING_MODE,
         "confidence_threshold": CONFIDENCE_THRESHOLD,
+        "intent_backend": INTENT_BACKEND,
     }
 
 

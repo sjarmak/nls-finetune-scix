@@ -670,11 +670,29 @@ def extract_intent(text: str) -> IntentSpec:
             confidence={"ads_passthrough": 1.0},
         )
 
-    # Initialize intent
-    intent = IntentSpec(raw_user_text=original_text)
-
     # Extract operator (FIRST - so we can remove operator phrases from text)
-    intent.operator, working_text = _extract_operator(working_text)
+    operator, working_text = _extract_operator(working_text)
+    return _extract_fields(original_text, working_text, operator)
+
+
+def extract_intent_with_operator(text: str, operator: str | None) -> IntentSpec:
+    """Run every extractor except operator gating, with the operator decided elsewhere.
+
+    Used by classifier-backed intent backends: the operator comes from the
+    classifier, and the operator's removal patterns are still applied so the
+    triggering phrase does not leak into the topic terms.
+    """
+    original_text = text.strip()
+    working_text = original_text
+    for removal_pattern in OPERATOR_REMOVAL_PATTERNS.get(operator or "", []):
+        working_text = removal_pattern.sub(" ", working_text)
+    working_text = re.sub(r"\s+", " ", working_text).strip()
+    return _extract_fields(original_text, working_text, operator)
+
+
+def _extract_fields(original_text: str, working_text: str, operator: str | None) -> IntentSpec:
+    """Years, authors, enum fields and topics from text with the operator phrase removed."""
+    intent = IntentSpec(raw_user_text=original_text, operator=operator)
 
     # Extract years
     intent.year_from, intent.year_to, working_text = _extract_years(working_text)

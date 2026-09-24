@@ -7,7 +7,9 @@ syntax validity — sliced by benchmark category. This is the metric that the
 PRD targets (semantic match >= 70%, syntax validity >= 95%) are defined on.
 
 Modes:
-    pipeline  - run the hybrid NER pipeline in-process (no server needed)
+    pipeline  - run the hybrid NER pipeline in-process (no server needed);
+                --intent-backend picks regex (default), jev or jev_gated for
+                the IntentSpec stage (jev needs TYPESAFE_API_KEY)
     server    - call a running NLS server's /v1/chat/completions endpoint;
                 point it at a hybrid, pipeline-only, or model-only server
                 (ROUTING_MODE env var on the server) to compare routing modes.
@@ -22,6 +24,10 @@ Usage:
 
     # Quick run on a sample
     python scripts/evaluate_semantic_overlap.py --mode pipeline --limit 20
+
+    # Jev intent backend on the synthetic val set
+    python scripts/evaluate_semantic_overlap.py --mode pipeline --dataset val \
+        --intent-backend jev
 
 Results are written to data/datasets/evaluations/semantic_overlap_<label>_<date>.json
 """
@@ -41,9 +47,11 @@ REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(REPO_ROOT / "packages/finetune/src"))
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
+from derive_intent_labels import load_val_items  # noqa: E402
 from evaluate_benchmark import flatten_tests, load_benchmark  # noqa: E402
 
 from finetune.domains.scix.eval import evaluate_pair, summarize_results  # noqa: E402
+from finetune.domains.scix.pipeline import INTENT_BACKENDS  # noqa: E402
 
 DEFAULT_BENCHMARK = REPO_ROOT / "data/datasets/benchmark/benchmark_queries.json"
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "data/datasets/evaluations"
@@ -53,11 +61,45 @@ TARGET_SYNTAX_VALIDITY_RATE = 0.95
 SYSTEM_PROMPT = 'Convert natural language to ADS search query. Output JSON: {"query": "..."}'
 
 
-def generate_via_pipeline(nl_query: str) -> str:
+def generate_via_pipeline(nl_query: str, intent_backend: str = "regex", jev_client=None) -> str:
     """Generate a query with the in-process hybrid pipeline."""
     from finetune.domains.scix.pipeline import process_query
 
-    return process_query(nl_query).final_query
+    return process_query(nl_query, intent_backend, jev_client).final_query
+
+
+def build_jev_client(intent_backend: str, cache_path: Path):
+    """JevClient for the jev backends, or None for regex. Fails fast without a key."""
+    if intent_backend == "regex":
+        return None
+    from finetune.domains.scix.jev_intent import JevClient
+
+    api_key = os.environ.get("TYPESAFE_API_KEY", "")
+    if not api_key:
+        raise SystemExit(f"TYPESAFE_API_KEY must be set for --intent-backend {intent_backend}")
+    return JevClient(api_key=api_key, cache_path=cache_path)
+
+
+def load_cases(dataset: str, benchmark_path: Path) -> list[tuple[dict, str, str]]:
+    """(test, category, subcategory) triples with natural_language and expected_query."""
+    if dataset == "benchmark":
+        return [
+            (test, category, subcategory)
+            for test, category, subcategory in flatten_tests(load_benchmark(benchmark_path))
+            if test.get("expected_query")
+        ]
+    return [
+        (
+            {
+                "id": item["id"],
+                "natural_language": item["nl"],
+                "expected_query": item["gold_query"],
+            },
+            "val",
+            item.get("category") or "synthetic",
+        )
+        for item in load_val_items()
+    ]
 
 
 def generate_via_server(nl_query: str, endpoint: str, client: httpx.Client) -> str:
@@ -104,6 +146,16 @@ def main() -> int:
         "--label", default=None, help="Label for the output artifact (default: mode)"
     )
     parser.add_argument("--benchmark", type=Path, default=DEFAULT_BENCHMARK)
+    parser.add_argument("--dataset", choices=["benchmark", "val"], default="benchmark")
+    parser.add_argument(
+        "--intent-backend",
+        choices=sorted(INTENT_BACKENDS),
+        default="regex",
+        help="IntentSpec stage for pipeline mode (jev backends need TYPESAFE_API_KEY)",
+    )
+    parser.add_argument(
+        "--jev-cache", type=Path, default=REPO_ROOT / "data/cache/jev_systemone.jsonl"
+    )
     parser.add_argument("--output", type=Path, default=None)
     parser.add_argument("--limit", type=int, default=None, help="Evaluate only the first N cases")
     parser.add_argument("--rows", type=int, default=50, help="Result-set size N for overlap")
@@ -114,19 +166,26 @@ def main() -> int:
         print("ERROR: ADS_API_KEY must be set for result-set evaluation", file=sys.stderr)
         return 1
 
-    label = args.label or args.mode
-    benchmark = load_benchmark(args.benchmark)
-    cases = [
-        (test, category, subcategory)
-        for test, category, subcategory in flatten_tests(benchmark)
-        if test.get("expected_query")
-    ]
+    if args.mode == "server" and args.intent_backend != "regex":
+        print("ERROR: --intent-backend applies to pipeline mode only", file=sys.stderr)
+        return 1
+
+    label = args.label or (
+        f"{args.mode}_{args.intent_backend}_{args.dataset}"
+        if args.mode == "pipeline"
+        else args.mode
+    )
+    cases = load_cases(args.dataset, args.benchmark)
     if args.limit:
         cases = cases[: args.limit]
 
-    print(f"Evaluating {len(cases)} benchmark cases (mode={args.mode}, label={label})")
+    print(
+        f"Evaluating {len(cases)} {args.dataset} cases "
+        f"(mode={args.mode}, intent_backend={args.intent_backend}, label={label})"
+    )
 
     client = httpx.Client(timeout=120.0) if args.mode == "server" else None
+    jev_client = build_jev_client(args.intent_backend, args.jev_cache)
     results = []
     generation_errors = []
 
@@ -136,7 +195,7 @@ def main() -> int:
 
         try:
             if args.mode == "pipeline":
-                generated = generate_via_pipeline(nl)
+                generated = generate_via_pipeline(nl, args.intent_backend, jev_client)
             else:
                 generated = generate_via_server(nl, args.endpoint, client)
         except Exception as e:
@@ -160,6 +219,8 @@ def main() -> int:
 
     if client:
         client.close()
+    if jev_client:
+        jev_client.close()
 
     summary = summarize_results(results)
     semantic_matches = sum(
@@ -172,6 +233,8 @@ def main() -> int:
     artifact = {
         "metadata": {
             "mode": args.mode,
+            "intent_backend": args.intent_backend,
+            "dataset": args.dataset,
             "label": label,
             "endpoint": args.endpoint if args.mode == "server" else None,
             "benchmark": str(args.benchmark),

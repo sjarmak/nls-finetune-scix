@@ -1,0 +1,313 @@
+"""Tests for the Jev (TypeSafe System One) typed-classifier intent backend.
+
+The client is exercised through an httpx MockTransport, so no network is
+touched. Wire-contract fixtures mirror the smoke call recorded on 2026-09-24
+against jev-1.13.0.
+"""
+
+import json
+from pathlib import Path
+
+import httpx
+import pytest
+
+from finetune.domains.scix.field_constraints import BIBGROUPS, COLLECTIONS, DOCTYPES
+from finetune.domains.scix.intent_spec import OPERATORS, IntentSpec
+from finetune.domains.scix.jev_intent import (
+    BOOLEAN_QUESTION_IDS,
+    CHOICE_QUESTION_IDS,
+    JEV_MODEL,
+    JevAnswers,
+    JevClient,
+    JevResponseError,
+    apply_answers,
+    build_questions,
+    build_request,
+    extract_intent_jev,
+    parse_response,
+    request_fingerprint,
+)
+
+
+def _choice(choice: str, probabilities: dict[str, float]) -> dict:
+    return {
+        "type": "choice",
+        "choice": choice,
+        "confidence": probabilities[choice],
+        "probabilities": probabilities,
+    }
+
+
+def _noul(p: float) -> dict:
+    return {"type": "noul", "noul": p}
+
+
+def _payload(operator: str = "none", **overrides) -> dict:
+    """A complete System One response for the standard question set."""
+    ops = {o: 0.01 for o in ["none", *sorted(OPERATORS)]}
+    ops[operator] = 1.0 - 0.01 * (len(ops) - 1)
+    answers = {
+        "operator": _choice(operator, ops),
+        "search_kind": _choice(
+            "topic",
+            {
+                "topic": 0.9,
+                "author": 0.02,
+                "object": 0.02,
+                "paper_reference": 0.02,
+                "identifier": 0.02,
+                "mixed": 0.02,
+            },
+        ),
+        "refereed": _noul(0.1),
+        "openaccess": _noul(0.05),
+        "eprint": _noul(0.02),
+        "doctype": _choice("none", {"none": 0.97, "article": 0.03}),
+        "bibgroup": _choice("none", {"none": 0.99, "HST": 0.01}),
+        "collection": _choice("none", {"none": 0.8, "astronomy": 0.2}),
+        "needs_clarification": _noul(0.1),
+        "refers_to_specific_paper": _noul(0.2),
+    }
+    answers.update(overrides)
+    usage = {"input_tokens": 500, "output_tokens": 0}
+    return {"model": JEV_MODEL, "answers": answers, "usage": usage}
+
+
+class TestQuestionSet:
+    def test_choice_options_are_exactly_the_legal_enum_values(self):
+        q = build_questions()
+        assert set(q["operator"]["criteria"]) == {"none", *OPERATORS}
+        assert set(q["doctype"]["criteria"]) == {"none", *DOCTYPES}
+        assert set(q["bibgroup"]["criteria"]) == {"none", *BIBGROUPS}
+        assert set(q["collection"]["criteria"]) == {"none", *COLLECTIONS}
+
+    def test_boolean_questions_use_noul_wire_type(self):
+        q = build_questions()
+        for qid in BOOLEAN_QUESTION_IDS:
+            assert q[qid]["type"] == "noul"
+            assert set(q[qid]["criteria"]) == {"true", "false"}
+        for qid in CHOICE_QUESTION_IDS:
+            assert q[qid]["type"] == "choice"
+            assert q[qid]["instructions"]
+
+    def test_every_option_has_a_description(self):
+        for qid, q in build_questions().items():
+            for option, description in q["criteria"].items():
+                assert description.strip(), f"{qid}:{option} has no description"
+
+
+class TestRequest:
+    def test_request_pins_model_and_carries_state(self):
+        req = build_request("papers citing Planck 2018")
+        assert req["model"] == JEV_MODEL
+        assert req["state"] == {"query": "papers citing Planck 2018"}
+        assert set(req["questions"]) == set(build_questions())
+
+    def test_context_is_merged_into_state_without_overriding_query(self):
+        req = build_request("x", context={"regex_intent": {"operator": None}})
+        assert req["state"] == {"query": "x", "regex_intent": {"operator": None}}
+        with pytest.raises(ValueError):
+            build_request("x", context={"query": "y"})
+
+    def test_fingerprint_is_stable_under_key_order(self):
+        a = {"model": "m", "state": {"query": "q", "z": 1}, "questions": {"b": 1, "a": 2}}
+        b = {"questions": {"a": 2, "b": 1}, "state": {"z": 1, "query": "q"}, "model": "m"}
+        assert request_fingerprint(a) == request_fingerprint(b)
+        assert request_fingerprint(a) != request_fingerprint({**a, "model": "other"})
+
+
+class TestParseResponse:
+    def test_parses_all_fields(self):
+        answers = parse_response(_payload("citations"), latency_ms=123.0, cached=False)
+        assert answers.model == JEV_MODEL
+        assert answers.choices["operator"].choice == "citations"
+        assert answers.choices["operator"].probabilities["none"] == pytest.approx(0.01)
+        assert answers.booleans["refereed"] == pytest.approx(0.1)
+        assert answers.input_tokens == 500
+        assert answers.latency_ms == 123.0
+        assert answers.cached is False
+
+    @pytest.mark.parametrize(
+        "mutation",
+        [
+            lambda p: p["answers"].pop("operator"),
+            lambda p: p["answers"]["operator"].update(choice="topn"),
+            lambda p: p["answers"]["refereed"].update(noul=1.5),
+            lambda p: p["answers"]["refereed"].update(type="choice"),
+            lambda p: p.pop("usage"),
+            lambda p: p.update(model=""),
+            lambda p: p["answers"]["operator"].pop("probabilities"),
+        ],
+    )
+    def test_rejects_malformed_payloads(self, mutation):
+        payload = _payload()
+        mutation(payload)
+        with pytest.raises(JevResponseError):
+            parse_response(payload, latency_ms=1.0, cached=False)
+
+
+class TestApplyAnswers:
+    def _answers(self, **overrides) -> JevAnswers:
+        return parse_response(_payload(**overrides), latency_ms=1.0, cached=False)
+
+    def test_none_operator_leaves_operator_unset(self):
+        base = IntentSpec(raw_user_text="t", free_text_terms=["citation analysis"])
+        out = apply_answers(base, self._answers())
+        assert out.operator is None
+        assert out.free_text_terms == ["citation analysis"]
+
+    def test_operator_and_enums_are_taken_from_jev(self):
+        base = IntentSpec(raw_user_text="t", authors=["Smith, J"], year_from=2020)
+        answers = self._answers(
+            operator="references",
+            doctype=_choice("phdthesis", {"none": 0.1, "phdthesis": 0.9}),
+            bibgroup=_choice("JWST", {"none": 0.2, "JWST": 0.8}),
+            collection=_choice("physics", {"none": 0.3, "physics": 0.7}),
+            refereed=_noul(0.95),
+            openaccess=_noul(0.51),
+            eprint=_noul(0.49),
+        )
+        out = apply_answers(base, answers)
+        assert out.operator == "references"
+        assert out.doctype == {"phdthesis"}
+        assert out.bibgroup == {"JWST"}
+        assert out.collection == {"physics"}
+        assert out.property == {"refereed", "openaccess"}
+        assert out.authors == ["Smith, J"] and out.year_from == 2020
+        assert out.confidence["operator"] == pytest.approx(0.94)
+        assert out.confidence["doctype"] == pytest.approx(0.9)
+        assert out.confidence["property.eprint"] == pytest.approx(0.49)
+        assert out.confidence["refers_to_specific_paper"] == pytest.approx(0.2)
+
+    def test_does_not_mutate_input(self):
+        base = IntentSpec(raw_user_text="t", property={"refereed"})
+        apply_answers(base, self._answers(operator="similar"))
+        assert base.operator is None and base.property == {"refereed"}
+
+
+def _mock_client(tmp_path: Path, payloads: list[dict], calls: list[dict]) -> JevClient:
+    def handler(request: httpx.Request) -> httpx.Response:
+        assert request.headers["authorization"] == "Bearer test-key"
+        calls.append(json.loads(request.content))
+        return httpx.Response(200, json=payloads[len(calls) - 1])
+
+    return JevClient(
+        api_key="test-key",
+        cache_path=tmp_path / "cache.jsonl",
+        transport=httpx.MockTransport(handler),
+    )
+
+
+class TestClientCache:
+    def test_second_identical_request_is_served_from_cache(self, tmp_path):
+        calls: list[dict] = []
+        client = _mock_client(tmp_path, [_payload("trending")], calls)
+        first = client.classify("what's hot in exoplanets")
+        second = client.classify("what's hot in exoplanets")
+        assert len(calls) == 1
+        assert first.cached is False and second.cached is True
+        assert second.choices["operator"].choice == "trending"
+        rows = [json.loads(line) for line in (tmp_path / "cache.jsonl").read_text().splitlines()]
+        assert len(rows) == 1 and rows[0]["fingerprint"] == request_fingerprint(calls[0])
+
+    def test_cache_can_be_bypassed_for_stability_repeats(self, tmp_path):
+        calls: list[dict] = []
+        client = _mock_client(tmp_path, [_payload("useful"), _payload("useful")], calls)
+        client.classify("q")
+        client.classify("q", use_cache=False)
+        assert len(calls) == 2
+
+    def test_http_error_propagates(self, tmp_path):
+        def handler(request: httpx.Request) -> httpx.Response:
+            return httpx.Response(401, json={"error": "bad key"})
+
+        client = JevClient(
+            api_key="k", cache_path=tmp_path / "c.jsonl", transport=httpx.MockTransport(handler)
+        )
+        with pytest.raises(httpx.HTTPStatusError):
+            client.classify("q")
+
+    def test_missing_api_key_is_rejected(self, tmp_path):
+        with pytest.raises(ValueError):
+            JevClient(api_key="", cache_path=tmp_path / "c.jsonl")
+
+
+class TestExtractIntentJev:
+    def test_composes_regex_extractors_with_jev_gating(self, tmp_path):
+        calls: list[dict] = []
+        client = _mock_client(tmp_path, [_payload("citations")], calls)
+        text = "papers that build on dark energy work by Smith since 2019"
+        intent = extract_intent_jev(text, client)
+        assert intent.operator == "citations"
+        assert intent.year_from == 2019
+        assert intent.authors == ["Smith"]
+        assert "dark energy" in " ".join(intent.free_text_terms)
+        assert intent.doctype == set(), "Jev's 'none' overrides the regex 'papers'->article map"
+        assert intent.raw_user_text == text
+        assert calls[0]["state"] == {"query": text}
+
+    def test_regex_intent_can_be_sent_as_context(self, tmp_path):
+        calls: list[dict] = []
+        client = _mock_client(tmp_path, [_payload()], calls)
+        extract_intent_jev("dark energy since 2019", client, include_regex_state=True)
+        assert calls[0]["state"]["regex_intent"]["year_from"] == 2019
+
+    def test_ads_syntax_passes_through_without_calling_jev(self, tmp_path):
+        calls: list[dict] = []
+        client = _mock_client(tmp_path, [], calls)
+        intent = extract_intent_jev('author:"Smith, J" year:2020', client)
+        assert intent.confidence == {"ads_passthrough": 1.0}
+        assert calls == []
+
+
+class TestPipelineBackends:
+    """process_query routes to the selected intent backend."""
+
+    def test_regex_backend_never_calls_jev(self, tmp_path):
+        from finetune.domains.scix.pipeline import process_query
+
+        calls: list[dict] = []
+        client = _mock_client(tmp_path, [], calls)
+        result = process_query("papers citing dark energy surveys", "regex", client)
+        assert calls == []
+        assert result.debug_info.intent_backend == "regex"
+        assert result.debug_info.classifier_called is False
+        assert result.intent.operator == "citations"
+
+    def test_jev_backend_always_calls_jev(self, tmp_path):
+        from finetune.domains.scix.pipeline import process_query
+
+        calls: list[dict] = []
+        client = _mock_client(tmp_path, [_payload("none")], calls)
+        result = process_query("papers citing dark energy surveys", "jev", client)
+        assert len(calls) == 1
+        assert result.debug_info.classifier_called is True
+        assert result.intent.operator is None, "Jev's answer wins over the regex match"
+        assert result.final_query
+
+    def test_gated_backend_skips_jev_when_regex_found_an_operator(self, tmp_path):
+        from finetune.domains.scix.pipeline import process_query
+
+        calls: list[dict] = []
+        client = _mock_client(tmp_path, [], calls)
+        result = process_query("papers citing dark energy surveys", "jev_gated", client)
+        assert calls == []
+        assert result.debug_info.classifier_called is False
+
+    def test_gated_backend_calls_jev_when_regex_found_no_operator(self, tmp_path):
+        from finetune.domains.scix.pipeline import process_query
+
+        calls: list[dict] = []
+        client = _mock_client(tmp_path, [_payload("similar")], calls)
+        result = process_query("work along the lines of the Planck results", "jev_gated", client)
+        assert len(calls) == 1
+        assert result.debug_info.classifier_called is True
+        assert result.intent.operator == "similar"
+
+    def test_jev_backends_require_a_client(self):
+        from finetune.domains.scix.pipeline import process_query
+
+        with pytest.raises(ValueError):
+            process_query("x", "jev", None)
+        with pytest.raises(ValueError):
+            process_query("x", "bogus", None)  # type: ignore[arg-type]

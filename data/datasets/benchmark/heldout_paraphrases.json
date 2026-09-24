@@ -1,0 +1,3184 @@
+{
+  "schema": "heldout-paraphrases-v1",
+  "purpose": "Held-out generalisation set for the Jev intent classifier experiment (docs/research/jev-intent-classifier-experiment.md, dataset 3).",
+  "drafted_by": "Claude Fable 5.1 (claude-fable-5-1) on 2026-09-24; drafts only, no model has scored them",
+  "excluded_from_comparison_arms": [
+    "claude-fable-5-1"
+  ],
+  "review_status": "reviewed by Stephanie on 2026-09-24: 152 approved, 0 rejected",
+  "strata": {
+    "operator_positive": 42,
+    "operator_negative": 40,
+    "enum_synonym": 40,
+    "ambiguous": 30
+  },
+  "label_conventions": {
+    "operator": "none unless the user asks for a result-set transform; operator words used as topic are none",
+    "property/doctype/bibgroup/collection": "gold ADS convention from benchmark_queries.json: generic 'papers' is no doctype; a facility named as the data source is its bibgroup; a facility inside a topic or object name is not",
+    "search_kind": "topic | author | object | paper_reference | identifier | mixed",
+    "needs_clarification": "true when a careful librarian would ask before searching",
+    "refers_to_specific_paper": "true when one identifiable work must be looked up before the search can run"
+  },
+  "items": [
+    {
+      "id": "hp-pos-001",
+      "stratum": "operator_positive",
+      "nl": "papers that build on the Planck 2018 cosmology results",
+      "labels": {
+        "operator": "citations",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-002",
+      "stratum": "operator_positive",
+      "nl": "who has picked up on the Riess et al. 2019 Hubble tension measurement since it came out",
+      "labels": {
+        "operator": "citations",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-003",
+      "stratum": "operator_positive",
+      "nl": "follow-up work to the first LIGO binary black hole detection paper",
+      "labels": {
+        "operator": "citations",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-004",
+      "stratum": "operator_positive",
+      "nl": "downstream research stemming from the Event Horizon Telescope M87 image",
+      "labels": {
+        "operator": "citations",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-005",
+      "stratum": "operator_positive",
+      "nl": "later studies drawing on the Salpeter initial mass function",
+      "labels": {
+        "operator": "citations",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-006",
+      "stratum": "operator_positive",
+      "nl": "how has the Kennicutt-Schmidt law paper been used since publication",
+      "labels": {
+        "operator": "citations",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-007",
+      "stratum": "operator_positive",
+      "nl": "subsequent literature engaging with the NFW dark matter halo profile",
+      "labels": {
+        "operator": "citations",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-008",
+      "stratum": "operator_positive",
+      "nl": "what came after the DESI 2024 baryon acoustic oscillation release, in terms of papers leaning on it",
+      "labels": {
+        "operator": "citations",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-009",
+      "stratum": "operator_positive",
+      "nl": "everything that has since made use of the Gaia DR3 catalog paper",
+      "labels": {
+        "operator": "citations",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-010",
+      "stratum": "operator_positive",
+      "nl": "research that takes the TRAPPIST-1 discovery as its starting point",
+      "labels": {
+        "operator": "citations",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-011",
+      "stratum": "operator_positive",
+      "nl": "the works the Planck 2018 cosmology paper drew on",
+      "labels": {
+        "operator": "references",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-012",
+      "stratum": "operator_positive",
+      "nl": "what did the JWST early release science team build upon",
+      "labels": {
+        "operator": "references",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-013",
+      "stratum": "operator_positive",
+      "nl": "sources underpinning the Bullet Cluster dark matter paper",
+      "labels": {
+        "operator": "references",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-014",
+      "stratum": "operator_positive",
+      "nl": "the reading list behind the Hubble constant tension review by Di Valentino",
+      "labels": {
+        "operator": "references",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-015",
+      "stratum": "operator_positive",
+      "nl": "the prior literature the LIGO GW150914 discovery paper leans on",
+      "labels": {
+        "operator": "references",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-016",
+      "stratum": "operator_positive",
+      "nl": "the earlier results that the DESI BAO analysis rests on",
+      "labels": {
+        "operator": "references",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-017",
+      "stratum": "operator_positive",
+      "nl": "what the authors of the first fast radio burst paper were relying on",
+      "labels": {
+        "operator": "references",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-018",
+      "stratum": "operator_positive",
+      "nl": "the foundations the TRAPPIST-1 discovery paper was assembled from",
+      "labels": {
+        "operator": "references",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-019",
+      "stratum": "operator_positive",
+      "nl": "papers in the same vein as the M87 black hole shadow imaging",
+      "labels": {
+        "operator": "similar",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-020",
+      "stratum": "operator_positive",
+      "nl": "along the lines of Riess 2019 on the local Hubble constant",
+      "labels": {
+        "operator": "similar",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-021",
+      "stratum": "operator_positive",
+      "nl": "kindred studies to exoplanet atmosphere retrievals with JWST transmission spectra",
+      "labels": {
+        "operator": "similar",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-022",
+      "stratum": "operator_positive",
+      "nl": "anything akin to the Bullet Cluster lensing analysis",
+      "labels": {
+        "operator": "similar",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-023",
+      "stratum": "operator_positive",
+      "nl": "more of the same as fast radio burst dispersion measure cosmology",
+      "labels": {
+        "operator": "similar",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-024",
+      "stratum": "operator_positive",
+      "nl": "research adjacent to the TRAPPIST-1 habitability assessments",
+      "labels": {
+        "operator": "similar",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-025",
+      "stratum": "operator_positive",
+      "nl": "papers in the spirit of the NFW halo profile derivation",
+      "labels": {
+        "operator": "similar",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": false,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-026",
+      "stratum": "operator_positive",
+      "nl": "what everybody is reading on exoplanet atmospheres right now",
+      "labels": {
+        "operator": "trending",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-027",
+      "stratum": "operator_positive",
+      "nl": "the buzz in gravitational wave astronomy this month",
+      "labels": {
+        "operator": "trending",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-028",
+      "stratum": "operator_positive",
+      "nl": "what is getting attention lately in fast radio bursts",
+      "labels": {
+        "operator": "trending",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-029",
+      "stratum": "operator_positive",
+      "nl": "the current favourites among galaxy formation papers",
+      "labels": {
+        "operator": "trending",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-030",
+      "stratum": "operator_positive",
+      "nl": "where the crowd is heading in dark energy research at the moment",
+      "labels": {
+        "operator": "trending",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-031",
+      "stratum": "operator_positive",
+      "nl": "the papers people are flocking to on JWST high-redshift galaxies",
+      "labels": {
+        "operator": "trending",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-032",
+      "stratum": "operator_positive",
+      "nl": "the bedrock literature on stellar nucleosynthesis",
+      "labels": {
+        "operator": "useful",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-033",
+      "stratum": "operator_positive",
+      "nl": "what should I read first on magnetic reconnection",
+      "labels": {
+        "operator": "useful",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-034",
+      "stratum": "operator_positive",
+      "nl": "the classics of galactic dynamics",
+      "labels": {
+        "operator": "useful",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-035",
+      "stratum": "operator_positive",
+      "nl": "the go-to papers for cosmic microwave background anisotropies",
+      "labels": {
+        "operator": "useful",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-036",
+      "stratum": "operator_positive",
+      "nl": "core reading for accretion disk theory",
+      "labels": {
+        "operator": "useful",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-037",
+      "stratum": "operator_positive",
+      "nl": "cornerstone results in exoplanet transit photometry",
+      "labels": {
+        "operator": "useful",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-038",
+      "stratum": "operator_positive",
+      "nl": "a synthesis of the fast radio burst literature",
+      "labels": {
+        "operator": "reviews",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-039",
+      "stratum": "operator_positive",
+      "nl": "an overall summary of where dark energy research stands",
+      "labels": {
+        "operator": "reviews",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-040",
+      "stratum": "operator_positive",
+      "nl": "a primer on gravitational lensing",
+      "labels": {
+        "operator": "reviews",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-041",
+      "stratum": "operator_positive",
+      "nl": "a roundup of galaxy cluster mass estimation methods",
+      "labels": {
+        "operator": "reviews",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-pos-042",
+      "stratum": "operator_positive",
+      "nl": "big-picture treatments of star formation efficiency",
+      "labels": {
+        "operator": "reviews",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-001",
+      "stratum": "operator_negative",
+      "nl": "citation analysis techniques in astronomy bibliometrics",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-002",
+      "stratum": "operator_negative",
+      "nl": "citation networks among gravitational wave papers",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-003",
+      "stratum": "operator_negative",
+      "nl": "self-citation rates in astrophysics journals",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-004",
+      "stratum": "operator_negative",
+      "nl": "citation counts as a predictor of telescope time allocation outcomes",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-005",
+      "stratum": "operator_negative",
+      "nl": "reference frame realization with VLBI",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-006",
+      "stratum": "operator_negative",
+      "nl": "the International Celestial Reference Frame",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-007",
+      "stratum": "operator_negative",
+      "nl": "reference stars for adaptive optics wavefront sensing",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-008",
+      "stratum": "operator_negative",
+      "nl": "Gaia reference frame alignment with quasars",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-009",
+      "stratum": "operator_negative",
+      "nl": "similarity metrics for stellar spectra classification",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-010",
+      "stratum": "operator_negative",
+      "nl": "self-similar solutions for supernova blast waves",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-011",
+      "stratum": "operator_negative",
+      "nl": "morphological similarity of spiral galaxies",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-012",
+      "stratum": "operator_negative",
+      "nl": "similarity-based photometric redshift estimation",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-013",
+      "stratum": "operator_negative",
+      "nl": "trend analysis of solar cycle sunspot numbers",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-014",
+      "stratum": "operator_negative",
+      "nl": "the stellar initial mass function trending toward lower masses in dense clusters",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-015",
+      "stratum": "operator_negative",
+      "nl": "secular trends in Earth's rotation rate",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-016",
+      "stratum": "operator_negative",
+      "nl": "long-term trends in exoplanet detection rates",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-017",
+      "stratum": "operator_negative",
+      "nl": "hot Jupiters",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-018",
+      "stratum": "operator_negative",
+      "nl": "hot gas in galaxy clusters",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-019",
+      "stratum": "operator_negative",
+      "nl": "hot subdwarf stars",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-020",
+      "stratum": "operator_negative",
+      "nl": "popular science communication of black hole research",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-021",
+      "stratum": "operator_negative",
+      "nl": "useful yield in solar cell efficiency modelling",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-022",
+      "stratum": "operator_negative",
+      "nl": "utility functions for observation scheduling",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-023",
+      "stratum": "operator_negative",
+      "nl": "helpful diagnostics for stellar age estimation",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-024",
+      "stratum": "operator_negative",
+      "nl": "essential amino acids found in meteorites",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-025",
+      "stratum": "operator_negative",
+      "nl": "key exchange protocols in quantum cryptography",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-026",
+      "stratum": "operator_negative",
+      "nl": "landmark detection for planetary rover navigation",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-027",
+      "stratum": "operator_negative",
+      "nl": "survey completeness corrections in galaxy surveys",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-028",
+      "stratum": "operator_negative",
+      "nl": "the Sloan Digital Sky Survey spectroscopic pipeline",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-029",
+      "stratum": "operator_negative",
+      "nl": "all-sky survey strategies for transient detection",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-030",
+      "stratum": "operator_negative",
+      "nl": "literature growth rates in astrophysics",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-031",
+      "stratum": "operator_negative",
+      "nl": "reviewer bias in telescope time allocation",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-032",
+      "stratum": "operator_negative",
+      "nl": "the peer review process in astronomy journals",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-033",
+      "stratum": "operator_negative",
+      "nl": "systematic errors in the distance ladder",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-034",
+      "stratum": "operator_negative",
+      "nl": "comprehensive models of the solar dynamo",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-035",
+      "stratum": "operator_negative",
+      "nl": "comparable-mass binary black hole mergers",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-036",
+      "stratum": "operator_negative",
+      "nl": "related-rates problems in orbital mechanics education",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-037",
+      "stratum": "operator_negative",
+      "nl": "seminal vesicle imaging",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-038",
+      "stratum": "operator_negative",
+      "nl": "foundational models for spectral classification",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-039",
+      "stratum": "operator_negative",
+      "nl": "must-have calibrations for CCD photometry",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-neg-040",
+      "stratum": "operator_negative",
+      "nl": "introduction rates of invasive species tracked by satellite imagery",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-001",
+      "stratum": "enum_synonym",
+      "nl": "cosmic ray papers anyone can read without paying",
+      "target_field": "property",
+      "labels": {
+        "operator": "none",
+        "property": [
+          "openaccess"
+        ],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-002",
+      "stratum": "enum_synonym",
+      "nl": "cosmic microwave background papers that are not behind a paywall",
+      "target_field": "property",
+      "labels": {
+        "operator": "none",
+        "property": [
+          "openaccess"
+        ],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-003",
+      "stratum": "enum_synonym",
+      "nl": "publicly readable studies of the solar wind",
+      "target_field": "property",
+      "labels": {
+        "operator": "none",
+        "property": [
+          "openaccess"
+        ],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-004",
+      "stratum": "enum_synonym",
+      "nl": "no-subscription-needed papers on stellar winds",
+      "target_field": "property",
+      "labels": {
+        "operator": "none",
+        "property": [
+          "openaccess"
+        ],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-005",
+      "stratum": "enum_synonym",
+      "nl": "papers vetted by referees on pulsar timing arrays",
+      "target_field": "property",
+      "labels": {
+        "operator": "none",
+        "property": [
+          "refereed"
+        ],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-006",
+      "stratum": "enum_synonym",
+      "nl": "work on exoplanet atmospheres that passed referee scrutiny",
+      "target_field": "property",
+      "labels": {
+        "operator": "none",
+        "property": [
+          "refereed"
+        ],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-007",
+      "stratum": "enum_synonym",
+      "nl": "journal-accepted studies of galaxy mergers, nothing unrefereed",
+      "target_field": "property",
+      "labels": {
+        "operator": "none",
+        "property": [
+          "refereed"
+        ],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-008",
+      "stratum": "enum_synonym",
+      "nl": "e-print postings on fast radio bursts",
+      "target_field": "property",
+      "labels": {
+        "operator": "none",
+        "property": [
+          "eprint"
+        ],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-009",
+      "stratum": "enum_synonym",
+      "nl": "manuscripts posted before journal publication on dark matter direct detection",
+      "target_field": "property",
+      "labels": {
+        "operator": "none",
+        "property": [
+          "eprint"
+        ],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-010",
+      "stratum": "enum_synonym",
+      "nl": "doctoral dissertations on star formation",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "phdthesis"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-011",
+      "stratum": "enum_synonym",
+      "nl": "doctorates written on galactic archaeology",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "phdthesis"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-012",
+      "stratum": "enum_synonym",
+      "nl": "MSc theses on exoplanet detection",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "mastersthesis"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-013",
+      "stratum": "enum_synonym",
+      "nl": "symposium contributions on galactic archaeology",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "inproceedings"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-014",
+      "stratum": "enum_synonym",
+      "nl": "contributions to the IAU symposia on stellar populations",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "inproceedings"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-015",
+      "stratum": "enum_synonym",
+      "nl": "textbooks on radiative transfer",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "book"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-016",
+      "stratum": "enum_synonym",
+      "nl": "full-length volumes on stellar structure",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "book"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-017",
+      "stratum": "enum_synonym",
+      "nl": "catalogues of variable stars",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "catalog"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-018",
+      "stratum": "enum_synonym",
+      "nl": "data tables of open cluster members",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "catalog"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-019",
+      "stratum": "enum_synonym",
+      "nl": "Python packages for spectral fitting",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "software"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-020",
+      "stratum": "enum_synonym",
+      "nl": "analysis pipelines released as installable tools for time-series photometry",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "software"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-021",
+      "stratum": "enum_synonym",
+      "nl": "technical memos on detector calibration",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "techreport"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-022",
+      "stratum": "enum_synonym",
+      "nl": "observing proposals for transient follow-up",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "proposal"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-023",
+      "stratum": "enum_synonym",
+      "nl": "press releases about exoplanet discoveries",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "pressrelease"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-024",
+      "stratum": "enum_synonym",
+      "nl": "corrections to published results on the Hubble constant",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "erratum"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-025",
+      "stratum": "enum_synonym",
+      "nl": "AAS meeting abstracts on brown dwarfs",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "abstract"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-026",
+      "stratum": "enum_synonym",
+      "nl": "obituaries of radio astronomers",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "obituary"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-027",
+      "stratum": "enum_synonym",
+      "nl": "GCN circulars on gamma-ray bursts",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "circular"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-028",
+      "stratum": "enum_synonym",
+      "nl": "recorded seminar talks on cosmology",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "talk"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-029",
+      "stratum": "enum_synonym",
+      "nl": "book reviews of cosmology textbooks",
+      "target_field": "doctype",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [
+          "bookreview"
+        ],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-030",
+      "stratum": "enum_synonym",
+      "nl": "Green Bank Telescope pulsar papers",
+      "target_field": "bibgroup",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [
+          "GBT"
+        ],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-031",
+      "stratum": "enum_synonym",
+      "nl": "Arecibo observations of the Crab pulsar",
+      "target_field": "bibgroup",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [
+          "ARECIBO"
+        ],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-032",
+      "stratum": "enum_synonym",
+      "nl": "LOFAR low-frequency transient studies",
+      "target_field": "bibgroup",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [
+          "LOFAR"
+        ],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-033",
+      "stratum": "enum_synonym",
+      "nl": "MeerKAT observations of galaxy clusters",
+      "target_field": "bibgroup",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [
+          "MeerKAT"
+        ],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-034",
+      "stratum": "enum_synonym",
+      "nl": "Pan-STARRS supernova discoveries",
+      "target_field": "bibgroup",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [
+          "Pan-STARRS"
+        ],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-035",
+      "stratum": "enum_synonym",
+      "nl": "NuSTAR hard X-ray studies of active galactic nuclei",
+      "target_field": "bibgroup",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [
+          "NuSTAR"
+        ],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-036",
+      "stratum": "enum_synonym",
+      "nl": "Hipparcos parallax papers",
+      "target_field": "bibgroup",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [
+          "Hipparcos"
+        ],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-037",
+      "stratum": "enum_synonym",
+      "nl": "geophysics papers on mantle convection",
+      "target_field": "collection",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [
+          "earthscience"
+        ],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-038",
+      "stratum": "enum_synonym",
+      "nl": "climate science studies of aerosol forcing",
+      "target_field": "collection",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [
+          "earthscience"
+        ],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-039",
+      "stratum": "enum_synonym",
+      "nl": "condensed matter work on topological insulators",
+      "target_field": "collection",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [
+          "physics"
+        ],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-enum-040",
+      "stratum": "enum_synonym",
+      "nl": "biology papers on extremophiles",
+      "target_field": "collection",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [
+          "general"
+        ],
+        "search_kind": "topic",
+        "needs_clarification": false,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-001",
+      "stratum": "ambiguous",
+      "nl": "recent stuff",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-002",
+      "stratum": "ambiguous",
+      "nl": "that paper from the conference",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": true,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-003",
+      "stratum": "ambiguous",
+      "nl": "the usual",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-004",
+      "stratum": "ambiguous",
+      "nl": "papers",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-005",
+      "stratum": "ambiguous",
+      "nl": "find it",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-006",
+      "stratum": "ambiguous",
+      "nl": "Smith",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "mixed",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-007",
+      "stratum": "ambiguous",
+      "nl": "Mercury",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "mixed",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-008",
+      "stratum": "ambiguous",
+      "nl": "Kepler",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "mixed",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-009",
+      "stratum": "ambiguous",
+      "nl": "the Nature paper on exoplanets",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": true,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-010",
+      "stratum": "ambiguous",
+      "nl": "latest results",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-011",
+      "stratum": "ambiguous",
+      "nl": "something on stars, maybe galaxies",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-012",
+      "stratum": "ambiguous",
+      "nl": "the Hubble paper",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": true,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-013",
+      "stratum": "ambiguous",
+      "nl": "what my advisor mentioned last week",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-014",
+      "stratum": "ambiguous",
+      "nl": "the one with the big table",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": true,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-015",
+      "stratum": "ambiguous",
+      "nl": "stuff by that group in Heidelberg",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "author",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-016",
+      "stratum": "ambiguous",
+      "nl": "cite this",
+      "labels": {
+        "operator": "citations",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": true,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-017",
+      "stratum": "ambiguous",
+      "nl": "what does it cite",
+      "labels": {
+        "operator": "references",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": true,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-018",
+      "stratum": "ambiguous",
+      "nl": "more like this",
+      "labels": {
+        "operator": "similar",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": true,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-019",
+      "stratum": "ambiguous",
+      "nl": "Andromeda or the other one",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "object",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-020",
+      "stratum": "ambiguous",
+      "nl": "the 2020 paper",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": true,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-021",
+      "stratum": "ambiguous",
+      "nl": "physics",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-022",
+      "stratum": "ambiguous",
+      "nl": "Jupiter Saturn",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "object",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-023",
+      "stratum": "ambiguous",
+      "nl": "things trending",
+      "labels": {
+        "operator": "trending",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-024",
+      "stratum": "ambiguous",
+      "nl": "good papers",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-025",
+      "stratum": "ambiguous",
+      "nl": "new",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-026",
+      "stratum": "ambiguous",
+      "nl": "the review",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": true,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-027",
+      "stratum": "ambiguous",
+      "nl": "that big survey",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "paper_reference",
+        "needs_clarification": true,
+        "refers_to_specific_paper": true
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-028",
+      "stratum": "ambiguous",
+      "nl": "papers by Li",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "author",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-029",
+      "stratum": "ambiguous",
+      "nl": "Chandra",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "mixed",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    },
+    {
+      "id": "hp-amb-030",
+      "stratum": "ambiguous",
+      "nl": "show me everything",
+      "labels": {
+        "operator": "none",
+        "property": [],
+        "doctype": [],
+        "bibgroup": [],
+        "collection": [],
+        "search_kind": "topic",
+        "needs_clarification": true,
+        "refers_to_specific_paper": false
+      },
+      "review": {
+        "status": "approved",
+        "reviewer": "Stephanie",
+        "note": ""
+      }
+    }
+  ]
+}
