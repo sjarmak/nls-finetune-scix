@@ -90,6 +90,20 @@ class TestQuestionSet:
             assert q[qid]["type"] == "choice"
             assert q[qid]["instructions"]
 
+    def test_reviews_operator_leaves_book_reviews_to_the_doctype(self):
+        q = build_questions()
+        reviews = q["operator"]["criteria"]["reviews"].lower()
+        assert "book review" in reviews
+        assert "bookreview" in reviews
+        bookreview = q["doctype"]["criteria"]["bookreview"].lower()
+        assert "book" in bookreview
+        assert "not a review article" in bookreview
+
+    def test_reviews_operator_is_not_an_observational_sky_survey(self):
+        reviews = build_questions()["operator"]["criteria"]["reviews"].lower()
+        assert "literature surveys" in reviews
+        assert "not an observational sky survey" in reviews
+
     def test_every_option_has_a_description(self):
         for qid, q in build_questions().items():
             for option, description in q["criteria"].items():
