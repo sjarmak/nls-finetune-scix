@@ -32,8 +32,11 @@ OPERATOR_DESCRIPTIONS: dict[str, str] = {
         "essential, must-read, landmark, classic, important, canonical papers."
     ),
     "reviews": (
-        "Review-style coverage of the topic: reviews, surveys, overviews, tutorials, "
-        "introductions, primers, literature reviews, state-of-the-art summaries."
+        "Review-style coverage of the topic: reviews, literature surveys, overviews, "
+        "tutorials, introductions, primers, literature reviews, state-of-the-art summaries. "
+        "Not an observational sky survey, which is a data source. "
+        "Not a book review: a review of a book or textbook is the bookreview document "
+        "type, not a review of the research literature."
     ),
 }
 
@@ -59,7 +62,11 @@ DOCTYPE_DESCRIPTIONS: dict[str, str] = {
     "abstract": "Meeting abstract.",
     "article": "Journal article.",
     "book": "Book or monograph.",
-    "bookreview": "Published review of a book.",
+    "bookreview": (
+        "Book review: a critique or assessment of a particular book or textbook (book "
+        "reviews, textbook reviews, reviews of books). Not a review article surveying a "
+        "research topic."
+    ),
     "catalog": "Data catalog or high-level data product.",
     "circular": "Printed or electronic circular (e.g. IAU, ATel-style notices).",
     "editorial": "Editorial.",
