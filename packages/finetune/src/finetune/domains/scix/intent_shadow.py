@@ -36,8 +36,13 @@ def shadow_record(
     served_intent: dict,
     shadow_backend: IntentBackend,
     jev_client: JevClient,
+    served_path: str,
 ) -> dict:
-    """Run ``shadow_backend`` on ``nl_query`` and compare it with the served intent.
+    """Run ``shadow_backend`` on ``nl_query`` and compare it with the regex intent.
+
+    ``served_path`` records where the request was answered. On "pipeline" the
+    regex intent is what the user got; on "model" the request fell back to the
+    fine-tuned model, so the comparison is kept but is not a served difference.
 
     Jev failures do not raise: the backend falls back to the regex intent and
     the reason lands in ``classifier_error``, so such a row shows no
@@ -52,12 +57,14 @@ def shadow_record(
         "record_type": SHADOW_RECORD_TYPE,
         "nl_query": nl_query,
         "served_backend": "regex",
+        "served_path": served_path,
         "shadow_backend": shadow_backend,
         "served_intent": served_intent,
         "shadow_intent": shadow_intent,
         "disagreements": disagreements,
         "disagree": bool(disagreements),
         "classifier_called": extraction.classifier_called,
+        "classifier_cached": extraction.classifier_cached,
         "classifier_error": extraction.classifier_error,
         "classifier_operator_confidence": (
             extraction.intent.confidence["operator"] if extraction.classifier_succeeded else None

@@ -14,10 +14,10 @@ Endpoints:
 
 Configuration (environment variables):
     MODEL_NAME       HuggingFace model id (default: adsabs/scix-nls-translator)
-    DEVICE           cuda | mps | cpu (default: auto-detect; cpu when torch is
-                     not installed). torch and transformers are imported only
-                     when the model loads, so ROUTING_MODE=pipeline runs
-                     without them.
+    DEVICE           cuda | mps | cpu (default: auto-detect when the model
+                     loads; cpu when torch is not installed). torch and
+                     transformers are imported only when the model loads, so
+                     ROUTING_MODE=pipeline runs without them.
     PORT             Server port (default: 8000)
     ROUTING_MODE     hybrid | pipeline | model (default: hybrid)
                      hybrid: pipeline first, model fallback on low confidence
@@ -46,9 +46,9 @@ Configuration (environment variables):
                      working directory). Set it empty to disable the cache;
                      the Docker image does, because the file grows without
                      bound and a container loses it on restart anyway.
-    JEV_TIMEOUT_S    Per-call System One timeout in seconds (default: 2.0;
-                     measured p95 is about 223 ms). A timeout falls back to
-                     the regex intent.
+    JEV_TIMEOUT_S    Wall-clock bound on each System One call in seconds
+                     (default: 2.0; measured p95 is about 223 ms). A timeout
+                     falls back to the regex intent.
     SHADOW_INTENT_BACKEND
                      Unset (default) | jev | jev_gated. Shadow mode: the served
                      response still uses the regex intent (requires
@@ -110,7 +110,9 @@ def _default_device() -> str:
 
 # Configuration
 MODEL_NAME = os.environ.get("MODEL_NAME", "adsabs/scix-nls-translator")
-DEVICE = os.environ.get("DEVICE") or _default_device()
+# Empty means auto-detect, resolved by load_model so torch stays unimported
+# until a model is actually loaded.
+DEVICE = os.environ.get("DEVICE", "")
 PORT = int(os.environ.get("PORT", 8000))
 ROUTING_MODE = os.environ.get("ROUTING_MODE", "hybrid")
 CONFIDENCE_THRESHOLD = float(os.environ.get("PIPELINE_CONFIDENCE_THRESHOLD", "0.5"))
@@ -154,9 +156,11 @@ try:
     from finetune.domains.scix.pipeline import process_query
 
     PIPELINE_AVAILABLE = True
-except ImportError:
+    PIPELINE_IMPORT_ERROR: str | None = None
+except ImportError as import_error:
     PIPELINE_AVAILABLE = False
-    logger.warning("Pipeline modules not available - using model-only mode")
+    PIPELINE_IMPORT_ERROR = f"{type(import_error).__name__}: {import_error}"
+    logger.warning("Pipeline modules not available - using model-only mode: %s", import_error)
 
 if ROUTING_MODE == "pipeline" and not PIPELINE_AVAILABLE:
     raise RuntimeError("ROUTING_MODE=pipeline but pipeline modules are not importable")
@@ -284,6 +288,7 @@ class PipelineDebugInfo(BaseModel):
     raw_extracted: dict | None = None
     intent_backend: str = "regex"
     classifier_called: bool = False
+    classifier_cached: bool = False
     classifier_error: str | None = None
     structural_confidence: float | None = None
     classifier_operator_confidence: float | None = None
@@ -318,16 +323,21 @@ class RoutedResult:
     latency_ms: float
     pipeline_result: PipelineResult | None = None
     pipeline_debug: PipelineDebugInfo | None = None  # set whenever the pipeline ran
+    # The pipeline's routing confidence when it ran; on a model fallback this is
+    # the value that fell below the threshold (``confidence`` is the model's 0.0).
+    pipeline_confidence: float | None = None
     prompt_tokens: int = 0
     completion_tokens: int = 0
 
 
 def load_model() -> None:
     """Load the fine-tuned model."""
-    global model, tokenizer
+    global model, tokenizer, DEVICE
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
+    if not DEVICE:
+        DEVICE = _default_device()
     logger.info("Loading model: %s (device=%s)", MODEL_NAME, DEVICE)
 
     dtype = torch.float16 if DEVICE != "cpu" else torch.float32
@@ -456,6 +466,7 @@ def run_pipeline(nl_query: str) -> tuple[RoutedResult | None, str | None]:
         fallback_reason=result.debug_info.fallback_reason,
         intent_backend=result.debug_info.intent_backend,
         classifier_called=result.debug_info.classifier_called,
+        classifier_cached=result.debug_info.classifier_cached,
         classifier_error=result.debug_info.classifier_error,
         structural_confidence=result.debug_info.structural_confidence,
         classifier_operator_confidence=result.debug_info.classifier_operator_confidence,
@@ -484,8 +495,13 @@ def run_pipeline(nl_query: str) -> tuple[RoutedResult | None, str | None]:
     )
 
 
-def schedule_shadow(request_id: str, nl_query: str, served_intent: dict) -> Future | None:
+def schedule_shadow(
+    request_id: str, nl_query: str, served_intent: dict, served_path: str
+) -> Future | None:
     """Queue a shadow intent run off the request path; never blocks or raises.
+
+    ``served_path`` is where the request was answered ("pipeline" or "model");
+    only pipeline-served rows compare the shadow with what the user got.
 
     Returns the Future, or None when shadow mode is off or the pending limit
     is reached (the run is skipped and logged).
@@ -496,7 +512,9 @@ def schedule_shadow(request_id: str, nl_query: str, served_intent: dict) -> Futu
         logger.warning("Shadow intent queue full (%d); skipped %r", SHADOW_MAX_PENDING, nl_query)
         return None
     try:
-        future = shadow_executor.submit(_run_shadow, request_id, nl_query, served_intent)
+        future = shadow_executor.submit(
+            _run_shadow, request_id, nl_query, served_intent, served_path
+        )
     except RuntimeError:
         _shadow_slots.release()
         logger.warning("Shadow intent executor is shut down; skipped %r", nl_query)
@@ -505,14 +523,16 @@ def schedule_shadow(request_id: str, nl_query: str, served_intent: dict) -> Futu
     return future
 
 
-def _run_shadow(request_id: str, nl_query: str, served_intent: dict) -> None:
+def _run_shadow(request_id: str, nl_query: str, served_intent: dict, served_path: str) -> None:
     """Background task: compare the served intent with the shadow backend's.
 
     It runs outside any request, so it catches everything: a failure here is
     logged and must never reach a client.
     """
     try:
-        record = shadow_record(nl_query, served_intent, SHADOW_INTENT_BACKEND, jev_client)
+        record = shadow_record(
+            nl_query, served_intent, SHADOW_INTENT_BACKEND, jev_client, served_path
+        )
         write_telemetry(
             {"timestamp": datetime.now(UTC).isoformat(), "request_id": request_id, **record}
         )
@@ -553,12 +573,13 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
     request_id = uuid.uuid4().hex
     fallback_reason: str | None = None
     pipeline_debug: PipelineDebugInfo | None = None
+    pipeline_confidence: float | None = None
 
     if ROUTING_MODE != "model" and PIPELINE_AVAILABLE:
         routed, error_reason = run_pipeline(nl_query)
 
         if routed is not None:
-            schedule_shadow(request_id, nl_query, routed.pipeline_result.intent)
+            regex_intent = routed.pipeline_result.intent
             low_confidence = routed.confidence < CONFIDENCE_THRESHOLD
             can_fall_back = ROUTING_MODE == "hybrid" and model is not None
 
@@ -573,10 +594,13 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
                         CONFIDENCE_THRESHOLD,
                         routed.fallback_reason,
                     )
+                schedule_shadow(request_id, nl_query, regex_intent, "pipeline")
                 _log_routing(request_id, nl_query, routed)
                 return routed
 
+            schedule_shadow(request_id, nl_query, regex_intent, "model")
             pipeline_debug = routed.pipeline_debug
+            pipeline_confidence = routed.confidence
             fallback_reason = _low_confidence_reason(routed)
         else:
             fallback_reason = error_reason
@@ -586,6 +610,7 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
     routed = run_model(messages, max_tokens)
     routed.fallback_reason = fallback_reason
     routed.pipeline_debug = pipeline_debug
+    routed.pipeline_confidence = pipeline_confidence
     _log_routing(request_id, nl_query, routed)
     return routed
 
@@ -625,11 +650,15 @@ def _log_routing(request_id: str, nl_query: str, routed: RoutedResult) -> None:
             "generated_query": routed.query,
             "path": routed.path,
             "confidence": routed.confidence,
+            "pipeline_confidence": (
+                routed.confidence if routed.path == "pipeline" else routed.pipeline_confidence
+            ),
             "fallback_reason": routed.fallback_reason,
             "latency_ms": round(routed.latency_ms, 1),
             "routing_mode": ROUTING_MODE,
             "intent_backend": INTENT_BACKEND,
             "classifier_called": debug.classifier_called if debug else False,
+            "classifier_cached": debug.classifier_cached if debug else False,
             "classifier_error": debug.classifier_error if debug else None,
             "structural_confidence": debug.structural_confidence if debug else None,
             "classifier_operator_confidence": (
@@ -646,8 +675,9 @@ async def health():
         "status": "healthy",
         "model": MODEL_NAME,
         "model_loaded": model is not None,
-        "device": DEVICE,
+        "device": DEVICE or "auto",
         "pipeline_available": PIPELINE_AVAILABLE,
+        "pipeline_import_error": PIPELINE_IMPORT_ERROR,
         "routing_mode": ROUTING_MODE,
         "confidence_threshold": CONFIDENCE_THRESHOLD,
         "intent_backend": INTENT_BACKEND,
@@ -673,8 +703,11 @@ async def list_models():
 
 
 @app.post("/v1/chat/completions", response_model=ChatResponse)
-async def chat_completions(request: ChatRequest):
+def chat_completions(request: ChatRequest):
     """OpenAI-compatible chat completions endpoint (vLLM style).
+
+    A plain ``def``: routing calls Jev and the model synchronously, so FastAPI
+    runs it in its worker threadpool instead of on the event loop.
 
     Routes through the hybrid pipeline first; the fine-tuned model handles
     low-confidence queries. Response shape is unchanged from the model-only
@@ -712,8 +745,9 @@ def _model_path_debug(routed: RoutedResult) -> PipelineDebugInfo:
 
 @app.post("/pipeline", response_model=PipelineResponse)
 @app.post("/", response_model=PipelineResponse)
-async def pipeline_endpoint(request: PipelineRequest):
-    """Hybrid NER pipeline endpoint with debug info.
+def pipeline_endpoint(request: PipelineRequest):
+    """Hybrid NER pipeline endpoint with debug info (threadpool, like
+    chat_completions).
 
     Same routing as /v1/chat/completions, but the response includes the
     pipeline's IntentSpec, retrieved examples, and timing breakdown.

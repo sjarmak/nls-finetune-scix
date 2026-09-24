@@ -6,10 +6,11 @@ path the Jev backend exists to avoid.
 """
 
 import logging
+import time
 
 import httpx
 import pytest
-from jev_fixtures import handler_client, jev_payload
+from jev_fixtures import handler_client, jev_payload, mock_jev_client
 
 from finetune.domains.scix.jev_intent import JevResponseError
 from finetune.domains.scix.ner import extract_intent
@@ -109,3 +110,57 @@ def test_client_reports_non_json_body_as_a_contract_error():
 def test_client_timeout_is_configurable():
     client = handler_client(_status(200), timeout_s=2.0)
     assert client.timeout_s == 2.0
+
+
+def _slow(delay_s: float):
+    def handler(request: httpx.Request) -> httpx.Response:
+        time.sleep(delay_s)
+        return httpx.Response(200, json=jev_payload("citations"))
+
+    return handler
+
+
+def test_timeout_is_a_wall_clock_bound_on_the_whole_call():
+    # httpx applies its timeout per phase; a response that takes longer than
+    # timeout_s in total must still end the call at the deadline.
+    client = handler_client(_slow(1.0), timeout_s=0.1)
+    started = time.perf_counter()
+    extraction = extract_intent_with_backend(GATED_QUERY, "jev_gated", client)
+    elapsed = time.perf_counter() - started
+    assert elapsed < 0.6
+    assert extraction.intent == extract_intent(GATED_QUERY)
+    assert extraction.classifier_error.startswith("TimeoutException")
+
+
+def test_unwritable_cache_still_serves_the_jev_answer(tmp_path, caplog):
+    blocker = tmp_path / "not-a-dir"
+    blocker.write_text("")
+    calls: list[dict] = []
+    client = mock_jev_client(None, [jev_payload("citations")], calls)
+    client.cache_path = blocker / "cache.jsonl"
+    with caplog.at_level(logging.WARNING):
+        extraction = extract_intent_with_backend(GATED_QUERY, "jev_gated", client)
+    assert extraction.classifier_succeeded
+    assert extraction.intent.operator == "citations"
+    assert len(calls) == 1
+    assert "Jev cache write" in caplog.text
+
+
+def test_cache_hit_is_reported_as_cached_not_billed(tmp_path):
+    calls: list[dict] = []
+    client = mock_jev_client(tmp_path, [jev_payload("citations")], calls)
+    first = extract_intent_with_backend(GATED_QUERY, "jev_gated", client)
+    second = extract_intent_with_backend(GATED_QUERY, "jev_gated", client)
+    assert len(calls) == 1
+    assert (first.classifier_called, first.classifier_cached) == (True, False)
+    assert (second.classifier_called, second.classifier_cached) == (True, True)
+    assert second.intent == first.intent
+
+
+def test_uncached_client_does_not_memoise_answers():
+    calls: list[dict] = []
+    client = mock_jev_client(None, [jev_payload("citations"), jev_payload("citations")], calls)
+    extract_intent_with_backend(GATED_QUERY, "jev", client)
+    second = extract_intent_with_backend(GATED_QUERY, "jev", client)
+    assert len(calls) == 2
+    assert second.classifier_cached is False

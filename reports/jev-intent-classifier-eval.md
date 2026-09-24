@@ -528,6 +528,16 @@ gate, and E serves the regex answer with `doctype:book`. The book-review
 error in the deployed shape is now a regex error; the fix belongs in
 `ner.py`, which is outside this report's scope.
 
+**Follow-up, same day.** `ner.py` now treats "book review(s)" and "reviews
+of ... books" as the `bookreview` document type before the operator rules
+run. The regex alone now gets four of the five items right (operator
+`none`, doctype `bookreview`). "textbook reviews related to astrophysics"
+still fires `similar` on "related to", now with doctype `bookreview`. The
+tables above were scored before this change and were not re-run. The
+held-out item "book reviews of cosmology textbooks" is now in-map for the
+regex; the held-out file marks it `regex_in_map`, and the check script
+lists it. Its effect on any re-score can only favour arm A.
+
 ### The regex doctype change
 
 Arm A's doctype set F1 rose from 0.080 to 0.737 on the benchmark (exact

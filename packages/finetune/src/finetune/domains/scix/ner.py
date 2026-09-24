@@ -49,6 +49,19 @@ PROPERTY_SYNONYMS: dict[str, str] = {
 # held-out paraphrase set uses as out-of-map probes ("dissertations", "press
 # releases", "proposals") stay out: adding them would make those items in-map
 # (scripts/check_heldout_paraphrases.py enforces this).
+# A request for book reviews names a doctype, and its wording overlaps the
+# reviews operator ("book reviews on X", "reviews of astronomy books"). These
+# phrases are taken out before operator gating, so the operator patterns never
+# see them, and the intent gets doctype bookreview. The second pattern keeps up
+# to three words between "reviews of" and "books" as topic text.
+BOOK_REVIEW_PATTERNS: tuple[tuple[re.Pattern[str], str], ...] = (
+    (
+        re.compile(r"\breviews?\s+of\s+((?:[\w'-]+\s+){0,3}?)(?:text)?books\b", re.IGNORECASE),
+        r" \1 ",
+    ),
+    (re.compile(r"\b(?:text)?book\s+reviews?(?:\s+(?:on|about|of))?\b", re.IGNORECASE), " "),
+)
+
 DOCTYPE_SYNONYMS: dict[str, str] = {
     # Journal articles, only when the journal is named
     "journal article": "article",
@@ -700,9 +713,21 @@ def extract_intent(text: str) -> IntentSpec:
             confidence={"ads_passthrough": 1.0},
         )
 
+    # Book-review phrases name a doctype; take them out before operator gating
+    working_text, book_review = _strip_book_review(working_text)
+
     # Extract operator (FIRST - so we can remove operator phrases from text)
     operator, working_text = _extract_operator(working_text)
-    return _extract_fields(original_text, working_text, operator)
+    return _extract_fields(original_text, working_text, operator, book_review)
+
+
+def _strip_book_review(text: str) -> tuple[str, bool]:
+    """Remove book-review phrases; True when one was found."""
+    found = False
+    for pattern, replacement in BOOK_REVIEW_PATTERNS:
+        text, count = pattern.subn(replacement, text)
+        found = found or count > 0
+    return re.sub(r"\s+", " ", text).strip(), found
 
 
 def extract_intent_with_operator(text: str, operator: str | None) -> IntentSpec:
@@ -720,8 +745,19 @@ def extract_intent_with_operator(text: str, operator: str | None) -> IntentSpec:
     return _extract_fields(original_text, working_text, operator)
 
 
-def _extract_fields(original_text: str, working_text: str, operator: str | None) -> IntentSpec:
-    """Years, authors, enum fields and topics from text with the operator phrase removed."""
+def _extract_fields(
+    original_text: str,
+    working_text: str,
+    operator: str | None,
+    book_review: bool = False,
+) -> IntentSpec:
+    """Years, authors, enum fields and topics from text with the operator phrase removed.
+
+    ``book_review`` means a book-review phrase was found and already removed
+    from the text. The doctype is then bookreview, and any "book" left in the
+    text names what is reviewed ("reviews of cosmology textbooks"), not a
+    second doctype.
+    """
     intent = IntentSpec(raw_user_text=original_text, operator=operator)
 
     # Extract years
@@ -733,6 +769,8 @@ def _extract_fields(original_text: str, working_text: str, operator: str | None)
     # Extract enum fields with synonym resolution
     intent.property, working_text = _extract_properties(working_text)
     intent.doctype, working_text = _extract_doctypes(working_text)
+    if book_review:
+        intent.doctype = (intent.doctype - {"book"}) | {"bookreview"}
     intent.bibgroup, working_text = _extract_bibgroups(working_text)
     intent.collection, working_text = _extract_collections(working_text)
 

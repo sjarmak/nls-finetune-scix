@@ -22,10 +22,12 @@ from finetune.domains.scix.intent_shadow import SHADOW_COMPARED_FIELDS, SHADOW_R
 
 REQUIRED_FIELDS: tuple[str, ...] = (
     "nl_query",
+    "served_path",
     "served_intent",
     "shadow_intent",
     "disagreements",
     "classifier_called",
+    "classifier_cached",
     "classifier_error",
     "classifier_operator_confidence",
 )
@@ -52,10 +54,16 @@ def load_shadow_rows(path: Path) -> list[dict]:
 
 
 def summarize(rows: list[dict]) -> dict:
-    """Counts per field and the disagreeing queries, in log order."""
+    """Counts per field and the disagreeing queries, in log order.
+
+    Disagreements are counted only on rows the pipeline served. When a request
+    fell back to the model the regex intent never reached the user, so those
+    rows are counted separately and not compared.
+    """
     by_field = {name: 0 for name in SHADOW_COMPARED_FIELDS}
     disagreeing_queries = []
-    for row in rows:
+    served_by_pipeline = [row for row in rows if row["served_path"] == "pipeline"]
+    for row in served_by_pipeline:
         fields = row["disagreements"]
         for name in fields:
             by_field[name] = by_field.get(name, 0) + 1
@@ -71,7 +79,11 @@ def summarize(rows: list[dict]) -> dict:
             )
     return {
         "shadow_rows": len(rows),
+        "served_by_model": len(rows) - len(served_by_pipeline),
         "classifier_called": sum(1 for row in rows if row["classifier_called"]),
+        "classifier_billed": sum(
+            1 for row in rows if row["classifier_called"] and not row["classifier_cached"]
+        ),
         "classifier_errors": sum(1 for row in rows if row["classifier_error"]),
         "disagreeing": len(disagreeing_queries),
         "by_field": by_field,
@@ -82,9 +94,11 @@ def summarize(rows: list[dict]) -> dict:
 def format_summary(summary: dict) -> str:
     lines = [
         f"shadow rows: {summary['shadow_rows']}",
-        f"classifier called: {summary['classifier_called']}",
+        f"served by the model (not compared): {summary['served_by_model']}",
+        f"classifier called: {summary['classifier_called']}"
+        f" (billed, not from cache: {summary['classifier_billed']})",
         f"classifier errors: {summary['classifier_errors']}",
-        f"disagreeing: {summary['disagreeing']}",
+        f"disagreeing (pipeline-served rows): {summary['disagreeing']}",
         "disagreements by field:",
         *(f"  {name}: {count}" for name, count in summary["by_field"].items()),
     ]

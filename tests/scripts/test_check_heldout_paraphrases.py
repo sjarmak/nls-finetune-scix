@@ -60,6 +60,20 @@ def test_in_map_enum_synonym_is_flagged():
     assert regex_problems(item) == []
 
 
+def test_regex_in_map_marker_accepts_a_documented_in_map_item():
+    item = _item(stratum="enum_synonym", target_field="property", nl="open access papers")
+    item["labels"] = {**item["labels"], "operator": "none", "property": ["openaccess"]}
+    item["regex_in_map"] = {"since": "2026-09-24", "reason": "later regex fix"}
+    assert regex_problems(item) == []
+
+
+def test_stale_or_incomplete_regex_in_map_marker_is_flagged():
+    item = _item(regex_in_map={"since": "2026-09-24", "reason": "later regex fix"})
+    assert "no longer gets it" in regex_problems(item)[0]
+    item = _item(nl="papers citing the Planck 2018 results", regex_in_map={"since": "x"})
+    assert "needs 'since' and 'reason'" in regex_problems(item)[0]
+
+
 def test_shipped_heldout_file_passes_all_mechanical_checks():
     doc = load_heldout()
     failures, counts = run_checks(doc)

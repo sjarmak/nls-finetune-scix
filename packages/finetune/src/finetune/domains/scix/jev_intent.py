@@ -20,8 +20,11 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import TimeoutError as FutureTimeout
 from dataclasses import dataclass, field, replace
 from datetime import UTC, datetime
 from pathlib import Path
@@ -41,6 +44,8 @@ from .jev_option_text import (
 SYSTEM_ONE_URL = "https://api.typesafe.ai/v1/systemone"
 JEV_MODEL = "jev-1.13.0"
 DEFAULT_CACHE_PATH = Path("data/cache/jev_systemone.jsonl")
+
+logger = logging.getLogger(__name__)
 BOOLEAN_DECISION_THRESHOLD = 0.5
 NONE_OPTION = "none"
 
@@ -292,6 +297,18 @@ class JevClient:
     errors) and ``JevResponseError`` (a body that is not JSON or breaks the
     answer contract). Those are the failure classes callers may degrade on;
     see ``JEV_FAILURES``.
+
+    ``timeout_s`` is a wall-clock bound on each call. httpx applies its
+    timeout per phase (connect, write, pool, and each socket read), so a
+    response that trickles in could otherwise run far past it. Each POST runs
+    on a small worker pool and ``classify`` stops waiting at the deadline with
+    ``httpx.TimeoutException``; the abandoned request still ends at httpx's
+    own per-phase limits. At most ``max_concurrent_calls`` requests are in
+    flight; further calls queue, and the queue wait counts toward the deadline.
+
+    The cache is best-effort. A cache file that cannot be written is logged
+    and the answer is still returned. With ``cache_path=None`` nothing is
+    memoised, so a long-running server does not grow without bound.
     """
 
     def __init__(
@@ -302,6 +319,7 @@ class JevClient:
         base_url: str = SYSTEM_ONE_URL,
         timeout_s: float = 30.0,
         transport: httpx.BaseTransport | None = None,
+        max_concurrent_calls: int = 16,
     ) -> None:
         if not api_key:
             raise ValueError("TYPESAFE_API_KEY is required for the Jev intent backend")
@@ -314,6 +332,9 @@ class JevClient:
             transport=transport,
         )
         self._base_url = base_url
+        self._pool = ThreadPoolExecutor(
+            max_workers=max_concurrent_calls, thread_name_prefix="jev-http"
+        )
         self._lock = threading.Lock()
         self._cache: dict[str, dict] = self._load_cache() if cache_path else {}
 
@@ -347,7 +368,7 @@ class JevClient:
                 )
 
         started = time.perf_counter()
-        response = self._http.post(self._base_url, json=request)
+        response = self._post(request)
         latency_ms = (time.perf_counter() - started) * 1000
         response.raise_for_status()
         try:
@@ -358,6 +379,16 @@ class JevClient:
         self._record(fingerprint, request, payload, latency_ms)
         return answers
 
+    def _post(self, request: dict) -> httpx.Response:
+        future = self._pool.submit(self._http.post, self._base_url, json=request)
+        try:
+            return future.result(timeout=self.timeout_s)
+        except FutureTimeout as error:
+            future.cancel()
+            raise httpx.TimeoutException(
+                f"no System One response within {self.timeout_s:g}s"
+            ) from error
+
     def _record(self, fingerprint: str, request: dict, payload: dict, latency_ms: float) -> None:
         row = {
             "fingerprint": fingerprint,
@@ -366,15 +397,19 @@ class JevClient:
             "request": request,
             "response": payload,
         }
+        if self.cache_path is None:
+            return
         with self._lock:
             self._cache[fingerprint] = row
-            if self.cache_path is None:
-                return
-            self.cache_path.parent.mkdir(parents=True, exist_ok=True)
-            with self.cache_path.open("a", encoding="utf-8") as handle:
-                handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+            try:
+                self.cache_path.parent.mkdir(parents=True, exist_ok=True)
+                with self.cache_path.open("a", encoding="utf-8") as handle:
+                    handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+            except OSError as error:
+                logger.warning("Jev cache write to %s failed: %s", self.cache_path, error)
 
     def close(self) -> None:
+        self._pool.shutdown(wait=False, cancel_futures=True)
         self._http.close()
 
 
@@ -430,16 +465,19 @@ def classify_and_extract(
     client: JevClient,
     include_regex_state: bool = False,
     use_cache: bool = True,
+    regex_intent: IntentSpec | None = None,
 ) -> tuple[IntentSpec, JevAnswers | None]:
     """Compose Jev gating answers with the regex extractors for names, years, topics.
 
     Returns the composed IntentSpec and the raw answers (None when the text is
     ADS syntax and Jev was not called). With ``include_regex_state`` the regex
-    IntentSpec is sent to Jev as extra state (experiment arm D).
+    IntentSpec is sent to Jev as extra state (experiment arm D). Pass
+    ``regex_intent`` when the caller already ran ``extract_intent(text)``.
     """
     from .ner import extract_intent, extract_intent_with_operator
 
-    regex_intent = extract_intent(text)
+    if regex_intent is None:
+        regex_intent = extract_intent(text)
     if regex_intent.confidence.get("ads_passthrough"):
         return regex_intent, None
     context = {"regex_intent": regex_intent.to_dict()} if include_regex_state else None

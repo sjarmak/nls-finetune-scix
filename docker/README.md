@@ -83,6 +83,10 @@ cd ~/ads-dev/nectar && pnpm dev
 curl http://localhost:8000/health
 ```
 
+If `pipeline_available` is false, `pipeline_import_error` says why (for
+example a missing dependency). In `hybrid` mode the server then sends every
+request to the model, so check this field after a deploy.
+
 **Generate query (vLLM style):**
 ```bash
 curl -X POST http://localhost:8000/v1/chat/completions \
@@ -147,21 +151,23 @@ naming the variable.
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `MODEL_NAME` | `adsabs/scix-nls-translator` | HuggingFace model to load |
-| `DEVICE` | auto-detect | `cuda`, `mps`, or `cpu`; `cpu` when torch is not installed |
+| `DEVICE` | auto-detect | `cuda`, `mps`, or `cpu`. Unset means detect when the model loads (`cpu` when torch is not installed); `/health` shows `auto` until then |
 | `PORT` | `8000` | Server port |
 | `ROUTING_MODE` | `hybrid` | `hybrid`: pipeline first, model fallback on low confidence. `pipeline`: pipeline only, the model is never loaded. `model`: model only |
 | `PIPELINE_CONFIDENCE_THRESHOLD` | `0.5` | Below this routing confidence the request goes to the model (in `hybrid`, when the model is loaded) |
 | `TELEMETRY_LOG` | unset | JSONL file; one `request` row per request, plus one `intent_shadow` row per shadow run |
 | `INTENT_BACKEND` | `regex` | Intent stage: `regex`, `jev` or `jev_gated` (see [Intent backends](#intent-backends)) |
 | `TYPESAFE_API_KEY` | unset | TypeSafe System One key; required when `INTENT_BACKEND` is `jev`/`jev_gated` or `SHADOW_INTENT_BACKEND` is set |
-| `JEV_TIMEOUT_S` | `2.0` | Per-call System One timeout in seconds; must be positive |
+| `JEV_TIMEOUT_S` | `2.0` | Wall-clock bound on each System One call, in seconds, including any wait for a free connection slot; must be positive |
 | `JEV_CACHE_PATH` | `data/cache/jev_systemone.jsonl`; empty in the image and compose | Append-only JSONL cache of System One responses, relative to the working directory. Empty disables the file |
 | `SHADOW_INTENT_BACKEND` | unset | `jev` or `jev_gated`: serve regex and run this backend off the request path. Needs `INTENT_BACKEND=regex`, `TELEMETRY_LOG`, `TYPESAFE_API_KEY`, and a `ROUTING_MODE` other than `model` |
 | `GOLD_EXAMPLES_PATH` | repo `data/datasets/raw/gold_examples.json`; `/app/data/gold_examples.json` in the image | Few-shot examples for retrieval (read by `retrieval.py`) |
 
 The JSONL cache is off in containers because it grows by one row per distinct
-query without bound and is lost when the container is replaced. The Jev client
-still keeps an in-process copy of every response for the life of the process.
+query without bound and is lost when the container is replaced. With the cache
+off the Jev client keeps no in-process copy either, so memory stays flat. When
+the cache is on and its file cannot be written, the failure is logged and the
+answer is still served.
 
 ## Intent backends
 
@@ -183,8 +189,16 @@ enum fields:
 network error, or a response that breaks the contract) never fails the
 request: the pipeline serves the regex intent and records the reason in
 `debug_info.classifier_error` on `/pipeline` and in the `classifier_error`
-telemetry field. `classifier_called` is true for every attempted call,
-answered or not.
+telemetry field. `classifier_called` is true whenever Jev was consulted,
+answered or not; `classifier_cached` is true when the answer came from the
+cache, so billed calls are those with `classifier_called` true and
+`classifier_cached` false.
+
+**Timeout.** `JEV_TIMEOUT_S` bounds the whole call by wall clock. httpx's own
+timeout applies per phase (connect, write, each socket read), so a response
+that trickles in could run past it; the client stops waiting at the deadline
+and serves the regex intent. The request handlers run in FastAPI's
+threadpool, so a slow Jev or model call does not block `/health`.
 
 **Routing confidence.** Without a Jev answer the routing confidence is the
 structural score (0.9 when authors, an operator or years were extracted, 0.7
@@ -216,8 +230,11 @@ telemetry as `structural_confidence` and `classifier_operator_confidence`.
    uv run python scripts/summarize_intent_shadow.py nls.jsonl
    ```
 
-   The summary counts rows, Jev calls and errors, and disagreements per field,
-   and lists each disagreeing query with both values. It does not say which
+   The summary counts rows, Jev calls (and how many were billed rather than
+   cache answers), errors, and disagreements per field, and lists each
+   disagreeing query with both values. Disagreements are counted only for
+   requests the pipeline served; when a request fell back to the model the
+   regex intent never reached the user, so those rows are counted separately. It does not say which
    side is right; read the disagreements.
 
 3. **Serve.** Switch the served intent and drop the shadow:
@@ -238,10 +255,11 @@ from the same request share `request_id`.
 | `nl_query`, `generated_query` | Input text and the served ADS query |
 | `path` | `pipeline` or `model` |
 | `confidence` | Routing confidence of the pipeline result; 0.0 when the model served |
+| `pipeline_confidence` | The pipeline's routing confidence whenever it ran, including the value that fell below the threshold on a model fallback |
 | `fallback_reason` | Why the model served it, or why a low-confidence pipeline result was served anyway |
 | `latency_ms` | Time spent in the path that served |
 | `routing_mode`, `intent_backend` | Server settings at the time |
-| `classifier_called`, `classifier_error` | Whether a Jev call was attempted, and its failure reason |
+| `classifier_called`, `classifier_cached`, `classifier_error` | Whether Jev was consulted, whether the answer came from the cache (not billed), and the failure reason |
 | `structural_confidence`, `classifier_operator_confidence` | The two inputs to the routing confidence |
 
 `record_type: "intent_shadow"`, one per shadow run:
@@ -251,9 +269,10 @@ from the same request share `request_id`.
 | `timestamp`, `request_id` | As above; `request_id` matches the request row |
 | `nl_query` | Input text |
 | `served_backend`, `shadow_backend` | `regex` and the shadow backend |
+| `served_path` | `pipeline` when the regex intent was served, `model` when the request fell back to the model |
 | `served_intent`, `shadow_intent` | Both IntentSpecs as dicts |
 | `disagreements`, `disagree` | Compared fields that differ (`operator`, `doctype`, `bibgroup`, `collection`, `property`) and whether any do |
-| `classifier_called`, `classifier_error`, `classifier_operator_confidence` | As in request rows, for the shadow run |
+| `classifier_called`, `classifier_cached`, `classifier_error`, `classifier_operator_confidence` | As in request rows, for the shadow run |
 | `shadow_latency_ms` | Duration of the shadow intent run |
 
 ## Performance

@@ -8,7 +8,9 @@ torch and transformers are imported only by load_model / generate_query and
 by device auto-detection, which DEVICE=cpu skips.
 """
 
+import builtins
 import importlib.util
+import inspect
 import itertools
 import json
 import logging
@@ -162,8 +164,31 @@ def test_imports_without_torch_or_transformers(load_server, monkeypatch):
     monkeypatch.setitem(sys.modules, "transformers", None)
     server = load_server(DEVICE="")
     health = TestClient(server.app).get("/health").json()
-    assert health["model_loaded"] is False and health["device"] == "cpu"
+    assert health["model_loaded"] is False and health["device"] == "auto"
     assert _post_pipeline(server, REGEX_OPERATOR_QUERY)["path"] == "pipeline"
+    assert server._default_device() == "cpu", "no torch means cpu once a model loads"
+
+
+def test_unset_device_does_not_import_torch(load_server, monkeypatch):
+    imported = []
+    real_import = builtins.__import__
+
+    def spy(name, *args, **kwargs):
+        if name == "torch":
+            imported.append(name)
+        return real_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", spy)
+    load_server(DEVICE=None)
+    assert imported == []
+
+
+def test_request_handlers_run_off_the_event_loop(load_server):
+    # Routing calls Jev and the model synchronously; async handlers would
+    # block the event loop (and /health) for the whole call.
+    server = load_server()
+    assert not inspect.iscoroutinefunction(server.chat_completions)
+    assert not inspect.iscoroutinefunction(server.pipeline_endpoint)
 
 
 def test_startup_loads_the_model(load_server):
@@ -206,6 +231,8 @@ def test_health_reports_the_intent_configuration(load_server):
     assert health["intent_backend"] == "regex"
     assert health["jev_timeout_s"] == 2.0
     assert health["shadow_intent_backend"] is None
+    assert health["pipeline_available"] is True
+    assert health["pipeline_import_error"] is None
 
 
 def test_health_reports_jev_and_shadow_settings(load_server, tmp_path):
@@ -301,6 +328,8 @@ def test_low_jev_operator_confidence_routes_to_the_model(load_server, tmp_path):
     (row,) = _rows(log)
     assert row["path"] == "model"
     assert row["classifier_operator_confidence"] == pytest.approx(0.44)
+    assert row["confidence"] == 0.0, "the model's own confidence"
+    assert row["pipeline_confidence"] == pytest.approx(0.44), "the value that fell short"
 
 
 def test_low_jev_confidence_is_served_when_no_model_is_loaded(load_server, tmp_path):
@@ -344,8 +373,10 @@ REQUEST_ROW_FIELDS = {
     "routing_mode",
     "intent_backend",
     "classifier_called",
+    "classifier_cached",
     "classifier_error",
     "structural_confidence",
+    "pipeline_confidence",
     "classifier_operator_confidence",
 }
 
@@ -362,6 +393,8 @@ def test_request_row_fields(load_server, tmp_path):
     assert row["classifier_called"] is True
     assert row["classifier_operator_confidence"] == pytest.approx(0.97)
     assert row["structural_confidence"] == pytest.approx(0.9)
+    assert row["pipeline_confidence"] == pytest.approx(0.9)
+    assert row["classifier_cached"] is False
 
 
 # -----------------------------------------------------------------------------
@@ -374,12 +407,14 @@ SHADOW_ROW_FIELDS = {
     "request_id",
     "nl_query",
     "served_backend",
+    "served_path",
     "shadow_backend",
     "served_intent",
     "shadow_intent",
     "disagreements",
     "disagree",
     "classifier_called",
+    "classifier_cached",
     "classifier_error",
     "classifier_operator_confidence",
     "shadow_latency_ms",
@@ -419,6 +454,18 @@ def test_shadow_serves_regex_and_logs_both_intents(load_server, tmp_path):
     assert shadow_row["shadow_intent"]["operator"] == "similar"
     assert shadow_row["disagreements"] == ["operator"]
     assert shadow_row["classifier_operator_confidence"] == pytest.approx(0.81)
+    assert shadow_row["served_path"] == "pipeline"
+
+
+def test_shadow_row_says_when_the_model_served_the_request(load_server, tmp_path):
+    server, log = _shadow_server(load_server, tmp_path)
+    server.jev_client = _answering(jev_payload("similar"))
+    _with_model(server)
+    body = _post_pipeline(server, "stars")  # structural confidence 0.3: model fallback
+    _drain(server)
+    assert body["path"] == "model"
+    shadow_row = next(r for r in _rows(log) if r["record_type"] == "intent_shadow")
+    assert shadow_row["served_path"] == "model"
 
 
 def test_shadow_runs_off_the_request_path(load_server, tmp_path):

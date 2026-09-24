@@ -163,7 +163,7 @@ The server is configured via environment variables (the `docker/server.py` modul
 | `TELEMETRY_LOG` | unset | JSONL log: one `request` row per request and one `intent_shadow` row per shadow run (feeds retraining data) |
 | `INTENT_BACKEND` | `regex` | Intent stage: `regex`, `jev` (Jev on every request) or `jev_gated` |
 | `TYPESAFE_API_KEY` | unset | System One key; required by the Jev backends and by shadow mode |
-| `JEV_TIMEOUT_S` | `2.0` | Per-call System One timeout in seconds |
+| `JEV_TIMEOUT_S` | `2.0` | Wall-clock bound on each System One call, in seconds, including any wait for a free connection slot |
 | `JEV_CACHE_PATH` | `data/cache/jev_systemone.jsonl` (empty in Docker) | JSONL cache of System One responses; empty disables it |
 | `SHADOW_INTENT_BACKEND` | unset | `jev` or `jev_gated`: serve regex, run this backend off the request path and log both intents (needs `INTENT_BACKEND=regex` and `TELEMETRY_LOG`) |
 | `GOLD_EXAMPLES_PATH` | `data/datasets/raw/gold_examples.json` | Few-shot examples for retrieval |

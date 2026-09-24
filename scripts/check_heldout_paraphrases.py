@@ -10,6 +10,12 @@ labelled value:
 - enum_synonym:      regex does not produce the labelled value on the target field
 - ambiguous:         labels are schema-valid only
 
+An item that a later, independently motivated regex fix brought into the
+patterns carries ``regex_in_map: {"since": ..., "reason": ...}``. For such an
+item the check asserts the opposite (regex now gets it) so a stale marker is
+caught, and the report lists it: arm A's score on it is contaminated in the
+baseline's favour.
+
 Also validates every label against IntentSpec / FIELD_ENUMS and reports the
 review status. Exit code 1 on any failure so it can gate the evaluation.
 """
@@ -70,18 +76,31 @@ def validate_item(item: dict) -> list[str]:
     return problems
 
 
-def regex_problems(item: dict) -> list[str]:
-    """Out-of-pattern assertions against the shipped regex extractor."""
+def _regex_hits(item: dict) -> str | None:
+    """Why the shipped regex already gets the item's probed value, or None."""
     intent = extract_intent(item["nl"])
     stratum = item["stratum"]
     if stratum in ("operator_positive", "operator_negative") and intent.operator is not None:
-        return [f"regex already returns operator={intent.operator!r}; item is in-pattern"]
+        return f"regex already returns operator={intent.operator!r}; item is in-pattern"
     if stratum == "enum_synonym":
         field = item["target_field"]
         labelled = set(item["labels"][field])
         got = set(getattr(intent, field))
         if labelled & got:
-            return [f"regex already maps to {field}={sorted(labelled & got)}; item is in-map"]
+            return f"regex already maps to {field}={sorted(labelled & got)}; item is in-map"
+    return None
+
+
+def regex_problems(item: dict) -> list[str]:
+    """Out-of-pattern assertions against the shipped regex extractor."""
+    hit = _regex_hits(item)
+    marker = item.get("regex_in_map")
+    if marker is None:
+        return [hit] if hit else []
+    if not isinstance(marker, dict) or not marker.get("since") or not marker.get("reason"):
+        return ["regex_in_map needs 'since' and 'reason'"]
+    if hit is None:
+        return ["marked regex_in_map but the regex no longer gets it; remove the marker"]
     return []
 
 
@@ -112,6 +131,11 @@ def main() -> int:
     pending = sum(1 for s in statuses if s not in ("approved", "rejected"))
     rejected = statuses.count("rejected")
     print(f"items per stratum: {counts}")
+    for item in doc["items"]:
+        if "regex_in_map" in item:
+            marker = item["regex_in_map"]
+            since, reason = marker.get("since"), marker.get("reason")
+            print(f"regex in-map since {since}: {item['id']} ({reason})")
     print(
         f"items not yet reviewed by a human: {pending} of {len(doc['items'])}"
         f" (rejected and excluded: {rejected})"

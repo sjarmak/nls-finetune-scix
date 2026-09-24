@@ -27,19 +27,31 @@ def _intent(operator=None, doctype=(), bibgroup=(), collection=(), prop=()) -> d
     }
 
 
-def _shadow(nl, served, shadow, disagreements, called=True, error=None, conf=0.9) -> dict:
+def _shadow(
+    nl,
+    served,
+    shadow,
+    disagreements,
+    called=True,
+    error=None,
+    conf=0.9,
+    path="pipeline",
+    cached=False,
+) -> dict:
     return {
         "record_type": "intent_shadow",
         "timestamp": "2026-09-24T00:00:00+00:00",
         "request_id": nl,
         "nl_query": nl,
         "served_backend": "regex",
+        "served_path": path,
         "shadow_backend": "jev_gated",
         "served_intent": served,
         "shadow_intent": shadow,
         "disagreements": disagreements,
         "disagree": bool(disagreements),
         "classifier_called": called,
+        "classifier_cached": cached,
         "classifier_error": error,
         "classifier_operator_confidence": None if error or not called else conf,
         "shadow_latency_ms": 200.0,
@@ -124,9 +136,28 @@ def test_format_mentions_counts_and_queries():
 
 def test_main_prints_summary(tmp_path, capsys):
     assert main([str(_write(tmp_path, ROWS))]) == 0
-    assert "disagreeing: 2" in capsys.readouterr().out
+    assert "disagreeing (pipeline-served rows): 2" in capsys.readouterr().out
 
 
 def test_main_json_output(tmp_path, capsys):
     assert main([str(_write(tmp_path, ROWS)), "--json"]) == 0
     assert json.loads(capsys.readouterr().out)["disagreeing"] == 2
+
+
+def test_model_served_rows_are_counted_but_not_compared():
+    rows = [
+        *ROWS,
+        _shadow("e", _intent(), _intent("useful"), ["operator"], path="model"),
+    ]
+    summary = summarize(rows)
+    assert summary["shadow_rows"] == 5
+    assert summary["served_by_model"] == 1
+    assert summary["disagreeing"] == 2
+    assert [q["nl_query"] for q in summary["disagreeing_queries"]] == ["a", "b"]
+
+
+def test_cache_answers_are_not_counted_as_billed():
+    rows = [*ROWS, _shadow("e", _intent(), _intent(), [], cached=True)]
+    summary = summarize(rows)
+    assert summary["classifier_called"] == 4
+    assert summary["classifier_billed"] == 3

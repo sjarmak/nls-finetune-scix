@@ -1,0 +1,9 @@
+# Allow-list: the image needs only what docker/Dockerfile COPYs. Everything
+# else (worktrees, datasets, caches, model outputs) stays out of the build
+# context, which is otherwise tens of GB.
+*
+!docker/requirements.txt
+!docker/server.py
+!packages/finetune/src/finetune/
+!data/datasets/raw/gold_examples.json
+**/__pycache__

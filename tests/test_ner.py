@@ -306,6 +306,51 @@ class TestExplicitDoctypeRequests:
         assert intent.doctype == {doctype}
 
 
+class TestBookReviewsAreADoctypeNotAnOperator:
+    """ "book reviews on X" asks for doctype:bookreview; the reviews operator must
+    not consume the word first (benchmark, val and held-out gold all say so)."""
+
+    @pytest.mark.parametrize(
+        ("text", "topic_word"),
+        [
+            ("book reviews on cosmology", "cosmology"),
+            ("book reviews of cosmology textbooks", "cosmology"),
+            ("recent reviews of galaxy evolution books", "galaxy"),
+            ("textbook reviews of galactic dynamics", "galactic"),
+            ("a book review about stellar evolution", "stellar"),
+        ],
+    )
+    def test_book_review_phrase_sets_bookreview_without_operator(self, text, topic_word):
+        intent = extract_intent(text)
+        assert intent.operator is None
+        assert intent.doctype == {"bookreview"}
+        assert any(topic_word in term for term in intent.free_text_terms)
+
+    def test_gold_book_review_items_match_their_labels(self):
+        # bench-doctype-013, val-338 and hp-enum-029: gold is operator none,
+        # doctype bookreview
+        for text in (
+            "book reviews on cosmology",
+            "recent reviews of astronomy books",
+            "book reviews of cosmology textbooks",
+        ):
+            intent = extract_intent(text)
+            assert (intent.operator, intent.doctype) == (None, {"bookreview"}), text
+
+    @pytest.mark.parametrize(
+        "text",
+        [
+            "reviews of dark matter halos",
+            "review articles on AGN feedback",
+            "reviews on exoplanets",
+        ],
+    )
+    def test_plain_reviews_still_trigger_the_operator(self, text):
+        intent = extract_intent(text)
+        assert intent.operator == "reviews"
+        assert "bookreview" not in intent.doctype
+
+
 class TestBibgroupSynonyms:
     """Tests for bibgroup synonym mapping."""
 

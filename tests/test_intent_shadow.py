@@ -37,15 +37,17 @@ def test_identical_intents_agree():
 def test_record_captures_both_intents_and_the_disagreement():
     served = extract_intent(GATED_QUERY).to_dict()
     record = shadow_record(
-        GATED_QUERY, served, "jev_gated", _answering(jev_payload("similar", 0.81))
+        GATED_QUERY, served, "jev_gated", _answering(jev_payload("similar", 0.81)), "pipeline"
     )
     assert record["record_type"] == SHADOW_RECORD_TYPE
     assert record["nl_query"] == GATED_QUERY
     assert record["served_backend"] == "regex"
+    assert record["served_path"] == "pipeline"
     assert record["shadow_backend"] == "jev_gated"
     assert record["served_intent"] == served
     assert record["shadow_intent"]["operator"] == "similar"
     assert record["classifier_called"] is True
+    assert record["classifier_cached"] is False
     assert record["classifier_error"] is None
     assert record["classifier_operator_confidence"] == pytest.approx(0.81)
     assert record["shadow_latency_ms"] >= 0
@@ -56,7 +58,7 @@ def test_record_captures_both_intents_and_the_disagreement():
 def test_enum_disagreement_is_reported_per_field():
     served = extract_intent(GATED_QUERY).to_dict()
     payload = jev_payload("none", bibgroup=choice_answer("JWST", {"none": 0.1, "JWST": 0.9}))
-    record = shadow_record(GATED_QUERY, served, "jev_gated", _answering(payload))
+    record = shadow_record(GATED_QUERY, served, "jev_gated", _answering(payload), "pipeline")
     assert "bibgroup" in record["disagreements"]
     assert "operator" not in record["disagreements"]
 
@@ -64,7 +66,7 @@ def test_enum_disagreement_is_reported_per_field():
 def test_failed_jev_call_is_recorded_not_raised():
     served = extract_intent(GATED_QUERY).to_dict()
     client = handler_client(lambda request: httpx.Response(502))
-    record = shadow_record(GATED_QUERY, served, "jev_gated", client)
+    record = shadow_record(GATED_QUERY, served, "jev_gated", client, "pipeline")
     assert record["classifier_called"] is True
     assert "502" in record["classifier_error"]
     assert record["classifier_operator_confidence"] is None
@@ -76,6 +78,14 @@ def test_closed_gate_records_no_call():
     query = "papers citing dark energy surveys"
     served = extract_intent(query).to_dict()
     client = handler_client(lambda request: pytest.fail("gate should stay closed"))
-    record = shadow_record(query, served, "jev_gated", client)
+    record = shadow_record(query, served, "jev_gated", client, "pipeline")
     assert record["classifier_called"] is False
     assert record["disagreements"] == []
+
+
+def test_record_keeps_the_path_that_served_the_request():
+    served = extract_intent(GATED_QUERY).to_dict()
+    record = shadow_record(
+        GATED_QUERY, served, "jev_gated", _answering(jev_payload("similar")), "model"
+    )
+    assert record["served_path"] == "model"

@@ -61,8 +61,10 @@ class DebugInfo:
         fallback_reason: Reason if fallback path was taken
         raw_extracted: Raw NER extraction before validation
         intent_backend: Which intent extractor produced the IntentSpec
-        classifier_called: Whether a Jev classifier call was attempted, even one
-            that failed
+        classifier_called: Whether the Jev classifier was consulted, even when
+            the call failed or was answered from the response cache
+        classifier_cached: Whether that answer came from the response cache,
+            so no request was sent or billed
         classifier_error: Why the Jev call failed, when it did; the regex
             intent was used instead
         structural_confidence: compute_pipeline_confidence on the final intent
@@ -79,6 +81,7 @@ class DebugInfo:
     raw_extracted: dict | None = None
     intent_backend: str = "regex"
     classifier_called: bool = False
+    classifier_cached: bool = False
     classifier_error: str | None = None
     structural_confidence: float | None = None
     classifier_operator_confidence: float | None = None
@@ -164,14 +167,17 @@ def compute_pipeline_confidence(intent: IntentSpec) -> tuple[float, str | None]:
 class IntentExtraction:
     """Outcome of the intent stage.
 
-    ``classifier_called`` is True whenever a Jev call was attempted, including
-    one that failed; ``classifier_error`` is set exactly when it failed, and
-    the intent is then the regex intent. Keeping both lets telemetry count
-    attempted (billed or timed-out) calls separately from answered ones.
+    ``classifier_called`` is True whenever Jev was consulted, including a call
+    that failed and one answered from the response cache. ``classifier_cached``
+    is True for a cache answer, which sends and bills nothing.
+    ``classifier_error`` is set exactly when the call failed, and the intent is
+    then the regex intent. Together they let telemetry count billed calls
+    (called and not cached) separately from answered ones.
     """
 
     intent: IntentSpec
     classifier_called: bool = False
+    classifier_cached: bool = False
     classifier_error: str | None = None
 
     @property
@@ -237,16 +243,17 @@ def extract_intent_with_backend(
 def _classify_or_fall_back(
     nl_text: str, regex_intent: IntentSpec, jev_client: "JevClient"
 ) -> IntentExtraction:
-    from .jev_intent import JEV_FAILURES, extract_intent_jev
+    from .jev_intent import JEV_FAILURES, classify_and_extract
 
     try:
-        intent = extract_intent_jev(nl_text, jev_client)
+        intent, answers = classify_and_extract(nl_text, jev_client, regex_intent=regex_intent)
     except JEV_FAILURES as error:
         reason = f"{type(error).__name__}: {error}"
         logger.warning("Jev classifier failed, serving the regex intent: %s", reason)
         return IntentExtraction(regex_intent, classifier_called=True, classifier_error=reason)
-    called = not regex_intent.confidence.get("ads_passthrough")
-    return IntentExtraction(intent, classifier_called=called)
+    if answers is None:
+        return IntentExtraction(intent)
+    return IntentExtraction(intent, classifier_called=True, classifier_cached=answers.cached)
 
 
 def process_query(
@@ -284,6 +291,7 @@ def process_query(
     extraction = extract_intent_with_backend(nl_text, intent_backend, jev_client)
     intent = extraction.intent
     debug_info.classifier_called = extraction.classifier_called
+    debug_info.classifier_cached = extraction.classifier_cached
     debug_info.classifier_error = extraction.classifier_error
     debug_info.ner_time_ms = (time.perf_counter() - ner_start) * 1000
     debug_info.raw_extracted = intent.to_dict()

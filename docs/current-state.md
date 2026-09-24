@@ -35,7 +35,7 @@ confidence is below 0.5. The evaluation that chose `jev_gated` is
 | `TELEMETRY_LOG` | unset | JSONL log: `request` rows and `intent_shadow` rows |
 | `INTENT_BACKEND` | `regex` | `regex` / `jev` / `jev_gated` |
 | `TYPESAFE_API_KEY` | unset | Needed by the Jev backends and shadow mode |
-| `JEV_TIMEOUT_S` | `2.0` | Per-call System One timeout (s) |
+| `JEV_TIMEOUT_S` | `2.0` | Wall-clock bound on each System One call, in seconds, including any wait for a free connection slot |
 | `JEV_CACHE_PATH` | `data/cache/jev_systemone.jsonl`; empty in Docker | Response cache file; empty disables it |
 | `SHADOW_INTENT_BACKEND` | unset | `jev` / `jev_gated`, logged next to the served regex intent |
 | `GOLD_EXAMPLES_PATH` | repo `data/datasets/raw/gold_examples.json` | Retrieval examples |

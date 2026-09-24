@@ -2309,6 +2309,10 @@
       "stratum": "enum_synonym",
       "nl": "book reviews of cosmology textbooks",
       "target_field": "doctype",
+      "regex_in_map": {
+        "since": "2026-09-24",
+        "reason": "ner.py book-review rule, motivated by the benchmark query 'book reviews on cosmology' and the val query 'textbook reviews from 2020'; arm A now gets this item, which favours the regex baseline"
+      },
       "labels": {
         "operator": "none",
         "property": [],
