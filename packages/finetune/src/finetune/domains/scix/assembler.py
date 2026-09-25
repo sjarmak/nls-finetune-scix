@@ -13,7 +13,7 @@ import re
 from collections.abc import Sequence
 
 from .constrain import constrain_query_output
-from .field_constraints import FIELD_ENUMS
+from .field_constraints import FIELD_ENUMS, PROPERTY_DOCTYPES
 from .intent_spec import OPERATORS, IntentSpec
 from .pipeline import GoldExample
 
@@ -174,7 +174,7 @@ def _build_enum_clause(field: str, values: set[str]) -> str:
     if not valid_values:
         return ""
 
-    sorted_values = sorted(valid_values)
+    sorted_values = [_quote_value(value) for value in sorted(valid_values)]
 
     if len(sorted_values) == 1:
         return f"{field}:{sorted_values[0]}"
@@ -318,9 +318,17 @@ def assemble_query(intent: IntentSpec, examples: list[GoldExample] | None = None
         if aff_clause:
             clauses.append(aff_clause)
 
-    # Build enum-constrained field clauses
-    for field_name in ("doctype", "property", "collection", "bibgroup", "esources", "data"):
-        values = getattr(intent, field_name)
+    # Build enum-constrained field clauses. A record kind asked for as a
+    # property goes in the doctype clause, where ADS indexes it.
+    enum_values = {
+        "doctype": intent.doctype | (intent.property & PROPERTY_DOCTYPES),
+        "property": intent.property - PROPERTY_DOCTYPES,
+        "collection": intent.collection,
+        "bibgroup": intent.bibgroup,
+        "esources": intent.esources,
+        "data": intent.data,
+    }
+    for field_name, values in enum_values.items():
         if values:
             constraint_count_before += len(values)
             clause = _build_enum_clause(field_name, values)

@@ -8,6 +8,7 @@ import pytest
 from jev_fixtures import choice_answer, jev_payload, mock_jev_client, noul_answer
 
 from finetune.domains.scix.assembler import assemble_query
+from finetune.domains.scix.field_constraints import BIBGROUPS
 from finetune.domains.scix.intent_spec import IntentSpec
 from finetune.domains.scix.jev_intent import (
     EXTRACTION_QUESTION_IDS,
@@ -192,10 +193,11 @@ class TestBibgroupCandidates:
             ("JWST or HST papers on exoplanet atmospheres", ("HST", "JWST")),
             ("Hubble deep field observations", ("HST",)),
             ("papers using Atacama Large Millimeter Array", ("ALMA",)),
-            ("X-ray bursts research with Rossi XTE", ("RXTE",)),
+            ("X-ray bursts research with Rossi XTE", ()),
+            ("radio jets with the Very Large Array", ("NRAO",)),
             ("stellar populations studies using Gemini North", ("Gemini",)),
             ("asteroid surveys with panstarrs", ("Pan-STARRS",)),
-            ("Wide-field Infrared Survey Explorer asteroids", ("WISE",)),
+            ("Wide-field Infrared Survey Explorer asteroids", ()),
             ("recent papers on asteroids", ()),
         ],
     )
@@ -211,7 +213,8 @@ class TestBibgroupCandidates:
         assert set(questions["bibgroup"]["criteria"]) == {"none", "JWST"}
 
     def test_without_candidates_every_bibgroup_is_offered(self):
-        assert len(build_request("q")["questions"]["bibgroup"]["criteria"]) > 50
+        criteria = build_request("q")["questions"]["bibgroup"]["criteria"]
+        assert set(criteria) == {"none", *BIBGROUPS}
 
     def test_unasked_bibgroup_is_empty_and_has_no_confidence(self):
         request = build_request("dark matter", bibgroup_candidates=())

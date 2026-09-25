@@ -54,6 +54,8 @@ PROPERTIES: frozenset[str] = frozenset(
         "nonarticle",  # Not a regular article (e.g., meeting abstracts)
         "refereed",  # Peer reviewed
         "notrefereed",  # Not peer reviewed
+        # ADS has no property with these names (0 records, 2026-09-25); the
+        # assembler writes them as doctype (see PROPERTY_DOCTYPES)
         "eprint",  # The record is an eprint/preprint
         "inproceedings",  # Conference proceeding
         "software",  # Software record
@@ -83,10 +85,17 @@ COLLECTIONS: frozenset[str] = frozenset(
     }
 )
 
+# Record kinds users ask for as a property that ADS indexes only as a doctype:
+# property:eprint matches nothing, doctype:eprint matches the preprints.
+PROPERTY_DOCTYPES: frozenset[str] = frozenset({"eprint", "inproceedings", "software", "catalog"})
+
 # Bibliographic groups curated by institutions/observatories
 # Reference: https://ui.adsabs.harvard.edu/help/data_faq/Bibgroups
 # These are hand-curated by librarians and contain publications
-# using data from specific telescopes/institutions
+# using data from specific telescopes/institutions. Every value must be an
+# ADS bibgroup_facet value (checked 2026-09-25); a facility without its own
+# group (Gaia, SDSS, LIGO) is left to the topic search, and
+# tests/test_field_constraints.py pins the list to the ADS facet.
 BIBGROUPS: frozenset[str] = frozenset(
     {
         # Space telescopes
@@ -103,52 +112,33 @@ BIBGROUPS: frozenset[str] = frozenset(
         "IUE",  # International Ultraviolet Explorer
         "EUVE",  # Extreme Ultraviolet Explorer
         "Copernicus",  # Copernicus satellite
-        "IRAS",  # Infrared Astronomical Satellite
-        "WISE",  # Wide-field Infrared Survey Explorer
-        "NEOWISE",  # NEOWISE mission
-        "Fermi",  # Fermi Gamma-ray Space Telescope
         "Swift",  # Swift Observatory
-        "RXTE",  # Rossi X-ray Timing Explorer
-        "NuSTAR",  # Nuclear Spectroscopic Telescope Array
+        "Herschel",  # Herschel Space Observatory
         # Solar missions
         "SOHO",  # Solar and Heliospheric Observatory
         "STEREO",  # Solar TErrestrial RElations Observatory
-        "SDO",  # Solar Dynamics Observatory
+        "Solar Dynamics Observatory",  # SDO
         # Ground-based observatories
-        "ESO/Telescopes",  # European Southern Observatory
+        "ESO/Telescopes",  # European Southern Observatory telescopes, including the VLT
         "CFHT",  # Canada-France-Hawaii Telescope
         "Gemini",  # Gemini Observatory
         "Keck",  # W.M. Keck Observatory
-        "VLT",  # Very Large Telescope
         "Subaru",  # Subaru Telescope
         "NOAO",  # National Optical Astronomy Observatory
-        "NOIRLab",  # NSF's National Optical-Infrared Astronomy Research Laboratory
-        "CTIO",  # Cerro Tololo Inter-American Observatory
-        "KPNO",  # Kitt Peak National Observatory
+        "NOIRLab",  # NSF NOIRLab, including Kitt Peak and Cerro Tololo
         "Pan-STARRS",  # Panoramic Survey Telescope & Rapid Response System
-        "SDSS",  # Sloan Digital Sky Survey
-        "2MASS",  # Two Micron All Sky Survey
-        "UKIRT",  # United Kingdom Infrared Telescope
         "ALMA",  # Atacama Large Millimeter Array
         "JCMT",  # James Clerk Maxwell Telescope
-        "APEX",  # Atacama Pathfinder Experiment
-        "ARECIBO",  # Arecibo Observatory
-        "VLA",  # Very Large Array
-        "VLBA",  # Very Long Baseline Array
-        "GBT",  # Green Bank Telescope
-        "LOFAR",  # Low-Frequency Array
-        "MeerKAT",  # MeerKAT radio telescope
-        "SKA",  # Square Kilometre Array
-        # Astrometry
-        "Gaia",  # Gaia mission
-        "Hipparcos",  # Hipparcos satellite
+        "NRAO",  # National Radio Astronomy Observatory: VLA, VLBA, Green Bank
+        "WHT",  # William Herschel Telescope
+        "INT",  # Isaac Newton Telescope
+        "IRTF",  # NASA Infrared Telescope Facility
+        "GTC",  # Gran Telescopio Canarias
+        "SMA",  # Submillimeter Array
         # Other
         "CfA",  # Center for Astrophysics publications
         "NASA PubSpace",  # NASA public access repository
-        "LISA",  # Laser Interferometer Space Antenna
-        "LIGO",  # Laser Interferometer Gravitational-Wave Observatory
         "SETI",  # SETI Institute publications
-        "ESO",  # European Southern Observatory (alias for ESO/Telescopes)
     }
 )
 

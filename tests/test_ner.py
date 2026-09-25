@@ -369,20 +369,32 @@ class TestBibgroupSynonyms:
         intent = extract_intent("james webb space telescope first images")
         assert "JWST" in intent.bibgroup
 
-    def test_sloan_synonym(self):
-        """'sloan' maps to bibgroup:SDSS."""
-        intent = extract_intent("sloan survey quasar catalog")
-        assert "SDSS" in intent.bibgroup
+    @pytest.mark.parametrize(
+        "text, bibgroup",
+        [
+            ("VLT spectroscopy of quasars", "ESO/Telescopes"),
+            ("Very Large Array radio jets", "NRAO"),
+            ("Green Bank Telescope pulsar papers", "NRAO"),
+            ("Kitt Peak imaging of galaxies", "NOIRLab"),
+            ("SDO observations of flares", "Solar Dynamics Observatory"),
+        ],
+    )
+    def test_facility_maps_to_its_ads_group(self, text, bibgroup):
+        assert extract_intent(text).bibgroup == {bibgroup}
 
-    def test_ligo_synonym(self):
-        """'ligo' maps to bibgroup:LIGO."""
-        intent = extract_intent("ligo gravitational wave detections")
-        assert "LIGO" in intent.bibgroup
-
-    def test_gravitational_wave_bibgroup(self):
-        """'gravitational wave' maps to bibgroup:LIGO."""
-        intent = extract_intent("gravitational wave observation methods")
-        assert "LIGO" in intent.bibgroup
+    @pytest.mark.parametrize(
+        "text, topic_word",
+        [
+            ("sloan survey quasar catalog", "sloan"),
+            ("ligo gravitational wave detections", "ligo"),
+            ("gravitational wave observation methods", "gravitational"),
+            ("Gaia open clusters", "gaia"),
+        ],
+    )
+    def test_facility_without_an_ads_group_stays_in_the_topic(self, text, topic_word):
+        intent = extract_intent(text)
+        assert intent.bibgroup == set()
+        assert topic_word in " ".join(intent.free_text_terms).lower()
 
     def test_all_bibgroups_valid(self):
         """All extracted bibgroups are in BIBGROUPS enum."""

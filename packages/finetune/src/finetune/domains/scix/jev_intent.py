@@ -181,7 +181,7 @@ def build_questions() -> dict[str, dict]:
         "bibgroup": _choice(
             "Which curated telescope, mission or institution bibliography does the user "
             "restrict results to? Choose the facility when the user wants papers from, using, "
-            "or by the team of that facility (JWST papers, ALMA observations, the Gaia mission). "
+            "or by the team of that facility (JWST papers, ALMA observations, the Kepler mission). "
             "Choose 'none' when no facility is named, or when the name is part of a topic, "
             "object or person (Hubble constant, Hubble deep field, Chandrasekhar).",
             BIBGROUP_DESCRIPTIONS,

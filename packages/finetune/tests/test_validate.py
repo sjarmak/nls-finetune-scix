@@ -1,6 +1,5 @@
 """Tests for validate_field_constraints function."""
 
-
 from finetune.domains.scix.validate import (
     FieldConstraintError,
     validate_field_constraints,
@@ -48,14 +47,15 @@ class TestValidateFieldConstraints:
         result = validate_field_constraints("bibgroup:SETI")
         assert result.valid is True
 
-    def test_valid_bibgroup_eso(self):
-        """ESO bibgroup (alias for ESO/Telescopes) should be valid."""
+    def test_bare_eso_bibgroup_suggests_eso_telescopes(self):
+        """ADS names the ESO group ESO/Telescopes; bibgroup:ESO matches nothing."""
         result = validate_field_constraints("bibgroup:ESO")
-        assert result.valid is True
+        assert result.valid is False
+        assert result.errors[0].suggestions == ["ESO/Telescopes"]
 
     def test_valid_multiple_fields(self):
         """Query with multiple valid constrained fields should pass."""
-        query = 'doctype:article property:refereed database:astronomy bibgroup:JWST'
+        query = "doctype:article property:refereed database:astronomy bibgroup:JWST"
         result = validate_field_constraints(query)
         assert result.valid is True
         assert len(result.errors) == 0

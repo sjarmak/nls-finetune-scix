@@ -77,9 +77,9 @@ class TestEnumValidation:
         assert "openaccess" in valid or "OpenAccess" in valid
 
     def test_valid_bibgroup(self):
-        values = {"HST", "JWST", "SDSS"}
+        values = {"HST", "JWST", "NRAO"}
         valid = _validate_enum_values("bibgroup", values)
-        assert valid == {"HST", "JWST", "SDSS"}
+        assert valid == {"HST", "JWST", "NRAO"}
 
     def test_invalid_bibgroup_removed(self):
         values = {"HST", "Hubble", "Webb"}  # Hubble and Webb are aliases, not valid
@@ -178,6 +178,27 @@ class TestEnumClauses:
         result = _build_enum_clause("doctype", {"article", "journal"})
         # journal is invalid, article is valid
         assert result == "doctype:article"
+
+    def test_multi_word_values_are_quoted(self):
+        result = _build_enum_clause("bibgroup", {"Solar Dynamics Observatory", "HST"})
+        assert result == 'bibgroup:(HST OR "Solar Dynamics Observatory")'
+
+    def test_eprint_property_is_written_as_doctype(self):
+        """ADS has no property:eprint; the preprints are doctype:eprint."""
+        intent = IntentSpec(free_text_terms=["fast radio bursts"], property={"eprint"})
+        assert assemble_query(intent) == 'abs:"fast radio bursts" doctype:eprint'
+
+    def test_record_kind_properties_join_the_doctype_clause(self):
+        intent = IntentSpec(
+            free_text_terms=["galaxies"],
+            doctype={"article"},
+            property={"refereed", "software", "catalog"},
+        )
+        query = assemble_query(intent)
+        assert "property:refereed" in query
+        assert "property:software" not in query and "property:catalog" not in query
+        assert all(f"{kind}" in query.split("doctype:")[1] for kind in ("article", "catalog"))
+        assert "software" in query.split("doctype:")[1]
 
 
 class TestOperatorWrapping:
@@ -339,7 +360,16 @@ class TestFuzzMalformedOperators:
 
     @pytest.mark.parametrize(
         "operator_word",
-        ["citations", "references", "citing", "cited", "reference", "trending", "useful", "similar"],
+        [
+            "citations",
+            "references",
+            "citing",
+            "cited",
+            "reference",
+            "trending",
+            "useful",
+            "similar",
+        ],
     )
     def test_operator_word_in_nl_never_produces_malformed(self, operator_word):
         """Inserting operator words into NL should never produce malformed concatenations."""

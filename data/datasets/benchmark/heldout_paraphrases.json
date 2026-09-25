@@ -2336,12 +2336,16 @@
       "stratum": "enum_synonym",
       "nl": "Green Bank Telescope pulsar papers",
       "target_field": "bibgroup",
+      "regex_in_map": {
+        "since": "2026-09-25",
+        "reason": "ner.py maps green bank telescope to NRAO since the bibgroup list was pinned to ADS; arm A now gets this item, which favours the regex baseline"
+      },
       "labels": {
         "operator": "none",
         "property": [],
         "doctype": [],
         "bibgroup": [
-          "GBT"
+          "NRAO"
         ],
         "collection": [],
         "search_kind": "topic",
@@ -2351,7 +2355,7 @@
       "review": {
         "status": "approved",
         "reviewer": "Stephanie",
-        "note": ""
+        "note": "2026-09-25: bibgroup GBT relabeled; ADS has no GBT bibgroup, the Green Bank Telescope is in the NRAO group"
       }
     },
     {
@@ -2363,9 +2367,7 @@
         "operator": "none",
         "property": [],
         "doctype": [],
-        "bibgroup": [
-          "ARECIBO"
-        ],
+        "bibgroup": [],
         "collection": [],
         "search_kind": "topic",
         "needs_clarification": false,
@@ -2374,7 +2376,7 @@
       "review": {
         "status": "approved",
         "reviewer": "Stephanie",
-        "note": ""
+        "note": "2026-09-25: bibgroup ARECIBO relabeled; ADS has no ARECIBO bibgroup, the facility stays in the topic"
       }
     },
     {
@@ -2386,9 +2388,7 @@
         "operator": "none",
         "property": [],
         "doctype": [],
-        "bibgroup": [
-          "LOFAR"
-        ],
+        "bibgroup": [],
         "collection": [],
         "search_kind": "topic",
         "needs_clarification": false,
@@ -2397,7 +2397,7 @@
       "review": {
         "status": "approved",
         "reviewer": "Stephanie",
-        "note": ""
+        "note": "2026-09-25: bibgroup LOFAR relabeled; ADS has no LOFAR bibgroup, the facility stays in the topic"
       }
     },
     {
@@ -2409,9 +2409,7 @@
         "operator": "none",
         "property": [],
         "doctype": [],
-        "bibgroup": [
-          "MeerKAT"
-        ],
+        "bibgroup": [],
         "collection": [],
         "search_kind": "topic",
         "needs_clarification": false,
@@ -2420,7 +2418,7 @@
       "review": {
         "status": "approved",
         "reviewer": "Stephanie",
-        "note": ""
+        "note": "2026-09-25: bibgroup MeerKAT relabeled; ADS has no MeerKAT bibgroup, the facility stays in the topic"
       }
     },
     {
@@ -2455,9 +2453,7 @@
         "operator": "none",
         "property": [],
         "doctype": [],
-        "bibgroup": [
-          "NuSTAR"
-        ],
+        "bibgroup": [],
         "collection": [],
         "search_kind": "topic",
         "needs_clarification": false,
@@ -2466,7 +2462,7 @@
       "review": {
         "status": "approved",
         "reviewer": "Stephanie",
-        "note": ""
+        "note": "2026-09-25: bibgroup NuSTAR relabeled; ADS has no NuSTAR bibgroup, the facility stays in the topic"
       }
     },
     {
@@ -2478,9 +2474,7 @@
         "operator": "none",
         "property": [],
         "doctype": [],
-        "bibgroup": [
-          "Hipparcos"
-        ],
+        "bibgroup": [],
         "collection": [],
         "search_kind": "topic",
         "needs_clarification": false,
@@ -2489,7 +2483,7 @@
       "review": {
         "status": "approved",
         "reviewer": "Stephanie",
-        "note": ""
+        "note": "2026-09-25: bibgroup Hipparcos relabeled; ADS has no Hipparcos bibgroup, the facility stays in the topic"
       }
     },
     {
