@@ -82,11 +82,27 @@ def semantic_match_rate_of(results: list[EvalResult]) -> float:
     return matches / len(scored)
 
 
-def generate_via_pipeline(nl_query: str, intent_backend: str = "regex", jev_client=None) -> str:
+def generate_via_pipeline(
+    nl_query: str, intent_backend: str = "regex", jev_client=None, paper_search=None
+) -> str:
     """Generate a query with the in-process hybrid pipeline."""
     from finetune.domains.scix.pipeline import process_query
 
-    return process_query(nl_query, intent_backend, jev_client, REFERENCE_YEAR).final_query
+    return process_query(
+        nl_query, intent_backend, jev_client, REFERENCE_YEAR, paper_search=paper_search
+    ).final_query
+
+
+def build_paper_search(jev_client):
+    """ADS candidate search for the named-paper lookup, with the Jev backends only."""
+    if jev_client is None:
+        return None
+    from finetune.domains.scix.paper_lookup import ADSPaperSearch
+
+    api_key = os.environ.get("ADS_API_KEY", "")
+    if not api_key:
+        raise SystemExit("ADS_API_KEY must be set for the paper lookup")
+    return ADSPaperSearch(api_key=api_key)
 
 
 def build_jev_client(intent_backend: str, cache_path: Path):
@@ -207,6 +223,7 @@ def main() -> int:
 
     client = httpx.Client(timeout=120.0) if args.mode == "server" else None
     jev_client = build_jev_client(args.intent_backend, args.jev_cache)
+    paper_search = build_paper_search(jev_client)
     results = []
     generation_errors = []
 
@@ -216,7 +233,7 @@ def main() -> int:
 
         try:
             if args.mode == "pipeline":
-                generated = generate_via_pipeline(nl, args.intent_backend, jev_client)
+                generated = generate_via_pipeline(nl, args.intent_backend, jev_client, paper_search)
             else:
                 generated = generate_via_server(nl, args.endpoint, client)
         except Exception as e:
@@ -243,6 +260,8 @@ def main() -> int:
         client.close()
     if jev_client:
         jev_client.close()
+    if paper_search:
+        paper_search.close()
 
     summary = summarize_results(results)
     semantic_match_rate = semantic_match_rate_of(results)

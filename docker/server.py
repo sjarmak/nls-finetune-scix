@@ -44,6 +44,15 @@ Configuration (environment variables):
                      A failed Jev call (HTTP error, timeout, network error or
                      malformed response) falls back to the regex intent; the
                      reason is in debug_info.classifier_error and telemetry.
+                     With ADS_API_KEY set, the Jev backends also resolve a
+                     paper the request names ("papers citing the original
+                     TRAPPIST-1 paper"): ADS offers the most-cited candidates
+                     and Jev picks one, which becomes citations(bibcode:...).
+                     A failed lookup keeps the topic search; the reason is in
+                     debug_info.paper_lookup_error.
+    PAPER_LOOKUP_TIMEOUT_S
+                     httpx timeout for each ADS candidate search in seconds
+                     (default: 3.0).
     JEV_CACHE_PATH   Append-only JSONL cache for System One responses
                      (default: data/cache/jev_systemone.jsonl, relative to the
                      working directory). Set it empty to disable the cache;
@@ -184,6 +193,17 @@ if INTENT_BACKEND != "regex" or SHADOW_INTENT_BACKEND:
         timeout_s=JEV_TIMEOUT_S,
     )
 
+paper_search = None
+if INTENT_BACKEND != "regex" and os.environ.get("ADS_API_KEY"):
+    from finetune.domains.scix.paper_lookup import ADSPaperSearch
+
+    paper_search = ADSPaperSearch(
+        api_key=os.environ["ADS_API_KEY"],
+        timeout_s=float(os.environ.get("PAPER_LOOKUP_TIMEOUT_S", "3.0")),
+    )
+elif INTENT_BACKEND != "regex":
+    logger.warning("ADS_API_KEY not set: named papers stay topic searches (no paper lookup)")
+
 shadow_executor: ThreadPoolExecutor | None = None
 _shadow_slots = threading.BoundedSemaphore(SHADOW_MAX_PENDING)
 if SHADOW_INTENT_BACKEND:
@@ -211,9 +231,13 @@ def startup() -> None:
 
 def shutdown() -> None:
     """Let running shadow comparisons finish (each is bounded by JEV_TIMEOUT_S
-    per Jev call) and drop queued ones."""
+    per Jev call) and drop queued ones, then close the Jev and ADS clients."""
     if shadow_executor is not None:
         shadow_executor.shutdown(wait=True, cancel_futures=True)
+    if paper_search is not None:
+        paper_search.close()
+    if jev_client is not None:
+        jev_client.close()
 
 
 @asynccontextmanager
@@ -489,7 +513,9 @@ def run_pipeline(
     """
     start_time = time.perf_counter()
     try:
-        result = process_query(nl_query, INTENT_BACKEND, jev_client, reference_year)
+        result = process_query(
+            nl_query, INTENT_BACKEND, jev_client, reference_year, paper_search=paper_search
+        )
     except Exception as e:
         logger.exception("Pipeline raised for query %r", nl_query)
         return None, f"pipeline error: {e}"

@@ -321,14 +321,24 @@ class TestAssembleQuery:
         assert result == ""
 
     def test_operator_with_target(self):
+        intent = IntentSpec(operator="citations", operator_target="2017Natur.542..456G")
+        assert assemble_query(intent) == "citations(bibcode:2017Natur.542..456G)"
+
+    def test_target_bibcode_with_ampersand(self):
+        intent = IntentSpec(operator="references", operator_target="2020A&A...641A...6P")
+        assert assemble_query(intent) == "references(bibcode:2020A&A...641A...6P)"
+
+    def test_filters_stay_outside_the_target(self):
         intent = IntentSpec(
             operator="citations",
-            operator_target="2023ApJ...123..456K",
+            operator_target="2017Natur.542..456G",
+            year_from=2024,
+            year_to=2026,
+            property={"refereed"},
         )
-        result = assemble_query(intent)
-        assert result.startswith("citations(")
-        # Bibcode should be included somehow
-        assert "2023ApJ" in result or result != ""
+        assert assemble_query(intent) == (
+            "citations(bibcode:2017Natur.542..456G) pubdate:[2024 TO 2026] property:refereed"
+        )
 
 
 class TestValidateSyntax:

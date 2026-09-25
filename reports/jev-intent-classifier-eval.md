@@ -977,6 +977,52 @@ detection" rejoined (0.08 to 1.00) and "exomoon detection" split (0.00 to
 fields (`collection`, `doctype`), not in splitting. The benchmark drop is
 within that noise.
 
+## Named papers resolved to bibcodes (2026-09-25)
+
+"Papers that cite the original TRAPPIST-1 seven-planet paper" is about one
+paper, but its topic words searched for the citations of every paper that
+mentions them. When Jev says the request
+names one paper (`refers_to_specific_paper`) and the operator needs a target
+(citations, references, similar), code now searches ADS for candidates: all
+topic terms together, then each term alone, each search keeping the author
+names and any explicit year, most-cited first. It pools up to 12 candidates
+and asks Jev which one the request means, with none as an option. The pick
+becomes the target: `citations(bibcode:2017Natur.542..456G)`. The same Jev
+call asks, for each topic term and author, whether it names the paper or
+narrows the papers the user wants back; the naming ones leave the query and
+the others stay outside the operator. A pick below 0.5 confidence is not
+applied and the query stays a topic search. The regex resolver this
+replaces is deleted.
+
+Live results on 16 requests (bibcode, Jev confidence):
+
+| request | query |
+|---|---|
+| citations to the Planck 2018 cosmology results | `citations(bibcode:2020A&A...641A...6P)` (0.76) |
+| articles citing Riess et al. supernova work | `citations(bibcode:1998AJ....116.1009R)` (0.91) |
+| sources used in the black hole imaging paper | `references(bibcode:2019ApJ...875L...1E)` |
+| papers like the Hawking radiation paper; bibliography of Hawking 1974 paper on black holes | `1974Natur.248...30H` as target |
+| find citations to the 2016 gravitational wave paper | `citations(bibcode:2016PhRvL.116f1102A)` (0.99) |
+| papers about ARP299 that cite "A Digital Archive of HI 21 Centimeter ..." | `citations(bibcode:2005ApJS..160..149S) abs:arp299 abs:cite` |
+| papers cited in the Planck 2018 paper (0.29); papers citing Hubble deep field observations (0.38); recent papers citing the original LIGO paper (0.33) | topic search kept |
+
+Earlier probes also resolved TRAPPIST-1 to Gillon et al. 2017. The first
+version cleared every topic term, which dropped ARP299, and applied
+low-confidence picks (Planck 2018 Overview at 0.26); the describes
+questions and the confidence floor fix both. The LIGO and 2MASS papers are
+missed because no candidate search surfaces them (tracked as bead 3kx); the
+stray `abs:cite` is a regex topic bug filed separately.
+
+The lookup adds one ADS round trip (searches run concurrently) and one Jev
+call, 0.4 to 2.1 s per triggered request; ADS failures and Jev failures
+leave the topic search in place and are recorded in the debug output. Only
+10 benchmark and 7 val requests trigger it, and their gold queries write the
+named paper as a topic operator (`references(abs:"Planck 2018")`), so the
+end-to-end overlap score cannot credit a bibcode target: Planck references
+fell from 1.00 to 0.08 in a partial run on the earlier code because the
+right bibcode shares no words with the gold. No overlap numbers are
+reported for this change.
+
 ## Criteria table
 
 Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criterion 4; rounds 5 to 7 for criterion 5 and the notes on criterion 2.

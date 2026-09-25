@@ -358,7 +358,7 @@ User NL → [NER Extractor] → IntentSpec → [Retrieval] → [Assembler] → V
 | `ner.py` | Rules-based NER with operator gating |
 | `retrieval.py` | Few-shot retrieval from gold_examples |
 | `assembler.py` | Deterministic query assembly |
-| `resolver.py` | Optional LLM for paper reference resolution |
+| `paper_lookup.py` | Named paper to bibcode: ADS candidates, Jev picks |
 | `pipeline.py` | Main pipeline orchestration |
 
 ### Testing Requirements

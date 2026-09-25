@@ -6,7 +6,8 @@ This module implements the main pipeline that orchestrates:
 3. Deterministic assembly → valid ADS query
 
 The pipeline is designed to be fast (<50ms local) and deterministic.
-LLM calls are only made in the fallback resolver path.
+With a Jev backend, a paper the request names is looked up in ADS and chosen
+by Jev (paper_lookup.py).
 """
 
 import json
@@ -19,6 +20,7 @@ from .intent_spec import IntentSpec
 
 if TYPE_CHECKING:
     from .jev_intent import JevClient
+    from .paper_lookup import ADSPaperSearch
 
 IntentBackend = Literal["regex", "jev", "jev_gated"]
 INTENT_BACKENDS: tuple[str, ...] = ("regex", "jev", "jev_gated")
@@ -70,6 +72,10 @@ class DebugInfo:
         structural_confidence: compute_pipeline_confidence on the final intent
         classifier_operator_confidence: Jev's operator confidence, when Jev
             answered; routing_confidence combines it with the structural one
+        paper_lookup: What the named-paper lookup searched, offered and chose
+            (PaperLookup.to_dict), when it ran
+        paper_lookup_error: Why the lookup failed, when it did; the query is
+            then the topic search
     """
 
     ner_time_ms: float = 0.0
@@ -85,6 +91,8 @@ class DebugInfo:
     classifier_error: str | None = None
     structural_confidence: float | None = None
     classifier_operator_confidence: float | None = None
+    paper_lookup: dict | None = None
+    paper_lookup_error: str | None = None
 
     def to_dict(self) -> dict:
         """Convert to dictionary for JSON serialization."""
@@ -266,11 +274,35 @@ def _classify_or_fall_back(
     return IntentExtraction(intent, classifier_called=True, classifier_cached=answers.cached)
 
 
+def _look_up_paper(
+    nl_text: str,
+    intent: IntentSpec,
+    jev_client: "JevClient",
+    paper_search: "ADSPaperSearch",
+    debug_info: DebugInfo,
+) -> IntentSpec:
+    """``intent`` with the named paper as operator target, or unchanged on a failed lookup."""
+    from .jev_intent import JEV_FAILURES
+    from .paper_lookup import PAPER_LOOKUP_FAILURES, needs_lookup, resolve_paper
+
+    if not needs_lookup(intent):
+        return intent
+    try:
+        resolved, lookup = resolve_paper(nl_text, intent, jev_client, paper_search)
+    except (*JEV_FAILURES, *PAPER_LOOKUP_FAILURES) as error:
+        logger.warning("Paper lookup failed for %r: %s", nl_text, error)
+        debug_info.paper_lookup_error = f"{type(error).__name__}: {error}"
+        return intent
+    debug_info.paper_lookup = lookup.to_dict()
+    return resolved
+
+
 def process_query(
     nl_text: str,
     intent_backend: IntentBackend = "regex",
     jev_client: "JevClient | None" = None,
     reference_year: int | None = None,
+    paper_search: "ADSPaperSearch | None" = None,
 ) -> PipelineResult:
     """Process a natural language query through the hybrid NER pipeline.
 
@@ -288,6 +320,8 @@ def process_query(
         jev_client: Required for the Jev backends
         reference_year: Year relative dates end at (the request date's year);
             defaults to the current year
+        paper_search: ADS client for the named-paper lookup; without it, or
+            without a Jev answer, a named paper stays a topic search
 
     Returns:
         PipelineResult containing:
@@ -308,6 +342,8 @@ def process_query(
     debug_info.classifier_error = extraction.classifier_error
     debug_info.ner_time_ms = (time.perf_counter() - ner_start) * 1000
     debug_info.raw_extracted = intent.to_dict()
+    if paper_search is not None and jev_client is not None and extraction.classifier_succeeded:
+        intent = _look_up_paper(nl_text, intent, jev_client, paper_search, debug_info)
 
     # Stage 2: Few-shot Retrieval
     from .retrieval import retrieve_similar

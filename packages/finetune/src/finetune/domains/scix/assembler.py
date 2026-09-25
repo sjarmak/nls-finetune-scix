@@ -5,7 +5,7 @@ ADS query syntax by composing validated building blocks. All enum values
 are validated against FIELD_ENUMS before assembly.
 
 The assembler is deterministic and never generates arbitrary text.
-LLM is only used in the resolver fallback path for paper references.
+A paper the request names is resolved to a bibcode before assembly (paper_lookup.py).
 """
 
 import logging
@@ -341,22 +341,19 @@ def assemble_query(intent: IntentSpec, examples: list[GoldExample] | None = None
     # Join all clauses with space (implicit AND)
     base_query = " ".join(clauses)
 
-    # Apply operator wrapper if set
-    if intent.operator:
+    # Apply operator wrapper if set. A target bibcode is the operator's whole
+    # argument and the other clauses filter its results from outside.
+    if intent.operator and intent.operator_target:
+        target = f"bibcode:{_quote_value(intent.operator_target)}"
+        base_query = " ".join([_wrap_with_operator(target, intent.operator), *clauses])
+    elif intent.operator:
         if base_query:
             base_query = _wrap_with_operator(base_query, intent.operator)
         else:
-            # No base query, operator needs a target
-            if intent.operator_target:
-                # Use the target as the query
-                target = _quote_value(intent.operator_target)
-                base_query = _wrap_with_operator(target, intent.operator)
-            else:
-                logger.warning(
-                    f"Operator {intent.operator} requested but no base query or target. "
-                    "Returning empty query."
-                )
-                base_query = ""
+            logger.warning(
+                f"Operator {intent.operator} requested but no base query or target. "
+                "Returning empty query."
+            )
 
     # Safety check: if too many constraints were dropped, simplify
     if constraint_count_before > 0:

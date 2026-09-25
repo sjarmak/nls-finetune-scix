@@ -750,6 +750,10 @@ class JevClient:
             author_candidates=author_candidates,
             word_pairs=word_pairs,
         )
+        return self.answer(request, use_cache=use_cache)
+
+    def answer(self, request: dict, use_cache: bool = True) -> JevAnswers:
+        """Send any System One request body and validate the answers to its questions."""
         fingerprint = request_fingerprint(request)
         questions = request["questions"]
         if use_cache:
