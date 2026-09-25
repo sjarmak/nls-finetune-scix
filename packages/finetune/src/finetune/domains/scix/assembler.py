@@ -14,10 +14,15 @@ from collections.abc import Sequence
 
 from .constrain import constrain_query_output
 from .field_constraints import FIELD_ENUMS, PROPERTY_DOCTYPES
-from .intent_spec import OPERATORS, IntentSpec
+from .intent_spec import DEFAULT_RANKING_LIMIT, OPERATORS, IntentSpec
 from .pipeline import GoldExample
 
 logger = logging.getLogger(__name__)
+_RANKING_SORTS = {
+    "citations": "citation_count desc",
+    "reads": "read_count desc",
+    "date": "date desc",
+}
 
 
 def _needs_quotes(value: str) -> bool:
@@ -365,6 +370,10 @@ def assemble_query(intent: IntentSpec, examples: list[GoldExample] | None = None
             # Fall back to just topic search if available
             if intent.free_text_terms:
                 base_query = _build_abs_clause(intent.free_text_terms)
+
+    if intent.ranking and base_query:
+        limit = intent.ranking_limit or DEFAULT_RANKING_LIMIT
+        base_query = f"topn({limit}, {base_query}, {_RANKING_SORTS[intent.ranking]})"
 
     # Final safety net: run constraint filter
     final_query = constrain_query_output(base_query)

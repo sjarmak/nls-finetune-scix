@@ -71,6 +71,7 @@ def jev_payload(
         "recency": choice_answer("none", {"none": 0.95, "last_3_years": 0.05}),
         "first_author": noul_answer(0.1),
         "highly_cited": noul_answer(0.05),
+        "ranking": choice_answer("none", {"none": 0.97, "citations": 0.01, "reads": 0.01, "date": 0.01}),
     }
     answers.update(overrides)
     usage = {"input_tokens": 500, "output_tokens": 0}

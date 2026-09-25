@@ -30,6 +30,7 @@ from finetune.domains.scix.jev_intent import (
     build_request,
     classify_and_extract,
     parse_response,
+    ranking_limit_candidate,
     topic_candidates,
     word_pairs,
 )
@@ -57,6 +58,8 @@ class TestQuestionSet:
         assert set(questions["recency"]["criteria"]) == {"none", *RECENCY_WINDOWS}
         assert questions["first_author"]["type"] == "noul"
         assert questions["highly_cited"]["type"] == "noul"
+        assert questions["ranking"]["type"] == "choice"
+        assert set(questions["ranking"]["criteria"]) == {"none", "citations", "reads", "date"}
         assert "topic" not in questions
 
     def test_topic_question_offers_none_plus_the_candidates(self):
@@ -159,6 +162,40 @@ class TestApplyAnswers:
         low = apply_answers(IntentSpec(), _answers(req, highly_cited=noul_answer(0.2)))
         assert low.min_citations is None
 
+    def test_ranking_sets_metric_and_candidate_limit(self):
+        req = build_request("q")
+        ranking = choice_answer(
+            "citations", {"none": 0.01, "citations": 0.96, "reads": 0.02, "date": 0.01}
+        )
+        out = apply_answers(IntentSpec(), _answers(req, ranking=ranking), ranking_limit=50)
+        assert (out.ranking, out.ranking_limit) == ("citations", 50)
+
+    def test_ranking_without_candidate_uses_default_limit(self):
+        req = build_request("q")
+        ranking = choice_answer(
+            "reads", {"none": 0.01, "citations": 0.01, "reads": 0.97, "date": 0.01}
+        )
+        out = apply_answers(IntentSpec(), _answers(req, ranking=ranking))
+        assert (out.ranking, out.ranking_limit) == ("reads", 10)
+
+    def test_no_ranking_discards_limit_candidate(self):
+        req = build_request("q")
+        out = apply_answers(IntentSpec(), _answers(req), ranking_limit=20)
+        assert (out.ranking, out.ranking_limit) == (None, None)
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("top 20 most cited papers", 20),
+        ("most cited 50 papers from 2015", 50),
+        ("top papers from 2015", None),
+        ("top 0 papers", None),
+    ],
+)
+def test_ranking_limit_candidate(text, expected):
+    assert ranking_limit_candidate(text, reference_year=2025) == expected
+
 
 class TestEndToEnd:
     def test_recent_papers_on_asteroids(self, tmp_path):
@@ -179,6 +216,24 @@ class TestEndToEnd:
         query = assemble_query(intent)
         assert 'author:"^Riess"' in query
         assert "citation_count:[100 TO *]" in query
+
+    def test_most_cited_papers_are_ranked(self, tmp_path):
+        ranking = choice_answer(
+            "citations", {"none": 0.01, "citations": 0.96, "reads": 0.02, "date": 0.01}
+        )
+        topic = choice_answer("exoplanets", {"none": 0.01, "exoplanets": 0.99})
+        client = mock_jev_client(None, [jev_payload(ranking=ranking, topic=topic)], [])
+        intent, _ = classify_and_extract("most cited papers on exoplanets", client)
+        assert assemble_query(intent) == "topn(10, abs:exoplanets, citation_count desc)"
+
+    def test_explicit_limit_and_read_ranking_are_assembled(self, tmp_path):
+        ranking = choice_answer(
+            "reads", {"none": 0.01, "citations": 0.01, "reads": 0.97, "date": 0.01}
+        )
+        topic = choice_answer("dark matter", {"none": 0.01, "dark matter": 0.99})
+        client = mock_jev_client(None, [jev_payload(ranking=ranking, topic=topic)], [])
+        intent, _ = classify_and_extract("top 20 most read dark matter papers", client)
+        assert assemble_query(intent) == 'topn(20, abs:"dark matter", read_count desc)'
 
 
 class TestAssembler:

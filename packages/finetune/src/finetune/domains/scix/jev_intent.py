@@ -35,7 +35,7 @@ from pathlib import Path
 import httpx
 
 from .field_constraints import BIBGROUPS, COLLECTIONS, DOCTYPES
-from .intent_spec import OPERATORS, IntentSpec
+from .intent_spec import DEFAULT_RANKING_LIMIT, OPERATORS, IntentSpec
 from .jev_option_text import (
     BIBGROUP_DESCRIPTIONS,
     COLLECTION_DESCRIPTIONS,
@@ -73,6 +73,7 @@ EXTRACTION_QUESTION_IDS: tuple[str, ...] = (
     "recency",
     "first_author",
     "highly_cited",
+    "ranking",
     "topic",
     NAMED_TOPIC_QUESTION,
 )
@@ -271,6 +272,18 @@ def build_extraction_questions(
             "them; the user states a citation count; or the user asks for popular or trending "
             "papers, which is about reads, not citations.",
         ),
+        "ranking": _choice(
+            "Does the user ask to rank or order the results? Choose the ranking metric they "
+            "request. A finite top N is a ranking request. Choose 'none' for numeric thresholds "
+            "and filters, for highly cited or recent work without ranking language, and when "
+            "citation, reading or publication date is merely the search topic.",
+            {
+                NONE_OPTION: "No result ordering is requested.",
+                "citations": "Order by citation count: most cited, highest cited or top by citations.",
+                "reads": "Order by readership: most read or top by read count.",
+                "date": "Order by publication date: top newest or top most recent results.",
+            },
+        ),
     }
     if topic_candidates:
         questions["topic"] = _topic_question(topic_candidates)
@@ -285,6 +298,14 @@ def bare_year(text: str, intent: IntentSpec, reference_year: int | None = None) 
     latest = (reference_year if reference_year is not None else datetime.now(UTC).year) + 5
     years = (int(m.group()) for m in _BARE_YEAR.finditer(text))
     return next((y for y in years if EARLIEST_YEAR <= y <= latest), None)
+
+
+def ranking_limit_candidate(text: str, reference_year: int | None = None) -> int | None:
+    latest_year = (reference_year if reference_year is not None else datetime.now(UTC).year) + 5
+    values = (int(match.group()) for match in re.finditer(r"(?<![\w.])\d+(?![\w.])", text))
+    return next(
+        (value for value in values if value > 0 and not EARLIEST_YEAR <= value <= latest_year), None
+    )
 
 
 def _publication_year_question(year: int) -> dict:
@@ -965,6 +986,7 @@ def apply_answers(
     word_pairs: tuple[tuple[str, int], ...] = (),
     named: IntentSpec | None = None,
     bare_year: int | None = None,
+    ranking_limit: int | None = None,
 ) -> IntentSpec:
     """Return a new IntentSpec with Jev's answers applied.
 
@@ -1058,6 +1080,9 @@ def apply_answers(
         kept = (" ".join(w for w in t.split() if w != year_word) for t in free_text_terms)
         free_text_terms = [t for t in kept if t]
     highly_cited = answers.booleans["highly_cited"] >= boolean_threshold
+    ranking_answer = answers.choices["ranking"]
+    ranking = None if ranking_answer.choice == NONE_OPTION else ranking_answer.choice
+    confidence["ranking"] = ranking_answer.confidence
     return replace(
         intent,
         operator=None if operator.choice == NONE_OPTION else operator.choice,
@@ -1072,6 +1097,8 @@ def apply_answers(
         authors=authors,
         first_author=bool(authors) and answers.booleans["first_author"] >= boolean_threshold,
         min_citations=HIGHLY_CITED_MIN_CITATIONS if highly_cited else intent.min_citations,
+        ranking=ranking,
+        ranking_limit=(ranking_limit or DEFAULT_RANKING_LIMIT) if ranking else None,
         confidence=confidence,
     )
 
@@ -1107,6 +1134,7 @@ def classify_and_extract(
     facility_in_topic = _topics(named) != _topics(regex_intent)
     names = author_candidates(text, regex_intent)
     year = bare_year(text, regex_intent, reference_year)
+    ranking_limit = ranking_limit_candidate(text, reference_year)
     pairs = word_pairs(regex_intent, *([named] if facility_in_topic else []))
     answers = client.classify(
         text,
@@ -1135,6 +1163,7 @@ def classify_and_extract(
         word_pairs=pairs,
         named=named_base,
         bare_year=year,
+        ranking_limit=ranking_limit,
     )
     return intent, answers
 

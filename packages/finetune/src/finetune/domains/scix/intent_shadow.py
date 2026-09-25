@@ -24,6 +24,8 @@ SHADOW_COMPARED_FIELDS: tuple[str, ...] = (
     "free_text_terms",
     "first_author",
     "min_citations",
+    "ranking",
+    "ranking_limit",
 )
 
 

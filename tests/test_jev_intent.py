@@ -83,7 +83,7 @@ class TestRequest:
         req = build_request("papers citing Planck 2018")
         assert req["model"] == JEV_MODEL
         assert req["state"] == {"query": "papers citing Planck 2018"}
-        extraction = {"recency", "first_author", "highly_cited"}
+        extraction = {"recency", "first_author", "highly_cited", "ranking"}
         assert set(req["questions"]) == set(build_questions()) | extraction
 
     def test_context_is_merged_into_state_without_overriding_query(self):

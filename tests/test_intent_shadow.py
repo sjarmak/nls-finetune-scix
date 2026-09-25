@@ -31,6 +31,8 @@ def test_compared_fields_are_the_ones_jev_decides():
         "free_text_terms",
         "first_author",
         "min_citations",
+        "ranking",
+        "ranking_limit",
     )
 
 

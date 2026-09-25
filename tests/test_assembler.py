@@ -233,6 +233,14 @@ class TestAssembleQuery:
         result = assemble_query(intent)
         assert result == "abs:exoplanets"
 
+    @pytest.mark.parametrize(
+        ("ranking", "sort"),
+        [("citations", "citation_count desc"), ("reads", "read_count desc"), ("date", "date desc")],
+    )
+    def test_ranking_wraps_query_in_topn(self, ranking, sort):
+        intent = IntentSpec(free_text_terms=["exoplanets"], ranking=ranking, ranking_limit=25)
+        assert assemble_query(intent) == f"topn(25, abs:exoplanets, {sort})"
+
     def test_topic_with_author(self):
         intent = IntentSpec(
             free_text_terms=["black holes"],

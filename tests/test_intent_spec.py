@@ -62,6 +62,15 @@ class TestIntentSpec:
         """Invalid operator raises ValueError."""
         with pytest.raises(ValueError, match="Invalid operator"):
             IntentSpec(operator="invalid_operator")
+
+    def test_invalid_ranking_raises(self):
+        with pytest.raises(ValueError, match="Invalid ranking"):
+            IntentSpec(ranking="score")
+
+    def test_ranking_limit_must_be_positive(self):
+        for invalid in (0, -1, 1.5, True):
+            with pytest.raises(ValueError, match="ranking_limit"):
+                IntentSpec(ranking="citations", ranking_limit=invalid)
     
     def test_has_constraints_empty(self):
         """has_constraints returns False when no constraints set."""
@@ -164,6 +173,8 @@ class TestIntentSpec:
             property={"refereed", "openaccess"},
             bibgroup={"LIGO"},
             operator="citations",
+            ranking="citations",
+            ranking_limit=25,
             raw_user_text="gravitational waves papers",
             confidence={"operator": 0.9},
         )
@@ -179,6 +190,8 @@ class TestIntentSpec:
         assert restored.property == original.property
         assert restored.bibgroup == original.bibgroup
         assert restored.operator == original.operator
+        assert restored.ranking == original.ranking
+        assert restored.ranking_limit == original.ranking_limit
         assert restored.raw_user_text == original.raw_user_text
         assert restored.confidence == original.confidence
     

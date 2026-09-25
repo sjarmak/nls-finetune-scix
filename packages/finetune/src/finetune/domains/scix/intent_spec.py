@@ -26,6 +26,8 @@ OPERATORS: frozenset[str] = frozenset(
         "reviews",  # Find review articles
     }
 )
+RANKINGS: frozenset[str] = frozenset({"citations", "reads", "date"})
+DEFAULT_RANKING_LIMIT = 10
 
 
 @dataclass
@@ -72,6 +74,8 @@ class IntentSpec:
 
     # Citation-count floor
     min_citations: int | None = None
+    ranking: str | None = None
+    ranking_limit: int | None = None
 
     # Constrained enum fields (must be validated against FIELD_ENUMS)
     doctype: set[str] = field(default_factory=set)
@@ -95,6 +99,16 @@ class IntentSpec:
             raise ValueError(
                 f"Invalid operator '{self.operator}'. Must be one of: {sorted(OPERATORS)}"
             )
+        if self.ranking is not None and self.ranking not in RANKINGS:
+            raise ValueError(
+                f"Invalid ranking '{self.ranking}'. Must be one of: {sorted(RANKINGS)}"
+            )
+        if self.ranking_limit is not None and (
+            isinstance(self.ranking_limit, bool)
+            or not isinstance(self.ranking_limit, int)
+            or self.ranking_limit <= 0
+        ):
+            raise ValueError("ranking_limit must be a positive integer")
 
     def has_constraints(self) -> bool:
         """Check if any constrained fields are set."""

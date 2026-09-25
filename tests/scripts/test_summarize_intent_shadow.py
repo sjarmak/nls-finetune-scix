@@ -116,6 +116,8 @@ def test_summary_counts():
         "free_text_terms": 0,
         "first_author": 0,
         "min_citations": 0,
+        "ranking": 0,
+        "ranking_limit": 0,
     }
 
 
