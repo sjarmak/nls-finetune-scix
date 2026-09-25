@@ -2036,9 +2036,7 @@
       "labels": {
         "operator": "none",
         "property": [],
-        "doctype": [
-          "catalog"
-        ],
+        "doctype": [],
         "bibgroup": [],
         "collection": [],
         "search_kind": "topic",
@@ -2048,7 +2046,7 @@
       "review": {
         "status": "approved",
         "reviewer": "Stephanie",
-        "note": ""
+        "note": "2026-09-25: doctype catalog removed; a catalog named in the topic is topic words (ruling on solar flare catalog sdo). With doctype:catalog the query finds 7 records, without it 2,994"
       }
     },
     {

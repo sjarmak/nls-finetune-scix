@@ -1255,6 +1255,12 @@ val 0.973 (0.975), held-out 0.993 (0.987). Doctype F1: benchmark 0.492
 0.913 (0.900), years 0.987 (0.927), exact query 0.713 (0.667), any ADS hits
 0.987 (0.967). Cost $0.000139 / $0.000147 / $0.000172, input tokens up 3%.
 
+Held-out relabel (user ruling, 2026-09-25): "catalogues of variable stars"
+(hp-enum-017) no longer carries the catalog doctype, in line with the
+"solar flare catalog" ruling. Rescored from the same Jev answers, held-out
+doctype F1 is 0.818 (0.800 before the relabel). "data tables of open
+cluster members" keeps its label.
+
 ## Criteria table
 
 Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criterion 4; rounds 5 to 10 for criterion 5 and the notes on criterion 2.
@@ -1345,7 +1351,7 @@ Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); ro
 - Round 9 (lowercase names, keyword queries read as citations): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round9_2026-09-25{.jsonl,_metrics.json}` (arm B).
 - Round 10 (named facilities, operator phrases, paper lookup): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round10_2026-09-25{.jsonl,_metrics.json}` (arm B).
 - Round 11 (two lowercase surnames): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round11_2026-09-25{.jsonl,_metrics.json}` (arm B) and `keyword_queries_jev_2026-09-25-vaz{.jsonl,_metrics.json}`.
-- Round 12 (three-word names, bare years, catalogs): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round12_2026-09-25{.jsonl,_metrics.json}` (arm B) and `keyword_queries_jev_2026-09-25-22b{.jsonl,_metrics.json}`.
+- Round 12 (three-word names, bare years, catalogs): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round12_2026-09-25{.jsonl,_metrics.json}` (arm B), `intent_classifiers_heldout_round12_relabel_2026-09-25{.jsonl,_metrics.json}` (held-out rescored after the hp-enum-017 relabel) and `keyword_queries_jev_2026-09-25-22b{.jsonl,_metrics.json}`.
 - Keyword queries: `data/datasets/evaluations/keyword_queries_{regex,jev}_2026-09-25{.jsonl,_metrics.json}` (round 9 code) and `keyword_queries_jev_2026-09-25-round10{.jsonl,_metrics.json}`; review sheet `reports/keyword-query-review-sheet.md`.
 - Request caches: `data/cache/jev_systemone.jsonl`, `data/cache/llm_intent.jsonl`.
 - Labels: `data/datasets/evaluations/intent_labels.jsonl`.
