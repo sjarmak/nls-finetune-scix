@@ -17,9 +17,10 @@ Searches: all topic terms together in abstracts, then in full text (the
 GW150914 abstract never says "LIGO"), then each term alone (a descriptive
 word such as "original" narrows the combined search to nothing), or, for a
 single phrase, each of its words ("2mass all-sky survey" is not how the 2MASS
-paper words it), then the author names without the terms (the Salpeter 1955
-record has no abstract). Every search keeps the author names and any explicit
-year. Explicit years describe the paper ("the Riess 1998 paper"); a recency
+paper words it). A request with authors and no terms searches the authors
+alone; with terms, an author-only search is left out, since it offers every
+famous paper by that author and splits Jev's pick ("the Hawking radiation
+paper"). Every search keeps the author names and any explicit year. Explicit years describe the paper ("the Riess 1998 paper"); a recency
 window Jev set ("recent papers citing ...") stays on the citing papers,
 outside the operator.
 """
@@ -29,7 +30,7 @@ from dataclasses import dataclass, replace
 
 import httpx
 
-from .assembler import _quote_value, assemble_query
+from .assembler import assemble_query, quote_value
 from .intent_spec import IntentSpec
 from .jev_intent import BOOLEAN_DECISION_THRESHOLD, NONE_OPTION, JevClient
 
@@ -169,7 +170,7 @@ def _has_explicit_year(intent: IntentSpec) -> bool:
 
 def _full_text_search(describe: IntentSpec, terms: list[str]) -> str:
     """``describe`` with ``terms`` searched in the full text instead of abstracts."""
-    full = " ".join(f"full:{_quote_value(t)}" for t in terms)
+    full = " ".join(f"full:{quote_value(t)}" for t in terms)
     return " ".join(q for q in (assemble_query(describe), full) if q)
 
 

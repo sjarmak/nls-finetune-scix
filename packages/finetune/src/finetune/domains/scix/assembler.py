@@ -37,7 +37,7 @@ def _needs_quotes(value: str) -> bool:
     return bool(re.search(r"[\s,:\-()]", value))
 
 
-def _quote_value(value: str) -> str:
+def quote_value(value: str) -> str:
     """Quote a value for ADS syntax if needed.
 
     Args:
@@ -119,7 +119,7 @@ def _build_abs_clause(terms: Sequence[str], use_or: bool = False) -> str:
 
     clauses = []
     for term in terms:
-        quoted = _quote_value(term)
+        quoted = quote_value(term)
         clauses.append(quoted)
 
     if len(clauses) == 1:
@@ -174,7 +174,7 @@ def _build_enum_clause(field: str, values: set[str]) -> str:
     if not valid_values:
         return ""
 
-    sorted_values = [_quote_value(value) for value in sorted(valid_values)]
+    sorted_values = [quote_value(value) for value in sorted(valid_values)]
 
     if len(sorted_values) == 1:
         return f"{field}:{sorted_values[0]}"
@@ -198,7 +198,7 @@ def _build_object_clause(objects: Sequence[str]) -> str:
     clauses = []
     for obj in objects:
         # Object names are typically short, but quote if needed
-        quoted = _quote_value(obj)
+        quoted = quote_value(obj)
         clauses.append(f"object:{quoted}")
 
     if len(clauses) == 1:
@@ -344,7 +344,7 @@ def assemble_query(intent: IntentSpec, examples: list[GoldExample] | None = None
     # Apply operator wrapper if set. A target bibcode is the operator's whole
     # argument and the other clauses filter its results from outside.
     if intent.operator and intent.operator_target:
-        target = f"bibcode:{_quote_value(intent.operator_target)}"
+        target = f"bibcode:{quote_value(intent.operator_target)}"
         base_query = " ".join([_wrap_with_operator(target, intent.operator), *clauses])
     elif intent.operator:
         if base_query:

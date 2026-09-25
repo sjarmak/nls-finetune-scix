@@ -21,10 +21,10 @@ from finetune.domains.scix.assembler import (
     _build_object_clause,
     _build_year_clause,
     _needs_quotes,
-    _quote_value,
     _validate_enum_values,
     _wrap_with_operator,
     assemble_query,
+    quote_value,
     validate_query_syntax,
 )
 from finetune.domains.scix.intent_spec import IntentSpec
@@ -35,11 +35,11 @@ class TestQuoting:
 
     def test_single_word_no_quotes(self):
         assert not _needs_quotes("exoplanets")
-        assert _quote_value("exoplanets") == "exoplanets"
+        assert quote_value("exoplanets") == "exoplanets"
 
     def test_multi_word_needs_quotes(self):
         assert _needs_quotes("black holes")
-        assert _quote_value("black holes") == '"black holes"'
+        assert quote_value("black holes") == '"black holes"'
 
     def test_special_chars_need_quotes(self):
         assert _needs_quotes("Hawking, S")
@@ -48,7 +48,7 @@ class TestQuoting:
 
     def test_empty_string(self):
         assert not _needs_quotes("")
-        assert _quote_value("") == ""
+        assert quote_value("") == ""
 
 
 class TestEnumValidation:
