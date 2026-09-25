@@ -14,12 +14,14 @@ from finetune.domains.scix.jev_intent import (
     EXTRACTION_QUESTION_IDS,
     HIGHLY_CITED_MIN_CITATIONS,
     MAX_AUTHOR_CANDIDATES,
+    MAX_AUTHOR_READINGS,
     MAX_JOIN_QUESTIONS,
     RECENCY_WINDOWS,
     JevResponseError,
     ads_author,
     apply_answers,
     author_candidates,
+    author_readings,
     bibgroup_candidates,
     build_questions,
     build_request,
@@ -29,6 +31,11 @@ from finetune.domains.scix.jev_intent import (
     word_pairs,
 )
 from finetune.domains.scix.ner import extract_intent
+
+
+def reading(choice: str, probabilities: dict[str, float] | None = None) -> dict:
+    """An ``author_reading`` answer; ``probabilities`` override the default 0.9 on ``choice``."""
+    return choice_answer(choice, {choice: 0.9, **(probabilities or {})})
 
 
 def _answers(request: dict, **overrides):
@@ -268,29 +275,80 @@ class TestAuthors:
         text = "Alpha Beta Gamma Delta Epsilon Zeta"
         assert len(author_candidates(text, extract_intent(text))) == MAX_AUTHOR_CANDIDATES
 
-    def test_one_yes_no_question_per_candidate(self):
-        questions = build_request("q", author_candidates=("Jarmak", "Kurtz"))["questions"]
-        assert questions["author_0"]["type"] == "noul"
-        assert "'Jarmak'" in questions["author_0"]["instructions"]
-        assert "'Kurtz'" in questions["author_1"]["instructions"]
-        assert "author_0" not in build_request("q")["questions"]
+    def test_readings_are_sets_of_names_that_share_no_word(self):
+        assert author_readings(("Jarmak Cassini", "Jarmak", "Cassini")) == (
+            (),
+            ("Jarmak Cassini",),
+            ("Jarmak",),
+            ("Cassini",),
+            ("Jarmak", "Cassini"),
+        )
+
+    def test_readings_are_capped_and_keep_every_name_as_a_person(self):
+        names = ("Alpha", "Beta", "Gamma", "Delta", "Epsilon")
+        readings = author_readings(names)
+        assert len(readings) == MAX_AUTHOR_READINGS
+        assert readings[0] == ()
+        assert readings[-1] == names
+
+    def test_capped_readings_keep_every_name_as_written(self):
+        names = ("Sara Seager", "Alpha", "Beta", "Gamma", "Sara", "Seager")
+        readings = author_readings(names)
+        assert len(readings) == MAX_AUTHOR_READINGS
+        assert readings[-1] == ("Sara Seager", "Alpha", "Beta", "Gamma")
+
+    def test_a_hyphenated_surname_and_its_first_part_are_not_two_people(self):
+        assert author_readings(("El-Badry", "El")) == ((), ("El-Badry",), ("El",))
+
+    def test_a_hyphenated_author_leaves_no_part_in_the_topic(self):
+        payload = jev_payload(author_reading=reading("El-Badry"))
+        intent, _ = classify_and_extract(
+            "papers by El-Badry on stellar binaries", mock_jev_client(None, [payload], [])
+        )
+        assert intent.authors == ["El-Badry"]
+        assert intent.free_text_terms == ["stellar binaries"]
+
+    def test_one_reading_question_for_all_candidates(self):
+        names = ("Jarmak Cassini", "Jarmak", "Cassini")
+        question = build_request("q", author_candidates=names)["questions"]["author_reading"]
+        assert question["type"] == "choice"
+        assert list(question["criteria"]) == [
+            "none",
+            "Jarmak Cassini",
+            "Jarmak",
+            "Cassini",
+            "Jarmak|Cassini",
+        ]
+        jarmak = question["criteria"]["Jarmak"]
+        assert jarmak.startswith("'Jarmak' is one person")
+        assert "'Cassini' is not a person here" in jarmak
+        assert question["criteria"]["Jarmak|Cassini"] == (
+            "'Jarmak' and 'Cassini' are different people, each an author."
+        )
+        assert "author_reading" not in build_request("q")["questions"]
+
+    def test_a_mission_next_to_a_surname_is_the_topic(self):
+        payload = jev_payload(author_reading=reading("Jarmak", {"none": 0.3, "Cassini": 0.1}))
+        intent, _ = classify_and_extract("Jarmak Cassini", mock_jev_client(None, [payload], []))
+        assert intent.authors == ["Jarmak"]
+        assert assemble_query(intent) == 'author:"Jarmak" abs:cassini'
 
     def test_papers_that_cite_a_surname(self):
-        payload = jev_payload("citations", author_0=noul_answer(0.95))
+        payload = jev_payload("citations", author_reading=reading("Jarmak"))
         client = mock_jev_client(None, [payload], [])
         intent, _ = classify_and_extract("papers that cite Jarmak", client)
         assert intent.authors == ["Jarmak"]
         assert assemble_query(intent) == 'citations(author:"Jarmak")'
 
     def test_a_rejected_name_stays_in_the_topic(self):
-        payload = jev_payload("citations", author_0=noul_answer(0.05))
+        payload = jev_payload("citations", author_reading=reading("none"))
         client = mock_jev_client(None, [payload], [])
         intent, _ = classify_and_extract("papers citing Maxwell", client)
         assert intent.authors == []
         assert assemble_query(intent) == "citations(abs:maxwell)"
 
     def test_jev_can_overrule_a_regex_author(self):
-        payload = jev_payload(author_0=noul_answer(0.05))
+        payload = jev_payload(author_reading=reading("none"))
         client = mock_jev_client(None, [payload], [])
         intent, _ = classify_and_extract("papers by Hubble", client)
         assert intent.authors == []
@@ -314,45 +372,41 @@ class TestAuthors:
         assert ads_author(name) == expected
 
     def test_a_full_name_is_one_author(self):
-        payload = jev_payload(author_0=noul_answer(0.95))
+        payload = jev_payload(author_reading=reading("Sara Seager"))
         client = mock_jev_client(None, [payload], [])
         intent, _ = classify_and_extract("Sara Seager exoplanet atmospheres", client)
         assert intent.authors == ["Seager, Sara"]
         assert assemble_query(intent) == 'author:"Seager, Sara" abs:"exoplanet atmospheres"'
 
     def test_two_surnames_written_together_can_be_two_people(self):
-        payload = jev_payload(
-            author_0=noul_answer(0.1), author_1=noul_answer(0.9), author_2=noul_answer(0.9)
-        )
+        payload = jev_payload(author_reading=reading("Madau|Dickinson"))
         client = mock_jev_client(None, [payload], [])
         intent, _ = classify_and_extract("Madau Dickinson star formation history", client)
         assert intent.authors == ["Madau", "Dickinson"]
 
     def test_a_lowercase_name_is_found(self):
-        payload = jev_payload(
-            author_0=noul_answer(0.97), author_1=noul_answer(0.1), author_2=noul_answer(0.02)
-        )
+        payload = jev_payload(author_reading=reading("andy casey"))
         client = mock_jev_client(None, [payload], [])
         intent, _ = classify_and_extract("andy casey stellar spectra", client)
         assert assemble_query(intent) == 'author:"Casey, Andy" abs:"stellar spectra"'
 
-    def test_a_regex_name_covered_by_an_accepted_span_stays_out_of_the_topic(self):
+    def test_a_regex_name_covered_by_the_chosen_span_stays_out_of_the_topic(self):
         names = ("Sara Seager", "Sara", "Seager")
         req = build_request("q", author_candidates=names)
-        answers = _answers(
-            req, author_0=noul_answer(0.95), author_1=noul_answer(0.1), author_2=noul_answer(0.1)
-        )
+        answers = _answers(req, author_reading=reading("Sara Seager"))
         intent = IntentSpec(authors=["Sara Seager"], free_text_terms=["exoplanets"])
         out = apply_answers(intent, answers, author_candidates=names)
         assert out.authors == ["Seager, Sara"]
         assert out.free_text_terms == ["exoplanets"]
 
-    def test_confidence_is_recorded_per_name(self):
-        payload = jev_payload("citations", author_0=noul_answer(0.95))
-        intent, _ = classify_and_extract(
-            "papers that cite Jarmak", mock_jev_client(None, [payload], [])
-        )
-        assert intent.confidence["author.Jarmak"] == 0.95
+    def test_confidence_is_recorded_per_name_across_readings(self):
+        probabilities = {"Jarmak": 0.6, "Jarmak|Cassini": 0.25, "none": 0.15}
+        payload = jev_payload(author_reading=reading("Jarmak", probabilities))
+        intent, _ = classify_and_extract("Jarmak Cassini", mock_jev_client(None, [payload], []))
+        assert intent.confidence["author_reading"] == 0.6
+        assert intent.confidence["author.Jarmak"] == pytest.approx(0.85)
+        assert intent.confidence["author.Cassini"] == pytest.approx(0.25)
+        assert intent.confidence["author.Jarmak Cassini"] == 0.0
 
 
 class TestPhraseSplitting:

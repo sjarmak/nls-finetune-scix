@@ -11,7 +11,12 @@ from pathlib import Path
 import httpx
 
 from finetune.domains.scix.intent_spec import OPERATORS
-from finetune.domains.scix.jev_intent import JEV_MODEL, JevClient
+from finetune.domains.scix.jev_intent import (
+    AUTHOR_READING_QUESTION,
+    JEV_MODEL,
+    NONE_OPTION,
+    JevClient,
+)
 
 TEST_API_KEY = "test-key"
 
@@ -90,8 +95,8 @@ def with_topic_answer(payload: dict, request: dict) -> dict:
 
     An unanswered topic gets the longest candidate, which is the whole regex
     phrase, so tests that do not set a topic keep the regex topic. An
-    unanswered author question is yes exactly when the regex found that name,
-    so tests that do not set authors keep the regex authors. An unanswered
+    unanswered author reading is the largest one made of names the regex
+    found, so tests that do not set authors keep the regex authors. An unanswered
     word-pair question joins the pair, so topic phrases stay whole.
     """
     from finetune.domains.scix.ner import extract_intent
@@ -104,11 +109,12 @@ def with_topic_answer(payload: dict, request: dict) -> dict:
     for qid in questions:
         if qid.startswith("join_") and qid not in answers:
             answers[qid] = noul_answer(0.9)
-    regex_authors = {a.lower() for a in extract_intent(request["state"]["query"]).authors}
-    for qid, question in questions.items():
-        if qid.startswith("author_") and qid not in answers:
-            named = any(f"'{a}'" in question["instructions"].lower() for a in regex_authors)
-            answers[qid] = noul_answer(0.9 if named else 0.1)
+    reading = questions.get(AUTHOR_READING_QUESTION)
+    if reading is not None and AUTHOR_READING_QUESTION not in answers:
+        regex_authors = {a.lower() for a in extract_intent(request["state"]["query"]).authors}
+        named = [k for k in reading["criteria"] if set(k.lower().split("|")) <= regex_authors]
+        choice = max(named, key=lambda k: len(k.split("|")), default=NONE_OPTION)
+        answers[AUTHOR_READING_QUESTION] = choice_answer(choice, {choice: 0.9})
     return {**payload, "answers": answers}
 
 

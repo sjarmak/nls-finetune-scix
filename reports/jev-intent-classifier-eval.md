@@ -977,6 +977,59 @@ detection" rejoined (0.08 to 1.00) and "exomoon detection" split (0.00 to
 fields (`collection`, `doctype`), not in splitting. The benchmark drop is
 within that noise.
 
+## Round 8: which names are people (2026-09-25)
+
+"Jarmak Cassini" searched `author:"Cassini" abs:jarmak` (0 results). The user
+meant Jarmak's papers about the Cassini mission. Rounds 5 to 7 asked one yes
+or no question per candidate name ("is 'Cassini' one person?"), and each name
+was judged alone; Cassini is a real surname, so it passed. Round 8 asks one
+choice question, `author_reading`, over the readings of all the names
+together: each option says which names are authors and which are what the
+papers are about (a mission, telescope, survey, object, place, theory or
+ordinary word). The options are the sets of candidate names that share no
+word, fewest names first, at most 16 (every reading of four single names).
+The instructions say missions are often named after people (Cassini,
+Hubble, Kepler, Herschel, Planck, Gaia) and that in a short keyword request
+a surname next to a subject usually names an author of papers on that
+subject. "Jarmak Cassini" now searches `author:"Jarmak" abs:cassini` (6
+results). A hyphenated surname now also counts its parts ("El-Badry": el,
+badry), so the regex topic no longer keeps a stray "badry".
+
+On 32 hand-labelled probes (missions next to surnames, eponymous terms such
+as Einstein ring and Chandrasekhar limit, full names, lowercase names) the
+chosen reading was right on 30. Two wordings were tried first: without the
+keyword-request sentence 28 of 32 ("Jarmak Cassini" tied between Jarmak and
+none at 0.43); with a "full name (given name plus surname)" description on
+span options 25 of 32. The two misses left are "Webb Rigby", read as one
+person, and "Kepler's laws Newton", which also takes Kepler.
+
+Arm B, round 7 in parentheses:
+
+| dataset | input tokens | $/query | operator acc | gold-none false positives |
+|---|---|---|---|---|
+| benchmark | 2,922 (2,833) | $0.000123 ($0.000119) | 0.987 (0.983) | 1 of 147 (1) |
+| val | 3,144 (2,999) | $0.000132 ($0.000126) | 0.970 (0.970) | 11 of 436 (11) |
+| held-out | 3,509 (3,331) | $0.000147 ($0.000140) | 0.993 (0.993) | 1 of 106 (1); operator-negative 0 of 40 (0) |
+
+The reading options spell out every name, so input tokens rise 3% to 5%.
+p95 uncached latency on held-out is 260 ms.
+
+The gold labels record only whether a request names an author, not which
+names, so the change shows in the rows. On val 25 requests changed authors.
+In 19 the new list is right where the old one was not: the regex had read
+"first author" and "as" in "papers by coelho as first author" as names
+("Author, First", "As, Coelho"), and the one-question-per-name set accepted
+them; the reading question drops them. One got worse: "Mark Twain Toronto
+Ontario 1884 1885" keeps Twain but its topic lost the place and years (Jev's
+topic answer was redrawn). The other five are wrong both ways, for example
+"papers by amiri hill ordog" (three people; only lowercase word pairs are
+offered). Hyphenated surnames no longer leave a
+part in the topic (Hervella-Seoane, Ould-Boukattine, Vega-Ferrero,
+El-Badry). Val topic exact match goes from 0.628 to 0.638. On the benchmark
+no authors changed. On held-out "the Hubble paper" no longer takes Hubble as
+an author, and seven topic phrases are grouped differently, the same
+redrawing noise as in round 7.
+
 ## Named papers resolved to bibcodes (2026-09-25)
 
 "Papers that cite the original TRAPPIST-1 seven-planet paper" is about one
@@ -1025,7 +1078,7 @@ reported for this change.
 
 ## Criteria table
 
-Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criterion 4; rounds 5 to 7 for criterion 5 and the notes on criterion 2.
+Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criterion 4; rounds 5 to 8 for criterion 5 and the notes on criterion 2.
 
 | # | criterion | result | status |
 |---|---|---|---|
@@ -1033,7 +1086,7 @@ Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); ro
 | 2 | B false-positive rate on operator-negative stratum ≤ 2% | 0 of 40 (B, D and E, rounds 2 to 4); on all gold-none items 1 of 106 (3 of 106), "the review". Round 5: 1 of 40 (2.5%), "foundational models for spectral classification" read as `useful`. Rounds 6 and 7: 0 of 40 | met; missed by one item in round 5 only |
 | 3 | B selective accuracy ≥ 95% at 90% coverage | 1.000 held-out, 1.000 benchmark, 0.995 (0.988) val | met |
 | 4 | end-to-end semantic match: no drop on benchmark, rise on held-out | Round 4, scored with the fixed rule (empty gold excluded): benchmark jev_gated 38.1% vs regex 31.7%, +6.4 points, paired 37 wins to 8 on 45 differing items; val 21.2% vs 12.3%, paired 106 to 14. Round 3 on the same rule: benchmark -2.6 points (paired 1 to 8), val level. Held-out has no gold queries; as a proxy the jev_gated pipeline serves 139 of 152 at 0.986 operator accuracy vs 141 at 0.688 for regex | no drop met on benchmark (round 4); rise shown on val and on held-out operator accuracy, not end to end on held-out |
-| 5 | E p95 added latency ≤ 600 ms, mean cost ≤ $0.0001/query | Round 5: E $0.000075 benchmark, $0.000105 val, $0.000115 held-out; B (Jev on every query) $0.000110 / $0.000113 / $0.000115. Round 4: E $0.000108 / $0.000149 / $0.000163. p95 202 to 322 ms (B, round 5). Round 6 (B, the rollout backend): $0.000114 / $0.000118 / $0.000127, p95 221 ms held-out. Round 7: $0.000119 / $0.000126 / $0.000140, p95 260 ms held-out | latency met; cost met on benchmark only (E), 19% to 40% over for B in round 7 |
+| 5 | E p95 added latency ≤ 600 ms, mean cost ≤ $0.0001/query | Round 5: E $0.000075 benchmark, $0.000105 val, $0.000115 held-out; B (Jev on every query) $0.000110 / $0.000113 / $0.000115. Round 4: E $0.000108 / $0.000149 / $0.000163. p95 202 to 322 ms (B, round 5). Round 6 (B, the rollout backend): $0.000114 / $0.000118 / $0.000127, p95 221 ms held-out. Round 7: $0.000119 / $0.000126 / $0.000140, p95 260 ms held-out. Round 8: $0.000123 / $0.000132 / $0.000147, p95 260 ms held-out | latency met; cost met on benchmark only (E), 23% to 47% over for B in round 8 |
 
 ## Caveats
 
@@ -1109,6 +1162,7 @@ Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); ro
 - Round 5 (facility and author candidates): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round5_2026-09-25{.jsonl,_metrics.json}` (arms A, B, E).
 - Round 6 (phrase grouping): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round6_2026-09-25{.jsonl,_metrics.json}` (arm B); end to end `semantic_overlap_pipeline_jev_{benchmark,val}_round{5,6}_2026-09-25.json` (round 5 run from the round 5 commit).
 - Round 7 (per-pair phrase splitting): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round7_2026-09-25{.jsonl,_metrics.json}` (arm B); end to end `semantic_overlap_pipeline_jev_{benchmark,val}_round7{base,}_2026-09-25.json` (`round7base` run from the parent commit).
+- Round 8 (which names are people): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round8_2026-09-25{.jsonl,_metrics.json}` (arm B).
 - Request caches: `data/cache/jev_systemone.jsonl`, `data/cache/llm_intent.jsonl`.
 - Labels: `data/datasets/evaluations/intent_labels.jsonl`.
 - Held-out paraphrases (approved): `data/datasets/benchmark/heldout_paraphrases.json`; review sheet `reports/heldout-paraphrase-review-sheet.md`; approval recorded with `scripts/approve_heldout_paraphrases.py`.

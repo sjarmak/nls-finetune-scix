@@ -19,6 +19,7 @@ Boolean questions are sent with ``type: "noul"`` and come back as
 from __future__ import annotations
 
 import hashlib
+import itertools
 import json
 import logging
 import re
@@ -73,7 +74,10 @@ MIN_JOINED_TOKENS = 3
 MAX_JOIN_QUESTIONS = 12
 """Most word-pair questions per query; a phrase that would pass the cap stays whole."""
 MAX_AUTHOR_CANDIDATES = 6
-"""Most names offered per query; each one is a yes/no question (``author_<i>``)."""
+"""Most names offered per query."""
+MAX_AUTHOR_READINGS = 16
+"""Most readings in the ``author_reading`` question: every reading of four single names."""
+AUTHOR_READING_QUESTION = "author_reading"
 _WORD = re.compile(r"[^\W\d_][\w'\-]*")
 """Questions that replace regex keyword rules. Kept out of ``build_questions`` so
 the arm C (``llm_intent``) prompt, which mirrors the gating set, is unchanged."""
@@ -276,15 +280,71 @@ def _join_question(phrase: str, first: str, second: str) -> dict:
     )
 
 
-def _author_question(name: str) -> dict:
-    return _boolean(
-        f"Does the user name '{name}' as one person: someone whose papers they want, or "
-        "whose work the papers they want cite or are cited by?",
-        f"'{name}' is one person's name (a surname, or given names or initials plus a "
-        "surname) used to find papers.",
-        f"'{name}' names two or more different people, a telescope, mission, survey, "
-        "instrument, object, place, institution or theory, is part of a topic phrase "
-        "(Hawking radiation, Einstein ring), or is an ordinary word.",
+def author_readings(names: tuple[str, ...]) -> tuple[tuple[str, ...], ...]:
+    """Sets of ``names`` that could all be people at once: no two share a word.
+
+    The empty reading comes first, then readings with more names; at most
+    ``MAX_AUTHOR_READINGS``. When the cap cuts, the last slot goes to every
+    name as written (each name that shares no word with an earlier one), so
+    a request listing five authors still offers all five. "Jarmak Cassini"
+    gives (), ("Jarmak Cassini",), ("Jarmak",), ("Cassini",) and
+    ("Jarmak", "Cassini").
+    """
+    readings = [
+        people
+        for k in range(len(names) + 1)
+        for people in itertools.combinations(names, k)
+        if all(not name_words(a) & name_words(b) for a, b in itertools.combinations(people, 2))
+    ]
+    if len(readings) <= MAX_AUTHOR_READINGS:
+        return tuple(readings)
+    every: list[str] = []
+    for name in names:
+        if not any(name_words(name) & name_words(taken) for taken in every):
+            every.append(name)
+    kept = [r for r in readings[: MAX_AUTHOR_READINGS - 1] if r != tuple(every)]
+    return (*kept, tuple(every))
+
+
+def reading_key(people: tuple[str, ...]) -> str:
+    return "|".join(people) or NONE_OPTION
+
+
+def _quoted(names: list[str]) -> str:
+    return " and ".join(f"'{name}'" for name in names)
+
+
+def _reading_text(people: tuple[str, ...], names: tuple[str, ...]) -> str:
+    taken = {word for person in people for word in name_words(person)}
+    words = (w.strip(".,") for name in names for w in name.split() if not _is_initial(w))
+    others = list(dict.fromkeys(w for w in words if w.lower() not in taken))
+    if not people:
+        text = "No one in the request is named as a person"
+    elif len(people) == 1:
+        text = f"{_quoted(list(people))} is one person, an author"
+    else:
+        text = f"{_quoted(list(people))} are different people, each an author"
+    if others:
+        verb = "is" if len(others) == 1 else "are"
+        text += (
+            f"; {_quoted(others)} {verb} not a person here but what the papers are about "
+            "(a mission, spacecraft, telescope, survey, instrument, object, place, "
+            "institution or theory), part of a topic phrase (Hawking radiation, Einstein "
+            "ring), or an ordinary word"
+        )
+    return text + "."
+
+
+def _author_reading_question(names: tuple[str, ...]) -> dict:
+    return _choice(
+        "Which of the capitalized names in this request are people the user names as "
+        "authors (someone whose papers they want, or whose work the papers they want cite "
+        "or are cited by), and which are not people? Missions, spacecraft, telescopes and "
+        "surveys are often named after people (Cassini, Hubble, Kepler, Herschel, Planck, "
+        "Gaia); in a search request such a name usually means the mission, not the person. "
+        "In a short keyword request, a surname next to a subject usually names an author of "
+        "papers on that subject.",
+        {reading_key(people): _reading_text(people, names) for people in author_readings(names)},
     )
 
 
@@ -394,8 +454,13 @@ def author_candidates(text: str, intent: IntentSpec) -> tuple[str, ...]:
 
 
 def name_words(name: str) -> set[str]:
-    """Lowercase words of ``name`` without initials, periods or commas."""
-    return {w.lower().strip(".,") for w in name.split() if not _is_initial(w)} - {""}
+    """Lowercase words of ``name`` without initials, periods or commas.
+
+    A hyphenated surname also gives its parts ("El-Badry": el-badry, el,
+    badry), since the regex topic splits it there.
+    """
+    words = {w.lower().strip(".,") for w in name.split() if not _is_initial(w)}
+    return {part for word in words for part in (word, *word.split("-"))} - {""}
 
 
 def ads_author(name: str) -> str:
@@ -539,8 +604,9 @@ def build_request(
 ) -> dict:
     """Build the System One request body. ``context`` is merged into ``state``.
 
-    Each of ``author_candidates`` gets its own yes/no question, ``author_<i>``,
-    and each of ``word_pairs`` its own, ``join_<k>``.
+    ``author_candidates`` get one choice question, ``author_reading``, over
+    which of them are people; each of ``word_pairs`` gets a yes/no question,
+    ``join_<k>``.
 
     With ``bibgroup_candidates`` the bibgroup question offers only those
     facilities plus ``none``, and is left out when there are none; without it
@@ -561,8 +627,8 @@ def build_request(
             offered = (NONE_OPTION, *bibgroup_candidates)
             criteria = {k: v for k, v in bibgroup["criteria"].items() if k in offered}
             questions["bibgroup"] = {**bibgroup, "criteria": criteria}
-    for i, name in enumerate(author_candidates):
-        questions[f"author_{i}"] = _author_question(name)
+    if author_candidates:
+        questions[AUTHOR_READING_QUESTION] = _author_reading_question(author_candidates)
     for k, (phrase, i) in enumerate(word_pairs):
         words = phrase.split()
         questions[f"join_{k}"] = _join_question(phrase, words[i], words[i + 1])
@@ -831,8 +897,8 @@ def apply_answers(
 ) -> IntentSpec:
     """Return a new IntentSpec with Jev's answers applied.
 
-    With ``author_candidates`` the authors are the candidates Jev calls people;
-    their words leave the topic, and a regex author Jev rejects joins it.
+    With ``author_candidates`` the authors are the reading Jev picks; their
+    words leave the topic, and a regex author Jev rejects joins it.
     With ``word_pairs`` each topic phrase is cut between the words Jev does
     not join into one term.
 
@@ -853,8 +919,11 @@ def apply_answers(
     topic = answers.choices.get("topic")
     join_probability = {pair: answers.booleans[f"join_{k}"] for k, pair in enumerate(word_pairs)}
     properties = {name for name in PROPERTY_BOOLEANS if answers.booleans[name] >= boolean_threshold}
+    reading = answers.choices.get(AUTHOR_READING_QUESTION) if author_candidates else None
+    readings = {reading_key(people): people for people in author_readings(author_candidates)}
     author_probability = {
-        name: answers.booleans[f"author_{i}"] for i, name in enumerate(author_candidates)
+        name: sum(p for key, p in reading.probabilities.items() if name in readings[key])
+        for name in (author_candidates if reading else ())
     }
     confidence = {
         "operator": operator.confidence,
@@ -875,6 +944,7 @@ def apply_answers(
         **({"topic": topic.confidence} if topic else {}),
         **{f"join.{phrase}#{i}": p for (phrase, i), p in join_probability.items()},
         **({"bibgroup": bibgroup.confidence} if bibgroup else {}),
+        **({AUTHOR_READING_QUESTION: reading.confidence} if reading else {}),
         **{f"author.{name}": p for name, p in author_probability.items()},
     }
     year_from, year_to = intent.year_from, intent.year_to
@@ -888,8 +958,8 @@ def apply_answers(
         joined = {pair: p >= boolean_threshold for pair, p in join_probability.items()}
         free_text_terms = _split_terms(free_text_terms, joined)
     authors = intent.authors
-    if author_candidates:
-        authors = _accepted_names(author_probability, boolean_threshold)
+    if reading is not None:
+        authors = list(readings[reading.choice])
         people = {word for name in authors for word in name_words(name)}
         rejected = [name.lower() for name in intent.authors if not name_words(name) <= people]
         authors = [ads_author(name) for name in authors]
@@ -911,21 +981,6 @@ def apply_answers(
         min_citations=HIGHLY_CITED_MIN_CITATIONS if highly_cited else intent.min_citations,
         confidence=confidence,
     )
-
-
-def _accepted_names(probability: dict[str, float], threshold: float) -> list[str]:
-    """Names Jev calls people; a longer span wins over the words it contains.
-
-    Spans are taken longest first, then by probability, and a name sharing a
-    word with one already taken is skipped. The result keeps the request order.
-    """
-    accepted = [name for name, p in probability.items() if p >= threshold]
-    ranked = sorted(accepted, key=lambda n: (-len(name_words(n)), -probability[n]))
-    taken: list[str] = []
-    for name in ranked:
-        if not name_words(name) & {w for t in taken for w in name_words(t)}:
-            taken.append(name)
-    return [name for name in accepted if name in taken]
 
 
 def classify_and_extract(
