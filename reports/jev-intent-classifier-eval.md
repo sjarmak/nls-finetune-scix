@@ -1076,9 +1076,57 @@ fell from 1.00 to 0.08 in a partial run on the earlier code because the
 right bibcode shares no words with the gold. No overlap numbers are
 reported for this change.
 
+## Round 9: lowercase names and keyword queries read as citations (2026-09-25)
+
+Two fixes to how terse keyword queries are read. First, "accomazzi europa"
+searched `author:"Europa, Accomazzi"`: in an all-lowercase request the only
+name candidates were adjacent word pairs, so the reading "Accomazzi is the
+author, Europa the topic" was never offered. Single words are now offered
+after the pairs, and up to 8 candidates are kept (was 6). On 20 lowercase
+probes this fixed 6 (accomazzi europa, jarmak cassini, rigby jwst lensed
+galaxies, amiri hill ordog, kurtz citation analysis, black hole mergers
+accomazzi) and broke 1 ("chandrasekhar limit white dwarfs" now takes
+Chandrasekhar as an author at 0.58).
+
+Second, "kurtz citation analysis" searched `citations(author:"Kurtz")` and
+"black hole mergers accomazzi" searched `citations(...)`: the regex found no
+operator, but Jev chose citations (0.70 and 0.56). Three wordings were
+probed on 34 requests (21 keyword and citation probes plus the 13 items the
+first attempt broke), three repeats where it mattered:
+
+| wording | correct of 34 |
+|---|---|
+| unchanged | 29 to 31 |
+| a sentence in the operator instructions: bare keywords are a plain search, choose an operator only when asked | 22 |
+| the same sentence limited to citations and references | 29 |
+| the `citations` option description: not a keyword query pairing a surname with topic words, not the word citation as a topic | 31 to 32 |
+
+The instruction sentence also suppressed trending, useful, reviews and
+similar; on the full sets it broke 16 operators and fixed 10, so it was
+dropped. The option description fixes both spurious citations on every
+repeat. The remaining miss, "cited by seager", is ambiguous.
+
+Arm B, round 8 in parentheses:
+
+| dataset | input tokens | $/query | operator acc | macro-F1 |
+|---|---|---|---|---|
+| benchmark | 3,172 (2,922) | $0.000133 ($0.000123) | 0.983 (0.987) | 0.979 (0.984) |
+| val | 3,362 (3,143) | $0.000141 ($0.000132) | 0.973 (0.970) | 0.862 (0.836) |
+| held-out | 3,921 (3,508) | $0.000165 ($0.000147) | 0.993 (0.993) | 0.986 (0.986) |
+
+Operator changes: benchmark "related to pulsar timing research" lost
+`similar` (it sat near 0.5 in every probe run) and "top papers on stellar
+evolution from 2020" lost a wrong `useful`; val "useful references for
+papers citing cosmology" moved from citations to the gold `useful`. Gold-none
+false positives are unchanged on all three sets. Four val author lists
+changed: "amiri hill ordog" became three authors, "Smith, Match" and
+"First, Bramante-elahi" became Smith and Bramante-elahi, and "papers where
+oort j is first author" went from the wrong "Author, First" to no author.
+Input tokens rise 7% to 12%, mostly from the extra lowercase candidates.
+
 ## Criteria table
 
-Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criterion 4; rounds 5 to 8 for criterion 5 and the notes on criterion 2.
+Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criterion 4; rounds 5 to 9 for criterion 5 and the notes on criterion 2.
 
 | # | criterion | result | status |
 |---|---|---|---|
@@ -1086,7 +1134,7 @@ Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); ro
 | 2 | B false-positive rate on operator-negative stratum ≤ 2% | 0 of 40 (B, D and E, rounds 2 to 4); on all gold-none items 1 of 106 (3 of 106), "the review". Round 5: 1 of 40 (2.5%), "foundational models for spectral classification" read as `useful`. Rounds 6 and 7: 0 of 40 | met; missed by one item in round 5 only |
 | 3 | B selective accuracy ≥ 95% at 90% coverage | 1.000 held-out, 1.000 benchmark, 0.995 (0.988) val | met |
 | 4 | end-to-end semantic match: no drop on benchmark, rise on held-out | Round 4, scored with the fixed rule (empty gold excluded): benchmark jev_gated 38.1% vs regex 31.7%, +6.4 points, paired 37 wins to 8 on 45 differing items; val 21.2% vs 12.3%, paired 106 to 14. Round 3 on the same rule: benchmark -2.6 points (paired 1 to 8), val level. Held-out has no gold queries; as a proxy the jev_gated pipeline serves 139 of 152 at 0.986 operator accuracy vs 141 at 0.688 for regex | no drop met on benchmark (round 4); rise shown on val and on held-out operator accuracy, not end to end on held-out |
-| 5 | E p95 added latency ≤ 600 ms, mean cost ≤ $0.0001/query | Round 5: E $0.000075 benchmark, $0.000105 val, $0.000115 held-out; B (Jev on every query) $0.000110 / $0.000113 / $0.000115. Round 4: E $0.000108 / $0.000149 / $0.000163. p95 202 to 322 ms (B, round 5). Round 6 (B, the rollout backend): $0.000114 / $0.000118 / $0.000127, p95 221 ms held-out. Round 7: $0.000119 / $0.000126 / $0.000140, p95 260 ms held-out. Round 8: $0.000123 / $0.000132 / $0.000147, p95 260 ms held-out | latency met; cost met on benchmark only (E), 23% to 47% over for B in round 8 |
+| 5 | E p95 added latency ≤ 600 ms, mean cost ≤ $0.0001/query | Round 5: E $0.000075 benchmark, $0.000105 val, $0.000115 held-out; B (Jev on every query) $0.000110 / $0.000113 / $0.000115. Round 4: E $0.000108 / $0.000149 / $0.000163. p95 202 to 322 ms (B, round 5). Round 6 (B, the rollout backend): $0.000114 / $0.000118 / $0.000127, p95 221 ms held-out. Round 7: $0.000119 / $0.000126 / $0.000140, p95 260 ms held-out. Round 8: $0.000123 / $0.000132 / $0.000147, p95 260 ms held-out. Round 9: $0.000133 / $0.000141 / $0.000165 | latency met; cost met on benchmark only (E), 33% to 65% over for B in round 9 |
 
 ## Caveats
 
@@ -1163,6 +1211,7 @@ Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); ro
 - Round 6 (phrase grouping): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round6_2026-09-25{.jsonl,_metrics.json}` (arm B); end to end `semantic_overlap_pipeline_jev_{benchmark,val}_round{5,6}_2026-09-25.json` (round 5 run from the round 5 commit).
 - Round 7 (per-pair phrase splitting): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round7_2026-09-25{.jsonl,_metrics.json}` (arm B); end to end `semantic_overlap_pipeline_jev_{benchmark,val}_round7{base,}_2026-09-25.json` (`round7base` run from the parent commit).
 - Round 8 (which names are people): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round8_2026-09-25{.jsonl,_metrics.json}` (arm B).
+- Round 9 (lowercase names, keyword queries read as citations): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round9_2026-09-25{.jsonl,_metrics.json}` (arm B).
 - Request caches: `data/cache/jev_systemone.jsonl`, `data/cache/llm_intent.jsonl`.
 - Labels: `data/datasets/evaluations/intent_labels.jsonl`.
 - Held-out paraphrases (approved): `data/datasets/benchmark/heldout_paraphrases.json`; review sheet `reports/heldout-paraphrase-review-sheet.md`; approval recorded with `scripts/approve_heldout_paraphrases.py`.

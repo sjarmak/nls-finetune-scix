@@ -60,6 +60,11 @@ class TestQuestionSet:
         assert "literature surveys" in reviews
         assert "not an observational sky survey" in reviews
 
+    def test_bare_keywords_with_a_name_are_a_plain_search(self):
+        citations = build_questions()["operator"]["criteria"]["citations"].lower()
+        assert "pairs a surname with topic words" in citations
+        assert "the word citation used as a topic" in citations
+
     def test_every_option_has_a_description(self):
         for qid, q in build_questions().items():
             for option, description in q["criteria"].items():

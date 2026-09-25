@@ -13,7 +13,10 @@ OPERATOR_DESCRIPTIONS: dict[str, str] = {
     ),
     "citations": (
         "The papers that cite a given paper, author or result set: forward citations, "
-        "work that builds on or responds to it. Not a filter on citation counts."
+        "work that builds on or responds to it. Not a filter on citation counts. "
+        "Not a keyword query that pairs a surname with topic words ('smith galaxy "
+        "mergers'), where the surname is the author, and not the word citation used as a "
+        "topic ('citation analysis')."
     ),
     "references": (
         "The papers a given work cites: its bibliography or reference list, the sources "
