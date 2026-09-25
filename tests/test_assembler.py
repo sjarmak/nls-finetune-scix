@@ -115,6 +115,10 @@ class TestClauseBuilding:
         result = _build_abs_clause(["black hole mergers"])
         assert result == 'abs:"black hole mergers"'
 
+    def test_abs_clause_escapes_asterisk(self):
+        result = _build_abs_clause(["sgr a* flares"])
+        assert result == 'abs:"sgr a\\* flares"'
+
     def test_abs_clause_multiple_terms(self):
         result = _build_abs_clause(["JWST", "exoplanets"])
         assert "abs:JWST" in result
@@ -140,11 +144,11 @@ class TestClauseBuilding:
 
     def test_object_clause_single(self):
         result = _build_object_clause(["M31"])
-        assert result == "object:M31"
+        assert result == "abs:M31"
 
     def test_object_clause_with_space(self):
         result = _build_object_clause(["NGC 1234"])
-        assert result == 'object:"NGC 1234"'
+        assert result == 'abs:"NGC 1234"'
 
     def test_affiliation_clause(self):
         result = _build_affiliation_clause(["Harvard"])

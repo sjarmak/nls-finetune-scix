@@ -1074,7 +1074,7 @@ def _extract_topics(text: str) -> tuple[list[str], list[str]]:
 
     # Clean term helper
     def clean_term(term: str) -> str:
-        words = re.findall(r"\b[a-zA-Z0-9][-a-zA-Z0-9]*\b", term.lower())
+        words = re.findall(r"\b[a-zA-Z0-9][-a-zA-Z0-9]*\*?", term.lower())
         meaningful = [w for w in words if w not in STOPWORDS and len(w) > 1]
         return " ".join(meaningful)
 
@@ -1102,7 +1102,7 @@ def _extract_topics(text: str) -> tuple[list[str], list[str]]:
         remaining = or_pattern.sub(" ", text).strip()
         free_text = []
         if remaining:
-            remaining_words = re.findall(r"\b[a-zA-Z0-9][-a-zA-Z0-9]*\b", remaining.lower())
+            remaining_words = re.findall(r"\b[a-zA-Z0-9][-a-zA-Z0-9]*\*?", remaining.lower())
             remaining_meaningful = [w for w in remaining_words if w not in STOPWORDS and len(w) > 1]
             if remaining_meaningful:
                 free_text.append(" ".join(remaining_meaningful))
@@ -1111,7 +1111,7 @@ def _extract_topics(text: str) -> tuple[list[str], list[str]]:
 
     # No OR pattern - standard processing into free_text_terms
     # Tokenize
-    words = re.findall(r"\b[a-zA-Z0-9][-a-zA-Z0-9]*\b", text.lower())
+    words = re.findall(r"\b[a-zA-Z0-9][-a-zA-Z0-9]*\*?", text.lower())
 
     # Filter stopwords
     meaningful = [w for w in words if w not in STOPWORDS and len(w) > 1]

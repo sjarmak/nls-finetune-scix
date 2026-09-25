@@ -536,6 +536,10 @@ class TestTopicExtraction:
             assert "the" not in topic.split()
             assert "of" not in topic.split()
 
+    def test_topic_preserves_wildcard_token(self):
+        intent = extract_intent("sgr a* flares")
+        assert intent.free_text_terms == ["sgr a* flares"]
+
     def test_topic_after_other_extractions(self):
         """Topics extracted after other fields removed."""
         intent = extract_intent("refereed papers by Hawking since 2020 on cosmology")

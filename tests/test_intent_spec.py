@@ -157,7 +157,13 @@ class TestIntentSpec:
     
     def test_deserialize_from_json(self):
         """IntentSpec deserializes from JSON correctly."""
-        json_str = '{"free_text_terms": ["pulsars"], "authors": [], "affiliations": [], "objects": [], "year_from": null, "year_to": null, "doctype": [], "property": [], "collection": [], "bibgroup": [], "esources": [], "data": [], "operator": null, "operator_target": null, "raw_user_text": "", "confidence": {}}'
+        json_str = (
+            '{"free_text_terms": ["pulsars"], "authors": [], "affiliations": [], '
+            '"objects": [], "year_from": null, "year_to": null, "doctype": [], '
+            '"property": [], "collection": [], "bibgroup": [], "esources": [], '
+            '"data": [], "operator": null, "operator_target": null, '
+            '"raw_user_text": "", "confidence": {}}'
+        )
         spec = IntentSpec.from_json(json_str)
         
         assert spec.free_text_terms == ["pulsars"]
@@ -248,6 +254,10 @@ class TestPipeline:
         
         assert isinstance(result.final_query, str)
         assert len(result.final_query) > 0
+
+    def test_pipeline_escapes_asterisk_in_topic(self):
+        result = process_query("sgr a* flares")
+        assert result.final_query == 'abs:"sgr a\\* flares"'
     
     def test_result_debug_info_has_timing(self):
         """DebugInfo has timing information."""

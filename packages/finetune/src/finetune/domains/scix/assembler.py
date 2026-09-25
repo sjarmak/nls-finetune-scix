@@ -124,7 +124,8 @@ def _build_abs_clause(terms: Sequence[str], use_or: bool = False) -> str:
 
     clauses = []
     for term in terms:
-        quoted = quote_value(term)
+        escaped = re.sub(r"(?<!\\)\*", r"\\*", term)
+        quoted = quote_value(escaped)
         clauses.append(quoted)
 
     if len(clauses) == 1:
@@ -200,15 +201,7 @@ def _build_object_clause(objects: Sequence[str]) -> str:
     if not objects:
         return ""
 
-    clauses = []
-    for obj in objects:
-        # Object names are typically short, but quote if needed
-        quoted = quote_value(obj)
-        clauses.append(f"object:{quoted}")
-
-    if len(clauses) == 1:
-        return clauses[0]
-    return " ".join(clauses)
+    return _build_abs_clause(objects)
 
 
 def _build_affiliation_clause(affiliations: Sequence[str]) -> str:
