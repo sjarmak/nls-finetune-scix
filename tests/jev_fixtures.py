@@ -100,6 +100,10 @@ def with_topic_answer(payload: dict, request: dict) -> dict:
     if topic is not None and "topic" not in answers:
         longest = next(option for option in topic["criteria"] if option != "none")
         answers["topic"] = choice_answer(longest, {"none": 0.05, longest: 0.95})
+    phrasing = questions.get("phrasing")
+    if phrasing is not None and "phrasing" not in answers:
+        whole = next(iter(phrasing["criteria"]))
+        answers["phrasing"] = choice_answer(whole, {whole: 1.0})
     regex_authors = {a.lower() for a in extract_intent(request["state"]["query"]).authors}
     for qid, question in questions.items():
         if qid.startswith("author_") and qid not in answers:
