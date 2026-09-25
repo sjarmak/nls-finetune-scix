@@ -297,6 +297,13 @@ def _look_up_paper(
     return resolved
 
 
+def _empty_query_reason(intent: IntentSpec) -> str:
+    """Why assembly produced nothing to serve."""
+    if intent.operator:
+        return f"operator {intent.operator} has no base query or target to apply to"
+    return "assembled query is empty"
+
+
 def process_query(
     nl_text: str,
     intent_backend: IntentBackend = "regex",
@@ -322,6 +329,10 @@ def process_query(
             defaults to the current year
         paper_search: ADS client for the named-paper lookup; without it, or
             without a Jev answer, a named paper stays a topic search
+
+    An empty assembled query (an operator with nothing to apply to, as in
+    "what does this paper cite") gets confidence 0.0 and its reason in
+    ``debug_info.fallback_reason``, so a caller never serves it as a query.
 
     Returns:
         PipelineResult containing:
@@ -367,6 +378,9 @@ def process_query(
     if extraction.classifier_succeeded:
         debug_info.classifier_operator_confidence = intent.confidence["operator"]
     confidence = routing_confidence(structural, debug_info.classifier_operator_confidence)
+    if not final_query:
+        confidence = 0.0
+        debug_info.fallback_reason = _empty_query_reason(intent)
 
     # Total timing
     debug_info.total_time_ms = (time.perf_counter() - start_time) * 1000

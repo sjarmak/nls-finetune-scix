@@ -18,6 +18,7 @@ from finetune.domains.scix.field_constraints import (
 from finetune.domains.scix.intent_spec import IntentSpec
 from finetune.domains.scix.ner import (
     extract_intent,
+    extract_intent_with_operator,
 )
 
 
@@ -828,6 +829,41 @@ class TestReferencesOperatorPatterns:
         """'list references' triggers references operator."""
         intent = extract_intent("list references of the catalog paper")
         assert intent.operator == "references"
+
+
+class TestWhatDoesXCiteKeepsX:
+    """The paper named between 'what does' and 'cite' is the operator's subject.
+
+    The removal pattern used to take the whole span, so the topic came out
+    empty and the assembler returned an empty query.
+    """
+
+    @pytest.mark.parametrize(
+        ("text", "topic"),
+        [
+            ("what papers does the CMB discovery paper cite", "cmb discovery"),
+            ("what does the CMB discovery paper cite", "cmb discovery"),
+            ("what does the cosmic shear paper cite", "cosmic shear"),
+            ("what did the dark energy discovery paper cite", "dark energy discovery"),
+            ("what papers did the CMB discovery paper cite", "cmb discovery"),
+            ("what papers does the Planck paper reference", "planck"),
+            ("what does the Planck paper reference?", "planck"),
+        ],
+    )
+    def test_subject_stays_the_topic(self, text, topic):
+        intent = extract_intent(text)
+        assert intent.operator == "references"
+        assert intent.free_text_terms == [topic]
+
+    def test_reference_as_a_noun_is_no_operator(self):
+        intent = extract_intent("what does the literature say about reference frames")
+        assert intent.operator is None
+
+    def test_classifier_operator_keeps_the_subject(self):
+        intent = extract_intent_with_operator(
+            "what papers does the Planck paper reference", "references"
+        )
+        assert intent.free_text_terms == ["planck"]
 
 
 class TestTrendingOperatorPatterns:

@@ -192,6 +192,15 @@ COLLECTION_SYNONYMS: dict[str, str] = {
 # CRITICAL: These patterns MUST be explicit and specific.
 # Do NOT trigger operators for generic use of these words as topics.
 
+# "what (papers) does/did X cite", and "... X reference" when "reference" ends
+# the clause (so "what does X say about reference frames" stays a topic). X is
+# the paper whose references are wanted: removing the phrase keeps it.
+WHAT_DOES_X_CITE = re.compile(
+    r"\bwhat\s+(?:papers?\s+)?(?:does|did)\s+(?P<subject>.+)\s+"
+    r"(?:cite\b|reference\s*(?=[?.!]|$))",
+    re.IGNORECASE,
+)
+
 # NOTE: The order of operators in this dict matters! More specific patterns should be
 # checked first. Currently, "references" patterns that could conflict with "citations"
 # patterns (like "sources cited by" vs "cited by") are handled via pattern specificity.
@@ -207,12 +216,10 @@ OPERATOR_PATTERNS: dict[str, list[re.Pattern]] = {
         re.compile(r"\breferences?\s+from\b", re.IGNORECASE),
         re.compile(r"\bpapers?\s+referenced\s+by\b", re.IGNORECASE),
         re.compile(r"\bbibliography\s+of\b", re.IGNORECASE),
-        re.compile(r"\bwhat\s+did\s+.+\s+cite\b", re.IGNORECASE),
+        WHAT_DOES_X_CITE,
         re.compile(r"\bpapers?\s+cited\s+in\b", re.IGNORECASE),
         # New patterns from US-004
         re.compile(r"\bcited\s+in\b", re.IGNORECASE),
-        re.compile(r"\bwhat\s+does\s+.+\s+cite\b", re.IGNORECASE),
-        re.compile(r"\bwhat\s+papers?\s+does\s+.+\s+cite\b", re.IGNORECASE),
         re.compile(r"\bpapers?\s+it\s+cites\b", re.IGNORECASE),
         re.compile(r"\bpapers?\s+they\s+cite\b", re.IGNORECASE),
         # More specific "references in" pattern - requires paper/bibliography context
@@ -348,12 +355,10 @@ OPERATOR_REMOVAL_PATTERNS: dict[str, list[re.Pattern]] = {
         re.compile(r"\breferences?\s+from\b", re.IGNORECASE),
         re.compile(r"\bpapers?\s+referenced\s+by\b", re.IGNORECASE),
         re.compile(r"\bbibliography\s+of\b", re.IGNORECASE),
-        re.compile(r"\bwhat\s+did\s+.+\s+cite\b", re.IGNORECASE),
+        WHAT_DOES_X_CITE,
         re.compile(r"\bpapers?\s+cited\s+in\b", re.IGNORECASE),
         # New patterns from US-004
         re.compile(r"\bcited\s+in\b", re.IGNORECASE),
-        re.compile(r"\bwhat\s+does\s+.+\s+cite\b", re.IGNORECASE),
-        re.compile(r"\bwhat\s+papers?\s+does\s+.+\s+cite\b", re.IGNORECASE),
         re.compile(r"\bpapers?\s+it\s+cites\b", re.IGNORECASE),
         re.compile(r"\bpapers?\s+they\s+cite\b", re.IGNORECASE),
         re.compile(r"\breferences?\s+in\s+(the\s+)?(paper|bibliography|appendix)\b", re.IGNORECASE),
@@ -756,10 +761,7 @@ def extract_intent_with_operator(
     triggering phrase does not leak into the topic terms.
     """
     original_text = text.strip()
-    working_text = original_text
-    for removal_pattern in OPERATOR_REMOVAL_PATTERNS.get(operator or "", []):
-        working_text = removal_pattern.sub(" ", working_text)
-    working_text = re.sub(r"\s+", " ", working_text).strip()
+    working_text = _remove_operator_phrases(original_text, operator)
     return _extract_fields(original_text, working_text, operator, reference_year)
 
 
@@ -822,14 +824,20 @@ def _extract_operator(text: str) -> tuple[str | None, str]:
     for operator, patterns in OPERATOR_PATTERNS.items():
         for pattern in patterns:
             if pattern.search(text):
-                # Found operator - remove the triggering phrase
-                cleaned = text
-                for removal_pattern in OPERATOR_REMOVAL_PATTERNS.get(operator, []):
-                    cleaned = removal_pattern.sub(" ", cleaned)
-                cleaned = re.sub(r"\s+", " ", cleaned).strip()
-                return operator, cleaned
+                return operator, _remove_operator_phrases(text, operator)
 
     return None, text
+
+
+def _remove_operator_phrases(text: str, operator: str | None) -> str:
+    """``text`` without ``operator``'s phrases, keeping the subject a phrase frames."""
+    for removal_pattern in OPERATOR_REMOVAL_PATTERNS.get(operator or "", []):
+        text = removal_pattern.sub(_kept_subject, text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _kept_subject(match: re.Match[str]) -> str:
+    return f" {match.groupdict().get('subject') or ''} "
 
 
 def _extract_years(

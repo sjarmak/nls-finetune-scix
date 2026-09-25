@@ -60,3 +60,12 @@ def test_no_classifier_answer_means_no_classifier_confidence(backend, query):
     assert result.debug_info.classifier_called is False
     assert result.debug_info.classifier_operator_confidence is None
     assert result.confidence == result.debug_info.structural_confidence
+
+
+def test_operator_without_a_subject_is_an_empty_query_with_no_confidence():
+    """Nothing names what to take the references of, so nothing is served from the pipeline."""
+    result = process_query("what does this paper cite", "regex")
+    assert result.intent.operator == "references"
+    assert result.final_query == ""
+    assert result.confidence == 0.0
+    assert "references" in result.debug_info.fallback_reason

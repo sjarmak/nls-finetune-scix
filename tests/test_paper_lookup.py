@@ -7,6 +7,7 @@ import httpx
 import pytest
 from jev_fixtures import (
     TEST_API_KEY,
+    answering_client,
     choice_answer,
     handler_client,
     jev_payload,
@@ -45,6 +46,13 @@ ORMEL = {
     "first_author": "Ormel, Chris W.",
     "year": "2017",
     "citation_count": 155,
+}
+PENZIAS = {
+    "bibcode": "1965ApJ...142..419P",
+    "title": ["A Measurement of Excess Antenna Temperature at 4080 Mc/s."],
+    "first_author": "Penzias, A. A.",
+    "year": "1965",
+    "citation_count": 2000,
 }
 TRAPPIST_TEXT = "Papers that cite the original TRAPPIST-1 seven-planet paper"
 
@@ -344,6 +352,29 @@ class TestResolvePaper:
 
 
 class TestPipelineLookup:
+    def test_paper_named_in_what_does_x_cite_resolves(self):
+        calls: list[dict] = []
+        searches: list[str] = []
+        search = ads_search(lambda q: [PENZIAS], searches)
+        result = process_query(
+            "what papers does the CMB discovery paper cite",
+            "jev",
+            jev_answering_paper(PENZIAS["bibcode"], calls, operator="references"),
+            2026,
+            paper_search=search,
+        )
+        assert searches[0] == 'abs:"cmb discovery"'
+        assert result.final_query == "references(bibcode:1965ApJ...142..419P)"
+
+    def test_unresolved_named_paper_keeps_its_topic(self):
+        result = process_query(
+            "what papers does the CMB discovery paper cite",
+            "jev",
+            answering_client(jev_payload("references")),
+            2026,
+        )
+        assert result.final_query == 'references(abs:"cmb discovery")'
+
     def test_named_paper_resolves_to_bibcode(self):
         calls: list[dict] = []
         search = ads_search(lambda q: [ORMEL, GILLON])

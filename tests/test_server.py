@@ -348,6 +348,16 @@ def test_model_only_output_without_a_query_is_an_error(load_server):
     assert response["choices"] == [] and response["error"] == "model output held no query"
 
 
+def test_operator_with_nothing_to_apply_to_falls_back_to_the_model_and_says_why(load_server):
+    server = load_server()
+    _with_model(server)
+    body = _post_pipeline(server, "what does this paper cite")
+    assert body["path"] == "model"
+    assert body["choices"][0]["message"]["content"] == MODEL_QUERY
+    reason = body["pipeline_result"]["debug_info"]["fallback_reason"]
+    assert "operator references has no base query or target" in reason
+
+
 def test_pipeline_error_and_empty_model_output_reports_both(load_server):
     server = load_server()
     _with_model(server, query=None)

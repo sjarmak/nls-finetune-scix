@@ -523,7 +523,7 @@ def run_pipeline(
     elapsed_ms = (time.perf_counter() - start_time) * 1000
 
     if not result.final_query.strip():
-        return None, "pipeline produced empty query"
+        return None, f"pipeline produced empty query: {result.debug_info.fallback_reason}"
 
     debug_info = PipelineDebugInfo(
         ner_time_ms=result.debug_info.ner_time_ms,
