@@ -72,13 +72,13 @@ def load_server(monkeypatch, tmp_path):
             module.shadow_executor.shutdown(wait=True, cancel_futures=True)
 
 
-def _with_model(server) -> list[list]:
-    """Pretend the fine-tuned model is loaded; returns the recorded calls."""
+def _with_model(server, query: str | None = MODEL_QUERY) -> list[list]:
+    """Pretend the fine-tuned model is loaded and answers ``query``; returns the recorded calls."""
     calls: list[list] = []
 
     def generate_query(messages, max_tokens=256):
         calls.append(messages)
-        return MODEL_QUERY, 11, 7
+        return query, 11, 7
 
     server.model = object()
     server.generate_query = generate_query
@@ -321,6 +321,67 @@ def test_low_jev_operator_confidence_routes_to_the_model(load_server, tmp_path):
     assert row["classifier_operator_confidence"] == pytest.approx(0.44)
     assert row["confidence"] == 0.0, "the model's own confidence"
     assert row["pipeline_confidence"] == pytest.approx(0.44), "the value that fell short"
+
+
+def test_model_output_without_a_query_serves_the_pipeline_result(load_server, tmp_path):
+    log = tmp_path / "telemetry.jsonl"
+    server = load_server(**_jev_env(TELEMETRY_LOG=str(log)))
+    server.jev_client = _answering(jev_payload("similar", operator_confidence=0.44))
+    _with_model(server, query=None)
+    body = _post_pipeline(server, GATED_QUERY)
+    assert body["path"] == "pipeline" and body["fallback"] is False
+    assert body["choices"][0]["message"]["content"] == body["pipeline_result"]["query"]
+    (row,) = _rows(log)
+    assert row["fallback_reason"] == (
+        "classifier operator confidence 0.44 below threshold 0.50; "
+        "model output held no query, served the pipeline result"
+    )
+
+
+def test_model_only_output_without_a_query_is_an_error(load_server):
+    server = load_server(ROUTING_MODE="model")
+    _with_model(server, query=None)
+    client = TestClient(server.app)
+    body = {"messages": [{"role": "user", "content": "Query: magnetars"}]}
+    assert client.post("/v1/chat/completions", json=body).status_code == 502
+    response = client.post("/pipeline", json=body).json()
+    assert response["choices"] == [] and response["error"] == "model output held no query"
+
+
+def test_pipeline_error_and_empty_model_output_reports_both(load_server):
+    server = load_server()
+    _with_model(server, query=None)
+    server.run_pipeline = lambda nl, year: (None, "pipeline exploded")
+    response = TestClient(server.app).post(
+        "/pipeline", json={"messages": [{"role": "user", "content": "Query: magnetars"}]}
+    )
+    assert response.json()["error"] == "pipeline exploded; model output held no query"
+
+
+def test_model_prompt_is_the_training_format(load_server):
+    server = load_server()
+    messages = [server.ChatMessage(role="user", content="Date: 2026-09-25\nQuery: magnetars")]
+    assert server.model_messages(messages) == [
+        {"role": "system", "content": server.MODEL_SYSTEM_PROMPT},
+        {"role": "user", "content": "Query: magnetars\nDate: 2026-09-25"},
+    ]
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ('{"query": "abs:\\"magnetars\\""}', 'abs:"magnetars"'),
+        ('<think>\nplan\n</think>\n\n{"query": "object:M87"}', "object:M87"),
+        ("<think>\nOkay, the user wants papers about pulsars. {maybe} Let me", None),
+        ("Magnetars are a type of neutron star with strong fields.", None),
+        ('{"answer": "abs:pulsars"}', None),
+        ('{"query": "  "}', None),
+        ('{"query": ["abs:x"]}', None),
+        ('Sure {note} here: {"query": "abs:magnetars"} done', "abs:magnetars"),
+    ],
+)
+def test_parse_model_output(load_server, text, expected):
+    assert load_server().parse_model_output(text) == expected
 
 
 def test_low_jev_confidence_is_served_when_no_model_is_loaded(load_server, tmp_path):

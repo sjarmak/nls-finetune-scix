@@ -361,20 +361,57 @@ def load_model() -> None:
     logger.info("Model loaded successfully on %s", DEVICE)
 
 
-def generate_query(messages: list[ChatMessage], max_tokens: int = 256) -> tuple[str, int, int]:
-    """Generate ADS query from chat messages with the fine-tuned model.
+# The prompt the translator was fine-tuned on (data/datasets/processed/train.jsonl).
+MODEL_SYSTEM_PROMPT = 'Convert natural language to ADS search query. Output JSON: {"query": "..."}'
+
+
+def model_messages(messages: list[ChatMessage]) -> list[dict]:
+    """The request rewritten in the training format: system prompt, "Query:" then "Date:".
+
+    Off that format the model answers in prose or starts a reasoning block that
+    runs past the token limit, so the client's own wording is not passed on.
+    """
+    user_message = next((m.content for m in messages if m.role == "user"), "")
+    match = re.search(r"^Date:(.*)$", user_message, re.MULTILINE)
+    day = match.group(1).strip() if match else date.today().isoformat()
+    return [
+        {"role": "system", "content": MODEL_SYSTEM_PROMPT},
+        {"role": "user", "content": f"Query: {extract_nl_query(messages)}\nDate: {day}"},
+    ]
+
+
+def parse_model_output(text: str) -> str | None:
+    """The query from the model's first {"query": ...} answer, or None when there is none."""
+    if "<think>" in text:
+        text = text.partition("</think>")[2]
+    decoder = json.JSONDecoder()
+    for match in re.finditer(r"\{", text):
+        try:
+            data, _ = decoder.raw_decode(text, match.start())
+        except json.JSONDecodeError:
+            continue
+        query = data.get("query") if isinstance(data, dict) else None
+        if isinstance(query, str) and query.strip():
+            return query.strip()
+    return None
+
+
+def generate_query(
+    messages: list[ChatMessage], max_tokens: int = 256
+) -> tuple[str | None, int, int]:
+    """Generate an ADS query with the fine-tuned model.
 
     Returns:
-        Tuple of (generated_text, prompt_tokens, completion_tokens)
+        Tuple of (query or None when the output holds no query, prompt_tokens,
+        completion_tokens)
     """
     import torch
 
-    # Build prompt from messages
-    message_dicts = [{"role": m.role, "content": m.content} for m in messages]
     prompt = tokenizer.apply_chat_template(
-        message_dicts,
+        model_messages(messages),
         tokenize=False,
         add_generation_prompt=True,
+        enable_thinking=False,
     )
 
     inputs = tokenizer(prompt, return_tensors="pt")
@@ -393,28 +430,8 @@ def generate_query(messages: list[ChatMessage], max_tokens: int = 256) -> tuple[
 
     # Decode only the generated part
     generated_ids = outputs[0][prompt_tokens:]
-    completion_tokens = len(generated_ids)
-
     response = tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
-
-    # Handle thinking mode output
-    if "<think>" in response:
-        parts = response.split("</think>")
-        if len(parts) > 1:
-            response = parts[-1].strip()
-
-    # Try to extract JSON query
-    try:
-        json_start = response.find("{")
-        json_end = response.rfind("}") + 1
-        if json_start >= 0 and json_end > json_start:
-            json_str = response[json_start:json_end]
-            data = json.loads(json_str)
-            response = data.get("query", response)
-    except json.JSONDecodeError:
-        pass
-
-    return response, prompt_tokens, completion_tokens
+    return parse_model_output(response), prompt_tokens, len(generated_ids)
 
 
 def extract_nl_query(messages: list[ChatMessage]) -> str:
@@ -580,17 +597,19 @@ def _run_shadow(
         logger.exception("Shadow intent run failed for %r", nl_query)
 
 
-def run_model(messages: list[ChatMessage], max_tokens: int) -> RoutedResult:
-    """Run the fine-tuned model."""
+def run_model(messages: list[ChatMessage], max_tokens: int) -> RoutedResult | None:
+    """Run the fine-tuned model; None when its output holds no query."""
     if model is None:
         raise HTTPException(status_code=503, detail="Model not loaded")
 
     start_time = time.perf_counter()
-    response_text, prompt_tokens, completion_tokens = generate_query(messages, max_tokens)
+    query, prompt_tokens, completion_tokens = generate_query(messages, max_tokens)
     elapsed_ms = (time.perf_counter() - start_time) * 1000
+    if query is None:
+        return None
 
     return RoutedResult(
-        query=response_text,
+        query=query,
         path="model",
         confidence=0.0,
         fallback_reason=None,
@@ -615,6 +634,7 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
     fallback_reason: str | None = None
     pipeline_debug: PipelineDebugInfo | None = None
     pipeline_confidence: float | None = None
+    pipeline_routed: RoutedResult | None = None
 
     if ROUTING_MODE != "model" and PIPELINE_AVAILABLE:
         routed, error_reason = run_pipeline(nl_query, reference_year)
@@ -639,7 +659,7 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
                 _log_routing(request_id, nl_query, routed)
                 return routed
 
-            schedule_shadow(request_id, nl_query, regex_intent, "model", reference_year)
+            pipeline_routed = routed
             pipeline_debug = routed.pipeline_debug
             pipeline_confidence = routed.confidence
             fallback_reason = _low_confidence_reason(routed)
@@ -649,6 +669,24 @@ def route_query(messages: list[ChatMessage], max_tokens: int = 256) -> RoutedRes
                 raise HTTPException(status_code=500, detail=f"Pipeline failed: {error_reason}")
 
     routed = run_model(messages, max_tokens)
+    if routed is None:
+        if pipeline_routed is None:
+            reasons = [fallback_reason] if fallback_reason else []
+            detail = "; ".join([*reasons, "model output held no query"])
+            raise HTTPException(status_code=502, detail=detail)
+        pipeline_routed.fallback_reason = (
+            f"{fallback_reason}; model output held no query, served the pipeline result"
+        )
+        logger.warning("Model output held no query; serving the pipeline result")
+        schedule_shadow(
+            request_id, nl_query, pipeline_routed.pipeline_result.intent, "pipeline", reference_year
+        )
+        _log_routing(request_id, nl_query, pipeline_routed)
+        return pipeline_routed
+    if pipeline_routed is not None:
+        schedule_shadow(
+            request_id, nl_query, pipeline_routed.pipeline_result.intent, "model", reference_year
+        )
     routed.fallback_reason = fallback_reason
     routed.pipeline_debug = pipeline_debug
     routed.pipeline_confidence = pipeline_confidence
