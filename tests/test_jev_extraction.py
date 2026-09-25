@@ -659,7 +659,6 @@ class TestRejectedFacility:
 
 
 class TestBareYear:
-    """A year with no "in", "since" or "before" is offered to Jev (bead nls-finetune-scix-a9r)."""
 
     @pytest.mark.parametrize(
         ("text", "year"),

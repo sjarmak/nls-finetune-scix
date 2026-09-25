@@ -280,13 +280,6 @@ def build_extraction_questions(
 
 
 def bare_year(text: str, intent: IntentSpec, reference_year: int | None = None) -> int | None:
-    """The first plausible year in ``text`` when the regex found no explicit years.
-
-    "Jensen, E. 2020" and "hubble 1929" carry a year with no "in" or "since";
-    so does "the Planck 2018 results", where it is a name. Jev decides which
-    (``publication_year``). Catalog numbers (PSR 1913+16, SN 1987A) are not
-    candidates, nor are years before 1800 or more than five years ahead.
-    """
     if intent.year_from is not None or intent.year_to is not None:
         return None
     latest = (reference_year if reference_year is not None else datetime.now(UTC).year) + 5
@@ -469,7 +462,6 @@ def _surnames(run: list[str]) -> list[str]:
 
 
 def _run_candidates(span: str, run: list[str]) -> list[str]:
-    """One span for a run of up to three surnames with its initials; single words otherwise too."""
     full = _surnames(run)
     if not full:
         return []
@@ -479,7 +471,6 @@ def _run_candidates(span: str, run: list[str]) -> list[str]:
 
 
 def _lowercase_runs(text: str, n: int) -> list[list[str]]:
-    """Runs of ``n`` adjacent content words of an all-lowercase request."""
     from .ner import STOPWORDS
 
     if any(c.isupper() for c in text):
@@ -493,12 +484,10 @@ def _lowercase_runs(text: str, n: int) -> list[list[str]]:
 
 
 def _lowercase_pairs(text: str) -> list[str]:
-    """Adjacent content-word pairs of an all-lowercase request (``sara seager exoplanets``)."""
     return [" ".join(run) for run in _lowercase_runs(text, 2)]
 
 
 def _lowercase_triples(text: str) -> list[str]:
-    """Adjacent content-word triples of an all-lowercase request (``jocelyn bell burnell``)."""
     return [" ".join(run) for run in _lowercase_runs(text, 3)]
 
 
