@@ -4,7 +4,7 @@
 
 To reject or fix an item, edit it in the JSON (or send the list of IDs to reject). `amb` marks items where a second reading is also reasonable; the note after the table says which.
 
-One item deliberately returns 0: `kw-st-001` ("accomazzi europa"), the motivating example. Accomazzi has no abstract mentioning Europa; `author:"Accomazzi" abs:europe` finds 7.
+Approved by Stephanie on 2026-09-25. On review, `kw-st-001` was reworded from "accomazzi europa" (0 hits: Accomazzi has no abstract mentioning Europa) to "accomazzi europe" (7 hits); a mission after a surname stays labelled as topic words.
 
 Conventions: surname-only authors are `"Last"`, full names `"Last, First"`; a facility typed as a filter is a bibgroup, a mission paired with a surname is the topic; objects are abs: terms; operator is none and first_author false throughout.
 
@@ -15,7 +15,7 @@ A bare surname followed by a topic. Check: is the surname a real author with pap
 
 | id | query | intended meaning | gold query | hits | amb |
 |---|---|---|---|---|---|
-| kw-st-001 | accomazzi europa | Papers by Accomazzi about Europa. | `author:"Accomazzi" abs:europa` | 0 |  |
+| kw-st-001 | accomazzi europe | Papers by Accomazzi about Europe. | `author:"Accomazzi" abs:europe` | 7 |  |
 | kw-st-002 | casey dusty star forming galaxies | Papers by Casey on dusty star-forming galaxies. | `author:"Casey" abs:"dusty star forming galaxies"` | 63 |  |
 | kw-st-003 | seager biosignature gases | Papers by Seager on biosignature gases. | `author:"Seager" abs:"biosignature gases"` | 50 |  |
 | kw-st-004 | kurtz bibliometrics | Papers by Kurtz on bibliometrics. | `author:"Kurtz" abs:bibliometrics` | 9 |  |

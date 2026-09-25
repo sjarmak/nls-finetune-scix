@@ -2,7 +2,7 @@
  "schema": "keyword-queries-v1",
  "purpose": "Terse, unfielded Google Scholar style keyword queries (e.g. 'accomazzi europa') whose main difficulty is disambiguation: author surnames versus missions and telescopes named after people, eponymous scientific terms, astronomical objects, facility filters, years and topic phrases. Scored by scripts/evaluate_keyword_queries.py.",
  "drafted_by": "Claude Opus 5.5 on 2026-09-25; drafts only",
- "review_status": "pending review by Stephanie",
+ "review_status": "approved by Stephanie on 2026-09-25 (mission after a surname labelled as topic; kw-st-001 reworded to 'accomazzi europe')",
  "strata": {
   "surname_topic": 15,
   "surname_mission": 15,
@@ -31,14 +31,14 @@
   {
    "id": "kw-st-001",
    "stratum": "surname_topic",
-   "query": "accomazzi europa",
-   "intent": "Papers by Accomazzi about Europa.",
+   "query": "accomazzi europe",
+   "intent": "Papers by Accomazzi about Europe.",
    "gold": {
     "authors": [
      "Accomazzi"
     ],
     "topic_terms": [
-     "europa"
+     "europe"
     ],
     "bibgroup": [],
     "object": [],
@@ -47,10 +47,10 @@
     "operator": "none",
     "first_author": false
    },
-   "gold_query": "author:\"Accomazzi\" abs:europa",
-   "gold_hits": 0,
+   "gold_query": "author:\"Accomazzi\" abs:europe",
+   "gold_hits": 7,
    "ambiguous": false,
-   "note": "Kept as the motivating example: the intended reading returns 0 in ADS (Accomazzi has no abstract mentioning Europa; author:\"Accomazzi\" abs:europe finds 7, which may be what was meant)."
+   "note": "Reworded on review (2026-09-25) from 'accomazzi europa', whose intended reading finds 0 in ADS (Accomazzi has no abstract mentioning Europa). Same test: a lowercase surname next to a place name."
   },
   {
    "id": "kw-st-002",
