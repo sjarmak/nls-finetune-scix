@@ -702,7 +702,9 @@ STOPWORDS: set[str] = {
 # =============================================================================
 
 
-def extract_intent(text: str, reference_year: int | None = None) -> IntentSpec:
+def extract_intent(
+    text: str, reference_year: int | None = None, keep_facility_words: bool = False
+) -> IntentSpec:
     """Extract structured intent from natural language search query.
 
     This is the main NER function that parses user input into an IntentSpec.
@@ -712,6 +714,8 @@ def extract_intent(text: str, reference_year: int | None = None) -> IntentSpec:
         text: Natural language search query from user
         reference_year: Year that relative phrases ("last 5 years", "since 2020")
             count back from; defaults to the current year
+        keep_facility_words: Leave bibgroup names in the topic phrase, where
+            they were written, while still setting ``bibgroup``
 
     Returns:
         IntentSpec with extracted fields and validated values
@@ -739,7 +743,9 @@ def extract_intent(text: str, reference_year: int | None = None) -> IntentSpec:
 
     # Extract operator (FIRST - so we can remove operator phrases from text)
     operator, working_text = _extract_operator(working_text)
-    return _extract_fields(original_text, working_text, operator, reference_year, book_review)
+    return _extract_fields(
+        original_text, working_text, operator, reference_year, book_review, keep_facility_words
+    )
 
 
 def _strip_book_review(text: str) -> tuple[str, bool]:
@@ -752,17 +758,27 @@ def _strip_book_review(text: str) -> tuple[str, bool]:
 
 
 def extract_intent_with_operator(
-    text: str, operator: str | None, reference_year: int | None = None
+    text: str,
+    operator: str | None,
+    reference_year: int | None = None,
+    keep_facility_words: bool = False,
 ) -> IntentSpec:
     """Run every extractor except operator gating, with the operator decided elsewhere.
 
     Used by classifier-backed intent backends: the operator comes from the
     classifier, and the operator's removal patterns are still applied so the
-    triggering phrase does not leak into the topic terms.
+    triggering phrase does not leak into the topic terms. ``keep_facility_words``
+    is as for :func:`extract_intent`.
     """
     original_text = text.strip()
     working_text = _remove_operator_phrases(original_text, operator)
-    return _extract_fields(original_text, working_text, operator, reference_year)
+    return _extract_fields(
+        original_text,
+        working_text,
+        operator,
+        reference_year,
+        keep_facility_words=keep_facility_words,
+    )
 
 
 def _extract_fields(
@@ -771,6 +787,7 @@ def _extract_fields(
     operator: str | None,
     reference_year: int | None = None,
     book_review: bool = False,
+    keep_facility_words: bool = False,
 ) -> IntentSpec:
     """Years, authors, enum fields and topics from text with the operator phrase removed.
 
@@ -778,6 +795,9 @@ def _extract_fields(
     from the text. The doctype is then bookreview, and any "book" left in the
     text names what is reviewed ("reviews of cosmology textbooks"), not a
     second doctype.
+
+    With ``keep_facility_words`` the bibgroup names stay in the text the
+    topic is taken from; a classifier decides whether they name a facility.
     """
     intent = IntentSpec(raw_user_text=original_text, operator=operator)
 
@@ -792,7 +812,9 @@ def _extract_fields(
     intent.doctype, working_text = _extract_doctypes(working_text)
     if book_review:
         intent.doctype = (intent.doctype - {"book"}) | {"bookreview"}
-    intent.bibgroup, working_text = _extract_bibgroups(working_text)
+    intent.bibgroup, without_facilities = _extract_bibgroups(working_text)
+    if not keep_facility_words:
+        working_text = without_facilities
     intent.collection, working_text = _extract_collections(working_text)
 
     # Remaining text becomes free text terms (topics)

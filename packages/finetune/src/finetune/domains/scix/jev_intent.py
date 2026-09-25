@@ -68,7 +68,14 @@ BOOLEAN_QUESTION_IDS: tuple[str, ...] = (
 )
 PROPERTY_BOOLEANS: tuple[str, ...] = ("refereed", "openaccess", "eprint")
 
-EXTRACTION_QUESTION_IDS: tuple[str, ...] = ("recency", "first_author", "highly_cited", "topic")
+NAMED_TOPIC_QUESTION = "named_topic"
+EXTRACTION_QUESTION_IDS: tuple[str, ...] = (
+    "recency",
+    "first_author",
+    "highly_cited",
+    "topic",
+    NAMED_TOPIC_QUESTION,
+)
 MIN_JOINED_TOKENS = 3
 """Shortest topic phrase whose adjacent word pairs each get a ``join_<i>`` question."""
 MAX_JOIN_QUESTIONS = 12
@@ -212,11 +219,14 @@ def build_questions() -> dict[str, dict]:
     }
 
 
-def build_extraction_questions(topic_candidates: tuple[str, ...] = ()) -> dict[str, dict]:
+def build_extraction_questions(
+    topic_candidates: tuple[str, ...] = (), named_topic_candidates: tuple[str, ...] = ()
+) -> dict[str, dict]:
     """Questions that decide what the regex keyword rules used to.
 
     ``topic`` is asked only when there are candidates; its options are the
-    candidate phrases plus ``none``.
+    candidate phrases plus ``none``. ``named_topic`` is the same question over
+    the phrase with the facility names left in, used when Jev picks no facility.
     """
     questions = {
         "recency": _choice(
@@ -256,17 +266,23 @@ def build_extraction_questions(topic_candidates: tuple[str, ...] = ()) -> dict[s
         ),
     }
     if topic_candidates:
-        questions["topic"] = _choice(
-            "Which phrase, taken from the request, names the subject the user wants papers "
-            "about? Choose the phrase holding only the subject words: leave out words about "
-            "recency, document type, citation counts or popularity (recent, latest, new, "
-            "papers, highly cited). Choose 'none' when no offered phrase names the subject.",
-            {
-                NONE_OPTION: "No offered phrase names the subject.",
-                **{c: f"The subject is exactly '{c}'." for c in topic_candidates},
-            },
-        )
+        questions["topic"] = _topic_question(topic_candidates)
+    if named_topic_candidates:
+        questions[NAMED_TOPIC_QUESTION] = _topic_question(named_topic_candidates)
     return questions
+
+
+def _topic_question(candidates: tuple[str, ...]) -> dict:
+    return _choice(
+        "Which phrase, taken from the request, names the subject the user wants papers "
+        "about? Choose the phrase holding only the subject words: leave out words about "
+        "recency, document type, citation counts or popularity (recent, latest, new, "
+        "papers, highly cited). Choose 'none' when no offered phrase names the subject.",
+        {
+            NONE_OPTION: "No offered phrase names the subject.",
+            **{c: f"The subject is exactly '{c}'." for c in candidates},
+        },
+    )
 
 
 def _join_question(phrase: str, first: str, second: str) -> dict:
@@ -502,15 +518,15 @@ def topic_candidates(intent: IntentSpec) -> tuple[str, ...]:
     return tuple(dict.fromkeys(s for s in spans if s.lower() != NONE_OPTION))
 
 
-def word_pairs(intent: IntentSpec) -> tuple[tuple[str, int], ...]:
-    """(phrase, i) for each pair of adjacent words i, i+1 in the regex topic phrases.
+def word_pairs(*intents: IntentSpec) -> tuple[tuple[str, int], ...]:
+    """(phrase, i) for each pair of adjacent words i, i+1 in the regex topic phrases of ``intents``.
 
     Only phrases of at least ``MIN_JOINED_TOKENS`` words are split, and a
     phrase whose pairs would pass ``MAX_JOIN_QUESTIONS`` is left whole. Each
     pair becomes a ``join_<k>`` question; Jev decides which pairs are one term.
     """
     pairs: list[tuple[str, int]] = []
-    for phrase in dict.fromkeys(intent.free_text_terms):
+    for phrase in dict.fromkeys(term for intent in intents for term in intent.free_text_terms):
         gaps = len(phrase.split()) - 1
         if gaps + 1 >= MIN_JOINED_TOKENS and len(pairs) + gaps <= MAX_JOIN_QUESTIONS:
             pairs += [(phrase, i) for i in range(gaps)]
@@ -604,6 +620,7 @@ def build_request(
     bibgroup_candidates: tuple[str, ...] | None = None,
     author_candidates: tuple[str, ...] = (),
     word_pairs: tuple[tuple[str, int], ...] = (),
+    named_topic_candidates: tuple[str, ...] = (),
 ) -> dict:
     """Build the System One request body. ``context`` is merged into ``state``.
 
@@ -622,7 +639,7 @@ def build_request(
         state.update(context)
     questions = {
         **build_questions(),
-        **build_extraction_questions(topic_candidates),
+        **build_extraction_questions(topic_candidates, named_topic_candidates),
     }
     if bibgroup_candidates is not None:
         bibgroup = questions.pop("bibgroup")
@@ -809,6 +826,7 @@ class JevClient:
         bibgroup_candidates: tuple[str, ...] | None = None,
         author_candidates: tuple[str, ...] = (),
         word_pairs: tuple[tuple[str, int], ...] = (),
+        named_topic_candidates: tuple[str, ...] = (),
     ) -> JevAnswers:
         request = build_request(
             text,
@@ -818,6 +836,7 @@ class JevClient:
             bibgroup_candidates=bibgroup_candidates,
             author_candidates=author_candidates,
             word_pairs=word_pairs,
+            named_topic_candidates=named_topic_candidates,
         )
         return self.answer(request, use_cache=use_cache)
 
@@ -897,11 +916,15 @@ def apply_answers(
     reference_year: int | None = None,
     author_candidates: tuple[str, ...] = (),
     word_pairs: tuple[tuple[str, int], ...] = (),
+    named: IntentSpec | None = None,
 ) -> IntentSpec:
     """Return a new IntentSpec with Jev's answers applied.
 
     With ``author_candidates`` the authors are the reading Jev picks; their
     words leave the topic, and a regex author Jev rejects joins it.
+    ``named`` is ``intent`` with the facility names the regex took out of the
+    topic left in; when Jev picks no facility its topic phrases and the
+    ``named_topic`` answer are used, so "Hubble constant" keeps "hubble".
     With ``word_pairs`` each topic phrase is cut between the words Jev does
     not join into one term.
 
@@ -920,6 +943,10 @@ def apply_answers(
     collection = answers.choices["collection"]
     recency = answers.choices["recency"]
     topic = answers.choices.get("topic")
+    free_text_terms, or_terms = intent.free_text_terms, intent.or_terms
+    if named is not None and (bibgroup is None or bibgroup.choice == NONE_OPTION):
+        topic = answers.choices.get(NAMED_TOPIC_QUESTION)
+        free_text_terms, or_terms = named.free_text_terms, named.or_terms
     join_probability = {pair: answers.booleans[f"join_{k}"] for k, pair in enumerate(word_pairs)}
     properties = {name for name in PROPERTY_BOOLEANS if answers.booleans[name] >= boolean_threshold}
     reading = answers.choices.get(AUTHOR_READING_QUESTION) if author_candidates else None
@@ -954,7 +981,6 @@ def apply_answers(
     if year_from is None and year_to is None and recency.choice != NONE_OPTION:
         year_to = reference_year if reference_year is not None else datetime.now(UTC).year
         year_from = year_to - RECENCY_WINDOWS[recency.choice] + 1
-    free_text_terms = intent.free_text_terms
     if topic is not None:
         free_text_terms = [] if topic.choice == NONE_OPTION else [topic.choice]
     if join_probability:
@@ -979,6 +1005,7 @@ def apply_answers(
         year_from=year_from,
         year_to=year_to,
         free_text_terms=free_text_terms,
+        or_terms=or_terms,
         authors=authors,
         first_author=bool(authors) and answers.booleans["first_author"] >= boolean_threshold,
         min_citations=HIGHLY_CITED_MIN_CITATIONS if highly_cited else intent.min_citations,
@@ -1001,7 +1028,9 @@ def classify_and_extract(
     IntentSpec is sent to Jev as extra state (experiment arm D). Pass
     ``regex_intent`` when the caller already ran ``extract_intent(text)``.
     The regex topic phrase is only a candidate source: Jev picks one of its
-    sub-spans (see ``topic_candidates``). Relative dates end at
+    sub-spans (see ``topic_candidates``). When the regex took a facility name
+    out of the topic, the phrase with the name left in is offered too
+    (``named_topic``), for when Jev says no facility is meant. Relative dates end at
     ``reference_year``, default the current year.
     """
     from .ner import extract_intent, extract_intent_with_operator
@@ -1011,8 +1040,10 @@ def classify_and_extract(
     if regex_intent.confidence.get("ads_passthrough"):
         return regex_intent, None
     context = {"regex_intent": regex_intent.to_dict()} if include_regex_state else None
+    named = extract_intent(text, reference_year, keep_facility_words=True)
+    facility_in_topic = _topics(named) != _topics(regex_intent)
     names = author_candidates(text, regex_intent)
-    pairs = word_pairs(regex_intent)
+    pairs = word_pairs(regex_intent, *([named] if facility_in_topic else []))
     answers = client.classify(
         text,
         context=context,
@@ -1021,15 +1052,29 @@ def classify_and_extract(
         bibgroup_candidates=bibgroup_candidates(text),
         author_candidates=names,
         word_pairs=pairs,
+        named_topic_candidates=topic_candidates(named) if facility_in_topic else (),
     )
     operator = answers.choices["operator"].choice
-    base = extract_intent_with_operator(
-        text, None if operator == NONE_OPTION else operator, reference_year
+    operator = None if operator == NONE_OPTION else operator
+    base = extract_intent_with_operator(text, operator, reference_year)
+    named_base = (
+        extract_intent_with_operator(text, operator, reference_year, keep_facility_words=True)
+        if facility_in_topic
+        else None
     )
     intent = apply_answers(
-        base, answers, reference_year=reference_year, author_candidates=names, word_pairs=pairs
+        base,
+        answers,
+        reference_year=reference_year,
+        author_candidates=names,
+        word_pairs=pairs,
+        named=named_base,
     )
     return intent, answers
+
+
+def _topics(intent: IntentSpec) -> tuple[list[str], list[str]]:
+    return intent.free_text_terms, intent.or_terms
 
 
 def extract_intent_jev(

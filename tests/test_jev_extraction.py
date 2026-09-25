@@ -16,6 +16,7 @@ from finetune.domains.scix.jev_intent import (
     MAX_AUTHOR_CANDIDATES,
     MAX_AUTHOR_READINGS,
     MAX_JOIN_QUESTIONS,
+    NAMED_TOPIC_QUESTION,
     RECENCY_WINDOWS,
     JevResponseError,
     ads_author,
@@ -508,3 +509,103 @@ class TestPhraseSplitting:
             "supermassive black hole growth", mock_jev_client(None, [payload], [])
         )
         assert intent.free_text_terms == []
+
+
+class TestRejectedFacility:
+    """A facility name Jev does not take as a bibgroup stays in the topic, where it was written."""
+
+    @staticmethod
+    def _extract(text: str, **answers) -> tuple[IntentSpec, dict]:
+        answers.setdefault("bibgroup", choice_answer("none", {"none": 0.9}))
+        calls: list[dict] = []
+        intent, _ = classify_and_extract(
+            text, mock_jev_client(None, [jev_payload(**answers)], calls)
+        )
+        return intent, calls[0]
+
+    def test_the_named_topic_question_offers_the_facility_word(self):
+        _, request = self._extract("Hubble constant tension")
+        questions = request["questions"]
+        assert "hubble constant tension" in questions[NAMED_TOPIC_QUESTION]["criteria"]
+        assert "hubble constant tension" not in questions["topic"]["criteria"]
+        assert set(questions["bibgroup"]["criteria"]) == {"none", "HST"}
+
+    def test_no_named_topic_question_without_a_facility(self):
+        _, request = self._extract("dark matter halos")
+        assert NAMED_TOPIC_QUESTION not in request["questions"]
+
+    def test_an_accepted_facility_uses_the_topic_without_it(self):
+        alma = choice_answer("ALMA", {"none": 0.1, "ALMA": 0.9})
+        topic = choice_answer("protoplanetary disks", {"protoplanetary disks": 0.9})
+        intent, request = self._extract(
+            "ALMA observations of protoplanetary disks", bibgroup=alma, topic=topic
+        )
+        assert (
+            "alma observations protoplanetary disks"
+            in request["questions"][NAMED_TOPIC_QUESTION]["criteria"]
+        )
+        assert assemble_query(intent) == 'abs:"protoplanetary disks" bibgroup:ALMA'
+
+    def test_hubble_constant_tension(self):
+        intent, _ = self._extract("Hubble constant tension")
+        assert intent.bibgroup == set()
+        assert assemble_query(intent) == 'abs:"hubble constant tension"'
+
+    def test_hubble_constant(self):
+        intent, _ = self._extract("Hubble constant")
+        assert assemble_query(intent) == 'abs:"hubble constant"'
+
+    def test_the_hubble_tension(self):
+        topic = choice_answer("hubble tension", {"none": 0.05, "hubble tension": 0.95})
+        intent, request = self._extract(
+            "new results on the Hubble tension", **{NAMED_TOPIC_QUESTION: topic}
+        )
+        assert "hubble tension" in request["questions"][NAMED_TOPIC_QUESTION]["criteria"]
+        assert assemble_query(intent) == 'abs:"hubble tension"'
+
+    def test_hubble_constant_by_riess(self):
+        intent, _ = self._extract("Hubble constant Riess", author_reading=reading("Riess"))
+        assert intent.authors == ["Riess"]
+        assert assemble_query(intent) == 'author:"Riess" abs:"hubble constant"'
+
+    def test_herschel_next_to_a_surname(self):
+        intent, _ = self._extract("Herschel Pilbratt", author_reading=reading("Pilbratt"))
+        assert intent.bibgroup == set()
+        assert assemble_query(intent) == 'author:"Pilbratt" abs:herschel'
+
+    def test_the_gaia_mission(self):
+        intent, _ = self._extract(
+            "datasets related to the Gaia mission", author_reading=reading("none")
+        )
+        assert assemble_query(intent) == 'abs:"datasets gaia mission"'
+
+    def test_max_planck_institute(self):
+        intent, _ = self._extract("Max Planck Institute", author_reading=reading("none"))
+        assert assemble_query(intent) == 'abs:"max planck institute"'
+
+    @pytest.mark.parametrize(
+        ("text", "code", "expected"),
+        [
+            ("JWST papers on exoplanets", "JWST", "abs:exoplanets bibgroup:JWST"),
+            (
+                "Hubble observations of Cepheids",
+                "HST",
+                'abs:"observations cepheids" bibgroup:HST',
+            ),
+            (
+                "James Webb Space Telescope brown dwarfs",
+                "JWST",
+                'abs:"brown dwarfs" bibgroup:JWST',
+            ),
+        ],
+    )
+    def test_an_accepted_facility_leaves_the_topic(self, text, code, expected):
+        bibgroup = choice_answer(code, {"none": 0.1, code: 0.9})
+        intent, _ = self._extract(text, bibgroup=bibgroup, author_reading=reading("none"))
+        assert intent.bibgroup == {code}
+        assert assemble_query(intent) == expected
+
+    def test_the_regex_backend_still_takes_the_facility_out(self):
+        intent = extract_intent("Hubble constant")
+        assert intent.bibgroup == {"HST"}
+        assert intent.free_text_terms == ["constant"]

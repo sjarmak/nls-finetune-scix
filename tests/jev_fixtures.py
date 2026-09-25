@@ -14,6 +14,7 @@ from finetune.domains.scix.intent_spec import OPERATORS
 from finetune.domains.scix.jev_intent import (
     AUTHOR_READING_QUESTION,
     JEV_MODEL,
+    NAMED_TOPIC_QUESTION,
     NONE_OPTION,
     JevClient,
 )
@@ -93,8 +94,8 @@ def handler_client(
 def with_topic_answer(payload: dict, request: dict) -> dict:
     """``payload`` plus defaults for the candidate questions it leaves unanswered.
 
-    An unanswered topic gets the longest candidate, which is the whole regex
-    phrase, so tests that do not set a topic keep the regex topic. An
+    An unanswered topic (or named topic) gets the longest candidate, which is
+    the whole regex phrase, so tests that do not set a topic keep the regex topic. An
     unanswered author reading is the largest one made of names the regex
     found, so tests that do not set authors keep the regex authors. An unanswered
     word-pair question joins the pair, so topic phrases stay whole.
@@ -102,10 +103,11 @@ def with_topic_answer(payload: dict, request: dict) -> dict:
     from finetune.domains.scix.ner import extract_intent
 
     questions, answers = request["questions"], dict(payload["answers"])
-    topic = questions.get("topic")
-    if topic is not None and "topic" not in answers:
-        longest = next(option for option in topic["criteria"] if option != "none")
-        answers["topic"] = choice_answer(longest, {"none": 0.05, longest: 0.95})
+    for qid in ("topic", NAMED_TOPIC_QUESTION):
+        topic = questions.get(qid)
+        if topic is not None and qid not in answers:
+            longest = next(option for option in topic["criteria"] if option != "none")
+            answers[qid] = choice_answer(longest, {"none": 0.05, longest: 0.95})
     for qid in questions:
         if qid.startswith("join_") and qid not in answers:
             answers[qid] = noul_answer(0.9)
