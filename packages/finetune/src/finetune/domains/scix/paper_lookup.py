@@ -13,11 +13,15 @@ describing ones leave the query, the others stay outside the operator. When
 Jev picks none, or picks with confidence below the decision threshold, the
 query stays a topic search.
 
-Searches: all topic terms together, then each term alone (a descriptive word
-such as "original" narrows the combined search to nothing), every search
-keeping the author names and any explicit year. Explicit years describe the
-paper ("the Riess 1998 paper"); a recency window Jev set ("recent papers
-citing ...") stays on the citing papers, outside the operator.
+Searches: all topic terms together in abstracts, then in full text (the
+GW150914 abstract never says "LIGO"), then each term alone (a descriptive
+word such as "original" narrows the combined search to nothing), or, for a
+single phrase, each of its words ("2mass all-sky survey" is not how the 2MASS
+paper words it), then the author names without the terms (the Salpeter 1955
+record has no abstract). Every search keeps the author names and any explicit
+year. Explicit years describe the paper ("the Riess 1998 paper"); a recency
+window Jev set ("recent papers citing ...") stays on the citing papers,
+outside the operator.
 """
 
 from concurrent.futures import ThreadPoolExecutor
@@ -25,7 +29,7 @@ from dataclasses import dataclass, replace
 
 import httpx
 
-from .assembler import assemble_query
+from .assembler import _quote_value, assemble_query
 from .intent_spec import IntentSpec
 from .jev_intent import BOOLEAN_DECISION_THRESHOLD, NONE_OPTION, JevClient
 
@@ -34,6 +38,7 @@ ADS_TIMEOUT_S = 10.0
 OPERATORS_WITH_TARGET = frozenset({"citations", "references", "similar"})
 CANDIDATES_PER_SEARCH = 5
 MAX_TERM_SEARCHES = 4
+MAX_SEARCHES = 2 + MAX_TERM_SEARCHES
 MAX_CANDIDATES = 12
 PAPER_QUESTION = "paper"
 DESCRIBES_PREFIX = "describes_"
@@ -90,7 +95,7 @@ class ADSPaperSearch:
         api_key: str,
         timeout_s: float = ADS_TIMEOUT_S,
         transport: httpx.BaseTransport | None = None,
-        max_concurrent_searches: int = 1 + MAX_TERM_SEARCHES,
+        max_concurrent_searches: int = MAX_SEARCHES,
     ) -> None:
         if not api_key:
             raise ValueError("ADS_API_KEY is required for paper lookup")
@@ -162,8 +167,26 @@ def _has_explicit_year(intent: IntentSpec) -> bool:
     return "year" in intent.confidence
 
 
+def _full_text_search(describe: IntentSpec, terms: list[str]) -> str:
+    """``describe`` with ``terms`` searched in the full text instead of abstracts."""
+    full = " ".join(f"full:{_quote_value(t)}" for t in terms)
+    return " ".join(q for q in (assemble_query(describe), full) if q)
+
+
+def _narrower_term_sets(terms: list[str]) -> list[list[str]]:
+    """Each term alone, or each word of a lone phrase, capped."""
+    parts = terms[0].split() if len(terms) == 1 else terms
+    return [[p] for p in parts[:MAX_TERM_SEARCHES]] if len(parts) > 1 else []
+
+
 def candidate_searches(intent: IntentSpec) -> tuple[str, ...]:
-    """ADS queries for candidate papers: all terms together, then each term alone."""
+    """ADS queries for candidate papers, at most ``MAX_SEARCHES``.
+
+    All terms together in abstracts and in full text, then each term (or word of
+    a lone phrase) alone. Authors are searched alone only when there are no
+    terms: an author-only search offers the author's other well-cited papers,
+    which splits the pick between them.
+    """
     years = (
         {"year_from": intent.year_from, "year_to": intent.year_to}
         if _has_explicit_year(intent)
@@ -171,8 +194,13 @@ def candidate_searches(intent: IntentSpec) -> tuple[str, ...]:
     )
     describe = IntentSpec(authors=list(intent.authors), first_author=intent.first_author, **years)
     terms = intent.free_text_terms
-    term_sets = [terms] + ([[t] for t in terms[:MAX_TERM_SEARCHES]] if len(terms) > 1 else [])
-    queries = [assemble_query(replace(describe, free_text_terms=list(ts))) for ts in term_sets]
+    if not terms:
+        return tuple(q for q in [assemble_query(describe)] if q)
+    combined, *narrower = (
+        assemble_query(replace(describe, free_text_terms=list(ts)))
+        for ts in [terms, *_narrower_term_sets(terms)]
+    )
+    queries = [combined, _full_text_search(describe, terms), *narrower]
     return tuple(dict.fromkeys(q for q in queries if q))
 
 

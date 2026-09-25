@@ -20,6 +20,7 @@ from finetune.domains.scix.intent_spec import IntentSpec
 from finetune.domains.scix.paper_lookup import (
     DESCRIBES_PREFIX,
     MAX_CANDIDATES,
+    MAX_SEARCHES,
     MAX_TERM_SEARCHES,
     PAPER_QUESTION,
     ADSPaperSearch,
@@ -142,22 +143,52 @@ class TestNeedsLookup:
 
 
 class TestCandidateSearches:
-    def test_all_terms_then_each_term(self):
+    def test_all_terms_full_text_then_each_term(self):
         assert candidate_searches(paper_intent()) == (
             'abs:original abs:"trappist-1" abs:"seven-planet"',
+            'full:original full:"trappist-1" full:"seven-planet"',
             "abs:original",
             'abs:"trappist-1"',
             'abs:"seven-planet"',
         )
 
-    def test_single_term_is_one_search(self):
-        assert candidate_searches(paper_intent(free_text_terms=["planck 2018"])) == (
-            'abs:"planck 2018"',
+    def test_single_word_is_searched_in_abstracts_and_full_text(self):
+        assert candidate_searches(paper_intent(free_text_terms=["emcee"])) == (
+            "abs:emcee",
+            "full:emcee",
+        )
+
+    def test_single_phrase_is_also_searched_one_word_at_a_time(self):
+        intent = paper_intent(free_text_terms=["2mass all-sky survey"])
+        assert candidate_searches(intent) == (
+            'abs:"2mass all-sky survey"',
+            'full:"2mass all-sky survey"',
+            "abs:2mass",
+            'abs:"all-sky"',
+            "abs:survey",
         )
 
     def test_term_searches_are_capped(self):
         terms = [f"term{i}" for i in range(MAX_TERM_SEARCHES + 3)]
-        assert len(candidate_searches(paper_intent(free_text_terms=terms))) == 1 + MAX_TERM_SEARCHES
+        searches = candidate_searches(paper_intent(free_text_terms=terms))
+        assert len(searches) == 2 + MAX_TERM_SEARCHES
+
+    def test_phrase_word_searches_are_capped(self):
+        phrase = " ".join(f"word{i}" for i in range(MAX_TERM_SEARCHES + 3))
+        searches = candidate_searches(paper_intent(free_text_terms=[phrase]))
+        assert len(searches) == 2 + MAX_TERM_SEARCHES
+
+    def test_authors_are_not_searched_without_the_terms(self):
+        intent = paper_intent(free_text_terms=["radiation"], authors=["Hawking"])
+        searches = candidate_searches(intent)
+        assert 'author:"Hawking"' not in searches
+        assert all(s.startswith('author:"Hawking"') for s in searches)
+
+    def test_every_search_stays_within_the_bound(self):
+        intent = paper_intent(
+            free_text_terms=[f"term{i}" for i in range(MAX_TERM_SEARCHES + 3)], authors=["Riess"]
+        )
+        assert len(candidate_searches(intent)) == MAX_SEARCHES
 
     def test_authors_and_explicit_year_describe_the_paper(self):
         intent = paper_intent(
@@ -167,13 +198,18 @@ class TestCandidateSearches:
             year_to=2017,
             confidence={"refers_to_specific_paper": 0.9, "year": 0.9},
         )
-        (query,) = candidate_searches(intent)
+        query, full_text = candidate_searches(intent)
         assert "author:" in query and "Gillon" in query
         assert 'abs:"trappist-1"' in query and "2017" in query
+        assert 'full:"trappist-1"' in full_text and "Gillon" in full_text and "2017" in full_text
 
     def test_recency_window_is_not_searched(self):
         intent = paper_intent(free_text_terms=["ligo"], year_from=2024, year_to=2026)
-        assert candidate_searches(intent) == ("abs:ligo",)
+        assert candidate_searches(intent) == ("abs:ligo", "full:ligo")
+
+    def test_authors_without_terms_are_one_search(self):
+        intent = paper_intent(free_text_terms=[], authors=["Hawking"])
+        assert candidate_searches(intent) == ('author:"Hawking"',)
 
     def test_nothing_to_search(self):
         assert candidate_searches(paper_intent(free_text_terms=[])) == ()
@@ -281,7 +317,7 @@ class TestResolvePaper:
         assert intent.confidence[PAPER_QUESTION] == pytest.approx(0.9)
         assert lookup.bibcode == GILLON["bibcode"] and lookup.title == GILLON["title"][0]
         assert lookup.candidates == (ORMEL["bibcode"], GILLON["bibcode"])
-        assert len(lookup.searches) == 4
+        assert len(lookup.searches) == 5
 
     def test_restricting_terms_and_authors_stay_outside_the_operator(self):
         calls: list[dict] = []
