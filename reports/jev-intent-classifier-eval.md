@@ -1124,9 +1124,64 @@ changed: "amiri hill ordog" became three authors, "Smith, Match" and
 oort j is first author" went from the wrong "Author, First" to no author.
 Input tokens rise 7% to 12%, mostly from the extra lowercase candidates.
 
+## Round 10: named facilities, operator phrases and paper lookup (2026-09-25)
+
+Four follow-up fixes, merged together:
+
+- A facility word Jev rejects as a bibgroup now stays in the topic.
+  "Hubble constant tension" used to search `abs:constant tension`. It now
+  searches `abs:"hubble constant tension"`. A second topic question carries
+  the phrase with the facility word kept, and its answer is used when Jev
+  picks no bibgroup.
+- "that cite" and "which cites" after a topic are the citations operator.
+  They no longer leak "cite" into the topic.
+- "what papers does the CMB discovery paper cite" keeps the named paper as
+  the topic. It used to produce an empty query; the pipeline now reports an
+  empty query with confidence 0 and a reason instead of sending it.
+- The paper lookup also searches full text, and each word of a lone phrase
+  (the GW150914 abstract never says "LIGO"). It no longer searches the
+  authors alone when there are topic words: that offered every famous paper
+  by the author and split the pick for "the Hawking radiation paper".
+
+Arm B, round 9 in parentheses. p95 is over all rows:
+
+| dataset | input tokens | $/query | operator acc | macro-F1 | p95 ms |
+|---|---|---|---|---|---|
+| benchmark | 3,206 (3,172) | $0.000135 ($0.000133) | 0.983 (0.983) | 0.979 (0.979) | 277 (266) |
+| val | 3,389 (3,362) | $0.000142 ($0.000141) | 0.975 (0.973) | 0.871 (0.862) | 237 (231) |
+| held-out | 3,968 (3,921) | $0.000167 ($0.000165) | 0.993 (0.993) | 0.986 (0.986) | 294 (240) |
+
+The uncached p95 in the metrics files (449, 479 and 544 ms) is not
+comparable to round 9. Only 26, 28 and 11 requests changed and missed the
+cache, and most of them name a facility, so they carry the second topic
+question. On the same requests the median moved by at most 16 ms either way
+(benchmark 156 to 172, val 166 to 154, held-out 159 to 172). The slowest
+requests are facility citations ("papers citing Hubble deep field
+observations", 618 ms), within the 600 ms criterion at p95 but not always
+per request. The four evals ran at once, which may add to the tail.
+
+Paper lookup, on 25 probes that name one paper: 15 picked the right paper
+before, 20 after (LIGO GW150914, 2MASS, astropy, Salpeter, Millennium
+simulation). Still missed: SDSS DR7, WMAP 9-year, the first exoplanet
+around a sun-like star, the Kepler mission paper, and Penzias and Wilson
+(no abstract in ADS, so no abstract search can find it).
+
+Keyword queries (the 150-item set in `data/datasets/benchmark/keyword_queries.json`,
+Jev backend, round 9 code in parentheses): exact query 0.647 (0.613), topic
+0.76 (0.72), authors 0.873 (0.873), any ADS hits 0.933 (0.927).
+
+"kurtz citation analysis" no longer gets `citations(...)`; Jev answers none
+on every run. Its operator confidence is 0.45 to 0.64, so some runs fall
+below the server's 0.50 gate and go to the fine-tuned model, which also
+returns `author:"kurtz" abs:"citation analysis"`.
+
+Open: a request with two facilities ("recent JWST papers on the Hubble
+tension") still loses the second one, and borderline phrase joins can flip
+between runs ("Gemini spectroscopy of quasars").
+
 ## Criteria table
 
-Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criterion 4; rounds 5 to 9 for criterion 5 and the notes on criterion 2.
+Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criterion 4; rounds 5 to 10 for criterion 5 and the notes on criterion 2.
 
 | # | criterion | result | status |
 |---|---|---|---|
@@ -1134,7 +1189,7 @@ Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); ro
 | 2 | B false-positive rate on operator-negative stratum ≤ 2% | 0 of 40 (B, D and E, rounds 2 to 4); on all gold-none items 1 of 106 (3 of 106), "the review". Round 5: 1 of 40 (2.5%), "foundational models for spectral classification" read as `useful`. Rounds 6 and 7: 0 of 40 | met; missed by one item in round 5 only |
 | 3 | B selective accuracy ≥ 95% at 90% coverage | 1.000 held-out, 1.000 benchmark, 0.995 (0.988) val | met |
 | 4 | end-to-end semantic match: no drop on benchmark, rise on held-out | Round 4, scored with the fixed rule (empty gold excluded): benchmark jev_gated 38.1% vs regex 31.7%, +6.4 points, paired 37 wins to 8 on 45 differing items; val 21.2% vs 12.3%, paired 106 to 14. Round 3 on the same rule: benchmark -2.6 points (paired 1 to 8), val level. Held-out has no gold queries; as a proxy the jev_gated pipeline serves 139 of 152 at 0.986 operator accuracy vs 141 at 0.688 for regex | no drop met on benchmark (round 4); rise shown on val and on held-out operator accuracy, not end to end on held-out |
-| 5 | E p95 added latency ≤ 600 ms, mean cost ≤ $0.0001/query | Round 5: E $0.000075 benchmark, $0.000105 val, $0.000115 held-out; B (Jev on every query) $0.000110 / $0.000113 / $0.000115. Round 4: E $0.000108 / $0.000149 / $0.000163. p95 202 to 322 ms (B, round 5). Round 6 (B, the rollout backend): $0.000114 / $0.000118 / $0.000127, p95 221 ms held-out. Round 7: $0.000119 / $0.000126 / $0.000140, p95 260 ms held-out. Round 8: $0.000123 / $0.000132 / $0.000147, p95 260 ms held-out. Round 9: $0.000133 / $0.000141 / $0.000165 | latency met; cost met on benchmark only (E), 33% to 65% over for B in round 9 |
+| 5 | E p95 added latency ≤ 600 ms, mean cost ≤ $0.0001/query | Round 5: E $0.000075 benchmark, $0.000105 val, $0.000115 held-out; B (Jev on every query) $0.000110 / $0.000113 / $0.000115. Round 4: E $0.000108 / $0.000149 / $0.000163. p95 202 to 322 ms (B, round 5). Round 6 (B, the rollout backend): $0.000114 / $0.000118 / $0.000127, p95 221 ms held-out. Round 7: $0.000119 / $0.000126 / $0.000140, p95 260 ms held-out. Round 8: $0.000123 / $0.000132 / $0.000147, p95 260 ms held-out. Round 9: $0.000133 / $0.000141 / $0.000165. Round 10: $0.000135 / $0.000142 / $0.000167, p95 294 ms held-out (all rows) | latency met; cost met on benchmark only (E), 35% to 67% over for B in round 10 |
 
 ## Caveats
 
@@ -1212,6 +1267,8 @@ Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); ro
 - Round 7 (per-pair phrase splitting): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round7_2026-09-25{.jsonl,_metrics.json}` (arm B); end to end `semantic_overlap_pipeline_jev_{benchmark,val}_round7{base,}_2026-09-25.json` (`round7base` run from the parent commit).
 - Round 8 (which names are people): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round8_2026-09-25{.jsonl,_metrics.json}` (arm B).
 - Round 9 (lowercase names, keyword queries read as citations): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round9_2026-09-25{.jsonl,_metrics.json}` (arm B).
+- Round 10 (named facilities, operator phrases, paper lookup): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round10_2026-09-25{.jsonl,_metrics.json}` (arm B).
+- Keyword queries: `data/datasets/evaluations/keyword_queries_{regex,jev}_2026-09-25{.jsonl,_metrics.json}` (round 9 code) and `keyword_queries_jev_2026-09-25-round10{.jsonl,_metrics.json}`; review sheet `reports/keyword-query-review-sheet.md`.
 - Request caches: `data/cache/jev_systemone.jsonl`, `data/cache/llm_intent.jsonl`.
 - Labels: `data/datasets/evaluations/intent_labels.jsonl`.
 - Held-out paraphrases (approved): `data/datasets/benchmark/heldout_paraphrases.json`; review sheet `reports/heldout-paraphrase-review-sheet.md`; approval recorded with `scripts/approve_heldout_paraphrases.py`.
