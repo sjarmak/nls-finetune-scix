@@ -1,0 +1,3446 @@
+{
+ "schema": "keyword-queries-v1",
+ "purpose": "Terse, unfielded Google Scholar style keyword queries (e.g. 'accomazzi europa') whose main difficulty is disambiguation: author surnames versus missions and telescopes named after people, eponymous scientific terms, astronomical objects, facility filters, years and topic phrases. Scored by scripts/evaluate_keyword_queries.py.",
+ "drafted_by": "Claude Opus 5.5 on 2026-09-25; drafts only",
+ "review_status": "pending review by Stephanie",
+ "strata": {
+  "surname_topic": 15,
+  "surname_mission": 15,
+  "eponymous_term": 15,
+  "multi_surname": 15,
+  "fullname_topic": 15,
+  "facility_topic": 15,
+  "object_topic": 15,
+  "topic_year": 15,
+  "pure_topic": 15,
+  "tricky": 15
+ },
+ "label_conventions": {
+  "authors": "ADS author strings: 'Last' for a bare surname, 'Last, First' when the query gives a first name. Scoring compares surname plus first initial, ignoring case, accents, hyphens and comma order; an initial is only compared when both sides give one.",
+  "topic_terms": "the abs: phrases, grouped as a searcher would quote them. Scored as an exact set of phrases (grouping matters) and as word-level F1 (grouping ignored). An astronomical object is kept in topic_terms as an abs: term.",
+  "object": "metadata only, not scored: which topic_terms name an astronomical object. gold_query writes objects as abs: terms because the ADS search API rejects object: ('undefined field object').",
+  "bibgroup": "a facility typed as a filter in front of a topic ('jwst brown dwarfs') is its bibgroup; a mission paired with a surname ('jarmak cassini') is the topic, and a facility inside a name ('hubble deep field', 'chandra deep field south') is a topic phrase. Items where the other reading is reasonable are marked ambiguous.",
+  "years": "year_from/year_to inclusive; a single year is year_from == year_to; 'since Y' is [Y, null]; 'before Y' is [null, Y-1]; a decade is its ten years.",
+  "operator": "none for every item; no query asks for a result-set transform.",
+  "first_author": "false for every item; no query asks for first-author position.",
+  "gold_query": "assembled from the gold fields by the repo's assemble_query, except that a '*' inside a quoted phrase is escaped (the assembler leaves 'sgr a*' unescaped and ADS then finds nothing).",
+  "gold_hits": "ADS numFound for gold_query (rows=0) on 2026-09-25.",
+  "ambiguous": "true when a second reading is also reasonable; the note says which."
+ },
+ "items": [
+  {
+   "id": "kw-st-001",
+   "stratum": "surname_topic",
+   "query": "accomazzi europa",
+   "intent": "Papers by Accomazzi about Europa.",
+   "gold": {
+    "authors": [
+     "Accomazzi"
+    ],
+    "topic_terms": [
+     "europa"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Accomazzi\" abs:europa",
+   "gold_hits": 0,
+   "ambiguous": false,
+   "note": "Kept as the motivating example: the intended reading returns 0 in ADS (Accomazzi has no abstract mentioning Europa; author:\"Accomazzi\" abs:europe finds 7, which may be what was meant)."
+  },
+  {
+   "id": "kw-st-002",
+   "stratum": "surname_topic",
+   "query": "casey dusty star forming galaxies",
+   "intent": "Papers by Casey on dusty star-forming galaxies.",
+   "gold": {
+    "authors": [
+     "Casey"
+    ],
+    "topic_terms": [
+     "dusty star forming galaxies"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Casey\" abs:\"dusty star forming galaxies\"",
+   "gold_hits": 63,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-st-003",
+   "stratum": "surname_topic",
+   "query": "seager biosignature gases",
+   "intent": "Papers by Seager on biosignature gases.",
+   "gold": {
+    "authors": [
+     "Seager"
+    ],
+    "topic_terms": [
+     "biosignature gases"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Seager\" abs:\"biosignature gases\"",
+   "gold_hits": 50,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-st-004",
+   "stratum": "surname_topic",
+   "query": "kurtz bibliometrics",
+   "intent": "Papers by Kurtz on bibliometrics.",
+   "gold": {
+    "authors": [
+     "Kurtz"
+    ],
+    "topic_terms": [
+     "bibliometrics"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Kurtz\" abs:bibliometrics",
+   "gold_hits": 9,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-st-005",
+   "stratum": "surname_topic",
+   "query": "Riess type ia supernovae",
+   "intent": "Papers by Riess on Type Ia supernovae.",
+   "gold": {
+    "authors": [
+     "Riess"
+    ],
+    "topic_terms": [
+     "type ia supernovae"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Riess\" abs:\"type ia supernovae\"",
+   "gold_hits": 391,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-st-006",
+   "stratum": "surname_topic",
+   "query": "madau star formation history",
+   "intent": "Papers by Madau on the cosmic star formation history.",
+   "gold": {
+    "authors": [
+     "Madau"
+    ],
+    "topic_terms": [
+     "star formation history"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Madau\" abs:\"star formation history\"",
+   "gold_hits": 24,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-st-007",
+   "stratum": "surname_topic",
+   "query": "bullock dark matter substructure",
+   "intent": "Papers by Bullock on dark matter substructure.",
+   "gold": {
+    "authors": [
+     "Bullock"
+    ],
+    "topic_terms": [
+     "dark matter substructure"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Bullock\" abs:\"dark matter substructure\"",
+   "gold_hits": 9,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-st-008",
+   "stratum": "surname_topic",
+   "query": "heckman agn feedback",
+   "intent": "Papers by Heckman on AGN feedback.",
+   "gold": {
+    "authors": [
+     "Heckman"
+    ],
+    "topic_terms": [
+     "agn feedback"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Heckman\" abs:\"agn feedback\"",
+   "gold_hits": 20,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-st-009",
+   "stratum": "surname_topic",
+   "query": "Kormendy supermassive black holes",
+   "intent": "Papers by Kormendy on supermassive black holes.",
+   "gold": {
+    "authors": [
+     "Kormendy"
+    ],
+    "topic_terms": [
+     "supermassive black holes"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Kormendy\" abs:\"supermassive black holes\"",
+   "gold_hits": 56,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-st-010",
+   "stratum": "surname_topic",
+   "query": "loeb first stars",
+   "intent": "Papers by Loeb on the first stars.",
+   "gold": {
+    "authors": [
+     "Loeb"
+    ],
+    "topic_terms": [
+     "first stars"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Loeb\" abs:\"first stars\"",
+   "gold_hits": 100,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-st-011",
+   "stratum": "surname_topic",
+   "query": "batygin planet nine",
+   "intent": "Papers by Batygin on Planet Nine.",
+   "gold": {
+    "authors": [
+     "Batygin"
+    ],
+    "topic_terms": [
+     "planet nine"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Batygin\" abs:\"planet nine\"",
+   "gold_hits": 27,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-st-012",
+   "stratum": "surname_topic",
+   "query": "charbonneau transiting planets",
+   "intent": "Papers by Charbonneau on transiting planets.",
+   "gold": {
+    "authors": [
+     "Charbonneau"
+    ],
+    "topic_terms": [
+     "transiting planets"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Charbonneau\" abs:\"transiting planets\"",
+   "gold_hits": 188,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-st-013",
+   "stratum": "surname_topic",
+   "query": "rigby lensed galaxies",
+   "intent": "Papers by Rigby on gravitationally lensed galaxies.",
+   "gold": {
+    "authors": [
+     "Rigby"
+    ],
+    "topic_terms": [
+     "lensed galaxies"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Rigby\" abs:\"lensed galaxies\"",
+   "gold_hits": 147,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-st-014",
+   "stratum": "surname_topic",
+   "query": "Tremaine secular dynamics",
+   "intent": "Papers by Tremaine on secular dynamics.",
+   "gold": {
+    "authors": [
+     "Tremaine"
+    ],
+    "topic_terms": [
+     "secular dynamics"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Tremaine\" abs:\"secular dynamics\"",
+   "gold_hits": 3,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-st-015",
+   "stratum": "surname_topic",
+   "query": "shen quasar black hole masses",
+   "intent": "Papers by Shen on quasar black hole masses.",
+   "gold": {
+    "authors": [
+     "Shen"
+    ],
+    "topic_terms": [
+     "quasar black hole masses"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Shen\" abs:\"quasar black hole masses\"",
+   "gold_hits": 14,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-sm-001",
+   "stratum": "surname_mission",
+   "query": "jarmak cassini",
+   "intent": "Papers by Jarmak about the Cassini mission or its data.",
+   "gold": {
+    "authors": [
+     "Jarmak"
+    ],
+    "topic_terms": [
+     "cassini"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Jarmak\" abs:cassini",
+   "gold_hits": 6,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-sm-002",
+   "stratum": "surname_mission",
+   "query": "spilker cassini",
+   "intent": "Papers by Spilker about the Cassini mission.",
+   "gold": {
+    "authors": [
+     "Spilker"
+    ],
+    "topic_terms": [
+     "cassini"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Spilker\" abs:cassini",
+   "gold_hits": 302,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-sm-003",
+   "stratum": "surname_mission",
+   "query": "bolton juno",
+   "intent": "Papers by Bolton about the Juno mission.",
+   "gold": {
+    "authors": [
+     "Bolton"
+    ],
+    "topic_terms": [
+     "juno"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Bolton\" abs:juno",
+   "gold_hits": 1094,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-sm-004",
+   "stratum": "surname_mission",
+   "query": "stern new horizons",
+   "intent": "Papers by Stern about the New Horizons mission.",
+   "gold": {
+    "authors": [
+     "Stern"
+    ],
+    "topic_terms": [
+     "new horizons"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Stern\" abs:\"new horizons\"",
+   "gold_hits": 862,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-sm-005",
+   "stratum": "surname_mission",
+   "query": "brown gaia",
+   "intent": "Papers by Brown about the Gaia mission.",
+   "gold": {
+    "authors": [
+     "Brown"
+    ],
+    "topic_terms": [
+     "gaia"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Brown\" abs:gaia",
+   "gold_hits": 329,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-sm-006",
+   "stratum": "surname_mission",
+   "query": "prusti gaia",
+   "intent": "Papers by Prusti about the Gaia mission.",
+   "gold": {
+    "authors": [
+     "Prusti"
+    ],
+    "topic_terms": [
+     "gaia"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Prusti\" abs:gaia",
+   "gold_hits": 117,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-sm-007",
+   "stratum": "surname_mission",
+   "query": "Tauber planck",
+   "intent": "Papers by Tauber about the Planck mission.",
+   "gold": {
+    "authors": [
+     "Tauber"
+    ],
+    "topic_terms": [
+     "planck"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Tauber\" abs:planck",
+   "gold_hits": 230,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-sm-008",
+   "stratum": "surname_mission",
+   "query": "laureijs euclid",
+   "intent": "Papers by Laureijs about the Euclid mission.",
+   "gold": {
+    "authors": [
+     "Laureijs"
+    ],
+    "topic_terms": [
+     "euclid"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Laureijs\" abs:euclid",
+   "gold_hits": 112,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-sm-009",
+   "stratum": "surname_mission",
+   "query": "spergel roman",
+   "intent": "Papers by Spergel about the Roman Space Telescope.",
+   "gold": {
+    "authors": [
+     "Spergel"
+    ],
+    "topic_terms": [
+     "roman"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Spergel\" abs:roman",
+   "gold_hits": 13,
+   "ambiguous": true,
+   "note": "Many of Spergel's Roman papers predate the name and say WFIRST; abs:roman misses them."
+  },
+  {
+   "id": "kw-sm-010",
+   "stratum": "surname_mission",
+   "query": "rigby jwst",
+   "intent": "Papers by Rigby about JWST.",
+   "gold": {
+    "authors": [
+     "Rigby"
+    ],
+    "topic_terms": [
+     "jwst"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Rigby\" abs:jwst",
+   "gold_hits": 109,
+   "ambiguous": true,
+   "note": "bibgroup:JWST (papers using JWST data) is also reasonable; gold treats the mission as the topic, as in the rest of this stratum."
+  },
+  {
+   "id": "kw-sm-011",
+   "stratum": "surname_mission",
+   "query": "Borucki kepler",
+   "intent": "Papers by Borucki about the Kepler mission.",
+   "gold": {
+    "authors": [
+     "Borucki"
+    ],
+    "topic_terms": [
+     "kepler"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Borucki\" abs:kepler",
+   "gold_hits": 304,
+   "ambiguous": true,
+   "note": "bibgroup:Kepler is also reasonable; gold treats the mission as the topic."
+  },
+  {
+   "id": "kw-sm-012",
+   "stratum": "surname_mission",
+   "query": "pilbratt herschel",
+   "intent": "Papers by Pilbratt about the Herschel Space Observatory.",
+   "gold": {
+    "authors": [
+     "Pilbratt"
+    ],
+    "topic_terms": [
+     "herschel"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Pilbratt\" abs:herschel",
+   "gold_hits": 87,
+   "ambiguous": true,
+   "note": "bibgroup:Herschel is also reasonable; gold treats the mission as the topic."
+  },
+  {
+   "id": "kw-sm-013",
+   "stratum": "surname_mission",
+   "query": "weisskopf chandra",
+   "intent": "Papers by Weisskopf about the Chandra X-ray Observatory.",
+   "gold": {
+    "authors": [
+     "Weisskopf"
+    ],
+    "topic_terms": [
+     "chandra"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Weisskopf\" abs:chandra",
+   "gold_hits": 192,
+   "ambiguous": true,
+   "note": "bibgroup:Chandra is also reasonable; gold treats the mission as the topic."
+  },
+  {
+   "id": "kw-sm-014",
+   "stratum": "surname_mission",
+   "query": "ricker tess",
+   "intent": "Papers by Ricker about the TESS mission.",
+   "gold": {
+    "authors": [
+     "Ricker"
+    ],
+    "topic_terms": [
+     "tess"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Ricker\" abs:tess",
+   "gold_hits": 432,
+   "ambiguous": true,
+   "note": "bibgroup:TESS is also reasonable; gold treats the mission as the topic."
+  },
+  {
+   "id": "kw-sm-015",
+   "stratum": "surname_mission",
+   "query": "glassmeier rosetta",
+   "intent": "Papers by Glassmeier about the Rosetta mission.",
+   "gold": {
+    "authors": [
+     "Glassmeier"
+    ],
+    "topic_terms": [
+     "rosetta"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Glassmeier\" abs:rosetta",
+   "gold_hits": 161,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-001",
+   "stratum": "eponymous_term",
+   "query": "chandrasekhar limit white dwarfs",
+   "intent": "Papers on the Chandrasekhar limit for white dwarfs; Chandrasekhar is not an author here.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "chandrasekhar limit",
+     "white dwarfs"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"chandrasekhar limit\" abs:\"white dwarfs\"",
+   "gold_hits": 530,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-002",
+   "stratum": "eponymous_term",
+   "query": "einstein ring strong lensing",
+   "intent": "Papers on Einstein rings in strong gravitational lensing.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "einstein ring",
+     "strong lensing"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"einstein ring\" abs:\"strong lensing\"",
+   "gold_hits": 244,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-003",
+   "stratum": "eponymous_term",
+   "query": "hawking radiation primordial black holes",
+   "intent": "Papers on Hawking radiation from primordial black holes.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "hawking radiation",
+     "primordial black holes"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"hawking radiation\" abs:\"primordial black holes\"",
+   "gold_hits": 321,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-004",
+   "stratum": "eponymous_term",
+   "query": "roche lobe overflow",
+   "intent": "Papers on Roche lobe overflow in binaries.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "roche lobe overflow"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"roche lobe overflow\"",
+   "gold_hits": 1513,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-005",
+   "stratum": "eponymous_term",
+   "query": "jeans mass molecular clouds",
+   "intent": "Papers on the Jeans mass in molecular clouds.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "jeans mass",
+     "molecular clouds"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"jeans mass\" abs:\"molecular clouds\"",
+   "gold_hits": 184,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-006",
+   "stratum": "eponymous_term",
+   "query": "kozai-lidov hot jupiters",
+   "intent": "Papers on Kozai-Lidov migration of hot Jupiters.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "kozai-lidov",
+     "hot jupiters"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"kozai-lidov\" abs:\"hot jupiters\"",
+   "gold_hits": 70,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-007",
+   "stratum": "eponymous_term",
+   "query": "Tully-Fisher relation",
+   "intent": "Papers on the Tully-Fisher relation.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "tully-fisher relation"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"tully-fisher relation\"",
+   "gold_hits": 3427,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-008",
+   "stratum": "eponymous_term",
+   "query": "faber-jackson relation elliptical galaxies",
+   "intent": "Papers on the Faber-Jackson relation of elliptical galaxies.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "faber-jackson relation",
+     "elliptical galaxies"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"faber-jackson relation\" abs:\"elliptical galaxies\"",
+   "gold_hits": 66,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-009",
+   "stratum": "eponymous_term",
+   "query": "bondi accretion",
+   "intent": "Papers on Bondi accretion.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "bondi accretion"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"bondi accretion\"",
+   "gold_hits": 414,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-010",
+   "stratum": "eponymous_term",
+   "query": "eddington ratio agn",
+   "intent": "Papers on Eddington ratios of AGN.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "eddington ratio",
+     "agn"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"eddington ratio\" abs:agn",
+   "gold_hits": 1589,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-011",
+   "stratum": "eponymous_term",
+   "query": "yarkovsky effect asteroids",
+   "intent": "Papers on the Yarkovsky effect on asteroids.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "yarkovsky effect",
+     "asteroids"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"yarkovsky effect\" abs:asteroids",
+   "gold_hits": 646,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-012",
+   "stratum": "eponymous_term",
+   "query": "Kelvin-Helmholtz instability",
+   "intent": "Papers on the Kelvin-Helmholtz instability.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "kelvin-helmholtz instability"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"kelvin-helmholtz instability\"",
+   "gold_hits": 7214,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-013",
+   "stratum": "eponymous_term",
+   "query": "alfven waves solar wind",
+   "intent": "Papers on Alfven waves in the solar wind.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "alfven waves",
+     "solar wind"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"alfven waves\" abs:\"solar wind\"",
+   "gold_hits": 1505,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-014",
+   "stratum": "eponymous_term",
+   "query": "press-schechter mass function",
+   "intent": "Papers on the Press-Schechter mass function.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "press-schechter mass function"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"press-schechter mass function\"",
+   "gold_hits": 51,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ep-015",
+   "stratum": "eponymous_term",
+   "query": "lyman alpha forest",
+   "intent": "Papers on the Lyman-alpha forest.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "lyman alpha forest"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"lyman alpha forest\"",
+   "gold_hits": 15972,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ms-001",
+   "stratum": "multi_surname",
+   "query": "kurtz accomazzi",
+   "intent": "Papers co-authored by Kurtz and Accomazzi.",
+   "gold": {
+    "authors": [
+     "Kurtz",
+     "Accomazzi"
+    ],
+    "topic_terms": [],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Kurtz\" author:\"Accomazzi\"",
+   "gold_hits": 188,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ms-002",
+   "stratum": "multi_surname",
+   "query": "riess scolnic hubble constant",
+   "intent": "Papers by Riess and Scolnic on the Hubble constant.",
+   "gold": {
+    "authors": [
+     "Riess",
+     "Scolnic"
+    ],
+    "topic_terms": [
+     "hubble constant"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Riess\" author:\"Scolnic\" abs:\"hubble constant\"",
+   "gold_hits": 55,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ms-003",
+   "stratum": "multi_surname",
+   "query": "seager deming exoplanet atmospheres",
+   "intent": "Papers by Seager and Deming on exoplanet atmospheres.",
+   "gold": {
+    "authors": [
+     "Seager",
+     "Deming"
+    ],
+    "topic_terms": [
+     "exoplanet atmospheres"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Seager\" author:\"Deming\" abs:\"exoplanet atmospheres\"",
+   "gold_hits": 16,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ms-004",
+   "stratum": "multi_surname",
+   "query": "casey narayanan",
+   "intent": "Papers co-authored by Casey and Narayanan.",
+   "gold": {
+    "authors": [
+     "Casey",
+     "Narayanan"
+    ],
+    "topic_terms": [],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Casey\" author:\"Narayanan\"",
+   "gold_hits": 107,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ms-005",
+   "stratum": "multi_surname",
+   "query": "genzel gillessen galactic center",
+   "intent": "Papers by Genzel and Gillessen on the Galactic Center.",
+   "gold": {
+    "authors": [
+     "Genzel",
+     "Gillessen"
+    ],
+    "topic_terms": [
+     "galactic center"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Genzel\" author:\"Gillessen\" abs:\"galactic center\"",
+   "gold_hits": 144,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ms-006",
+   "stratum": "multi_surname",
+   "query": "madau dickinson",
+   "intent": "Papers co-authored by Madau and Dickinson (e.g. the 2014 star formation history review).",
+   "gold": {
+    "authors": [
+     "Madau",
+     "Dickinson"
+    ],
+    "topic_terms": [],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Madau\" author:\"Dickinson\"",
+   "gold_hits": 27,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ms-007",
+   "stratum": "multi_surname",
+   "query": "navarro frenk white",
+   "intent": "Papers by Navarro, Frenk and White (the NFW profile papers).",
+   "gold": {
+    "authors": [
+     "Navarro",
+     "Frenk",
+     "White"
+    ],
+    "topic_terms": [],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Navarro\" author:\"Frenk\" author:\"White\"",
+   "gold_hits": 51,
+   "ambiguous": true,
+   "note": "Could also mean the NFW profile as a topic (abs:\"navarro frenk white\" or abs:nfw); gold reads three surnames."
+  },
+  {
+   "id": "kw-ms-008",
+   "stratum": "multi_surname",
+   "query": "blandford znajek",
+   "intent": "Papers by Blandford and Znajek.",
+   "gold": {
+    "authors": [
+     "Blandford",
+     "Znajek"
+    ],
+    "topic_terms": [],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Blandford\" author:\"Znajek\"",
+   "gold_hits": 1,
+   "ambiguous": true,
+   "note": "Could also mean the Blandford-Znajek mechanism as a topic; gold reads two surnames because the query has no hyphen."
+  },
+  {
+   "id": "kw-ms-009",
+   "stratum": "multi_surname",
+   "query": "kormendy ho",
+   "intent": "Papers co-authored by Kormendy and Ho.",
+   "gold": {
+    "authors": [
+     "Kormendy",
+     "Ho"
+    ],
+    "topic_terms": [],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Kormendy\" author:\"Ho\"",
+   "gold_hits": 22,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ms-010",
+   "stratum": "multi_surname",
+   "query": "Springel Hernquist",
+   "intent": "Papers co-authored by Springel and Hernquist.",
+   "gold": {
+    "authors": [
+     "Springel",
+     "Hernquist"
+    ],
+    "topic_terms": [],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Springel\" author:\"Hernquist\"",
+   "gold_hits": 252,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ms-011",
+   "stratum": "multi_surname",
+   "query": "vogelsberger genel illustris",
+   "intent": "Papers by Vogelsberger and Genel on the Illustris simulations.",
+   "gold": {
+    "authors": [
+     "Vogelsberger",
+     "Genel"
+    ],
+    "topic_terms": [
+     "illustris"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Vogelsberger\" author:\"Genel\" abs:illustris",
+   "gold_hits": 37,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ms-012",
+   "stratum": "multi_surname",
+   "query": "rigby gladders lensed galaxies",
+   "intent": "Papers by Rigby and Gladders on lensed galaxies.",
+   "gold": {
+    "authors": [
+     "Rigby",
+     "Gladders"
+    ],
+    "topic_terms": [
+     "lensed galaxies"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Rigby\" author:\"Gladders\" abs:\"lensed galaxies\"",
+   "gold_hits": 80,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ms-013",
+   "stratum": "multi_surname",
+   "query": "el-badry rix wide binaries",
+   "intent": "Papers by El-Badry and Rix on wide binaries.",
+   "gold": {
+    "authors": [
+     "El-Badry",
+     "Rix"
+    ],
+    "topic_terms": [
+     "wide binaries"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"El-Badry\" author:\"Rix\" abs:\"wide binaries\"",
+   "gold_hits": 10,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ms-014",
+   "stratum": "multi_surname",
+   "query": "jarmak colwell saturn rings",
+   "intent": "Papers by Jarmak and Colwell on Saturn's rings.",
+   "gold": {
+    "authors": [
+     "Jarmak",
+     "Colwell"
+    ],
+    "topic_terms": [
+     "saturn rings"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Jarmak\" author:\"Colwell\" abs:\"saturn rings\"",
+   "gold_hits": 4,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ms-015",
+   "stratum": "multi_surname",
+   "query": "binney tremaine",
+   "intent": "Works co-authored by Binney and Tremaine (Galactic Dynamics).",
+   "gold": {
+    "authors": [
+     "Binney",
+     "Tremaine"
+    ],
+    "topic_terms": [],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Binney\" author:\"Tremaine\"",
+   "gold_hits": 8,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-001",
+   "stratum": "fullname_topic",
+   "query": "sara seager exoplanet atmospheres",
+   "intent": "Papers by Sara Seager on exoplanet atmospheres.",
+   "gold": {
+    "authors": [
+     "Seager, Sara"
+    ],
+    "topic_terms": [
+     "exoplanet atmospheres"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Seager, Sara\" abs:\"exoplanet atmospheres\"",
+   "gold_hits": 148,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-002",
+   "stratum": "fullname_topic",
+   "query": "Caitlin Casey submillimeter galaxies",
+   "intent": "Papers by Caitlin Casey on submillimeter galaxies.",
+   "gold": {
+    "authors": [
+     "Casey, Caitlin"
+    ],
+    "topic_terms": [
+     "submillimeter galaxies"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Casey, Caitlin\" abs:\"submillimeter galaxies\"",
+   "gold_hits": 56,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-003",
+   "stratum": "fullname_topic",
+   "query": "jane rigby gravitational lensing",
+   "intent": "Papers by Jane Rigby on gravitational lensing.",
+   "gold": {
+    "authors": [
+     "Rigby, Jane"
+    ],
+    "topic_terms": [
+     "gravitational lensing"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Rigby, Jane\" abs:\"gravitational lensing\"",
+   "gold_hits": 146,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-004",
+   "stratum": "fullname_topic",
+   "query": "adam riess cepheids",
+   "intent": "Papers by Adam Riess on Cepheids.",
+   "gold": {
+    "authors": [
+     "Riess, Adam"
+    ],
+    "topic_terms": [
+     "cepheids"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Riess, Adam\" abs:cepheids",
+   "gold_hits": 167,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-005",
+   "stratum": "fullname_topic",
+   "query": "Kareem El-Badry wide binaries",
+   "intent": "Papers by Kareem El-Badry on wide binaries.",
+   "gold": {
+    "authors": [
+     "El-Badry, Kareem"
+    ],
+    "topic_terms": [
+     "wide binaries"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"El-Badry, Kareem\" abs:\"wide binaries\"",
+   "gold_hits": 26,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-006",
+   "stratum": "fullname_topic",
+   "query": "alberto accomazzi digital libraries",
+   "intent": "Papers by Alberto Accomazzi on digital libraries.",
+   "gold": {
+    "authors": [
+     "Accomazzi, Alberto"
+    ],
+    "topic_terms": [
+     "digital libraries"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Accomazzi, Alberto\" abs:\"digital libraries\"",
+   "gold_hits": 63,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-007",
+   "stratum": "fullname_topic",
+   "query": "michael kurtz bibliometrics",
+   "intent": "Papers by Michael Kurtz on bibliometrics.",
+   "gold": {
+    "authors": [
+     "Kurtz, Michael"
+    ],
+    "topic_terms": [
+     "bibliometrics"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Kurtz, Michael\" abs:bibliometrics",
+   "gold_hits": 9,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-008",
+   "stratum": "fullname_topic",
+   "query": "stephanie jarmak saturn rings",
+   "intent": "Papers by Stephanie Jarmak on Saturn's rings.",
+   "gold": {
+    "authors": [
+     "Jarmak, Stephanie"
+    ],
+    "topic_terms": [
+     "saturn rings"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Jarmak, Stephanie\" abs:\"saturn rings\"",
+   "gold_hits": 5,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-009",
+   "stratum": "fullname_topic",
+   "query": "Andrea Ghez galactic center",
+   "intent": "Papers by Andrea Ghez on the Galactic Center.",
+   "gold": {
+    "authors": [
+     "Ghez, Andrea"
+    ],
+    "topic_terms": [
+     "galactic center"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Ghez, Andrea\" abs:\"galactic center\"",
+   "gold_hits": 307,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-010",
+   "stratum": "fullname_topic",
+   "query": "neta bahcall galaxy clusters",
+   "intent": "Papers by Neta Bahcall on galaxy clusters.",
+   "gold": {
+    "authors": [
+     "Bahcall, Neta"
+    ],
+    "topic_terms": [
+     "galaxy clusters"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Bahcall, Neta\" abs:\"galaxy clusters\"",
+   "gold_hits": 154,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-011",
+   "stratum": "fullname_topic",
+   "query": "wendy freedman hubble constant",
+   "intent": "Papers by Wendy Freedman on the Hubble constant.",
+   "gold": {
+    "authors": [
+     "Freedman, Wendy"
+    ],
+    "topic_terms": [
+     "hubble constant"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Freedman, Wendy\" abs:\"hubble constant\"",
+   "gold_hits": 148,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-012",
+   "stratum": "fullname_topic",
+   "query": "heidi hammel neptune",
+   "intent": "Papers by Heidi Hammel on Neptune.",
+   "gold": {
+    "authors": [
+     "Hammel, Heidi"
+    ],
+    "topic_terms": [
+     "neptune"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Hammel, Heidi\" abs:neptune",
+   "gold_hits": 190,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-013",
+   "stratum": "fullname_topic",
+   "query": "Chris Lintott galaxy zoo",
+   "intent": "Papers by Chris Lintott on Galaxy Zoo.",
+   "gold": {
+    "authors": [
+     "Lintott, Chris"
+    ],
+    "topic_terms": [
+     "galaxy zoo"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Lintott, Chris\" abs:\"galaxy zoo\"",
+   "gold_hits": 177,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-014",
+   "stratum": "fullname_topic",
+   "query": "priyamvada natarajan black hole seeds",
+   "intent": "Papers by Priyamvada Natarajan on black hole seeds.",
+   "gold": {
+    "authors": [
+     "Natarajan, Priyamvada"
+    ],
+    "topic_terms": [
+     "black hole seeds"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Natarajan, Priyamvada\" abs:\"black hole seeds\"",
+   "gold_hits": 33,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fn-015",
+   "stratum": "fullname_topic",
+   "query": "sandra faber galaxy evolution",
+   "intent": "Papers by Sandra Faber on galaxy evolution.",
+   "gold": {
+    "authors": [
+     "Faber, Sandra"
+    ],
+    "topic_terms": [
+     "galaxy evolution"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Faber, Sandra\" abs:\"galaxy evolution\"",
+   "gold_hits": 254,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-001",
+   "stratum": "facility_topic",
+   "query": "jwst brown dwarfs",
+   "intent": "Papers on brown dwarfs that use JWST data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "brown dwarfs"
+    ],
+    "bibgroup": [
+     "JWST"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"brown dwarfs\" bibgroup:JWST",
+   "gold_hits": 143,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-002",
+   "stratum": "facility_topic",
+   "query": "hst m31 cepheids",
+   "intent": "Papers on Cepheids in M31 that use Hubble data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "m31",
+     "cepheids"
+    ],
+    "bibgroup": [
+     "HST"
+    ],
+    "object": [
+     "M31"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:m31 abs:cepheids bibgroup:HST",
+   "gold_hits": 37,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-003",
+   "stratum": "facility_topic",
+   "query": "Chandra galaxy clusters",
+   "intent": "Papers on galaxy clusters that use Chandra data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "galaxy clusters"
+    ],
+    "bibgroup": [
+     "Chandra"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"galaxy clusters\" bibgroup:Chandra",
+   "gold_hits": 2643,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-004",
+   "stratum": "facility_topic",
+   "query": "ALMA protoplanetary disks",
+   "intent": "Papers on protoplanetary disks that use ALMA data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "protoplanetary disks"
+    ],
+    "bibgroup": [
+     "ALMA"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"protoplanetary disks\" bibgroup:ALMA",
+   "gold_hits": 904,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-005",
+   "stratum": "facility_topic",
+   "query": "tess hot jupiters",
+   "intent": "Papers on hot Jupiters that use TESS data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "hot jupiters"
+    ],
+    "bibgroup": [
+     "TESS"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"hot jupiters\" bibgroup:TESS",
+   "gold_hits": 133,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-006",
+   "stratum": "facility_topic",
+   "query": "kepler eclipsing binaries",
+   "intent": "Papers on eclipsing binaries that use Kepler data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "eclipsing binaries"
+    ],
+    "bibgroup": [
+     "Kepler"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"eclipsing binaries\" bibgroup:Kepler",
+   "gold_hits": 286,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-007",
+   "stratum": "facility_topic",
+   "query": "spitzer phase curves",
+   "intent": "Papers on exoplanet phase curves that use Spitzer data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "phase curves"
+    ],
+    "bibgroup": [
+     "Spitzer"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"phase curves\" bibgroup:Spitzer",
+   "gold_hits": 122,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-008",
+   "stratum": "facility_topic",
+   "query": "herschel cold dust",
+   "intent": "Papers on cold dust that use Herschel data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "cold dust"
+    ],
+    "bibgroup": [
+     "Herschel"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"cold dust\" bibgroup:Herschel",
+   "gold_hits": 208,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-009",
+   "stratum": "facility_topic",
+   "query": "xmm-newton ultraluminous x-ray sources",
+   "intent": "Papers on ultraluminous X-ray sources that use XMM-Newton data; Newton is not an author.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "ultraluminous x-ray sources"
+    ],
+    "bibgroup": [
+     "XMM"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"ultraluminous x-ray sources\" bibgroup:XMM",
+   "gold_hits": 534,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-010",
+   "stratum": "facility_topic",
+   "query": "keck quasar absorption lines",
+   "intent": "Papers on quasar absorption lines that use Keck data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "quasar absorption lines"
+    ],
+    "bibgroup": [
+     "Keck"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"quasar absorption lines\" bibgroup:Keck",
+   "gold_hits": 529,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-011",
+   "stratum": "facility_topic",
+   "query": "gemini direct imaging exoplanets",
+   "intent": "Papers on directly imaged exoplanets that use Gemini data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "direct imaging",
+     "exoplanets"
+    ],
+    "bibgroup": [
+     "Gemini"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"direct imaging\" abs:exoplanets bibgroup:Gemini",
+   "gold_hits": 78,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-012",
+   "stratum": "facility_topic",
+   "query": "swift gamma-ray bursts",
+   "intent": "Papers on gamma-ray bursts that use Swift data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "gamma-ray bursts"
+    ],
+    "bibgroup": [
+     "Swift"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"gamma-ray bursts\" bibgroup:Swift",
+   "gold_hits": 818,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-013",
+   "stratum": "facility_topic",
+   "query": "galex star formation",
+   "intent": "Papers on star formation that use GALEX data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "star formation"
+    ],
+    "bibgroup": [
+     "GALEX"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"star formation\" bibgroup:GALEX",
+   "gold_hits": 1707,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-014",
+   "stratum": "facility_topic",
+   "query": "sdo solar flares",
+   "intent": "Papers on solar flares that use SDO data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "solar flares"
+    ],
+    "bibgroup": [
+     "Solar Dynamics Observatory"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"solar flares\" bibgroup:\"Solar Dynamics Observatory\"",
+   "gold_hits": 3007,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-fa-015",
+   "stratum": "facility_topic",
+   "query": "soho coronal mass ejections",
+   "intent": "Papers on coronal mass ejections that use SOHO data.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "coronal mass ejections"
+    ],
+    "bibgroup": [
+     "SOHO"
+    ],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"coronal mass ejections\" bibgroup:SOHO",
+   "gold_hits": 2983,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-001",
+   "stratum": "object_topic",
+   "query": "M87 black hole shadow",
+   "intent": "Papers on the black hole shadow of M87.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "m87",
+     "black hole shadow"
+    ],
+    "bibgroup": [],
+    "object": [
+     "M87"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:m87 abs:\"black hole shadow\"",
+   "gold_hits": 335,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-002",
+   "stratum": "object_topic",
+   "query": "NGC 1275 filaments",
+   "intent": "Papers on the filaments around NGC 1275.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "ngc 1275",
+     "filaments"
+    ],
+    "bibgroup": [],
+    "object": [
+     "NGC 1275"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"ngc 1275\" abs:filaments",
+   "gold_hits": 129,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-003",
+   "stratum": "object_topic",
+   "query": "trappist-1 atmospheres",
+   "intent": "Papers on the atmospheres of the TRAPPIST-1 planets.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "trappist-1",
+     "atmospheres"
+    ],
+    "bibgroup": [],
+    "object": [
+     "TRAPPIST-1"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"trappist-1\" abs:atmospheres",
+   "gold_hits": 614,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-004",
+   "stratum": "object_topic",
+   "query": "sgr a* flares",
+   "intent": "Papers on flares from Sgr A*.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "sgr a*",
+     "flares"
+    ],
+    "bibgroup": [],
+    "object": [
+     "Sgr A*"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"sgr a\\*\" abs:flares",
+   "gold_hits": 1372,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-005",
+   "stratum": "object_topic",
+   "query": "m31 globular clusters",
+   "intent": "Papers on globular clusters in M31.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "m31",
+     "globular clusters"
+    ],
+    "bibgroup": [],
+    "object": [
+     "M31"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:m31 abs:\"globular clusters\"",
+   "gold_hits": 1501,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-006",
+   "stratum": "object_topic",
+   "query": "crab nebula gamma rays",
+   "intent": "Papers on gamma rays from the Crab Nebula.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "crab nebula",
+     "gamma rays"
+    ],
+    "bibgroup": [],
+    "object": [
+     "Crab Nebula"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"crab nebula\" abs:\"gamma rays\"",
+   "gold_hits": 3247,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-007",
+   "stratum": "object_topic",
+   "query": "betelgeuse dimming",
+   "intent": "Papers on the dimming of Betelgeuse.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "betelgeuse",
+     "dimming"
+    ],
+    "bibgroup": [],
+    "object": [
+     "Betelgeuse"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:betelgeuse abs:dimming",
+   "gold_hits": 121,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-008",
+   "stratum": "object_topic",
+   "query": "proxima centauri flares",
+   "intent": "Papers on flares from Proxima Centauri.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "proxima centauri",
+     "flares"
+    ],
+    "bibgroup": [],
+    "object": [
+     "Proxima Centauri"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"proxima centauri\" abs:flares",
+   "gold_hits": 205,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-009",
+   "stratum": "object_topic",
+   "query": "SN 1987A neutrinos",
+   "intent": "Papers on neutrinos from SN 1987A.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "sn 1987a",
+     "neutrinos"
+    ],
+    "bibgroup": [],
+    "object": [
+     "SN 1987A"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"sn 1987a\" abs:neutrinos",
+   "gold_hits": 588,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-010",
+   "stratum": "object_topic",
+   "query": "eta carinae great eruption",
+   "intent": "Papers on the Great Eruption of Eta Carinae.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "eta carinae",
+     "great eruption"
+    ],
+    "bibgroup": [],
+    "object": [
+     "Eta Carinae"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"eta carinae\" abs:\"great eruption\"",
+   "gold_hits": 160,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-011",
+   "stratum": "object_topic",
+   "query": "3c 273 jet",
+   "intent": "Papers on the jet of 3C 273.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "3c 273",
+     "jet"
+    ],
+    "bibgroup": [],
+    "object": [
+     "3C 273"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"3c 273\" abs:jet",
+   "gold_hits": 683,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-012",
+   "stratum": "object_topic",
+   "query": "omega centauri multiple populations",
+   "intent": "Papers on multiple stellar populations in Omega Centauri.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "omega centauri",
+     "multiple populations"
+    ],
+    "bibgroup": [],
+    "object": [
+     "Omega Centauri"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"omega centauri\" abs:\"multiple populations\"",
+   "gold_hits": 56,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-013",
+   "stratum": "object_topic",
+   "query": "lmc cepheids",
+   "intent": "Papers on Cepheids in the Large Magellanic Cloud.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "lmc",
+     "cepheids"
+    ],
+    "bibgroup": [],
+    "object": [
+     "LMC"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:lmc abs:cepheids",
+   "gold_hits": 1289,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-014",
+   "stratum": "object_topic",
+   "query": "vega debris disk",
+   "intent": "Papers on the Vega debris disk.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "vega",
+     "debris disk"
+    ],
+    "bibgroup": [],
+    "object": [
+     "Vega"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:vega abs:\"debris disk\"",
+   "gold_hits": 215,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ob-015",
+   "stratum": "object_topic",
+   "query": "GW170817 kilonova",
+   "intent": "Papers on the kilonova from GW170817.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "gw170817",
+     "kilonova"
+    ],
+    "bibgroup": [],
+    "object": [
+     "GW170817"
+    ],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:gw170817 abs:kilonova",
+   "gold_hits": 539,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-001",
+   "stratum": "topic_year",
+   "query": "exoplanet atmospheres 2020",
+   "intent": "Papers on exoplanet atmospheres published in 2020.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "exoplanet atmospheres"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 2020,
+    "year_to": 2020,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"exoplanet atmospheres\" pubdate:[2020 TO 2020]",
+   "gold_hits": 519,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-002",
+   "stratum": "topic_year",
+   "query": "fast radio bursts 2018-2022",
+   "intent": "Papers on fast radio bursts published 2018 to 2022.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "fast radio bursts"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 2018,
+    "year_to": 2022,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"fast radio bursts\" pubdate:[2018 TO 2022]",
+   "gold_hits": 2120,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-003",
+   "stratum": "topic_year",
+   "query": "gravitational waves 2016",
+   "intent": "Papers on gravitational waves published in 2016.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "gravitational waves"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 2016,
+    "year_to": 2016,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"gravitational waves\" pubdate:[2016 TO 2016]",
+   "gold_hits": 2654,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-004",
+   "stratum": "topic_year",
+   "query": "kilonovae 2017-2019",
+   "intent": "Papers on kilonovae published 2017 to 2019.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "kilonovae"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 2017,
+    "year_to": 2019,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:kilonovae pubdate:[2017 TO 2019]",
+   "gold_hits": 172,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-005",
+   "stratum": "topic_year",
+   "query": "weak lensing 2019",
+   "intent": "Papers on weak lensing published in 2019.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "weak lensing"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 2019,
+    "year_to": 2019,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"weak lensing\" pubdate:[2019 TO 2019]",
+   "gold_hits": 375,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-006",
+   "stratum": "topic_year",
+   "query": "tidal disruption events 2015-2020",
+   "intent": "Papers on tidal disruption events published 2015 to 2020.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "tidal disruption events"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 2015,
+    "year_to": 2020,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"tidal disruption events\" pubdate:[2015 TO 2020]",
+   "gold_hits": 874,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-007",
+   "stratum": "topic_year",
+   "query": "hot jupiters 2010",
+   "intent": "Papers on hot Jupiters published in 2010.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "hot jupiters"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 2010,
+    "year_to": 2010,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"hot jupiters\" pubdate:[2010 TO 2010]",
+   "gold_hits": 193,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-008",
+   "stratum": "topic_year",
+   "query": "magnetars 2020-2023",
+   "intent": "Papers on magnetars published 2020 to 2023.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "magnetars"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 2020,
+    "year_to": 2023,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:magnetars pubdate:[2020 TO 2023]",
+   "gold_hits": 1170,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-009",
+   "stratum": "topic_year",
+   "query": "exomoons since 2018",
+   "intent": "Papers on exomoons published from 2018 on.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "exomoons"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 2018,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:exomoons pubdate:[2018 TO *]",
+   "gold_hits": 315,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-010",
+   "stratum": "topic_year",
+   "query": "cosmic rays before 2000",
+   "intent": "Papers on cosmic rays published before 2000.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "cosmic rays"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": 1999,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"cosmic rays\" pubdate:[* TO 1999]",
+   "gold_hits": 34490,
+   "ambiguous": true,
+   "note": "'before 2000' read as ending 1999; ending 2000 is also defensible."
+  },
+  {
+   "id": "kw-ty-011",
+   "stratum": "topic_year",
+   "query": "cmb anisotropies 1990s",
+   "intent": "Papers on CMB anisotropies published in the 1990s.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "cmb anisotropies"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 1990,
+    "year_to": 1999,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"cmb anisotropies\" pubdate:[1990 TO 1999]",
+   "gold_hits": 432,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-012",
+   "stratum": "topic_year",
+   "query": "riess 2016 hubble constant",
+   "intent": "Papers by Riess on the Hubble constant published in 2016.",
+   "gold": {
+    "authors": [
+     "Riess"
+    ],
+    "topic_terms": [
+     "hubble constant"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 2016,
+    "year_to": 2016,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Riess\" abs:\"hubble constant\" pubdate:[2016 TO 2016]",
+   "gold_hits": 5,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-013",
+   "stratum": "topic_year",
+   "query": "seager 2013 biosignatures",
+   "intent": "Papers by Seager on biosignatures published in 2013.",
+   "gold": {
+    "authors": [
+     "Seager"
+    ],
+    "topic_terms": [
+     "biosignatures"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 2013,
+    "year_to": 2013,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Seager\" abs:biosignatures pubdate:[2013 TO 2013]",
+   "gold_hits": 1,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-014",
+   "stratum": "topic_year",
+   "query": "1998 supernova cosmology",
+   "intent": "Papers on supernova cosmology published in 1998.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "supernova cosmology"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 1998,
+    "year_to": 1998,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"supernova cosmology\" pubdate:[1998 TO 1998]",
+   "gold_hits": 25,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-ty-015",
+   "stratum": "topic_year",
+   "query": "JWST 2023 high redshift galaxies",
+   "intent": "Papers on high-redshift galaxies from JWST data published in 2023.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "high redshift galaxies"
+    ],
+    "bibgroup": [
+     "JWST"
+    ],
+    "object": [],
+    "year_from": 2023,
+    "year_to": 2023,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"high redshift galaxies\" pubdate:[2023 TO 2023] bibgroup:JWST",
+   "gold_hits": 111,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-001",
+   "stratum": "pure_topic",
+   "query": "dark matter halo profiles",
+   "intent": "Papers on density profiles of dark matter halos.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "dark matter halo profiles"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"dark matter halo profiles\"",
+   "gold_hits": 497,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-002",
+   "stratum": "pure_topic",
+   "query": "tidal disruption events x-ray",
+   "intent": "Papers on the X-ray emission of tidal disruption events.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "tidal disruption events",
+     "x-ray"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"tidal disruption events\" abs:\"x-ray\"",
+   "gold_hits": 1243,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-003",
+   "stratum": "pure_topic",
+   "query": "hot jupiter inflated radii",
+   "intent": "Papers on the inflated radii of hot Jupiters.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "hot jupiter",
+     "inflated radii"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"hot jupiter\" abs:\"inflated radii\"",
+   "gold_hits": 108,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-004",
+   "stratum": "pure_topic",
+   "query": "cosmic ray acceleration supernova remnants",
+   "intent": "Papers on cosmic-ray acceleration in supernova remnants.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "cosmic ray acceleration",
+     "supernova remnants"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"cosmic ray acceleration\" abs:\"supernova remnants\"",
+   "gold_hits": 824,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-005",
+   "stratum": "pure_topic",
+   "query": "black hole spin x-ray reflection",
+   "intent": "Papers measuring black hole spin with X-ray reflection.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "black hole spin",
+     "x-ray reflection"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"black hole spin\" abs:\"x-ray reflection\"",
+   "gold_hits": 139,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-006",
+   "stratum": "pure_topic",
+   "query": "galaxy quenching environment",
+   "intent": "Papers on environmental quenching of galaxies.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "galaxy quenching",
+     "environment"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"galaxy quenching\" abs:environment",
+   "gold_hits": 359,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-007",
+   "stratum": "pure_topic",
+   "query": "stellar streams milky way halo",
+   "intent": "Papers on stellar streams in the Milky Way halo.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "stellar streams",
+     "milky way halo"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"stellar streams\" abs:\"milky way halo\"",
+   "gold_hits": 316,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-008",
+   "stratum": "pure_topic",
+   "query": "primordial black holes dark matter",
+   "intent": "Papers on primordial black holes as dark matter.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "primordial black holes",
+     "dark matter"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"primordial black holes\" abs:\"dark matter\"",
+   "gold_hits": 1972,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-009",
+   "stratum": "pure_topic",
+   "query": "solar wind turbulence",
+   "intent": "Papers on turbulence in the solar wind.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "solar wind turbulence"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"solar wind turbulence\"",
+   "gold_hits": 1866,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-010",
+   "stratum": "pure_topic",
+   "query": "magnetic reconnection solar flares",
+   "intent": "Papers on magnetic reconnection in solar flares.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "magnetic reconnection",
+     "solar flares"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"magnetic reconnection\" abs:\"solar flares\"",
+   "gold_hits": 3399,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-011",
+   "stratum": "pure_topic",
+   "query": "baryon acoustic oscillations",
+   "intent": "Papers on baryon acoustic oscillations.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "baryon acoustic oscillations"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"baryon acoustic oscillations\"",
+   "gold_hits": 6828,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-012",
+   "stratum": "pure_topic",
+   "query": "radius valley super earths",
+   "intent": "Papers on the radius valley of super-Earths.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "radius valley",
+     "super earths"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"radius valley\" abs:\"super earths\"",
+   "gold_hits": 133,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-013",
+   "stratum": "pure_topic",
+   "query": "agn feedback cooling flows",
+   "intent": "Papers on AGN feedback in cooling flows.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "agn feedback",
+     "cooling flows"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"agn feedback\" abs:\"cooling flows\"",
+   "gold_hits": 238,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-014",
+   "stratum": "pure_topic",
+   "query": "ice giants interior structure",
+   "intent": "Papers on the interior structure of the ice giants.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "ice giants",
+     "interior structure"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"ice giants\" abs:\"interior structure\"",
+   "gold_hits": 77,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-pt-015",
+   "stratum": "pure_topic",
+   "query": "planet formation pebble accretion",
+   "intent": "Papers on pebble accretion in planet formation.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "planet formation",
+     "pebble accretion"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"planet formation\" abs:\"pebble accretion\"",
+   "gold_hits": 363,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-tr-001",
+   "stratum": "tricky",
+   "query": "hubble constant tension",
+   "intent": "Papers on the Hubble tension; Hubble is neither an author nor the HST bibgroup.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "hubble constant",
+     "tension"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"hubble constant\" abs:tension",
+   "gold_hits": 1318,
+   "ambiguous": true,
+   "note": "Grouping as one phrase \"hubble constant tension\" is too narrow; \"hubble tension\" is the field's name for it. Gold keeps the user's words split into constant + tension."
+  },
+  {
+   "id": "kw-tr-002",
+   "stratum": "tricky",
+   "query": "hubble deep field",
+   "intent": "Papers on the Hubble Deep Field.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "hubble deep field"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"hubble deep field\"",
+   "gold_hits": 3845,
+   "ambiguous": true,
+   "note": "bibgroup:HST is defensible (the HDF is HST data); gold keeps the name as a topic phrase."
+  },
+  {
+   "id": "kw-tr-003",
+   "stratum": "tricky",
+   "query": "hubble 1929",
+   "intent": "Edwin Hubble's 1929 papers (the velocity-distance relation).",
+   "gold": {
+    "authors": [
+     "Hubble"
+    ],
+    "topic_terms": [],
+    "bibgroup": [],
+    "object": [],
+    "year_from": 1929,
+    "year_to": 1929,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Hubble\" pubdate:[1929 TO 1929]",
+   "gold_hits": 5,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-tr-004",
+   "stratum": "tricky",
+   "query": "webb galaxy clusters",
+   "intent": "Papers by an astronomer named Webb (e.g. Tracy Webb) on galaxy clusters.",
+   "gold": {
+    "authors": [
+     "Webb"
+    ],
+    "topic_terms": [
+     "galaxy clusters"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Webb\" abs:\"galaxy clusters\"",
+   "gold_hits": 89,
+   "ambiguous": true,
+   "note": "Could mean JWST observations of galaxy clusters (bibgroup:JWST or abs:webb); gold reads a surname because 'webb' alone is rarely used for the telescope."
+  },
+  {
+   "id": "kw-tr-005",
+   "stratum": "tricky",
+   "query": "newton m dwarfs rotation",
+   "intent": "Papers by Newton (e.g. Elisabeth Newton) on M dwarf rotation.",
+   "gold": {
+    "authors": [
+     "Newton"
+    ],
+    "topic_terms": [
+     "m dwarfs",
+     "rotation"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Newton\" abs:\"m dwarfs\" abs:rotation",
+   "gold_hits": 55,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-tr-006",
+   "stratum": "tricky",
+   "query": "planck cmb lensing",
+   "intent": "Papers on CMB lensing from the Planck mission; Planck is not an author.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "planck",
+     "cmb lensing"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:planck abs:\"cmb lensing\"",
+   "gold_hits": 683,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-tr-007",
+   "stratum": "tricky",
+   "query": "el-badry wide binaries",
+   "intent": "Papers by El-Badry on wide binaries (hyphenated surname).",
+   "gold": {
+    "authors": [
+     "El-Badry"
+    ],
+    "topic_terms": [
+     "wide binaries"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"El-Badry\" abs:\"wide binaries\"",
+   "gold_hits": 26,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-tr-008",
+   "stratum": "tricky",
+   "query": "bullock boylan-kolchin too big to fail",
+   "intent": "Papers by Bullock and Boylan-Kolchin on the too-big-to-fail problem.",
+   "gold": {
+    "authors": [
+     "Bullock",
+     "Boylan-Kolchin"
+    ],
+    "topic_terms": [
+     "too big to fail"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Bullock\" author:\"Boylan-Kolchin\" abs:\"too big to fail\"",
+   "gold_hits": 12,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-tr-009",
+   "stratum": "tricky",
+   "query": "white galaxy formation",
+   "intent": "Papers by White (e.g. Simon White) on galaxy formation.",
+   "gold": {
+    "authors": [
+     "White"
+    ],
+    "topic_terms": [
+     "galaxy formation"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"White\" abs:\"galaxy formation\"",
+   "gold_hits": 314,
+   "ambiguous": true,
+   "note": "'white' is also a common word; a pure topic reading is possible but unlikely."
+  },
+  {
+   "id": "kw-tr-010",
+   "stratum": "tricky",
+   "query": "ho low luminosity agn",
+   "intent": "Papers by Ho (e.g. Luis Ho) on low-luminosity AGN.",
+   "gold": {
+    "authors": [
+     "Ho"
+    ],
+    "topic_terms": [
+     "low luminosity agn"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Ho\" abs:\"low luminosity agn\"",
+   "gold_hits": 80,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-tr-011",
+   "stratum": "tricky",
+   "query": "vera rubin rotation curves",
+   "intent": "Papers by Vera Rubin on galaxy rotation curves, not the Rubin Observatory.",
+   "gold": {
+    "authors": [
+     "Rubin, Vera"
+    ],
+    "topic_terms": [
+     "rotation curves"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Rubin, Vera\" abs:\"rotation curves\"",
+   "gold_hits": 60,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-tr-012",
+   "stratum": "tricky",
+   "query": "brown kuiper belt",
+   "intent": "Papers by Brown (e.g. Mike Brown) on the Kuiper belt.",
+   "gold": {
+    "authors": [
+     "Brown"
+    ],
+    "topic_terms": [
+     "kuiper belt"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Brown\" abs:\"kuiper belt\"",
+   "gold_hits": 280,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-tr-013",
+   "stratum": "tricky",
+   "query": "jocelyn bell burnell pulsars",
+   "intent": "Papers by Jocelyn Bell Burnell on pulsars (two-word surname).",
+   "gold": {
+    "authors": [
+     "Bell Burnell, Jocelyn"
+    ],
+    "topic_terms": [
+     "pulsars"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "author:\"Bell Burnell, Jocelyn\" abs:pulsars",
+   "gold_hits": 9,
+   "ambiguous": false
+  },
+  {
+   "id": "kw-tr-014",
+   "stratum": "tricky",
+   "query": "chandra deep field south",
+   "intent": "Papers on the Chandra Deep Field South survey field.",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "chandra deep field south"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:\"chandra deep field south\"",
+   "gold_hits": 2332,
+   "ambiguous": true,
+   "note": "bibgroup:Chandra is defensible; gold keeps the field name as a topic phrase."
+  },
+  {
+   "id": "kw-tr-015",
+   "stratum": "tricky",
+   "query": "frb host galaxies",
+   "intent": "Papers on the host galaxies of fast radio bursts (FRB acronym).",
+   "gold": {
+    "authors": [],
+    "topic_terms": [
+     "frb",
+     "host galaxies"
+    ],
+    "bibgroup": [],
+    "object": [],
+    "year_from": null,
+    "year_to": null,
+    "operator": "none",
+    "first_author": false
+   },
+   "gold_query": "abs:frb abs:\"host galaxies\"",
+   "gold_hits": 858,
+   "ambiguous": false
+  }
+ ]
+}
