@@ -19,10 +19,11 @@ fallback when pipeline confidence falls below the threshold.
 
 The pipeline's intent stage has three backends. `regex` (the default) is the
 rules-based `ner.py`. `jev` and `jev_gated` use Jev typed classifiers
-(TypeSafe System One, `jev-1.13.0`) for the operator, doctype, bibgroup,
-collection and property fields while the regex keeps names, years and topics;
-`jev_gated` calls Jev only when the regex finds no operator or its structural
-confidence is below 0.5. The evaluation that chose `jev_gated` is
+(TypeSafe System One, `jev-1.13.0`) for the operator, enum fields, recency,
+highly cited, first author, topic and which candidate words are authors; code
+proposes the candidates and parses explicit years. `jev_gated` calls Jev only
+when the regex finds no operator or its structural confidence is below 0.5.
+`jev` (Jev on every request) is the backend to roll out; the evaluation is
 [reports/jev-intent-classifier-eval.md](../reports/jev-intent-classifier-eval.md).
 
 | Setting | Default | Meaning |

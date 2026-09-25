@@ -149,7 +149,7 @@ User NL query → Nectar (:8000) → NLS Server (:8001)
                                    └─ fine-tuned model (low-confidence fallback)
 ```
 
-The pipeline's intent stage is selectable. The shipped default is the regex extractor in `ner.py`; `jev_gated` asks Jev typed classifiers (TypeSafe System One) for the operator and enum fields when the regex finds no operator or is unsure, and keeps the regex for names, years and topics. The evaluation that chose it is [reports/jev-intent-classifier-eval.md](reports/jev-intent-classifier-eval.md).
+The pipeline's intent stage is selectable. The shipped default is the regex extractor in `ner.py`; `jev` asks Jev typed classifiers (TypeSafe System One) on every request to decide the operator, enum fields, recency, highly cited, which candidate words are authors and topic, while code proposes the candidate names, facilities and words and parses explicit years. `jev_gated` calls Jev only when the regex finds no operator or is unsure. The evaluation behind the choice of `jev` is [reports/jev-intent-classifier-eval.md](reports/jev-intent-classifier-eval.md).
 
 The server is configured via environment variables (the `docker/server.py` module docstring is the authoritative list):
 
@@ -168,7 +168,7 @@ The server is configured via environment variables (the `docker/server.py` modul
 | `SHADOW_INTENT_BACKEND` | unset | `jev` or `jev_gated`: serve regex, run this backend off the request path and log both intents (needs `INTENT_BACKEND=regex` and `TELEMETRY_LOG`) |
 | `GOLD_EXAMPLES_PATH` | `data/datasets/raw/gold_examples.json` | Few-shot examples for retrieval |
 
-A failed Jev call (error or timeout) never fails a request: the regex intent is served and the reason is reported as `classifier_error`. When Jev answers, the routing confidence is the minimum of the structural confidence and Jev's operator confidence. Recommended rollout: run in shadow (`INTENT_BACKEND=regex`, `SHADOW_INTENT_BACKEND=jev_gated`, `TELEMETRY_LOG` set), review the log with `scripts/summarize_intent_shadow.py`, then serve `INTENT_BACKEND=jev_gated`. [docker/README.md](docker/README.md) has the commands and the telemetry row fields.
+A failed Jev call (error or timeout) never fails a request: the regex intent is served and the reason is reported as `classifier_error`. When Jev answers, the routing confidence is the minimum of the structural confidence and Jev's operator confidence. Recommended rollout: run in shadow (`INTENT_BACKEND=regex`, `SHADOW_INTENT_BACKEND=jev`, `TELEMETRY_LOG` set), review the log with `scripts/summarize_intent_shadow.py`, then serve `INTENT_BACKEND=jev`. [docker/README.md](docker/README.md) has the commands and the telemetry row fields.
 
 ### Model
 

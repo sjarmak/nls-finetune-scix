@@ -11,7 +11,7 @@
 #   docker compose up --build
 #
 #   # Shadow the Jev intent backend (serves regex, logs both intents):
-#   TYPESAFE_API_KEY=... SHADOW_INTENT_BACKEND=jev_gated \
+#   TYPESAFE_API_KEY=... SHADOW_INTENT_BACKEND=jev \
 #     TELEMETRY_LOG=/app/telemetry/nls.jsonl docker compose up nls-server
 #
 # Every setting below comes from the host environment when set there, with

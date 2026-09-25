@@ -7,6 +7,16 @@ Run date: 2026-09-24. Plan and pre-registered criteria:
 
 ## Decision
 
+**Go on the intent stage with Jev on every request (`INTENT_BACKEND=jev`),
+decided 2026-09-25 after round 5.** The gated backend skips Jev whenever the
+regex finds a confident operator, so the regex alone decided queries such as
+"papers that cite Jarmak" (`citations(abs:jarmak)`), and on val and the
+held-out set the gate opens for 93% to 99% of queries anyway, so it saves
+little. Arm B finds all 25 benchmark author queries (gated 17, regex 14) at
+$0.000110 to $0.000115 per query, 10% to 15% over the $0.0001 criterion,
+accepted as the cost of the rollout. See section "Round 5: facility and
+author candidates (2026-09-25)". The earlier decision follows.
+
 **Go on the intent stage, now including recency, topic, first author and
 highly cited.** The decision was made on the round-2 numbers and re-checked
 in round 3 (section "Round 3: after the rollout fixes (2026-09-24)"). Round

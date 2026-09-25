@@ -188,16 +188,23 @@ names, years, topics). `INTENT_BACKEND` picks who makes the judgement calls:
   - **Topic.** When the regex found one topic phrase of at most six words,
     Jev picks which contiguous span of it is the subject (or none), so
     "recent asteroids" becomes `asteroids`.
+  - **Facilities.** Only the facilities named in the query are offered as
+    bibgroup options; with none named the question is not asked.
+  - **Authors.** The regex names plus up to four capitalized words are
+    offered, and Jev says for each whether it is a person, so "papers that
+    cite Jarmak" becomes `citations(author:"Jarmak")`. Lowercase names not
+    after "by" ("smith j") are not offered yet.
 
-  Code still finds the candidate names, years and words; Jev chooses among
-  them.
+  Code still finds the candidate names, facilities, years and words; Jev
+  chooses among them. This is the backend to serve.
+  [reports/jev-intent-classifier-eval.md](../reports/jev-intent-classifier-eval.md)
+  has the evidence (round 5 for authors and cost).
 - `jev_gated`: regex first; Jev is called only when the regex finds no
-  operator or its structural confidence is below 0.5. This is the shape the
-  evaluation recommends. Evidence:
-  [reports/jev-intent-classifier-eval.md](../reports/jev-intent-classifier-eval.md).
-  Because the gate skips Jev whenever the regex finds an operator, recency,
-  highly cited, first author and topic choice are also skipped on those
-  queries ("papers citing X from recent years" keeps the regex reading).
+  operator or its structural confidence is below 0.5. Because the gate
+  skips Jev whenever the regex finds an operator, every Jev decision is
+  skipped on those queries ("papers that cite Jarmak" keeps the regex
+  reading, `citations(abs:jarmak)`). It saves little: on val and the
+  held-out set the gate opens for 93% to 99% of queries.
 
 **Reference year.** Relative years ("recent", "last 5 years") end at the year
 on the prompt's `Date: YYYY-MM-DD` line, which Nectar sends. A malformed date
@@ -232,7 +239,7 @@ telemetry as `structural_confidence` and `classifier_operator_confidence`.
 
    ```bash
    export TYPESAFE_API_KEY=...   # from your secret store, not a file in the repo
-   INTENT_BACKEND=regex SHADOW_INTENT_BACKEND=jev_gated \
+   INTENT_BACKEND=regex SHADOW_INTENT_BACKEND=jev \
      TELEMETRY_LOG=/app/telemetry/nls.jsonl \
      docker compose -f docker/docker-compose.yml up nls-server
    ```
@@ -256,7 +263,7 @@ telemetry as `structural_confidence` and `classifier_operator_confidence`.
    side is right; read the disagreements.
 
 3. **Serve.** Switch the served intent and drop the shadow:
-   `INTENT_BACKEND=jev_gated`, `SHADOW_INTENT_BACKEND` unset. Watch
+   `INTENT_BACKEND=jev`, `SHADOW_INTENT_BACKEND` unset. Watch
    `classifier_error` in the request rows; a Jev outage shows up there while
    requests keep being served from the regex intent.
 
