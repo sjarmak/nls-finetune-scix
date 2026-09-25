@@ -21,12 +21,14 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import re
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import TimeoutError as FutureTimeout
 from dataclasses import dataclass, field, replace
 from datetime import UTC, datetime
+from functools import cache
 from pathlib import Path
 
 import httpx
@@ -66,6 +68,9 @@ BOOLEAN_QUESTION_IDS: tuple[str, ...] = (
 PROPERTY_BOOLEANS: tuple[str, ...] = ("refereed", "openaccess", "eprint")
 
 EXTRACTION_QUESTION_IDS: tuple[str, ...] = ("recency", "first_author", "highly_cited", "topic")
+MAX_AUTHOR_CANDIDATES = 4
+"""Most names offered per query; each one is a yes/no question (``author_<i>``)."""
+_WORD = re.compile(r"[^\W\d_][\w'\-]*")
 """Questions that replace regex keyword rules. Kept out of ``build_questions`` so
 the arm C (``llm_intent``) prompt, which mirrors the gating set, is unchanged."""
 RECENCY_WINDOWS: dict[str, int] = {
@@ -256,6 +261,29 @@ def build_extraction_questions(topic_candidates: tuple[str, ...] = ()) -> dict[s
     return questions
 
 
+def _author_question(name: str) -> dict:
+    return _boolean(
+        f"Does the user name '{name}' as a person: someone whose papers they want, or whose "
+        "work the papers they want cite or are cited by?",
+        f"'{name}' is a person's name (a surname or full name) used to find papers.",
+        f"'{name}' names a telescope, mission, survey, instrument, object, place, institution "
+        "or theory, is part of a topic phrase (Hawking radiation, Einstein ring), or is an "
+        "ordinary word.",
+    )
+
+
+def author_candidates(text: str, intent: IntentSpec) -> tuple[str, ...]:
+    """Names the regex found, then capitalized words in ``text``, at most ``MAX_AUTHOR_CANDIDATES``.
+
+    All-caps words (JWST, ALMA) are acronyms, not surnames, and are not offered.
+    """
+    unique: dict[str, str] = {}
+    capitalized = [w for w in _WORD.findall(text) if w[0].isupper() and not w.isupper()]
+    for name in (*intent.authors, *capitalized):
+        unique.setdefault(name.lower(), name)
+    return tuple(unique.values())[:MAX_AUTHOR_CANDIDATES]
+
+
 def topic_candidates(intent: IntentSpec) -> tuple[str, ...]:
     """Contiguous sub-spans of the regex topic phrase, longest first.
 
@@ -273,6 +301,39 @@ def topic_candidates(intent: IntentSpec) -> tuple[str, ...]:
         for start in range(len(tokens) - length + 1)
     )
     return tuple(dict.fromkeys(s for s in spans if s.lower() != NONE_OPTION))
+
+
+def _name_pattern(name: str) -> re.Pattern[str]:
+    """Whole-word pattern for a facility name, tolerant of spaces, hyphens and slashes."""
+    words = re.findall(r"[a-z0-9]+", name.lower())
+    return re.compile(r"\b" + r"[\s\-/]*".join(map(re.escape, words)) + r"\b")
+
+
+@cache
+def _bibgroup_name_patterns() -> tuple[tuple[str, re.Pattern[str]], ...]:
+    """Every name a bibgroup goes by: its code, its described name, and the NER synonyms."""
+    from .ner import BIBGROUP_SYNONYMS
+
+    names = [(code, code) for code in BIBGROUPS]
+    names += [
+        (code, re.split(r" \(| \||\.", text, maxsplit=1)[0])
+        for code, text in BIBGROUP_DESCRIPTIONS.items()
+        if code != NONE_OPTION
+    ]
+    names += [(code, synonym) for synonym, code in BIBGROUP_SYNONYMS.items()]
+    return tuple((code, _name_pattern(name)) for code, name in names)
+
+
+def bibgroup_candidates(text: str) -> tuple[str, ...]:
+    """Bibgroups whose name appears in the request, in code order.
+
+    This is string matching on facility names only. Whether a named facility is
+    a restriction or part of a topic (Hubble constant) stays Jev's decision;
+    code only keeps the other fifty-odd options out of the request.
+    """
+    lowered = text.lower()
+    found = {code for code, pattern in _bibgroup_name_patterns() if pattern.search(lowered)}
+    return tuple(sorted(found))
 
 
 def _check_covers(name: str, descriptions: dict[str, str], values: frozenset[str]) -> None:
@@ -293,14 +354,31 @@ def build_request(
     context: dict | None = None,
     model: str = JEV_MODEL,
     topic_candidates: tuple[str, ...] = (),
+    bibgroup_candidates: tuple[str, ...] | None = None,
+    author_candidates: tuple[str, ...] = (),
 ) -> dict:
-    """Build the System One request body. ``context`` is merged into ``state``."""
+    """Build the System One request body. ``context`` is merged into ``state``.
+
+    Each of ``author_candidates`` gets its own yes/no question, ``author_<i>``.
+
+    With ``bibgroup_candidates`` the bibgroup question offers only those
+    facilities plus ``none``, and is left out when there are none; without it
+    the question offers every bibgroup.
+    """
     state: dict = {"query": text}
     if context:
         if "query" in context:
             raise ValueError("context may not override the 'query' state key")
         state.update(context)
     questions = {**build_questions(), **build_extraction_questions(topic_candidates)}
+    if bibgroup_candidates is not None:
+        bibgroup = questions.pop("bibgroup")
+        if bibgroup_candidates:
+            offered = (NONE_OPTION, *bibgroup_candidates)
+            criteria = {k: v for k, v in bibgroup["criteria"].items() if k in offered}
+            questions["bibgroup"] = {**bibgroup, "criteria": criteria}
+    for i, name in enumerate(author_candidates):
+        questions[f"author_{i}"] = _author_question(name)
     return {"model": model, "state": state, "questions": questions}
 
 
@@ -472,9 +550,16 @@ class JevClient:
         context: dict | None = None,
         use_cache: bool = True,
         topic_candidates: tuple[str, ...] = (),
+        bibgroup_candidates: tuple[str, ...] | None = None,
+        author_candidates: tuple[str, ...] = (),
     ) -> JevAnswers:
         request = build_request(
-            text, context=context, model=self.model, topic_candidates=topic_candidates
+            text,
+            context=context,
+            model=self.model,
+            topic_candidates=topic_candidates,
+            bibgroup_candidates=bibgroup_candidates,
+            author_candidates=author_candidates,
         )
         fingerprint = request_fingerprint(request)
         questions = request["questions"]
@@ -548,12 +633,17 @@ def apply_answers(
     answers: JevAnswers,
     boolean_threshold: float = BOOLEAN_DECISION_THRESHOLD,
     reference_year: int | None = None,
+    author_candidates: tuple[str, ...] = (),
 ) -> IntentSpec:
     """Return a new IntentSpec with Jev's answers applied.
 
+    With ``author_candidates`` the authors are the candidates Jev calls people;
+    their words leave the topic, and a regex author Jev rejects joins it.
+
     Names and explicit years on ``intent`` are kept. Operator, doctype,
     bibgroup, collection and the three property flags are replaced by Jev's
-    answers. Jev also sets the recency window (only when no explicit years
+    answers; bibgroup is empty when the question was not asked (no facility
+    named). Jev also sets the recency window (only when no explicit years
     were found; it ends at ``reference_year``, default the current year), the
     first-author flag (only when there are authors), the citation floor and,
     when a topic question was asked, the topic phrase. ``confidence`` holds
@@ -561,16 +651,18 @@ def apply_answers(
     """
     operator = answers.choices["operator"]
     doctype = answers.choices["doctype"]
-    bibgroup = answers.choices["bibgroup"]
+    bibgroup = answers.choices.get("bibgroup")
     collection = answers.choices["collection"]
     recency = answers.choices["recency"]
     topic = answers.choices.get("topic")
     properties = {name for name in PROPERTY_BOOLEANS if answers.booleans[name] >= boolean_threshold}
+    author_probability = {
+        name: answers.booleans[f"author_{i}"] for i, name in enumerate(author_candidates)
+    }
     confidence = {
         "operator": operator.confidence,
         "search_kind": answers.choices["search_kind"].confidence,
         "doctype": doctype.confidence,
-        "bibgroup": bibgroup.confidence,
         "database": collection.confidence,
         "recency": recency.confidence,
         "needs_clarification": answers.booleans["needs_clarification"],
@@ -584,6 +676,8 @@ def apply_answers(
             if k in ("year", "authors", "topics", "or_topics")
         },
         **({"topic": topic.confidence} if topic else {}),
+        **({"bibgroup": bibgroup.confidence} if bibgroup else {}),
+        **{f"author.{name}": p for name, p in author_probability.items()},
     }
     year_from, year_to = intent.year_from, intent.year_to
     if year_from is None and year_to is None and recency.choice != NONE_OPTION:
@@ -592,18 +686,26 @@ def apply_answers(
     free_text_terms = intent.free_text_terms
     if topic is not None:
         free_text_terms = [] if topic.choice == NONE_OPTION else [topic.choice]
+    authors = intent.authors
+    if author_candidates:
+        authors = [n for n, p in author_probability.items() if p >= boolean_threshold]
+        people = {name.lower() for name in authors}
+        rejected = [name.lower() for name in intent.authors if name.lower() not in people]
+        kept = (" ".join(w for w in t.split() if w.lower() not in people) for t in free_text_terms)
+        free_text_terms = [t for t in kept if t] + rejected
     highly_cited = answers.booleans["highly_cited"] >= boolean_threshold
     return replace(
         intent,
         operator=None if operator.choice == NONE_OPTION else operator.choice,
         doctype=set() if doctype.choice == NONE_OPTION else {doctype.choice},
-        bibgroup=set() if bibgroup.choice == NONE_OPTION else {bibgroup.choice},
+        bibgroup=set() if bibgroup is None or bibgroup.choice == NONE_OPTION else {bibgroup.choice},
         collection=set() if collection.choice == NONE_OPTION else {collection.choice},
         property=properties,
         year_from=year_from,
         year_to=year_to,
         free_text_terms=free_text_terms,
-        first_author=bool(intent.authors) and answers.booleans["first_author"] >= boolean_threshold,
+        authors=authors,
+        first_author=bool(authors) and answers.booleans["first_author"] >= boolean_threshold,
         min_citations=HIGHLY_CITED_MIN_CITATIONS if highly_cited else intent.min_citations,
         confidence=confidence,
     )
@@ -634,17 +736,21 @@ def classify_and_extract(
     if regex_intent.confidence.get("ads_passthrough"):
         return regex_intent, None
     context = {"regex_intent": regex_intent.to_dict()} if include_regex_state else None
+    names = author_candidates(text, regex_intent)
     answers = client.classify(
         text,
         context=context,
         use_cache=use_cache,
         topic_candidates=topic_candidates(regex_intent),
+        bibgroup_candidates=bibgroup_candidates(text),
+        author_candidates=names,
     )
     operator = answers.choices["operator"].choice
     base = extract_intent_with_operator(
         text, None if operator == NONE_OPTION else operator, reference_year
     )
-    return apply_answers(base, answers, reference_year=reference_year), answers
+    intent = apply_answers(base, answers, reference_year=reference_year, author_candidates=names)
+    return intent, answers
 
 
 def extract_intent_jev(

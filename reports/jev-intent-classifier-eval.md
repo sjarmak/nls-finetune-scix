@@ -829,17 +829,68 @@ The noise caveat from round 3 still applies. Between 58 and 64 of the
 253 benchmark gold queries are unscorable depending on the pair of runs,
 because some of the empty results were timeouts.
 
+## Round 5: facility and author candidates (2026-09-25)
+
+Two changes to the Jev request, both following the topic pattern: code
+proposes candidates mechanically, Jev decides what they mean.
+
+1. **Bibgroup.** The bibgroup question listed every facility (about 28% of
+   the question text). Code now matches facility names, codes and NER
+   synonyms in the query and offers only those plus `none`; with no
+   facility named the question is left out. Candidate recall against the
+   round-4c arm E answers missed 8 of 101; only 2 of the 8 agreed with gold
+   (ALMA as "Atacama Large Millimeter Array", RXTE as "Rossi XTE"), and
+   aliases for both were added after reading val, so val bibgroup numbers
+   are tuned. The other 6 were Jev false positives such as "Harvard" read
+   as CfA.
+2. **Authors.** The regex found authors only after "by", "author" or before
+   "et al.", so "papers that cite Jarmak" became `citations(abs:jarmak)`
+   (found in UI testing). Code now offers the regex names plus every
+   capitalized, non-acronym word (at most 4), and Jev answers one yes/no
+   question per name: is this a person? The authors are the names Jev
+   accepts. A regex name Jev rejects ("papers by Hubble" if read as the
+   telescope) goes back into the topic.
+
+The `jev_gated` backend skips Jev whenever the regex finds an operator with
+high confidence, so "papers that cite Jarmak" never reached Jev under it.
+The test server now runs `INTENT_BACKEND=jev` (Jev on every query).
+
+| dataset | arm | input tokens | $/query (round 4c) | operator acc | bibgroup F1 | author detection F1 (regex) |
+|---|---|---|---|---|---|---|
+| benchmark | B jev | 2,609 | $0.000110 ($0.000159) | 0.983 (0.987) | 0.931 (0.915) | 1.000 (0.700) |
+| benchmark | E jev_gated | 1,783 | $0.000075 ($0.000108) | 0.996 (0.996) | 0.862 (0.848) | 0.810 (0.700) |
+| val | B jev | 2,684 | $0.000113 ($0.000160) | 0.973 (0.968) | 0.841 (0.811) | 0.911 (0.875) |
+| val | E jev_gated | 2,502 | $0.000105 ($0.000149) | 0.966 (0.964) | 0.806 (0.763) | 0.905 (0.875) |
+| held-out | B jev | 2,745 | $0.000115 ($0.000164) | 0.987 (0.993) | 0.583 (0.560) | n/a |
+| held-out | E jev_gated | 2,729 | $0.000115 ($0.000163) | 0.987 (0.993) | 0.583 (0.560) | n/a |
+
+Author detection is "the gold query names an author" against "any author
+predicted"; held-out has no author labels. On the benchmark arm B finds all
+25 author queries against 14 for the regex. Of the 11 val misses, 10 are
+lowercase names not after "by" ("smith j dark energy", "oort j weak
+lensing") or accented ("cañas"), which the candidate rule does not offer;
+"Übler" was fixed after this run (initial capitals are now Unicode-aware).
+Most of the 22 val false positives are gold gaps ("papers by Silich on
+stellar winds" has no author clause in its gold query).
+
+Held-out arm B makes one new operator false positive on the
+operator-negative stratum: "foundational models for spectral
+classification" read as `useful` (round 4c: none). That is 1 of 40, 2.5%,
+over criterion 2's 2%. The request changed for every item, so every answer
+was re-drawn; it was not tuned against. p95 uncached latency for arm B is
+202 to 322 ms.
+
 ## Criteria table
 
-Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criteria 4 and 5.
+Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criterion 4; round 5 for criterion 5 and the round-5 note on criterion 2.
 
 | # | criterion | result | status |
 |---|---|---|---|
 | 1 | B macro-F1 on paraphrase set ≥ A + 15 points and > C | B 0.986 (0.955) vs A 0.146, +84 points; vs C 0.922 (0.933), +6.4 points, and C makes 3 operator-negative false positives to B's 0 | met |
-| 2 | B false-positive rate on operator-negative stratum ≤ 2% | 0 of 40 (B, D and E, both rounds); on all gold-none items 1 of 106 (3 of 106), "the review" | met |
+| 2 | B false-positive rate on operator-negative stratum ≤ 2% | 0 of 40 (B, D and E, rounds 2 to 4); on all gold-none items 1 of 106 (3 of 106), "the review". Round 5: 1 of 40 (2.5%), "foundational models for spectral classification" read as `useful` | met through round 4; missed by one item in round 5 |
 | 3 | B selective accuracy ≥ 95% at 90% coverage | 1.000 held-out, 1.000 benchmark, 0.995 (0.988) val | met |
 | 4 | end-to-end semantic match: no drop on benchmark, rise on held-out | Round 4, scored with the fixed rule (empty gold excluded): benchmark jev_gated 38.1% vs regex 31.7%, +6.4 points, paired 37 wins to 8 on 45 differing items; val 21.2% vs 12.3%, paired 106 to 14. Round 3 on the same rule: benchmark -2.6 points (paired 1 to 8), val level. Held-out has no gold queries; as a proxy the jev_gated pipeline serves 139 of 152 at 0.986 operator accuracy vs 141 at 0.688 for regex | no drop met on benchmark (round 4); rise shown on val and on held-out operator accuracy, not end to end on held-out |
-| 5 | E p95 added latency ≤ 600 ms, mean cost ≤ $0.0001/query | Round 4: $0.000108 benchmark, $0.000149 val, $0.000163 held-out (round 3: $0.000088 / $0.000122 / $0.000129); p95 218 to 269 ms in round 3, not re-measured in round 4 | latency met (round 3); cost missed on every set in round 4 |
+| 5 | E p95 added latency ≤ 600 ms, mean cost ≤ $0.0001/query | Round 5: E $0.000075 benchmark, $0.000105 val, $0.000115 held-out; B (Jev on every query) $0.000110 / $0.000113 / $0.000115. Round 4: E $0.000108 / $0.000149 / $0.000163. p95 202 to 322 ms (B, round 5) | latency met; cost met on benchmark only (E), 5% to 15% over elsewhere |
 
 ## Caveats
 
@@ -883,8 +934,9 @@ Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); ro
   answer changed on 9% of benchmark items across repeats).
 - **Token cost is 2.6x the plan's estimate** (3,118 input tokens per Jev
   call in round 3, 2,903 in round 2, 1,200 planned). The option lists are
-  the reason; a shorter bibgroup list (the 10 facilities that appear in the
-  data) would roughly halve it.
+  the reason. The bibgroup list was about 28% of the question text, not
+  half as an earlier draft of this caveat said; offering only the facilities
+  named in the query (round 5) cut about 30% of the tokens.
 - **Jev confidence is a model output** and was measured calibrated on these
   two sets; that is a result, not a premise, and it was measured on
   `jev-1.13.0` only.
@@ -911,6 +963,7 @@ Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); ro
 - End to end: `data/datasets/evaluations/semantic_overlap_pipeline_{regex,jev,jev_gated}_{benchmark,val}_2026-09-24.json`.
 - Round 3 (the code on main): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_v3_2026-09-24{.jsonl,_metrics.json}` (arms A, B, D, E) and `intent_classifiers_{benchmark,val,heldout}_c_v3_2026-09-24{.jsonl,_metrics.json}` (arm C via the CLI); end to end `semantic_overlap_pipeline_{regex,jev_gated}_{benchmark,val}_v3_2026-09-24.json`.
 - Round 4 (Jev decides recency, topic, first author and highly cited): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round4c_2026-09-24{.jsonl,_metrics.json}` (final criteria text; `round4` and `round4b` are the two earlier revisions); end to end `semantic_overlap_pipeline_{regex,jev_gated}_{benchmark,val}_round4_2026-09-24.json`.
+- Round 5 (facility and author candidates): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round5_2026-09-25{.jsonl,_metrics.json}` (arms A, B, E).
 - Request caches: `data/cache/jev_systemone.jsonl`, `data/cache/llm_intent.jsonl`.
 - Labels: `data/datasets/evaluations/intent_labels.jsonl`.
 - Held-out paraphrases (approved): `data/datasets/benchmark/heldout_paraphrases.json`; review sheet `reports/heldout-paraphrase-review-sheet.md`; approval recorded with `scripts/approve_heldout_paraphrases.py`.

@@ -86,17 +86,26 @@ def handler_client(
 
 
 def with_topic_answer(payload: dict, request: dict) -> dict:
-    """``payload`` plus, when a topic was asked and not answered, the longest candidate.
+    """``payload`` plus defaults for the candidate questions it leaves unanswered.
 
-    The longest candidate is the whole regex phrase, so tests that do not set
-    a topic keep the regex topic.
+    An unanswered topic gets the longest candidate, which is the whole regex
+    phrase, so tests that do not set a topic keep the regex topic. An
+    unanswered author question is yes exactly when the regex found that name,
+    so tests that do not set authors keep the regex authors.
     """
-    topic = request["questions"].get("topic")
-    if topic is None or "topic" in payload["answers"]:
-        return payload
-    longest = next(option for option in topic["criteria"] if option != "none")
-    answer = choice_answer(longest, {"none": 0.05, longest: 0.95})
-    return {**payload, "answers": {**payload["answers"], "topic": answer}}
+    from finetune.domains.scix.ner import extract_intent
+
+    questions, answers = request["questions"], dict(payload["answers"])
+    topic = questions.get("topic")
+    if topic is not None and "topic" not in answers:
+        longest = next(option for option in topic["criteria"] if option != "none")
+        answers["topic"] = choice_answer(longest, {"none": 0.05, longest: 0.95})
+    regex_authors = {a.lower() for a in extract_intent(request["state"]["query"]).authors}
+    for qid, question in questions.items():
+        if qid.startswith("author_") and qid not in answers:
+            named = any(f"'{a}'" in question["instructions"].lower() for a in regex_authors)
+            answers[qid] = noul_answer(0.9 if named else 0.1)
+    return {**payload, "answers": answers}
 
 
 def answering_client(

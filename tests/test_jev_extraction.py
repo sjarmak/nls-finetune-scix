@@ -12,9 +12,12 @@ from finetune.domains.scix.intent_spec import IntentSpec
 from finetune.domains.scix.jev_intent import (
     EXTRACTION_QUESTION_IDS,
     HIGHLY_CITED_MIN_CITATIONS,
+    MAX_AUTHOR_CANDIDATES,
     RECENCY_WINDOWS,
     JevResponseError,
     apply_answers,
+    author_candidates,
+    bibgroup_candidates,
     build_questions,
     build_request,
     classify_and_extract,
@@ -178,3 +181,108 @@ class TestReferenceYear:
     def test_last_n_years_anchor_on_the_reference_year(self):
         intent = extract_intent("exoplanet papers from the last 5 years", reference_year=2025)
         assert intent.year_to == 2025
+
+
+class TestBibgroupCandidates:
+    @pytest.mark.parametrize(
+        "text, expected",
+        [
+            ("JWST or HST papers on exoplanet atmospheres", ("HST", "JWST")),
+            ("Hubble deep field observations", ("HST",)),
+            ("papers using Atacama Large Millimeter Array", ("ALMA",)),
+            ("X-ray bursts research with Rossi XTE", ("RXTE",)),
+            ("stellar populations studies using Gemini North", ("Gemini",)),
+            ("asteroid surveys with panstarrs", ("Pan-STARRS",)),
+            ("Wide-field Infrared Survey Explorer asteroids", ("WISE",)),
+            ("recent papers on asteroids", ()),
+        ],
+    )
+    def test_facilities_named_in_the_text(self, text, expected):
+        assert bibgroup_candidates(text) == expected
+
+    def test_no_facility_leaves_the_bibgroup_question_out(self):
+        questions = build_request("dark matter", bibgroup_candidates=())["questions"]
+        assert "bibgroup" not in questions
+
+    def test_named_facilities_are_the_only_options(self):
+        questions = build_request("JWST papers", bibgroup_candidates=("JWST",))["questions"]
+        assert set(questions["bibgroup"]["criteria"]) == {"none", "JWST"}
+
+    def test_without_candidates_every_bibgroup_is_offered(self):
+        assert len(build_request("q")["questions"]["bibgroup"]["criteria"]) > 50
+
+    def test_unasked_bibgroup_is_empty_and_has_no_confidence(self):
+        request = build_request("dark matter", bibgroup_candidates=())
+        answers = _answers(request)
+        intent = apply_answers(IntentSpec(bibgroup={"HST"}), answers)
+        assert intent.bibgroup == set()
+        assert "bibgroup" not in intent.confidence
+
+    def test_classify_and_extract_narrows_the_request(self):
+        calls: list[dict] = []
+        chandra = choice_answer("Chandra", {"none": 0.2, "Chandra": 0.8})
+        client = mock_jev_client(None, [jev_payload(), jev_payload(bibgroup=chandra)], calls)
+        classify_and_extract("dark matter halos", client)
+        intent, _ = classify_and_extract("Chandra observations of dark matter halos", client)
+        assert intent.bibgroup == {"Chandra"}
+        assert "bibgroup" not in calls[0]["questions"]
+        assert set(calls[1]["questions"]["bibgroup"]["criteria"]) == {"none", "Chandra"}
+
+
+class TestAuthors:
+    """Code offers capitalized words as names; Jev decides which are people."""
+
+    @pytest.mark.parametrize(
+        ("text", "expected"),
+        [
+            ("papers that cite Jarmak", ("Jarmak",)),
+            ("papers by Hawking on black holes", ("Hawking",)),
+            ("JWST papers on brown dwarfs", ()),
+            ("recent papers on asteroids", ()),
+            ("Chandra observations of Einstein rings", ("Chandra", "Einstein")),
+            ("papers by hawking", ("hawking",)),
+            ("papers by Übler published in 2019", ("Übler",)),
+        ],
+    )
+    def test_candidates(self, text, expected):
+        assert author_candidates(text, extract_intent(text)) == expected
+
+    def test_candidates_are_capped(self):
+        text = "Alpha Beta Gamma Delta Epsilon Zeta"
+        assert len(author_candidates(text, extract_intent(text))) == MAX_AUTHOR_CANDIDATES
+
+    def test_one_yes_no_question_per_candidate(self):
+        questions = build_request("q", author_candidates=("Jarmak", "Kurtz"))["questions"]
+        assert questions["author_0"]["type"] == "noul"
+        assert "'Jarmak'" in questions["author_0"]["instructions"]
+        assert "'Kurtz'" in questions["author_1"]["instructions"]
+        assert "author_0" not in build_request("q")["questions"]
+
+    def test_papers_that_cite_a_surname(self):
+        payload = jev_payload("citations", author_0=noul_answer(0.95))
+        client = mock_jev_client(None, [payload], [])
+        intent, _ = classify_and_extract("papers that cite Jarmak", client)
+        assert intent.authors == ["Jarmak"]
+        assert assemble_query(intent) == 'citations(author:"Jarmak")'
+
+    def test_a_rejected_name_stays_in_the_topic(self):
+        payload = jev_payload("citations", author_0=noul_answer(0.05))
+        client = mock_jev_client(None, [payload], [])
+        intent, _ = classify_and_extract("papers citing Maxwell", client)
+        assert intent.authors == []
+        assert assemble_query(intent) == "citations(abs:maxwell)"
+
+    def test_jev_can_overrule_a_regex_author(self):
+        payload = jev_payload(author_0=noul_answer(0.05))
+        client = mock_jev_client(None, [payload], [])
+        intent, _ = classify_and_extract("papers by Hubble", client)
+        assert intent.authors == []
+        assert intent.first_author is False
+        assert "hubble" in " ".join(intent.free_text_terms).lower()
+
+    def test_confidence_is_recorded_per_name(self):
+        payload = jev_payload("citations", author_0=noul_answer(0.95))
+        intent, _ = classify_and_extract(
+            "papers that cite Jarmak", mock_jev_client(None, [payload], [])
+        )
+        assert intent.confidence["author.Jarmak"] == 0.95

@@ -68,9 +68,11 @@ def test_record_captures_both_intents_and_the_disagreement():
 
 def test_enum_disagreement_is_reported_per_field():
     served = extract_intent(GATED_QUERY).to_dict()
-    payload = jev_payload("none", bibgroup=choice_answer("JWST", {"none": 0.1, "JWST": 0.9}))
+    payload = jev_payload(
+        "none", doctype=choice_answer("phdthesis", {"none": 0.1, "phdthesis": 0.9})
+    )
     record = shadow_record(GATED_QUERY, served, "jev_gated", _answering(payload), "pipeline")
-    assert "bibgroup" in record["disagreements"]
+    assert "doctype" in record["disagreements"]
     assert "operator" not in record["disagreements"]
 
 
