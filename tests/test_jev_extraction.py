@@ -261,8 +261,17 @@ class TestAuthors:
             ("similar work to Kaltenegger's biosignature models", ("Kaltenegger",)),
             (
                 "sara seager exoplanet atmospheres",
-                ("sara seager", "seager exoplanet", "exoplanet atmospheres"),
+                (
+                    "sara seager",
+                    "seager exoplanet",
+                    "exoplanet atmospheres",
+                    "sara",
+                    "seager",
+                    "exoplanet",
+                    "atmospheres",
+                ),
             ),
+            ("accomazzi europa", ("accomazzi europa", "accomazzi", "europa")),
             ("Event Horizon Telescope images", ("Event", "Horizon", "Telescope")),
             ("Pieter van Dokkum dwarf galaxies", ("Pieter van Dokkum", "van Dokkum", "Pieter")),
             ("van Dokkum, P. G.", ("van Dokkum, P. G.",)),
@@ -272,7 +281,7 @@ class TestAuthors:
         assert author_candidates(text, extract_intent(text)) == expected
 
     def test_candidates_are_capped(self):
-        text = "Alpha Beta Gamma Delta Epsilon Zeta"
+        text = "Alpha Beta Gamma Delta Epsilon Zeta Eta Theta Iota"
         assert len(author_candidates(text, extract_intent(text))) == MAX_AUTHOR_CANDIDATES
 
     def test_readings_are_sets_of_names_that_share_no_word(self):
@@ -389,6 +398,12 @@ class TestAuthors:
         client = mock_jev_client(None, [payload], [])
         intent, _ = classify_and_extract("andy casey stellar spectra", client)
         assert assemble_query(intent) == 'author:"Casey, Andy" abs:"stellar spectra"'
+
+    def test_a_lowercase_surname_next_to_a_mission_is_one_author(self):
+        payload = jev_payload(author_reading=reading("accomazzi"))
+        client = mock_jev_client(None, [payload], [])
+        intent, _ = classify_and_extract("accomazzi europa", client)
+        assert assemble_query(intent) == 'author:"Accomazzi" abs:europa'
 
     def test_a_regex_name_covered_by_the_chosen_span_stays_out_of_the_topic(self):
         names = ("Sara Seager", "Sara", "Seager")

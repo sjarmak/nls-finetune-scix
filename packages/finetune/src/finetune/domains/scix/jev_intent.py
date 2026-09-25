@@ -73,7 +73,7 @@ MIN_JOINED_TOKENS = 3
 """Shortest topic phrase whose adjacent word pairs each get a ``join_<i>`` question."""
 MAX_JOIN_QUESTIONS = 12
 """Most word-pair questions per query; a phrase that would pass the cap stays whole."""
-MAX_AUTHOR_CANDIDATES = 6
+MAX_AUTHOR_CANDIDATES = 8
 """Most names offered per query."""
 MAX_AUTHOR_READINGS = 16
 """Most readings in the ``author_reading`` question: every reading of four single names."""
@@ -437,18 +437,21 @@ def _lowercase_pairs(text: str) -> list[str]:
 
 
 def author_candidates(text: str, intent: IntentSpec) -> tuple[str, ...]:
-    """Name spans, the regex names, then single capitalized words, at most ``MAX_AUTHOR_CANDIDATES``.
+    """Name spans, the regex names, then single words, at most ``MAX_AUTHOR_CANDIDATES``.
 
     A span is a full name written together ("Sara Seager", "A. G. Riess",
     "Riess, A. G.") or, in an all-lowercase request, a pair of adjacent words.
-    Single words are offered too, so Jev can call "Madau Dickinson" two people.
-    All-caps words (JWST, ALMA) are acronyms, not surnames, and are not offered.
+    Single words are offered too, so Jev can call "Madau Dickinson" two people
+    and "accomazzi europa" one author plus a topic. All-caps words (JWST, ALMA)
+    are acronyms, not surnames, and are not offered.
     """
     runs = [_run_candidates(span, run) for span, run in _name_runs(text)]
     spans = [c for r in runs for c in r if " " in c]
     singles = [c for r in runs for c in r if " " not in c]
+    pairs = _lowercase_pairs(text)
+    lowercase_singles = [word for pair in pairs for word in pair.split()]
     unique: dict[str, str] = {}
-    for name in (*spans, *_lowercase_pairs(text), *intent.authors, *singles):
+    for name in (*spans, *pairs, *intent.authors, *singles, *lowercase_singles):
         unique.setdefault(name.lower(), name)
     return tuple(unique.values())[:MAX_AUTHOR_CANDIDATES]
 
