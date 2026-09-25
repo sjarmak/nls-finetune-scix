@@ -15,6 +15,7 @@ from finetune.domains.scix.jev_intent import (
     MAX_AUTHOR_CANDIDATES,
     RECENCY_WINDOWS,
     JevResponseError,
+    ads_author,
     apply_answers,
     author_candidates,
     bibgroup_candidates,
@@ -243,6 +244,17 @@ class TestAuthors:
             ("Chandra observations of Einstein rings", ("Chandra", "Einstein")),
             ("papers by hawking", ("hawking",)),
             ("papers by Übler published in 2019", ("Übler",)),
+            ("Sara Seager", ("Sara Seager", "Sara", "Seager")),
+            ("papers by A. G. Riess", ("A. G. Riess",)),
+            ("Riess, A. G.", ("Riess, A. G.",)),
+            ("similar work to Kaltenegger's biosignature models", ("Kaltenegger",)),
+            (
+                "sara seager exoplanet atmospheres",
+                ("sara seager", "seager exoplanet", "exoplanet atmospheres"),
+            ),
+            ("Event Horizon Telescope images", ("Event", "Horizon", "Telescope")),
+            ("Pieter van Dokkum dwarf galaxies", ("Pieter van Dokkum", "van Dokkum", "Pieter")),
+            ("van Dokkum, P. G.", ("van Dokkum, P. G.",)),
         ],
     )
     def test_candidates(self, text, expected):
@@ -280,6 +292,56 @@ class TestAuthors:
         assert intent.authors == []
         assert intent.first_author is False
         assert "hubble" in " ".join(intent.free_text_terms).lower()
+
+    @pytest.mark.parametrize(
+        ("name", "expected"),
+        [
+            ("Sara Seager", "Seager, Sara"),
+            ("A. G. Riess", "Riess, A. G."),
+            ("Riess, A. G.", "Riess, A. G."),
+            ("sara seager", "Seager, Sara"),
+            ("Seager", "Seager"),
+            ("Pieter van Dokkum", "van Dokkum, Pieter"),
+            ("richard de grijs", "de Grijs, Richard"),
+            ("de Grijs", "de Grijs"),
+        ],
+    )
+    def test_names_are_written_last_name_first(self, name, expected):
+        assert ads_author(name) == expected
+
+    def test_a_full_name_is_one_author(self):
+        payload = jev_payload(author_0=noul_answer(0.95))
+        client = mock_jev_client(None, [payload], [])
+        intent, _ = classify_and_extract("Sara Seager exoplanet atmospheres", client)
+        assert intent.authors == ["Seager, Sara"]
+        assert assemble_query(intent) == 'author:"Seager, Sara" abs:"exoplanet atmospheres"'
+
+    def test_two_surnames_written_together_can_be_two_people(self):
+        payload = jev_payload(
+            author_0=noul_answer(0.1), author_1=noul_answer(0.9), author_2=noul_answer(0.9)
+        )
+        client = mock_jev_client(None, [payload], [])
+        intent, _ = classify_and_extract("Madau Dickinson star formation history", client)
+        assert intent.authors == ["Madau", "Dickinson"]
+
+    def test_a_lowercase_name_is_found(self):
+        payload = jev_payload(
+            author_0=noul_answer(0.97), author_1=noul_answer(0.1), author_2=noul_answer(0.02)
+        )
+        client = mock_jev_client(None, [payload], [])
+        intent, _ = classify_and_extract("andy casey stellar spectra", client)
+        assert assemble_query(intent) == 'author:"Casey, Andy" abs:"stellar spectra"'
+
+    def test_a_regex_name_covered_by_an_accepted_span_stays_out_of_the_topic(self):
+        names = ("Sara Seager", "Sara", "Seager")
+        req = build_request("q", author_candidates=names)
+        answers = _answers(
+            req, author_0=noul_answer(0.95), author_1=noul_answer(0.1), author_2=noul_answer(0.1)
+        )
+        intent = IntentSpec(authors=["Sara Seager"], free_text_terms=["exoplanets"])
+        out = apply_answers(intent, answers, author_candidates=names)
+        assert out.authors == ["Seager, Sara"]
+        assert out.free_text_terms == ["exoplanets"]
 
     def test_confidence_is_recorded_per_name(self):
         payload = jev_payload("citations", author_0=noul_answer(0.95))

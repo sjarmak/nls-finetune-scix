@@ -71,7 +71,7 @@ EXTRACTION_QUESTION_IDS: tuple[str, ...] = ("recency", "first_author", "highly_c
 MIN_GROUPED_TOKENS, MAX_GROUPED_TOKENS = 3, 5
 """Topic lengths that get a phrasing question (2**(n-1) options for n words)."""
 GROUP_SEPARATOR = " | "
-MAX_AUTHOR_CANDIDATES = 4
+MAX_AUTHOR_CANDIDATES = 6
 """Most names offered per query; each one is a yes/no question (``author_<i>``)."""
 _WORD = re.compile(r"[^\W\d_][\w'\-]*")
 """Questions that replace regex keyword rules. Kept out of ``build_questions`` so
@@ -281,25 +281,141 @@ def build_extraction_questions(
 
 def _author_question(name: str) -> dict:
     return _boolean(
-        f"Does the user name '{name}' as a person: someone whose papers they want, or whose "
-        "work the papers they want cite or are cited by?",
-        f"'{name}' is a person's name (a surname or full name) used to find papers.",
-        f"'{name}' names a telescope, mission, survey, instrument, object, place, institution "
-        "or theory, is part of a topic phrase (Hawking radiation, Einstein ring), or is an "
-        "ordinary word.",
+        f"Does the user name '{name}' as one person: someone whose papers they want, or "
+        "whose work the papers they want cite or are cited by?",
+        f"'{name}' is one person's name (a surname, or given names or initials plus a "
+        "surname) used to find papers.",
+        f"'{name}' names two or more different people, a telescope, mission, survey, "
+        "instrument, object, place, institution or theory, is part of a topic phrase "
+        "(Hawking radiation, Einstein ring), or is an ordinary word.",
     )
 
 
-def author_candidates(text: str, intent: IntentSpec) -> tuple[str, ...]:
-    """Names the regex found, then capitalized words in ``text``, at most ``MAX_AUTHOR_CANDIDATES``.
+_NAME_TOKEN = re.compile(r"[^\W\d_][\w'\u2019\-]*\.?")
+_POSSESSIVE = re.compile(r"['\u2019]s$")
 
+
+_PARTICLES = frozenset({"van", "von", "de", "der", "den", "del", "della", "di", "da", "du", "ter"})
+"""Lowercase surname particles that belong to the capitalized word after them (van Dokkum)."""
+
+
+def _is_initial(word: str) -> bool:
+    return len(word.rstrip(".")) == 1 and word[0].isupper()
+
+
+def _is_particle(word: str) -> bool:
+    return word in _PARTICLES
+
+
+def _is_capitalized(word: str) -> bool:
+    return word[0].isupper() and not (len(word.rstrip(".")) > 1 and word.rstrip(".").isupper())
+
+
+def _name_runs(text: str) -> list[tuple[str, list[str]]]:
+    """Runs of capitalized words and initials that touch in ``text`` ("Sara Seager", "Riess, A. G.").
+
+    Each run is its text and its words. Words touch when only spaces, or a
+    comma before an initial, separate them. Surname particles join the
+    capitalized word after them ("de Grijs"). Possessive 's is dropped.
+    All-caps acronyms (JWST) end a run.
+    """
+    runs: list[tuple[int, int, list[str]]] = []
+    particles: list[re.Match[str]] = []
+    for match in _NAME_TOKEN.finditer(text):
+        word = _POSSESSIVE.sub("", match.group())
+        if _is_particle(word):
+            particles.append(match)
+            continue
+        if not _is_capitalized(word):
+            runs.append((match.end(), match.end(), []))
+            particles = []
+            continue
+        first = particles[0].start() if particles else match.start()
+        joined = [*(p.group() for p in particles), word]
+        start, end, words = runs[-1] if runs else (0, 0, [])
+        gap = text[end:first].strip()
+        if words and (gap == "" or (gap == "," and _is_initial(word) and not particles)):
+            runs[-1] = (start, match.end(), [*words, *joined])
+        else:
+            runs.append((first, match.end(), joined))
+        particles = []
+    return [(_POSSESSIVE.sub("", text[start:end]), words) for start, end, words in runs if words]
+
+
+def _surnames(run: list[str]) -> list[str]:
+    """The full words of ``run`` with their particles ("de Grijs"), without initials."""
+    names: list[str] = []
+    particles: list[str] = []
+    for word in run:
+        if _is_particle(word):
+            particles.append(word)
+        elif not _is_initial(word):
+            names.append(" ".join([*particles, word.rstrip(".")]))
+            particles = []
+    return names
+
+
+def _run_candidates(span: str, run: list[str]) -> list[str]:
+    """One span for a one- or two-surname run with its initials; single words otherwise too."""
+    full = _surnames(run)
+    if not full:
+        return []
+    spans = [span] if len(full) <= 2 and span not in full else []
+    singles = full if len(full) > 1 or not spans else []
+    return spans + singles
+
+
+def _lowercase_pairs(text: str) -> list[str]:
+    """Adjacent content-word pairs of an all-lowercase request (``sara seager exoplanets``)."""
+    from .ner import STOPWORDS
+
+    if any(c.isupper() for c in text):
+        return []
+    words = [_POSSESSIVE.sub("", w) for w in _WORD.findall(text)]
+    return [
+        f"{a} {b}"
+        for a, b in zip(words, words[1:], strict=False)
+        if a not in STOPWORDS and b not in STOPWORDS and len(a) > 1 and len(b) > 1
+    ]
+
+
+def author_candidates(text: str, intent: IntentSpec) -> tuple[str, ...]:
+    """Name spans, the regex names, then single capitalized words, at most ``MAX_AUTHOR_CANDIDATES``.
+
+    A span is a full name written together ("Sara Seager", "A. G. Riess",
+    "Riess, A. G.") or, in an all-lowercase request, a pair of adjacent words.
+    Single words are offered too, so Jev can call "Madau Dickinson" two people.
     All-caps words (JWST, ALMA) are acronyms, not surnames, and are not offered.
     """
+    runs = [_run_candidates(span, run) for span, run in _name_runs(text)]
+    spans = [c for r in runs for c in r if " " in c]
+    singles = [c for r in runs for c in r if " " not in c]
     unique: dict[str, str] = {}
-    capitalized = [w for w in _WORD.findall(text) if w[0].isupper() and not w.isupper()]
-    for name in (*intent.authors, *capitalized):
+    for name in (*spans, *_lowercase_pairs(text), *intent.authors, *singles):
         unique.setdefault(name.lower(), name)
     return tuple(unique.values())[:MAX_AUTHOR_CANDIDATES]
+
+
+def name_words(name: str) -> set[str]:
+    """Lowercase words of ``name`` without initials, periods or commas."""
+    return {w.lower().strip(".,") for w in name.split() if not _is_initial(w)} - {""}
+
+
+def ads_author(name: str) -> str:
+    """``name`` in ADS order: "Sara Seager" -> "Seager, Sara"; "Pieter van Dokkum" -> "van Dokkum, Pieter".
+
+    A single surname or a name that already has a comma is kept; an
+    all-lowercase name is capitalized, except its surname particles.
+    """
+    words = name.split()
+    if name.islower():
+        words = [w if _is_particle(w) else w[:1].upper() + w[1:] for w in words]
+    last = len(words) - 1
+    while last > 0 and _is_particle(words[last - 1]):
+        last -= 1
+    if "," in name or last == 0:
+        return " ".join(words)
+    return f"{' '.join(words[last:])}, {' '.join(words[:last])}"
 
 
 def topic_candidates(intent: IntentSpec) -> tuple[str, ...]:
@@ -755,9 +871,10 @@ def apply_answers(
         free_text_terms = _group_topic(free_text_terms[0], phrasing.choice)
     authors = intent.authors
     if author_candidates:
-        authors = [n for n, p in author_probability.items() if p >= boolean_threshold]
-        people = {name.lower() for name in authors}
-        rejected = [name.lower() for name in intent.authors if name.lower() not in people]
+        authors = _accepted_names(author_probability, boolean_threshold)
+        people = {word for name in authors for word in name_words(name)}
+        rejected = [name.lower() for name in intent.authors if not name_words(name) <= people]
+        authors = [ads_author(name) for name in authors]
         kept = (" ".join(w for w in t.split() if w.lower() not in people) for t in free_text_terms)
         free_text_terms = [t for t in kept if t] + rejected
     highly_cited = answers.booleans["highly_cited"] >= boolean_threshold
@@ -776,6 +893,21 @@ def apply_answers(
         min_citations=HIGHLY_CITED_MIN_CITATIONS if highly_cited else intent.min_citations,
         confidence=confidence,
     )
+
+
+def _accepted_names(probability: dict[str, float], threshold: float) -> list[str]:
+    """Names Jev calls people; a longer span wins over the words it contains.
+
+    Spans are taken longest first, then by probability, and a name sharing a
+    word with one already taken is skipped. The result keeps the request order.
+    """
+    accepted = [name for name, p in probability.items() if p >= threshold]
+    ranked = sorted(accepted, key=lambda n: (-len(name_words(n)), -probability[n]))
+    taken: list[str] = []
+    for name in ranked:
+        if not name_words(name) & {w for t in taken for w in name_words(t)}:
+            taken.append(name)
+    return [name for name in accepted if name in taken]
 
 
 def classify_and_extract(
