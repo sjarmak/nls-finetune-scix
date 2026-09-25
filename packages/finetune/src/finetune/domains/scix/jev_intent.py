@@ -80,11 +80,14 @@ MIN_JOINED_TOKENS = 3
 """Shortest topic phrase whose adjacent word pairs each get a ``join_<i>`` question."""
 MAX_JOIN_QUESTIONS = 12
 """Most word-pair questions per query; a phrase that would pass the cap stays whole."""
-MAX_AUTHOR_CANDIDATES = 8
+MAX_AUTHOR_CANDIDATES = 10
 """Most names offered per query."""
 MAX_AUTHOR_READINGS = 16
 """Most readings in the ``author_reading`` question: every reading of four single names."""
 AUTHOR_READING_QUESTION = "author_reading"
+PUBLICATION_YEAR_QUESTION = "publication_year"
+_BARE_YEAR = re.compile(r"(?<![\w+\-/.])\d{4}(?![\w+\-/])")
+EARLIEST_YEAR = 1800
 _WORD = re.compile(r"[^\W\d_][\w'\-]*")
 """Questions that replace regex keyword rules. Kept out of ``build_questions`` so
 the arm C (``llm_intent``) prompt, which mirrors the gating set, is unchanged."""
@@ -187,7 +190,11 @@ def build_questions() -> dict[str, dict]:
             "Which single document type does the user restrict results to? Generic words "
             "such as papers, publications, articles, work, research or studies do not name a "
             "type; choose 'none' for them. Choose a type only when a specific kind of document "
-            "is asked for (a thesis, a book, conference proceedings, software, journal articles).",
+            "is asked for (a thesis, a book, conference proceedings, software, journal articles). "
+            "A word naming a data product in the topic (a flare catalog, a star catalog, an "
+            "atlas) asks for papers about or presenting it: choose 'none'. Choose 'catalog' only "
+            "when catalog records are the whole request (catalogs in the astronomy database, "
+            "VizieR tables, catalog entries).",
             DOCTYPE_DESCRIPTIONS,
         ),
         "bibgroup": _choice(
@@ -270,6 +277,33 @@ def build_extraction_questions(
     if named_topic_candidates:
         questions[NAMED_TOPIC_QUESTION] = _topic_question(named_topic_candidates)
     return questions
+
+
+def bare_year(text: str, intent: IntentSpec, reference_year: int | None = None) -> int | None:
+    """The first plausible year in ``text`` when the regex found no explicit years.
+
+    "Jensen, E. 2020" and "hubble 1929" carry a year with no "in" or "since";
+    so does "the Planck 2018 results", where it is a name. Jev decides which
+    (``publication_year``). Catalog numbers (PSR 1913+16, SN 1987A) are not
+    candidates, nor are years before 1800 or more than five years ahead.
+    """
+    if intent.year_from is not None or intent.year_to is not None:
+        return None
+    latest = (reference_year if reference_year is not None else datetime.now(UTC).year) + 5
+    years = (int(m.group()) for m in _BARE_YEAR.finditer(text))
+    return next((y for y in years if EARLIEST_YEAR <= y <= latest), None)
+
+
+def _publication_year_question(year: int) -> dict:
+    return _boolean(
+        f"In this request, is {year} the publication year of the papers the user wants, or "
+        "of the one paper they refer to?",
+        f"{year} is when the wanted papers, or the referred-to paper, were published "
+        f"(exoplanet atmospheres {year}, Jensen {year}, the Riess {year} paper).",
+        f"{year} is part of a name or label that is not a publication date: a data release, "
+        "survey or result named after a year (the Planck 2018 results were published in "
+        "2020, DESI 2024), an object designation or an event.",
+    )
 
 
 def _topic_question(candidates: tuple[str, ...]) -> dict:
@@ -435,27 +469,37 @@ def _surnames(run: list[str]) -> list[str]:
 
 
 def _run_candidates(span: str, run: list[str]) -> list[str]:
-    """One span for a one- or two-surname run with its initials; single words otherwise too."""
+    """One span for a run of up to three surnames with its initials; single words otherwise too."""
     full = _surnames(run)
     if not full:
         return []
-    spans = [span] if len(full) <= 2 and span not in full else []
+    spans = [span] if len(full) <= 3 and span not in full else []
     singles = full if len(full) > 1 or not spans else []
     return spans + singles
 
 
-def _lowercase_pairs(text: str) -> list[str]:
-    """Adjacent content-word pairs of an all-lowercase request (``sara seager exoplanets``)."""
+def _lowercase_runs(text: str, n: int) -> list[list[str]]:
+    """Runs of ``n`` adjacent content words of an all-lowercase request."""
     from .ner import STOPWORDS
 
     if any(c.isupper() for c in text):
         return []
     words = [_POSSESSIVE.sub("", w) for w in _WORD.findall(text)]
     return [
-        f"{a} {b}"
-        for a, b in zip(words, words[1:], strict=False)
-        if a not in STOPWORDS and b not in STOPWORDS and len(a) > 1 and len(b) > 1
+        run
+        for run in (words[i : i + n] for i in range(len(words) - n + 1))
+        if all(w not in STOPWORDS and len(w) > 1 for w in run)
     ]
+
+
+def _lowercase_pairs(text: str) -> list[str]:
+    """Adjacent content-word pairs of an all-lowercase request (``sara seager exoplanets``)."""
+    return [" ".join(run) for run in _lowercase_runs(text, 2)]
+
+
+def _lowercase_triples(text: str) -> list[str]:
+    """Adjacent content-word triples of an all-lowercase request (``jocelyn bell burnell``)."""
+    return [" ".join(run) for run in _lowercase_runs(text, 3)]
 
 
 def author_candidates(text: str, intent: IntentSpec) -> tuple[str, ...]:
@@ -464,8 +508,10 @@ def author_candidates(text: str, intent: IntentSpec) -> tuple[str, ...]:
     A span is a full name written together ("Sara Seager", "A. G. Riess",
     "Riess, A. G.") or, in an all-lowercase request, a pair of adjacent words.
     Single words are offered too, so Jev can call "Madau Dickinson" two people
-    and "accomazzi europa" one author plus a topic. All-caps words (JWST, ALMA)
-    are acronyms, not surnames, and are not offered.
+    and "accomazzi europa" one author plus a topic. Lowercase triples
+    ("jocelyn bell burnell") come last, so a long request loses them to the
+    cap before its pairs and single words. All-caps words (JWST, ALMA) are
+    acronyms, not surnames, and are not offered.
     """
     runs = [_run_candidates(span, run) for span, run in _name_runs(text)]
     spans = [c for r in runs for c in r if " " in c]
@@ -473,7 +519,8 @@ def author_candidates(text: str, intent: IntentSpec) -> tuple[str, ...]:
     pairs = _lowercase_pairs(text)
     lowercase_singles = [word for pair in pairs for word in pair.split()]
     unique: dict[str, str] = {}
-    for name in (*spans, *pairs, *intent.authors, *singles, *lowercase_singles):
+    triples = _lowercase_triples(text)
+    for name in (*spans, *pairs, *intent.authors, *singles, *lowercase_singles, *triples):
         unique.setdefault(name.lower(), name)
     return tuple(unique.values())[:MAX_AUTHOR_CANDIDATES]
 
@@ -627,12 +674,13 @@ def build_request(
     author_candidates: tuple[str, ...] = (),
     word_pairs: tuple[tuple[str, int], ...] = (),
     named_topic_candidates: tuple[str, ...] = (),
+    bare_year: int | None = None,
 ) -> dict:
     """Build the System One request body. ``context`` is merged into ``state``.
 
     ``author_candidates`` get one choice question, ``author_reading``, over
     which of them are people; each of ``word_pairs`` gets a yes/no question,
-    ``join_<k>``.
+    ``join_<k>``; a ``bare_year`` gets ``publication_year``.
 
     With ``bibgroup_candidates`` the bibgroup question offers only those
     facilities plus ``none``, and is left out when there are none; without it
@@ -655,6 +703,8 @@ def build_request(
             questions["bibgroup"] = {**bibgroup, "criteria": criteria}
     if author_candidates:
         questions[AUTHOR_READING_QUESTION] = _author_reading_question(author_candidates)
+    if bare_year is not None:
+        questions[PUBLICATION_YEAR_QUESTION] = _publication_year_question(bare_year)
     for k, (phrase, i) in enumerate(word_pairs):
         words = phrase.split()
         questions[f"join_{k}"] = _join_question(phrase, words[i], words[i + 1])
@@ -833,6 +883,7 @@ class JevClient:
         author_candidates: tuple[str, ...] = (),
         word_pairs: tuple[tuple[str, int], ...] = (),
         named_topic_candidates: tuple[str, ...] = (),
+        bare_year: int | None = None,
     ) -> JevAnswers:
         request = build_request(
             text,
@@ -843,6 +894,7 @@ class JevClient:
             author_candidates=author_candidates,
             word_pairs=word_pairs,
             named_topic_candidates=named_topic_candidates,
+            bare_year=bare_year,
         )
         return self.answer(request, use_cache=use_cache)
 
@@ -923,6 +975,7 @@ def apply_answers(
     author_candidates: tuple[str, ...] = (),
     word_pairs: tuple[tuple[str, int], ...] = (),
     named: IntentSpec | None = None,
+    bare_year: int | None = None,
 ) -> IntentSpec:
     """Return a new IntentSpec with Jev's answers applied.
 
@@ -937,8 +990,9 @@ def apply_answers(
     Names and explicit years on ``intent`` are kept. Operator, doctype,
     bibgroup, collection and the three property flags are replaced by Jev's
     answers; bibgroup is empty when the question was not asked (no facility
-    named). Jev also sets the recency window (only when no explicit years
-    were found; it ends at ``reference_year``, default the current year), the
+    named). A ``bare_year`` Jev calls a publication year becomes the year
+    range and leaves the topic. Jev also sets the recency window (only when no
+    years were found; it ends at ``reference_year``, default the current year), the
     first-author flag (only when there are authors), the citation floor and,
     when a topic question was asked, the topic phrase. ``confidence`` holds
     the model's actual probabilities.
@@ -984,6 +1038,16 @@ def apply_answers(
         **{f"author.{name}": p for name, p in author_probability.items()},
     }
     year_from, year_to = intent.year_from, intent.year_to
+    year_probability = answers.booleans.get(PUBLICATION_YEAR_QUESTION) if bare_year else None
+    publication_year = (
+        year_probability is not None
+        and year_probability >= boolean_threshold
+        and year_from is None
+        and year_to is None
+    )
+    if publication_year:
+        year_from = year_to = bare_year
+        confidence["year"] = year_probability
     if year_from is None and year_to is None and recency.choice != NONE_OPTION:
         year_to = reference_year if reference_year is not None else datetime.now(UTC).year
         year_from = year_to - RECENCY_WINDOWS[recency.choice] + 1
@@ -1000,6 +1064,10 @@ def apply_answers(
         authors = [ads_author(name) for name in authors]
         kept = (" ".join(w for w in t.split() if w.lower() not in people) for t in free_text_terms)
         free_text_terms = [t for t in kept if t] + rejected
+    if publication_year:
+        year_word = str(bare_year)
+        kept = (" ".join(w for w in t.split() if w != year_word) for t in free_text_terms)
+        free_text_terms = [t for t in kept if t]
     highly_cited = answers.booleans["highly_cited"] >= boolean_threshold
     return replace(
         intent,
@@ -1049,6 +1117,7 @@ def classify_and_extract(
     named = extract_intent(text, reference_year, keep_facility_words=True)
     facility_in_topic = _topics(named) != _topics(regex_intent)
     names = author_candidates(text, regex_intent)
+    year = bare_year(text, regex_intent, reference_year)
     pairs = word_pairs(regex_intent, *([named] if facility_in_topic else []))
     answers = client.classify(
         text,
@@ -1059,6 +1128,7 @@ def classify_and_extract(
         author_candidates=names,
         word_pairs=pairs,
         named_topic_candidates=topic_candidates(named) if facility_in_topic else (),
+        bare_year=year,
     )
     operator = answers.choices["operator"].choice
     operator = None if operator == NONE_OPTION else operator
@@ -1075,6 +1145,7 @@ def classify_and_extract(
         author_candidates=names,
         word_pairs=pairs,
         named=named_base,
+        bare_year=year,
     )
     return intent, answers
 

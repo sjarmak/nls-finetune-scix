@@ -1208,6 +1208,53 @@ Held-out drops from 0.993 to 0.987: "cornerstone results in exoplanet transit
 photometry" moved from useful to none at confidence 0.49 (0.50 before). Input
 tokens rise under 1%.
 
+## Round 12: three-word names, bare years and catalogs (2026-09-25)
+
+Three fixes, run as one round.
+
+Three-word names. "jocelyn bell burnell pulsars" never offered the whole
+name: a lowercase request offered only word pairs and single words. It now
+also offers each run of three lowercase words, after every other candidate,
+and the candidate cap rises from 8 to 10 so the triple survives in a
+five-word request ("maria teresa ruiz white dwarfs"). A capitalized run of
+up to three surnames is offered whole. The request now searches
+`author:"Burnell, Jocelyn Bell"` (19 hits, 6 before). The name probe (48
+items plus the three-word cases) scores 54 of 58, against 104 of 116 over 2
+repeats in the cap-8 trial. Still wrong: "jarmak colwell saturn rings" and
+the Bell Burnell surname form.
+
+Bare years. "Jensen, E. 2020" searched `author:"Jensen, E."`: the regex
+reads a year only after "in", "since", "from" and similar words. Code now
+offers the first year-like number (1800 to five years ahead, not part of a
+designation such as PSR 1913+16 or SN 1987A) and Jev answers one yes/no
+question, `publication_year`: is it when the papers were published, or part
+of a name (the Planck 2018 results, DESI 2024)? A yes sets the year and takes
+the number out of the topic. The regex also reads "2018 to 2023" as a range
+now; the bare-year question had been taking its first year. Keyword set years
+0.927 to 0.987; val year exact match 0.803 to 0.860, with 47 items gaining the
+right year. Most of the 20 val items scored wrong are gold rows that omit a
+stated year ("papers by Jensen 2020" has none, "papers by Guo 2020" has
+2020) or journal references where the year is the paper's own. Known
+regression: "papers cited in the Planck 2018 paper" gets `publication_year`
+0.57, so the paper lookup searches 2018 and misses the 2020 paper it used
+to resolve. Two rewordings that fixed it cost "ALMA observations 2022" and
+"Gaia astrometry 2017", and a lookup search with the year as a word left Jev
+split among three Planck 2018 papers.
+
+Catalogs. "solar flare catalog sdo" searched `doctype:catalog` (0 hits).
+ADS holds 2,230 catalog records in all, so a catalog named in the topic now
+means papers about it; the catalog doctype stays for requests that are only
+for catalog records ("catalog in astronomy database", "VizieR catalogs of
+open clusters"). The query now finds 99 papers. Held-out loses two catalog
+labels: "catalogues of variable stars" (7 hits with the doctype, 2,994
+without) and "data tables of open cluster members".
+
+Arm B operator accuracy (round 11 in parentheses): benchmark 0.983 (0.983),
+val 0.973 (0.975), held-out 0.993 (0.987). Doctype F1: benchmark 0.492
+(0.478), val 0.420 (0.410), held-out 0.800 (0.870). Keyword set: authors
+0.913 (0.900), years 0.987 (0.927), exact query 0.713 (0.667), any ADS hits
+0.987 (0.967). Cost $0.000139 / $0.000147 / $0.000172, input tokens up 3%.
+
 ## Criteria table
 
 Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criterion 4; rounds 5 to 10 for criterion 5 and the notes on criterion 2.
@@ -1298,6 +1345,7 @@ Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); ro
 - Round 9 (lowercase names, keyword queries read as citations): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round9_2026-09-25{.jsonl,_metrics.json}` (arm B).
 - Round 10 (named facilities, operator phrases, paper lookup): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round10_2026-09-25{.jsonl,_metrics.json}` (arm B).
 - Round 11 (two lowercase surnames): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round11_2026-09-25{.jsonl,_metrics.json}` (arm B) and `keyword_queries_jev_2026-09-25-vaz{.jsonl,_metrics.json}`.
+- Round 12 (three-word names, bare years, catalogs): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round12_2026-09-25{.jsonl,_metrics.json}` (arm B) and `keyword_queries_jev_2026-09-25-22b{.jsonl,_metrics.json}`.
 - Keyword queries: `data/datasets/evaluations/keyword_queries_{regex,jev}_2026-09-25{.jsonl,_metrics.json}` (round 9 code) and `keyword_queries_jev_2026-09-25-round10{.jsonl,_metrics.json}`; review sheet `reports/keyword-query-review-sheet.md`.
 - Request caches: `data/cache/jev_systemone.jsonl`, `data/cache/llm_intent.jsonl`.
 - Labels: `data/datasets/evaluations/intent_labels.jsonl`.

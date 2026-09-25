@@ -438,6 +438,12 @@ class TestYearExtraction:
         assert intent.year_from == 2018
         assert intent.year_to == 2024
 
+    def test_year_range_x_to_y(self):
+        """'X to Y' with no 'from' extracts the year range."""
+        intent = extract_intent("weak lensing by Smith, J 2018 to 2023")
+        assert (intent.year_from, intent.year_to) == (2018, 2023)
+        assert "2018" not in " ".join(intent.free_text_terms)
+
     def test_year_range_dash(self):
         """'X-Y' extracts year range."""
         intent = extract_intent("2010-2020 papers about exoplanets")

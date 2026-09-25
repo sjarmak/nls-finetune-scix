@@ -492,6 +492,7 @@ YEAR_PATTERNS: list[tuple[re.Pattern, str]] = [
     (re.compile(r"\bfrom\s+(\d{4})\s+to\s+(\d{4})\b", re.IGNORECASE), "range"),
     (re.compile(r"\bbetween\s+(\d{4})\s+and\s+(\d{4})\b", re.IGNORECASE), "range"),
     (re.compile(r"\b(\d{4})\s*[-–—]\s*(\d{4})\b"), "range"),
+    (re.compile(r"\b(\d{4})\s+to\s+(\d{4})\b", re.IGNORECASE), "range"),
     # Since/after: "since 2020", "after 2019"
     (re.compile(r"\bsince\s+(\d{4})\b", re.IGNORECASE), "since"),
     (re.compile(r"\bafter\s+(\d{4})\b", re.IGNORECASE), "after"),

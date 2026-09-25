@@ -70,7 +70,11 @@ DOCTYPE_DESCRIPTIONS: dict[str, str] = {
         "reviews, textbook reviews, reviews of books). Not a review article surveying a "
         "research topic."
     ),
-    "catalog": "Data catalog or high-level data product.",
+    "catalog": (
+        "A data catalog record itself (ADS indexes only about two thousand). Not papers "
+        "that present, compile or use a catalog: 'flare catalog' or 'a catalog of X' is a "
+        "topic, so choose none."
+    ),
     "circular": "Printed or electronic circular (e.g. IAU, ATel-style notices).",
     "editorial": "Editorial.",
     "eprint": "Preprint (e.g. arXiv) as a document type.",

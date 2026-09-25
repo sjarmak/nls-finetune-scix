@@ -1,0 +1,366 @@
+{
+  "dataset": "val",
+  "label": "val_round12",
+  "n_items": 478,
+  "arms": {
+    "B": "jev"
+  },
+  "llm_transport": "sdk",
+  "generated_at": "2026-09-25T14:16:37.781411+00:00",
+  "stability_repeats": 1,
+  "stability_subset": 100,
+  "rows_path": "/home/ds/projects/nls-finetune-scix/data/datasets/evaluations/intent_classifiers_val_round12_2026-09-25.jsonl",
+  "metrics": {
+    "B": {
+      "n_items": 478,
+      "n_errors": 0,
+      "n_unsupported_operator": 5,
+      "operator": {
+        "n": 473,
+        "accuracy": 0.9725158562367865,
+        "macro_f1": 0.8616413591900327,
+        "per_class": {
+          "none": {
+            "precision": 0.9976525821596244,
+            "recall": 0.9747706422018348,
+            "f1": 0.9860788863109049,
+            "tp": 425,
+            "fp": 1,
+            "fn": 11
+          },
+          "citations": {
+            "precision": 0.9166666666666666,
+            "recall": 1.0,
+            "f1": 0.9565217391304348,
+            "tp": 11,
+            "fp": 1,
+            "fn": 0
+          },
+          "references": {
+            "precision": 0.5,
+            "recall": 0.75,
+            "f1": 0.6,
+            "tp": 3,
+            "fp": 3,
+            "fn": 1
+          },
+          "similar": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 3,
+            "fp": 0,
+            "fn": 0
+          },
+          "trending": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "tp": 8,
+            "fp": 0,
+            "fn": 0
+          },
+          "useful": {
+            "precision": 0.8,
+            "recall": 1.0,
+            "f1": 0.888888888888889,
+            "tp": 4,
+            "fp": 1,
+            "fn": 0
+          },
+          "reviews": {
+            "precision": 0.46153846153846156,
+            "recall": 0.8571428571428571,
+            "f1": 0.6,
+            "tp": 6,
+            "fp": 7,
+            "fn": 1
+          }
+        }
+      },
+      "operator_fp_on_gold_none": {
+        "n": 436,
+        "false_positives": 11,
+        "rate": 0.02522935779816514
+      },
+      "operator_pred_on_unsupported": {
+        "none": 5
+      },
+      "selective": [
+        {
+          "threshold": 0.5,
+          "coverage": 0.9894291754756871,
+          "accuracy": 0.9764957264957265,
+          "n_answered": 468
+        },
+        {
+          "threshold": 0.55,
+          "coverage": 0.9873150105708245,
+          "accuracy": 0.9785867237687366,
+          "n_answered": 467
+        },
+        {
+          "threshold": 0.6,
+          "coverage": 0.9767441860465116,
+          "accuracy": 0.9805194805194806,
+          "n_answered": 462
+        },
+        {
+          "threshold": 0.65,
+          "coverage": 0.9704016913319239,
+          "accuracy": 0.9803921568627451,
+          "n_answered": 459
+        },
+        {
+          "threshold": 0.7,
+          "coverage": 0.959830866807611,
+          "accuracy": 0.9845814977973568,
+          "n_answered": 454
+        },
+        {
+          "threshold": 0.75,
+          "coverage": 0.9513742071881607,
+          "accuracy": 0.9866666666666667,
+          "n_answered": 450
+        },
+        {
+          "threshold": 0.8,
+          "coverage": 0.945031712473573,
+          "accuracy": 0.9865771812080537,
+          "n_answered": 447
+        },
+        {
+          "threshold": 0.85,
+          "coverage": 0.9344608879492601,
+          "accuracy": 0.9909502262443439,
+          "n_answered": 442
+        },
+        {
+          "threshold": 0.9,
+          "coverage": 0.9175475687103594,
+          "accuracy": 0.9930875576036866,
+          "n_answered": 434
+        },
+        {
+          "threshold": 0.95,
+          "coverage": 0.8858350951374208,
+          "accuracy": 1.0,
+          "n_answered": 419
+        }
+      ],
+      "accuracy_at_90_coverage": {
+        "coverage": 0.9027484143763214,
+        "accuracy": 0.9953161592505855,
+        "threshold": 0.94
+      },
+      "calibration": {
+        "ece": 0.011353065539112082,
+        "n": 473,
+        "bins": [
+          {
+            "bin": [
+              0.0,
+              0.1
+            ],
+            "n": 0,
+            "confidence": null,
+            "accuracy": null
+          },
+          {
+            "bin": [
+              0.1,
+              0.2
+            ],
+            "n": 0,
+            "confidence": null,
+            "accuracy": null
+          },
+          {
+            "bin": [
+              0.2,
+              0.3
+            ],
+            "n": 1,
+            "confidence": 0.22,
+            "accuracy": 1.0
+          },
+          {
+            "bin": [
+              0.3,
+              0.4
+            ],
+            "n": 1,
+            "confidence": 0.36,
+            "accuracy": 1.0
+          },
+          {
+            "bin": [
+              0.4,
+              0.5
+            ],
+            "n": 3,
+            "confidence": 0.4166666666666667,
+            "accuracy": 0.3333333333333333
+          },
+          {
+            "bin": [
+              0.5,
+              0.6
+            ],
+            "n": 6,
+            "confidence": 0.5633333333333334,
+            "accuracy": 0.6666666666666666
+          },
+          {
+            "bin": [
+              0.6,
+              0.7
+            ],
+            "n": 8,
+            "confidence": 0.645,
+            "accuracy": 0.75
+          },
+          {
+            "bin": [
+              0.7,
+              0.8
+            ],
+            "n": 7,
+            "confidence": 0.7414285714285713,
+            "accuracy": 0.8571428571428571
+          },
+          {
+            "bin": [
+              0.8,
+              0.9
+            ],
+            "n": 13,
+            "confidence": 0.8507692307692308,
+            "accuracy": 0.7692307692307693
+          },
+          {
+            "bin": [
+              0.9,
+              1.0
+            ],
+            "n": 434,
+            "confidence": 0.9939400921658986,
+            "accuracy": 0.9930875576036866
+          }
+        ]
+      },
+      "latency_ms": {
+        "n": 478,
+        "p50": 157.3039290960878,
+        "p95": 223.58078588731587,
+        "mean": 165.28024293886318
+      },
+      "latency_ms_uncached": {
+        "n": 472,
+        "p50": 157.3039290960878,
+        "p95": 222.05768930725753,
+        "mean": 165.29672907791652
+      },
+      "enum_property": {
+        "precision": 0.9487179487179487,
+        "recall": 0.8809523809523809,
+        "f1": 0.9135802469135802,
+        "tp": 37,
+        "fp": 2,
+        "fn": 5,
+        "n": 478,
+        "exact_match": 0.9853556485355649
+      },
+      "enum_doctype": {
+        "precision": 0.2786885245901639,
+        "recall": 0.85,
+        "f1": 0.41975308641975306,
+        "tp": 17,
+        "fp": 44,
+        "fn": 3,
+        "n": 478,
+        "exact_match": 0.9016736401673641
+      },
+      "enum_bibgroup": {
+        "precision": 0.6896551724137931,
+        "recall": 0.9523809523809523,
+        "f1": 0.7999999999999999,
+        "tp": 20,
+        "fp": 9,
+        "fn": 1,
+        "n": 478,
+        "exact_match": 0.9790794979079498
+      },
+      "enum_collection": {
+        "precision": 0.20833333333333334,
+        "recall": 0.8333333333333334,
+        "f1": 0.33333333333333337,
+        "tp": 15,
+        "fp": 57,
+        "fn": 3,
+        "n": 478,
+        "exact_match": 0.8744769874476988
+      },
+      "extraction": {
+        "year": {
+          "precision": 0.5149253731343284,
+          "recall": 0.6052631578947368,
+          "f1": 0.5564516129032258,
+          "tp": 69,
+          "fp": 65,
+          "fn": 45,
+          "n": 478,
+          "exact_match": 0.8598326359832636
+        },
+        "year_when_gold_has_one": {
+          "precision": 0.6160714285714286,
+          "recall": 0.6052631578947368,
+          "f1": 0.6106194690265486,
+          "tp": 69,
+          "fp": 43,
+          "fn": 45,
+          "n": 114,
+          "exact_match": 0.6052631578947368
+        },
+        "first_author": {
+          "precision": 0.9523809523809523,
+          "recall": 0.40816326530612246,
+          "f1": 0.5714285714285714,
+          "tp": 40,
+          "fp": 2,
+          "fn": 58,
+          "n": 179,
+          "exact_match": 0.664804469273743
+        },
+        "citation_floor": {
+          "precision": 1.0,
+          "recall": 0.6666666666666666,
+          "f1": 0.8,
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "n": 478,
+          "exact_match": 0.997907949790795
+        },
+        "topic_tokens": {
+          "precision": 0.6100861008610086,
+          "recall": 0.6966292134831461,
+          "f1": 0.6504918032786885,
+          "tp": 496,
+          "fp": 317,
+          "fn": 216,
+          "n": 478,
+          "exact_match": 0.6359832635983264
+        }
+      },
+      "cost": {
+        "n": 478,
+        "mean_input_tokens": 3506.765690376569,
+        "mean_output_tokens": 0.0,
+        "mean_usd_per_query": 0.0001472841589958159,
+        "total_usd": 0.070401828,
+        "classifier_call_rate": 1.0
+      }
+    }
+  }
+}

@@ -60,6 +60,13 @@ class TestQuestionSet:
         assert "literature surveys" in reviews
         assert "not an observational sky survey" in reviews
 
+    def test_a_catalog_as_topic_is_not_the_catalog_doctype(self):
+        catalog = build_questions()["doctype"]["criteria"]["catalog"].lower()
+        assert "not papers that present" in catalog
+        assert "is a topic" in catalog
+        doctype = build_questions()["doctype"]["instructions"]
+        assert "catalogs in the astronomy database" in doctype
+
     def test_bare_keywords_with_a_name_are_a_plain_search(self):
         citations = build_questions()["operator"]["criteria"]["citations"].lower()
         assert "pairs a surname with topic words" in citations

@@ -17,12 +17,14 @@ from finetune.domains.scix.jev_intent import (
     MAX_AUTHOR_READINGS,
     MAX_JOIN_QUESTIONS,
     NAMED_TOPIC_QUESTION,
+    PUBLICATION_YEAR_QUESTION,
     RECENCY_WINDOWS,
     JevResponseError,
     ads_author,
     apply_answers,
     author_candidates,
     author_readings,
+    bare_year,
     bibgroup_candidates,
     build_questions,
     build_request,
@@ -270,10 +272,38 @@ class TestAuthors:
                     "seager",
                     "exoplanet",
                     "atmospheres",
+                    "sara seager exoplanet",
+                    "seager exoplanet atmospheres",
                 ),
             ),
             ("accomazzi europa", ("accomazzi europa", "accomazzi", "europa")),
-            ("Event Horizon Telescope images", ("Event", "Horizon", "Telescope")),
+            (
+                "Event Horizon Telescope images",
+                (
+                    "Event Horizon Telescope",
+                    "Event",
+                    "Horizon",
+                    "Telescope",
+                ),
+            ),
+            (
+                "Jocelyn Bell Burnell pulsars",
+                ("Jocelyn Bell Burnell", "Jocelyn", "Bell", "Burnell"),
+            ),
+            (
+                "jocelyn bell burnell pulsars",
+                (
+                    "jocelyn bell",
+                    "bell burnell",
+                    "burnell pulsars",
+                    "jocelyn",
+                    "bell",
+                    "burnell",
+                    "pulsars",
+                    "jocelyn bell burnell",
+                    "bell burnell pulsars",
+                ),
+            ),
             ("Pieter van Dokkum dwarf galaxies", ("Pieter van Dokkum", "van Dokkum", "Pieter")),
             ("van Dokkum, P. G.", ("van Dokkum, P. G.",)),
         ],
@@ -282,7 +312,7 @@ class TestAuthors:
         assert author_candidates(text, extract_intent(text)) == expected
 
     def test_candidates_are_capped(self):
-        text = "Alpha Beta Gamma Delta Epsilon Zeta Eta Theta Iota"
+        text = "Alpha Beta Gamma Delta Epsilon Zeta Eta Theta Iota Kappa Lambda"
         assert len(author_candidates(text, extract_intent(text))) == MAX_AUTHOR_CANDIDATES
 
     def test_readings_are_sets_of_names_that_share_no_word(self):
@@ -426,6 +456,17 @@ class TestAuthors:
         client = mock_jev_client(None, [payload], [])
         intent, _ = classify_and_extract("accomazzi europa", client)
         assert assemble_query(intent) == 'author:"Accomazzi" abs:europa'
+
+    def test_a_lowercase_three_word_name_survives_the_cap_in_a_five_word_request(self):
+        text = "maria teresa ruiz white dwarfs"
+        assert "maria teresa ruiz" in author_candidates(text, extract_intent(text))
+
+    def test_a_lowercase_three_word_name_is_one_author(self):
+        payload = jev_payload(author_reading=reading("jocelyn bell burnell"))
+        client = mock_jev_client(None, [payload], [])
+        intent, _ = classify_and_extract("jocelyn bell burnell pulsars", client)
+        assert intent.authors == ["Burnell, Jocelyn Bell"]
+        assert intent.free_text_terms == ["pulsars"]
 
     def test_a_regex_name_covered_by_the_chosen_span_stays_out_of_the_topic(self):
         names = ("Sara Seager", "Sara", "Seager")
@@ -615,3 +656,72 @@ class TestRejectedFacility:
         intent = extract_intent("Hubble constant")
         assert intent.bibgroup == {"HST"}
         assert intent.free_text_terms == ["constant"]
+
+
+class TestBareYear:
+    """A year with no "in", "since" or "before" is offered to Jev (bead nls-finetune-scix-a9r)."""
+
+    @pytest.mark.parametrize(
+        ("text", "year"),
+        [
+            ("Jensen, E. 2020", 2020),
+            ("exoplanet atmospheres 2020", 2020),
+            ("hubble 1929", 1929),
+            ("papers that build on the Planck 2018 cosmology results", 2018),
+            ("SN 1987A neutrinos", None),
+            ("NGC 4258 water masers", None),
+            ("PSR 1913+16 timing", None),
+            ("dark energy since 2019", None),
+            ("fast radio bursts 2018-2022", None),
+            ("the 1990s", None),
+            ("1700 comet records", None),
+        ],
+    )
+    def test_candidate(self, text, year):
+        assert bare_year(text, extract_intent(text, reference_year=2026), 2026) == year
+
+    def test_question_is_asked_only_for_a_bare_year(self):
+        assert PUBLICATION_YEAR_QUESTION not in build_request("q")["questions"]
+        question = build_request("q", bare_year=2018)["questions"][PUBLICATION_YEAR_QUESTION]
+        assert question["type"] == "noul"
+        assert "2018" in question["instructions"]
+        assert "Planck 2018" in question["criteria"]["false"]
+
+    def test_a_publication_year_filters_and_leaves_the_topic(self):
+        req = build_request("q", bare_year=2020)
+        answers = _answers(req, **{PUBLICATION_YEAR_QUESTION: noul_answer(0.9)})
+        base = IntentSpec(free_text_terms=["exoplanet atmospheres 2020"])
+        out = apply_answers(base, answers, bare_year=2020)
+        assert (out.year_from, out.year_to) == (2020, 2020)
+        assert out.free_text_terms == ["exoplanet atmospheres"]
+        assert out.confidence["year"] == pytest.approx(0.9)
+
+    def test_a_year_in_a_name_stays_in_the_topic(self):
+        req = build_request("q", bare_year=2018)
+        answers = _answers(req, **{PUBLICATION_YEAR_QUESTION: noul_answer(0.1)})
+        base = IntentSpec(free_text_terms=["planck 2018 cosmology results"])
+        out = apply_answers(base, answers, bare_year=2018)
+        assert (out.year_from, out.year_to) == (None, None)
+        assert out.free_text_terms == ["planck 2018 cosmology results"]
+        assert "year" not in out.confidence
+
+    def test_publication_year_wins_over_recency(self):
+        req = build_request("q", bare_year=2020)
+        answers = _answers(
+            req,
+            recency=choice_answer("last_2_years", {"none": 0.1, "last_2_years": 0.9}),
+            **{PUBLICATION_YEAR_QUESTION: noul_answer(0.9)},
+        )
+        out = apply_answers(IntentSpec(), answers, reference_year=2026, bare_year=2020)
+        assert (out.year_from, out.year_to) == (2020, 2020)
+
+    def test_author_and_year(self, tmp_path):
+        calls: list[dict] = []
+        payload = jev_payload(
+            author_reading=reading("Jensen, E."),
+            **{PUBLICATION_YEAR_QUESTION: noul_answer(0.95)},
+        )
+        client = mock_jev_client(tmp_path, [payload], calls)
+        intent, _ = classify_and_extract("Jensen, E. 2020", client, reference_year=2026)
+        assert PUBLICATION_YEAR_QUESTION in calls[0]["questions"]
+        assert assemble_query(intent) == 'author:"Jensen, E." pubdate:[2020 TO 2020]'
