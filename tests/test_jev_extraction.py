@@ -307,6 +307,12 @@ class TestAuthors:
         assert len(readings) == MAX_AUTHOR_READINGS
         assert readings[-1] == ("Sara Seager", "Alpha", "Beta", "Gamma")
 
+    def test_capped_readings_keep_two_surnames_ahead_of_word_pairs(self):
+        text = "riess scolnic hubble constant"
+        readings = author_readings(author_candidates(text, extract_intent(text)))
+        assert len(readings) == MAX_AUTHOR_READINGS
+        assert ("riess", "scolnic") in readings
+
     def test_a_hyphenated_surname_and_its_first_part_are_not_two_people(self):
         assert author_readings(("El-Badry", "El")) == ((), ("El-Badry",), ("El",))
 

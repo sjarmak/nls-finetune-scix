@@ -299,19 +299,25 @@ def _join_question(phrase: str, first: str, second: str) -> dict:
 def author_readings(names: tuple[str, ...]) -> tuple[tuple[str, ...], ...]:
     """Sets of ``names`` that could all be people at once: no two share a word.
 
-    The empty reading comes first, then readings with more names; at most
+    The empty reading comes first, then readings with more names; among
+    readings of two or more names, those with fewer multi-word names come
+    first, so "riess scolnic hubble constant" offers Riess and Scolnic as two
+    people before the pairs of adjacent words fill the cap. At most
     ``MAX_AUTHOR_READINGS``. When the cap cuts, the last slot goes to every
     name as written (each name that shares no word with an earlier one), so
     a request listing five authors still offers all five. "Jarmak Cassini"
     gives (), ("Jarmak Cassini",), ("Jarmak",), ("Cassini",) and
     ("Jarmak", "Cassini").
     """
-    readings = [
-        people
-        for k in range(len(names) + 1)
-        for people in itertools.combinations(names, k)
-        if all(not name_words(a) & name_words(b) for a, b in itertools.combinations(people, 2))
-    ]
+    readings = sorted(
+        (
+            people
+            for k in range(len(names) + 1)
+            for people in itertools.combinations(names, k)
+            if all(not name_words(a) & name_words(b) for a, b in itertools.combinations(people, 2))
+        ),
+        key=lambda people: (len(people), len(people) > 1 and sum(" " in n for n in people)),
+    )
     if len(readings) <= MAX_AUTHOR_READINGS:
         return tuple(readings)
     every: list[str] = []

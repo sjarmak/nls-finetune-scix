@@ -1179,6 +1179,35 @@ Open: a request with two facilities ("recent JWST papers on the Hubble
 tension") still loses the second one, and borderline phrase joins can flip
 between runs ("Gemini spectroscopy of quasars").
 
+## Round 11: two lowercase surnames (2026-09-25)
+
+"riess scolnic hubble constant" searched `author:"Scolnic, Riess"` (0 hits),
+as did 7 of the 11 two-surname items in the keyword set. The two-author
+reading was never offered: an all-lowercase request offers every adjacent
+word pair as a name, and the readings that combine those pairs filled the
+16-reading cap first. Readings of two or more names now list those with
+fewer multi-word names first. Short requests ("madau dickinson") were
+already right. A sentence in the reading instructions ("two surnames written
+together are two authors") and a reading text that spells out "given name
+riess, surname scolnic" were also probed and changed nothing.
+
+On 48 name probes, 2 repeats: 78 of 96 correct before, 90 of 96 after.
+Still wrong: "casey narayanan" (Casey is also a given name),
+"jarmak colwell saturn rings", and "jocelyn bell burnell pulsars" (a
+three-word name is never a candidate in a lowercase request).
+
+Keyword set (150 items, round 10 in parentheses): authors 0.900 (0.873),
+exact query 0.667 (0.647), any ADS hits 0.967 (0.933), topic 0.747 (0.760).
+The topic drop is two eponyms read as authors ("hawking radiation",
+"faber-jackson relation"). Over 3 repeats of the 15 eponym items, the old
+ordering read an eponym as a person in 12 of 45 runs and the new one in 10,
+so the one-shot flips are noise.
+
+Arm B operator accuracy is unchanged on benchmark (0.983) and val (0.975).
+Held-out drops from 0.993 to 0.987: "cornerstone results in exoplanet transit
+photometry" moved from useful to none at confidence 0.49 (0.50 before). Input
+tokens rise under 1%.
+
 ## Criteria table
 
 Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criterion 4; rounds 5 to 10 for criterion 5 and the notes on criterion 2.
@@ -1268,6 +1297,7 @@ Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); ro
 - Round 8 (which names are people): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round8_2026-09-25{.jsonl,_metrics.json}` (arm B).
 - Round 9 (lowercase names, keyword queries read as citations): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round9_2026-09-25{.jsonl,_metrics.json}` (arm B).
 - Round 10 (named facilities, operator phrases, paper lookup): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round10_2026-09-25{.jsonl,_metrics.json}` (arm B).
+- Round 11 (two lowercase surnames): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round11_2026-09-25{.jsonl,_metrics.json}` (arm B) and `keyword_queries_jev_2026-09-25-vaz{.jsonl,_metrics.json}`.
 - Keyword queries: `data/datasets/evaluations/keyword_queries_{regex,jev}_2026-09-25{.jsonl,_metrics.json}` (round 9 code) and `keyword_queries_jev_2026-09-25-round10{.jsonl,_metrics.json}`; review sheet `reports/keyword-query-review-sheet.md`.
 - Request caches: `data/cache/jev_systemone.jsonl`, `data/cache/llm_intent.jsonl`.
 - Labels: `data/datasets/evaluations/intent_labels.jsonl`.
