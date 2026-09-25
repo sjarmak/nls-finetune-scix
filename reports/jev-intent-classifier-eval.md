@@ -931,17 +931,63 @@ wave papers" as `citations(doctype:bookreview)`, neither of them right. The gold
 the benchmarks do not reward grouping; the gain shows in the result counts
 of multi-concept requests.
 
+## Round 7: per-pair phrase splitting (2026-09-25)
+
+Round 6 grouping still left long topics whole. "Numerical simulations of
+tidal disruption of small bodies" searched `abs:"numerical simulations
+tidal disruption small bodies"` (about 0 results): the phrase has six
+words, and round 6 only offered groupings for three to five. Round 7 replaces the grouping choice with one yes
+or no question per adjacent word pair of a topic phrase of three or more
+words: do these two words belong to one fixed term? Each "no" is a split.
+At most 12 pair questions go out per request; a phrase whose pairs would pass
+that cap stays whole. The tidal disruption query becomes
+`abs:"numerical simulations" abs:"tidal disruption" abs:"small bodies"`
+(6 results).
+
+Arm B, round 6 in parentheses:
+
+| dataset | input tokens | $/query | operator acc | gold-none false positives |
+|---|---|---|---|---|
+| benchmark | 2,833 (2,709) | $0.000119 ($0.000114) | 0.983 (0.983) | 1 of 147 (1) |
+| val | 2,999 (2,820) | $0.000126 ($0.000118) | 0.970 (0.970) | 11 of 436 (12) |
+| held-out | 3,331 (3,021) | $0.000140 ($0.000127) | 0.993 (0.993) | 1 of 106 (1); operator-negative 0 of 40 (0) |
+
+The pair questions add 4% to 10% to the input tokens. p95 uncached latency
+on held-out is 260 ms.
+
+End to end, the `jev` pipeline with the change against the same pipeline at
+the parent commit (186b734, which includes the bibgroup and property
+fixes; a separate worktree, run at the same time, same ADS):
+
+| dataset | semantic match (Jaccard ≥ 0.5) | mean Jaccard | syntax validity |
+|---|---|---|---|
+| benchmark | 42.7% (43.5%) | 0.484 (0.491) | 90.1% (89.3%) |
+| val | 26.8% (26.2%) | 0.300 (0.291) | 95.8% (96.2%) |
+
+On val, 63 of 478 queries changed and 46 of those changed their number of
+`abs:` clauses. By Jaccard 7 got better and none worse; of the split changes
+5 got better, for example "saturn radio emission coronal mass ejection
+effects" went from 0.00 to 0.33 once split into `abs:saturn abs:"radio
+emission" abs:"coronal mass ejection" abs:effects`. On the benchmark 31 of
+253 changed, 3 better and 3 worse. Two of the worse ones split a term the
+gold keeps whole: "merger events" (0.96 to 0.19) and "black hole imaging"
+(1.00 to 0.20). Two better ones go the other way: "gravitational wave
+detection" rejoined (0.08 to 1.00) and "exomoon detection" split (0.00 to
+0.23). The other changed items differ in Jev's re-drawn answers on other
+fields (`collection`, `doctype`), not in splitting. The benchmark drop is
+within that noise.
+
 ## Criteria table
 
-Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criterion 4; rounds 5 and 6 for criterion 5 and the notes on criterion 2.
+Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); round 4 for criterion 4; rounds 5 to 7 for criterion 5 and the notes on criterion 2.
 
 | # | criterion | result | status |
 |---|---|---|---|
 | 1 | B macro-F1 on paraphrase set ≥ A + 15 points and > C | B 0.986 (0.955) vs A 0.146, +84 points; vs C 0.922 (0.933), +6.4 points, and C makes 3 operator-negative false positives to B's 0 | met |
-| 2 | B false-positive rate on operator-negative stratum ≤ 2% | 0 of 40 (B, D and E, rounds 2 to 4); on all gold-none items 1 of 106 (3 of 106), "the review". Round 5: 1 of 40 (2.5%), "foundational models for spectral classification" read as `useful`. Round 6: 0 of 40 | met; missed by one item in round 5 only |
+| 2 | B false-positive rate on operator-negative stratum ≤ 2% | 0 of 40 (B, D and E, rounds 2 to 4); on all gold-none items 1 of 106 (3 of 106), "the review". Round 5: 1 of 40 (2.5%), "foundational models for spectral classification" read as `useful`. Rounds 6 and 7: 0 of 40 | met; missed by one item in round 5 only |
 | 3 | B selective accuracy ≥ 95% at 90% coverage | 1.000 held-out, 1.000 benchmark, 0.995 (0.988) val | met |
 | 4 | end-to-end semantic match: no drop on benchmark, rise on held-out | Round 4, scored with the fixed rule (empty gold excluded): benchmark jev_gated 38.1% vs regex 31.7%, +6.4 points, paired 37 wins to 8 on 45 differing items; val 21.2% vs 12.3%, paired 106 to 14. Round 3 on the same rule: benchmark -2.6 points (paired 1 to 8), val level. Held-out has no gold queries; as a proxy the jev_gated pipeline serves 139 of 152 at 0.986 operator accuracy vs 141 at 0.688 for regex | no drop met on benchmark (round 4); rise shown on val and on held-out operator accuracy, not end to end on held-out |
-| 5 | E p95 added latency ≤ 600 ms, mean cost ≤ $0.0001/query | Round 5: E $0.000075 benchmark, $0.000105 val, $0.000115 held-out; B (Jev on every query) $0.000110 / $0.000113 / $0.000115. Round 4: E $0.000108 / $0.000149 / $0.000163. p95 202 to 322 ms (B, round 5). Round 6 (B, the rollout backend): $0.000114 / $0.000118 / $0.000127, p95 221 ms held-out | latency met; cost met on benchmark only (E), 14% to 27% over for B in round 6 |
+| 5 | E p95 added latency ≤ 600 ms, mean cost ≤ $0.0001/query | Round 5: E $0.000075 benchmark, $0.000105 val, $0.000115 held-out; B (Jev on every query) $0.000110 / $0.000113 / $0.000115. Round 4: E $0.000108 / $0.000149 / $0.000163. p95 202 to 322 ms (B, round 5). Round 6 (B, the rollout backend): $0.000114 / $0.000118 / $0.000127, p95 221 ms held-out. Round 7: $0.000119 / $0.000126 / $0.000140, p95 260 ms held-out | latency met; cost met on benchmark only (E), 19% to 40% over for B in round 7 |
 
 ## Caveats
 
@@ -1016,6 +1062,7 @@ Round 3 values for criteria 1 to 3 (round 2 in parentheses where it differs); ro
 - Round 4 (Jev decides recency, topic, first author and highly cited): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round4c_2026-09-24{.jsonl,_metrics.json}` (final criteria text; `round4` and `round4b` are the two earlier revisions); end to end `semantic_overlap_pipeline_{regex,jev_gated}_{benchmark,val}_round4_2026-09-24.json`.
 - Round 5 (facility and author candidates): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round5_2026-09-25{.jsonl,_metrics.json}` (arms A, B, E).
 - Round 6 (phrase grouping): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round6_2026-09-25{.jsonl,_metrics.json}` (arm B); end to end `semantic_overlap_pipeline_jev_{benchmark,val}_round{5,6}_2026-09-25.json` (round 5 run from the round 5 commit).
+- Round 7 (per-pair phrase splitting): `data/datasets/evaluations/intent_classifiers_{benchmark,val,heldout}_round7_2026-09-25{.jsonl,_metrics.json}` (arm B); end to end `semantic_overlap_pipeline_jev_{benchmark,val}_round7{base,}_2026-09-25.json` (`round7base` run from the parent commit).
 - Request caches: `data/cache/jev_systemone.jsonl`, `data/cache/llm_intent.jsonl`.
 - Labels: `data/datasets/evaluations/intent_labels.jsonl`.
 - Held-out paraphrases (approved): `data/datasets/benchmark/heldout_paraphrases.json`; review sheet `reports/heldout-paraphrase-review-sheet.md`; approval recorded with `scripts/approve_heldout_paraphrases.py`.

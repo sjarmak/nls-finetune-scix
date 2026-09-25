@@ -14,6 +14,7 @@ from finetune.domains.scix.jev_intent import (
     EXTRACTION_QUESTION_IDS,
     HIGHLY_CITED_MIN_CITATIONS,
     MAX_AUTHOR_CANDIDATES,
+    MAX_JOIN_QUESTIONS,
     RECENCY_WINDOWS,
     JevResponseError,
     ads_author,
@@ -24,8 +25,8 @@ from finetune.domains.scix.jev_intent import (
     build_request,
     classify_and_extract,
     parse_response,
-    phrase_groupings,
     topic_candidates,
+    word_pairs,
 )
 from finetune.domains.scix.ner import extract_intent
 
@@ -354,43 +355,50 @@ class TestAuthors:
         assert intent.confidence["author.Jarmak"] == 0.95
 
 
-class TestPhraseGrouping:
-    """Code lists every contiguous grouping of the topic words; Jev picks one."""
+class TestPhraseSplitting:
+    """Code asks about each adjacent word pair; Jev says which pairs are one term."""
 
-    def test_every_grouping_whole_phrase_first(self):
-        intent = IntentSpec(free_text_terms=["atmospheric escape sub-neptunes"])
-        assert phrase_groupings(intent) == (
-            "atmospheric escape sub-neptunes",
-            "atmospheric | escape sub-neptunes",
-            "atmospheric escape | sub-neptunes",
-            "atmospheric | escape | sub-neptunes",
+    def test_each_pair_of_a_long_phrase_is_asked(self):
+        intent = IntentSpec(free_text_terms=["tidal disruption small bodies", "dark energy"])
+        assert word_pairs(intent) == (
+            ("tidal disruption small bodies", 0),
+            ("tidal disruption small bodies", 1),
+            ("tidal disruption small bodies", 2),
         )
 
-    @pytest.mark.parametrize(
-        "terms",
-        [["dark energy"], ["one two three four five six"], ["a b c", "d e f"], []],
-    )
-    def test_not_asked_for_short_long_or_several_phrases(self, terms):
-        assert phrase_groupings(IntentSpec(free_text_terms=terms)) == ()
+    def test_a_phrase_past_the_cap_stays_whole(self):
+        long = " ".join(f"w{i}" for i in range(MAX_JOIN_QUESTIONS + 2))
+        intent = IntentSpec(free_text_terms=["a b c", long])
+        assert word_pairs(intent) == (("a b c", 0), ("a b c", 1))
 
-    def test_question_offers_the_groupings(self):
-        groupings = ("a b c", "a | b c", "a b | c", "a | b | c")
-        questions = build_request("q", phrase_groupings=groupings)["questions"]
-        assert list(questions["phrasing"]["criteria"]) == list(groupings)
-        assert "phrasing" not in build_request("q")["questions"]
+    def test_question_names_the_two_words(self):
+        pairs = (("stis ultraviolet spectroscopy", 1),)
+        questions = build_request("q", word_pairs=pairs)["questions"]
+        assert "'ultraviolet' and 'spectroscopy'" in questions["join_0"]["instructions"]
+        assert not any(q.startswith("join_") for q in build_request("q")["questions"])
 
-    def test_chosen_grouping_is_cut_to_the_chosen_topic(self):
+    def test_unjoined_pairs_split_the_phrase(self):
+        text = "Numerical simulations of tidal disruption of small bodies"
+        joins = [0.58, 0.07, 0.89, 0.09, 0.65]
+        payload = jev_payload(**{f"join_{k}": noul_answer(p) for k, p in enumerate(joins)})
+        intent, _ = classify_and_extract(text, mock_jev_client(None, [payload], []))
+        assert assemble_query(intent) == (
+            'abs:"numerical simulations" abs:"tidal disruption" abs:"small bodies"'
+        )
+
+    def test_split_is_cut_to_the_chosen_topic(self):
         text = "recent papers on atmospheric escape from sub-Neptunes"
         phrase = extract_intent(text).free_text_terms[0]
         assert phrase == "recent atmospheric escape sub-neptunes"
-        grouping = "recent | atmospheric escape | sub-neptunes"
         payload = jev_payload(
             recency=choice_answer("last_3_years", {"none": 0.01, "last_3_years": 0.99}),
             topic=choice_answer(
                 "atmospheric escape sub-neptunes",
                 {"none": 0.0, "atmospheric escape sub-neptunes": 1.0},
             ),
-            phrasing=choice_answer(grouping, {grouping: 0.9, phrase: 0.1}),
+            join_0=noul_answer(0.1),
+            join_1=noul_answer(0.9),
+            join_2=noul_answer(0.1),
         )
         intent, _ = classify_and_extract(
             text, mock_jev_client(None, [payload], []), reference_year=2026
@@ -400,7 +408,7 @@ class TestPhraseGrouping:
             'abs:"atmospheric escape" abs:"sub-neptunes" pubdate:[2024 TO 2026]'
         )
 
-    def test_whole_phrase_answer_keeps_one_phrase(self):
+    def test_joined_pairs_keep_one_phrase(self):
         payload = jev_payload()
         intent, _ = classify_and_extract(
             "supermassive black hole growth", mock_jev_client(None, [payload], [])
@@ -410,10 +418,7 @@ class TestPhraseGrouping:
     def test_no_topic_means_no_terms(self):
         payload = jev_payload(
             topic=choice_answer("none", {"none": 1.0, "supermassive black hole growth": 0.0}),
-            phrasing=choice_answer(
-                "supermassive | black hole | growth",
-                {"supermassive | black hole | growth": 1.0},
-            ),
+            join_0=noul_answer(0.1),
         )
         intent, _ = classify_and_extract(
             "supermassive black hole growth", mock_jev_client(None, [payload], [])

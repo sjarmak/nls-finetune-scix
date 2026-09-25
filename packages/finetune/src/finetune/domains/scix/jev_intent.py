@@ -68,9 +68,10 @@ BOOLEAN_QUESTION_IDS: tuple[str, ...] = (
 PROPERTY_BOOLEANS: tuple[str, ...] = ("refereed", "openaccess", "eprint")
 
 EXTRACTION_QUESTION_IDS: tuple[str, ...] = ("recency", "first_author", "highly_cited", "topic")
-MIN_GROUPED_TOKENS, MAX_GROUPED_TOKENS = 3, 5
-"""Topic lengths that get a phrasing question (2**(n-1) options for n words)."""
-GROUP_SEPARATOR = " | "
+MIN_JOINED_TOKENS = 3
+"""Shortest topic phrase whose adjacent word pairs each get a ``join_<i>`` question."""
+MAX_JOIN_QUESTIONS = 12
+"""Most word-pair questions per query; a phrase that would pass the cap stays whole."""
 MAX_AUTHOR_CANDIDATES = 6
 """Most names offered per query; each one is a yes/no question (``author_<i>``)."""
 _WORD = re.compile(r"[^\W\d_][\w'\-]*")
@@ -207,14 +208,11 @@ def build_questions() -> dict[str, dict]:
     }
 
 
-def build_extraction_questions(
-    topic_candidates: tuple[str, ...] = (), phrase_groupings: tuple[str, ...] = ()
-) -> dict[str, dict]:
+def build_extraction_questions(topic_candidates: tuple[str, ...] = ()) -> dict[str, dict]:
     """Questions that decide what the regex keyword rules used to.
 
     ``topic`` is asked only when there are candidates; its options are the
-    candidate phrases plus ``none``. ``phrasing`` is asked only when there
-    are groupings (see ``phrase_groupings``).
+    candidate phrases plus ``none``.
     """
     questions = {
         "recency": _choice(
@@ -264,19 +262,18 @@ def build_extraction_questions(
                 **{c: f"The subject is exactly '{c}'." for c in topic_candidates},
             },
         )
-    if phrase_groupings:
-        questions["phrasing"] = _choice(
-            "How should the subject words be grouped for an abstract search? Each group is "
-            "searched as an exact phrase and every group must match. Keep a fixed term "
-            "together (a technical term or name such as 'dark matter', 'atmospheric escape', "
-            "'black hole'); split words that are separate concepts, so papers that use them "
-            "apart still match. Group words the same way whichever of them is the subject.",
-            {
-                g: "Search " + " AND ".join(f"'{p}'" for p in g.split(GROUP_SEPARATOR)) + "."
-                for g in phrase_groupings
-            },
-        )
     return questions
+
+
+def _join_question(phrase: str, first: str, second: str) -> dict:
+    return _boolean(
+        f"In the search subject '{phrase}', do the adjacent words '{first}' and '{second}' "
+        "belong to one fixed term that papers write together (a technical term or name such "
+        "as 'dark matter', 'atmospheric escape', 'black hole', 'cosmic microwave background')?",
+        f"'{first} {second}' is part of one fixed term, so the words should be searched as one "
+        "phrase.",
+        f"'{first}' and '{second}' are separate concepts; papers may use them apart.",
+    )
 
 
 def _author_question(name: str) -> dict:
@@ -437,43 +434,52 @@ def topic_candidates(intent: IntentSpec) -> tuple[str, ...]:
     return tuple(dict.fromkeys(s for s in spans if s.lower() != NONE_OPTION))
 
 
-def phrase_groupings(intent: IntentSpec) -> tuple[str, ...]:
-    """Every split of the regex topic phrase into contiguous groups, whole phrase first.
+def word_pairs(intent: IntentSpec) -> tuple[tuple[str, int], ...]:
+    """(phrase, i) for each pair of adjacent words i, i+1 in the regex topic phrases.
 
-    Groups are joined by ``GROUP_SEPARATOR``. Empty unless the regex found
-    exactly one topic phrase of ``MIN_GROUPED_TOKENS`` to ``MAX_GROUPED_TOKENS`` words.
+    Only phrases of at least ``MIN_JOINED_TOKENS`` words are split, and a
+    phrase whose pairs would pass ``MAX_JOIN_QUESTIONS`` is left whole. Each
+    pair becomes a ``join_<k>`` question; Jev decides which pairs are one term.
     """
-    if intent.or_terms or len(intent.free_text_terms) != 1:
-        return ()
-    tokens = intent.free_text_terms[0].split()
-    if not MIN_GROUPED_TOKENS <= len(tokens) <= MAX_GROUPED_TOKENS:
-        return ()
-    groupings = []
-    for cuts in range(2 ** (len(tokens) - 1)):
-        groups, current = [], [tokens[0]]
-        for i, token in enumerate(tokens[1:]):
-            if cuts >> i & 1:
-                groups.append(" ".join(current))
+    pairs: list[tuple[str, int]] = []
+    for phrase in dict.fromkeys(intent.free_text_terms):
+        gaps = len(phrase.split()) - 1
+        if gaps + 1 >= MIN_JOINED_TOKENS and len(pairs) + gaps <= MAX_JOIN_QUESTIONS:
+            pairs += [(phrase, i) for i in range(gaps)]
+    return tuple(pairs)
+
+
+def _split_terms(terms: list[str], joined: dict[tuple[str, int], bool]) -> list[str]:
+    """Each term cut between adjacent words Jev did not join.
+
+    A term may be a sub-span of an asked phrase (the topic Jev chose); its
+    gaps map to the phrase's gaps. A term from no asked phrase stays whole.
+    """
+    phrases = list(dict.fromkeys(phrase for phrase, _ in joined))
+    split: list[str] = []
+    for term in terms:
+        words = term.split()
+        offset = next(
+            (
+                (phrase, start)
+                for phrase in phrases
+                for start in range(len(phrase.split()) - len(words) + 1)
+                if phrase.split()[start : start + len(words)] == words
+            ),
+            None,
+        )
+        if offset is None:
+            split.append(term)
+            continue
+        phrase, start = offset
+        current = [words[0]]
+        for i, word in enumerate(words[1:]):
+            if not joined[(phrase, start + i)]:
+                split.append(" ".join(current))
                 current = []
-            current.append(token)
-        groups.append(" ".join(current))
-        groupings.append(GROUP_SEPARATOR.join(groups))
-    return tuple(groupings)
-
-
-def _group_topic(topic: str, grouping: str) -> list[str]:
-    """``topic`` (a contiguous span of the grouped phrase) cut at the grouping's boundaries."""
-    words = topic.split()
-    groups = [group.split() for group in grouping.split(GROUP_SEPARATOR)]
-    flat = [word for group in groups for word in group]
-    start = next(i for i in range(len(flat)) if flat[i : i + len(words)] == words)
-    kept, position = [], 0
-    for group in groups:
-        span = [w for i, w in enumerate(group, position) if start <= i < start + len(words)]
-        position += len(group)
-        if span:
-            kept.append(" ".join(span))
-    return kept
+            current.append(word)
+        split.append(" ".join(current))
+    return split
 
 
 def _name_pattern(name: str) -> re.Pattern[str]:
@@ -529,11 +535,12 @@ def build_request(
     topic_candidates: tuple[str, ...] = (),
     bibgroup_candidates: tuple[str, ...] | None = None,
     author_candidates: tuple[str, ...] = (),
-    phrase_groupings: tuple[str, ...] = (),
+    word_pairs: tuple[tuple[str, int], ...] = (),
 ) -> dict:
     """Build the System One request body. ``context`` is merged into ``state``.
 
-    Each of ``author_candidates`` gets its own yes/no question, ``author_<i>``.
+    Each of ``author_candidates`` gets its own yes/no question, ``author_<i>``,
+    and each of ``word_pairs`` its own, ``join_<k>``.
 
     With ``bibgroup_candidates`` the bibgroup question offers only those
     facilities plus ``none``, and is left out when there are none; without it
@@ -546,7 +553,7 @@ def build_request(
         state.update(context)
     questions = {
         **build_questions(),
-        **build_extraction_questions(topic_candidates, phrase_groupings),
+        **build_extraction_questions(topic_candidates),
     }
     if bibgroup_candidates is not None:
         bibgroup = questions.pop("bibgroup")
@@ -556,6 +563,9 @@ def build_request(
             questions["bibgroup"] = {**bibgroup, "criteria": criteria}
     for i, name in enumerate(author_candidates):
         questions[f"author_{i}"] = _author_question(name)
+    for k, (phrase, i) in enumerate(word_pairs):
+        words = phrase.split()
+        questions[f"join_{k}"] = _join_question(phrase, words[i], words[i + 1])
     return {"model": model, "state": state, "questions": questions}
 
 
@@ -729,7 +739,7 @@ class JevClient:
         topic_candidates: tuple[str, ...] = (),
         bibgroup_candidates: tuple[str, ...] | None = None,
         author_candidates: tuple[str, ...] = (),
-        phrase_groupings: tuple[str, ...] = (),
+        word_pairs: tuple[tuple[str, int], ...] = (),
     ) -> JevAnswers:
         request = build_request(
             text,
@@ -738,7 +748,7 @@ class JevClient:
             topic_candidates=topic_candidates,
             bibgroup_candidates=bibgroup_candidates,
             author_candidates=author_candidates,
-            phrase_groupings=phrase_groupings,
+            word_pairs=word_pairs,
         )
         fingerprint = request_fingerprint(request)
         questions = request["questions"]
@@ -813,11 +823,14 @@ def apply_answers(
     boolean_threshold: float = BOOLEAN_DECISION_THRESHOLD,
     reference_year: int | None = None,
     author_candidates: tuple[str, ...] = (),
+    word_pairs: tuple[tuple[str, int], ...] = (),
 ) -> IntentSpec:
     """Return a new IntentSpec with Jev's answers applied.
 
     With ``author_candidates`` the authors are the candidates Jev calls people;
     their words leave the topic, and a regex author Jev rejects joins it.
+    With ``word_pairs`` each topic phrase is cut between the words Jev does
+    not join into one term.
 
     Names and explicit years on ``intent`` are kept. Operator, doctype,
     bibgroup, collection and the three property flags are replaced by Jev's
@@ -834,7 +847,7 @@ def apply_answers(
     collection = answers.choices["collection"]
     recency = answers.choices["recency"]
     topic = answers.choices.get("topic")
-    phrasing = answers.choices.get("phrasing")
+    join_probability = {pair: answers.booleans[f"join_{k}"] for k, pair in enumerate(word_pairs)}
     properties = {name for name in PROPERTY_BOOLEANS if answers.booleans[name] >= boolean_threshold}
     author_probability = {
         name: answers.booleans[f"author_{i}"] for i, name in enumerate(author_candidates)
@@ -856,7 +869,7 @@ def apply_answers(
             if k in ("year", "authors", "topics", "or_topics")
         },
         **({"topic": topic.confidence} if topic else {}),
-        **({"phrasing": phrasing.confidence} if phrasing else {}),
+        **{f"join.{phrase}#{i}": p for (phrase, i), p in join_probability.items()},
         **({"bibgroup": bibgroup.confidence} if bibgroup else {}),
         **{f"author.{name}": p for name, p in author_probability.items()},
     }
@@ -867,8 +880,9 @@ def apply_answers(
     free_text_terms = intent.free_text_terms
     if topic is not None:
         free_text_terms = [] if topic.choice == NONE_OPTION else [topic.choice]
-    if phrasing is not None and len(free_text_terms) == 1:
-        free_text_terms = _group_topic(free_text_terms[0], phrasing.choice)
+    if join_probability:
+        joined = {pair: p >= boolean_threshold for pair, p in join_probability.items()}
+        free_text_terms = _split_terms(free_text_terms, joined)
     authors = intent.authors
     if author_candidates:
         authors = _accepted_names(author_probability, boolean_threshold)
@@ -936,6 +950,7 @@ def classify_and_extract(
         return regex_intent, None
     context = {"regex_intent": regex_intent.to_dict()} if include_regex_state else None
     names = author_candidates(text, regex_intent)
+    pairs = word_pairs(regex_intent)
     answers = client.classify(
         text,
         context=context,
@@ -943,13 +958,15 @@ def classify_and_extract(
         topic_candidates=topic_candidates(regex_intent),
         bibgroup_candidates=bibgroup_candidates(text),
         author_candidates=names,
-        phrase_groupings=phrase_groupings(regex_intent),
+        word_pairs=pairs,
     )
     operator = answers.choices["operator"].choice
     base = extract_intent_with_operator(
         text, None if operator == NONE_OPTION else operator, reference_year
     )
-    intent = apply_answers(base, answers, reference_year=reference_year, author_candidates=names)
+    intent = apply_answers(
+        base, answers, reference_year=reference_year, author_candidates=names, word_pairs=pairs
+    )
     return intent, answers
 
 

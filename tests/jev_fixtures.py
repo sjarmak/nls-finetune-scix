@@ -91,7 +91,8 @@ def with_topic_answer(payload: dict, request: dict) -> dict:
     An unanswered topic gets the longest candidate, which is the whole regex
     phrase, so tests that do not set a topic keep the regex topic. An
     unanswered author question is yes exactly when the regex found that name,
-    so tests that do not set authors keep the regex authors.
+    so tests that do not set authors keep the regex authors. An unanswered
+    word-pair question joins the pair, so topic phrases stay whole.
     """
     from finetune.domains.scix.ner import extract_intent
 
@@ -100,10 +101,9 @@ def with_topic_answer(payload: dict, request: dict) -> dict:
     if topic is not None and "topic" not in answers:
         longest = next(option for option in topic["criteria"] if option != "none")
         answers["topic"] = choice_answer(longest, {"none": 0.05, longest: 0.95})
-    phrasing = questions.get("phrasing")
-    if phrasing is not None and "phrasing" not in answers:
-        whole = next(iter(phrasing["criteria"]))
-        answers["phrasing"] = choice_answer(whole, {whole: 1.0})
+    for qid in questions:
+        if qid.startswith("join_") and qid not in answers:
+            answers[qid] = noul_answer(0.9)
     regex_authors = {a.lower() for a in extract_intent(request["state"]["query"]).authors}
     for qid, question in questions.items():
         if qid.startswith("author_") and qid not in answers:
