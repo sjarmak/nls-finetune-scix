@@ -720,6 +720,24 @@ class TestCitationsOperatorPatterns:
         intent = extract_intent("list citations of the CMB paper")
         assert intent.operator == "citations"
 
+    @pytest.mark.parametrize("subject", ["ARP299", "NGC 3690"])
+    def test_that_cite_after_a_topic_leaves_the_topic(self, subject):
+        """'<topic> that cite "<title>"' is citations, and 'cite' is not a topic word."""
+        intent = extract_intent(
+            f'papers about {subject} that cite "A Digital Archive of HI 21 Centimeter '
+            'Line Spectra of Optically Targeted Galaxies"'
+        )
+        assert intent.operator == "citations"
+        words = {w for term in intent.free_text_terms for w in term.split()}
+        assert "cite" not in words
+        assert {"digital", "archive", "galaxies"} <= words
+
+    def test_which_cites_after_a_topic(self):
+        """'<topic> which cites <target>' is citations."""
+        intent = extract_intent("the survey of M31 which cites the Hipparcos catalog")
+        assert intent.operator == "citations"
+        assert "cites" not in " ".join(intent.free_text_terms).split()
+
 
 class TestReferencesOperatorPatterns:
     """Tests for US-004 expanded references() operator patterns."""

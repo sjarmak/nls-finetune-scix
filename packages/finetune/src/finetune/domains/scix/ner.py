@@ -238,6 +238,8 @@ OPERATOR_PATTERNS: dict[str, list[re.Pattern]] = {
         re.compile(r"\barticles?\s+citing\b", re.IGNORECASE),
         re.compile(r"\bworks?\s+that\s+cite\b", re.IGNORECASE),
         re.compile(r"\bpapers?\s+which\s+cite\b", re.IGNORECASE),
+        # The clause may follow a topic: "papers about M31 that cite X"
+        re.compile(r"\b(?:that|which)\s+cites?\b", re.IGNORECASE),
         re.compile(r"\bshow\s+citations?\b", re.IGNORECASE),
         re.compile(r"\blist\s+citations?\b", re.IGNORECASE),
     ],
@@ -376,6 +378,8 @@ OPERATOR_REMOVAL_PATTERNS: dict[str, list[re.Pattern]] = {
         re.compile(r"\barticles?\s+citing\b", re.IGNORECASE),
         re.compile(r"\bworks?\s+that\s+cite\b", re.IGNORECASE),
         re.compile(r"\bpapers?\s+which\s+cite\b", re.IGNORECASE),
+        # The clause may follow a topic: "papers about M31 that cite X"
+        re.compile(r"\b(?:that|which)\s+cites?\b", re.IGNORECASE),
         re.compile(r"\bshow\s+citations?\b", re.IGNORECASE),
         re.compile(r"\blist\s+citations?\b", re.IGNORECASE),
     ],

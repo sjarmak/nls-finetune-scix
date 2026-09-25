@@ -349,6 +349,21 @@ class TestAuthors:
         assert intent.authors == ["Jarmak"]
         assert assemble_query(intent) == 'citations(author:"Jarmak")'
 
+    @pytest.mark.parametrize("subject", ["ARP299", "NGC 3690"])
+    def test_cite_after_a_topic_leaves_the_topic_when_jev_picks_citations(self, subject):
+        text = (
+            f'papers about {subject} that cite "A Digital Archive of HI 21 Centimeter '
+            'Line Spectra of Optically Targeted Galaxies"'
+        )
+        calls: list[dict] = []
+        client = mock_jev_client(None, [jev_payload("citations")], calls)
+        intent, _ = classify_and_extract(text, client)
+        assert intent.operator == "citations"
+        offered = " ".join(q.get("instructions", "") for q in calls[0]["questions"].values())
+        assert "'cite'" not in offered
+        assert "cite" not in {w for term in intent.free_text_terms for w in term.split()}
+        assert "abs:cite" not in assemble_query(intent)
+
     def test_a_rejected_name_stays_in_the_topic(self):
         payload = jev_payload("citations", author_reading=reading("none"))
         client = mock_jev_client(None, [payload], [])
