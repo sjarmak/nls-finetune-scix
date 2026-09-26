@@ -1,0 +1,84 @@
+// Deployment model — where each piece runs at review time.
+//
+// Serving and the review app run as local processes on a developer/host machine
+// (the inference server auto-detects MPS/CUDA/CPU). Fine-tuning runs off-machine
+// on Colab. Datasets and eval artifacts are files on disk. The ADS, Anthropic,
+// OpenAI, and HuggingFace services are external. This is the "what runs where /
+// what's the process & data boundary" view a design review always asks for.
+
+deployment {
+
+  serveHost = host 'Serving host' {
+    description 'Runs the model server (MPS/CUDA/CPU auto-detect) and, for the review app, the API + web dev servers'
+
+    serverProc = proc 'NLS inference server — :8001' {
+      description 'docker/server.py / mise run dev-model; pipeline-first routing, model fallback'
+      instanceOf nls.server
+    }
+    pipelineProc = proc 'Hybrid pipeline (in-process)' {
+      description 'Imported into the server process — no separate service'
+      instanceOf nls.pipeline
+    }
+    apiProc = proc 'Review API — :8000' {
+      instanceOf nls.api
+    }
+    webProc = proc 'Review web — :5173' {
+      instanceOf nls.web
+    }
+    datasetFiles = proc 'Dataset & eval files (data/)' {
+      description 'gold_examples.json, train/val JSONL, benchmark, eval-*.json — read/written on local disk'
+    }
+  }
+
+  dataPrepHost = host 'Data-prep / CLI host' {
+    description 'Runs the dataset-generation agent, the eval harness, and the scix-finetune CLI'
+    instanceOf nls.dataPrep
+    instanceOf nls.eval
+  }
+
+  colabHost = host 'Google Colab (GPU)' {
+    description 'Off-machine A100/T4 runtime that fine-tunes the LoRA adapter'
+    instanceOf nls.training
+    instanceOf colab
+  }
+
+  nectarHost = host 'Nectar / SciXplorer host' {
+    description 'The search frontend that consumes the NLS endpoint'
+    instanceOf nectar
+  }
+
+  adsHost = host 'ADS / SciX API' {
+    description 'External NASA ADS search service — validation, result-sets, query logs'
+    instanceOf ads
+  }
+
+  llmHost = host 'LLM & model providers' {
+    description 'Anthropic, OpenAI, and HuggingFace — external SaaS'
+    instanceOf anthropic
+    instanceOf openai
+    instanceOf huggingface
+  }
+
+  // Runtime data & control flow between processes/hosts.
+  serverProc -> datasetFiles 'reads gold examples + telemetry'
+  serverProc -> llmHost 'loads adapter (HF); resolver LLM (OpenAI)'
+  serverProc -> adsHost 'resolver paper lookup'
+  nectarHost -> serverProc 'POST /v1/chat/completions'
+  apiProc -> serverProc 'OpenAI-compatible inference'
+  apiProc -> datasetFiles 'reads examples + eval runs'
+  apiProc -> llmHost 'GPT-4o-mini baseline'
+  webProc -> apiProc 'REST'
+  dataPrepHost -> adsHost 'query logs + validation'
+  dataPrepHost -> llmHost 'NL generation + curation judge'
+  dataPrepHost -> datasetFiles 'writes train/val + eval'
+  colabHost -> datasetFiles 'consumes train.jsonl'
+  colabHost -> llmHost 'pushes adapter to HF'
+}
+
+views {
+
+  deployment view deployment {
+    title 'Deployment — where each piece runs'
+    include *
+  }
+}
