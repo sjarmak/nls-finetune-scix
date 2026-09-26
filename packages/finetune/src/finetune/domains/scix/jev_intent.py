@@ -399,8 +399,8 @@ def _reading_text(people: tuple[str, ...], names: tuple[str, ...]) -> str:
         text += (
             f"; {_quoted(others)} {verb} not a person here but what the papers are about "
             "(a mission, spacecraft, telescope, survey, instrument, object, place, "
-            "institution or theory), part of a topic phrase (Hawking radiation, Einstein "
-            "ring), or an ordinary word"
+            "institution or theory), part of an eponymous topic phrase (Hawking radiation, "
+            "Einstein ring, Chandrasekhar limit, Bondi accretion), or an ordinary word"
         )
     return text + "."
 
@@ -413,7 +413,9 @@ def _author_reading_question(names: tuple[str, ...]) -> dict:
         "surveys are often named after people (Cassini, Hubble, Kepler, Herschel, Planck, "
         "Gaia); in a search request such a name usually means the mission, not the person. "
         "In a short keyword request, a surname next to a subject usually names an author of "
-        "papers on that subject.",
+        "papers on that subject. The exception is an eponymous scientific term: the name is "
+        "part of the subject, not an author. Examples include Chandrasekhar limit, "
+        "Faber-Jackson relation, Press-Schechter mass function and Bondi accretion.",
         {reading_key(people): _reading_text(people, names) for people in author_readings(names)},
     )
 
