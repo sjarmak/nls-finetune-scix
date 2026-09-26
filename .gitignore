@@ -45,3 +45,7 @@ nls_query_eval
 
 # Model request caches (Jev / LLM), rebuilt on demand
 data/cache/
+
+# Gas City
+.beads/*
+!.beads/identity.toml
