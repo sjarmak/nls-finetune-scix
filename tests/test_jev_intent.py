@@ -9,14 +9,17 @@ import json
 
 import httpx
 import pytest
+from hypothesis import example, given, settings
+from hypothesis import strategies as st
 from jev_fixtures import choice_answer, jev_payload, mock_jev_client, noul_answer
 
-from finetune.domains.scix.field_constraints import BIBGROUPS, COLLECTIONS, DOCTYPES
+from finetune.domains.scix.field_constraints import BIBGROUPS, COLLECTIONS, DOCTYPES, PROPERTIES
 from finetune.domains.scix.intent_spec import OPERATORS, IntentSpec
 from finetune.domains.scix.jev_intent import (
     BOOLEAN_QUESTION_IDS,
     CHOICE_QUESTION_IDS,
     JEV_MODEL,
+    PROPERTY_BOOLEANS,
     JevAnswers,
     JevClient,
     JevResponseError,
@@ -166,6 +169,44 @@ class TestApplyAnswers:
         base = IntentSpec(raw_user_text="t", property={"refereed"})
         apply_answers(base, self._answers(operator="similar"))
         assert base.operator is None and base.property == {"refereed"}
+
+    def test_preserves_property_values_not_owned_by_jev(self):
+        base = IntentSpec(property={"data", "refereed"})
+        out = apply_answers(base, self._answers())
+        assert out.property == {"data"}
+
+    @given(
+        unowned=st.sets(st.sampled_from(sorted(PROPERTIES - set(PROPERTY_BOOLEANS)))),
+        refereed=st.booleans(),
+        openaccess=st.booleans(),
+        eprint=st.booleans(),
+    )
+    @example(unowned={"ads_openaccess"}, refereed=False, openaccess=False, eprint=False)
+    @settings(database=None)
+    def test_replaces_only_jev_owned_property_values(
+        self,
+        unowned: set[str],
+        refereed: bool,
+        openaccess: bool,
+        eprint: bool,
+    ) -> None:
+        base = IntentSpec(property=unowned | set(PROPERTY_BOOLEANS))
+        answers = self._answers(
+            refereed=noul_answer(float(refereed)),
+            openaccess=noul_answer(float(openaccess)),
+            eprint=noul_answer(float(eprint)),
+        )
+        out = apply_answers(base, answers)
+        expected = unowned | {
+            name
+            for name, selected in (
+                ("refereed", refereed),
+                ("openaccess", openaccess),
+                ("eprint", eprint),
+            )
+            if selected
+        }
+        assert out.property == expected
 
 
 class TestClientCache:
