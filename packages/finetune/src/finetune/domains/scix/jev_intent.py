@@ -1019,7 +1019,9 @@ def apply_answers(
         topic = answers.choices.get(NAMED_TOPIC_QUESTION)
         free_text_terms, or_terms = named.free_text_terms, named.or_terms
     join_probability = {pair: answers.booleans[f"join_{k}"] for k, pair in enumerate(word_pairs)}
-    properties = {name for name in PROPERTY_BOOLEANS if answers.booleans[name] >= boolean_threshold}
+    properties = intent.property - set(PROPERTY_BOOLEANS) | {
+        name for name in PROPERTY_BOOLEANS if answers.booleans[name] >= boolean_threshold
+    }
     reading = answers.choices.get(AUTHOR_READING_QUESTION) if author_candidates else None
     readings = {reading_key(people): people for people in author_readings(author_candidates)}
     author_probability = {
