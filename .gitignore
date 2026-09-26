@@ -30,7 +30,6 @@ build/
 
 # Python
 uv.lock
-.hypothesis/
 
 # Bun
 bun.lockb
