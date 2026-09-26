@@ -428,6 +428,35 @@ class TestAuthors:
         )
         assert "author_reading" not in build_request("q")["questions"]
 
+    @pytest.mark.parametrize(
+        ("text", "term"),
+        [
+            pytest.param(
+                "chandrasekhar limit white dwarfs",
+                "chandrasekhar limit",
+                id="chandrasekhar-limit",
+            ),
+            pytest.param(
+                "faber-jackson relation elliptical galaxies",
+                "faber-jackson relation",
+                id="faber-jackson-relation",
+            ),
+            pytest.param(
+                "press-schechter mass function",
+                "press-schechter mass function",
+                id="press-schechter-mass-function",
+            ),
+            pytest.param("bondi accretion", "bondi accretion", id="bondi-accretion"),
+        ],
+    )
+    def test_eponymous_term_is_not_presented_as_an_author(self, text: str, term: str):
+        names = author_candidates(text, extract_intent(text))
+        instructions = build_request(text, author_candidates=names)["questions"][
+            "author_reading"
+        ]["instructions"]
+        assert term in instructions.lower()
+        assert "eponymous" in instructions.lower()
+
     def test_a_mission_next_to_a_surname_is_the_topic(self):
         payload = jev_payload(author_reading=reading("Jarmak", {"none": 0.3, "Cassini": 0.1}))
         intent, _ = classify_and_extract("Jarmak Cassini", mock_jev_client(None, [payload], []))
