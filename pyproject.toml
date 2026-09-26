@@ -25,6 +25,7 @@ dev = [
     "nltk>=3.8",
     "wordfreq>=3.0",
     "fastapi>=0.109.0",
+    "hypothesis==6.168.1",
 ]
 
 [tool.uv.workspace]

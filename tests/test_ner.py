@@ -9,7 +9,10 @@ as TOPICS do NOT trigger operators - only explicit patterns do.
 from datetime import datetime
 
 import pytest
+from hypothesis import given, settings
+from hypothesis import strategies as st
 
+from finetune.domains.scix.assembler import assemble_query
 from finetune.domains.scix.field_constraints import (
     BIBGROUPS,
     DOCTYPES,
@@ -487,6 +490,22 @@ class TestYearExtraction:
         intent = extract_intent("papers from the 1990s about Hubble")
         assert intent.year_from == 1990
         assert intent.year_to == 1999
+
+    def test_gravitational_wave_topic_survives_decade_extraction(self):
+        intent = extract_intent("gravitational wave papers from the 1990s")
+        assert assemble_query(intent) == 'abs:"gravitational wave" pubdate:[1990 TO 1999]'
+
+    def test_older_than_extracts_topic_and_exclusive_upper_bound(self):
+        intent = extract_intent("dark matter papers older than 1995")
+        assert assemble_query(intent) == 'abs:"dark matter" pubdate:[* TO 1994]'
+
+    @given(st.integers(min_value=1801, max_value=datetime.now().year + 5))
+    @settings(database=None)
+    def test_older_than_is_exclusive_for_every_valid_year(self, year):
+        intent = extract_intent(f"quasar spectra papers older than {year}")
+        assert intent.free_text_terms == ["quasar spectra"]
+        assert intent.year_from is None
+        assert intent.year_to == year - 1
 
 
 class TestAuthorExtraction:

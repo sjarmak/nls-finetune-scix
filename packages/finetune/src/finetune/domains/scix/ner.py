@@ -498,7 +498,7 @@ YEAR_PATTERNS: list[tuple[re.Pattern, str]] = [
     (re.compile(r"\bafter\s+(\d{4})\b", re.IGNORECASE), "after"),
     (re.compile(r"\bfrom\s+(\d{4})\b", re.IGNORECASE), "since"),
     # Before/until: "before 2020", "until 2019"
-    (re.compile(r"\bbefore\s+(\d{4})\b", re.IGNORECASE), "before"),
+    (re.compile(r"\b(?:before|older\s+than)\s+(\d{4})\b", re.IGNORECASE), "before"),
     (re.compile(r"\buntil\s+(\d{4})\b", re.IGNORECASE), "until"),
     (re.compile(r"\bthrough\s+(\d{4})\b", re.IGNORECASE), "until"),
     # Relative: "last N years", "past N years"
